@@ -19,7 +19,6 @@ import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 import fiskfille.tf.TFReflection;
 import fiskfille.tf.client.keybinds.TFKeyBinds;
 import fiskfille.tf.client.render.entity.EntityRendererTF;
-import fiskfille.tf.client.tutorial.TutorialHandler;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
@@ -49,8 +48,6 @@ public class ClientTickHandler
 
         if (event.phase == TickEvent.Phase.END)
         {
-            TutorialHandler.tick(player);
-
             if (transformer != null)
             {
                 if (transformationTimer >= 0.5F)

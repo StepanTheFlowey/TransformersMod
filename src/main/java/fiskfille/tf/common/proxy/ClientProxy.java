@@ -53,7 +53,6 @@ import fiskfille.tf.client.render.tileentity.RenderIsoCondenser;
 import fiskfille.tf.client.render.tileentity.RenderRelayTower;
 import fiskfille.tf.client.render.tileentity.RenderTransformiumSeed;
 import fiskfille.tf.client.render.tileentity.RenderTransmitter;
-import fiskfille.tf.client.tutorial.TutorialHandler;
 import fiskfille.tf.common.block.TFBlocks;
 import fiskfille.tf.common.entity.EntityBassCharge;
 import fiskfille.tf.common.entity.EntityFlamethrowerFire;
@@ -94,7 +93,6 @@ public class ClientProxy extends CommonProxy
         super.preInit();
         TFReflection.client();
         TFKeyBinds.register();
-        TutorialHandler.init();
 
         registerEventHandler(new ClientEventHandler());
         registerEventHandler(new ClientTickHandler());

@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.Vec3;
-import fiskfille.tf.client.tutorial.EnumTutorialType;
 import fiskfille.tf.common.entity.EntityMissile;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.motion.TFMotionManager;
@@ -70,11 +69,5 @@ public abstract class TransformerJet extends Transformer
             Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -2, true);
             player.worldObj.spawnParticle("flame", side.xCoord, side.yCoord + 0.3F, side.zCoord, rand.nextFloat() / 20, -0.2F + rand.nextFloat() / 20, rand.nextFloat() / 20);
         }
-    }
-
-    @Override
-    public EnumTutorialType getTutorialType(int altMode)
-    {
-        return EnumTutorialType.JET;
     }
 }

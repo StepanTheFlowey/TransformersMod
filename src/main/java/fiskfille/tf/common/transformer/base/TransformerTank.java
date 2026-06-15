@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.Vec3;
 import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.tutorial.EnumTutorialType;
 import fiskfille.tf.common.entity.EntityTankShell;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.motion.TFMotionManager;
@@ -77,11 +76,5 @@ public abstract class TransformerTank extends Transformer
             Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -0.6, false);
             player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);
         }
-    }
-
-    @Override
-    public EnumTutorialType getTutorialType(int altMode)
-    {
-        return EnumTutorialType.TANK;
     }
 }

@@ -182,15 +182,6 @@ public class ClientEventHandler
                     mc.gameSettings.viewBobbing = prevViewBobbing;
                 }
             }
-
-//            if (isTransformed)
-//            {
-//                TutorialHandler.openTutorial(player, transformer);
-//            }
-//            else
-//            {
-//                TutorialHandler.currentTutorial = null;
-//            }
         }
     }
 

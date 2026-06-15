@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import org.lwjgl.input.Mouse;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import fiskfille.tf.client.tutorial.TutorialHandler;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.network.MessageLaserShoot;
 import fiskfille.tf.common.network.MessageVehicleShoot;
@@ -193,14 +192,12 @@ public class TFShootManager
                         laserCharge -= 5;
                         player.playSound("random.fizz", 1, 2F);
                         TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, false));
-                        TutorialHandler.shoot(player);
                     }
                     else
                     {
                         if (!laserFilling && (player.inventory.hasItem(transformer.getShootItem(altMode)) || player.capabilities.isCreativeMode))
                         {
                             TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, true));
-                            TutorialHandler.shoot(player);
                             laserFilling = true;
                         }
                     }
@@ -222,7 +219,6 @@ public class TFShootManager
                             if (hasAmmo)
                             {
                                 TFNetworkManager.networkWrapper.sendToServer(new MessageVehicleShoot(player));
-                                TutorialHandler.shoot(player);
 
                                 if (!isCreative)
                                 {

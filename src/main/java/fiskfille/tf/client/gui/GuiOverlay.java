@@ -22,7 +22,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.tutorial.TutorialHandler;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.data.TFDataManager;
 import fiskfille.tf.common.item.ItemVurpsSniper;
@@ -67,7 +66,6 @@ public class GuiOverlay extends Gui
                 renderKatanaDash(event, width, height, player);
                 renderShotsLeft(event, width, height, player);
                 renderLaserCharge(event, width, height, player);
-                renderTutorial(event, width, height, player);
             }
         }
     }
@@ -313,52 +311,6 @@ public class GuiOverlay extends Gui
                 drawTexturedModalRect(x + 1, y + 1, 0, 0, (int) (d * 25), 10);
 
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
-            }
-        }
-    }
-
-    public void renderTutorial(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player)
-    {
-        if (TutorialHandler.currentTutorial != null)
-        {
-            TutorialHandler.currentTutorial.ticker.render(event, width, height, player);
-        }
-
-        if (TutorialHandler.completedTutorial != null)
-        {
-            mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/achievement/achievement_background.png"));
-            int i = (int) (TutorialHandler.animationTimer > 90 ? (100 - TutorialHandler.animationTimer) * 3.2F : TutorialHandler.animationTimer < 10 ? TutorialHandler.animationTimer * 3.2F : 32) - 32;
-            String s = TutorialHandler.completedTutorial.name();
-
-            drawTexturedModalRect(width - 160, i, 96, 202, 160, 32);
-            mc.fontRenderer.drawString("Tutorial Completed!", width - 130, i + 7, 0xffff00);
-            mc.fontRenderer.drawString(s.substring(0, 1) + s.substring(1, s.length()).toLowerCase(), width - 130, i + 18, 0xffffff);
-
-            ItemStack itemstack = null;
-
-            for (int j = 0; j < TransformersAPI.getTransformers().size(); ++j)
-            {
-                Transformer transformer = TransformersAPI.getTransformers().get(j);
-
-                int altMode = TFData.ALT_MODE.get(player);
-
-                if (transformer.getTutorialType(altMode) == TutorialHandler.completedTutorial && itemstack == null)
-                {
-                    itemstack = new ItemStack(TFItems.displayVehicle, 1, j);
-                }
-            }
-
-            if (itemstack != null)
-            {
-                RenderHelper.enableGUIStandardItemLighting();
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-                GL11.glEnable(GL11.GL_LIGHTING);
-                itemRenderer.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.getTextureManager(), itemstack, width - 152, i + 8);
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glDepthMask(true);
-                GL11.glEnable(GL11.GL_DEPTH_TEST);
             }
         }
     }
