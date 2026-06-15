@@ -31,7 +31,7 @@ import fiskfille.tf.config.TFConfig;
 public class TransformersMod
 {
     public static final String modid = "transformers";
-    public static final String version = "${version}";
+    public static final String version = "0.6.5";
 
     @Instance(TransformersMod.modid)
     public static TransformersMod instance;
