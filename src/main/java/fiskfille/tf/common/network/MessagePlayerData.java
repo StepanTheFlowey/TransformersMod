@@ -80,12 +80,12 @@ public class MessagePlayerData implements IMessage
                         
                         if (transformer != null)
                         {
-                            entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, transformer.getTransformationSound((Integer) value), 1, 1, false);
+                            entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, transformer.getTransformationSound((Integer) value), 0.5F, 1F, false);
                         }
                     }
                     else if (type == TFData.STEALTH_FORCE)
                     {
-                        entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, TransformersMod.modid + ":transform_stealth" + ((Boolean) value ? "" : "_in"), 1, 1.25F, false);
+                        entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, TransformersMod.modid + ":transform_stealth" + ((Boolean) value ? "" : "_in"), 0.5F, 1.25F, false);
                     }
                 }
             }
