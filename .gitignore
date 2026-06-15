@@ -1,18 +1,10 @@
-# Fisk put your eclipsy things here
-
+build/
+.gradle/
+idea/
 *.iml
 *.ipr
 *.iws
-out/
-build/
-idea/
-.gradle/
-minecraft/
-
+jars/
 libs/
-
-gradlew
-gradlew.bat
-gradle/
-
-eclipse/
+out/
+run/
