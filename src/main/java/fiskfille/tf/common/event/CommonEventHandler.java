@@ -44,7 +44,6 @@ import fiskfille.tf.common.recipe.TFRecipes;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.web.update.Update;
 
 public class CommonEventHandler
 {
@@ -185,44 +184,6 @@ public class CommonEventHandler
 //                {
 //                    ClientEventHandler.prevViewBobbing = Minecraft.getMinecraft().gameSettings.viewBobbing;
 //                }
-
-                if (!displayedUpdates && TFConfig.checkForUpdates)
-                {
-                    Update update = TransformersMod.latestUpdate;
-
-                    if (update != null && update.isAvailable())
-                    {
-                        player.addChatMessage(new ChatComponentText(EnumChatFormatting.BLUE + "TransformersMod version " + update.getVersion() + " is now available!"));
-                        player.addChatMessage(new ChatComponentText(""));
-                        player.addChatMessage(new ChatComponentText(EnumChatFormatting.BLUE + "" + EnumChatFormatting.BOLD + "What's New: "));
-
-                        String[] updates = update.getUpdateLog().split(Pattern.quote("(newline)"));
-
-                        for (String updatePart : updates)
-                        {
-                            EnumChatFormatting colour = EnumChatFormatting.RED;
-
-                            if (updatePart.trim().startsWith("*"))
-                            {
-                                colour = EnumChatFormatting.GOLD;
-                            }
-                            else if (updatePart.trim().startsWith("+"))
-                            {
-                                colour = EnumChatFormatting.GREEN;
-                            }
-                            else if (updatePart.trim().startsWith("-"))
-                            {
-                                colour = EnumChatFormatting.RED;
-                            }
-
-                            player.addChatMessage(new ChatComponentText(colour + updatePart));
-                        }
-
-                        player.addChatMessage(new ChatComponentText(""));
-                    }
-
-                    displayedUpdates = true;
-                }
             }
         }
     }

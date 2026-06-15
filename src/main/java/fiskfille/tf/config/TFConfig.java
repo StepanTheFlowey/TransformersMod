@@ -21,7 +21,6 @@ public class TFConfig
     public static boolean allowMissileExplosions;
     public static boolean allowTankShellExplosions;
     public static boolean useMiles;
-    public static boolean checkForUpdates;
     public static boolean groundBridgeMinRange;
     public static boolean oldPortalRender;
     public static int controlPanelMaxRange;
@@ -34,7 +33,6 @@ public class TFConfig
     {
         configFile = config;
 
-        checkForUpdates = config.getBoolean("Check For Updates", CATEGORY_GENERAL, true, "If false, the mod will not check for updates.");
         groundBridgeMinRange = config.getBoolean("Ground Bridge Min Range", CATEGORY_GENERAL, true, "If false, the 'Invalid Coords' Ground Bridge error will be discarded.");
         controlPanelMaxRange = config.getInt("Control Panel Max Range", CATEGORY_GENERAL, 20, 0, Integer.MAX_VALUE, "The maximum distance the portal frame can be from the Ground Bridge Control Panel.");
         

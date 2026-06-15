@@ -26,9 +26,6 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.proxy.CommonProxy;
 import fiskfille.tf.common.tab.CreativeTabTransformers;
 import fiskfille.tf.config.TFConfig;
-import fiskfille.tf.web.WebHelper;
-import fiskfille.tf.web.update.Update;
-import fiskfille.tf.web.update.UpdateChecker;
 
 @Mod(modid = TransformersMod.modid, name = "Transformers Mod", version = TransformersMod.version, guiFactory = "fiskfille.tf.client.gui.TFGuiFactory")
 public class TransformersMod
@@ -43,7 +40,6 @@ public class TransformersMod
     public static CommonProxy proxy;
 
     public static CreativeTabs tabTransformers = new CreativeTabTransformers();
-    public static Update latestUpdate;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -52,15 +48,6 @@ public class TransformersMod
         {
             System.out.println("TransformersMod coremod not added! -Dfml.coreMods.load=fiskfille.tf.asm.TFLoadingPlugin");
             FMLCommonHandler.instance().exitJava(0, false);
-        }
-
-        try
-        {
-            WebHelper.readPastebin("Kyct1Dvz");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
         }
 
         TransformerManager.register();
@@ -72,12 +59,6 @@ public class TransformersMod
         if (config.hasChanged())
         {
             config.save();
-        }
-
-        if (TFConfig.checkForUpdates)
-        {
-            UpdateChecker updateChecker = new UpdateChecker();
-            updateChecker.handleUpdates();
         }
 
         TFNetworkManager.registerPackets();
