@@ -114,7 +114,6 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityLaserBeam.class, new RenderBlank());
         RenderingRegistry.registerEntityRenderingHandler(EntityBassCharge.class, new RenderBassCharge());
         RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
-//        RenderingRegistry.registerEntityRenderingHandler(EntityTransformer.class, new RenderTransformer());
 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(TFBlocks.displayStation), new RenderItemDisplayStation());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(TFBlocks.assemblyTable), new RenderItemTileEntity(TFBlocks.assemblyTable));
