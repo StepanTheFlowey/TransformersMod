@@ -208,7 +208,7 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler
     }
 
     @Override
-    public List<String> handleTooltip(GuiRecipe gui, List<String> currenttip, int recipe)
+    public List<String> handleTooltip(GuiRecipe<?> gui, List<String> currenttip, int recipe)
     {
         currenttip = super.handleTooltip(gui, currenttip, recipe);
 

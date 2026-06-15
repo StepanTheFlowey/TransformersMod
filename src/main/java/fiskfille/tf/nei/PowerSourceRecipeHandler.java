@@ -179,7 +179,7 @@ public class PowerSourceRecipeHandler extends EnergonProcessorRecipeHandler
     }
 
     @Override
-    public List<String> handleItemTooltip(GuiRecipe gui, ItemStack stack, List<String> currenttip, int recipe)
+    public List<String> handleItemTooltip(GuiRecipe<?> gui, ItemStack stack, List<String> currenttip, int recipe)
     {
         CachedPowerSourceRecipe crecipe = (CachedPowerSourceRecipe) arecipes.get(recipe);
         PowerSourcePair powerSource = crecipe.powerSource;

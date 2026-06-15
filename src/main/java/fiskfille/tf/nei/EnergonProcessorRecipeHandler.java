@@ -255,7 +255,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler
     }
 
     @Override
-    public List<String> handleTooltip(GuiRecipe gui, List<String> currenttip, int recipe)
+    public List<String> handleTooltip(GuiRecipe<?> gui, List<String> currenttip, int recipe)
     {
         currenttip = super.handleTooltip(gui, currenttip, recipe);
         int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 4);
