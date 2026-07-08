@@ -1,5 +1,8 @@
 package fiskfille.tf.client.render.entity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -11,13 +14,13 @@ import fiskfille.tf.client.model.tileentity.ModelTransformiumSeed;
 import fiskfille.tf.common.entity.EntityTransformiumSeed;
 import fiskfille.tf.helper.TFRenderHelper;
 
+@SideOnly(Side.CLIENT)
 public class RenderTransformiumSeedEntity extends Render
 {
-    private ModelTransformiumSeed model;
+    private final ModelTransformiumSeed model = new ModelTransformiumSeed();
 
     public RenderTransformiumSeedEntity()
     {
-        model = new ModelTransformiumSeed();
         shadowSize = 0.5F;
     }
 
@@ -27,6 +30,7 @@ public class RenderTransformiumSeedEntity extends Render
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y, (float) z);
         GL11.glRotatef(180, 1, 0, 0);
+
         model.render(seed);
 
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -35,6 +39,7 @@ public class RenderTransformiumSeedEntity extends Render
         model.render(seed);
         TFRenderHelper.resetLighting();
         GL11.glEnable(GL11.GL_LIGHTING);
+
         GL11.glPopMatrix();
     }
 
