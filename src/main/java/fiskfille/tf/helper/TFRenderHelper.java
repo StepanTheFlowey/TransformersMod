@@ -1,23 +1,41 @@
 package fiskfille.tf.helper;
 
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
+
+import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
+import fiskfille.tf.client.model.transformer.definition.TransformerModel;
+import fiskfille.tf.common.data.TFData;
+import fiskfille.tf.common.energon.power.IEnergyReceiver;
+import fiskfille.tf.common.energon.power.IEnergyTransmitter;
+import fiskfille.tf.common.energon.power.IReceiverRender;
+import fiskfille.tf.common.energon.power.ITransmitterRender;
+import fiskfille.tf.common.energon.power.ReceiverEntry;
+import fiskfille.tf.common.energon.power.TransmissionHandler;
+import fiskfille.tf.common.item.armor.ItemTransformerArmor;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.tick.ClientTickHandler;
+import fiskfille.tf.common.tileentity.TileEntityMachine;
+import fiskfille.tf.common.tileentity.TileEntityRelayTower;
+import fiskfille.tf.common.transformer.base.Transformer;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.WeakHashMap;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.DestroyBlockProgress;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -31,31 +49,14 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
-import fiskfille.tf.client.model.transformer.definition.TransformerModel;
-import fiskfille.tf.common.data.TFData;
-import fiskfille.tf.common.energon.power.IEnergyReceiver;
-import fiskfille.tf.common.energon.power.IEnergyTransmitter;
-import fiskfille.tf.common.energon.power.IReceiverRender;
-import fiskfille.tf.common.energon.power.ITransmitterRender;
-import fiskfille.tf.common.energon.power.ReceiverEntry;
-import fiskfille.tf.common.energon.power.TransmissionHandler;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.item.armor.ItemTransformerArmor;
-import fiskfille.tf.common.tick.ClientTickHandler;
-import fiskfille.tf.common.tileentity.TileEntityMachine;
-import fiskfille.tf.common.tileentity.TileEntityRelayTower;
-import fiskfille.tf.common.transformer.base.Transformer;
-
 public class TFRenderHelper
 {
-    private static Minecraft mc = Minecraft.getMinecraft();
-    private static RenderItem itemRender = new RenderItem();
+    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final RenderItem itemRender = new RenderItem();
+    private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<EntityPlayer, Double>();
 
     private static float lastBrightnessX;
     private static float lastBrightnessY;
-    private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<EntityPlayer, Double>();
 
     public static final int LIGHTING_LUMINOUS = 0xF0F0;
 
@@ -78,9 +79,9 @@ public class TFRenderHelper
 
     public static float[] hexToRGB(int hex)
     {
-        float r = ((hex & 0xFF0000) >> 16) / 255F;
-        float g = ((hex & 0xFF00) >> 8) / 255F;
-        float b = (hex & 0xFF) / 255F;
+        final float r = ((hex & 0xFF0000) >> 16) / 255F;
+        final float g = ((hex & 0xFF00) >> 8) / 255F;
+        final float b = (hex & 0xFF) / 255F;
         return new float[] {r, g, b};
     }
 
@@ -182,7 +183,7 @@ public class TFRenderHelper
     {
         RenderManager renderManager = RenderManager.instance;
         FontRenderer fontrenderer = renderManager.getFontRenderer();
-        float f2 = -0.02F;
+        final float f2 = -0.02F;
         GL11.glPushMatrix();
         GL11.glTranslatef(x, y, z);
         GL11.glNormal3f(0.0F, 1.0F, 0.0F);
@@ -196,12 +197,12 @@ public class TFRenderHelper
         Tessellator tessellator = Tessellator.instance;
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         tessellator.startDrawingQuads();
-        int i = fontrenderer.getStringWidth(s) / 2;
-        tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-        tessellator.addVertex(-i - 1, -1.0D, 0.0D);
-        tessellator.addVertex(-i - 1, 8.0D, 0.0D);
-        tessellator.addVertex(i + 1, 8.0D, 0.0D);
-        tessellator.addVertex(i + 1, -1.0D, 0.0D);
+        final int i = fontrenderer.getStringWidth(s) / 2;
+        tessellator.setColorRGBA_F(0F, 0F, 0F, 0.25F);
+        tessellator.addVertex(-i - 1, -1D, 0D);
+        tessellator.addVertex(-i - 1, 8D, 0D);
+        tessellator.addVertex(i + 1, 8D, 0D);
+        tessellator.addVertex(i + 1, -1D, 0D);
         tessellator.draw();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDepthMask(true);
@@ -214,14 +215,15 @@ public class TFRenderHelper
 
     public static void faceVec(Vec3 src, Vec3 dst)
     {
-        double d0 = dst.xCoord - src.xCoord;
-        double d1 = dst.yCoord - src.yCoord;
-        double d2 = dst.zCoord - src.zCoord;
-        double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-        float yaw = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-        float pitch = (float) -(Math.atan2(d1, d3) * 180.0D / Math.PI);
+        final double d0 = dst.xCoord - src.xCoord;
+        final double d1 = dst.yCoord - src.yCoord;
+        final double d2 = dst.zCoord - src.zCoord;
+        final double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+
+        final double yaw = Math.atan2(d2, d0) * 180D / Math.PI - 90D;
+        final double pitch = Math.atan2(d1, d3) * 180D / Math.PI;
         GL11.glRotated(-yaw, 0, 1, 0);
-        GL11.glRotated(pitch, 1, 0, 0);
+        GL11.glRotated(-pitch, 1, 0, 0);
     }
 
     public static void renderEnergyTransmissions(TileEntity transmitterTile, double x, double y, double z, float partialTicks)
@@ -333,11 +335,11 @@ public class TFRenderHelper
                     primary = 0xAF5B57;
                     secondary = 0xF8817B;
                 }
-//                else if (!(receiverTile instanceof IEnergyTransmitter) && receiver.getEnergy() >= receiver.getMaxEnergy())
-//                {
-//                    primary = 0x62AF57;
-//                    secondary = 0x8AF87B;
-//                }
+//              else if (!(receiverTile instanceof IEnergyTransmitter) && receiver.getEnergy() >= receiver.getMaxEnergy())
+//              {
+//                  primary = 0x62AF57;
+//                  secondary = 0x8AF87B;
+//              }
 
                 GL11.glPushMatrix();
                 GL11.glTranslated(x + x1, y + y1, z + z1);
@@ -361,28 +363,28 @@ public class TFRenderHelper
 
     public static void renderEnergyBeam(Vec3 src, Vec3 dst, int primaryColor, int secondaryColor, int primaryParentColor, int secondaryParentColor)
     {
-        Tessellator tessellator = Tessellator.instance;
-        float partialTicks = ClientTickHandler.renderTick;
-        float[] primary = hexToRGB(primaryColor);
-        float[] secondary = hexToRGB(secondaryColor);
-        float[] parentPrimary = hexToRGB(primaryParentColor);
-        float[] parentSecondary = hexToRGB(secondaryParentColor);
+        final Tessellator tessellator = Tessellator.instance;
+        final float partialTicks = ClientTickHandler.renderTick;
+        final float[] primary = hexToRGB(primaryColor);
+        final float[] secondary = hexToRGB(secondaryColor);
+        final float[] parentPrimary = hexToRGB(primaryParentColor);
+        final float[] parentSecondary = hexToRGB(secondaryParentColor);
 
-        double width = 1F / 16;
-        double length = src.distanceTo(dst);
-        int segments = MathHelper.floor_double(length * 8);
+        final double width = 1D / 16D;
+        final double length = src.distanceTo(dst);
+        final int segments = MathHelper.floor_double(length * 8);
 
         faceVec(src, dst);
 
         for (int i = 0; i < segments; ++i)
         {
-            double segmentLength = length / segments;
-            double start = i * segmentLength;
-            double end = (i + 1) * segmentLength;
-            float f = (float) Math.cos(i / (segments * 0.15625F) - (mc.thePlayer.ticksExisted + partialTicks) / 5);
-            float f1 = 1 - f;
-            float f2 = Math.min((float) i / segments * 3, 1);
-            float f3 = 1 - f2;
+            final double segmentLength = length / segments;
+            final double start = i * segmentLength;
+            final double end = (i + 1) * segmentLength;
+            final float f = (float) Math.cos(i / (segments * 0.15625F) - (mc.thePlayer.ticksExisted + partialTicks) / 5);
+            final float f1 = 1 - f;
+            final float f2 = Math.min((float) i / segments * 3, 1);
+            final float f3 = 1 - f2;
 
             tessellator.startDrawingQuads();
             tessellator.setColorRGBA_F((primary[0] * f + secondary[0] * f1) * f2 + (parentPrimary[0] * f + parentSecondary[0] * f1) * f3, (primary[1] * f + secondary[1] * f1) * f2 + (parentPrimary[1] * f + parentSecondary[1] * f1) * f3, (primary[2] * f + secondary[2] * f1) * f2 + (parentPrimary[2] * f + parentSecondary[2] * f1) * f3, 1);
@@ -425,7 +427,7 @@ public class TFRenderHelper
 
     public static void renderEnergyStatic(Vec3 src, Vec3 dst, double width, float intensity, int segments, long seed)
     {
-        Tessellator tessellator = Tessellator.instance;
+        final Tessellator tessellator = Tessellator.instance;
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -438,9 +440,9 @@ public class TFRenderHelper
         faceVec(dst, src);
         GL11.glRotatef(90, 1, 0, 0);
 
-        float[] primary = hexToRGB(0x57ABAF);
-        float[] secondary = hexToRGB(0x7BF2F8);
-        double length = src.distanceTo(dst);
+        final float[] primary = hexToRGB(0x57ABAF);
+        final float[] secondary = hexToRGB(0x7BF2F8);
+        final double length = src.distanceTo(dst);
 
         Random rand = new Random(seed + mc.thePlayer.ticksExisted * 10);
         Random randPrev = new Random(seed + (mc.thePlayer.ticksExisted - 1) * 10);
@@ -449,12 +451,12 @@ public class TFRenderHelper
 
         for (int i = 0; i < segments; ++i)
         {
-            float f = (float) i / segments;
             dst = Vec3.createVectorHelper(0, (i + 1) * length / segments, 0);
 
             if (i < segments - 1)
             {
-                float angle = (float) Math.toRadians(90 * intensity) * (1 - f);
+                final float f = (float) i / segments;
+                final float angle = (float) Math.toRadians(90 * intensity) * (1 - f);
                 dst.rotateAroundX((TFHelper.median(rand.nextFloat(), randPrev.nextFloat(), ClientTickHandler.renderTick) - 0.5F) * 2 * angle);
                 dst.rotateAroundY((TFHelper.median(rand.nextFloat(), randPrev.nextFloat(), ClientTickHandler.renderTick) - 0.5F) * 2 * angle);
                 dst.rotateAroundZ((TFHelper.median(rand.nextFloat(), randPrev.nextFloat(), ClientTickHandler.renderTick) - 0.5F) * 2 * angle);
