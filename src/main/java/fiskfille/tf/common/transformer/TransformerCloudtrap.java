@@ -72,7 +72,7 @@ public class TransformerCloudtrap extends TransformerJet
         {
             if (!player.capabilities.isFlying)
             {
-                if (player.motionY < 0.0D)
+                if (player.motionY < 0D)
                 {
                     player.motionY *= 0.975;
                 }

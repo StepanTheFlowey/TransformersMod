@@ -50,7 +50,7 @@ public class RenderItemBassBlaster implements IItemRenderer
             GL11.glRotatef(-95, 0, 1, 0);
             GL11.glRotatef(30, 1, 0, 0);
 
-            float f = 1.0F;
+            float f = 1F;
             GL11.glScalef(f, f, f);
             model.render();
             GL11.glPopMatrix();

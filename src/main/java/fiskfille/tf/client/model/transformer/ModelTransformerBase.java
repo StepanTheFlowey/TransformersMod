@@ -335,11 +335,11 @@ public abstract class ModelTransformerBase extends MowzieModelBase
 
     protected void applyDefaultHittingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer head, ModelRenderer chest, ModelRenderer lowerArmR, ModelRenderer lowerArmL)
     {
-        if (onGround > -9990.0F)
+        if (onGround > -9990F)
         {
             float hitAnimation = onGround;
 
-            float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * PI * 2.0F) * 0.2F;
+            float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * PI * 2F) * 0.2F;
             chest.rotateAngleY += change;
             head.rotateAngleY -= change;
 
@@ -351,10 +351,10 @@ public abstract class ModelTransformerBase extends MowzieModelBase
             lowerArmL.rotateAngleY += change * 0.5;
             lowerArmL.rotateAngleX += change * 0.5;
 
-            hitAnimation = 1.0F - onGround;
+            hitAnimation = 1F - onGround;
             hitAnimation *= hitAnimation;
             hitAnimation *= hitAnimation;
-            hitAnimation = 1.0F - hitAnimation;
+            hitAnimation = 1F - hitAnimation;
             float f7 = MathHelper.sin(hitAnimation * PI);
             float f8 = MathHelper.sin(onGround * PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
 
@@ -362,11 +362,11 @@ public abstract class ModelTransformerBase extends MowzieModelBase
             float armRZChange = MathHelper.sin(onGround * PI) * -0.4F * 0.5F;
 
             upperArmR.rotateAngleX += armRXChange;
-            upperArmR.rotateAngleY += change * 2.0F * 0.5;
+            upperArmR.rotateAngleY += change * 2F * 0.5;
             upperArmR.rotateAngleZ += armRZChange;
 
             lowerArmR.rotateAngleX += armRXChange;
-            lowerArmR.rotateAngleY += change * 2.0F * 0.5;
+            lowerArmR.rotateAngleY += change * 2F * 0.5;
             lowerArmR.rotateAngleZ += armRZChange;
         }
     }

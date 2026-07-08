@@ -20,8 +20,8 @@ public class DisplayableVehicle extends Displayable
 
         if (vehicle != null)
         {
-            GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.5F, 0.0F, 1.0F, 0.0F);
-            GL11.glTranslatef(0.0F, -0.2F, 0.0F);
+            GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.5F, 0F, 1F, 0F);
+            GL11.glTranslatef(0F, -0.2F, 0F);
 
             final float scale = 0.75F;
             GL11.glScalef(scale, scale, scale);

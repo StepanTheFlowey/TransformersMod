@@ -195,16 +195,16 @@ public class TFHelper
 
     public static int blend(int a, int b, float ratio)
     {
-        if (ratio > 1.0F)
+        if (ratio > 1F)
         {
-            ratio = 1.0F;
+            ratio = 1F;
         }
-        else if (ratio < 0.0F)
+        else if (ratio < 0F)
         {
-            ratio = 0.0F;
+            ratio = 0F;
         }
 
-        float iRatio = 1.0F - ratio;
+        float iRatio = 1F - ratio;
 
         int aA = a >> 24 & 0xff;
         int aR = (a & 0xff0000) >> 16;

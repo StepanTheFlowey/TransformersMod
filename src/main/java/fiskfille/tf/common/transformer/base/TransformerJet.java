@@ -32,7 +32,7 @@ public abstract class TransformerJet extends Transformer
     @Override
     public float getThirdPersonDistance(EntityPlayer player, int altMode)
     {
-        return 4.0F;
+        return 4F;
     }
 
     @Override

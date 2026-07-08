@@ -47,7 +47,7 @@ public class AlloyRecipes
 
     private void registerRecipes()
     {
-        addRecipe(new AlloyIngredients("transformium", "ingotIron", "ingotIron"), new ItemStack(TFItems.transformiumAlloy, 2), 400, 1.0F);
+        addRecipe(new AlloyIngredients("transformium", "ingotIron", "ingotIron"), new ItemStack(TFItems.transformiumAlloy, 2), 400, 1F);
         addRecipe(new AlloyIngredients(TFBlocks.transformiumStone, Blocks.clay, "gemQuartz"), new ItemStack(TFItems.transformiumFragment), 600, 0.35F);
         addRecipe(new AlloyIngredients("ingotIron", "ingotGold", "dustRedstone"), new ItemStack(TFItems.crudeFluxAlloy), 0.4F);
         addRecipe(new AlloyIngredients("ingotFluxAlloyCrude", "ingotFluxAlloyCrude", "dustRedstone"), new ItemStack(TFItems.refinedFluxAlloy), 300, 0.6F);
@@ -166,7 +166,7 @@ public class AlloyRecipes
         {
             if (!iterator.hasNext())
             {
-                return 0.0F;
+                return 0F;
             }
 
             entry = (Entry) iterator.next();

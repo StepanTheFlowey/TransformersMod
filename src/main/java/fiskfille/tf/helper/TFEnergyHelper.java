@@ -141,17 +141,17 @@ public class TFEnergyHelper
                     boolean flag6 = true;
                     boolean flag3 = true;
                     boolean flag4 = true;
-                    double d0 = 999.0D;
-                    double d1 = 999.0D;
-                    double d2 = 999.0D;
+                    double d0 = 999D;
+                    double d1 = 999D;
+                    double d2 = 999D;
 
                     if (x > x1)
                     {
-                        d0 = x1 + 1.0D;
+                        d0 = x1 + 1D;
                     }
                     else if (x < x1)
                     {
-                        d0 = x1 + 0.0D;
+                        d0 = x1 + 0D;
                     }
                     else
                     {
@@ -160,11 +160,11 @@ public class TFEnergyHelper
 
                     if (y > y1)
                     {
-                        d1 = y1 + 1.0D;
+                        d1 = y1 + 1D;
                     }
                     else if (y < y1)
                     {
-                        d1 = y1 + 0.0D;
+                        d1 = y1 + 0D;
                     }
                     else
                     {
@@ -173,20 +173,20 @@ public class TFEnergyHelper
 
                     if (z > z1)
                     {
-                        d2 = z1 + 1.0D;
+                        d2 = z1 + 1D;
                     }
                     else if (z < z1)
                     {
-                        d2 = z1 + 0.0D;
+                        d2 = z1 + 0D;
                     }
                     else
                     {
                         flag4 = false;
                     }
 
-                    double d3 = 999.0D;
-                    double d4 = 999.0D;
-                    double d5 = 999.0D;
+                    double d3 = 999D;
+                    double d4 = 999D;
+                    double d5 = 999D;
                     double d6 = dst.xCoord - src.xCoord;
                     double d7 = dst.yCoord - src.yCoord;
                     double d8 = dst.zCoord - src.zCoord;
@@ -405,11 +405,11 @@ public class TFEnergyHelper
     {
         float usage = storage.getUsage();
 
-        if (usage < 0.0F)
+        if (usage < 0F)
         {
             storage.remove(-usage, false);
         }
-        else if (usage > 0.0F)
+        else if (usage > 0F)
         {
             storage.add(usage, false);
         }

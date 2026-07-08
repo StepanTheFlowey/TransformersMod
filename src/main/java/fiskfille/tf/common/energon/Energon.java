@@ -20,7 +20,7 @@ public abstract class Energon
 
     public float getEnergyValue()
     {
-        return 1.0F;
+        return 1F;
     }
 
     public String getTranslatedName()

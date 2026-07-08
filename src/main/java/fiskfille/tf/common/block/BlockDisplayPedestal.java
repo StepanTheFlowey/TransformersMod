@@ -28,8 +28,8 @@ public class BlockDisplayPedestal extends BlockMachineBase
     public BlockDisplayPedestal()
     {
         super(TFMaterial.display);
-        setHardness(2.0F);
-        setResistance(5.0F);
+        setHardness(2F);
+        setResistance(5F);
         setHarvestLevel("pickaxe", 0);
     }
 

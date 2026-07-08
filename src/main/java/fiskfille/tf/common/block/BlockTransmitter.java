@@ -19,8 +19,8 @@ public class BlockTransmitter extends BlockMachineBase
     public BlockTransmitter()
     {
         super(Material.rock);
-        setHardness(5.0F);
-        setResistance(10.0F);
+        setHardness(5F);
+        setResistance(10F);
     }
 
     @Override

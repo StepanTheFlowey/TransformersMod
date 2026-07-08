@@ -105,7 +105,7 @@ public class TFModelSubwoofer extends TransformerModel
     @Override
     public void renderFirstPersonArm(EntityPlayer player)
     {
-        GL11.glTranslatef(0.1F, 0.0F, 0.15F);
+        GL11.glTranslatef(0.1F, 0F, 0.15F);
     }
 
     @Override

@@ -14,14 +14,14 @@ public class ModelPowerCanister extends MowzieModelBase
         textureWidth = 32;
         textureHeight = 16;
         canister3 = new MowzieModelRenderer(this, 12, 5);
-        canister3.setRotationPoint(0.0F, -1.5F, 0.0F);
-        canister3.addBox(-2.0F, 0.0F, -2.0F, 4, 1, 4, 0.0F);
+        canister3.setRotationPoint(0F, -1.5F, 0F);
+        canister3.addBox(-2F, 0F, -2F, 4, 1, 4, 0F);
         canister2 = new MowzieModelRenderer(this, 12, 0);
-        canister2.setRotationPoint(0.0F, -8.5F, 0.0F);
-        canister2.addBox(-2.0F, -1.0F, -2.0F, 4, 1, 4, 0.0F);
+        canister2.setRotationPoint(0F, -8.5F, 0F);
+        canister2.addBox(-2F, -1F, -2F, 4, 1, 4, 0F);
         canister1 = new MowzieModelRenderer(this, 0, 0);
-        canister1.setRotationPoint(0.0F, 0.0F, 0.0F);
-        canister1.addBox(-1.5F, -10.0F, -1.5F, 3, 10, 3, 0.0F);
+        canister1.setRotationPoint(0F, 0F, 0F);
+        canister1.addBox(-1.5F, -10F, -1.5F, 3, 10, 3, 0F);
         canister1.addChild(canister3);
         canister1.addChild(canister2);
 

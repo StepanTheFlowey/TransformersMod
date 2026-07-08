@@ -12,7 +12,7 @@ public class RenderBlank extends Render
 {
     public RenderBlank()
     {
-        shadowSize = 0.0F;
+        shadowSize = 0F;
     }
 
     @Override

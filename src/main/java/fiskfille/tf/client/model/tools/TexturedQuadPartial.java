@@ -19,8 +19,8 @@ public class TexturedQuadPartial
     public TexturedQuadPartial(PositionTextureVertex[] vertices, double f, double f1, double f2, double f3, double width, double height)
     {
         this(vertices);
-        double f4 = 0.0F / width;
-        double f5 = 0.0F / height;
+        double f4 = 0F / width;
+        double f5 = 0F / height;
         vertices[0] = vertices[0].setTexturePosition((float) ((float) f2 / width - f4), (float) ((float) f1 / height + f5));
         vertices[1] = vertices[1].setTexturePosition((float) ((float) f / width + f4), (float) ((float) f1 / height + f5));
         vertices[2] = vertices[2].setTexturePosition((float) ((float) f / width + f4), (float) ((float) f3 / height - f5));

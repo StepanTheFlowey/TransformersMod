@@ -14,19 +14,19 @@ public class EntityBassCharge extends EntityThrowable
     public EntityBassCharge(World world)
     {
         super(world);
-        setSize(1.0F, 1.0F);
+        setSize(1F, 1F);
     }
 
     public EntityBassCharge(World world, EntityLivingBase entity)
     {
         super(world, entity);
-        setSize(1.0F, 1.0F);
+        setSize(1F, 1F);
     }
 
     public EntityBassCharge(World world, double x, double y, double z)
     {
         super(world, x, y, z);
-        setSize(1.0F, 1.0F);
+        setSize(1F, 1F);
     }
 
     @Override
@@ -43,13 +43,13 @@ public class EntityBassCharge extends EntityThrowable
     @Override
     protected float getGravityVelocity()
     {
-        return 0.0F;
+        return 0F;
     }
 
     @Override
     protected float func_70182_d()
     {
-        return 3.0F;
+        return 3F;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class EntityBassCharge extends EntityThrowable
     {
         if (mop.entityHit != null)
         {
-            float f = 2.0F * (1.0F - (float) ticksExisted / 20);
+            float f = 2F * (1F - (float) ticksExisted / 20);
             mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), f);
             mop.entityHit.hurtResistantTime = 0;
         }

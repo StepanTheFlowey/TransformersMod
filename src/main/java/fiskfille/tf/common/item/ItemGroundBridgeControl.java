@@ -55,7 +55,7 @@ public class ItemGroundBridgeControl extends ItemMachine
             }
 
             BlockControlPanel block = (BlockControlPanel) TFBlocks.groundBridgeControlPanel;
-            int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+            int direction = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
             byte x1 = 0;
             byte z1 = 0;
 
@@ -92,7 +92,7 @@ public class ItemGroundBridgeControl extends ItemMachine
                             world.setBlock(x + x1, y + 1, z + z1, block, direction + 8, 3);
                         }
 
-                        world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, block.stepSound.func_150496_b(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+                        world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, block.stepSound.func_150496_b(), (block.stepSound.getVolume() + 1F) / 2F, block.stepSound.getPitch() * 0.8F);
                         --itemstack.stackSize;
                         return true;
                     }

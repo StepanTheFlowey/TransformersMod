@@ -266,7 +266,7 @@ public class MowzieModelBase extends ModelBiped
      * @param boxes are the ModelRenderers to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;
-     * @param rootOffset changes the delay between boxes. Try values from 0.0D to 5.0D or so until you like the effect;
+     * @param rootOffset changes the delay between boxes. Try values from 0D to 5D or so until you like the effect;
      * @param f is the walked distance;
      * @param f1 is the walk speed.
      */
@@ -288,7 +288,7 @@ public class MowzieModelBase extends ModelBiped
      * @param boxes are the ModelRenderers to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;
-     * @param rootOffset changes the delay between boxes. Try values from 0.0D to 5.0D or so until you like the effect;
+     * @param rootOffset changes the delay between boxes. Try values from 0D to 5D or so until you like the effect;
      * @param f is the walked distance;
      * @param f1 is the walk speed.
      */
@@ -310,7 +310,7 @@ public class MowzieModelBase extends ModelBiped
      * @param boxes are the ModelRenderers to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;
-     * @param rootOffset changes the delay between boxes. Try values from 0.0D to 5.0D or so until you like the effect;
+     * @param rootOffset changes the delay between boxes. Try values from 0D to 5D or so until you like the effect;
      * @param f is the walked distance;
      * @param f1 is the walk speed.
      */
@@ -344,7 +344,7 @@ public class MowzieModelBase extends ModelBiped
                 moveY = ((AxisAlignedBB) collidingEntity).calculateYOffset(entity.boundingBox, moveY);
             }
 
-            onGround = actualMoveY != moveY && actualMoveY < 0.0D;
+            onGround = actualMoveY != moveY && actualMoveY < 0D;
         }
 
         return onGround || isRiding;

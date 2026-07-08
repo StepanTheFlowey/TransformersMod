@@ -130,7 +130,7 @@ public abstract class ShaderProgram
 
     public void setUniform(String name, boolean value)
     {
-        GL20.glUniform1f(this.uniforms.get(name), value ? 1.0F : 0.0F);
+        GL20.glUniform1f(this.uniforms.get(name), value ? 1F : 0F);
     }
 
     public void setUniform(String name, Matrix4f value)

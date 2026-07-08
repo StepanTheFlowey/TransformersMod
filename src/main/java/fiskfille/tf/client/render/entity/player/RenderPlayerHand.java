@@ -47,7 +47,7 @@ public class RenderPlayerHand extends RenderPlayer
                     upperArm = mainModel.bipedRightArm;
                 }
 
-                mainModel.onGround = 0.0F;
+                mainModel.onGround = 0F;
                 mainModel.setToInitPose();
 
                 int pass = shouldRenderPass(player, 1, partialTicks);
@@ -56,7 +56,7 @@ public class RenderPlayerHand extends RenderPlayer
                 GL11.glScalef(scale, scale, scale);
 
                 model.renderFirstPersonArm(player);
-                GL11.glTranslatef(0.0F, 0.35F, 0.0F);
+                GL11.glTranslatef(0F, 0.35F, 0F);
                 TFRenderHelper.setupRenderLayers(player, player.getCurrentArmor(2), upperArm);
 
                 if (pass > 0)

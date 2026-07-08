@@ -92,7 +92,7 @@ public class TFModelCloudtrap extends TransformerModel
     public void renderCape(EntityPlayer player)
     {
         GL11.glRotatef(20, 1, 0, 0);
-        GL11.glTranslatef(0, -0.05F, 0.0F);
+        GL11.glTranslatef(0, -0.05F, 0F);
     }
 
     @Override

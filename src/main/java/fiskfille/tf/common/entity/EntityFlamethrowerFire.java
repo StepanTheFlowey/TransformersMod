@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class EntityFlamethrowerFire extends EntityThrowable
 {
-    protected int particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 2;
+    protected int particleMaxAge = (int) (8D / (Math.random() * 0.8D + 0.2D)) + 2;
 
     public EntityFlamethrowerFire(World world)
     {
@@ -33,13 +33,13 @@ public class EntityFlamethrowerFire extends EntityThrowable
     @Override
     protected float getGravityVelocity()
     {
-        return 0.0F;
+        return 0F;
     }
 
     @Override
     protected float func_70182_d()
     {
-        return 1.0F;
+        return 1F;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class EntityFlamethrowerFire extends EntityThrowable
             if (getThrower() instanceof EntityPlayer)
             {
                 EntityPlayer player = (EntityPlayer) getThrower();
-                mop.entityHit.attackEntityFrom(DamageSource.causePlayerDamage(player), 5.0F * multiplier);
+                mop.entityHit.attackEntityFrom(DamageSource.causePlayerDamage(player), 5F * multiplier);
             }
         }
 

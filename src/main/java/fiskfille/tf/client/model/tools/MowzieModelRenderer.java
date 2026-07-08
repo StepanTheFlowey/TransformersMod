@@ -29,9 +29,9 @@ public class MowzieModelRenderer extends ModelRenderer
     public float initRotationPointY;
     public float initRotationPointZ;
 
-    public float scaleX = 1.0F;
-    public float scaleY = 1.0F;
-    public float scaleZ = 1.0F;
+    public float scaleX = 1F;
+    public float scaleY = 1F;
+    public float scaleZ = 1F;
 
     protected boolean compiled;
     protected int displayList;
@@ -294,9 +294,9 @@ public class MowzieModelRenderer extends ModelRenderer
                 GL11.glTranslatef(-rotationPointX * f, -rotationPointY * f, -rotationPointZ * f);
                 int i;
 
-                if (rotateAngleX == 0.0F && rotateAngleY == 0.0F && rotateAngleZ == 0.0F)
+                if (rotateAngleX == 0F && rotateAngleY == 0F && rotateAngleZ == 0F)
                 {
-                    if (rotationPointX == 0.0F && rotationPointY == 0.0F && rotationPointZ == 0.0F)
+                    if (rotationPointX == 0F && rotationPointY == 0F && rotationPointZ == 0F)
                     {
                         GL11.glCallList(displayList);
 
@@ -329,19 +329,19 @@ public class MowzieModelRenderer extends ModelRenderer
                     GL11.glPushMatrix();
                     GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
 
-                    if (rotateAngleZ != 0.0F)
+                    if (rotateAngleZ != 0F)
                     {
-                        GL11.glRotatef(rotateAngleZ * (180F / (float) Math.PI), 0.0F, 0.0F, 1.0F);
+                        GL11.glRotatef(rotateAngleZ * (180F / (float) Math.PI), 0F, 0F, 1F);
                     }
 
-                    if (rotateAngleY != 0.0F)
+                    if (rotateAngleY != 0F)
                     {
-                        GL11.glRotatef(rotateAngleY * (180F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
+                        GL11.glRotatef(rotateAngleY * (180F / (float) Math.PI), 0F, 1F, 0F);
                     }
 
-                    if (rotateAngleX != 0.0F)
+                    if (rotateAngleX != 0F)
                     {
-                        GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
+                        GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1F, 0F, 0F);
                     }
 
                     GL11.glCallList(displayList);
@@ -358,7 +358,7 @@ public class MowzieModelRenderer extends ModelRenderer
                 }
 
                 GL11.glTranslatef(-offsetX, -offsetY, -offsetZ);
-                GL11.glScalef(1.0F / scaleX, 1.0F / scaleY, 1.0F / scaleZ);
+                GL11.glScalef(1F / scaleX, 1F / scaleY, 1F / scaleZ);
             }
         }
 
@@ -382,9 +382,9 @@ public class MowzieModelRenderer extends ModelRenderer
                 GL11.glTranslatef(offsetX, offsetY, offsetZ);
                 GL11.glTranslatef(-rotationPointX * f, -rotationPointY * f, -rotationPointZ * f);
 
-                if (rotateAngleX == 0.0F && rotateAngleY == 0.0F && rotateAngleZ == 0.0F)
+                if (rotateAngleX == 0F && rotateAngleY == 0F && rotateAngleZ == 0F)
                 {
-                    if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F)
+                    if (rotationPointX != 0F || rotationPointY != 0F || rotationPointZ != 0F)
                     {
                         GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
                     }
@@ -393,23 +393,23 @@ public class MowzieModelRenderer extends ModelRenderer
                 {
                     GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
 
-                    if (rotateAngleZ != 0.0F)
+                    if (rotateAngleZ != 0F)
                     {
-                        GL11.glRotatef(rotateAngleZ * (180F / (float) Math.PI), 0.0F, 0.0F, 1.0F);
+                        GL11.glRotatef(rotateAngleZ * (180F / (float) Math.PI), 0F, 0F, 1F);
                     }
 
-                    if (rotateAngleY != 0.0F)
+                    if (rotateAngleY != 0F)
                     {
-                        GL11.glRotatef(rotateAngleY * (180F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
+                        GL11.glRotatef(rotateAngleY * (180F / (float) Math.PI), 0F, 1F, 0F);
                     }
 
-                    if (rotateAngleX != 0.0F)
+                    if (rotateAngleX != 0F)
                     {
-                        GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
+                        GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1F, 0F, 0F);
                     }
                 }
 
-                GL11.glScalef(1.0F / scaleX, 1.0F / scaleY, 1.0F / scaleZ);
+                GL11.glScalef(1F / scaleX, 1F / scaleY, 1F / scaleZ);
             }
         }
     }

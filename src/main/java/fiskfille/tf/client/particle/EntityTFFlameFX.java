@@ -15,8 +15,8 @@ public class EntityTFFlameFX extends EntityFX
         this.motionY = this.motionY * 0.009999999776482582D + motionY;
         this.motionZ = this.motionZ * 0.009999999776482582D + motionZ;
         flameScale = particleScale;
-        particleRed = particleGreen = particleBlue = 1.0F;
-        particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
+        particleRed = particleGreen = particleBlue = 1F;
+        particleMaxAge = (int) (8D / (Math.random() * 0.8D + 0.2D)) + 4;
         noClip = false;
         setParticleTextureIndex(48);
     }
@@ -25,7 +25,7 @@ public class EntityTFFlameFX extends EntityFX
     public void renderParticle(Tessellator tesselator, float x, float y, float z, float r, float g, float b)
     {
         float f6 = (particleAge + x) / particleMaxAge;
-        particleScale = flameScale * (1.0F - f6 * f6 * 0.5F);
+        particleScale = flameScale * (1F - f6 * f6 * 0.5F);
         super.renderParticle(tesselator, x, y, z, r, g, b);
     }
 

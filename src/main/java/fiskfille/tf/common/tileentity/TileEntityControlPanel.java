@@ -764,7 +764,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
     {
         float yaw = (getBlockMetadata() + 2) * 90;
         Vec3 vec3 = Vec3.createVectorHelper(-0.055F, 0.175F, -0.5F);
-        vec3.rotateAroundY(-yaw * (float) Math.PI / 180.0F);
+        vec3.rotateAroundY(-yaw * (float) Math.PI / 180F);
 
         return vec3;
     }

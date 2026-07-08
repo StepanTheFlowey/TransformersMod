@@ -13,7 +13,7 @@ public class BlockTransformiumStone extends BlockBasic
         super(Material.rock);
         setHarvestLvl("pickaxe", 2);
         setHardness(2.5F);
-        setResistance(10.0F);
+        setResistance(10F);
         setTickRandomly(true);
     }
 

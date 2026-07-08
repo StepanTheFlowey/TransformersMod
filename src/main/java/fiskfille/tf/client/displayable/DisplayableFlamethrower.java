@@ -20,10 +20,10 @@ public class DisplayableFlamethrower extends Displayable
         bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/flame_thrower.png"));
 
         float f = 0.7F;
-        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15.0F) * 0.05F;
+        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.05F;
         GL11.glScalef(f, f, f);
-        GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0.0F, 1.0F, 0.0F);
-        GL11.glTranslatef(-0.2F, 0.95F + f1, 0.0F);
+        GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+        GL11.glTranslatef(-0.2F, 0.95F + f1, 0F);
 
         model.render();
     }

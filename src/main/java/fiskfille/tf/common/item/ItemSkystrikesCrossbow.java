@@ -123,7 +123,7 @@ public class ItemSkystrikesCrossbow extends Item
     {
         Multimap multimap = super.getItemAttributeModifiers();
         multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 4.0D, 0));
+        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 4D, 0));
         return multimap;
     }
 }

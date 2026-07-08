@@ -27,8 +27,8 @@ public class BlockAlloyCrucible extends BlockMachineBase
     {
         super(Material.iron);
         setHarvestLevel("pickaxe", 1);
-        setHardness(6.0F);
-        setResistance(10.0F);
+        setHardness(6F);
+        setResistance(10F);
     }
 
     public static int getRotation(int metadata)

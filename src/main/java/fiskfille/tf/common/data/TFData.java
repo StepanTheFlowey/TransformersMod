@@ -36,18 +36,18 @@ public class TFData<T>
 {
     public static final TFData<Integer> ALT_MODE = new TFData<Integer>(-1, isTransformer());
     public static final TFData<Boolean> STEALTH_FORCE = new TFData<Boolean>(false, and(isInVehicleMode(), hasStealthForce()));
-    public static final TFData<Float> TRANSFORM_PROGRESS = new TFData<Float>(0.0F, isTransformer());
-    public static final TFData<Float> STEALTH_FORCE_PROGRESS = new TFData<Float>(0.0F, isInVehicleMode());
-    public static final TFData<Double> FORWARD_VELOCITY = new TFData<Double>(0.0D, Predicates.<EntityPlayer> alwaysTrue());
-    public static final TFData<Double> HORIZONTAL_VELOCITY = new TFData<Double>(0.0D, Predicates.<EntityPlayer> alwaysTrue());
+    public static final TFData<Float> TRANSFORM_PROGRESS = new TFData<Float>(0F, isTransformer());
+    public static final TFData<Float> STEALTH_FORCE_PROGRESS = new TFData<Float>(0F, isInVehicleMode());
+    public static final TFData<Double> FORWARD_VELOCITY = new TFData<Double>(0D, Predicates.<EntityPlayer> alwaysTrue());
+    public static final TFData<Double> HORIZONTAL_VELOCITY = new TFData<Double>(0D, Predicates.<EntityPlayer> alwaysTrue());
     public static final TFData<Boolean> BOOSTING = new TFData<Boolean>(false, Predicates.<EntityPlayer> alwaysTrue());
-    public static final TFData<Float> NITRO = new TFData<Float>(1.0F, Predicates.<EntityPlayer> alwaysTrue());
+    public static final TFData<Float> NITRO = new TFData<Float>(1F, Predicates.<EntityPlayer> alwaysTrue());
 
     public static final TFData<Integer> PREV_ALT_MODE = new TFDataPrev(ALT_MODE);
-    public static final TFData<Float> PREV_TRANSFORM_PROGRESS = new TFData<Float>(0.0F, isTransformer());
-    public static final TFData<Float> PREV_STEALTH_FORCE_PROGRESS = new TFData<Float>(0.0F, isInVehicleMode());
+    public static final TFData<Float> PREV_TRANSFORM_PROGRESS = new TFData<Float>(0F, isTransformer());
+    public static final TFData<Float> PREV_STEALTH_FORCE_PROGRESS = new TFData<Float>(0F, isInVehicleMode());
     public static final TFData<Transformer> PREV_TRANSFORMER = new TFData<Transformer>(null, Predicates.<EntityPlayer> alwaysTrue());
-    public static final TFData<Float> PREV_NITRO = new TFData<Float>(1.0F, Predicates.<EntityPlayer> alwaysTrue());
+    public static final TFData<Float> PREV_NITRO = new TFData<Float>(1F, Predicates.<EntityPlayer> alwaysTrue());
 
     public static final List<TFData<?>> VALUES = Lists.newArrayList();
 

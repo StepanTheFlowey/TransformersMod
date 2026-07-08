@@ -18,7 +18,7 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
     public BlockTransformiumSeed()
     {
         super(Material.circuits);
-        setResistance(1000000.0F);
+        setResistance(1000000F);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
         {
             EntityTransformiumSeed seed = new EntityTransformiumSeed(world, x + 0.5F, y, z + 0.5F, entity);
             world.spawnEntityInWorld(seed);
-            world.playSoundAtEntity(seed, "note.pling", 1.0F, 0.5F);
+            world.playSoundAtEntity(seed, "note.pling", 1F, 0.5F);
         }
 
         if (entity instanceof EntityPlayer)
@@ -68,7 +68,7 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
     public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 src, Vec3 dst)
     {
         float f = 0.2F;
-        setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 1.0F, 0.5F + f);
+        setBlockBounds(0.5F - f, 0F, 0.5F - f, 0.5F + f, 1F, 0.5F + f);
 
         return super.collisionRayTrace(world, x, y, z, src, dst);
     }

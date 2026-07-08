@@ -44,7 +44,7 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
     @Override
     protected float func_70182_d()
     {
-        return 4.0F;
+        return 4F;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
             }
             else if (mop.typeOfHit == MovingObjectType.ENTITY)
             {
-                worldObj.createExplosion(null, mop.entityHit.posX, mop.entityHit.posY, mop.entityHit.posZ, 1.0F, allowExplosions);
+                worldObj.createExplosion(null, mop.entityHit.posX, mop.entityHit.posY, mop.entityHit.posZ, 1F, allowExplosions);
             }
         }
 
@@ -92,7 +92,7 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
             ++x;
         }
 
-        worldObj.createExplosion(null, x + 0.5F, y + 0.5F, z + 0.5F, 1.0F, allowExplosions);
+        worldObj.createExplosion(null, x + 0.5F, y + 0.5F, z + 0.5F, 1F, allowExplosions);
     }
 
     @Override

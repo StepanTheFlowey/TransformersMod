@@ -36,7 +36,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
     @Override
     protected float getGravityVelocity()
     {
-        return 0.0F;
+        return 0F;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
                 {
                     float f = rand.nextFloat() / 5;
 
-                    worldObj.spawnParticle("reddust", posX + f, posY + 0.15F, posZ + f, blue ? -1.0D : 0.0D, 0.0D, blue ? 1.0D : 0.0D);
+                    worldObj.spawnParticle("reddust", posX + f, posY + 0.15F, posZ + f, blue ? -1D : 0D, 0D, blue ? 1D : 0D);
                 }
             }
 
@@ -80,7 +80,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 
             if (entityHit instanceof EntityLivingBase && thrower instanceof EntityPlayer && thrower != entityHit)
             {
-                ((EntityLivingBase) entityHit).attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) thrower), 10.0F);
+                ((EntityLivingBase) entityHit).attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) thrower), 10F);
             }
         }
 

@@ -28,7 +28,7 @@ public class BlockCosmicRust extends Block
     @Override
     public float getBlockHardness(World world, int x, int y, int z)
     {
-        return world.getBlockMetadata(x, y, z) == 1 ? 2.0F : blockHardness;
+        return world.getBlockMetadata(x, y, z) == 1 ? 2F : blockHardness;
     }
 
     @Override

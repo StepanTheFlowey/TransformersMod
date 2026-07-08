@@ -46,14 +46,14 @@ public class GuiVerticalSlider extends GuiSliderBase
         {
             percentage = (float) (mouseY - (yPosition + 4)) / (float) (height - 8);
 
-            if (percentage < 0.0F)
+            if (percentage < 0F)
             {
-                percentage = 0.0F;
+                percentage = 0F;
             }
 
-            if (percentage > 1.0F)
+            if (percentage > 1F)
             {
-                percentage = 1.0F;
+                percentage = 1F;
             }
 
             dragging = true;

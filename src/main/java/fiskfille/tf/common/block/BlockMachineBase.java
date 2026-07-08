@@ -329,9 +329,9 @@ public class BlockMachineBase extends Block implements ITileEntityProvider
             }
 
             float f = 0.7F;
-            double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-            double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-            double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+            double d0 = world.rand.nextFloat() * f + (1F - f) * 0.5D;
+            double d1 = world.rand.nextFloat() * f + (1F - f) * 0.5D;
+            double d2 = world.rand.nextFloat() * f + (1F - f) * 0.5D;
             EntityItem entityitem = new EntityItem(world, x + d0, y + d1, z + d2, itemstack);
 
             entityitem.delayBeforeCanPickup = 10;

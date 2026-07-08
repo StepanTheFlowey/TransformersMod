@@ -35,7 +35,7 @@ public class GuiAssemblyTable extends GuiContainerTF
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1F, 1F, 1F, 1F);
         mc.getTextureManager().bindTexture(texture);
         int k = (width - xSize) / 2;
         int l = (height - ySize) / 2;

@@ -149,7 +149,7 @@ public class TFMotionManager
 
         if (forwardVelocity < 1 && forwardVelocity > -1)
         {
-            forwardVelocity = 0.0D;
+            forwardVelocity = 0D;
         }
         else if (forwardVelocity < -reversingSpeedLimit)
         {
@@ -296,6 +296,6 @@ public class TFMotionManager
 
     public static double fromKMPH(double speed)
     {
-        return speed * 1000.0 / 60.0 / 60.0 / 20.0;
+        return speed * 1000D / 60D / 60D / 20D;
     }
 }

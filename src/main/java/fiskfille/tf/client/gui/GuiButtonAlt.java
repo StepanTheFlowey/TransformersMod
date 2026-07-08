@@ -23,7 +23,7 @@ public class GuiButtonAlt extends GuiButton
         {
             FontRenderer fontrenderer = mc.fontRenderer;
             mc.getTextureManager().bindTexture(buttonTextures);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glColor4f(1F, 1F, 1F, 1F);
             field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
             int k = getHoverState(field_146123_n);
             GL11.glEnable(GL11.GL_BLEND);

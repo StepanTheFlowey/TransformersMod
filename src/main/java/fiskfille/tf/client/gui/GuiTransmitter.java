@@ -86,7 +86,7 @@ public class GuiTransmitter extends GuiContainerTF
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
 
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1F, 1F, 1F, 1F);
         mc.getTextureManager().bindTexture(guiTextures);
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 

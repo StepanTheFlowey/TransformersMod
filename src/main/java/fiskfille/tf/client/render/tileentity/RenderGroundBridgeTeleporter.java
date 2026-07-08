@@ -169,14 +169,14 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer
 
                 Vec3 pos1 = Vec3.createVectorHelper(0, radius, 0);
                 Vec3 pos2 = Vec3.createVectorHelper(0, radius, 0);
-                pos1.rotateAroundZ(angle * f * (float) Math.PI / 180.0F);
-                pos2.rotateAroundZ(angle * f1 * (float) Math.PI / 180.0F);
+                pos1.rotateAroundZ(angle * f * (float) Math.PI / 180F);
+                pos2.rotateAroundZ(angle * f1 * (float) Math.PI / 180F);
                 Vec3 pos3 = Vec3.createVectorHelper((pos1.xCoord + pos2.xCoord) / 2, (pos1.yCoord + pos2.yCoord) / 2, (pos1.zCoord + pos2.zCoord) / 2);
 
                 Vec3 pos4 = Vec3.createVectorHelper(0, innerRadius, 0);
                 Vec3 pos5 = Vec3.createVectorHelper(0, innerRadius, 0);
-                pos4.rotateAroundZ(angle * f * (float) Math.PI / 180.0F);
-                pos5.rotateAroundZ(angle * f1 * (float) Math.PI / 180.0F);
+                pos4.rotateAroundZ(angle * f * (float) Math.PI / 180F);
+                pos5.rotateAroundZ(angle * f1 * (float) Math.PI / 180F);
 
                 if (!invert)
                 {
@@ -235,16 +235,16 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer
         {
             Vec3 pos1 = Vec3.createVectorHelper(0, radius, 0);
             Vec3 pos2 = Vec3.createVectorHelper(0, radius, 0);
-            pos1.rotateAroundZ(angle * j * (float) Math.PI / 180.0F);
-            pos2.rotateAroundZ(angle * (j - 1) * (float) Math.PI / 180.0F);
+            pos1.rotateAroundZ(angle * j * (float) Math.PI / 180F);
+            pos2.rotateAroundZ(angle * (j - 1) * (float) Math.PI / 180F);
 
             float minX = -icon.getInterpolatedU(8);
             float minY = icon.getInterpolatedV(8);
 
             Vec3 tex1 = Vec3.createVectorHelper(0.5F, 0.5F, 0);
             Vec3 tex2 = Vec3.createVectorHelper(0.5F, 0.5F, 0);
-            tex1.rotateAroundZ((angle * j + 135) * (float) Math.PI / 180.0F);
-            tex2.rotateAroundZ((angle * (j - 1) + 135) * (float) Math.PI / 180.0F);
+            tex1.rotateAroundZ((angle * j + 135) * (float) Math.PI / 180F);
+            tex2.rotateAroundZ((angle * (j - 1) + 135) * (float) Math.PI / 180F);
             tex1.xCoord /= zoom;
             tex1.yCoord /= zoom;
             tex1.zCoord /= zoom;

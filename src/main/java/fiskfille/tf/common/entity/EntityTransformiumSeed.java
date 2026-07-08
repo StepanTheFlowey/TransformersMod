@@ -28,7 +28,7 @@ public class EntityTransformiumSeed extends Entity
         super(world);
         preventEntitySpawning = true;
         setSize(0.98F, 0.98F);
-        yOffset = height / 2.0F;
+        yOffset = height / 2F;
     }
 
     public EntityTransformiumSeed(World world, double x, double y, double z, EntityLivingBase entity)
@@ -77,12 +77,12 @@ public class EntityTransformiumSeed extends Entity
             motionY = 0D;
         }
 
-        worldObj.playSoundAtEntity(this, "note.pling", 1, 0.0F + (float) ticksExisted / 50);
-        worldObj.playSoundAtEntity(this, "note.bassattack", 1, 0.0F + (float) ticksExisted / 50);
+        worldObj.playSoundAtEntity(this, "note.pling", 1, 0F + (float) ticksExisted / 50);
+        worldObj.playSoundAtEntity(this, "note.bassattack", 1, 0F + (float) ticksExisted / 50);
 
         for (int j = 0; j < 5; ++j)
         {
-            worldObj.spawnParticle("flame", posX, posY, posZ, 0.0D, -0.5D, 0.0D);
+            worldObj.spawnParticle("flame", posX, posY, posZ, 0D, -0.5D, 0D);
         }
 
         if (ticksExisted > 100)
@@ -119,15 +119,15 @@ public class EntityTransformiumSeed extends Entity
 
                     for (int depth = 0; depth < 3; ++depth)
                     {
-                        worldObj.spawnParticle("smoke", blockPosition.xCoord + rand.nextFloat() - 0.5F / 2, y + 1.2F, blockPosition.zCoord + rand.nextFloat() - 0.5F / 2, 0.0D, 0.0D, 0.0D);
-                        worldObj.spawnParticle("flame", blockPosition.xCoord + rand.nextFloat() - 0.5F / 2, y + 1.2F, blockPosition.zCoord + rand.nextFloat() - 0.5F / 2, 0.0D, 0.0D, 0.0D);
+                        worldObj.spawnParticle("smoke", blockPosition.xCoord + rand.nextFloat() - 0.5F / 2, y + 1.2F, blockPosition.zCoord + rand.nextFloat() - 0.5F / 2, 0D, 0D, 0D);
+                        worldObj.spawnParticle("flame", blockPosition.xCoord + rand.nextFloat() - 0.5F / 2, y + 1.2F, blockPosition.zCoord + rand.nextFloat() - 0.5F / 2, 0D, 0D, 0D);
 
                         if (worldObj.getBlock((int) x, y - depth, (int) z) != TFBlocks.transformiumStone && !worldObj.isAirBlock((int) x, y - depth, (int) z) && worldObj.getBlock((int) x, y - depth, (int) z) != Blocks.bedrock)
                         {
                             worldObj.setBlock((int) x, y - depth, (int) z, TFBlocks.transformiumStone);
                         }
 
-                        List<Entity> entities = getEntitiesNear(worldObj, x, y - depth, z, 5.0F);
+                        List<Entity> entities = getEntitiesNear(worldObj, x, y - depth, z, 5F);
 
                         for (Entity entity : entities)
                         {
@@ -155,7 +155,7 @@ public class EntityTransformiumSeed extends Entity
     {
         if (!worldObj.isRemote)
         {
-            worldObj.createExplosion(this, posX, posY, posZ, 10.0F, true);
+            worldObj.createExplosion(this, posX, posY, posZ, 10F, true);
         }
     }
 
@@ -177,7 +177,7 @@ public class EntityTransformiumSeed extends Entity
     @SideOnly(Side.CLIENT)
     public float getShadowSize()
     {
-        return 0.0F;
+        return 0F;
     }
 
     @Override

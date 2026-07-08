@@ -29,7 +29,7 @@ public class RenderTransformiumSeed extends TileEntitySpecialRenderer
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
-        GL11.glScalef(1.0F, -1F, -1F);
+        GL11.glScalef(1F, -1F, -1F);
         bindTexture(texture);
         model.render(new EntityTransformiumSeed(seed.getWorldObj()));
 

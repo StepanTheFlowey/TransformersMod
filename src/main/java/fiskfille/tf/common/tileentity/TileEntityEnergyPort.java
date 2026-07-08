@@ -86,7 +86,7 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
         float yaw = rotations[dir.ordinal() - 2] * 90;
 
         Vec3 vec3 = Vec3.createVectorHelper(0, 0, 0.5F - f);
-        vec3.rotateAroundY(-yaw * (float) Math.PI / 180.0F);
+        vec3.rotateAroundY(-yaw * (float) Math.PI / 180F);
 
         return vec3;
     }

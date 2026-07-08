@@ -48,7 +48,7 @@ public class CommonTickHandler
             if (transformationTimer == 1)
             {
                 speedAttribute.applyModifier(speedModifier);
-                player.stepHeight = 1.0F;
+                player.stepHeight = 1F;
             }
 
             Transformer prevArmor = null;
@@ -113,7 +113,7 @@ public class CommonTickHandler
                 }
                 else
                 {
-                    TFData.FORWARD_VELOCITY.setWithoutNotify(player, 0.0D);
+                    TFData.FORWARD_VELOCITY.setWithoutNotify(player, 0D);
                 }
             }
 
@@ -128,36 +128,36 @@ public class CommonTickHandler
 
             if (TFData.ALT_MODE.get(player) != -1)
             {
-                TFData.TRANSFORM_PROGRESS.incrWithoutNotify(player, 1.0F / transformTicks);
+                TFData.TRANSFORM_PROGRESS.incrWithoutNotify(player, 1F / transformTicks);
             }
             else if (!TFHelper.isInStealthMode(player))
             {
-                TFData.TRANSFORM_PROGRESS.incrWithoutNotify(player, -1.0F / transformTicks);
+                TFData.TRANSFORM_PROGRESS.incrWithoutNotify(player, -1F / transformTicks);
             }
 
-            TFData.TRANSFORM_PROGRESS.clampWithoutNotify(player, 0.0F, 1.0F);
+            TFData.TRANSFORM_PROGRESS.clampWithoutNotify(player, 0F, 1F);
 
             if (TFData.STEALTH_FORCE.get(player))
             {
-                TFData.STEALTH_FORCE_PROGRESS.incrWithoutNotify(player, 1.0F / stealthTicks);
+                TFData.STEALTH_FORCE_PROGRESS.incrWithoutNotify(player, 1F / stealthTicks);
             }
             else
             {
-                TFData.STEALTH_FORCE_PROGRESS.incrWithoutNotify(player, -1.0F / stealthTicks);
+                TFData.STEALTH_FORCE_PROGRESS.incrWithoutNotify(player, -1F / stealthTicks);
             }
 
-            TFData.STEALTH_FORCE_PROGRESS.clampWithoutNotify(player, 0.0F, 1.0F);
+            TFData.STEALTH_FORCE_PROGRESS.clampWithoutNotify(player, 0F, 1F);
 
             if (!player.capabilities.isCreativeMode && TFData.BOOSTING.get(player) && TFData.NITRO.get(player) > 0)
             {
-                TFData.NITRO.incrWithoutNotify(player, -1.0F / nitroTicks);
+                TFData.NITRO.incrWithoutNotify(player, -1F / nitroTicks);
             }
             else if (!TFData.BOOSTING.get(player) || player.capabilities.isCreativeMode)
             {
-                TFData.NITRO.incrWithoutNotify(player, 1.0F / nitroTicks);
+                TFData.NITRO.incrWithoutNotify(player, 1F / nitroTicks);
             }
 
-            TFData.NITRO.clampWithoutNotify(player, 0.0F, 1.0F);
+            TFData.NITRO.clampWithoutNotify(player, 0F, 1F);
             TFData.PREV_TRANSFORMER.setWithoutNotify(player, TFHelper.getTransformer(player));
         }
     }

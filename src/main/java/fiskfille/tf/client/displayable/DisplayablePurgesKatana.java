@@ -19,10 +19,10 @@ public class DisplayablePurgesKatana extends Displayable
     {
         bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png"));
 
-        float f = 1.0F;
-        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15.0F) * 0.1F;
+        float f = 1F;
+        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
         GL11.glScalef(f, f, f);
-        GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
         GL11.glTranslatef(0, 0.7F + f1, -0.55F);
         GL11.glRotatef(-90, 1, 0, 0);
 

@@ -57,7 +57,7 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler
             }
 
             float min = 0.001F;
-            float max = 1.0F - min;
+            float max = 1F - min;
             renderer.setRenderBounds(min, min, min, max, max, max);
             flag |= renderer.renderStandardBlock(block, x, y, z);
             renderer.setRenderBoundsFromBlock(block);
@@ -99,7 +99,7 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler
         }
 
         float min = connectAbove || connectBelow ? 0.002F : 0.002F;
-        float max = 1.0F - min;
+        float max = 1F - min;
 
         for (int i = 0; i < 2; ++i)
         {
@@ -156,7 +156,7 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
     {
         float min = 0.0001F;
-        float max = 1.0F - min;
+        float max = 1F - min;
         BlockEnergonTank.renderSide = 4;
         renderer.setRenderBounds(min, min, min, max, max, max);
         TFRenderHelper.renderBlock(block, metadata, renderer);

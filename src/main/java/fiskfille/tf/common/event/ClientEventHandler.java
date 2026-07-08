@@ -268,7 +268,7 @@ public class ClientEventHandler
                     Transformer transformer = TFHelper.getTransformerFromArmor(player, 2);
                     RenderManager renderManager = RenderManager.instance;
 
-                    GL11.glColor3f(1.0F, 1.0F, 1.0F);
+                    GL11.glColor3f(1F, 1F, 1F);
 
                     // renderArrowsStuckInEntity(player, partialTicks); TODO
 
@@ -290,8 +290,8 @@ public class ClientEventHandler
                             if (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(helmet).getRenderType()))
                             {
                                 scale = 0.625F;
-                                GL11.glTranslatef(0.0F, -0.25F, 0.0F);
-                                GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+                                GL11.glTranslatef(0F, -0.25F, 0F);
+                                GL11.glRotatef(90F, 0F, 1F, 0F);
                                 GL11.glScalef(scale, -scale, -scale);
                             }
 
@@ -317,7 +317,7 @@ public class ClientEventHandler
                                 }
                             }
 
-                            TileEntitySkullRenderer.field_147536_b.func_152674_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, helmetStack.getItemDamage(), gameprofile);
+                            TileEntitySkullRenderer.field_147536_b.func_152674_a(-0.5F, 0F, -0.5F, 1, 180F, helmetStack.getItemDamage(), gameprofile);
                         }
 
                         GL11.glPopMatrix();
@@ -336,12 +336,12 @@ public class ClientEventHandler
                             float f9 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * partialTicks - (player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * partialTicks);
                             float f10 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * partialTicks;
                             GL11.glPushMatrix();
-                            GL11.glRotatef(f9, 0.0F, 1.0F, 0.0F);
-                            GL11.glRotatef(f10, 1.0F, 0.0F, 0.0F);
-                            GL11.glTranslatef(0.375F * (j * 2 - 1), 0.0F, 0.0F);
-                            GL11.glTranslatef(0.0F, -0.375F, 0.0F);
-                            GL11.glRotatef(-f10, 1.0F, 0.0F, 0.0F);
-                            GL11.glRotatef(-f9, 0.0F, 1.0F, 0.0F);
+                            GL11.glRotatef(f9, 0F, 1F, 0F);
+                            GL11.glRotatef(f10, 1F, 0F, 0F);
+                            GL11.glTranslatef(0.375F * (j * 2 - 1), 0F, 0F);
+                            GL11.glTranslatef(0F, -0.375F, 0F);
+                            GL11.glRotatef(-f10, 1F, 0F, 0F);
+                            GL11.glRotatef(-f9, 0F, 1F, 0F);
                             f2 = 1.3333334F;
                             GL11.glScalef(f2, f2, f2);
                             modelBipedMain.renderEars(0.0625F);
@@ -388,40 +388,40 @@ public class ClientEventHandler
                             modelBipedMain.bipedBody.postRender(0.0625F);
                         }
 
-                        GL11.glTranslatef(0.0F, 0.0F, 0.125F);
+                        GL11.glTranslatef(0F, 0F, 0.125F);
                         double d3 = player.field_71091_bM + (player.field_71094_bP - player.field_71091_bM) * partialTicks - (player.prevPosX + (player.posX - player.prevPosX) * partialTicks);
                         double d4 = player.field_71096_bN + (player.field_71095_bQ - player.field_71096_bN) * partialTicks - (player.prevPosY + (player.posY - player.prevPosY) * partialTicks);
                         double d0 = player.field_71097_bO + (player.field_71085_bR - player.field_71097_bO) * partialTicks - (player.prevPosZ + (player.posZ - player.prevPosZ) * partialTicks);
                         f4 = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * partialTicks;
-                        double d1 = MathHelper.sin(f4 * (float) Math.PI / 180.0F);
-                        double d2 = -MathHelper.cos(f4 * (float) Math.PI / 180.0F);
-                        float f5 = (float) d4 * 10.0F;
+                        double d1 = MathHelper.sin(f4 * (float) Math.PI / 180F);
+                        double d2 = -MathHelper.cos(f4 * (float) Math.PI / 180F);
+                        float f5 = (float) d4 * 10F;
 
-                        if (f5 < -6.0F)
+                        if (f5 < -6F)
                         {
-                            f5 = -6.0F;
+                            f5 = -6F;
                         }
 
-                        if (f5 > 32.0F)
+                        if (f5 > 32F)
                         {
-                            f5 = 32.0F;
+                            f5 = 32F;
                         }
 
-                        float f6 = (float) (d3 * d1 + d0 * d2) * 100.0F;
-                        float f7 = (float) (d3 * d2 - d0 * d1) * 100.0F;
+                        float f6 = (float) (d3 * d1 + d0 * d2) * 100F;
+                        float f7 = (float) (d3 * d2 - d0 * d1) * 100F;
 
-                        if (f6 < 0.0F)
+                        if (f6 < 0F)
                         {
-                            f6 = 0.0F;
+                            f6 = 0F;
                         }
 
                         float f8 = player.prevCameraYaw + (player.cameraYaw - player.prevCameraYaw) * partialTicks;
-                        f5 += MathHelper.sin((player.prevDistanceWalkedModified + (player.distanceWalkedModified - player.prevDistanceWalkedModified) * partialTicks) * 6.0F) * 32.0F * f8;
+                        f5 += MathHelper.sin((player.prevDistanceWalkedModified + (player.distanceWalkedModified - player.prevDistanceWalkedModified) * partialTicks) * 6F) * 32F * f8;
 
-                        GL11.glRotatef(6.0F + f6 / 2.0F + f5, 1.0F, 0.0F, 0.0F);
-                        GL11.glRotatef(f7 / 2.0F, 0.0F, 0.0F, 1.0F);
-                        GL11.glRotatef(-f7 / 2.0F, 0.0F, 1.0F, 0.0F);
-                        GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+                        GL11.glRotatef(6F + f6 / 2F + f5, 1F, 0F, 0F);
+                        GL11.glRotatef(f7 / 2F, 0F, 0F, 1F);
+                        GL11.glRotatef(-f7 / 2F, 0F, 1F, 0F);
+                        GL11.glRotatef(180F, 0F, 1F, 0F);
                         modelBipedMain.renderCloak(0.0625F);
                         GL11.glPopMatrix();
                     }
@@ -485,10 +485,10 @@ public class ClientEventHandler
                         if (is3D || heldItem instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(heldItem).getRenderType()))
                         {
                             f2 = 0.5F;
-                            GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
+                            GL11.glTranslatef(0F, 0.1875F, -0.3125F);
                             f2 *= 0.75F;
-                            GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
-                            GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+                            GL11.glRotatef(20F, 1F, 0F, 0F);
+                            GL11.glRotatef(45F, 0F, 1F, 0F);
                             GL11.glScalef(-f2, -f2, f2);
                         }
                         else if (heldItem == Items.bow)
@@ -497,14 +497,14 @@ public class ClientEventHandler
 
                             if (model != null)
                             {
-                                GL11.glTranslatef(0.0F, -0.15F, -0.1F);
+                                GL11.glTranslatef(0F, -0.15F, -0.1F);
                             }
 
                             GL11.glTranslatef(-0.01F, 0.05F, 0.4F);
-                            GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
+                            GL11.glRotatef(-20F, 0F, 1F, 0F);
                             GL11.glScalef(f2, -f2, f2);
-                            GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-                            GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+                            GL11.glRotatef(-100F, 1F, 0F, 0F);
+                            GL11.glRotatef(45F, 0F, 1F, 0F);
                         }
                         else if (heldItem.isFull3D())
                         {
@@ -519,31 +519,31 @@ public class ClientEventHandler
 
                             if (heldItem.shouldRotateAroundWhenRendering())
                             {
-                                GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-                                GL11.glTranslatef(0.0F, -0.125F, 0.0F);
+                                GL11.glRotatef(180F, 0F, 0F, 1F);
+                                GL11.glTranslatef(0F, -0.125F, 0F);
                             }
 
                             if (player.getItemInUseCount() > 0 && action == EnumAction.block)
                             {
-                                GL11.glTranslatef(0.05F, 0.0F, -0.1F);
-                                GL11.glRotatef(-50.0F, 0.0F, 1.0F, 0.0F);
-                                GL11.glRotatef(-10.0F, 1.0F, 0.0F, 0.0F);
-                                GL11.glRotatef(-60.0F, 0.0F, 0.0F, 1.0F);
+                                GL11.glTranslatef(0.05F, 0F, -0.1F);
+                                GL11.glRotatef(-50F, 0F, 1F, 0F);
+                                GL11.glRotatef(-10F, 1F, 0F, 0F);
+                                GL11.glRotatef(-60F, 0F, 0F, 1F);
                             }
 
-                            GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
+                            GL11.glTranslatef(0F, 0.1875F, 0F);
                             GL11.glScalef(f2, -f2, f2);
-                            GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-                            GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+                            GL11.glRotatef(-100F, 1F, 0F, 0F);
+                            GL11.glRotatef(45F, 0F, 1F, 0F);
                         }
                         else
                         {
                             f2 = 0.375F;
                             GL11.glTranslatef(0.2F, 0.1F, -0.15F);
                             GL11.glScalef(f2, f2, f2);
-                            GL11.glRotatef(60.0F, 0.0F, 0.0F, 1.0F);
-                            GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
-                            GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
+                            GL11.glRotatef(60F, 0F, 0F, 1F);
+                            GL11.glRotatef(-90F, 1F, 0F, 0F);
+                            GL11.glRotatef(20F, 0F, 0F, 1F);
                         }
 
                         float f3;
@@ -555,20 +555,20 @@ public class ClientEventHandler
                             for (k = 0; k < heldItem.getRenderPasses(heldItemStack.getItemDamage()); ++k)
                             {
                                 int i = heldItem.getColorFromItemStack(heldItemStack, k);
-                                f12 = (i >> 16 & 255) / 255.0F;
-                                f3 = (i >> 8 & 255) / 255.0F;
-                                f4 = (i & 255) / 255.0F;
-                                GL11.glColor4f(f12, f3, f4, 1.0F);
+                                f12 = (i >> 16 & 255) / 255F;
+                                f3 = (i >> 8 & 255) / 255F;
+                                f4 = (i & 255) / 255F;
+                                GL11.glColor4f(f12, f3, f4, 1F);
                                 renderManager.itemRenderer.renderItem(player, heldItemStack, k);
                             }
                         }
                         else
                         {
                             k = heldItem.getColorFromItemStack(heldItemStack, 0);
-                            float f11 = (k >> 16 & 255) / 255.0F;
-                            f12 = (k >> 8 & 255) / 255.0F;
-                            f3 = (k & 255) / 255.0F;
-                            GL11.glColor4f(f11, f12, f3, 1.0F);
+                            float f11 = (k >> 16 & 255) / 255F;
+                            f12 = (k >> 8 & 255) / 255F;
+                            f3 = (k & 255) / 255F;
+                            GL11.glColor4f(f11, f12, f3, 1F);
                             renderManager.itemRenderer.renderItem(player, heldItemStack, 0);
                         }
 
@@ -775,7 +775,7 @@ public class ClientEventHandler
                 double blocksMoved = Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
 
                 GuiOverlay.prevSpeed = GuiOverlay.speed;
-                GuiOverlay.speed = blocksMoved * 20.0 * 60.0 * 60.0 / 1000.0;
+                GuiOverlay.speed = blocksMoved * 20D * 60D * 60D / 1000D;
 
                 lastX = player.posX;
                 lastY = player.posY;
@@ -809,13 +809,13 @@ public class ClientEventHandler
 
             if (TFDataManager.getZoomTimer(player) > 0 && TFHelper.getTransformer(player) instanceof TransformerVurp && itemstack != null && itemstack.getItem() == TFItems.vurpsSniper && mc.gameSettings.thirdPersonView == 0)
             {
-                event.newfov = 1.0F - (float) TFDataManager.getZoomTimer(player) / 10;
+                event.newfov = 1F - (float) TFDataManager.getZoomTimer(player) / 10;
             }
         }
 
         if (TFHelper.getTransformationTimer(player) > 0 && !(nitro > 0 && moveForward && nitroPressed && !TFHelper.isInStealthMode(player)))
         {
-            event.newfov = 1.0F;
+            event.newfov = 1F;
         }
     }
 

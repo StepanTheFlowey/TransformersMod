@@ -58,9 +58,9 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
             animationTimer *= 0.95F;
         }
 
-        if (animationTimer > 1.0F)
+        if (animationTimer > 1F)
         {
-            animationTimer = 1.0F;
+            animationTimer = 1F;
         }
 
         if (!data.isInitialized())

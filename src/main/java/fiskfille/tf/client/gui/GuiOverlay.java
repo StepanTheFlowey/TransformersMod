@@ -107,7 +107,7 @@ public class GuiOverlay extends Gui
 
             if (hasSniper)
             {
-                GL11.glColor4f(0.0F, 1.0F, 1.0F, 0.5F);
+                GL11.glColor4f(0F, 1F, 1F, 0.5F);
             }
             else
             {
@@ -161,7 +161,7 @@ public class GuiOverlay extends Gui
 
             // Nitro Outline
             drawTexturedModalRect(5 - offset, 16, 0, 0, 202, 12);
-            GL11.glColor4f(0.0F, 1.0F, 1.0F, 0.5F);
+            GL11.glColor4f(0F, 1F, 1F, 0.5F);
             // Nitro Bar
             drawTexturedModalRect(6 - offset, 4, 0, 0, Math.round(nitro * 200), 10);
             GL11.glColor4f(1F, 0F, 0F, 0.5F);
@@ -255,20 +255,20 @@ public class GuiOverlay extends Gui
                         GL11.glDisable(GL11.GL_DEPTH_TEST);
                         GL11.glDepthMask(false);
                         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-                        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                        GL11.glColor4f(1F, 1F, 1F, 1F);
                         GL11.glDisable(GL11.GL_ALPHA_TEST);
                         mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, "textures/misc/sniper_scope.png"));
                         Tessellator tessellator = Tessellator.instance;
                         tessellator.startDrawingQuads();
-                        tessellator.addVertexWithUV(0.0D, height, -90.0D, 0.0D, 1.0D);
-                        tessellator.addVertexWithUV(width, height, -90.0D, 1.0D, 1.0D);
-                        tessellator.addVertexWithUV(width, 0.0D, -90.0D, 1.0D, 0.0D);
-                        tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
+                        tessellator.addVertexWithUV(0D, height, -90D, 0D, 1D);
+                        tessellator.addVertexWithUV(width, height, -90D, 1D, 1D);
+                        tessellator.addVertexWithUV(width, 0D, -90D, 1D, 0D);
+                        tessellator.addVertexWithUV(0D, 0D, -90D, 0D, 0D);
                         tessellator.draw();
                         GL11.glDepthMask(true);
                         GL11.glEnable(GL11.GL_DEPTH_TEST);
                         GL11.glEnable(GL11.GL_ALPHA_TEST);
-                        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                        GL11.glColor4f(1F, 1F, 1F, 1F);
                     }
                 }
             }
@@ -285,9 +285,9 @@ public class GuiOverlay extends Gui
                 int j = TFItems.purgesKatana.getMaxItemUseDuration(player.getHeldItem()) - player.getItemInUseCount();
                 double d = (double) j / 10;
 
-                if (d > 2.0D)
+                if (d > 2D)
                 {
-                    d = 2.0D;
+                    d = 2D;
                 }
 
                 GL11.glDisable(GL11.GL_TEXTURE_2D);

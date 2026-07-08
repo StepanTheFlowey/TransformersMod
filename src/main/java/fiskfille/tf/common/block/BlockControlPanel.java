@@ -19,8 +19,8 @@ public class BlockControlPanel extends BlockMachineBase
     public BlockControlPanel()
     {
         super(Material.iron);
-        setHardness(4.0F);
-        setResistance(10.0F);
+        setHardness(4F);
+        setResistance(10F);
         setStepSound(soundTypeMetal);
     }
 

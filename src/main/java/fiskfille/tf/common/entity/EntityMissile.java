@@ -27,7 +27,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
         super(world, entity);
         isInStealthMode = stealthMode;
         allowExplosions = explosions;
-        setThrowableHeading(motionX, motionY, motionZ, func_70182_d(), 1.0F);
+        setThrowableHeading(motionX, motionY, motionZ, func_70182_d(), 1F);
     }
 
     public EntityMissile(World world, double x, double y, double z)
@@ -61,7 +61,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
     @Override
     protected float func_70182_d()
     {
-        return isInStealthMode ? 2.0F : 4.0F;
+        return isInStealthMode ? 2F : 4F;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
                 {
                     EntityPlayer player = (EntityPlayer) getThrower();
 
-                    if (player.getDistanceSqToEntity(mop.entityHit) >= 25.0D)
+                    if (player.getDistanceSqToEntity(mop.entityHit) >= 25D)
                     {
                         player.addStat(TFAchievements.sharpshooter, 1);
                     }

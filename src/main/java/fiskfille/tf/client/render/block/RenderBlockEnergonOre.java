@@ -33,7 +33,7 @@ public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
     {
-        GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(90F, 0F, 1F, 0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
         BlockEnergonOre.renderPass = 0;

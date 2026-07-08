@@ -29,7 +29,7 @@ public class TFParticles
                 double diffZ = mc.renderViewEntity.posZ - z;
 
                 EntityFX particle = null;
-                double maxRenderDistance = 16.0D;
+                double maxRenderDistance = 16D;
 
                 if (diffX * diffX + diffY * diffY + diffZ * diffZ > maxRenderDistance * maxRenderDistance)
                 {

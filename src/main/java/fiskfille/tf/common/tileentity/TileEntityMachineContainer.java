@@ -179,7 +179,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
     @Override
     public boolean isUseableByPlayer(EntityPlayer player)
     {
-        return player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+        return player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
     }
 
     @Override

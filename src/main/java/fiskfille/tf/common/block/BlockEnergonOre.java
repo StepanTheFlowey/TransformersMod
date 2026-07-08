@@ -22,8 +22,8 @@ public class BlockEnergonOre extends Block
     public BlockEnergonOre()
     {
         super(Material.rock);
-        setHardness(3.0F);
-        setResistance(5.0F);
+        setHardness(3F);
+        setResistance(5F);
     }
 
     @Override

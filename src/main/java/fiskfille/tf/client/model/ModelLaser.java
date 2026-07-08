@@ -15,11 +15,11 @@ public class ModelLaser extends ModelBase
         textureWidth = 64;
         textureHeight = 16;
         laserInner = new ModelRenderer(this, 0, 0);
-        laserInner.setRotationPoint(0.0F, 0.0F, 0.0F);
+        laserInner.setRotationPoint(0F, 0F, 0F);
         laserInner.addBox(-0.5F, -0.5F, -3.5F, 1, 1, 7);
         laserOuter = new ModelRenderer(this, 17, 0);
-        laserOuter.setRotationPoint(0.0F, 0.0F, 0.0F);
-        laserOuter.addBox(-1.0F, -1.0F, -4.0F, 2, 2, 8);
+        laserOuter.setRotationPoint(0F, 0F, 0F);
+        laserOuter.addBox(-1F, -1F, -4F, 2, 2, 8);
         laserInner.addChild(laserOuter);
     }
 

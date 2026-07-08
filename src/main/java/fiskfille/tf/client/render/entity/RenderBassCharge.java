@@ -26,8 +26,8 @@ public class RenderBassCharge extends Render
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y, (float) z);
-        GL11.glRotatef(pitch, 1.0F, 0.0F, 0.0F);
-        GL11.glRotatef(yaw, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(pitch, 1F, 0F, 0F);
+        GL11.glRotatef(yaw, 0F, 1F, 0F);
         GL11.glScalef(f1, f1, f1);
         GL11.glDepthMask(false);
         GL11.glEnable(GL11.GL_BLEND);

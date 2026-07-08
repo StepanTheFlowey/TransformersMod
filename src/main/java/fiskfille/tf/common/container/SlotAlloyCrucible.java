@@ -68,11 +68,11 @@ public class SlotAlloyCrucible extends Slot
             float xp = (AlloyRecipes.getInstance().getXpYield(itemstack) * tileentity.alloyResults + FurnaceRecipes.smelting().func_151398_b(itemstack) * tileentity.furnaceResults) / amountTaken;
             int i;
 
-            if (xp == 0.0F)
+            if (xp == 0F)
             {
                 amount = 0;
             }
-            else if (xp < 1.0F)
+            else if (xp < 1F)
             {
                 i = MathHelper.floor_float(amount * xp);
 

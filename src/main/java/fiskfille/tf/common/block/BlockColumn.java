@@ -16,8 +16,8 @@ public class BlockColumn extends BlockMachineBase
     public BlockColumn()
     {
         super(Material.iron);
-        setHardness(5.0F);
-        setResistance(10.0F);
+        setHardness(5F);
+        setResistance(10F);
     }
 
     @Override

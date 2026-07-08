@@ -51,7 +51,7 @@ public class ItemBassBlaster extends Item
 
                 for (int i = 0; i < 2; ++i)
                 {
-                    world.playSoundAtEntity(player, "note.bass", 1.0F, 0.8F);
+                    world.playSoundAtEntity(player, "note.bass", 1F, 0.8F);
                 }
 
                 if (!world.isRemote)

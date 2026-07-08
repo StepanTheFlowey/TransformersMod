@@ -12,8 +12,8 @@ public class ModelTankShell extends ModelBase
         textureWidth = 16;
         textureHeight = 8;
         shell = new ModelRenderer(this, 0, 0);
-        shell.setRotationPoint(0.0F, 0.0F, 0.0F);
-        shell.addBox(-3.0F, -1.0F, -1.0F, 6, 2, 2);
+        shell.setRotationPoint(0F, 0F, 0F);
+        shell.addBox(-3F, -1F, -1F, 6, 2, 2);
         shell.rotateAngleY = (float) Math.PI / 2;
     }
 

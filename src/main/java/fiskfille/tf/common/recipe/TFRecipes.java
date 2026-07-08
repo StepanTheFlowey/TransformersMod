@@ -159,7 +159,7 @@ public class TFRecipes
 
     private static void addSmelting()
     {
-        GameRegistry.addSmelting(TFBlocks.transformiumOre, new ItemStack(TFItems.transformiumFragment, 1), 1.0F);
+        GameRegistry.addSmelting(TFBlocks.transformiumOre, new ItemStack(TFItems.transformiumFragment, 1), 1F);
         GameRegistry.addSmelting(TFBlocks.energonOre, new ItemStack(TFItems.energonDust, 1), 0.7F);
     }
 

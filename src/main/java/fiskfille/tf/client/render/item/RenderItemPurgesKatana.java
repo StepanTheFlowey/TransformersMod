@@ -32,10 +32,10 @@ public class RenderItemPurgesKatana implements IItemRenderer
         if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP)
         {
             GL11.glPushMatrix();
-            GL11.glRotatef(0, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(210, 0.0F, 0.0F, 1.0F);
-            GL11.glTranslatef(-0.7F, 0.2F, -0.0F);
+            GL11.glRotatef(0, 1F, 0F, 0F);
+            GL11.glRotatef(0, 0F, 1F, 0F);
+            GL11.glRotatef(210, 0F, 0F, 1F);
+            GL11.glTranslatef(-0.7F, 0.2F, -0F);
 
             model.render();
             GL11.glPopMatrix();
@@ -43,9 +43,9 @@ public class RenderItemPurgesKatana implements IItemRenderer
         else if (type == ItemRenderType.EQUIPPED)
         {
             GL11.glPushMatrix();
-            GL11.glRotatef(5, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(-5, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(215, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(5, 1F, 0F, 0F);
+            GL11.glRotatef(-5, 0F, 1F, 0F);
+            GL11.glRotatef(215, 0F, 0F, 1F);
             GL11.glTranslatef(-0.715F, 0.265F, -0.07F);
 
             model.render();

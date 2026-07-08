@@ -72,15 +72,15 @@ public class TFBlocks
 
     public static void register()
     {
-        transformiumOre = new BlockBasic(Material.rock).setHarvestLvl("pickaxe", 2).setHardness(10.0F).setResistance(1000.0F);
-        transformiumStone = new BlockTransformiumStone().setResistance(1000.0F);
+        transformiumOre = new BlockBasic(Material.rock).setHarvestLvl("pickaxe", 2).setHardness(10F).setResistance(1000F);
+        transformiumStone = new BlockTransformiumStone().setResistance(1000F);
         transformiumSeed = new BlockTransformiumSeed();
         cosmicRust = new BlockCosmicRust();
-        transformiumBlock = new BlockCompressedTF(MapColor.brownColor).setHarvestLvl("pickaxe", 2).setHardness(7.0F).setResistance(1000000.0F);
-        transformiumAlloyBlock = new BlockCompressedTF(MapColor.dirtColor).setHarvestLvl("pickaxe", 3).setHardness(10.0F).setResistance(50.0F).setStepSound(Block.soundTypeMetal);
-        crudeFluxAlloyBlock = new BlockCompressedTF(MapColor.adobeColor).setHarvestLvl("pickaxe", 1).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
-        refinedFluxAlloyBlock = new BlockCompressedTF(MapColor.yellowColor).setHarvestLvl("pickaxe", 2).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
-        energonAlloyBlock = new BlockCompressedTF(MapColor.diamondColor).setHarvestLvl("pickaxe", 1).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
+        transformiumBlock = new BlockCompressedTF(MapColor.brownColor).setHarvestLvl("pickaxe", 2).setHardness(7F).setResistance(1000000F);
+        transformiumAlloyBlock = new BlockCompressedTF(MapColor.dirtColor).setHarvestLvl("pickaxe", 3).setHardness(10F).setResistance(50F).setStepSound(Block.soundTypeMetal);
+        crudeFluxAlloyBlock = new BlockCompressedTF(MapColor.adobeColor).setHarvestLvl("pickaxe", 1).setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
+        refinedFluxAlloyBlock = new BlockCompressedTF(MapColor.yellowColor).setHarvestLvl("pickaxe", 2).setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
+        energonAlloyBlock = new BlockCompressedTF(MapColor.diamondColor).setHarvestLvl("pickaxe", 1).setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
 
         energonOre = new BlockEnergonOre();
         energonCrystal = new BlockEnergonCrystal(TFEnergonManager.energon);
@@ -91,7 +91,7 @@ public class TFBlocks
         displayPedestal = new BlockDisplayPedestal();
         displayStation = new BlockDisplayStation();
         wool = new BlockColoredTF(Material.cloth).setHardness(0.8F).setStepSound(Block.soundTypeCloth);
-        stainedHardenedClay = new BlockColoredTF(Material.rock).setHardness(1.25F).setResistance(7.0F).setStepSound(Block.soundTypePiston);
+        stainedHardenedClay = new BlockColoredTF(Material.rock).setHardness(1.25F).setResistance(7F).setStepSound(Block.soundTypePiston);
         stainedGlass = new BlockStainedGlassTF().setHardness(0.3F).setStepSound(Block.soundTypeGlass);
         stainedGlassPane = new BlockStainedGlassPaneTF().setHardness(0.3F).setStepSound(Block.soundTypeGlass);
         carpet = new BlockCarpetTF().setHardness(0.1F).setStepSound(Block.soundTypeCloth).setLightOpacity(0);

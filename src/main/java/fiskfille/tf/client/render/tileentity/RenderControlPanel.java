@@ -38,8 +38,8 @@ public class RenderControlPanel extends TileEntitySpecialRenderer
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        GL11.glScalef(1.0F, -1F, -1F);
-        GL11.glRotatef(BlockControlPanel.getDirection(metadata) * 90 + 180, 0.0F, 1.0F, 0.0F);
+        GL11.glScalef(1F, -1F, -1F);
+        GL11.glRotatef(BlockControlPanel.getDirection(metadata) * 90 + 180, 0F, 1F, 0F);
 
         if (BlockControlPanel.isBlockLeftSideOfPanel(metadata))
         {
@@ -92,7 +92,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer
 
                 if (energy > 0)
                 {
-                    float f = 1.0F / 32;
+                    float f = 1F / 32;
                     float f1 = energy / tile.getMaxEnergy();
                     float length = f * 18;
                     float width = f * 4;
@@ -242,7 +242,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
         GL11.glScalef(scale, scale, -scale);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1F, 1F, 1F, 1F);
         GL11.glDisable(GL11.GL_LIGHTING);
         mc.fontRenderer.drawSplitString(s, 0, 0, 200, color);
         GL11.glEnable(GL11.GL_LIGHTING);
@@ -256,7 +256,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
         GL11.glScalef(scale, scale, -scale);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1F, 1F, 1F, 1F);
         GL11.glDisable(GL11.GL_LIGHTING);
         mc.fontRenderer.drawString(s, -mc.fontRenderer.getStringWidth(s) / 2, 0, color);
         GL11.glEnable(GL11.GL_LIGHTING);

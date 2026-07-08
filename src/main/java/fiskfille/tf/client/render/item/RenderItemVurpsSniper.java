@@ -43,7 +43,7 @@ public class RenderItemVurpsSniper implements IItemRenderer
 
                 if (i == 7)
                 {
-                    GL11.glTranslatef(0.1F, 0.45F, -1.0F);
+                    GL11.glTranslatef(0.1F, 0.45F, -1F);
                     GL11.glRotatef(0, 1, 0, 0);
                     GL11.glRotatef(210, 0, 0, 1);
                     GL11.glRotatef(95, 0, 1, 0);
@@ -57,7 +57,7 @@ public class RenderItemVurpsSniper implements IItemRenderer
                 }
                 else if (i == 5)
                 {
-                    GL11.glTranslatef(1.0F, 0.9F, -0.9F);
+                    GL11.glTranslatef(1F, 0.9F, -0.9F);
                     GL11.glRotatef(0, 1, 0, 0);
                     GL11.glRotatef(210, 0, 0, 1);
                     GL11.glRotatef(95, 0, 1, 0);
@@ -98,7 +98,7 @@ public class RenderItemVurpsSniper implements IItemRenderer
                     GL11.glRotatef(90, 0, 1, 0);
                 }
 
-                float f = 2.0F;
+                float f = 2F;
                 GL11.glScalef(f, f, f);
                 model.render();
             }

@@ -40,31 +40,31 @@ public class RenderItemSkystrikesCrossbow implements IItemRenderer
 
                 if (player.getItemInUseDuration() == 0)
                 {
-                    GL11.glRotatef(7, 1.0F, 0.0F, 0.0F);
-                    GL11.glRotatef(-15, 0.0F, 1.0F, 0.0F);
-                    GL11.glRotatef(20, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(7, 1F, 0F, 0F);
+                    GL11.glRotatef(-15, 0F, 1F, 0F);
+                    GL11.glRotatef(20, 0F, 0F, 1F);
                     GL11.glTranslatef(0.4F, 0.3F, -0.4F);
                 }
                 else
                 {
-                    GL11.glRotatef(0, 1.0F, 0.0F, 0.0F);
-                    GL11.glRotatef(-10, 0.0F, 1.0F, 0.0F);
-                    GL11.glRotatef(40, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(0, 1F, 0F, 0F);
+                    GL11.glRotatef(-10, 0F, 1F, 0F);
+                    GL11.glRotatef(40, 0F, 0F, 1F);
                     GL11.glTranslatef(0.8F, -0.2F, -0.1F);
                 }
             }
             else
             {
-                GL11.glRotatef(7, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(-15, 0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(20, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(7, 1F, 0F, 0F);
+                GL11.glRotatef(-15, 0F, 1F, 0F);
+                GL11.glRotatef(20, 0F, 0F, 1F);
                 GL11.glTranslatef(0.4F, 0.3F, -0.4F);
             }
 
-            GL11.glRotatef(110, 0.2F, 6.0F, 4.0F);
+            GL11.glRotatef(110, 0.2F, 6F, 4F);
             GL11.glRotatef(165, -2.35F, 0.8F, 0.2F);
 
-            float f = 1.0F;
+            float f = 1F;
             GL11.glScalef(f, f, f);
             model.render();
             GL11.glPopMatrix();
@@ -72,14 +72,14 @@ public class RenderItemSkystrikesCrossbow implements IItemRenderer
         else if (type == ItemRenderType.EQUIPPED)
         {
             GL11.glPushMatrix();
-            GL11.glRotatef(-90, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(180, 0.0F, 0.0F, 1.0F);
-            GL11.glRotatef(-45, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(5, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(-10, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(-90, 0F, 1F, 0F);
+            GL11.glRotatef(180, 0F, 0F, 1F);
+            GL11.glRotatef(-45, 1F, 0F, 0F);
+            GL11.glRotatef(5, 0F, 1F, 0F);
+            GL11.glRotatef(-10, 1F, 0F, 0F);
             GL11.glTranslatef(0.1F, 0.5F, -0.6F);
 
-            float f = 1.0F;
+            float f = 1F;
             GL11.glScalef(f, f, f);
             model.render();
             GL11.glPopMatrix();

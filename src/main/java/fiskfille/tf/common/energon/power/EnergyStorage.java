@@ -108,7 +108,7 @@ public class EnergyStorage
 
     public float set(float amount)
     {
-        energy = Math.min(getMaxEnergy(), Math.max(0.0F, amount));
+        energy = Math.min(getMaxEnergy(), Math.max(0F, amount));
         return energy;
     }
 

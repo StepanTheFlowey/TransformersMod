@@ -42,14 +42,14 @@ public class ModelRendererPartial extends MowzieModelRenderer
         name = boxName + "." + name;
         TextureOffset offset = baseModel.getTextureOffset(name);
         setTextureOffset(offset.textureOffsetX, offset.textureOffsetY);
-        cubeList.add(new ModelBoxPartial(this, textureOffsetX, textureOffsetY, p_78786_2_, p_78786_3_, p_78786_4_, p_78786_5_, p_78786_6_, p_78786_7_, 0.0F).func_78244_a(name));
+        cubeList.add(new ModelBoxPartial(this, textureOffsetX, textureOffsetY, p_78786_2_, p_78786_3_, p_78786_4_, p_78786_5_, p_78786_6_, p_78786_7_, 0F).func_78244_a(name));
         return this;
     }
 
     @Override
     public ModelRenderer addBox(float p_78789_1_, float p_78789_2_, float p_78789_3_, int p_78789_4_, int p_78789_5_, int p_78789_6_)
     {
-        cubeList.add(new ModelBoxPartial(this, textureOffsetX, textureOffsetY, p_78789_1_, p_78789_2_, p_78789_3_, p_78789_4_, p_78789_5_, p_78789_6_, 0.0F));
+        cubeList.add(new ModelBoxPartial(this, textureOffsetX, textureOffsetY, p_78789_1_, p_78789_2_, p_78789_3_, p_78789_4_, p_78789_5_, p_78789_6_, 0F));
         return this;
     }
 

@@ -55,7 +55,7 @@ public class RenderBlockDisplayPedestal implements ISimpleBlockRenderingHandler
         BlockIcon[] icons = BlockDisplayPedestal.getTexture(metadata);
         AxisAlignedBB[] bounds = BlockDisplayPedestal.getBounds();
 
-        GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(90F, 0F, 1F, 0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
         for (int i = 0; i < Math.min(icons.length, bounds.length); ++i)

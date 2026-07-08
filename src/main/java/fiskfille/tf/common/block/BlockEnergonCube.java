@@ -18,8 +18,8 @@ public class BlockEnergonCube extends BlockBasic implements IEnergon
 
         setHarvestLvl("pickaxe", 1);
         setStepSound(Block.soundTypeMetal);
-        setHardness(6.0F);
-        setResistance(10.0F);
+        setHardness(6F);
+        setResistance(10F);
         setLightLevel(0.5F);
     }
 

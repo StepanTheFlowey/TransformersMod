@@ -64,17 +64,17 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 
         if (!flag && flag1)
         {
-            f = 0.0F;
-            f1 = 1.0F;
+            f = 0F;
+            f1 = 1F;
         }
 
         if (flag && !flag1)
         {
-            f2 = 0.0F;
-            f3 = 1.0F;
+            f2 = 0F;
+            f3 = 1F;
         }
 
-        setBlockBounds(f, 0.0F, f2, f1, 1.0F, f3);
+        setBlockBounds(f, 0F, f2, f1, 1F, f3);
     }
 
     @Override
@@ -201,7 +201,7 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
                     if (teleporter.returnPortal())
                     {
                         posX = data.framePos.posX + 0.5D;
-                        posY = data.framePos.posY + 1.0D;
+                        posY = data.framePos.posY + 1D;
                         posZ = data.framePos.posZ + 0.5D;
                         dimension = data.framePos.dimension;
                         srcYaw = data.direction;

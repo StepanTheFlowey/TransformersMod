@@ -23,8 +23,8 @@ public class RenderTankShell extends Render
     {
         GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
-        GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 + 180, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 1.0F, 0.0F, 0.0F);
+        GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 + 180, 0F, 1F, 0F);
+        GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 1F, 0F, 0F);
         final float scale = 1.75F;
         GL11.glScalef(scale, scale, scale);
         bindEntityTexture(entity);

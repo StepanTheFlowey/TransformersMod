@@ -46,11 +46,11 @@ public class RenderItemFlamethrower implements IItemRenderer
                 if (player.getItemInUseDuration() != 0)
                 {
                     GL11.glRotatef(-10, 0, 0, 1);
-                    GL11.glTranslatef(-0.4F, 0.0F, 0);
+                    GL11.glTranslatef(-0.4F, 0F, 0);
                 }
             }
 
-            float f = 2.0F;
+            float f = 2F;
             GL11.glScalef(f, f, f);
             model.render();
             GL11.glPopMatrix();

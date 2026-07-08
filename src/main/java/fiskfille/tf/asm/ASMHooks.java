@@ -12,7 +12,7 @@ public class ASMHooks
 //            return SHData.getFloat((EntityPlayer) entity, SHData.SCALE);
         }
 
-        return 1.0F;
+        return 1F;
     }
 
     public static float getModifiedEntityScale(Entity entity)
@@ -22,7 +22,7 @@ public class ASMHooks
             return getEntityScale(entity);
         }
 
-        return 1.0F;
+        return 1F;
     }
 
     public static double getScaledSneakOffset(Entity entity, double d)

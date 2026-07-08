@@ -39,9 +39,9 @@ public class ItemPurgesKatana extends ItemSword
             int timeLeft = getMaxItemUseDuration(stack) - time;
             double force = (double) timeLeft / 10;
 
-            if (force > 2.0D)
+            if (force > 2D)
             {
-                force = 2.0D;
+                force = 2D;
             }
 
             stack.damageItem(1, player);
@@ -96,7 +96,7 @@ public class ItemPurgesKatana extends ItemSword
     {
         Multimap multimap = super.getItemAttributeModifiers();
         multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 8.0D, 0));
+        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 8D, 0));
         return multimap;
     }
 }

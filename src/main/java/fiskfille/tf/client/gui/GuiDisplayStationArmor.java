@@ -61,7 +61,7 @@ public class GuiDisplayStationArmor extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1F, 1F, 1F, 1F);
         mc.getTextureManager().bindTexture(guiTextures);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

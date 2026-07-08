@@ -54,7 +54,7 @@ public class ContainerBasic extends Container
                 return ((IInventory) tileentity).isUseableByPlayer(player);
             }
 
-            return player.getDistanceSq(tileentity.xCoord + 0.5D, tileentity.yCoord + 0.5D, tileentity.zCoord + 0.5D) <= 64.0D;
+            return player.getDistanceSq(tileentity.xCoord + 0.5D, tileentity.yCoord + 0.5D, tileentity.zCoord + 0.5D) <= 64D;
         }
 
         return true;

@@ -28,8 +28,8 @@ public class RenderEnergonProcessor extends TileEntitySpecialRenderer
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        GL11.glScalef(1.0F, -1F, -1F);
-        GL11.glRotatef(metadata * 90, 0.0F, 1.0F, 0.0F);
+        GL11.glScalef(1F, -1F, -1F);
+        GL11.glRotatef(metadata * 90, 0F, 1F, 0F);
 
         bindTexture(texture);
         model.setBreaking(false);
