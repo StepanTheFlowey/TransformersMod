@@ -90,7 +90,7 @@ public class TransformersMod
             remap(mapping, "transformium", TFItems.transformiumFragment);
             remap(mapping, "energon_crystal_piece", TFItems.energonCrystalShard);
             remap(mapping, "red_energon_crystal_piece", TFItems.redEnergonCrystalShard);
-            
+
             remap(mapping, "display_pillar", TFBlocks.displayPedestal);
         }
     }
@@ -102,11 +102,11 @@ public class TransformersMod
             mapping.remap(item);
         }
     }
-    
+
     private void remap(MissingMapping mapping, String name, Block block)
     {
         remap(mapping, name, Item.getItemFromBlock(block));
-        
+
         if (mapping.type == GameRegistry.Type.BLOCK && mapping.name.equals(modid + ":" + name))
         {
             mapping.remap(block);

@@ -39,7 +39,7 @@ public class ContainerDisplayStation extends ContainerBasic
                 }
             });
         }
-        
+
         for (int i = 0; i < 4; ++i)
         {
             final int finalSlotIndex = i;
@@ -85,7 +85,7 @@ public class ContainerDisplayStation extends ContainerBasic
 
         addPlayerInventory(inventoryPlayer, 20);
     }
-    
+
     @Override
     public TileEntityDisplayStation getTile()
     {
@@ -110,11 +110,11 @@ public class ContainerDisplayStation extends ContainerBasic
             if (slotId > MAX)
             {
                 boolean flag = true;
-                
+
                 for (int i = 0; i <= MAX; ++i)
                 {
                     Slot slot1 = (Slot) inventorySlots.get(i);
-                    
+
                     if (slot1 != null && slot1.isItemValid(itemstack1))
                     {
                         if (mergeItemStack(itemstack1, i, i + 1, false))
@@ -123,7 +123,7 @@ public class ContainerDisplayStation extends ContainerBasic
                         }
                     }
                 }
-                
+
                 if (flag && slotId >= MAX + 28 && slotId < MAX + 37 && !mergeItemStack(itemstack1, MAX + 1, MAX + 28, false))
                 {
                     return null;
@@ -132,11 +132,11 @@ public class ContainerDisplayStation extends ContainerBasic
             else if (slotId >= HELMET1 && slotId <= BOOTS2)
             {
                 boolean flag = true;
-                
+
                 for (int i = 0; i <= MAX; ++i)
                 {
                     Slot slot1 = (Slot) inventorySlots.get(i);
-                    
+
                     if (slot1 != null && slot1.isItemValid(itemstack1))
                     {
                         if (mergeItemStack(itemstack1, i, i + 1, false))
@@ -145,7 +145,7 @@ public class ContainerDisplayStation extends ContainerBasic
                         }
                     }
                 }
-                
+
                 // In one of the infuser slots; try to place in player inventory / action bar
                 if (flag && !mergeItemStack(itemstack1, MAX + 1, MAX + 37, false))
                 {
@@ -157,7 +157,7 @@ public class ContainerDisplayStation extends ContainerBasic
             {
                 return null;
             }
-        
+
             if (itemstack1.stackSize == 0)
             {
                 slot.putStack((ItemStack) null);
@@ -177,7 +177,7 @@ public class ContainerDisplayStation extends ContainerBasic
 
         return itemstack;
     }
-    
+
     @Override
     public void detectAndSendChanges()
     {
@@ -192,7 +192,7 @@ public class ContainerDisplayStation extends ContainerBasic
                 break;
             }
         }
-        
+
         super.detectAndSendChanges();
     }
 }

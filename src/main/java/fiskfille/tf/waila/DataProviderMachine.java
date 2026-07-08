@@ -53,20 +53,20 @@ public class DataProviderMachine implements IWailaDataProvider
                 EnergyStorage storage = new EnergyStorage(energyContainer.getMaxEnergy());
                 storage.set(energyContainer.getEnergy());
                 storage.setUsage(energyContainer.getEnergyUsage());
-                
+
                 list.addAll(TFFormatHelper.toString(storage.format()));
-                
+
                 if (tileentity instanceof IFluidHandlerTF)
                 {
                     list.add(" ");
                 }
             }
-            
+
             if (tileentity instanceof IFluidHandlerTF)
             {
                 IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tileentity;
                 FluidTankTF tank = getFluid(tileentity, fluidHandler);
-                
+
                 list.addAll(TFFormatHelper.toString(tank.format()));
             }
         }

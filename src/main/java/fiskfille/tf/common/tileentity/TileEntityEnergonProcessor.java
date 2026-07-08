@@ -243,7 +243,7 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
             data.kill();
         }
     }
-    
+
     @Override
     public int getSizeInventory()
     {

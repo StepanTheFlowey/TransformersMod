@@ -30,7 +30,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
     public void updateEntity()
     {
         super.updateEntity();
-        
+
         for (Map.Entry<ForgeDirection, Float> e : animationTimer.entrySet())
         {
             prevAnimationTimer.put(e.getKey(), e.getValue());
@@ -47,15 +47,15 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
         {
             Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
             float f = animationTimer.get(dir) == null ? 0 : animationTimer.get(dir);
-            
+
             boolean active = false;
-            
+
             if (block instanceof IEnergon && ((IEnergon) block).getMass() > 0)
             {
                 providers.put(dir, block);
                 active = canActivate();
             }
-            
+
             if (active)
             {
                 animationTimer.put(dir, MathHelper.clamp_float(f + 1F / 10, 0, 1));
@@ -94,7 +94,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
         {
             return 0;
         }
-        
+
         return (float) mass / Energon.CRYSTAL_BLOCK * 0.1F;
     }
 
@@ -119,7 +119,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
     public void readCustomNBT(NBTTagCompound nbt)
     {
         super.readCustomNBT(nbt);
-        
+
         if (nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND))
         {
             NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
@@ -131,7 +131,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
     public void writeCustomNBT(NBTTagCompound nbt)
     {
         super.writeCustomNBT(nbt);
-        
+
         if (data.storage.getEnergy() > 0)
         {
             NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");

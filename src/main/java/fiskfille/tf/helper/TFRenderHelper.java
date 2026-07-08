@@ -56,9 +56,9 @@ public class TFRenderHelper
     private static float lastBrightnessX;
     private static float lastBrightnessY;
     private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<EntityPlayer, Double>();
-    
+
     public static final int LIGHTING_LUMINOUS = 0xF0F0;
-    
+
     public static void setLighting(int lighting)
     {
         storeLighting();
@@ -99,7 +99,7 @@ public class TFRenderHelper
             {
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                
+
                 if (TFArmorDyeHelper.isDyed(itemstack))
                 {
                     float[] primaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getPrimaryColor(itemstack));
@@ -130,7 +130,7 @@ public class TFRenderHelper
                     model.render(0.0625F);
                     resetLighting();
                 }
-                
+
                 GL11.glDisable(GL11.GL_BLEND);
             }
         }
@@ -236,7 +236,7 @@ public class TFRenderHelper
         IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
         TransmissionHandler transmissionHandler = transmitter.getTransmissionHandler();
         boolean renderBeams = false;
-        
+
         if (transmitterTile instanceof TileEntityRelayTower)
         {
             TileEntityRelayTower relay = (TileEntityRelayTower) transmitterTile;
@@ -246,31 +246,31 @@ public class TFRenderHelper
         {
             renderBeams = transmitter.getEnergy() > 0;
         }
-        
+
         if (transmitterTile instanceof TileEntityMachine)
         {
             TileEntityMachine machine = (TileEntityMachine) transmitterTile;
             renderBeams &= machine.canActivate();
         }
-        
+
         if (renderBeams)
         {
             for (ReceiverEntry entry : transmissionHandler.getReceivers())
             {
                 boolean invertCurrent = transmitterTile instanceof TileEntityRelayTower && ((TileEntityRelayTower) transmitterTile).data.invertCurrent.contains(entry.getCoords());
                 boolean canReach = entry.canReach();
-                
+
                 if (entry.getTile() == null)
                 {
                     continue;
                 }
-                
+
                 TileEntity tile = transmitterTile;
                 Vec3 srcOffset1 = transmitter.getEnergyOutputOffset();
                 Vec3 dstOffset1 = entry.getReceiver().getEnergyInputOffset();
                 Vec3 srcOffset;
                 Vec3 dstOffset;
-                
+
                 if (tile instanceof ITransmitterRender)
                 {
                     srcOffset1 = ((ITransmitterRender) tile).getRenderOutputOffset();
@@ -280,13 +280,13 @@ public class TFRenderHelper
                 {
                     dstOffset1 = ((IReceiverRender) entry.getTile()).getRenderInputOffset();
                 }
-                
+
                 if (invertCurrent)
                 {
                     tile = entry.getTile();
                     entry = new ReceiverEntry(transmitterTile);
                     entry.setCanReach(canReach);
-                    
+
                     srcOffset = dstOffset1.addVector(0, 0, 0);
                     dstOffset = srcOffset1.addVector(0, 0, 0);
                 }
@@ -295,7 +295,7 @@ public class TFRenderHelper
                     srcOffset = srcOffset1.addVector(0, 0, 0);
                     dstOffset = dstOffset1.addVector(0, 0, 0);
                 }
-                
+
                 IEnergyReceiver receiver = entry.getReceiver();
                 DimensionalCoords coords = entry.getCoords();
                 Vec3 src = srcOffset.addVector(tile.xCoord + 0.5F, tile.yCoord + 0.5F, tile.zCoord + 0.5F);
@@ -322,12 +322,12 @@ public class TFRenderHelper
 
                 src = Vec3.createVectorHelper(x1, y1, z1);
                 dst = Vec3.createVectorHelper(deltaX, deltaY, deltaZ);
-                
+
                 int primary = 0x57ABAF;
                 int secondary = 0x7BF2F8;
                 int parentPrimary = primary;
                 int parentSecondary = secondary;
-                
+
                 if (!canReach)
                 {
                     primary = 0xAF5B57;
@@ -338,15 +338,15 @@ public class TFRenderHelper
 //                    primary = 0x62AF57;
 //                    secondary = 0x8AF87B;
 //                }
-                
+
                 GL11.glPushMatrix();
                 GL11.glTranslated(x + x1, y + y1, z + z1);
-                
+
                 if (invertCurrent)
                 {
                     GL11.glTranslated((tile.xCoord - coords.posX), (tile.yCoord - coords.posY), (tile.zCoord - coords.posZ));
                 }
-                
+
                 renderEnergyBeam(src, dst, primary, secondary, parentPrimary, parentSecondary);
                 GL11.glPopMatrix();
             }
@@ -386,7 +386,7 @@ public class TFRenderHelper
 
             tessellator.startDrawingQuads();
             tessellator.setColorRGBA_F((primary[0] * f + secondary[0] * f1) * f2 + (parentPrimary[0] * f + parentSecondary[0] * f1) * f3, (primary[1] * f + secondary[1] * f1) * f2 + (parentPrimary[1] * f + parentSecondary[1] * f1) * f3, (primary[2] * f + secondary[2] * f1) * f2 + (parentPrimary[2] * f + parentSecondary[2] * f1) * f3, 1);
-            
+
             tessellator.addVertex(width, width, end);
             tessellator.addVertex(width, width, start);
             tessellator.addVertex(-width, width, start);

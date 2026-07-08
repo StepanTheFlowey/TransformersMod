@@ -21,9 +21,9 @@ public class RenderBlockAlloyCrucible implements ISimpleBlockRenderingHandler
     {
         int metadata = world.getBlockMetadata(x, y, z);
         boolean flag = false;
-        
+
         flag |= renderer.renderStandardBlock(block, x, y, z);
-        
+
         if (BlockAlloyCrucible.getFlag(metadata, BlockAlloyCrucible.FLAG_TOP) || BlockAlloyCrucible.getFlag(metadata, BlockAlloyCrucible.FLAG_FRONT))
         {
             BlockAlloyCrucible.renderPass = 1;
@@ -39,11 +39,11 @@ public class RenderBlockAlloyCrucible implements ISimpleBlockRenderingHandler
     {
         GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        
+
         block.setBlockBoundsForItemRender();
         renderer.setRenderBoundsFromBlock(block);
         TFRenderHelper.renderBlock(block, metadata, renderer);
-        
+
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
     }
 

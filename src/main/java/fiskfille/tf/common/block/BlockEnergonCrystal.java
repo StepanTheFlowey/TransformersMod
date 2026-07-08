@@ -36,7 +36,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
         setResistance(10);
         setLightLevel(0.5F);
     }
-    
+
     @Override
     public int getMixedBrightnessForBlock(IBlockAccess world, int x, int y, int z)
     {
@@ -105,7 +105,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
         int metadata = world.getBlockMetadata(x, y, z);
         ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
         float f = 0.21F;
-        
+
         if (dir == ForgeDirection.UP)
         {
             f = 0.2F;
@@ -162,7 +162,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -170,12 +170,12 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
     {
         ForgeDirection dir = ForgeDirection.getOrientation(side).getOpposite();
-        
+
         if (world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false))
         {
             return side;
         }
-        
+
         for (ForgeDirection dir1 : ForgeDirection.VALID_DIRECTIONS)
         {
             if (world.isSideSolid(x + dir1.offsetX, y + dir1.offsetY, z + dir1.offsetZ, dir1.getOpposite(), false))
@@ -183,7 +183,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
                 return dir1.getOpposite().ordinal();
             }
         }
-        
+
         return 0;
     }
 
@@ -192,7 +192,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
     {
         int metadata = world.getBlockMetadata(x, y, z);
         ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
-        
+
         if (!world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false))
         {
             if (rand.nextInt(9) == 0)

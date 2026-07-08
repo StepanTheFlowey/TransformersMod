@@ -47,11 +47,11 @@ public class RenderBlockGroundBridgeFrame implements ISimpleBlockRenderingHandle
     {
         GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        
+
         block.setBlockBoundsForItemRender();
         renderer.setRenderBoundsFromBlock(block);
         TFRenderHelper.renderBlock(block, metadata, renderer);
-        
+
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
     }
 

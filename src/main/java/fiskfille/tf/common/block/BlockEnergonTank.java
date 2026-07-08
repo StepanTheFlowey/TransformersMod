@@ -72,7 +72,7 @@ public class BlockEnergonTank extends BlockMachineBase
         {
             return true;
         }
-        
+
         int metadata = world.getBlockMetadata(x, y, z);
         boolean flag = true;
 
@@ -86,7 +86,7 @@ public class BlockEnergonTank extends BlockMachineBase
             TFGui.ENERGON_TANK.open(player, x, y, z);
             return true;
         }
-        
+
         return false;
     }
 

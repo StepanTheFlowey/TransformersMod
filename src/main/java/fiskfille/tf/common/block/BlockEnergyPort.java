@@ -16,26 +16,26 @@ public class BlockEnergyPort extends BlockMachineBase
         setHardness(6.0F);
         setResistance(10.0F);
     }
-    
+
     @Override
     public int getPlacedRotation(EntityLivingBase entity)
     {
         return 0;
     }
-    
+
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
     {
         return ForgeDirection.getOrientation(side).getOpposite().ordinal();
     }
-    
+
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
     {
         int metadata = world.getBlockMetadata(x, y, z);
         ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
         float f = 0.0625F * 3.5F;
-        
+
         switch (dir)
         {
         case DOWN:

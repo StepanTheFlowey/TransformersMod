@@ -23,7 +23,7 @@ public class GuiColumn extends GuiContainerTF
 {
     private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/energy_column.png");
     private TileEntityColumn tileentity;
-    
+
     private GuiHoverFieldEnergy[] fieldEnergy;
 
     public GuiColumn(InventoryPlayer inventoryPlayer, TileEntityColumn tile)
@@ -32,7 +32,7 @@ public class GuiColumn extends GuiContainerTF
         tileentity = tile;
         ySize = 190;
     }
-    
+
     @Override
     public void initGui()
     {
@@ -41,27 +41,27 @@ public class GuiColumn extends GuiContainerTF
         int y = (height - ySize) / 2;
 
         fieldEnergy = new GuiHoverFieldEnergy[6];
-        
+
         for (int i = 0; i < fieldEnergy.length; ++i)
         {
             buttonList.add(fieldEnergy[i] = new GuiHoverFieldEnergy(x + 25 + i * 22, y + 19, 16, 52, tileentity.storage));
         }
-        
+
         buttonList.add(new GuiButtonConfigSides(0, x + xSize - 18, y + 5));
         buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 20, tileentity));
     }
-    
+
     @Override
     public void updateScreen()
     {
         super.updateScreen();
-        
+
         for (GuiHoverFieldEnergy field : fieldEnergy)
         {
             field.update(tileentity.storage);
         }
     }
-    
+
     @Override
     protected void actionPerformed(GuiButton button)
     {

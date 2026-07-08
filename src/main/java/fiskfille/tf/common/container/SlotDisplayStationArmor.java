@@ -31,14 +31,14 @@ public class SlotDisplayStationArmor extends Slot
     {
         return 1;
     }
-    
+
     @Override
     public boolean isItemValid(ItemStack itemstack)
     {
         boolean flag = itemstack.getItem() instanceof ItemTransformerArmor;
         return type ? flag : !flag && tile.getStackInSlot(slotNumber % 4) != null;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getBackgroundIconIndex()

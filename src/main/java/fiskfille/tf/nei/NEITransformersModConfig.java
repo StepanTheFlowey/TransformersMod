@@ -18,17 +18,17 @@ public class NEITransformersModConfig implements IConfigureNEI
         registerHandler(new PowerSourceRecipeHandler());
         registerHandler(new AssemblyTableRecipeHandler());
         registerHandler(new AlloyCrucibleRecipeHandler());
-        
+
         API.hideItem(new ItemStack(TFBlocks.groundBridgeTeleporter, 1, OreDictionary.WILDCARD_VALUE));
     }
-    
+
     public void registerHandler(Object obj)
     {
         if (obj instanceof ICraftingHandler)
         {
             API.registerRecipeHandler((ICraftingHandler) obj);
         }
-        
+
         if (obj instanceof IUsageHandler)
         {
             API.registerUsageHandler((IUsageHandler) obj);

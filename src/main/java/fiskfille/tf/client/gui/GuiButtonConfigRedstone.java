@@ -19,7 +19,7 @@ import fiskfille.tf.common.tileentity.TileEntityMachine;
 public class GuiButtonConfigRedstone extends GuiButtonFlat
 {
     public TileEntityMachine machine;
-    
+
     public GuiButtonConfigRedstone(int id, int x, int y, TileEntityMachine tile)
     {
         super(id, x, y, 13, "");
@@ -37,7 +37,7 @@ public class GuiButtonConfigRedstone extends GuiButtonFlat
             drawTexturedModalRect(xPosition, yPosition, 230 + (field_146123_n ? width : 0), 13 + machine.redstoneMode.ordinal() * height, width, height);
         }
     }
-    
+
     @Override
     public List<String> getHoverText()
     {

@@ -31,7 +31,7 @@ import fiskfille.tf.helper.TFHelper;
 public class TileEntityDisplayStation extends TileEntityContainer implements IMultiTile, ITileDataCallback
 {
     public boolean isRedstonePowered = false;
-    
+
     public final GameProfile username;
     public EntityPlayer fakePlayer;
 
@@ -39,7 +39,7 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
     {
         username = new GameProfile(UUID.randomUUID(), String.format("[%s]", new DimensionalCoords(this)));
     }
-    
+
     @Override
     public void updateEntity()
     {
@@ -53,12 +53,12 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
             {
                 fakePlayer = FakePlayerFactory.get((WorldServer) worldObj, username);
             }
-            
+
             if (fakePlayer != null)
             {
                 ++fakePlayer.ticksExisted;
                 fakePlayer.motionY = 1.25E-85;
-                
+
                 for (int i = 0; i < 4; ++i)
                 {
                     fakePlayer.setCurrentItemOrArmor(4 - i, getStackInSlot(i));
@@ -66,7 +66,7 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
             }
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
     public void clientTick()
     {
@@ -84,17 +84,17 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
                         return true;
                     }
                 };
-                
+
                 player.movementInput = new MovementInputFromOptions(mc.gameSettings);
                 fakePlayer = player;
             }
         }
     }
-    
+
     public boolean canTransform()
     {
         ItemStack vehicle = getStackInSlot(6);
-        
+
         if (getStackInSlot(6) != null)
         {
             for (int i = 0; i < 4; ++i)
@@ -104,10 +104,10 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
                     return false;
                 }
             }
-            
+
             return true;
         }
-        
+
         return TFHelper.isTransformer(getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), getStackInSlot(3));
     }
 
@@ -144,14 +144,14 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 
         return false;
     }
-    
+
     @Override
     public void readCustomNBT(NBTTagCompound nbt)
     {
         super.readCustomNBT(nbt);
         isRedstonePowered = nbt.getBoolean("Powered");
     }
-    
+
     @Override
     public void writeCustomNBT(NBTTagCompound nbt)
     {
@@ -164,7 +164,7 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
     {
         return super.getRenderBoundingBox().addCoord(0, 1, 0).expand(0.5F, 0.5F, 0.5F);
     }
-    
+
     @Override
     public int getSizeInventory()
     {
@@ -197,7 +197,7 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
             if (canTransform())
             {
                 ItemStack vehicle = getStackInSlot(6);
-                
+
                 if (vehicle != null)
                 {
                     if (!vehicle.hasTagCompound())
@@ -249,7 +249,7 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
                 }
             }
         }
-        
+
         markDirty();
     }
 }

@@ -26,7 +26,7 @@ public abstract class Transformer
 
     /**
      * Override to specify whether this Transformer can use nitro.
-     * 
+     *
      * @param player The player trying to use nitro.
      * @returns whether the player can use nitro.
      */
@@ -58,7 +58,7 @@ public abstract class Transformer
 
     /**
      * Called every tick while wearing the armor.
-     * 
+     *
      * @param player The player wearing the armor.
      * @param timer The transformation timer.
      */
@@ -145,7 +145,7 @@ public abstract class Transformer
 
     /**
      * Called every tick while using nitro on the client side, used to make nitro particles.
-     * 
+     *
      * @param player The player making the particles
      */
     public void doNitroParticles(EntityPlayer player, int altMode)
@@ -154,7 +154,7 @@ public abstract class Transformer
 
     /**
      * Called when this transformer hits the ground.
-     * 
+     *
      * @param player The player who is falling.
      * @param distance The distance fell.
      * @return The damage to take.

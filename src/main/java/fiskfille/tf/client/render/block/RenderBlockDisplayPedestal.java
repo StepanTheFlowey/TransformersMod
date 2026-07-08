@@ -23,24 +23,24 @@ public class RenderBlockDisplayPedestal implements ISimpleBlockRenderingHandler
     {
         boolean flag = !renderer.hasOverrideBlockTexture();
         boolean flag1 = false;
-        
+
         BlockIcon[] icons = BlockDisplayPedestal.getTexture(world.getBlockMetadata(x, y, z));
         AxisAlignedBB[] bounds = BlockDisplayPedestal.getBounds();
         renderer.setRenderAllFaces(true);
-        
+
         for (int i = 0; i < Math.min(icons.length, bounds.length); ++i)
         {
             AxisAlignedBB aabb = bounds[i];
-            
+
             if (flag)
             {
                 renderer.setOverrideBlockTexture(icons[i].block.getIcon(icons[i].side, icons[i].metadata));
             }
-            
+
             renderer.setRenderBounds(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ);
             flag1 |= renderer.renderStandardBlock(block, x, y, z);
         }
-        
+
         if (flag)
         {
             renderer.clearOverrideBlockTexture();
@@ -54,19 +54,19 @@ public class RenderBlockDisplayPedestal implements ISimpleBlockRenderingHandler
     {
         BlockIcon[] icons = BlockDisplayPedestal.getTexture(metadata);
         AxisAlignedBB[] bounds = BlockDisplayPedestal.getBounds();
-        
+
         GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        
+
         for (int i = 0; i < Math.min(icons.length, bounds.length); ++i)
         {
             AxisAlignedBB aabb = bounds[i];
-            
+
             renderer.setOverrideBlockTexture(icons[i].block.getIcon(icons[i].side, icons[i].metadata));
             renderer.setRenderBounds(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ);
             TFRenderHelper.renderBlock(block, metadata, renderer);
         }
-        
+
         renderer.clearOverrideBlockTexture();
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
     }

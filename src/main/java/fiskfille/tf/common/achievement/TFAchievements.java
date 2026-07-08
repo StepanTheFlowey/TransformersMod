@@ -38,13 +38,13 @@ public class TFAchievements
     public static final List<Achievement> achievements = Lists.newArrayList();
     private static final Map<Achievement, ItemStack> displayItems = Maps.newHashMap();
     private static boolean init = false;
-    
+
     public static void register()
     {
         if (!init)
         {
             init = true;
-            
+
             for (Field field : TFAchievements.class.getFields())
             {
                 if (field.getType().getName().equals(Achievement.class.getName()))
@@ -60,7 +60,7 @@ public class TFAchievements
                 }
             }
         }
-        
+
         setItem(transformersMod, TFBlocks.energonCrystal);
         setItem(transformium, TFItems.transformiumFragment);
         setItem(transform, TFSubItems.wheel);
@@ -73,14 +73,14 @@ public class TFAchievements
         setItem(vurp, TFSubItems.vurp_torso_base);
         setItem(subwoofer, TFSubItems.subwoofer_torso_base);
         setItem(sharpshooter, TFItems.vurpsSniper);
-        
+
         try
         {
             Field itemField = Achievement.class.getField(TFTranslator.getMappedName("field_75990_d", "theItemStack"));
             Field modifiersField = Field.class.getDeclaredField("modifiers");
             modifiersField.setAccessible(true);
             modifiersField.setInt(itemField, itemField.getModifiers() & ~Modifier.FINAL);
-            
+
             for (Achievement achievement : achievements)
             {
                 itemField.set(achievement, displayItems.get(achievement));
@@ -90,28 +90,28 @@ public class TFAchievements
         {
             e.printStackTrace();
         }
-        
+
         if (AchievementPage.getAchievementPage("Transformers") == null)
         {
             AchievementPage.registerAchievementPage(new AchievementPage("Transformers", achievements.toArray(new Achievement[achievements.size()])));
         }
     }
-    
+
     private static void setItem(Achievement achievement, ItemStack itemstack)
     {
         displayItems.put(achievement, itemstack);
     }
-    
+
     private static void setItem(Achievement achievement, ItemStack[] aitemstack)
     {
         setItem(achievement, aitemstack[1]);
     }
-    
+
     private static void setItem(Achievement achievement, Item item)
     {
         setItem(achievement, new ItemStack(item));
     }
-    
+
     private static void setItem(Achievement achievement, Block block)
     {
         setItem(achievement, new ItemStack(block));

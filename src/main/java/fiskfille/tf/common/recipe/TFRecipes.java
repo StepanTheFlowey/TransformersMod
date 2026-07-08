@@ -50,15 +50,15 @@ public class TFRecipes
 {
     public static List<IRecipe> prevRecipes = Lists.newArrayList();
     public static List<ItemStack> prevFurnaceRecipes = Lists.newArrayList();
-    
+
     public static List<IRecipe> tempRecipes = Lists.newArrayList();
     public static List<ItemStack> tempFurnaceRecipes = Lists.newArrayList();
-    
+
     public static void register()
     {
         AssemblyTableCraftingManager.getInstance().getRecipeList().clear();
         restore();
-        
+
         PowerManager.register();
         AlloyRecipes.register();
         addSmelting();
@@ -83,7 +83,7 @@ public class TFRecipes
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFBlocks.isoCondenser, 1), "III", "RER", "ISI", 'I', "ingotIron", 'R', "dustRedstone", 'E', "blockEnergonBlue", 'S', TFSubItems.iron_support[1]));
         AssemblyTable.addRecipe(new ItemStack(TFBlocks.groundBridgeFrame, 1), new Dyes(), "     ", " SES ", " E1E ", " SES ", "     ", 'S', TFSubItems.iron_support, 'E', TFItems.energonDust, '1', TFSubItems.basic_circuit);
         AssemblyTable.addRecipe(new ItemStack(TFBlocks.groundBridgeControlPanel, 1), new Dyes(), " PPP ", "IW3WI", "SCOCS", "FF3FF", "     ", 'P', TFSubItems.lcd_panel, 'I', Items.iron_ingot, 'W', TFSubItems.refined_alloy_wire, '3', TFSubItems.advanced_circuit, 'S', TFSubItems.iron_support, 'C', TFSubItems.energy_converter, 'O', TFSubItems.singularity, 'F', TFBlocks.groundBridgeFrame);
-        
+
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFItems.transformiumDetector, 1), "IEI", "TRT", "rrr", 'I', "ingotIron", 'E', TFBlocks.energonCrystal, 'T', "transformium", 'R', "blockRedstone", 'r', "dustRedstone"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFItems.csd, 1), "I", "1", "I", 'I', "ingotIron", '1', TFSubItems.basic_circuit[1]));
         GameRegistry.addRecipe(new ItemStack(TFItems.fuelCanister, 1), "L", "B", "L", 'L', TFSubItems.canister_lid[1], 'B', Items.bucket);
@@ -92,7 +92,7 @@ public class TFRecipes
         AssemblyTable.addRecipe(new ItemStack(TFItems.dataCore, 1, DataCore.leveler.index), new Dyes(), "     ", " F2F ", " EOE ", " F2F ", "     ", 'F', TFBlocks.groundBridgeFrame, '2', TFSubItems.improved_circuit, 'E', TFItems.energonDust, 'O', Items.comparator);
         AssemblyTable.addRecipe(new ItemStack(TFItems.dataCore, 1, DataCore.range.index), new Dyes(), "     ", " F2F ", " EOE ", " F2F ", "     ", 'F', TFBlocks.groundBridgeFrame, '2', TFSubItems.improved_circuit, 'E', TFItems.energonDust, 'O', Items.ender_pearl);
         AssemblyTable.addRecipe(new ItemStack(TFItems.groundBridgeRemote, 1), new Dyes(), " PPP ", " QRQ ", " 3W3 ", " III ", "     ", 'P', TFSubItems.lcd_panel, 'Q', Items.quartz, 'R', Items.redstone, '3', TFSubItems.advanced_circuit, 'W', TFSubItems.refined_alloy_wire, 'I', Items.iron_ingot);
-        
+
         String[] materials = {"ingotGold", "gemDiamond", "gemEmerald"};
 
         for (int i = 0; i < materials.length; ++i)
@@ -107,24 +107,24 @@ public class TFRecipes
         addMaterialCompression("nuggetFluxAlloyCrude", "ingotFluxAlloyCrude", "blockFluxAlloyCrude");
         addMaterialCompression("nuggetFluxAlloyRefined", "ingotFluxAlloyRefined", "blockFluxAlloyRefined");
         addMaterialCompression("nuggetEnergonAlloy", "ingotEnergonAlloy", "blockEnergonAlloy");
-        
+
         save();
     }
-    
+
     public static void save()
     {
         List<IRecipe> recipes = (List<IRecipe>) CraftingManager.getInstance().getRecipeList();
-        
+
         for (int i = 0; i < recipes.size(); ++i)
         {
             IRecipe recipe = recipes.get(i);
-            
+
             if (!prevRecipes.contains(recipe))
             {
                 tempRecipes.add(recipe);
             }
         }
-        
+
         for (ItemStack itemstack : (Set<ItemStack>) FurnaceRecipes.smelting().getSmeltingList().keySet())
         {
             if (!prevFurnaceRecipes.contains(itemstack))
@@ -133,11 +133,11 @@ public class TFRecipes
             }
         }
     }
-    
+
     public static void restore()
     {
         Map<ItemStack, ItemStack> map = Maps.newHashMap();
-        
+
         for (Map.Entry<ItemStack, ItemStack> e : ((Map<ItemStack, ItemStack>) FurnaceRecipes.smelting().getSmeltingList()).entrySet())
         {
             if (!tempFurnaceRecipes.contains(e.getKey()))
@@ -145,14 +145,14 @@ public class TFRecipes
                 map.put(e.getKey(), e.getValue());
             }
         }
-        
+
         CraftingManager.getInstance().getRecipeList().removeAll(tempRecipes);
         FurnaceRecipes.smelting().getSmeltingList().clear();
         FurnaceRecipes.smelting().getSmeltingList().putAll(map);
-        
+
         tempRecipes.clear();
         tempFurnaceRecipes.clear();
-        
+
         prevRecipes = Lists.newArrayList(CraftingManager.getInstance().getRecipeList());
         prevFurnaceRecipes = Lists.newArrayList(FurnaceRecipes.smelting().getSmeltingList().keySet());
     }
@@ -188,7 +188,7 @@ public class TFRecipes
         GameRegistry.addRecipe(new ShapedOreRecipe(TFSubItems.basic_circuit[1], "RRR", "CCR", "RWI", 'R', "dustRedstone", 'C', "ingotFluxAlloyCrude", 'W', TFSubItems.crude_alloy_wire[1], 'I', "ingotIron"));
         GameRegistry.addRecipe(new ShapedOreRecipe(TFSubItems.improved_circuit[1], "EEE", "1F1", "EWG", 'E', "ingotEnergonAlloy", '1', TFSubItems.basic_circuit[1], 'F', TFSubItems.focusing_crystal[1], 'W', TFSubItems.refined_alloy_wire[1], 'G', "ingotGold"));
         GameRegistry.addRecipe(new ShapedOreRecipe(TFSubItems.advanced_circuit[1], "EEE", "2R2", "EWT", 'E', "ingotEnergonAlloy", '2', TFSubItems.improved_circuit[1], 'R', "ingotFluxAlloyRefined", 'W', TFSubItems.refined_alloy_wire[1], 'T', "ingotTransformiumAlloy"));
-        
+
         AssemblyTable.addRecipe(TFSubItems.optic_sensor, new Dyes(), "     ", " DT  ", " TT  ", "   R ", "     ", 'D', Items.diamond, 'T', TFItems.transformiumAlloyNugget, 'R', Items.redstone);
         AssemblyTable.addRecipe(TFSubItems.protoform_head, new Dyes(GRAY, 3), "     ", " TTT ", " OTO ", " TRT ", "  T  ", 'T', TFItems.transformiumAlloy, 'O', TFSubItems.optic_sensor, 'R', Items.redstone);
         AssemblyTable.addRecipe(TFSubItems.wheel, new Dyes(BLACK, 3), "     ", " LLL ", " LIL ", " LLL ", "     ", 'L', Items.leather, 'I', Items.iron_ingot);
@@ -239,7 +239,7 @@ public class TFRecipes
         GameRegistry.addRecipe(new ShapedOreRecipe(TFItems.colorComponent, "DDD", "DCD", "DDD", 'D', "dye", 'C', TFItems.componentBase));
         GameRegistry.addRecipe(new ItemStack(TFItems.armorComponent), " I ", "ICI", " I ", 'C', TFItems.componentBase, 'I', Items.iron_chestplate);
         GameRegistry.addRecipe(new RecipeDisplayItems());
-        
+
         for (int i = 0; i < BlockDisplayPedestal.getTextures().size(); ++i)
         {
             BlockIcon[] icons = BlockDisplayPedestal.getTexture(i);
@@ -314,7 +314,7 @@ public class TFRecipes
         AssemblyTable.addRecipe(new ItemStack(TFItems.cloudtrapLeggings), new Dyes(GRAY, 3, PALE_BROWN, 1), "     ", "     ", " R R ", " G G ", "     ", 'R', TFSubItems.transformium_alloy_rod, 'G', TFSubItems.cloudtraps_greave);
         AssemblyTable.addRecipe(new ItemStack(TFItems.cloudtrapBoots), new Dyes(GRAY, 3, PALE_BROWN, 2), "     ", "     ", "     ", " TTT ", "     ", 'T', new ItemStack(TFItems.transformiumAlloy, 2));
     }
-    
+
     private static void addMaterialCompression(Object... args)
     {
         for (int i = 0; i < args.length; ++i)
@@ -322,28 +322,28 @@ public class TFRecipes
             Object nugget = null;
             Object ingot = args[i];
             Object block = null;
-            
+
             if (i > 0)
             {
                 nugget = args[i - 1];
             }
-            
+
             if (i + 1 < args.length)
             {
                 block = args[i + 1];
             }
-            
+
             ItemStack result = null;
-            
+
             if (ingot instanceof String)
             {
                 if (!OreDictionary.doesOreNameExist((String) ingot))
                 {
                     continue;
                 }
-                
+
                 result = OreDictionary.getOres((String) ingot).get(0);
-                
+
                 if (result.getItemDamage() == OreDictionary.WILDCARD_VALUE)
                 {
                     result.setItemDamage(0);
@@ -353,7 +353,7 @@ public class TFRecipes
             {
                 result = new ItemStack(ingot instanceof Item ? (Item) ingot : Item.getItemFromBlock((Block) ingot));
             }
-            
+
             if (nugget != null) // 9 Nuggets -> Ingot
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(result, "###", "###", "###", '#', nugget));
@@ -363,7 +363,7 @@ public class TFRecipes
             {
                 result = result.copy();
                 result.stackSize = 9;
-                
+
                 GameRegistry.addRecipe(new ShapelessOreRecipe(result, block));
             }
         }

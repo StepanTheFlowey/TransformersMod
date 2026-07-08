@@ -33,7 +33,7 @@ public class ModelVehicleBase extends MowzieModelBase
 
     /**
      * Renders the vehicle mode
-     * 
+     *
      * @param player The player for which this vehicle mode should be rendered, if any
      * @param itemstack The ItemStack containing the vehicle mode's data
      */

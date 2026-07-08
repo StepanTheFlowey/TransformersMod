@@ -44,7 +44,7 @@ public class GuiIconFlat extends GuiButtonFlat
             GL11.glPopMatrix();
         }
     }
-    
+
     @Override
     public List<String> getHoverText()
     {
@@ -54,7 +54,7 @@ public class GuiIconFlat extends GuiButtonFlat
     public static interface IButtonRenderCallback
     {
         void render(GuiButton button, int mouseX, int mouseY);
-        
+
         List<String> getHoverText(GuiButton button);
     }
 }

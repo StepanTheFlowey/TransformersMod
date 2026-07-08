@@ -38,7 +38,7 @@ public class TFModelHelper
     /**
      * Hooks into {@link ModelBiped#render}<br>
      * Called after {@link ModelBiped#setRotationAngles}, but before rendering
-     * 
+     *
      * @param model
      * @param entity
      * @param limbSwing
@@ -51,17 +51,17 @@ public class TFModelHelper
     public static void renderBipedPre(ModelBiped model, Entity entity, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale)
     {
         ModelOffset offset = TFModelHelper.getOffsets(entity);
-        
+
         if (!offset.isInitialized())
         {
             offset = new ModelOffset(true);
             offset.headOffsetX = model.bipedHead.rotationPointX;
             offset.headOffsetY = model.bipedHead.rotationPointY;
             offset.headOffsetZ = model.bipedHead.rotationPointZ;
-            
+
             offsets.put(entity, offset);
         }
-        
+
         if (offset.isInitialized())
         {
             model.bipedHead.rotationPointY = offset.headOffsetY;
@@ -76,7 +76,7 @@ public class TFModelHelper
     /**
      * Hooks into {@link ModelBiped#render}<br>
      * Called after after rendering
-     * 
+     *
      * @param model
      * @param entity
      * @param limbSwing

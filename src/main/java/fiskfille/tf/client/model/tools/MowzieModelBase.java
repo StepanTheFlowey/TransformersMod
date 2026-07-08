@@ -50,7 +50,7 @@ public class MowzieModelBase extends ModelBiped
 
     /**
      * Resets the rotate angles and rotation points to its original value if they were saved before. Note: Call this at the beginning of setRotationAngles.
-     * 
+     *
      * @see #setInitPose() method in MowzieModelBase class.
      */
     public void setToInitPose()
@@ -67,7 +67,7 @@ public class MowzieModelBase extends ModelBiped
      * Note: When parenting a chain of boxes, such as a head to a neck to a body, the end of the chain should start first. In this case the head should be parented to the neck before parenting the neck to the body.
      * <p/>
      * Some corrections and adjustments to the rotation point may be needed.
-     * 
+     *
      * @param child is the child box;
      * @param parent is the parent box.
      */
@@ -105,7 +105,7 @@ public class MowzieModelBase extends ModelBiped
      * Rotates a box to face where the entity is looking.
      * <p/>
      * Note: Just keep f3 and f4 from the setRotationAngles() method.
-     * 
+     *
      * @param f is the number of boxes being used. (i.e. if you are using this on a head and neck, set it to 2. Just a head, 1);
      * @param f3 is the rotationYaw of the EntityLivingBase;
      * @param f4 is the rotationPitch of the EntityLivingBase.
@@ -120,7 +120,7 @@ public class MowzieModelBase extends ModelBiped
      * Returns a float that can be used to rotate boxes.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will rotate;
      * @param invert will invert the rotation;
@@ -145,7 +145,7 @@ public class MowzieModelBase extends ModelBiped
      * Returns a float that can be used to move boxes.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;
      * @param bounce will make the box bounce;
@@ -168,7 +168,7 @@ public class MowzieModelBase extends ModelBiped
      * Rotates a box back and forth (rotateAngleX). Useful for arms and legs.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param box is the ModelRenderer to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will rotate;
@@ -192,7 +192,7 @@ public class MowzieModelBase extends ModelBiped
      * Rotates a box up and down (rotateAngleZ). Useful for wings and ears.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param box is the ModelRenderer to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will rotate;
@@ -216,7 +216,7 @@ public class MowzieModelBase extends ModelBiped
      * Rotates a box side to side (rotateAngleY).
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param box is the ModelRenderer to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will rotate;
@@ -240,7 +240,7 @@ public class MowzieModelBase extends ModelBiped
      * Moves a box up and down (rotationPointY). Useful for bodies.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param box is the ModelRenderer to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;
@@ -262,7 +262,7 @@ public class MowzieModelBase extends ModelBiped
      * Swings a chain of parented boxes back and forth (rotateAngleY). Useful for tails.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param boxes are the ModelRenderers to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;
@@ -284,7 +284,7 @@ public class MowzieModelBase extends ModelBiped
      * Swings a chain of parented boxes up and down (rotateAngleX). Useful for tails.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param boxes are the ModelRenderers to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;
@@ -306,7 +306,7 @@ public class MowzieModelBase extends ModelBiped
      * Flaps a chain of parented boxes up and down (rotateAngleZ). Useful for tails.
      * <p/>
      * Note: Just keep f and f1 from the setRotationAngles() method.
-     * 
+     *
      * @param boxes are the ModelRenderers to be animated;
      * @param speed is how fast the animation runs;
      * @param degree is how far the box will move;

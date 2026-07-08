@@ -29,10 +29,10 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer
         bindTexture(texture);
         model.setBreaking(false);
         model.render();
-        
+
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        
+
         if (tile.getWorldObj() != null && tile.getEnergy() > 0)
         {
             bindTexture(textureOn);
@@ -74,18 +74,18 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
     }
-    
+
     public void adjustRotation(TileEntityEnergyPort tile, double x, double y, double z, float partialTicks)
     {
         int metadata = 0;
-        
+
         if (tile.getWorldObj() != null)
         {
             metadata = tile.getBlockMetadata();
         }
-        
+
         ForgeDirection dir = ForgeDirection.getOrientation(metadata);
-        
+
         if (dir == ForgeDirection.UP)
         {
             GL11.glTranslatef(0, 1, 0);
@@ -98,12 +98,12 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer
         else
         {
             int[] rotations = {0, 2, 3, 1};
-            
+
             GL11.glRotatef(90 * rotations[metadata - 2], 0, 1, 0);
             GL11.glRotatef(90, 1, 0, 0);
             GL11.glTranslatef(0, -1, 0);
         }
-        
+
         GL11.glTranslatef(0, -0.00103125F, 0);
     }
 

@@ -31,7 +31,7 @@ public class GuiButtonConfigSides extends GuiButtonFlat
             drawTexturedModalRect(xPosition, yPosition, 230 + (field_146123_n ? width : 0), 0, width, height);
         }
     }
-    
+
     @Override
     public List<String> getHoverText()
     {

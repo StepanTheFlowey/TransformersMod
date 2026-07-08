@@ -104,7 +104,7 @@ public class BlockRelayTorch extends BlockRelayTower
     public boolean canPlaceBlockAt(World world, int x, int y, int z)
     {
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-        {            
+        {
             if (canPlaceAt(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite()))
             {
                 return true;
@@ -134,7 +134,7 @@ public class BlockRelayTorch extends BlockRelayTower
 
         return 0;
     }
-    
+
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
     {
@@ -147,11 +147,11 @@ public class BlockRelayTorch extends BlockRelayTower
             world.setBlockToAir(x, y, z);
         }
     }
-    
+
     public boolean canPlaceAt(World world, int x, int y, int z, ForgeDirection dir)
     {
         Block block = world.getBlock(x, y, z);
-        
+
         return block.isSideSolid(world, x, y, z, dir) || block == TFBlocks.energyColumn && (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN);
     }
 }

@@ -64,7 +64,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
     public float prevActivationLeverTimer;
     public float activationLeverCoverTimer;
     public float prevActivationLeverCoverTimer;
-    
+
     public boolean hasSpace;
     public float lastUsage;
     public int destDimIndex = 1;
@@ -334,7 +334,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
                         {
                             --y;
                         }
-                        
+
                         prevYCoord = y;
                     }
                     else
@@ -600,7 +600,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
             }
         }
     }
-    
+
     @Override
     public int getSizeInventory()
     {

@@ -36,7 +36,7 @@ public class AlloyRecipes
     {
         return instance;
     }
-    
+
     public static void register()
     {
         getInstance().smeltingMap.clear();
@@ -44,7 +44,7 @@ public class AlloyRecipes
         getInstance().experienceMap.clear();
         getInstance().registerRecipes();
     }
-    
+
     private void registerRecipes()
     {
         addRecipe(new AlloyIngredients("transformium", "ingotIron", "ingotIron"), new ItemStack(TFItems.transformiumAlloy, 2), 400, 1.0F);
@@ -54,7 +54,7 @@ public class AlloyRecipes
         addRecipe(new AlloyIngredients("ingotIron", "dustEnergon"), new ItemStack(TFItems.energonAlloy), 800, 0.4F);
         addRecipe(new AlloyIngredients("dustEnergon", "transformium", "dustEnergon"), TFSubItems.focusing_crystal[1], 0.1F);
         addRecipe(new AlloyIngredients("dustEnergon", "dustEnergon", "dustEnergon"), new ItemStack(TFItems.energonCrystalShard), 100, 0);
-        
+
         addRecipe(new AlloyIngredients("stone", Items.ender_pearl), new ItemStack(Blocks.end_stone), 0.2F);
         addRecipe(new AlloyIngredients("blockGlass"), new ItemStack(Blocks.glass), 0);
         addRecipe(new AlloyIngredients("paneGlass"), new ItemStack(Blocks.glass_pane), 0);
@@ -234,7 +234,7 @@ public class AlloyRecipes
         public boolean matches(ItemStack input1, ItemStack input2, ItemStack input3)
         {
             ItemStack[] ingredients = new ItemStack[] {input1, input2, input3};
-            
+
             for (int i = 0; i < getIngredients().length; ++i)
             {
                 ItemStack itemstack = getIngredients()[i];

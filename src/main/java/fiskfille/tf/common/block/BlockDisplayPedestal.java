@@ -32,7 +32,7 @@ public class BlockDisplayPedestal extends BlockMachineBase
         setResistance(5.0F);
         setHarvestLevel("pickaxe", 0);
     }
-    
+
     @Override
     public void getSubBlocks(Item item, CreativeTabs tab, List list)
     {
@@ -41,46 +41,46 @@ public class BlockDisplayPedestal extends BlockMachineBase
             list.add(new ItemStack(item, 1, i));
         }
     }
-    
+
     @Override
     public String getHarvestTool(int metadata)
     {
         BlockIcon icon = getTexture(metadata)[0];
         return icon.block.getHarvestTool(icon.metadata);
     }
-    
+
     @Override
     public boolean isToolEffective(String type, int metadata)
     {
         BlockIcon icon = getTexture(metadata)[0];
         return icon.block.isToolEffective(type, icon.metadata);
     }
-    
+
     @Override
     public int getFlammability(IBlockAccess world, int x, int y, int z, ForgeDirection face)
     {
         BlockIcon[] icons = getTexture(world.getBlockMetadata(x, y, z));
         int fire = 0;
-        
+
         for (int i = 0; i < icons.length; ++i)
         {
             fire += Blocks.fire.getFlammability(icons[i].block);
         }
-        
+
         return fire / icons.length;
     }
-    
+
     @Override
     public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z, ForgeDirection face)
     {
         BlockIcon[] icons = getTexture(world.getBlockMetadata(x, y, z));
         int fire = 0;
-        
+
         for (int i = 0; i < icons.length; ++i)
         {
             fire += Blocks.fire.getEncouragement(icons[i].block);
         }
-        
+
         return fire / icons.length;
     }
 
@@ -89,7 +89,7 @@ public class BlockDisplayPedestal extends BlockMachineBase
     {
         return 0;
     }
-    
+
     @Override
     public int damageDropped(int metadata)
     {
@@ -104,7 +104,7 @@ public class BlockDisplayPedestal extends BlockMachineBase
             addBox(aabb1.minX, aabb1.minY, aabb1.minZ, aabb1.maxX, aabb1.maxY, aabb1.maxZ, x, y, z, aabb, list);
         }
     }
-    
+
     public static List<BlockIcon[]> getTextures()
     {
         List<BlockIcon[]> list = Lists.newArrayList();
@@ -113,13 +113,13 @@ public class BlockDisplayPedestal extends BlockMachineBase
         list.add(new BlockIcon[] {new BlockIcon(Blocks.sandstone, 2, 0), new BlockIcon(Blocks.sandstone, 2, 1), new BlockIcon(Blocks.sandstone, 1, 0)});
         list.add(new BlockIcon[] {new BlockIcon(Blocks.quartz_block, 1, 1), new BlockIcon(Blocks.quartz_block, 2, 2), new BlockIcon(Blocks.quartz_block, 1, 2)});
         list.add(new BlockIcon[] {new BlockIcon(Blocks.nether_brick, 0, 0), new BlockIcon(Blocks.netherrack, 0, 0), new BlockIcon(Blocks.nether_brick, 0, 0)});
-        
+
         for (int i = 0; i < 6; ++i)
         {
             Block log = i < 4 ? Blocks.log : Blocks.log2;
             list.add(new BlockIcon[] {new BlockIcon(Blocks.planks, 0, i), new BlockIcon(log, 2, i % 4), new BlockIcon(Blocks.planks, 0, i)});
         }
-        
+
         return list;
     }
 
@@ -161,12 +161,12 @@ public class BlockDisplayPedestal extends BlockMachineBase
                             {
                                 int amount = Math.min(heldItem.stackSize, displayItem.getMaxStackSize() - displayItem.stackSize);
                                 displayItem.stackSize += amount;
-                                
+
                                 if ((heldItem.stackSize -= amount) <= 0)
                                 {
                                     player.setCurrentItemOrArmor(0, null);
                                 }
-                                
+
                                 return true;
                             }
                         }
@@ -174,7 +174,7 @@ public class BlockDisplayPedestal extends BlockMachineBase
                         {
                             tile.setDisplayItem(heldItem, true);
                             player.setCurrentItemOrArmor(0, displayItem);
-                            
+
                             return true;
                         }
                     }
@@ -203,7 +203,7 @@ public class BlockDisplayPedestal extends BlockMachineBase
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
     {
         AxisAlignedBB aabb = null;
-        
+
         for (AxisAlignedBB aabb1 : getBounds())
         {
             if (aabb == null)
@@ -215,7 +215,7 @@ public class BlockDisplayPedestal extends BlockMachineBase
                 aabb = aabb.func_111270_a(aabb1);
             }
         }
-        
+
         setBlockBounds((float) aabb.minX, (float) aabb.minY, (float) aabb.minZ, (float) aabb.maxX, (float) aabb.maxY, (float) aabb.maxZ);
     }
 

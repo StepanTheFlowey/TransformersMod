@@ -55,7 +55,7 @@ public abstract class GuiContainerTF extends GuiContainer
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             int k = 0;
             Iterator iterator = text.iterator();
-            
+
             List<String> list = Lists.newArrayList();
             List<Integer> colors = Lists.newArrayList();
 
@@ -63,12 +63,12 @@ public abstract class GuiContainerTF extends GuiContainer
             {
                 String s = (String) iterator.next();
                 int color = -1;
-                
+
                 if (s.startsWith("&<0x") && s.contains(">"))
                 {
                     String s1 = s.split("&<0x")[1];
                     s1 = s1.substring(0, s1.indexOf('>'));
-                    
+
                     try
                     {
                         color = Integer.valueOf(s1);
@@ -77,10 +77,10 @@ public abstract class GuiContainerTF extends GuiContainer
                     {
                         e.printStackTrace();
                     }
-                    
+
                     s = s.substring(s.indexOf('>') + 1);
                 }
-                
+
                 list.add(s);
                 colors.add(color);
                 int l = font.getStringWidth(s);
@@ -90,7 +90,7 @@ public abstract class GuiContainerTF extends GuiContainer
                     k = l;
                 }
             }
-            
+
             text = Lists.newArrayList();
             text.addAll(list);
 

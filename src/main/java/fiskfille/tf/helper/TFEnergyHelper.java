@@ -317,7 +317,7 @@ public class TFEnergyHelper
     {
         TransmissionHandler transmissionHandler = transmitter.getTransmissionHandler();
         List<ReceiverEntry> tilesToPower = Lists.newArrayList();
-        
+
         for (ReceiverEntry receiver : transmissionHandler.getReceivers())
         {
             if (receiver.canReach() && receiver.getTile() != null)
@@ -328,9 +328,9 @@ public class TFEnergyHelper
 
         return tilesToPower;
     }
-    
+
     /**
-     * 
+     *
      * @param transmitter
      * @returns A list of every descendant of this transmitter
      */
@@ -338,7 +338,7 @@ public class TFEnergyHelper
     {
         List<ReceiverEntry> tilesToPower = getReceiversToPower(transmitter);
         List<ReceiverEntry> list = Lists.newArrayList(tilesToPower);
-        
+
         for (ReceiverEntry receiver : tilesToPower)
         {
             if (receiver.getTile() instanceof IEnergyTransmitter)
@@ -346,12 +346,12 @@ public class TFEnergyHelper
                 list.addAll(getReceiverChain(receiver.getTransmitter()));
             }
         }
-        
+
         return list;
     }
-    
+
     /**
-     * 
+     *
      * @param transmitter
      * @returns A list of receivers which are at the very end of the lineage of this transmitter
      */
@@ -359,7 +359,7 @@ public class TFEnergyHelper
     {
         List<ReceiverEntry> tiles = getReceiverChain(transmitter);
         List<ReceiverEntry> list = Lists.newArrayList();
-        
+
         for (ReceiverEntry receiver : tiles)
         {
             if (!list.contains(receiver) && (!(receiver.getTile() instanceof IEnergyTransmitter) || getReceiversToPower(receiver.getTransmitter()).isEmpty()))
@@ -367,7 +367,7 @@ public class TFEnergyHelper
                 list.add(receiver);
             }
         }
-        
+
         return list;
     }
 
@@ -437,13 +437,13 @@ public class TFEnergyHelper
                     if (ownerEntry.getTile() instanceof TileEntityMachine)
                     {
                         TileEntityMachine machine = (TileEntityMachine) ownerEntry.getTile();
-                        
+
                         if (!machine.canActivate())
                         {
                             continue;
                         }
                     }
-                    
+
                     return true;
                 }
             }

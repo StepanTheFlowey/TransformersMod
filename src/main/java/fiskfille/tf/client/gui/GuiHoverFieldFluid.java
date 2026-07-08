@@ -12,18 +12,18 @@ import fiskfille.tf.helper.TFFormatHelper;
 public class GuiHoverFieldFluid extends GuiHoverField
 {
     private FluidTankTF fluidTank;
-    
+
     public GuiHoverFieldFluid(int x, int y, int width, int height, FluidTankTF tank)
     {
         super(x, y, width, height, new ArrayList<String>());
         fluidTank = tank;
     }
-    
+
     public void update(FluidTankTF tank)
     {
         fluidTank = tank;
     }
-    
+
     @Override
     public List<String> getHoverText()
     {

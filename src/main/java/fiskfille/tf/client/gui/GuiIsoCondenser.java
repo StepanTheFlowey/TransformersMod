@@ -33,7 +33,7 @@ public class GuiIsoCondenser extends GuiContainerTF
 {
     private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/isotopic_condenser.png");
     private TileEntityIsoCondenser tileentity;
-    
+
     private GuiHoverFieldEnergy fieldEnergy;
 
     public GuiIsoCondenser(InventoryPlayer inventoryPlayer, TileEntityIsoCondenser tile)
@@ -41,7 +41,7 @@ public class GuiIsoCondenser extends GuiContainerTF
         super(new ContainerEmpty(inventoryPlayer));
         tileentity = tile;
     }
-    
+
     @Override
     public void initGui()
     {
@@ -53,14 +53,14 @@ public class GuiIsoCondenser extends GuiContainerTF
         buttonList.add(new GuiButtonConfigSides(0, x + xSize - 18, y + 5));
         buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 20, tileentity));
     }
-    
+
     @Override
     public void updateScreen()
     {
         super.updateScreen();
         fieldEnergy.update(tileentity.data.storage);
     }
-    
+
     @Override
     protected void actionPerformed(GuiButton button)
     {

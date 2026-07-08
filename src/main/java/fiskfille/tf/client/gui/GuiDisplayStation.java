@@ -42,7 +42,7 @@ public class GuiDisplayStation extends GuiContainerTF
         tileentity = tile;
         ySize = 186;
     }
-    
+
     @Override
     public void initGui()
     {
@@ -50,15 +50,15 @@ public class GuiDisplayStation extends GuiContainerTF
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         buttonList.add(new GuiButtonTransform(0, x + 140, y + 83));
-        
+
         for (int i = 0; i < 2; ++i)
         {
             GuiButton button = new GuiButtonComponent(i + 1, x + 140, y + 17 + i * 18);
             button.enabled = getComponent(i) != null && getComponent(i).canLoad(tileentity, i);
-            
+
             buttonList.add(button);
         }
-        
+
         ((GuiButton) buttonList.get(0)).enabled = tileentity.canTransform();
     }
 
@@ -67,7 +67,7 @@ public class GuiDisplayStation extends GuiContainerTF
     {
         super.updateScreen();
         ((GuiButton) buttonList.get(0)).enabled = tileentity.canTransform();
-        
+
         for (int i = 0; i < 2; ++i)
         {
             ((GuiButton) buttonList.get(i + 1)).enabled = getComponent(i) != null && getComponent(i).canLoad(tileentity, i);
@@ -124,9 +124,9 @@ public class GuiDisplayStation extends GuiContainerTF
         int y = (height - ySize) / 2;
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
         GuiInventory.func_147046_a(x + 63, y + 85, 30, x + 63 - mouseX, y + 85 - 50 - mouseY, mc.thePlayer);
-        
+
         List<Transformer> list = Lists.newArrayList();
-        
+
         for (int i = 0; i < 4; ++i)
         {
             ItemStack itemstack = tileentity.getStackInSlot(i);
@@ -134,30 +134,30 @@ public class GuiDisplayStation extends GuiContainerTF
             if (itemstack != null)
             {
                 Transformer transformer = TFHelper.getTransformerFromArmor(itemstack);
-                
+
                 if (transformer != null && !list.contains(transformer))
                 {
                     list.add(transformer);
                 }
             }
         }
-        
+
         Transformer transformer = TransformersAPI.getTransformers().get((mc.thePlayer.ticksExisted / 20) % TransformersAPI.getTransformers().size());
-        
+
         if (list.size() == 1)
         {
             transformer = list.get(0);
         }
-        
+
         if (transformer != null)
         {
             Item[] items = {transformer.getHelmet(), transformer.getChestplate(), transformer.getLeggings(), transformer.getBoots()};
             boolean prevColor = itemRender.renderWithColor;
-            
+
             TFRenderHelper.setupRenderItemIntoGUI();
             GL11.glColor4f(0.6F, 0.6F, 0.6F, 0.25F);
             itemRender.renderWithColor = false;
-            
+
             for (int i = 0; i < 4; ++i)
             {
                 if (tileentity.getStackInSlot(i) == null)
@@ -165,13 +165,13 @@ public class GuiDisplayStation extends GuiContainerTF
                     itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(items[i], 1, 0), x + 13, y + 18 + i * 18);
                 }
             }
-            
+
             if (tileentity.getStackInSlot(6) == null)
             {
                 ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1, TransformersAPI.getTransformers().indexOf(transformer));
                 itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.getTextureManager(), itemstack, x + 144, y + 63);
             }
-            
+
             itemRender.renderWithColor = prevColor;
             GL11.glColor4f(1, 1, 1, 1);
             TFRenderHelper.finishRenderItemIntoGUI();

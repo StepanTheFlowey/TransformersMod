@@ -25,7 +25,7 @@ public class ItemMetaBasic extends Item
 {
     public static Map<String, Integer> subItems = Maps.newHashMap();
     public Map<String, IIcon> mappedIcons = Maps.newHashMap();
-    
+
     public static String[] iconNames;
     public static String[] iconDomains;
 
@@ -38,20 +38,20 @@ public class ItemMetaBasic extends Item
     public void getSubItems(Item item, CreativeTabs tab, List list)
     {
         List<Double> list1 = Lists.newArrayList();
-        
+
         for (Map.Entry<String, Integer> e : subItems.entrySet())
         {
             list1.add(e.getValue().doubleValue());
         }
-        
+
         Collections.sort(list1);
-        
+
         for (int i = 0; i < list1.size(); ++i)
         {
             list.add(new ItemStack(this, 1, list1.get(i).intValue()));
         }
     }
-    
+
     @Override
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int slot, boolean isHeld)
     {
@@ -77,7 +77,7 @@ public class ItemMetaBasic extends Item
     {
         return mappedIcons.get(getNameFromId(damage));
     }
-    
+
     public String getNameFromId(int id)
     {
         if (subItems.containsValue(id))
@@ -90,7 +90,7 @@ public class ItemMetaBasic extends Item
                 }
             }
         }
-        
+
         return null;
     }
 

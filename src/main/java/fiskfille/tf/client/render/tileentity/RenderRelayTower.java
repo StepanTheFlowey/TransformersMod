@@ -42,7 +42,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer
             if (tower instanceof TileEntityRelayTorch && world != null)
             {
                 ForgeDirection dir = ForgeDirection.getOrientation(metadata);
-                
+
                 if (dir == ForgeDirection.UP)
                 {
                     GL11.glTranslatef(0, 1, 0);
@@ -55,7 +55,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer
                 else
                 {
                     int[] rotations = {0, 2, 3, 1};
-                    
+
                     GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
                     GL11.glRotatef(90, 1, 0, 0);
                     GL11.glTranslatef(0, -1, 0);

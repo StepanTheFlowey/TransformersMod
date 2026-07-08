@@ -41,13 +41,13 @@ public abstract class TileEntityTF extends TileEntity
     {
         readCustomNBT(pkt.func_148857_g());
     }
-    
+
     @Override
     public void markDirty()
     {
         super.markDirty();
         TileEntity tile = TFTileHelper.getTileBase(this);
-        
+
         if (tile != null)
         {
             worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);

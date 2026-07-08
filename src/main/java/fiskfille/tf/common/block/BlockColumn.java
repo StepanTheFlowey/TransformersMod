@@ -68,7 +68,7 @@ public class BlockColumn extends BlockMachineBase
         {
             return true;
         }
-        
+
         if (!player.isSneaking())
         {
             TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
@@ -83,7 +83,7 @@ public class BlockColumn extends BlockMachineBase
 
         return false;
     }
-    
+
     @Override
     public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
     {

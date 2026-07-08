@@ -79,7 +79,7 @@ public class GuiConfigSides extends GuiContainerTF
         super.initGui();
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
-        
+
         buttonList.add(buttonDistribution = new GuiButtonDistribution(0, x + 111, y + 66, machine));
 
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
@@ -147,7 +147,7 @@ public class GuiConfigSides extends GuiContainerTF
     {
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
-        
+
         String s = I18n.format("gui.tf.io");
         fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
         fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
@@ -219,7 +219,7 @@ public class GuiConfigSides extends GuiContainerTF
 
         ForgeHooksClient.setRenderPass(-1);
         setGlStateForPass(0, false);
-        
+
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -227,18 +227,18 @@ public class GuiConfigSides extends GuiContainerTF
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         tessellator.setTranslation(-x - 0.5F, -y - 0.5F, -z - 0.5F);
         renderBlocks.setRenderAllFaces(true);
-        
+
         for (GuiButton button : (List<GuiButton>) buttonList)
         {
             if (button instanceof GuiButtonIO)
             {
                 GuiButtonIO iobutton = (GuiButtonIO) button;
-                
+
                 if (iobutton.func_146115_a())
                 {
                     ForgeDirection dir = iobutton.side;
                     IIcon icon = renderBlocks.getBlockIcon(Blocks.wool);
-                    
+
                     if (iobutton.enabled)
                     {
                         GL11.glColor4f(0.2F, 1, 0.2F, 0.5F);
@@ -247,26 +247,26 @@ public class GuiConfigSides extends GuiContainerTF
                     {
                         GL11.glColor4f(1, 0.2F, 0.2F, 0.5F);
                     }
-                    
+
                     block.setBlockBoundsBasedOnState(world, x, y, z);
                     renderBlocks.setRenderBoundsFromBlock(block);
-                    
+
                     for (int i = 0; i < 2; ++i)
                     {
                         if (i == 1)
                         {
                             EnumIO io = machine.getInOutMode(dir);
-                            
+
                             if (io.ordinal() == 0)
                             {
                                 break;
                             }
-                            
+
                             GL11.glColor4f(1, 1, 1, 1);
                             renderBlocks.setRenderBounds(0, 0, 0, 1, 1, 1);
                             icon = TFTextureHelper.ioIcons[io.ordinal()];
                         }
-                        
+
                         tessellator.startDrawingQuads();
                         renderFace(dir, block, x, y + (i == 1 && dir.offsetY > 0 ? block.getBlockHeight() - 1 : 0), z, icon);
                         tessellator.draw();
@@ -274,29 +274,29 @@ public class GuiConfigSides extends GuiContainerTF
                 }
             }
         }
-        
+
 //        GL11.glColor4f(1, 1, 1, 1);
-//        
+//
 //        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 //        {
 //            EnumIO io = machine.getInOutMode(dir);
-//            
+//
 //            if (io.ordinal() > 0)
 //            {
 //                renderBlocks.setRenderBounds(0, 0, 0, 1, 1, 1);
-//                
+//
 //                tessellator.startDrawingQuads();
 //                renderFace(dir, block, x, y, z, TFTextureHelper.ioIcons[io.ordinal()]);
 //                tessellator.draw();
 //            }
 //        }
-        
+
         tessellator.setTranslation(0, 0, 0);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDisable(GL11.GL_BLEND);
     }
-    
+
     private void renderFace(ForgeDirection dir, Block block, int x, int y, int z, IIcon icon)
     {
         switch (dir)
@@ -327,11 +327,11 @@ public class GuiConfigSides extends GuiContainerTF
     private void doTileEntityRenderPass(List<ChunkCoordinates> blocks, int pass)
     {
         ForgeHooksClient.setRenderPass(pass);
-        
+
         for (ChunkCoordinates coords : blocks)
         {
             TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(coords.posX, coords.posY, coords.posZ));
-            
+
             if (tile != null)
             {
                 GL11.glColor4f(1, 1, 1, 1);
@@ -351,7 +351,7 @@ public class GuiConfigSides extends GuiContainerTF
         for (ChunkCoordinates coords : blocks)
         {
             Block block = world.getBlock(coords.posX, coords.posY, coords.posZ);
-            
+
             if (block != null)
             {
                 if (block.canRenderInPass(pass))
@@ -371,11 +371,11 @@ public class GuiConfigSides extends GuiContainerTF
     private void setGlStateForPass(int pass, boolean isNeighbour)
     {
         GL11.glColor4f(1, 1, 1, 1);
-        
+
         if (isNeighbour)
         {
             float alpha = 0.6F;
-            
+
             if (pass == 0)
             {
                 GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -393,7 +393,7 @@ public class GuiConfigSides extends GuiContainerTF
                 GL14.glBlendColor(1, 1, 1, alpha);
                 GL11.glDepthMask(false);
             }
-            
+
             return;
         }
 

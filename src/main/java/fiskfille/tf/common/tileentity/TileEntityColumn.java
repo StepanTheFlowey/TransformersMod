@@ -59,7 +59,7 @@ public class TileEntityColumn extends TileEntityMachineContainer implements IEne
         {
             return 0;
         }
-        
+
         return storage.add(amount, simulate);
     }
 
@@ -70,7 +70,7 @@ public class TileEntityColumn extends TileEntityMachineContainer implements IEne
         {
             return 0;
         }
-        
+
         return storage.remove(amount, simulate);
     }
 

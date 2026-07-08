@@ -13,7 +13,7 @@ public class TFOreDictRegistry
     public static void register()
     {
         registerOre("dye", TFItems.dye);
-        
+
         // Minerals
         registerOre("transformium", TFItems.transformiumFragment);
         registerOre("ingotTransformiumAlloy", TFItems.transformiumAlloy);
@@ -35,7 +35,7 @@ public class TFOreDictRegistry
         registerOre("blockEnergon", TFBlocks.energonCube, TFBlocks.redEnergonCube);
         registerOre("blockEnergonBlue", TFBlocks.energonCube);
         registerOre("blockEnergonRed", TFBlocks.redEnergonCube);
-        
+
         // Blocks
         registerOre("blockGlass", TFBlocks.stainedGlass);
         registerOre("paneGlass", TFBlocks.stainedGlassPane);
@@ -44,7 +44,7 @@ public class TFOreDictRegistry
         registerOre("carpet", Blocks.carpet, TFBlocks.carpet);
         registerOre("slabStone", new ItemStack(Blocks.stone_slab, 1, 0));
     }
-    
+
     private static void registerOre(String name, Object... args)
     {
         for (Object obj : args)

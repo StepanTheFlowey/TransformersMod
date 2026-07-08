@@ -18,19 +18,19 @@ public class TFTextureHelper
 {
     public static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
     private static Minecraft mc = Minecraft.getMinecraft();
-    
+
     public static IIcon energonFlowingIcon;
     public static IIcon energonStillIcon;
-    
+
     public static IIcon[] ioIcons;
-    
+
     public static void onTextureStitch(TextureMap map)
     {
         energonFlowingIcon = map.registerIcon(TransformersMod.modid + ":energon_flow");
         energonStillIcon = map.registerIcon(TransformersMod.modid + ":energon_still");
-        
+
         ioIcons = new IIcon[EnumIO.values().length];
-        
+
         for (EnumIO io : EnumIO.values())
         {
             if (io.ordinal() > 0)
@@ -52,7 +52,7 @@ public class TFTextureHelper
 
         return resourcelocation;
     }
-    
+
     public static boolean isBoundTexture(ResourceLocation resourceLocation)
     {
         ITextureObject texture = mc.getTextureManager().getTexture(resourceLocation);

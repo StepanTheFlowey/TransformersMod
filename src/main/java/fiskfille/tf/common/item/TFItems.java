@@ -31,7 +31,7 @@ public class TFItems
     public static Item energonAlloyNugget;
     public static Item energonDust;
     public static Item craftingMaterial;
-    
+
     public static Item fuelCanister;
     public static Item dye;
     public static Item componentBase;

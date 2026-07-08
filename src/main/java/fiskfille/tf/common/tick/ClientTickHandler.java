@@ -126,7 +126,7 @@ public class ClientTickHandler
                         e.getValue().clientTick();
                     }
                 }
-                
+
                 if (ClientProxy.fakePlayer == null || ClientProxy.fakePlayer.worldObj != mc.theWorld)
                 {
                     if (mc.playerController != null)

@@ -14,7 +14,7 @@ public class TFReflection
     public static Method renderHandMethod;
     public static Method drawSlotMethod;
     public static Field thirdPersonDistanceField;
-    
+
     public static Method setSizeMethod;
 
     @SideOnly(Side.CLIENT)
@@ -22,7 +22,7 @@ public class TFReflection
     {
         renderHandMethod = getMethod(EntityRenderer.class, "renderHand", "func_78476_b");
         drawSlotMethod = getMethod(GuiContainer.class, "func_146977_a");
-        
+
         thirdPersonDistanceField = getField(EntityRenderer.class, "thirdPersonDistance", "field_78490_B");
     }
 

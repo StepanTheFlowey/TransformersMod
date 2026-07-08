@@ -49,7 +49,7 @@ public class TFArmorHelper
             }
         }
     }
-    
+
     public static int getArmorValue(EntityPlayer player, ItemStack itemstack, int slot)
     {
         if (itemstack != null)

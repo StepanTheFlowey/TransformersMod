@@ -69,7 +69,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer
     {
         int metadata = tile.getBlockMetadata();
         ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
-        
+
         if (dir == ForgeDirection.UP)
         {
             GL11.glTranslatef(0, 1, 0);
@@ -82,7 +82,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer
         else
         {
             int[] rotations = {2, 0, 1, 3};
-            
+
             GL11.glTranslatef(0, 0.125F, 0);
             GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
             GL11.glRotatef(55, 1, 0, 0);

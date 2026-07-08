@@ -213,7 +213,7 @@ public class ClientEventHandler
         {
             ItemHandler.init();
         }
-        
+
         if (event.map.getTextureType() == 0)
         {
             TFFluidRenderHelper.onTextureStitch(event.map);

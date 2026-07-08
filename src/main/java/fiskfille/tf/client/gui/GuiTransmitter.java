@@ -25,13 +25,13 @@ public class GuiTransmitter extends GuiContainerTF
 
     private GuiHoverFieldEnergy fieldEnergy;
     private GuiHoverFieldFluid fieldFluid;
-    
+
     public GuiTransmitter(InventoryPlayer inventoryPlayer, TileEntityTransmitter tile)
     {
         super(new ContainerTransmitter(inventoryPlayer, tile));
         tileentity = tile;
     }
-    
+
     @Override
     public void initGui()
     {
@@ -44,7 +44,7 @@ public class GuiTransmitter extends GuiContainerTF
         buttonList.add(new GuiButtonConfigSides(0, x + xSize - 18, y + 5));
         buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 20, tileentity));
     }
-    
+
     @Override
     public void updateScreen()
     {
@@ -52,7 +52,7 @@ public class GuiTransmitter extends GuiContainerTF
         fieldEnergy.update(tileentity.data.storage);
         fieldFluid.update(tileentity.data.tank);
     }
-    
+
     @Override
     protected void actionPerformed(GuiButton button)
     {
@@ -95,7 +95,7 @@ public class GuiTransmitter extends GuiContainerTF
             float f = tileentity.getEnergy() / tileentity.getMaxEnergy();
             drawTexturedModalRect(x + 107, y + 17 + Math.round(52 * (1 - f)), 196, Math.round(52 * (1 - f)), 16, Math.round(52 * f));
         }
-        
+
         GL11.glEnable(GL11.GL_BLEND);
         TFFluidRenderHelper.renderIntoGUI(tileentity.getTank(), x + 80, y + 19, 16, 48, zLevel);
         GL11.glDisable(GL11.GL_BLEND);

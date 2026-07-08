@@ -74,12 +74,12 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
                 }
 
                 data.serverTickPre();
-                
+
                 if (getEnergy() > 0 && canActivate())
                 {
                     List<ReceiverEntry> receiversToPower = TFEnergyHelper.getReceiversToPower(this);
                     float f = Math.min(getEnergy(), getTransmissionRate()) / receiversToPower.size();
-                    
+
                     for (ReceiverEntry entry : receiversToPower)
                     {
                         IEnergyReceiver receiver = entry.getReceiver();
@@ -140,7 +140,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
             }
         }
     }
-    
+
     @Override
     public int getSizeInventory()
     {
@@ -237,7 +237,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
     {
         return Vec3.createVectorHelper(0, 2.25F, 0);
     }
-    
+
     @Override
     public Vec3 getRenderOutputOffset()
     {

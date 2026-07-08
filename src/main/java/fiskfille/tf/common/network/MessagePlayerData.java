@@ -77,7 +77,7 @@ public class MessagePlayerData implements IMessage
                     if (type == TFData.ALT_MODE)
                     {
                         Transformer transformer = TFHelper.getTransformer((EntityPlayer) entity);
-                        
+
                         if (transformer != null)
                         {
                             entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, transformer.getTransformationSound((Integer) value), 0.5F, 1F, false);

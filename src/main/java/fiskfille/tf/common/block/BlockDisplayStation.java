@@ -74,21 +74,21 @@ public class BlockDisplayStation extends BlockMachineBase
         {
             return true;
         }
-        
+
         TileEntity tileentity = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
         if (tileentity instanceof TileEntityDisplayStation)
         {
             TileEntityDisplayStation tile = (TileEntityDisplayStation) tileentity;
-            
+
             if (!player.isSneaking())
             {
                 ItemStack heldItem = player.getHeldItem();
-                
+
                 if (heldItem != null && heldItem.getItem() == TFItems.displayVehicle)
                 {
                     boolean flag = true;
-                    
+
                     for (int i = 0; i < 4; ++i)
                     {
                         if (tile.getStackInSlot(i) != null)
@@ -97,23 +97,23 @@ public class BlockDisplayStation extends BlockMachineBase
                             break;
                         }
                     }
-                    
+
                     if (flag)
                     {
                         ItemStack[] armor = ItemDisplayVehicle.getArmorFromNBT(heldItem);
-                        
+
                         for (int i = 0; i < armor.length; ++i)
                         {
                             tile.setInventorySlotContents(i, armor[i]);
                         }
-                        
+
                         tile.markDirty();
                         player.setCurrentItemOrArmor(0, null);
-                        
+
                         return true;
                     }
                 }
-                
+
                 TFGui.DISPLAY_STATION.open(player, tile);
             }
             else
@@ -130,7 +130,7 @@ public class BlockDisplayStation extends BlockMachineBase
 
         return true;
     }
-    
+
     private void handleArmorTransition(EntityPlayer player, TileEntityDisplayStation tile, int armorType)
     {
         ItemStack playerArmor = player.inventory.armorInventory[armorType];
@@ -189,20 +189,20 @@ public class BlockDisplayStation extends BlockMachineBase
 
         }
     }
-    
+
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
     {
         super.onNeighborBlockChange(world, x, y, z, block);
-        
+
         if (world.getTileEntity(x, y, z) instanceof TileEntityDisplayStation)
         {
             TileEntityDisplayStation tile = TFTileHelper.getTileBase((TileEntityDisplayStation) world.getTileEntity(x, y, z));
-            
+
             if (!world.isRemote)
             {
                 boolean flag = world.isBlockIndirectlyGettingPowered(tile.xCoord, tile.yCoord, tile.zCoord);
-                
+
                 if (flag && !tile.isRedstonePowered)
                 {
                     if (tile.canTransform())
@@ -211,7 +211,7 @@ public class BlockDisplayStation extends BlockMachineBase
                         tile.receive(null, 0);
                     }
                 }
-                
+
                 tile.isRedstonePowered = flag;
             }
         }

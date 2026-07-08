@@ -22,13 +22,13 @@ public class BlockRelayTower extends BlockMachineBase
         setHardness(5.0F);
         setResistance(10.0F);
     }
-    
+
     @Override
     public int getBlockHeight()
     {
         return 2;
     }
-    
+
     @Override
     public boolean renderAsNormalBlock()
     {
@@ -90,7 +90,7 @@ public class BlockRelayTower extends BlockMachineBase
         {
             return true;
         }
-        
+
         if (!player.isSneaking())
         {
             TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
@@ -105,7 +105,7 @@ public class BlockRelayTower extends BlockMachineBase
 
         return false;
     }
-    
+
     @Override
     public void registerBlockIcons(IIconRegister iconRegister)
     {

@@ -26,7 +26,7 @@ public class TFItemRegistry
         item.setTextureName(getMod() + ":" + unlocalizedName);
         GameRegistry.registerItem(item, unlocalizedName);
     }
-    
+
     private static String getMod()
     {
         return Loader.instance().activeModContainer().getModId();

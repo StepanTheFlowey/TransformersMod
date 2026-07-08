@@ -229,26 +229,26 @@ public class GuiColor extends GuiScreen
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         EntityPlayer entity = ClientProxy.fakePlayer;
-        
+
         if (entity != null)
         {
             Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
             Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
-            
+
             for (int i = 0; i < 4; ++i)
             {
                 ItemStack armor = tileentity.getStackInSlot(i);
-                
+
                 if (armor != null)
                 {
                     armor = armor.copy();
                     TFArmorDyeHelper.setPrimaryColor(armor, primary.getRGB());
                     TFArmorDyeHelper.setSecondaryColor(armor, secondary.getRGB());
                 }
-                
+
                 entity.setCurrentItemOrArmor(4 - i, armor);
             }
-            
+
             entity.capabilities.isFlying = true;
             entity.rotationYawHead = 0;
             entity.setInvisible(true);

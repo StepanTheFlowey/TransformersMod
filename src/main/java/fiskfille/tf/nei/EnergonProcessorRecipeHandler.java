@@ -260,23 +260,23 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler
         currenttip = super.handleTooltip(gui, currenttip, recipe);
         int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 4);
         int guiTop = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 5);
-        
+
         Point mousepos = GuiDraw.getMousePosition();
         Point relMouse = new Point(mousepos.x - guiLeft, mousepos.y - guiTop);
         Point recipepos = gui.getRecipePosition(recipe);
-        
+
         if (currenttip.isEmpty() && GuiContainerManager.getStackMouseOver(gui) == null && new Rectangle(recipepos.x + 72, recipepos.y + 6, 52, 52).contains(relMouse))
         {
             currenttip.addAll(TFFormatHelper.toString(getProcessorRecipes().get(recipe).tank.format()));
         }
-        
+
         return currenttip;
     }
 
     public List<CachedProcessorRecipe> getProcessorRecipes()
     {
         List<CachedProcessorRecipe> list = Lists.newArrayList();
-        
+
         for (CachedRecipe recipe : arecipes)
         {
             if (recipe instanceof CachedProcessorRecipe)
@@ -284,7 +284,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler
                 list.add((CachedProcessorRecipe) recipe);
             }
         }
-        
+
         return list;
     }
 }

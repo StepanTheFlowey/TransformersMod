@@ -27,7 +27,7 @@ public class BlockAssemblyTable extends BlockMachineBase
         {
             return true;
         }
-        
+
         if (!player.isSneaking())
         {
             TFGui.ASSEMBLY_TABLE.open(player, x, y, z);

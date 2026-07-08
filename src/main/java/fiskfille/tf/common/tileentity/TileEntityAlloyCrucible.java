@@ -40,10 +40,10 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
     public ItemStack smeltingResult;
     public boolean alloyResult;
     public int smeltTime;
-    
+
     public int alloyResults;
     public int furnaceResults;
-    
+
     private int metadataFlags;
 
     @Override
@@ -84,7 +84,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
         {
             data = new TileDataEnergyContainer((TileDataEnergyContainer) prevData);
         }
-        
+
         int i = getMetadataFlags();
 
         if (i != metadataFlags)
@@ -93,21 +93,21 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
             worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, i, 2);
         }
     }
-    
+
     public int getMetadataFlags()
     {
         int metadata = BlockAlloyCrucible.getRotation(getBlockMetadata());
-        
+
         if (getEnergy() > 0)
         {
             metadata |= BlockAlloyCrucible.FLAG_TOP;
         }
-        
+
         if (canSmelt())
         {
             metadata |= BlockAlloyCrucible.FLAG_FRONT;
         }
-        
+
         return metadata;
     }
 
@@ -121,7 +121,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
             data.kill();
         }
     }
-    
+
     @Override
     public int getSizeInventory()
     {
@@ -398,25 +398,25 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
     {
         return 0xFF0000;
     }
-    
+
     @Override
     public ItemStack decrStackSize(int slot, int amount)
     {
         if (slot == 3)
         {
             ItemStack itemstack = getStackInSlot(slot);
-            
+
             if (itemstack != null)
             {
                 int toRemove = Math.min(itemstack.stackSize, amount);
                 int i = Math.min(alloyResults, toRemove);
-                
+
                 toRemove -= i;
                 alloyResults -= i;
                 furnaceResults -= Math.min(furnaceResults, toRemove);
             }
         }
-        
+
         return super.decrStackSize(slot, amount);
     }
 
@@ -448,7 +448,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
     public void receive(EntityPlayer player, int action)
     {
         super.receive(player, action);
-        
+
         if (action == 0)
         {
             smeltingMode = EnumSmeltingMode.values()[(smeltingMode.ordinal() + 1) % EnumSmeltingMode.values().length];

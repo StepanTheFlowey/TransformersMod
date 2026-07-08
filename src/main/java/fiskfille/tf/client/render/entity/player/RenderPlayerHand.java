@@ -29,7 +29,7 @@ public class RenderPlayerHand extends RenderPlayer
     public void renderFirstPersonArm(EntityPlayer player)
     {
         float partialTicks = ClientTickHandler.renderTick;
-        
+
         if (TFHelper.getTransformationTimer(player) == 0)
         {
             Transformer transformer = TFHelper.getTransformerFromArmor(player, 2);
@@ -80,7 +80,7 @@ public class RenderPlayerHand extends RenderPlayer
                             float f = 0.76F;
                             float f1 = ticks * (0.001F + i * 0.003F) * 20;
                             float f2 = 0.33333334F;
-                            
+
                             GL11.glDisable(GL11.GL_LIGHTING);
                             GL11.glColor4f(0.5F * f, 0.25F * f, 0.8F * f, 1);
                             GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);

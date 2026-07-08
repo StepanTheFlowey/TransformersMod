@@ -33,7 +33,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 {
     private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/alloy_crucible.png");
     private TileEntityAlloyCrucible tileentity;
-    
+
     private GuiHoverFieldEnergy fieldEnergy;
 
     public GuiAlloyCrucible(InventoryPlayer inventoryPlayer, TileEntityAlloyCrucible tile)
@@ -55,7 +55,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
         buttonList.add(new GuiButtonConfigSides(1, x + xSize - 18, y + 27));
         buttonList.add(new GuiButtonConfigRedstone(2, x + xSize - 18, y + 42, tileentity));
     }
-    
+
     @Override
     public void updateScreen()
     {
@@ -123,7 +123,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
             }
         }
     }
-    
+
     @Override
     public List<String> getHoverText(GuiButton button)
     {

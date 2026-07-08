@@ -15,7 +15,7 @@ import fiskfille.tf.common.transformer.base.Transformer;
 public class RenderItemDisplayVehicle implements IItemRenderer
 {
     private static Minecraft mc = Minecraft.getMinecraft();
-    
+
     public TransformerModel getModelFromMetadata(int metadata)
     {
         Transformer transformer = TransformersAPI.getTransformers().get(metadata);

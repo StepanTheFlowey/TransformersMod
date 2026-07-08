@@ -24,20 +24,20 @@ public class TFHelper
     public static boolean isTransformer(ItemStack... itemstacks)
     {
         ItemStack itemstack = itemstacks[0];
-        
+
         for (int i = 1; i < itemstacks.length; ++i)
         {
             if (getTransformerFromArmor(itemstack) == null || getTransformerFromArmor(itemstack) != getTransformerFromArmor(itemstacks[i]))
             {
                 return false;
             }
-            
+
             itemstack = itemstacks[i];
         }
-        
+
         return true;
-        
-        
+
+
 //        Transformer helmet = getTransformerFromArmor(itemstacks[0]);
 //        Transformer chest = getTransformerFromArmor(itemstacks[1]);
 //        Transformer legs = getTransformerFromArmor(itemstacks[2]);

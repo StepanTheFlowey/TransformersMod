@@ -15,7 +15,7 @@ import fiskfille.tf.common.tileentity.TileEntityMachine;
 public class GuiButtonDistribution extends GuiButtonFlat
 {
     public TileEntityMachine machine;
-    
+
     public GuiButtonDistribution(int id, int x, int y, TileEntityMachine tile)
     {
         super(id, x, y, 13, "");
@@ -34,10 +34,10 @@ public class GuiButtonDistribution extends GuiButtonFlat
             displayString = "/";
             break;
         }
-        
+
         super.drawButton(mc, mouseX, mouseY);
     }
-    
+
     @Override
     public List<String> getHoverText()
     {

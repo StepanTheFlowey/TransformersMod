@@ -28,7 +28,7 @@ public class GuiEnergonTank extends GuiContainerTF
     private TileEntityEnergonTank tileentity;
 
     public FluidTankTF fluidTank;
-    
+
     private GuiHoverFieldFluid fieldFluid;
 
     public GuiEnergonTank(InventoryPlayer inventoryPlayer, TileEntityEnergonTank tile)
@@ -36,7 +36,7 @@ public class GuiEnergonTank extends GuiContainerTF
         super(new ContainerEnergonTank(inventoryPlayer, tile));
         tileentity = tile;
     }
-    
+
     @Override
     public void initGui()
     {
@@ -47,7 +47,7 @@ public class GuiEnergonTank extends GuiContainerTF
         buttonList.add(fieldFluid = new GuiHoverFieldFluid(x + 61, y + 17, 52, 52, tileentity.data.tank));
         buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 5, tileentity));
     }
-    
+
     @Override
     public void updateScreen()
     {
@@ -55,7 +55,7 @@ public class GuiEnergonTank extends GuiContainerTF
         updateFluids();
         fieldFluid.update(fluidTank);
     }
-    
+
     @Override
     protected void actionPerformed(GuiButton button)
     {
@@ -133,7 +133,7 @@ public class GuiEnergonTank extends GuiContainerTF
         {
             updateFluids();
         }
-        
+
         GL11.glEnable(GL11.GL_BLEND);
         TFFluidRenderHelper.renderIntoGUI(fluidTank, x + 64, y + 19, 48, 48, zLevel);
         GL11.glDisable(GL11.GL_BLEND);

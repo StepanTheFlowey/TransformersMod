@@ -20,7 +20,7 @@ public class TFWorldGenHandler
     private Random rand;
     private int xCoord;
     private int zCoord;
-    
+
     public WorldGenerator transformiumGen;
     public WorldGenerator energonGen;
     public WorldGenerator energonCrystalGen;
@@ -45,7 +45,7 @@ public class TFWorldGenHandler
         genStandardOre(2, transformiumGen, 16);
         genStandardOre(4, energonGen, 32);
     }
-    
+
     @SubscribeEvent
     public void onPopulateChunkPost(PopulateChunkEvent.Post event)
     {
@@ -53,7 +53,7 @@ public class TFWorldGenHandler
         rand = event.rand;
         xCoord = event.chunkX * 16;
         zCoord = event.chunkZ * 16;
-        
+
         genStandardOre(100, energonCrystalGen, 48);
         genStandardOre(10, redEnergonCrystalGen, 24);
     }
@@ -67,7 +67,7 @@ public class TFWorldGenHandler
                 int x = xCoord + rand.nextInt(16);
                 int y = rand.nextInt(maxHeight);
                 int z = zCoord + rand.nextInt(16);
-                
+
                 generator.generate(world, rand, x, y, z);
             }
         }

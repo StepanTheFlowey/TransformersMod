@@ -129,21 +129,21 @@ public class EnergyStorage
         lastEnergy = energy;
         return energyUsage;
     }
-    
+
     public List<IChatComponent> format()
     {
         List<IChatComponent> list = Lists.newArrayList();
         float usage = getUsage();
-        
+
         IChatComponent gain = new ChatComponentText("+").setChatStyle(new ChatStyle().setColor(GREEN));
         IChatComponent loss = new ChatComponentText("-").setChatStyle(new ChatStyle().setColor(RED));
         IChatComponent rate = new ChatComponentText(TFFormatHelper.formatNumberPrecise(Math.abs(usage)) + "");
         IChatComponent prefix = new ChatComponentText("").setChatStyle(new ChatStyle().setColor(GRAY));
         prefix = usage > 0 ? gain : usage < 0 ? loss : prefix;
-        
+
         list.add(new ChatComponentTranslation("gui.emb.storage", TFFormatHelper.formatNumber(getEnergy()), TFFormatHelper.formatNumber(getMaxEnergy())));
         list.add(new ChatComponentTranslation("gui.emb.rate", prefix.appendSibling(rate)).setChatStyle(new ChatStyle().setColor(GRAY)));
-        
+
         return list;
     }
 }

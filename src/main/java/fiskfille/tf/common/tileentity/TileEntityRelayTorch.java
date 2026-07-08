@@ -50,7 +50,7 @@ public class TileEntityRelayTorch extends TileEntityRelayTower
     {
         ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
         float f = 0.0625F * 3.5F;
-        
+
         if (dir == ForgeDirection.UP)
         {
             return Vec3.createVectorHelper(0, -f, 0);
@@ -59,10 +59,10 @@ public class TileEntityRelayTorch extends TileEntityRelayTower
         {
             return Vec3.createVectorHelper(0, f, 0);
         }
-        
+
         int[] rotations = {2, 0, 1, 3};
         float yaw = rotations[dir.ordinal() - 2] * 90;
-        
+
         Vec3 vec3 = Vec3.createVectorHelper(0, 0, -f);
         vec3.rotateAroundY(-yaw * (float) Math.PI / 180.0F);
 

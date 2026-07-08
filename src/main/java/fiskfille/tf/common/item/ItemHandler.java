@@ -19,15 +19,15 @@ public class ItemHandler
 {
     private static Map<Class, String> itemHandlers = Maps.newHashMap();
     public static boolean hasInit = false;
-    
+
     public static void init()
     {
         List<String> names = Lists.newLinkedList();
         List<String> domains = Lists.newLinkedList();
-        
+
         MinecraftForge.EVENT_BUS.post(new ItemHandlerEvent.Init(itemHandlers));
         hasInit = true;
-        
+
         for (Map.Entry<Class, String> e : itemHandlers.entrySet())
         {
             for (Field field : e.getKey().getFields())
@@ -50,7 +50,7 @@ public class ItemHandler
     {
         TFWorldData data = TFWorldData.get(world);
         MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Pre(world));
-        
+
         for (Map.Entry<Class, String> e : itemHandlers.entrySet())
         {
             for (Field field : e.getKey().getFields())
@@ -88,7 +88,7 @@ public class ItemHandler
                 }
             }
         }
-        
+
         ItemMetaBasic.subItems = data.subItems;
         MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Post(world));
     }

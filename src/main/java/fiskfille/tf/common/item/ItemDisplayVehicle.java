@@ -97,9 +97,9 @@ public class ItemDisplayVehicle extends Item
                 setNBTData(itemstack);
                 armorFromNBT = getArmorFromNBT(itemstack);
             }
-            
+
             player.setCurrentItemOrArmor(0, null);
-            
+
             for (int i = 0; i < 4; ++i)
             {
                 if (player.getCurrentArmor(i) != null)

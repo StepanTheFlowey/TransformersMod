@@ -33,7 +33,7 @@ public class FluidTankTF extends FluidTank
     {
         super(capacity);
     }
-    
+
     public FluidTankTF(FluidStack stack, int capacity)
     {
         super(stack, capacity);
@@ -120,7 +120,7 @@ public class FluidTankTF extends FluidTank
 
         return fluidUsage;
     }
-    
+
     public List<IChatComponent> format()
     {
         List<IChatComponent> list = Lists.newArrayList();
@@ -140,7 +140,7 @@ public class FluidTankTF extends FluidTank
                 {
                     IChatComponent name = new ChatComponentText(energon.getTranslatedName()).setChatStyle(new ChatStyle().setColor(GRAY));
                     IChatComponent ratio = new ChatComponentText(percentage + "").setChatStyle(new ChatStyle().setColor(YELLOW));
-                    
+
                     list.add(new ChatComponentTranslation("gui.energon_processor.content", name, ratio).setChatStyle(new ChatStyle().setColor(GRAY)));
                     flag = true;
                 }
@@ -158,9 +158,9 @@ public class FluidTankTF extends FluidTank
 
         IChatComponent amount = new ChatComponentText(TFFormatHelper.formatNumber(getFluidAmount())).setChatStyle(new ChatStyle().setColor(YELLOW));
         IChatComponent capacity = new ChatComponentText(TFFormatHelper.formatNumber(getCapacity())).setChatStyle(new ChatStyle().setColor(YELLOW));
-        
+
         list.add(new ChatComponentTranslation("gui.energon_processor.filled", amount, capacity).setChatStyle(new ChatStyle().setColor(GRAY)));
-        
+
         return list;
     }
 }

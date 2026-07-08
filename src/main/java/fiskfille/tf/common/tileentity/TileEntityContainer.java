@@ -10,7 +10,7 @@ import fiskfille.tf.helper.TFTileHelper;
 public abstract class TileEntityContainer extends TileEntityTF implements IInventory
 {
     protected ItemStack[] inventory = new ItemStack[getSizeInventory()];
-    
+
     public ItemStack[] getItemStacks()
     {
         if (hasWorldObj())
@@ -27,7 +27,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
                 return new ItemStack[getSizeInventory()];
             }
         }
-        
+
         return inventory;
     }
 
@@ -47,7 +47,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
                 return;
             }
         }
-        
+
         inventory = itemstacks;
     }
 
@@ -148,7 +148,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
         {
             return;
         }
-        
+
         nbt.setBoolean("LoadInventory", true);
         NBTTagList nbttaglist = new NBTTagList();
 

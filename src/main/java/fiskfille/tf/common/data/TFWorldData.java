@@ -18,7 +18,7 @@ public class TFWorldData extends WorldSavedData
 {
     public static final String KEY = "TFWorld";
     public static TFWorldData instance;
-    
+
     public Map<String, Integer> subItems = Maps.newHashMap();
 
     public TFWorldData(String s)
@@ -52,12 +52,12 @@ public class TFWorldData extends WorldSavedData
     public void readFromNBT(NBTTagCompound nbt)
     {
         NBTTagList list = nbt.getTagList("SubItems", NBT.TAG_COMPOUND);
-        
+
         for (int i = 0; i < list.tagCount(); ++i)
         {
             NBTTagCompound nbttagcompound = list.getCompoundTagAt(i);
             String name = nbttagcompound.getString("name");
-            
+
             if (Arrays.asList(ItemMetaBasic.iconNames).contains(name))
             {
                 subItems.put(name, nbttagcompound.getInteger("id"));
@@ -77,7 +77,7 @@ public class TFWorldData extends WorldSavedData
             nbttagcompound.setString("name", e.getKey());
             list.appendTag(nbttagcompound);
         }
-        
+
         nbt.setTag("SubItems", list);
     }
 
@@ -90,16 +90,16 @@ public class TFWorldData extends WorldSavedData
 
         return instance;
     }
-    
+
     public int getNextAvailableId()
     {
         int id = 0;
-        
+
         while (subItems.containsValue(id))
         {
             ++id;
         }
-        
+
         return id;
     }
 }

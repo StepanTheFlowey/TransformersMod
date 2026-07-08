@@ -169,7 +169,7 @@ public class AssemblyTableRecipeHandler extends TemplateRecipeHandler
         {
             result.setItemDamage(0);
         }
-        
+
         for (IRecipe irecipe : (List<IRecipe>) AssemblyTableCraftingManager.getInstance().getRecipeList())
         {
             if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getRecipeOutput(), result))

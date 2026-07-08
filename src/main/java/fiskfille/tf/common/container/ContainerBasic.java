@@ -59,7 +59,7 @@ public class ContainerBasic extends Container
 
         return true;
     }
-    
+
     @Override
     protected boolean mergeItemStack(ItemStack stackToMove, int fromId, int toId, boolean descending)
     {

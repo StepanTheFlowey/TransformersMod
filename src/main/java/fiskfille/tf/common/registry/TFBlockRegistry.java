@@ -65,7 +65,7 @@ public class TFBlockRegistry
     {
         registerItemBlockAsTileEntity(block, name, clazz, ItemMachine.class);
     }
-    
+
     private static String getMod()
     {
         return Loader.instance().activeModContainer().getModId();

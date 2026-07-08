@@ -79,7 +79,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer
 
             f1 = MathHelper.clamp_float(f1, 0, 1);
 
-            
+
             GL11.glScalef(f1, f1, 1);
             GL11.glColor4f(1, 1, 1, 1);
             TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
@@ -101,7 +101,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer
             {
                 float zOffset = 0.6F;
                 float scale = 1.9F;
-                
+
                 bindTexture(PORTAL_EFFECT);
                 GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
                 GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
@@ -215,12 +215,12 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer
     {
         GL11.glPushMatrix();
         GL11.glRotatef(180, 0, 0, 1);
-        
+
         if (offsetX != 0 || offsetY != 0 || offsetZ != 0)
         {
             GL11.glTranslatef(offsetX, offsetY, offsetZ);
         }
-        
+
         GL11.glScalef(scale, scale, 1);
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawing(GL11.GL_TRIANGLES);
@@ -240,7 +240,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer
 
             float minX = -icon.getInterpolatedU(8);
             float minY = icon.getInterpolatedV(8);
-            
+
             Vec3 tex1 = Vec3.createVectorHelper(0.5F, 0.5F, 0);
             Vec3 tex2 = Vec3.createVectorHelper(0.5F, 0.5F, 0);
             tex1.rotateAroundZ((angle * j + 135) * (float) Math.PI / 180.0F);

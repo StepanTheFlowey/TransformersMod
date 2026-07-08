@@ -223,17 +223,17 @@ public class CommonEventHandler
         {
             TFWorldData.load(world);
         }
-        
+
         ItemHandler.load(world);
     }
-    
+
     @SubscribeEvent
     public void onItemStitchPost(ItemStitchEvent.Post event)
     {
         TFRecipes.register();
         TFAchievements.register();
     }
-    
+
     @SubscribeEvent
     public void onItemHandlerInit(ItemHandlerEvent.Init event)
     {

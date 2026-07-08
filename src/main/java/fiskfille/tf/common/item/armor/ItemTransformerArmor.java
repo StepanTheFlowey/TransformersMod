@@ -27,18 +27,18 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
         super(material, renderIndex, armorPiece);
         setCreativeTab(TransformersMod.tabTransformers);
     }
-    
+
     @Override
     public boolean isValidArmor(ItemStack stack, int armorType, Entity entity)
     {
         if (entity instanceof EntityLivingBase)
         {
             EntityLivingBase livingBase = (EntityLivingBase) entity;
-            
+
             for (int i = 0; i < 4; ++i)
             {
                 ItemStack armor = livingBase.getEquipmentInSlot(1 + i);
-                
+
                 if (armor != null && armor.getItem() instanceof ItemTransformerArmor)
                 {
                     if (getTransformer() != ((ItemTransformerArmor) armor.getItem()).getTransformer())
@@ -48,10 +48,10 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
                 }
             }
         }
-        
+
         return super.isValidArmor(stack, armorType, entity);
     }
-    
+
     @Override
     public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot)
     {

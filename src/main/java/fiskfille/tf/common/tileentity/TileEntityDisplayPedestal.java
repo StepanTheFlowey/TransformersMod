@@ -11,7 +11,7 @@ public class TileEntityDisplayPedestal extends TileEntityContainer
     {
         return 1;
     }
-    
+
     @Override
     public AxisAlignedBB getRenderBoundingBox()
     {
@@ -41,7 +41,7 @@ public class TileEntityDisplayPedestal extends TileEntityContainer
     {
         return "";
     }
-    
+
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack)
     {

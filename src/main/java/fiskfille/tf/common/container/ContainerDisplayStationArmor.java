@@ -54,7 +54,7 @@ public class ContainerDisplayStationArmor extends ContainerBasic
             }
         }
     }
-    
+
     @Override
     public TileEntityDisplayStation getTile()
     {
@@ -77,23 +77,23 @@ public class ContainerDisplayStationArmor extends ContainerBasic
             {
                 boolean flag = true;
                 boolean flag1 = itemstack1.getItem() instanceof ItemTransformerArmor;
-                
+
                 for (int i = 0; i < 8; ++i)
                 {
                     Slot slot1 = (Slot) inventorySlots.get(i % 4);
-                    
+
                     if (itemstack1.getItem().isValidArmor(itemstack1, i % 4, player) && (i < 4 ? flag1 && slot1.isItemValid(itemstack1) : !flag1 && slot1.getHasStack()))
                     {
                         if (!mergeItemStack(itemstack1, i, i + 1, false))
                         {
                             return null;
                         }
-                        
+
                         flag = false;
                         break;
                     }
                 }
-                
+
                 if (flag)
                 {
                     if (slotId >= MAX + 1 && slotId < MAX + 28)
@@ -136,7 +136,7 @@ public class ContainerDisplayStationArmor extends ContainerBasic
 
         return itemstack;
     }
-    
+
     @Override
     public void detectAndSendChanges()
     {
@@ -151,7 +151,7 @@ public class ContainerDisplayStationArmor extends ContainerBasic
                 break;
             }
         }
-        
+
         super.detectAndSendChanges();
     }
 }

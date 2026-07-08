@@ -16,7 +16,7 @@ public class BlockIsoCondenser extends BlockMachineBase
         setHardness(6.0F);
         setResistance(10.0F);
     }
-    
+
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
     {
@@ -49,7 +49,7 @@ public class BlockIsoCondenser extends BlockMachineBase
         {
             return true;
         }
-        
+
         if (!player.isSneaking())
         {
             TFGui.ISOTOPIC_CONDENSER.open(player, x, y, z);

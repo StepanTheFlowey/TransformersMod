@@ -40,7 +40,7 @@ public class GuiDisplayStationArmor extends GuiContainer
         tileentity = tile;
         ySize = 186;
     }
-    
+
     @Override
     protected void keyTyped(char c, int key)
     {
@@ -69,7 +69,7 @@ public class GuiDisplayStationArmor extends GuiContainer
 
         ContainerDisplayStationArmor container = (ContainerDisplayStationArmor) inventorySlots;
         List<Transformer> list = Lists.newArrayList();
-        
+
         for (int i = 0; i < 4; ++i)
         {
             ItemStack itemstack = tileentity.getStackInSlot(i);
@@ -78,38 +78,38 @@ public class GuiDisplayStationArmor extends GuiContainer
             if (itemstack != null)
             {
                 Transformer transformer = TFHelper.getTransformerFromArmor(itemstack);
-                
+
                 if (transformer != null && !list.contains(transformer))
                 {
                     list.add(transformer);
                 }
-                
+
                 if (itemstack1 != null)
                 {
                     int amount = TFArmorHelper.getArmorValue(mc.thePlayer, itemstack1, i) - TFArmorHelper.getArmorValue(mc.thePlayer, new ItemStack(itemstack.getItem()), i);
                     String s = (amount < 0 ? EnumChatFormatting.DARK_RED : EnumChatFormatting.DARK_BLUE) + I18n.format(amount < 0 ? "gui.display_station.armor.neg" : "gui.display_station.armor", amount < 0 ? -amount : amount);
-                    
+
                     fontRendererObj.drawString(s, x + 71, y + 22 + i * 18, -1);
                 }
             }
         }
-        
+
         Transformer transformer = TransformersAPI.getTransformers().get((mc.thePlayer.ticksExisted / 20) % TransformersAPI.getTransformers().size());
-        
+
         if (list.size() == 1)
         {
             transformer = list.get(0);
         }
-        
+
         if (transformer != null)
         {
             Item[] items = {transformer.getHelmet(), transformer.getChestplate(), transformer.getLeggings(), transformer.getBoots()};
             boolean prevColor = itemRender.renderWithColor;
-            
+
             TFRenderHelper.setupRenderItemIntoGUI();
             GL11.glColor4f(0.6F, 0.6F, 0.6F, 0.25F);
             itemRender.renderWithColor = false;
-            
+
             for (int i = 0; i < 4; ++i)
             {
                 if (tileentity.getStackInSlot(i) == null)
@@ -117,12 +117,12 @@ public class GuiDisplayStationArmor extends GuiContainer
                     itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(items[i], 1, 0), x + 25, y + 18 + i * 18);
                 }
             }
-            
+
             itemRender.renderWithColor = prevColor;
             GL11.glColor4f(1, 1, 1, 1);
             TFRenderHelper.finishRenderItemIntoGUI();
         }
     }
 
-    
+
 }

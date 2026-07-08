@@ -10,7 +10,7 @@ import fiskfille.tf.helper.TFTileHelper;
 public abstract class TileEntityMachineContainer extends TileEntityMachine implements IInventory
 {
     protected ItemStack[] inventory = new ItemStack[getSizeInventory()];
-    
+
     public ItemStack[] getItemStacks()
     {
         if (hasWorldObj())
@@ -27,7 +27,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
                 return new ItemStack[getSizeInventory()];
             }
         }
-        
+
         return inventory;
     }
 
@@ -47,7 +47,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
                 return;
             }
         }
-        
+
         inventory = itemstacks;
     }
 
@@ -124,7 +124,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
     public void readCustomNBT(NBTTagCompound nbt)
     {
         super.readCustomNBT(nbt);
-        
+
         if (nbt.hasKey("LoadInventory"))
         {
             NBTTagList nbttaglist = nbt.getTagList("Items", 10);
@@ -147,12 +147,12 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
     public void writeCustomNBT(NBTTagCompound nbt)
     {
         super.writeCustomNBT(nbt);
-        
+
         if (TFTileHelper.getTileBase(this) != this)
         {
             return;
         }
-        
+
         nbt.setBoolean("LoadInventory", true);
         NBTTagList nbttaglist = new NBTTagList();
 

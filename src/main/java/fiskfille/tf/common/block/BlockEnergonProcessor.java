@@ -41,7 +41,7 @@ public class BlockEnergonProcessor extends BlockMachineBase
         {
             return true;
         }
-        
+
         if (!player.isSneaking())
         {
             TFGui.ENERGON_PROCESSOR.open(player, x, y, z);

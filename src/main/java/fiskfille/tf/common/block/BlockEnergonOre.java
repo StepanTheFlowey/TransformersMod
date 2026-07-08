@@ -16,7 +16,7 @@ public class BlockEnergonOre extends Block
 {
     private IIcon[] icons;
     private Random rand = new Random();
-    
+
     public static int renderPass;
 
     public BlockEnergonOre()
@@ -25,7 +25,7 @@ public class BlockEnergonOre extends Block
         setHardness(3.0F);
         setResistance(5.0F);
     }
-    
+
     @Override
     public int getMixedBrightnessForBlock(IBlockAccess world, int x, int y, int z)
     {
@@ -33,10 +33,10 @@ public class BlockEnergonOre extends Block
         {
             return 0xF000F0;
         }
-        
+
         return super.getMixedBrightnessForBlock(world, x, y, z);
     }
-    
+
     @Override
     public int getRenderType()
     {
@@ -71,13 +71,13 @@ public class BlockEnergonOre extends Block
 
         return 0;
     }
-    
+
     @Override
     public IIcon getIcon(int side, int metadata)
     {
         return icons[MathHelper.clamp_int(renderPass, 0, icons.length - 1)];
     }
-    
+
     @Override
     public void registerBlockIcons(IIconRegister iconRegister)
     {

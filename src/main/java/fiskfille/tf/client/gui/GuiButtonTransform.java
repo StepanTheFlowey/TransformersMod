@@ -26,11 +26,11 @@ public class GuiButtonTransform extends GuiButtonFlat
             GL11.glColor4f(1, 1, 1, 1);
             field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
             int hoverState = getHoverState(field_146123_n);
-            
+
             drawTexturedModalRect(xPosition, yPosition, 78, 104 + hoverState * height, width, height);
         }
     }
-    
+
     @Override
     public List<String> getHoverText()
     {
@@ -38,7 +38,7 @@ public class GuiButtonTransform extends GuiButtonFlat
         {
             return Arrays.asList(I18n.format("gui.display_station.transform"));
         }
-        
+
         return Arrays.asList();
     }
 }

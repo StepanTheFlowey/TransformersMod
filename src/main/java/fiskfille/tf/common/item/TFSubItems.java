@@ -19,7 +19,7 @@ public class TFSubItems
     public static ItemStack[] basic_circuit;
     public static ItemStack[] improved_circuit;
     public static ItemStack[] advanced_circuit;
-    
+
     public static ItemStack[] optic_sensor;
     public static ItemStack[] protoform_head;
     public static ItemStack[] transformium_alloy_rod;

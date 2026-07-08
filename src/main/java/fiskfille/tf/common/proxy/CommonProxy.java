@@ -41,7 +41,7 @@ public class CommonProxy
         TFEntities.register();
         TFDisplayableManager.registerDisplayables();
         TFGui.register();
-        
+
         NetworkRegistry.INSTANCE.registerGuiHandler(TransformersMod.modid, new GuiHandlerTF());
         registerEventHandler(new TFWorldGenHandler());
         registerEventHandler(new CommonEventHandler());

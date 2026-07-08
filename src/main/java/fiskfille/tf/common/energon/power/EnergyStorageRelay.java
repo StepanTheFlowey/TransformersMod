@@ -56,7 +56,7 @@ public class EnergyStorageRelay extends EnergyStorage
         {
             float f = entry.getReceiver().extractEnergy(amount / receivers.size(), simulate);
             removed += f;
-            
+
             relay.netEnergyTransfer.put(entry.getCoords(), relay.getNetTransfer(entry.getCoords()) - f);
         }
 
@@ -73,7 +73,7 @@ public class EnergyStorageRelay extends EnergyStorage
         {
             float f = entry.getReceiver().receiveEnergy(amount / receivers.size(), simulate);
             added += f;
-            
+
             relay.netEnergyTransfer.put(entry.getCoords(), relay.getNetTransfer(entry.getCoords()) + f);
         }
 
@@ -133,7 +133,7 @@ public class EnergyStorageRelay extends EnergyStorage
         float energy = getEnergy();
         energyUsage = energy - lastEnergy;
         lastEnergy = energy;
-        
+
         return energyUsage;
     }
 }

@@ -99,7 +99,7 @@ public class ItemFuelCanister extends ItemFluidContainer
     {
         FluidTankTF tank = new FluidTankTF(getCapacity(itemstack));
         tank.setFluid(getFluid(itemstack));
-        
+
         list.addAll(TFFormatHelper.toString(tank.format()));
     }
 

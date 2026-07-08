@@ -23,7 +23,7 @@ import fiskfille.tf.common.fluid.FluidTankTF;
 public final class TFFluidRenderHelper
 {
     private static Minecraft mc = Minecraft.getMinecraft();
-    
+
     public static final int DISPLAY_STAGES = 100;
     private static Map<Fluid, int[]> flowingRenderCache = new HashMap<Fluid, int[]>();
     private static Map<Fluid, int[]> stillRenderCache = new HashMap<Fluid, int[]>();
@@ -155,7 +155,7 @@ public final class TFFluidRenderHelper
 
         return diplayLists;
     }
-    
+
     public static void renderIntoGUI(FluidTankTF tank, int x, int y, int width, int height, float zLevel)
     {
         FluidStack stack = tank.getFluid();
@@ -165,14 +165,14 @@ public final class TFFluidRenderHelper
             Tessellator tessellator = Tessellator.instance;
             IIcon icon = stack.getFluid().getStillIcon();
             float f = (float) stack.amount / tank.getCapacity();
-            
+
             Vector4d pos = new Vector4d(x, y, width, height);
             Vector4d tex = new Vector4d(icon.getMinU(), icon.getInterpolatedV(16 * (1 - f)), icon.getInterpolatedU(16 * (float) width / height), icon.getMaxV());
             pos.y += pos.w * (1 - f);
             pos.w *= f;
             pos.z += pos.x;
             pos.w += pos.y;
-            
+
             mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
             TFFluidRenderHelper.setColorForFluidStack(stack);
             tessellator.startDrawingQuads();

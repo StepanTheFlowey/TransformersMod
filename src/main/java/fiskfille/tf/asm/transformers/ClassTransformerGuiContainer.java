@@ -26,7 +26,7 @@ public class ClassTransformerGuiContainer extends ClassTransformerMethodProcess
         {
             AbstractInsnNode node = method.instructions.get(i);
 //            System.out.println(node.getClass() + ", " + node.getOpcode());
-            
+
             if (i == 0)
             {
                 list.add(new VarInsnNode(ALOAD, 0));

@@ -22,7 +22,7 @@ public class BlockEnergonCube extends BlockBasic implements IEnergon
         setResistance(10.0F);
         setLightLevel(0.5F);
     }
-    
+
     @Override
     public int getMixedBrightnessForBlock(IBlockAccess world, int x, int y, int z)
     {

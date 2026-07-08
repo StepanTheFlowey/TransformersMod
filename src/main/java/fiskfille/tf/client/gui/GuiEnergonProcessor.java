@@ -22,7 +22,7 @@ public class GuiEnergonProcessor extends GuiContainerTF
 {
     private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/energon_processor.png");
     private TileEntityEnergonProcessor tileentity;
-    
+
     private GuiHoverFieldFluid fieldFluid;
 
     public GuiEnergonProcessor(InventoryPlayer inventoryPlayer, TileEntityEnergonProcessor tile)
@@ -30,7 +30,7 @@ public class GuiEnergonProcessor extends GuiContainerTF
         super(new ContainerEnergonProcessor(inventoryPlayer, tile));
         tileentity = tile;
     }
-    
+
     @Override
     public void initGui()
     {
@@ -41,14 +41,14 @@ public class GuiEnergonProcessor extends GuiContainerTF
         buttonList.add(fieldFluid = new GuiHoverFieldFluid(x + 77, y + 17, 52, 52, tileentity.data.tank));
         buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 5, tileentity));
     }
-    
+
     @Override
     public void updateScreen()
     {
         super.updateScreen();
         fieldFluid.update(tileentity.data.tank);
     }
-    
+
     @Override
     protected void actionPerformed(GuiButton button)
     {
@@ -97,11 +97,11 @@ public class GuiEnergonProcessor extends GuiContainerTF
             int i = tileentity.powerTime * 13 / tileentity.currentMaxPowerTime;
             drawTexturedModalRect(x + 25, y + 48 - i, 176, 12 - i, 14, i + 2);
         }
-        
+
         GL11.glEnable(GL11.GL_BLEND);
         TFFluidRenderHelper.renderIntoGUI(tileentity.getTank(), x + 79, y + 19, 48, 48, zLevel);
         GL11.glDisable(GL11.GL_BLEND);
-        
+
         mc.getTextureManager().bindTexture(guiTextures);
         drawTexturedModalRect(x + 77, y + 17, 204, 0, 52, 52);
     }

@@ -115,7 +115,7 @@ public class RenderItemArmor implements IItemRenderer
             {
                 float f1 = (Minecraft.getSystemTime() % (3000F + i * 1873) / (3000 + i * 1873) * 256) / 64;
                 float f2 = 0.33333334F;
-                
+
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glColor4f(0.5F, 0.25F, 0.8F, 1);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
@@ -137,7 +137,7 @@ public class RenderItemArmor implements IItemRenderer
             GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glEnable(GL11.GL_ALPHA_TEST);
         }
-        
+
         GL11.glDisable(GL11.GL_BLEND);
     }
 

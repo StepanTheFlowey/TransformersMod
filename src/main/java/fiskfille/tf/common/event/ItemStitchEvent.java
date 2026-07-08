@@ -9,7 +9,7 @@ public abstract class ItemStitchEvent extends WorldEvent
     {
         super(world);
     }
-    
+
     public static class Pre extends ItemStitchEvent
     {
         public Pre(World world)
@@ -17,7 +17,7 @@ public abstract class ItemStitchEvent extends WorldEvent
             super(world);
         }
     }
-    
+
     public static class Post extends ItemStitchEvent
     {
         public Post(World world)

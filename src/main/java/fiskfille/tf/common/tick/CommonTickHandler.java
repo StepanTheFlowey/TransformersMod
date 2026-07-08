@@ -50,17 +50,17 @@ public class CommonTickHandler
                 speedAttribute.applyModifier(speedModifier);
                 player.stepHeight = 1.0F;
             }
-            
+
             Transformer prevArmor = null;
-            
+
             for (int i = 0; i < 4; ++i)
             {
                 ItemStack armor = player.getEquipmentInSlot(1 + i);
-                
+
                 if (armor != null && armor.getItem() instanceof ItemTransformerArmor)
                 {
                     ItemTransformerArmor tfArmor = (ItemTransformerArmor) armor.getItem();
-                    
+
                     if (prevArmor == null)
                     {
                         prevArmor = tfArmor.getTransformer();
@@ -68,7 +68,7 @@ public class CommonTickHandler
                     else if (prevArmor != tfArmor.getTransformer())
                     {
                         player.setCurrentItemOrArmor(1 + i, null);
-                        
+
                         if (!player.inventory.addItemStackToInventory(armor))
                         {
                             player.dropPlayerItemWithRandomChoice(armor, false);

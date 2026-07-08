@@ -259,7 +259,7 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
             data.kill();
         }
     }
-    
+
     @Override
     public int getSizeInventory()
     {

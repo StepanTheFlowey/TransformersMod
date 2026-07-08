@@ -51,7 +51,7 @@ public class TileDataRelay extends TileData
         transmissionHandler.toBytes(buf);
         buf.writeBoolean(isPowered);
         buf.writeInt(invertCurrent.size());
-        
+
         for (DimensionalCoords coords : invertCurrent)
         {
             coords.toBytes(buf);
@@ -64,9 +64,9 @@ public class TileDataRelay extends TileData
         super.fromBytes(buf);
         transmissionHandler.fromBytes(buf);
         isPowered = buf.readBoolean();
-        
+
         int size = buf.readInt();
-        
+
         for (int i = 0; i < size; ++i)
         {
             invertCurrent.add(new DimensionalCoords().fromBytes(buf));

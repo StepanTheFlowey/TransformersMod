@@ -36,7 +36,7 @@ public class TFMotionManager
 {
     /**
      * Method used to apply realistic vehicle motion to the player.
-     * 
+     *
      * @param player The player the motion should be applied to
      * @param speedLimit How many km/h the vehicle can go moving normally
      * @param nitroSpeedLimit How many km/h the vehicle can go while using nitro
@@ -198,7 +198,7 @@ public class TFMotionManager
 
     /**
      * Method used to apply realistic jet motion to the player.
-     * 
+     *
      * @param player The player the motion should be applied to
      * @param speedLimit How many km/h the jet can go moving normally
      * @param nitroSpeedLimit How many km/h the jet can go while using nitro

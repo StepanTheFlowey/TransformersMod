@@ -109,7 +109,7 @@ public class MessageTileTrigger implements IMessage
     {
         /**
          * Called when a tile gets triggered
-         * 
+         *
          * @param player The player who triggered it, or null if none exists
          * @param action The trigger type
          */

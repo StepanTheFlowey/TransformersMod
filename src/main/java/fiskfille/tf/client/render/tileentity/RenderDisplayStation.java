@@ -76,7 +76,7 @@ public class RenderDisplayStation extends TileEntitySpecialRenderer
             try
             {
                 EntityPlayer entity = tile.fakePlayer;
-                
+
                 if (entity != null && entity.experience != -0.0085F)
                 {
                     entity.width = 0.6F;

@@ -49,10 +49,10 @@ public class RenderItemPowerCanister implements IItemRenderer
                 float energy = container.getEnergyStored(itemstack);
                 float max = container.getEnergyCapacity(itemstack);
                 float filled = energy / max;
-                
+
                 if (energy > 0)
                 {
-                    boolean flag = renderItem.renderWithColor;   
+                    boolean flag = renderItem.renderWithColor;
                     TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
                     GL11.glDisable(GL11.GL_LIGHTING);
                     GL11.glEnable(GL11.GL_BLEND);
@@ -65,9 +65,9 @@ public class RenderItemPowerCanister implements IItemRenderer
                     GL11.glEnable(GL11.GL_LIGHTING);
                     TFRenderHelper.resetLighting();
                 }
-                
+
                 int shade = Math.round(255);
-                
+
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -134,7 +134,7 @@ public class RenderItemPowerCanister implements IItemRenderer
         tessellator.addVertex(x + width, y, 0);
         tessellator.draw();
     }
-    
+
     private void renderQuad(Tessellator tessellator, float x, float y, float width, float height, int color)
     {
         renderQuad(tessellator, x, y, width, height, color, color);

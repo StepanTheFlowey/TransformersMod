@@ -121,7 +121,7 @@ public class BlockControlPanel extends BlockMachineBase
         {
             return true;
         }
-        
+
         int metadata = world.getBlockMetadata(x, y, z);
         int direction = getDirection(metadata);
         int face = -1;

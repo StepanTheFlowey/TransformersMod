@@ -36,7 +36,7 @@ public class GuiHoverField extends GuiButtonFlat
     {
         return hoverText;
     }
-    
+
     public String colorFormat(int color)
     {
         return String.format("&<0x%s>", color);

@@ -261,26 +261,26 @@ public class GuiColorPresets extends GuiScreen
         if (flag)
         {
             EntityPlayer entity = ClientProxy.fakePlayer;
-            
+
             if (entity != null)
             {
                 Color primary = new Color(tempLayerColors[0][0], tempLayerColors[0][1], tempLayerColors[0][2]);
                 Color secondary = new Color(tempLayerColors[1][0], tempLayerColors[1][1], tempLayerColors[1][2]);
-                
+
                 for (int i = 0; i < 4; ++i)
                 {
                     ItemStack armor = tileentity.getStackInSlot(i);
-                    
+
                     if (armor != null)
                     {
                         armor = armor.copy();
                         TFArmorDyeHelper.setPrimaryColor(armor, primary.getRGB());
                         TFArmorDyeHelper.setSecondaryColor(armor, secondary.getRGB());
                     }
-                    
+
                     entity.setCurrentItemOrArmor(4 - i, armor);
                 }
-                
+
                 entity.capabilities.isFlying = true;
                 entity.rotationYawHead = 0;
                 entity.setInvisible(true);

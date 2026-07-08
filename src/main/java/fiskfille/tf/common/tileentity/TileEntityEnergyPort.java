@@ -14,17 +14,17 @@ import fiskfille.tf.helper.TFTileHelper;
 public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceiver, IReceiverRender
 {
     public ReceiverHandler receiverHandler = new ReceiverHandler(this);
-    
+
     public IEnergyContainer getReceiver()
     {
         ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
         TileEntity tile = TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ));
-        
+
         if (tile instanceof IEnergyContainer && !(tile instanceof TileEntityEnergyPort))
         {
             return (IEnergyContainer) tile;
         }
-        
+
         return null;
     }
 
@@ -61,18 +61,18 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
     {
         return getInputVec(3.5F);
     }
-    
+
     @Override
     public Vec3 getRenderInputOffset()
     {
         return getInputVec(1.5F);
     }
-    
+
     public Vec3 getInputVec(float height)
     {
         ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
         float f = 0.0625F * height;
-        
+
         if (dir == ForgeDirection.UP)
         {
             return Vec3.createVectorHelper(0, 0.5F - f, 0);
@@ -81,10 +81,10 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
         {
             return Vec3.createVectorHelper(0, -0.5F + f, 0);
         }
-        
+
         int[] rotations = {2, 0, 1, 3};
         float yaw = rotations[dir.ordinal() - 2] * 90;
-        
+
         Vec3 vec3 = Vec3.createVectorHelper(0, 0, 0.5F - f);
         vec3.rotateAroundY(-yaw * (float) Math.PI / 180.0F);
 
@@ -101,12 +101,12 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
     public float receiveEnergy(float amount, boolean simulate)
     {
         IEnergyContainer container = getReceiver();
-        
+
         if (container != null)
         {
             return container.receiveEnergy(amount, simulate);
         }
-        
+
         return 0;
     }
 
@@ -114,12 +114,12 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
     public float extractEnergy(float amount, boolean simulate)
     {
         IEnergyContainer container = getReceiver();
-        
+
         if (container != null)
         {
             return container.extractEnergy(amount, simulate);
         }
-        
+
         return 0;
     }
 
@@ -127,12 +127,12 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
     public float getEnergy()
     {
         IEnergyContainer container = getReceiver();
-        
+
         if (container != null)
         {
             return container.getEnergy();
         }
-        
+
         return 0;
     }
 
@@ -140,12 +140,12 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
     public float getMaxEnergy()
     {
         IEnergyContainer container = getReceiver();
-        
+
         if (container != null)
         {
             return container.getMaxEnergy();
         }
-        
+
         return 0;
     }
 
@@ -153,12 +153,12 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
     public float getEnergyUsage()
     {
         IEnergyContainer container = getReceiver();
-        
+
         if (container != null)
         {
             return container.getEnergyUsage();
         }
-        
+
         return 0;
     }
 }

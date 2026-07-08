@@ -22,7 +22,7 @@ public class GuiButtonIO extends GuiButtonFlat
 {
     public TileEntityMachine machine;
     public ForgeDirection side;
-    
+
     public GuiButtonIO(int id, int x, int y, TileEntityMachine tile, ForgeDirection dir)
     {
         super(id, x, y, 13, "");
@@ -39,17 +39,17 @@ public class GuiButtonIO extends GuiButtonFlat
             GL11.glColor4f(1, 1, 1, 1);
             field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
             int hoverState = getHoverState(field_146123_n);
-            
+
             drawTexturedModalRect(xPosition, yPosition, 60 + side.ordinal() * width, 65 + hoverState * height, width, height);
             EnumIO mode = machine.io[side.ordinal()];
-            
+
             if (mode.ordinal() > 0)
             {
                 drawTexturedModalRect(xPosition, yPosition, 138 + (mode.ordinal() - 1) * width, 65, width, height);
             }
         }
     }
-    
+
     @Override
     public List<String> getHoverText()
     {

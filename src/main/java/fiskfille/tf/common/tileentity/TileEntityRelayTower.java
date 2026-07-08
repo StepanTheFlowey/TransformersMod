@@ -34,12 +34,12 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
     public TileDataRelay data = new TileDataRelay();
 
     public EnergyStorage storage = new EnergyStorageRelay(this);
-    
+
     public Map<DimensionalCoords, Float> netEnergyTransfer = Maps.newHashMap();
     public float energyTransfer;
     public float energyReceived;
     public float energyExtracted;
-    
+
     public Ticket chunkTicket;
 
     @Override
@@ -70,7 +70,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
                 data.serverTickPre();
                 data.isPowered = energyTransfer > 0 || TFEnergyHelper.canPowerChainReach(this);
                 data.invertCurrent.clear();
-                
+
                 for (Map.Entry<DimensionalCoords, Float> e : netEnergyTransfer.entrySet())
                 {
                     if (e.getValue() < 0)
@@ -78,7 +78,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
                         data.invertCurrent.add(e.getKey());
                     }
                 }
-                
+
                 data.serverTick();
             }
 
@@ -89,13 +89,13 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
                 data = new TileDataRelay((TileDataRelay) prevData);
             }
         }
-        
+
         energyTransfer = 0;
         energyReceived = 0;
         energyTransfer = 0;
         netEnergyTransfer.clear();
     }
-    
+
     public float getNetTransfer(DimensionalCoords coords)
     {
         return netEnergyTransfer.containsKey(coords) ? netEnergyTransfer.get(coords) : 0;
@@ -211,20 +211,20 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
     public float receiveEnergy(float amount, boolean simulate)
     {
         amount = Math.min(amount, getTransmissionRate() - energyReceived);
-        
+
         if (amount <= 0)
         {
             return 0;
         }
-        
+
         float f = storage.add(amount, simulate);
-        
+
         if (!simulate)
         {
             energyTransfer += f;
             energyReceived += f;
         }
-        
+
         return f;
     }
 
@@ -232,20 +232,20 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
     public float extractEnergy(float amount, boolean simulate)
     {
         amount = Math.min(amount, getTransmissionRate() - energyExtracted);
-        
+
         if (amount <= 0)
         {
             return 0;
         }
-        
+
         float f = storage.remove(amount, simulate);
-        
+
         if (!simulate)
         {
             energyTransfer += f;
             energyExtracted += f;
         }
-        
+
         return f;
     }
 

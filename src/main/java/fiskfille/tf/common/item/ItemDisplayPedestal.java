@@ -14,7 +14,7 @@ public class ItemDisplayPedestal extends ItemBlockWithMetadata
     {
         super(block);
     }
-    
+
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List list)
     {

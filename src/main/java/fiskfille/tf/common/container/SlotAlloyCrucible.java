@@ -91,10 +91,10 @@ public class SlotAlloyCrucible extends Slot
                 thePlayer.worldObj.spawnEntityInWorld(new EntityXPOrb(thePlayer.worldObj, thePlayer.posX, thePlayer.posY + 0.5D, thePlayer.posZ + 0.5D, i));
             }
         }
-        
+
         int i = amountTaken;
         int j = Math.min(tileentity.alloyResults, i);
-        
+
         i -= j;
         tileentity.alloyResults -= j;
         tileentity.furnaceResults -= Math.min(tileentity.furnaceResults, i);

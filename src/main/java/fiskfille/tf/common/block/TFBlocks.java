@@ -81,7 +81,7 @@ public class TFBlocks
         crudeFluxAlloyBlock = new BlockCompressedTF(MapColor.adobeColor).setHarvestLvl("pickaxe", 1).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
         refinedFluxAlloyBlock = new BlockCompressedTF(MapColor.yellowColor).setHarvestLvl("pickaxe", 2).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
         energonAlloyBlock = new BlockCompressedTF(MapColor.diamondColor).setHarvestLvl("pickaxe", 1).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
-        
+
         energonOre = new BlockEnergonOre();
         energonCrystal = new BlockEnergonCrystal(TFEnergonManager.energon);
         redEnergonCrystal = new BlockEnergonCrystal(TFEnergonManager.redEnergon);
@@ -109,7 +109,7 @@ public class TFBlocks
         groundBridgeFrame = new BlockGroundBridgeFrame();
         groundBridgeTeleporter = new BlockGroundBridgeTeleporter();
         groundBridgeControlPanel = new BlockControlPanel();
-        
+
 
         TFBlockRegistry.registerBlock(transformiumOre, "Transformium Ore");
         TFBlockRegistry.registerBlock(transformiumStone, "Transformium Stone");

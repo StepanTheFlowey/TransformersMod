@@ -268,7 +268,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase
         {
             ticks = 0;
         }
-        
+
         super.setRotationAngles(limbSwing, limbSwingAmount, ticks, rotationYaw, rotationPitch, scale, entity);
         setToInitPose();
         globalSpeed = baseSpeed;

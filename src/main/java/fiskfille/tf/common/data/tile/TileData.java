@@ -61,7 +61,7 @@ public abstract class TileData
         if (!equals(TFTileHelper.getTileData(coords)))
         {
             TFNetworkManager.networkWrapper.sendToAll(new MessageSetTileData(this));
-            
+
             if (TransformersMod.version.equals("${" + "version}")) // Debug: detect if build.gradle has been run
             {
                 System.out.println("Syncing " + getClass().getSimpleName() + " at " + coords);
