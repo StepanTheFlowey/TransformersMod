@@ -12,7 +12,7 @@ import fiskfille.tf.common.tick.ClientTickHandler;
 
 public class DisplayableBassBlaster extends Displayable
 {
-    private ModelBassBlaster model = new ModelBassBlaster();
+    private final ModelBassBlaster model = new ModelBassBlaster();
 
     @Override
     public void render(ItemStack itemstack)

@@ -15,7 +15,7 @@ import fiskfille.tf.helper.TFRenderHelper;
 
 public class DisplayableEnergonCrystal extends Displayable
 {
-    private ModelCrystal model = new ModelCrystal();
+    private final ModelCrystal model = new ModelCrystal();
 
     @Override
     public void render(ItemStack itemstack)

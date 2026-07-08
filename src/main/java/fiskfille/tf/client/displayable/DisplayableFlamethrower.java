@@ -12,7 +12,7 @@ import fiskfille.tf.common.tick.ClientTickHandler;
 
 public class DisplayableFlamethrower extends Displayable
 {
-    private ModelFlamethrower model = new ModelFlamethrower();
+    private final ModelFlamethrower model = new ModelFlamethrower();
 
     @Override
     public void render(ItemStack itemstack)

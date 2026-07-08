@@ -16,15 +16,14 @@ public class DisplayableVehicle extends Displayable
     @Override
     public void render(ItemStack itemstack)
     {
-        TransformerModel tfModel = getModelFromStack(itemstack);
-        ModelVehicleBase vehicle = tfModel.getVehicleModel();
+        final ModelVehicleBase vehicle = getModelFromStack(itemstack).getVehicleModel();
 
         if (vehicle != null)
         {
             GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.5F, 0.0F, 1.0F, 0.0F);
             GL11.glTranslatef(0.0F, -0.2F, 0.0F);
 
-            float scale = 0.75F;
+            final float scale = 0.75F;
             GL11.glScalef(scale, scale, scale);
             vehicle.renderDisplayVehicle(itemstack);
         }
@@ -32,7 +31,7 @@ public class DisplayableVehicle extends Displayable
 
     public TransformerModel getModelFromStack(ItemStack displayItem)
     {
-        Transformer transformer = TransformersAPI.getTransformers().get(displayItem.getItemDamage());
+        final Transformer transformer = TransformersAPI.getTransformers().get(displayItem.getItemDamage());
 
         if (transformer != null)
         {

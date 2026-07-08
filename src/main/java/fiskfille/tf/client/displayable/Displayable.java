@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 public abstract class Displayable
 {
-    protected Minecraft mc = Minecraft.getMinecraft();
+    protected static final Minecraft mc = Minecraft.getMinecraft();
 
     public abstract void render(ItemStack itemstack);
 

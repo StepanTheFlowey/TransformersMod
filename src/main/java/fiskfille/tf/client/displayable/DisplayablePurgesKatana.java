@@ -12,7 +12,7 @@ import fiskfille.tf.common.tick.ClientTickHandler;
 
 public class DisplayablePurgesKatana extends Displayable
 {
-    private ModelPurgesKatana model = new ModelPurgesKatana();
+    private final ModelPurgesKatana model = new ModelPurgesKatana();
 
     @Override
     public void render(ItemStack itemstack)

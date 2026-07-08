@@ -12,7 +12,7 @@ import fiskfille.tf.common.tick.ClientTickHandler;
 
 public class DisplayableSkystrikesCrossbow extends Displayable
 {
-    private ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
+    private final ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
 
     @Override
     public void render(ItemStack itemstack)

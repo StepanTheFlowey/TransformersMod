@@ -13,20 +13,22 @@ import fiskfille.tf.helper.TFRenderHelper;
 
 public class DisplayableTransformiumSeed extends Displayable
 {
+    protected final TileEntityTransformiumSeed tileentity = new TileEntityTransformiumSeed();
+
     @Override
     public void render(ItemStack itemstack)
     {
         TFRenderHelper.renderTag(StatCollector.translateToLocalFormatted("tile.display_pedestal.amount", itemstack.stackSize), 0, 0.05F, 0);
 
         GL11.glPushMatrix();
-        float f = 0.5F;
-        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15.0F) * 0.07F;
+        final float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15.0F) * 0.07F;
         GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(0, 0.6F + f1, 0);
         GL11.glRotatef(180, 1, 0, 0);
+        final float f = 0.5F;
         GL11.glScalef(f, f, f);
 
-        TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityTransformiumSeed(), -0.5F, -0.5F, -0.5F, 0.0F);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(tileentity, -0.5F, -0.5F, -0.5F, 0.0F);
         GL11.glPopMatrix();
     }
 }
