@@ -1,26 +1,24 @@
 package fiskfille.tf.client.displayable;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelFlamethrower;
 import fiskfille.tf.common.tick.ClientTickHandler;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class DisplayableFlamethrower extends Displayable {
-	private final ModelFlamethrower model = new ModelFlamethrower();
+	private static final ModelFlamethrower model = new ModelFlamethrower();
 
 	@Override
 	public void render(ItemStack itemstack) {
 		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/flame_thrower.png"));
 
-		float f = 0.7F;
-		float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.05F;
+		final float f = 0.7F;
 		GL11.glScalef(f, f, f);
 		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+		final float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.05F;
 		GL11.glTranslatef(-0.2F, 0.95F + f1, 0F);
 
 		model.render();
