@@ -1,7 +1,6 @@
 package fiskfille.tf.asm;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 
 public class ASMHooks {
 	public static float getEntityScale(Entity entity) {

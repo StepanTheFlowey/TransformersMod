@@ -1,12 +1,7 @@
 package fiskfille.tf.asm.transformers;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.List;
-
+import fiskfille.tf.TFLog;
 import net.minecraft.launchwrapper.IClassTransformer;
-
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -14,7 +9,7 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 
-import fiskfille.tf.TFLog;
+import java.util.List;
 
 public abstract class ClassTransformerBase implements IClassTransformer, Opcodes {
 	protected final String classPath;
@@ -23,54 +18,6 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 	public ClassTransformerBase(String classPath) {
 		this.classPath = classPath;
 		this.unobfClass = classPath.substring(classPath.lastIndexOf('.') + 1);
-	}
-
-	@Override
-	public byte[] transform(String name, String transformedName, byte[] bytes) {
-		try {
-			if(transformedName.equals(classPath)) {
-				TFLog.info("Patching class %s (%s)...", unobfClass, name);
-
-				final ClassReader cr = new ClassReader(bytes);
-				final ClassNode cn = new ClassNode();
-				cr.accept(cn, 0);
-
-				setupMappings();
-				boolean success = processFields(cn.fields) && processMethods(cn.methods);
-				addInterface(cn.interfaces);
-
-				final ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-				cn.accept(cw);
-
-				if(success) {
-					TFLog.info("Patching class %s done.", unobfClass);
-				}
-				else {
-					TFLog.error("Patching class %s failed!", unobfClass);
-				}
-
-				return cw.toByteArray();
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		return bytes;
-	}
-
-	public void addInterface(List<String> interfaces) {
-
-	}
-
-	public abstract boolean processMethods(List<MethodNode> methods);
-
-	public abstract boolean processFields(List<FieldNode> fields);
-
-	public abstract void setupMappings();
-
-	public void sendPatchLog(String method) {
-		TFLog.info("\tPatching method %s in %s", method, unobfClass);
 	}
 
 	public static MethodNode generateSetter(String className, String methodName, String fieldName, String fieldType) {
@@ -130,5 +77,53 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 		mn.visitMaxs(1, 1);
 		mn.visitEnd();
 		return mn;
+	}
+
+	@Override
+	public byte[] transform(String name, String transformedName, byte[] bytes) {
+		try {
+			if(transformedName.equals(classPath)) {
+				TFLog.info("Patching class %s (%s)...", unobfClass, name);
+
+				final ClassReader cr = new ClassReader(bytes);
+				final ClassNode cn = new ClassNode();
+				cr.accept(cn, 0);
+
+				setupMappings();
+				boolean success = processFields(cn.fields) && processMethods(cn.methods);
+				addInterface(cn.interfaces);
+
+				final ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+				cn.accept(cw);
+
+				if(success) {
+					TFLog.info("Patching class %s done.", unobfClass);
+				}
+				else {
+					TFLog.error("Patching class %s failed!", unobfClass);
+				}
+
+				return cw.toByteArray();
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return bytes;
+	}
+
+	public void addInterface(List<String> interfaces) {
+
+	}
+
+	public abstract boolean processMethods(List<MethodNode> methods);
+
+	public abstract boolean processFields(List<FieldNode> fields);
+
+	public abstract void setupMappings();
+
+	public void sendPatchLog(String method) {
+		TFLog.info("\tPatching method %s in %s", method, unobfClass);
 	}
 }

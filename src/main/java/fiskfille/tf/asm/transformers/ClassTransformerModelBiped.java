@@ -1,17 +1,11 @@
 package fiskfille.tf.asm.transformers;
 
-import java.util.List;
-
-import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.FieldNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
-
 import fiskfille.tf.asm.TFTranslator;
 import fiskfille.tf.helper.TFModelHelper;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.*;
+
+import java.util.List;
 
 public class ClassTransformerModelBiped extends ClassTransformerBase {
 	public ClassTransformerModelBiped() {

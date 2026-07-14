@@ -1,14 +1,9 @@
 package fiskfille.tf.asm.transformers;
 
-import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
-
 import fiskfille.tf.asm.ASMHooksClient;
 import fiskfille.tf.asm.TFTranslator;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.*;
 
 public class ClassTransformerGuiContainer extends ClassTransformerMethodProcess {
 	public ClassTransformerGuiContainer() {

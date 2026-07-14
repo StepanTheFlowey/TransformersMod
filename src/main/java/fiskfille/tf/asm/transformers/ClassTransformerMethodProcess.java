@@ -1,11 +1,10 @@
 package fiskfille.tf.asm.transformers;
 
-import java.util.List;
-
+import fiskfille.tf.asm.TFTranslator;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 
-import fiskfille.tf.asm.TFTranslator;
+import java.util.List;
 
 public abstract class ClassTransformerMethodProcess extends ClassTransformerBase {
 	private final String methodName;
