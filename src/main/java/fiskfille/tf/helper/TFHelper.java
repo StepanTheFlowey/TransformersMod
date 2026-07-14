@@ -16,7 +16,7 @@ import fiskfille.tf.common.transformer.base.Transformer;
  */
 public class TFHelper {
 	public static boolean isTransformer(EntityLivingBase entity) {
-		return isTransformer(new ItemStack[]{entity.getEquipmentInSlot(4), entity.getEquipmentInSlot(3), entity.getEquipmentInSlot(2), entity.getEquipmentInSlot(1)});
+		return isTransformer(entity.getEquipmentInSlot(4), entity.getEquipmentInSlot(3), entity.getEquipmentInSlot(2), entity.getEquipmentInSlot(1));
 	}
 
 	public static boolean isTransformer(ItemStack... itemstacks) {

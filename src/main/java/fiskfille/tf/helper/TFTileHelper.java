@@ -11,7 +11,7 @@ import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.tileentity.IMultiTile;
 
 public class TFTileHelper {
-	private static Map<DimensionalCoords, TileData> tileData = Maps.newHashMap();
+	private static final Map<DimensionalCoords, TileData> tileData = Maps.newHashMap();
 
 	public static TileData getTileData(DimensionalCoords coords) {
 		return tileData.get(coords);

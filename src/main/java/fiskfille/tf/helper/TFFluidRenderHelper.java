@@ -21,12 +21,11 @@ import org.lwjgl.opengl.GL11;
 import fiskfille.tf.common.fluid.FluidTankTF;
 
 public final class TFFluidRenderHelper {
-	private static Minecraft mc = Minecraft.getMinecraft();
-
 	public static final int DISPLAY_STAGES = 100;
-	private static Map<Fluid, int[]> flowingRenderCache = new HashMap<Fluid, int[]>();
-	private static Map<Fluid, int[]> stillRenderCache = new HashMap<Fluid, int[]>();
 	private static final RenderInfo liquidBlock = new RenderInfo();
+	private static final Minecraft mc = Minecraft.getMinecraft();
+	private static final Map<Fluid, int[]> flowingRenderCache = new HashMap<Fluid, int[]>();
+	private static final Map<Fluid, int[]> stillRenderCache = new HashMap<Fluid, int[]>();
 
 	public static void onTextureStitch(TextureMap map) {
 		for(int[] aint : flowingRenderCache.values()) {

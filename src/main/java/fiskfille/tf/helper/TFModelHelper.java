@@ -14,9 +14,8 @@ import fiskfille.tf.client.model.player.ModelBipedPartial;
  */
 @SideOnly(Side.CLIENT)
 public class TFModelHelper {
+	private static final Map<Entity, ModelOffset> offsets = new HashMap<Entity, ModelOffset>();
 	public static ModelBipedPartial modelBipedPartial = new ModelBipedPartial();
-
-	private static Map<Entity, ModelOffset> offsets = new HashMap<Entity, ModelOffset>();
 
 	/**
 	 * @returns the model offsets for the specified entity.

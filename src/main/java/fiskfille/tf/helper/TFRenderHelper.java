@@ -50,14 +50,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class TFRenderHelper {
+	public static final int LIGHTING_LUMINOUS = 0xF0F0;
 	private static final Minecraft mc = Minecraft.getMinecraft();
 	private static final RenderItem itemRender = new RenderItem();
 	private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<EntityPlayer, Double>();
-
 	private static float lastBrightnessX;
 	private static float lastBrightnessY;
-
-	public static final int LIGHTING_LUMINOUS = 0xF0F0;
 
 	public static void setLighting(int lighting) {
 		storeLighting();
@@ -403,8 +401,8 @@ public class TFRenderHelper {
 		final float[] secondary = hexToRGB(0x7BF2F8);
 		final double length = src.distanceTo(dst);
 
-		Random rand = new Random(seed + mc.thePlayer.ticksExisted * 10);
-		Random randPrev = new Random(seed + (mc.thePlayer.ticksExisted - 1) * 10);
+		Random rand = new Random(seed + mc.thePlayer.ticksExisted * 10L);
+		Random randPrev = new Random(seed + (mc.thePlayer.ticksExisted - 1) * 10L);
 
 		src = Vec3.createVectorHelper(0, 0, 0);
 
@@ -473,16 +471,15 @@ public class TFRenderHelper {
 	}
 
 	public static int getBlockDestroyProgress(World world, int x, int y, int z) {
-		Map damagedBlocks = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, "damagedBlocks", "field_72738_E", "O");
+		final Map damagedBlocks = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, "damagedBlocks", "field_72738_E", "O");
 
 		if(!damagedBlocks.isEmpty()) {
-			Iterator iterator = damagedBlocks.values().iterator();
+			final Iterator iterator = damagedBlocks.values().iterator();
 
 			while(iterator.hasNext()) {
-				DestroyBlockProgress progress = (DestroyBlockProgress) iterator.next();
-
-				int metadata = world.getBlockMetadata(progress.getPartialBlockX(), progress.getPartialBlockY(), progress.getPartialBlockZ());
-				int[] offsets = TFTileHelper.getTileBaseOffsets(world.getTileEntity(x, y, z), metadata);
+				final DestroyBlockProgress progress = (DestroyBlockProgress) iterator.next();
+				final int metadata = world.getBlockMetadata(progress.getPartialBlockX(), progress.getPartialBlockY(), progress.getPartialBlockZ());
+				final int[] offsets = TFTileHelper.getTileBaseOffsets(world.getTileEntity(x, y, z), metadata);
 
 				if(x == progress.getPartialBlockX() + offsets[0] && y == progress.getPartialBlockY() + offsets[1] && z == progress.getPartialBlockZ() + offsets[2]) {
 					return progress.getPartialBlockDamage();
@@ -494,28 +491,33 @@ public class TFRenderHelper {
 	}
 
 	public static void renderBlock(Block block, IIcon icon, RenderBlocks renderer) {
-		Tessellator tessellator = Tessellator.instance;
+		final Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, -1F, 0F);
 		renderer.renderFaceYNeg(block, 0D, 0D, 0D, icon);
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, 1F, 0F);
 		renderer.renderFaceYPos(block, 0D, 0D, 0D, icon);
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, 0F, -1F);
 		renderer.renderFaceZNeg(block, 0D, 0D, 0D, icon);
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, 0F, 1F);
 		renderer.renderFaceZPos(block, 0D, 0D, 0D, icon);
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1F, 0F, 0F);
 		renderer.renderFaceXNeg(block, 0D, 0D, 0D, icon);
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1F, 0F, 0F);
 		renderer.renderFaceXPos(block, 0D, 0D, 0D, icon);
@@ -523,28 +525,33 @@ public class TFRenderHelper {
 	}
 
 	public static void renderBlock(Block block, int meta, RenderBlocks renderer) {
-		Tessellator tessellator = Tessellator.instance;
+		final Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, -1F, 0F);
 		renderer.renderFaceYNeg(block, 0D, 0D, 0D, block.getIcon(0, meta));
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, 1F, 0F);
 		renderer.renderFaceYPos(block, 0D, 0D, 0D, block.getIcon(1, meta));
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, 0F, -1F);
 		renderer.renderFaceZNeg(block, 0D, 0D, 0D, block.getIcon(2, meta));
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0F, 0F, 1F);
 		renderer.renderFaceZPos(block, 0D, 0D, 0D, block.getIcon(3, meta));
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1F, 0F, 0F);
 		renderer.renderFaceXNeg(block, 0D, 0D, 0D, block.getIcon(4, meta));
 		tessellator.draw();
+
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1F, 0F, 0F);
 		renderer.renderFaceXPos(block, 0D, 0D, 0D, block.getIcon(5, meta));
@@ -569,22 +576,23 @@ public class TFRenderHelper {
 	}
 
 	public static void renderItemIntoGUI(int x, int y, ItemStack itemstack) {
-		if(itemstack != null) {
-			FontRenderer font = itemstack.getItem().getFontRenderer(itemstack);
+		if(itemstack == null) {
+			return;
+		}
 
-			if(font == null) {
-				font = mc.fontRenderer;
-			}
+		FontRenderer font = itemstack.getItem().getFontRenderer(itemstack);
+		if(font == null) {
+			font = mc.fontRenderer;
+		}
 
-			itemRender.renderItemAndEffectIntoGUI(font, mc.getTextureManager(), itemstack, x, y);
-
-			if(itemstack.stackSize > 1) {
-				itemRender.renderItemOverlayIntoGUI(font, mc.getTextureManager(), itemstack, x, y, itemstack.stackSize + "");
-			}
+		itemRender.renderItemAndEffectIntoGUI(font, mc.getTextureManager(), itemstack, x, y);
+		if(itemstack.stackSize > 1) {
+			itemRender.renderItemOverlayIntoGUI(font, mc.getTextureManager(), itemstack, x, y, itemstack.stackSize + "");
 		}
 	}
 
 	public static void setupRenderItemIntoGUI() {
+		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glEnable(GL11.GL_LIGHTING);
@@ -593,10 +601,7 @@ public class TFRenderHelper {
 	}
 
 	public static void finishRenderItemIntoGUI() {
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDepthMask(true);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glPopAttrib();
 	}
 }

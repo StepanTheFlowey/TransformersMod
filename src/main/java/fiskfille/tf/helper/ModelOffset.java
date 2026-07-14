@@ -4,11 +4,10 @@ package fiskfille.tf.helper;
  * @author gegy1000
  */
 public class ModelOffset {
+	private final boolean initialized;
 	public float headOffsetY = 0;
 	public float headOffsetX = 0;
 	public float headOffsetZ = 0;
-
-	private final boolean initialized;
 
 	public ModelOffset(boolean init) {
 		initialized = init;

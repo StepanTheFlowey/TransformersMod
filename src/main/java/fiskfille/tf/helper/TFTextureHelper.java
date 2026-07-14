@@ -15,10 +15,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TFTextureHelper {
-	private static final Minecraft mc = Minecraft.getMinecraft();
-
 	public static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-
+	private static final Minecraft mc = Minecraft.getMinecraft();
 	public static IIcon energonFlowingIcon;
 	public static IIcon energonStillIcon;
 	public static IIcon[] ioIcons;
