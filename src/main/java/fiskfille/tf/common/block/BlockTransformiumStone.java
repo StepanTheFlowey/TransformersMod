@@ -1,10 +1,10 @@
 package fiskfille.tf.common.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockTransformiumStone extends BlockBasic {
 	public BlockTransformiumStone() {
@@ -17,8 +17,7 @@ public class BlockTransformiumStone extends BlockBasic {
 
 	@Override
 	public int tickRate(World world) {
-		float f = 1F;
-		return (int) (100000000000F * f);
+		return 1000000000;
 	}
 
 	@Override

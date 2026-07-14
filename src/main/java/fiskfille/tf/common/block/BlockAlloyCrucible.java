@@ -1,5 +1,9 @@
 package fiskfille.tf.common.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
+import fiskfille.tf.client.render.block.RenderBlockAlloyCrucible;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,20 +11,14 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
-import fiskfille.tf.client.render.block.RenderBlockAlloyCrucible;
 
 public class BlockAlloyCrucible extends BlockMachineBase {
+	public static final int FLAG_TOP = 4;
+	public static final int FLAG_FRONT = 8;
+	public static int renderPass;
 	private IIcon bottomIcon;
 	private IIcon[] topIcons;
 	private IIcon[] frontIcons;
-
-	public static final int FLAG_TOP = 4;
-	public static final int FLAG_FRONT = 8;
-
-	public static int renderPass;
 
 	public BlockAlloyCrucible() {
 		super(Material.iron);

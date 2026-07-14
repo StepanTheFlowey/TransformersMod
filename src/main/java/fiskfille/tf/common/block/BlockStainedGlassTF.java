@@ -1,7 +1,8 @@
 package fiskfille.tf.common.block;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.common.item.ItemDyeTF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.material.Material;
@@ -13,9 +14,8 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.common.item.ItemDyeTF;
+
+import java.util.List;
 
 public class BlockStainedGlassTF extends BlockStainedGlass {
 	private static IIcon[] icons;

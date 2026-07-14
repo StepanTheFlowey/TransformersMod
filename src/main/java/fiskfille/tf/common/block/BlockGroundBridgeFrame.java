@@ -1,5 +1,9 @@
 package fiskfille.tf.common.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.client.render.block.RenderBlockGroundBridgeFrame;
+import fiskfille.tf.common.tileentity.TileEntityGroundBridgeFrame;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -10,10 +14,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.client.render.block.RenderBlockGroundBridgeFrame;
-import fiskfille.tf.common.tileentity.TileEntityGroundBridgeFrame;
 
 public class BlockGroundBridgeFrame extends Block implements ITileEntityProvider {
 	@SideOnly(Side.CLIENT) public IIcon centerIcon;
@@ -23,6 +23,17 @@ public class BlockGroundBridgeFrame extends Block implements ITileEntityProvider
 		setHarvestLevel(null, -1);
 		setHardness(1);
 		setResistance(5);
+	}
+
+	public static ForgeDirection getFrameDirection(IBlockAccess world, int x, int y, int z) {
+		if(BlockGroundBridgeTeleporter.isNorthSouthFacingFramePresent(world, x, y, z)) {
+			return ForgeDirection.NORTH;
+		}
+		else if(BlockGroundBridgeTeleporter.isEastWestFacingFramePresent(world, x, y, z)) {
+			return ForgeDirection.EAST;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -46,17 +57,6 @@ public class BlockGroundBridgeFrame extends Block implements ITileEntityProvider
 		}
 
 		return false;
-	}
-
-	public static ForgeDirection getFrameDirection(IBlockAccess world, int x, int y, int z) {
-		if(BlockGroundBridgeTeleporter.isNorthSouthFacingFramePresent(world, x, y, z)) {
-			return ForgeDirection.NORTH;
-		}
-		else if(BlockGroundBridgeTeleporter.isEastWestFacingFramePresent(world, x, y, z)) {
-			return ForgeDirection.EAST;
-		}
-
-		return null;
 	}
 
 	@Override

@@ -1,7 +1,10 @@
 package fiskfille.tf.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.common.energon.Energon;
+import fiskfille.tf.common.energon.IEnergon;
+import fiskfille.tf.common.tileentity.TileEntityCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
@@ -14,15 +17,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.common.energon.Energon;
-import fiskfille.tf.common.energon.IEnergon;
-import fiskfille.tf.common.tileentity.TileEntityCrystal;
+
+import java.util.Random;
 
 public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvider, IEnergon {
-	private Random rand = new Random();
-	private Energon energonType;
+	private final Random rand = new Random();
+	private final Energon energonType;
 
 	public BlockEnergonCrystal(Energon type) {
 		super(TFMaterial.energon);
@@ -89,8 +89,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
+		final ForgeDirection dir = ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).getOpposite();
 		float f = 0.21F;
 
 		if(dir == ForgeDirection.UP) {
@@ -143,7 +142,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
-		ForgeDirection dir = ForgeDirection.getOrientation(side).getOpposite();
+		final ForgeDirection dir = ForgeDirection.getOrientation(side).getOpposite();
 
 		if(world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false)) {
 			return side;
@@ -160,18 +159,17 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
+		final ForgeDirection dir = ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).getOpposite();
 
 		if(!world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false)) {
 			if(rand.nextInt(9) == 0) {
 				if(!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops") && !world.restoringBlockSnapshots) // do not drop items while restoring blockstates, prevents item dupe
 				{
-					float f = 0.7F;
-					double motionX = world.rand.nextFloat() * f + (1 - f) * 0.5D;
-					double motionY = world.rand.nextFloat() * f + (1 - f) * 0.5D;
-					double motionZ = world.rand.nextFloat() * f + (1 - f) * 0.5D;
-					EntityItem entityitem = new EntityItem(world, x + motionX, y + motionY, z + motionZ, new ItemStack(energonType.getCrystal()));
+					final float f = 0.7F;
+					final double motionX = world.rand.nextFloat() * f + (1 - f) * 0.5D;
+					final double motionY = world.rand.nextFloat() * f + (1 - f) * 0.5D;
+					final double motionZ = world.rand.nextFloat() * f + (1 - f) * 0.5D;
+					final EntityItem entityitem = new EntityItem(world, x + motionX, y + motionY, z + motionZ, new ItemStack(energonType.getCrystal()));
 					entityitem.delayBeforeCanPickup = 10;
 					world.spawnEntityInWorld(entityitem);
 				}

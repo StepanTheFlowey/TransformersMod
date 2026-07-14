@@ -20,7 +20,7 @@ public class TFMaterial extends Material {
 
 	@Override
 	public boolean isOpaque() {
-		return isTranslucent ? false : blocksMovement();
+		return !isTranslucent && blocksMovement();
 	}
 
 	@Override

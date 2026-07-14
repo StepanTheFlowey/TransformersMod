@@ -1,12 +1,15 @@
 package fiskfille.tf.common.block;
 
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
-
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.data.TFEntityData;
+import fiskfille.tf.common.data.tile.TileDataControlPanel;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import fiskfille.tf.common.tileentity.TileEntityGroundBridgeTeleporter;
+import fiskfille.tf.common.world.TeleporterGroundBridge;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.ITileEntityProvider;
@@ -20,59 +23,16 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.data.TFEntityData;
-import fiskfille.tf.common.data.tile.TileDataControlPanel;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.common.tileentity.TileEntityGroundBridgeTeleporter;
-import fiskfille.tf.common.world.TeleporterGroundBridge;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.Random;
+
+import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITileEntityProvider {
 	public BlockGroundBridgeTeleporter() {
 		super(TransformersMod.modid + ":ground_bridge_teleporter", Material.portal, false);
 		setTickRandomly(true);
 		// setLightLevel(1);
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-		return null;
-	}
-
-	public boolean canPaneConnectTo(IBlockAccess world, int x, int y, int z, ForgeDirection dir) {
-		return world.getBlock(x, y, z) == TFBlocks.groundBridgeTeleporter;
-	}
-
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		float thickness = 0.125F;
-		float f = 0.5F - thickness;
-		float f1 = 0.5F + thickness;
-		float f2 = 0.5F - thickness;
-		float f3 = 0.5F + thickness;
-		boolean flag = canPaneConnectTo(world, x, y, z - 1, NORTH) || canPaneConnectTo(world, x, y, z + 1, SOUTH);
-		boolean flag1 = canPaneConnectTo(world, x - 1, y, z, WEST) || canPaneConnectTo(world, x + 1, y, z, EAST);
-
-		if(!flag && flag1) {
-			f = 0F;
-			f1 = 1F;
-		}
-
-		if(flag && !flag1) {
-			f2 = 0F;
-			f3 = 1F;
-		}
-
-		setBlockBounds(f, 0F, f2, f1, 1F, f3);
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
 	}
 
 	public static boolean spawnTeleporter(World world, int x, int y, int z, TileEntityControlPanel tile) {
@@ -89,63 +49,6 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		}
 
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		int i1 = 0;
-
-		if(world.getBlock(x, y, z) == this) {
-			i1 = func_149999_b(world.getBlockMetadata(x, y, z));
-
-			if(i1 == 0) {
-				return false;
-			}
-
-			if(i1 == 2 && side != 5 && side != 4) {
-				return false;
-			}
-
-			if(i1 == 1 && side != 3 && side != 2) {
-				return false;
-			}
-		}
-
-		boolean flag = world.getBlock(x - 1, y, z) == this && world.getBlock(x - 2, y, z) != this;
-		boolean flag1 = world.getBlock(x + 1, y, z) == this && world.getBlock(x + 2, y, z) != this;
-		boolean flag2 = world.getBlock(x, y, z - 1) == this && world.getBlock(x, y, z - 2) != this;
-		boolean flag3 = world.getBlock(x, y, z + 1) == this && world.getBlock(x, y, z + 2) != this;
-		boolean flag4 = flag || flag1 || i1 == 1;
-		boolean flag5 = flag2 || flag3 || i1 == 2;
-		return flag4 && side == 4 || flag4 && side == 5 || flag5 && side == 2 || flag5 && side == 3;
-	}
-
-	@Override
-	public int quantityDropped(Random rand) {
-		return 0;
-	}
-
-	@Override
-	public int getRenderType() {
-		return -1;
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-		if(!world.isRemote) {
-			if(entity.ridingEntity == null && entity.riddenByEntity == null) {
-				if(TFEntityData.getData(entity).groundBridgeCooldown == 0) {
-					TileEntityGroundBridgeTeleporter teleporter = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y, z);
-
-					if(teleporter != null && teleporter.controlPanel != null) {
-						doTeleport(entity, teleporter);
-					}
-				}
-
-				TFEntityData.getData(entity).groundBridgeCooldown = 10;
-			}
-		}
 	}
 
 	public static void doTeleport(Entity entity, TileEntityGroundBridgeTeleporter teleporter) {
@@ -212,18 +115,6 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		}
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass() {
-		return 1;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z) {
-		return Item.getItemById(0);
-	}
-
 	public static int func_149999_b(int meta) {
 		return meta & 3;
 	}
@@ -247,9 +138,7 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 
 				if(j == 3) {
 					if(world.getBlock(x - 2, y + 5, z) == b && world.getBlock(x + 2, y + 5, z) == b) {
-						if(world.getBlock(x, y + 6, z) == b && world.getBlock(x - 1, y + 6, z) == b && world.getBlock(x + 1, y + 6, z) == b) {
-							return true;
-						}
+						return world.getBlock(x, y + 6, z) == b && world.getBlock(x - 1, y + 6, z) == b && world.getBlock(x + 1, y + 6, z) == b;
 					}
 				}
 			}
@@ -273,9 +162,7 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 
 				if(j == 3) {
 					if(world.getBlock(x, y + 5, z - 2) == b && world.getBlock(x, y + 5, z + 2) == b) {
-						if(world.getBlock(x, y + 6, z) == b && world.getBlock(x, y + 6, z - 1) == b && world.getBlock(x, y + 6, z + 1) == b) {
-							return true;
-						}
+						return world.getBlock(x, y + 6, z) == b && world.getBlock(x, y + 6, z - 1) == b && world.getBlock(x, y + 6, z + 1) == b;
 					}
 				}
 			}
@@ -360,6 +247,112 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		}
 
 		world.setBlockMetadataWithNotify(x, y + 3, z, metadata + 1, 2);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+		return null;
+	}
+
+	public boolean canPaneConnectTo(IBlockAccess world, int x, int y, int z, ForgeDirection dir) {
+		return world.getBlock(x, y, z) == TFBlocks.groundBridgeTeleporter;
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+		float thickness = 0.125F;
+		float f = 0.5F - thickness;
+		float f1 = 0.5F + thickness;
+		float f2 = 0.5F - thickness;
+		float f3 = 0.5F + thickness;
+		boolean flag = canPaneConnectTo(world, x, y, z - 1, NORTH) || canPaneConnectTo(world, x, y, z + 1, SOUTH);
+		boolean flag1 = canPaneConnectTo(world, x - 1, y, z, WEST) || canPaneConnectTo(world, x + 1, y, z, EAST);
+
+		if(!flag && flag1) {
+			f = 0F;
+			f1 = 1F;
+		}
+
+		if(flag && !flag1) {
+			f2 = 0F;
+			f3 = 1F;
+		}
+
+		setBlockBounds(f, 0F, f2, f1, 1F, f3);
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+		int i1 = 0;
+
+		if(world.getBlock(x, y, z) == this) {
+			i1 = func_149999_b(world.getBlockMetadata(x, y, z));
+
+			if(i1 == 0) {
+				return false;
+			}
+
+			if(i1 == 2 && side != 5 && side != 4) {
+				return false;
+			}
+
+			if(i1 == 1 && side != 3 && side != 2) {
+				return false;
+			}
+		}
+
+		boolean flag = world.getBlock(x - 1, y, z) == this && world.getBlock(x - 2, y, z) != this;
+		boolean flag1 = world.getBlock(x + 1, y, z) == this && world.getBlock(x + 2, y, z) != this;
+		boolean flag2 = world.getBlock(x, y, z - 1) == this && world.getBlock(x, y, z - 2) != this;
+		boolean flag3 = world.getBlock(x, y, z + 1) == this && world.getBlock(x, y, z + 2) != this;
+		boolean flag4 = flag || flag1 || i1 == 1;
+		boolean flag5 = flag2 || flag3 || i1 == 2;
+		return flag4 && side == 4 || flag4 && side == 5 || flag5 && side == 2 || flag5 && side == 3;
+	}
+
+	@Override
+	public int quantityDropped(Random rand) {
+		return 0;
+	}
+
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+		if(!world.isRemote) {
+			if(entity.ridingEntity == null && entity.riddenByEntity == null) {
+				if(TFEntityData.getData(entity).groundBridgeCooldown == 0) {
+					TileEntityGroundBridgeTeleporter teleporter = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y, z);
+
+					if(teleporter != null && teleporter.controlPanel != null) {
+						doTeleport(entity, teleporter);
+					}
+				}
+
+				TFEntityData.getData(entity).groundBridgeCooldown = 10;
+			}
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderBlockPass() {
+		return 1;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World world, int x, int y, int z) {
+		return Item.getItemById(0);
 	}
 
 	@Override

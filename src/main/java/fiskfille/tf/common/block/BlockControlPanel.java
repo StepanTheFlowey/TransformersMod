@@ -1,5 +1,11 @@
 package fiskfille.tf.common.block;
 
+import fiskfille.tf.common.groundbridge.DataCore;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.network.MessageTileTrigger;
+import fiskfille.tf.common.network.base.TFNetworkManager;
+import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -7,12 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import fiskfille.tf.common.groundbridge.DataCore;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.network.MessageTileTrigger;
-import fiskfille.tf.common.network.base.TFNetworkManager;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.helper.TFTileHelper;
 
 public class BlockControlPanel extends BlockMachineBase {
 	public BlockControlPanel() {
@@ -20,6 +20,18 @@ public class BlockControlPanel extends BlockMachineBase {
 		setHardness(4F);
 		setResistance(10F);
 		setStepSound(soundTypeMetal);
+	}
+
+	public static boolean isBlockLeftSideOfPanel(int metadata) {
+		return metadata < 4;
+	}
+
+	public static boolean isBlockTopOfPanel(int metadata) {
+		return metadata >= 8;
+	}
+
+	public static int getDirection(int metadata) {
+		return metadata % 4;
 	}
 
 	@Override
@@ -76,18 +88,6 @@ public class BlockControlPanel extends BlockMachineBase {
 		else {
 			setBlockBounds(0, 0, 0, 1, f1, 1);
 		}
-	}
-
-	public static boolean isBlockLeftSideOfPanel(int metadata) {
-		return metadata < 4;
-	}
-
-	public static boolean isBlockTopOfPanel(int metadata) {
-		return metadata >= 8;
-	}
-
-	public static int getDirection(int metadata) {
-		return metadata % 4;
 	}
 
 	@Override

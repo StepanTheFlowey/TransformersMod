@@ -1,14 +1,14 @@
 package fiskfille.tf.common.block;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import fiskfille.tf.TFLog;
+import fiskfille.tf.TransformersMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
-import fiskfille.tf.TFLog;
-import fiskfille.tf.TransformersMod;
 
 public abstract class BlockTF extends Block {
 	protected final Class<? extends TileEntity> tileClass;
@@ -37,7 +37,7 @@ public abstract class BlockTF extends Block {
 	}
 
 	protected void init() {
-		String unlocalizedName = name.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
+		final String unlocalizedName = name.toLowerCase().replace(" ", "_").replace("'", "");
 
 		if(tileClass != null) {
 			GameRegistry.registerTileEntity(tileClass, name);

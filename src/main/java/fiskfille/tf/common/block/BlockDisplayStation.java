@@ -1,13 +1,5 @@
 package fiskfille.tf.common.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.item.ItemDisplayVehicle;
@@ -17,6 +9,14 @@ import fiskfille.tf.common.network.MessageUpdateArmor;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockDisplayStation extends BlockMachineBase {
 	public BlockDisplayStation() {

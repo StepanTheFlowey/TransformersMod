@@ -1,7 +1,8 @@
 package fiskfille.tf.common.block;
 
-import java.util.List;
-
+import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
+import fiskfille.tf.common.tileentity.TileEntityTransmitter;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -10,9 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
-import fiskfille.tf.common.tileentity.TileEntityTransmitter;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.List;
 
 public class BlockTransmitter extends BlockMachineBase {
 	public BlockTransmitter() {
@@ -158,7 +158,7 @@ public class BlockTransmitter extends BlockMachineBase {
 			}
 
 			if(face != -1) {
-				if(side == 1 || side == 0) {
+				if(side == 0 || side == 1) {
 					if(direction == 0) {
 						hitX = 1 - hitX;
 						hitY = (side == 1 ? 1 : hitZ * 2) - hitZ;
@@ -175,19 +175,19 @@ public class BlockTransmitter extends BlockMachineBase {
 						hitX = hitZ;
 					}
 				}
-				else if(side == 3) {
-					hitY = 1 - hitY;
-				}
 				else if(side == 2) {
 					hitX = 1 - hitX;
 					hitY = 1 - hitY;
 				}
-				else if(side == 5) {
-					hitX = 1 - hitZ;
+				else if(side == 3) {
 					hitY = 1 - hitY;
 				}
 				else if(side == 4) {
 					hitX = hitZ;
+					hitY = 1 - hitY;
+				}
+				else if(side == 5) {
+					hitX = 1 - hitZ;
 					hitY = 1 - hitY;
 				}
 
@@ -219,9 +219,8 @@ public class BlockTransmitter extends BlockMachineBase {
 
 	public boolean onRightClick(World world, int x, int y, int z, TileEntityTransmitter tile, EntityPlayer player, int face, float hitX, float hitY) {
 		// 0 = back, 1 = front, 2 = left, 3 = right, 4 = top, 5 = bottom
-		float f = 0.0625F;
-
 		if(face == 1) {
+			final float f = 0.0625F;
 			if(hitX > f * 5.5F && hitX < f * 10.5F && hitY > f * 10 && hitY < f * 20) {
 				TFGui.RECEIVER_NETWORK.open(player, tile);
 				return true;

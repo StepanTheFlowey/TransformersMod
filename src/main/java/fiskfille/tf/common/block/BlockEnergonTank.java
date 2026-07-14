@@ -1,5 +1,9 @@
 package fiskfille.tf.common.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
+import fiskfille.tf.client.render.block.RenderBlockEnergonTank;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,10 +15,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
-import fiskfille.tf.client.render.block.RenderBlockEnergonTank;
 
 public class BlockEnergonTank extends BlockMachineBase {
 	@SideOnly(Side.CLIENT) public static boolean renderingInside;
@@ -101,7 +101,7 @@ public class BlockEnergonTank extends BlockMachineBase {
 			}
 		}
 
-		return side == 0 && minY > 0 ? true : side == 1 && maxY < 1 ? true : side == 2 && minZ > 0 ? true : side == 3 && maxZ < 1 ? true : side == 4 && minX > 0 ? true : side == 5 && maxX < 1 ? true : flag;
+		return side == 0 && minY > 0 || side == 1 && maxY < 1 || side == 2 && minZ > 0 || side == 3 && maxZ < 1 || side == 4 && minX > 0 || side == 5 && maxX < 1 || flag;
 	}
 
 	@Override

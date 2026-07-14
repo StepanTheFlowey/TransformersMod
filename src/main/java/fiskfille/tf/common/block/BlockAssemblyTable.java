@@ -1,11 +1,11 @@
 package fiskfille.tf.common.block;
 
+import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
 
 public class BlockAssemblyTable extends BlockMachineBase {
 	public BlockAssemblyTable() {

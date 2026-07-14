@@ -1,14 +1,14 @@
 package fiskfille.tf.common.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.world.IBlockAccess;
 import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.common.energon.IEnergon;
 import fiskfille.tf.helper.TFMathHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.world.IBlockAccess;
 
 public class BlockEnergonCube extends BlockBasic implements IEnergon {
-	private Energon energonType;
+	private final Energon energonType;
 
 	public BlockEnergonCube(Energon type) {
 		super(TFMaterial.energon);

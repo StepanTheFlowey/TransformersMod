@@ -1,5 +1,8 @@
 package fiskfille.tf.common.block;
 
+import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
+import fiskfille.tf.common.tileentity.TileEntityColumn;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,9 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
-import fiskfille.tf.common.tileentity.TileEntityColumn;
-import fiskfille.tf.helper.TFTileHelper;
 
 public class BlockColumn extends BlockMachineBase {
 	public BlockColumn() {

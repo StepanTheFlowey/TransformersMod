@@ -1,7 +1,7 @@
 package fiskfille.tf.common.block;
 
-import java.util.Random;
-
+import fiskfille.tf.client.render.block.RenderBlockEnergonOre;
+import fiskfille.tf.common.item.TFItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -9,14 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import fiskfille.tf.client.render.block.RenderBlockEnergonOre;
-import fiskfille.tf.common.item.TFItems;
+
+import java.util.Random;
 
 public class BlockEnergonOre extends Block {
-	private IIcon[] icons;
-	private Random rand = new Random();
-
 	public static int renderPass;
+	private final Random rand = new Random();
+	private IIcon[] icons;
 
 	public BlockEnergonOre() {
 		super(Material.rock);

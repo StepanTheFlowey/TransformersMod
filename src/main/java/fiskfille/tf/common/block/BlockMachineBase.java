@@ -1,8 +1,13 @@
 package fiskfille.tf.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TFLog;
+import fiskfille.tf.common.fluid.FluidEnergon;
+import fiskfille.tf.common.fluid.IFluidHandlerTF;
+import fiskfille.tf.common.fluid.TFFluids;
+import fiskfille.tf.common.item.ItemFuelCanister;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -23,14 +28,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TFLog;
-import fiskfille.tf.common.fluid.FluidEnergon;
-import fiskfille.tf.common.fluid.IFluidHandlerTF;
-import fiskfille.tf.common.fluid.TFFluids;
-import fiskfille.tf.common.item.ItemFuelCanister;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockMachineBase extends Block implements ITileEntityProvider {
 	protected final Random rand = new Random();
@@ -175,11 +175,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 
 	@Override
 	public boolean hasComparatorInputOverride() {
-		if(tileClass != null && (IFluidHandler.class.isAssignableFrom(tileClass) || IInventory.class.isAssignableFrom(tileClass))) {
-			return true;
-		}
-
-		return false;
+		return tileClass != null && (IFluidHandler.class.isAssignableFrom(tileClass) || IInventory.class.isAssignableFrom(tileClass));
 	}
 
 	@Override

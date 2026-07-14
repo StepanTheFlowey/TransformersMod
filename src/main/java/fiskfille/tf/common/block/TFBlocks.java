@@ -1,30 +1,14 @@
 package fiskfille.tf.common.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import fiskfille.tf.common.energon.TFEnergonManager;
 import fiskfille.tf.common.item.ItemColoredTF;
 import fiskfille.tf.common.item.ItemDisplayPedestal;
 import fiskfille.tf.common.item.ItemGroundBridgeControl;
 import fiskfille.tf.common.registry.TFBlockRegistry;
-import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible;
-import fiskfille.tf.common.tileentity.TileEntityAssemblyTable;
-import fiskfille.tf.common.tileentity.TileEntityColumn;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.common.tileentity.TileEntityCrystal;
-import fiskfille.tf.common.tileentity.TileEntityDisplayPedestal;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
-import fiskfille.tf.common.tileentity.TileEntityEnergonProcessor;
-import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
-import fiskfille.tf.common.tileentity.TileEntityEnergyPort;
-import fiskfille.tf.common.tileentity.TileEntityGroundBridgeFrame;
-import fiskfille.tf.common.tileentity.TileEntityGroundBridgeTeleporter;
-import fiskfille.tf.common.tileentity.TileEntityIsoCondenser;
-import fiskfille.tf.common.tileentity.TileEntityRelayTorch;
-import fiskfille.tf.common.tileentity.TileEntityRelayTower;
-import fiskfille.tf.common.tileentity.TileEntityTransformiumSeed;
-import fiskfille.tf.common.tileentity.TileEntityTransmitter;
+import fiskfille.tf.common.tileentity.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 
 public class TFBlocks {
 	// Misc
