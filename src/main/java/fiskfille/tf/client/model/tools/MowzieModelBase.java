@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 /**
  * @author BobMowzie, gegy1000
  */
@@ -302,7 +304,7 @@ public class MowzieModelBase extends ModelBiped {
 	public boolean onGround(Entity entity) {
 		boolean onGround = entity.onGround;
 
-		if(entity != Minecraft.getMinecraft().thePlayer) {
+		if(entity != mc.thePlayer) {
 			double moveY = -0.2;
 			double actualMoveY = moveY;
 

@@ -1,6 +1,7 @@
 package fiskfille.tf;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeChunkManager;
@@ -34,6 +35,7 @@ import fiskfille.tf.config.TFConfig;
 				guiFactory = "fiskfille.tf.client.gui.TFGuiFactory"
 )
 public class TransformersMod {
+	public static final Minecraft mc = Minecraft.getMinecraft();
 	public static final String modid = "transformers";
 	public static final String version = "0.6.5";
 

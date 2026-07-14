@@ -28,6 +28,8 @@ import fiskfille.tf.common.network.MessageTileTrigger.ITileDataCallback;
 import fiskfille.tf.helper.TFArmorDyeHelper;
 import fiskfille.tf.helper.TFHelper;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class TileEntityDisplayStation extends TileEntityContainer implements IMultiTile, ITileDataCallback {
 	public boolean isRedstonePowered = false;
 
@@ -62,8 +64,6 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 	@SideOnly(Side.CLIENT)
 	public void clientTick() {
 		if(fakePlayer == null) {
-			Minecraft mc = Minecraft.getMinecraft();
-
 			if(mc != null && mc.playerController != null && getWorldObj() != null) {
 				EntityClientPlayerMP player = new EntityClientPlayerMP(mc, getWorldObj(), mc.getSession(), mc.getNetHandler(), new StatFileWriter()) {
 					@Override

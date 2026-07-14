@@ -9,6 +9,8 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class DisplayableVehicle extends Displayable {
 	@Override
 	public void render(ItemStack itemstack) {

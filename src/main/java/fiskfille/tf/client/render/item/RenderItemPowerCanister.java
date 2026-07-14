@@ -6,7 +6,6 @@ import fiskfille.tf.common.energon.power.IEnergyContainerItem;
 import fiskfille.tf.common.item.ItemPowerCanister;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.helper.TFRenderHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -17,8 +16,6 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderItemPowerCanister implements IItemRenderer {
 	private static final ModelPowerCanister modelCanister = new ModelPowerCanister();
-
-	private static final Minecraft mc = Minecraft.getMinecraft();
 	private static final RenderItem renderItem = new RenderItem();
 
 	public static void renderCanister(ItemStack itemstack) {
@@ -32,7 +29,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 		}
 
 		GL11.glDisable(GL11.GL_CULL_FACE);
-		mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
+		TransformersMod.mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
 		modelCanister.render();
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
@@ -50,7 +47,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data) {
 		if(type == ItemRenderType.INVENTORY) {
-			renderItem.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), itemstack, 0, 0, true);
+			renderItem.renderItemIntoGUI(TransformersMod.mc.fontRenderer, TransformersMod.mc.getTextureManager(), itemstack, 0, 0, true);
 
 			if(itemstack.getItem() instanceof IEnergyContainerItem) {
 				IEnergyContainerItem container = (IEnergyContainerItem) itemstack.getItem();

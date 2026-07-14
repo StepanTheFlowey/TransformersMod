@@ -13,9 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemArmor implements IItemRenderer {
-	private static final Minecraft mc = Minecraft.getMinecraft();
+import static fiskfille.tf.TransformersMod.mc;
 
+public class RenderItemArmor implements IItemRenderer {
 	private final Transformer transformer;
 	private final int armorPiece;
 

@@ -9,6 +9,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class DisplayableTransformiumSeed extends Displayable {
 	private static final TileEntityTransformiumSeed tileentity = new TileEntityTransformiumSeed();
 

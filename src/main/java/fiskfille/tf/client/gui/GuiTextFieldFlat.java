@@ -2,7 +2,6 @@ package fiskfille.tf.client.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
@@ -11,6 +10,8 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.opengl.GL11;
+
+import static fiskfille.tf.TransformersMod.mc;
 
 @SideOnly(Side.CLIENT)
 public class GuiTextFieldFlat extends GuiTextField {
@@ -349,7 +350,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	public void drawTextBox() {
 		if(getVisible()) {
 			if(getEnableBackgroundDrawing()) {
-				Minecraft.getMinecraft().getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
+				mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
 
 				GL11.glEnable(GL11.GL_BLEND);
 				OpenGlHelper.glBlendFunc(770, 771, 1, 0);

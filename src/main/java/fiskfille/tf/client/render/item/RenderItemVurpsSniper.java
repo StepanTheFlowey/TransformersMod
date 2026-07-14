@@ -3,7 +3,6 @@ package fiskfille.tf.client.render.item;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelVurpsSniper;
 import fiskfille.tf.common.data.TFDataManager;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +25,7 @@ public class RenderItemVurpsSniper implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		TransformersMod.mc.renderEngine.bindTexture(texture);
 
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
 			if(data[1] instanceof EntityPlayer) {

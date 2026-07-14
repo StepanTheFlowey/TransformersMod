@@ -26,7 +26,6 @@ import java.util.WeakHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.DestroyBlockProgress;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -49,9 +48,10 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class TFRenderHelper {
 	public static final int LIGHTING_LUMINOUS = 0xF0F0;
-	private static final Minecraft mc = Minecraft.getMinecraft();
 	private static final RenderItem itemRender = new RenderItem();
 	private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<EntityPlayer, Double>();
 	private static float lastBrightnessX;

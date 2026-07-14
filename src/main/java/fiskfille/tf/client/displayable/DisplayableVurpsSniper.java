@@ -8,6 +8,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class DisplayableVurpsSniper extends Displayable {
 	private static final ModelVurpsSniper model = new ModelVurpsSniper();
 

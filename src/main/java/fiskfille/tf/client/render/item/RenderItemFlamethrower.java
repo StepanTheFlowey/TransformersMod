@@ -2,7 +2,6 @@ package fiskfille.tf.client.render.item;
 
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelFlamethrower;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -25,7 +24,7 @@ public class RenderItemFlamethrower implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		TransformersMod.mc.renderEngine.bindTexture(texture);
 
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
 			GL11.glTranslatef(1.1F, 0.5F, 0);

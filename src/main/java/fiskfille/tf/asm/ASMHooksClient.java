@@ -1,7 +1,6 @@
 package fiskfille.tf.asm;
 
 import fiskfille.tf.helper.TFHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -12,9 +11,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
-public class ASMHooksClient {
-	private static final Minecraft mc = Minecraft.getMinecraft();
+import static fiskfille.tf.TransformersMod.mc;
 
+public class ASMHooksClient {
 	public static int getBrightnessForRender(Entity entity) {
 		if(entity instanceof EntityPlayer) {
 			final float scale = TFHelper.getHeight((EntityPlayer) entity) / 1.8F;

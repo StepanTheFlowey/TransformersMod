@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.vecmath.Vector4d;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -20,10 +19,11 @@ import org.lwjgl.opengl.GL11;
 
 import fiskfille.tf.common.fluid.FluidTankTF;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public final class TFFluidRenderHelper {
 	public static final int DISPLAY_STAGES = 100;
 	private static final RenderInfo liquidBlock = new RenderInfo();
-	private static final Minecraft mc = Minecraft.getMinecraft();
 	private static final Map<Fluid, int[]> flowingRenderCache = new HashMap<Fluid, int[]>();
 	private static final Map<Fluid, int[]> stillRenderCache = new HashMap<Fluid, int[]>();
 

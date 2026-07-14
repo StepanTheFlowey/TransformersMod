@@ -21,13 +21,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 import fiskfille.tf.client.keybinds.TFKeyBinds;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFVectorHelper;
+
+import static fiskfille.tf.TransformersMod.mc;
 
 /**
  * @author FiskFille
@@ -46,7 +47,6 @@ public class TFMotionManager {
 	 * @param canMoveSideways     If the vehicle can move to the left or to the right
 	 */
 	public static void motion(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double sidewaysSpeedLimit, double reversingSpeedLimit, boolean canDrift, boolean canDriveOffroad, boolean canMoveSideways) {
-		Minecraft mc = Minecraft.getMinecraft();
 		Random rand = new Random();
 
 		// Controls
@@ -174,7 +174,6 @@ public class TFMotionManager {
 	 * @param idlingSpeedLimit How many km/h the jet goes while idling
 	 */
 	public static void motionJet(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double idlingSpeedLimit) {
-		Minecraft mc = Minecraft.getMinecraft();
 		boolean clientPlayer = player == mc.thePlayer;
 
 		// Controls

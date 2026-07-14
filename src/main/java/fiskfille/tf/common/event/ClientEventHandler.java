@@ -72,9 +72,9 @@ import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFModelHelper;
 import fiskfille.tf.helper.TFTextureHelper;
 
-public class ClientEventHandler {
-	private final Minecraft mc = Minecraft.getMinecraft();
+import static fiskfille.tf.TransformersMod.mc;
 
+public class ClientEventHandler {
 	public RenderPlayerHand renderHandInstance;
 	public boolean prevViewBobbing = mc.gameSettings.viewBobbing;
 

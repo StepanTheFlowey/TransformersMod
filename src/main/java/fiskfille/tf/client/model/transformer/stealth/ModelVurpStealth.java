@@ -6,11 +6,12 @@ import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
+import static fiskfille.tf.TransformersMod.mc;
 
 public class ModelVurpStealth extends ModelVurpVehicle {
 	public ModelRendererTF vehicleBase;
@@ -431,7 +432,7 @@ public class ModelVurpStealth extends ModelVurpVehicle {
 			vehicleWheelR.rotateAngleY = rot;
 			vehicleWheelL.rotateAngleY = rot;
 
-			vehicleBase.rotateAngleX = (float) (Math.PI / 2 - TFRenderHelper.getMotionY(player) - (player == Minecraft.getMinecraft().thePlayer && player.onGround ? 0.0784000015258789 : 0));
+			vehicleBase.rotateAngleX = (float) (Math.PI / 2 - TFRenderHelper.getMotionY(player) - (player == mc.thePlayer && player.onGround ? 0.0784000015258789 : 0));
 			vehicleBase.rotateAngleY = -(float) Math.toRadians(TFHelper.median(player.renderYawOffset - player.rotationYaw, player.prevRenderYawOffset - player.prevRotationYaw, ClientTickHandler.renderTick));
 		}
 	}

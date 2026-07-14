@@ -80,9 +80,9 @@ import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 import fiskfille.tf.common.tileentity.TileEntityTransformiumSeed;
 import fiskfille.tf.common.tileentity.TileEntityTransmitter;
 
-public class ClientProxy extends CommonProxy {
-	private Minecraft mc = Minecraft.getMinecraft();
+import static fiskfille.tf.TransformersMod.mc;
 
+public class ClientProxy extends CommonProxy {
 	public static GuiOverlay guiOverlay = new GuiOverlay();
 	public static EntityClientPlayerMP fakePlayer;
 

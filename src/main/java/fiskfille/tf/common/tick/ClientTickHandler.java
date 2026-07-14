@@ -17,7 +17,6 @@ import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTileHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.settings.GameSettings;
@@ -29,9 +28,10 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Map;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class ClientTickHandler {
 	public static float renderTick;
-	private final Minecraft mc = Minecraft.getMinecraft();
 	private EntityRenderer renderer, prevRenderer;
 
 	@SubscribeEvent

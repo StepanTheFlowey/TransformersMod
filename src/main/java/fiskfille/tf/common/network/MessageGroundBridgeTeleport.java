@@ -1,13 +1,14 @@
 package fiskfille.tf.common.network;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import fiskfille.tf.common.block.BlockGroundBridgeTeleporter;
 import fiskfille.tf.common.tileentity.TileEntityGroundBridgeTeleporter;
+
+import static fiskfille.tf.TransformersMod.mc;
 
 public class MessageGroundBridgeTeleport implements IMessage {
 	private int id;
@@ -43,7 +44,7 @@ public class MessageGroundBridgeTeleport implements IMessage {
 		@Override
 		public IMessage onMessage(MessageGroundBridgeTeleport message, MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.id);
+				Entity entity = mc.theWorld.getEntityByID(message.id);
 
 				if(entity != null && entity.worldObj.getTileEntity(message.x, message.y, message.z) instanceof TileEntityGroundBridgeTeleporter) {
 					TileEntityGroundBridgeTeleporter teleporter = (TileEntityGroundBridgeTeleporter) entity.worldObj.getTileEntity(message.x, message.y, message.z);

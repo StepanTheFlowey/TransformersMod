@@ -8,7 +8,6 @@ import fiskfille.tf.common.groundbridge.DataCore;
 import fiskfille.tf.common.tileentity.TileEntityControlPanel;
 import fiskfille.tf.helper.TFDimensionHelper;
 import fiskfille.tf.helper.TFRenderHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -19,8 +18,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class RenderControlPanel extends TileEntitySpecialRenderer {
-	private final Minecraft mc = Minecraft.getMinecraft();
 	private final ModelControlPanel model = new ModelControlPanel();
 	private final ItemRenderer itemRenderer = new ItemRenderer(mc);
 

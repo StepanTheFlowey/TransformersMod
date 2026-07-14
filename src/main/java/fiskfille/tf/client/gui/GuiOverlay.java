@@ -14,7 +14,6 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFShootManager;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -30,9 +29,10 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class GuiOverlay extends Gui {
 	public static final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/gui/mod_icons.png");
-	private static final Minecraft mc = Minecraft.getMinecraft();
 	public static double prevSpeed;
 	public static double speed;
 	private final RenderItem itemRenderer = new RenderItem();

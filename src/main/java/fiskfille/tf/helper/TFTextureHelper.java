@@ -6,7 +6,6 @@ import fiskfille.tf.TransformersMod;
 import java.util.Locale;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
@@ -14,9 +13,10 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class TFTextureHelper {
 	public static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-	private static final Minecraft mc = Minecraft.getMinecraft();
 	public static IIcon energonFlowingIcon;
 	public static IIcon energonStillIcon;
 	public static IIcon[] ioIcons;

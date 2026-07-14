@@ -11,6 +11,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import static fiskfille.tf.TransformersMod.mc;
+
 public class ModelSubwooferVehicle extends ModelVehicleBase {
 	public ModelRendererTF vehicleBase;
 	public ModelRendererTF vehicleStomach;
@@ -294,7 +296,7 @@ public class ModelSubwooferVehicle extends ModelVehicleBase {
 				modelRenderer.rotateAngleX = wheelSpinSpeed;
 			}
 
-			vehicleBase.rotateAngleX = -(float) (TFRenderHelper.getMotionY(player) + (player == Minecraft.getMinecraft().thePlayer && player.onGround ? 0.0784000015258789 : 0));
+			vehicleBase.rotateAngleX = -(float) (TFRenderHelper.getMotionY(player) + (player == mc.thePlayer && player.onGround ? 0.0784000015258789 : 0));
 			vehicleBase.rotateAngleY = -(float) Math.toRadians(TFHelper.median(player.renderYawOffset - player.rotationYaw, player.prevRenderYawOffset - player.prevRotationYaw, ClientTickHandler.renderTick));
 		}
 	}
