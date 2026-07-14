@@ -1,16 +1,5 @@
 package fiskfille.tf.client.render.tileentity;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.render.shader.PortalShader;
 import fiskfille.tf.common.block.TFBlocks;
@@ -19,9 +8,18 @@ import fiskfille.tf.common.tileentity.TileEntityGroundBridgeTeleporter;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
+import org.lwjgl.opengl.GL11;
 
 public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
-	private static final ResourceLocation PORTAL_EFFECT = new ResourceLocation(TransformersMod.modid, "textures/misc/portal_effect.png");
+	private final ResourceLocation PORTAL_EFFECT = new ResourceLocation(TransformersMod.modid, "textures/misc/portal_effect.png");
 
 	private PortalShader shader;
 

@@ -1,15 +1,13 @@
 package fiskfille.tf.client.render.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import fiskfille.tf.common.block.BlockEnergonOre;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
+import org.lwjgl.opengl.GL11;
 
 public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler {
 	public static RenderBlockEnergonOre instance = new RenderBlockEnergonOre();
@@ -37,8 +35,6 @@ public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler {
 		block.setBlockBoundsForItemRender();
 		renderer.setRenderBoundsFromBlock(block);
 		TFRenderHelper.renderBlock(block, metadata, renderer);
-
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override

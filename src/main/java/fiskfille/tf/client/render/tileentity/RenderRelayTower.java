@@ -1,27 +1,25 @@
 package fiskfille.tf.client.render.tileentity;
 
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tileentity.ModelRelayTorch;
 import fiskfille.tf.client.model.tileentity.ModelRelayTower;
 import fiskfille.tf.common.tileentity.TileEntityRelayTorch;
 import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import org.lwjgl.opengl.GL11;
 
 public class RenderRelayTower extends TileEntitySpecialRenderer {
-	private ModelRelayTower modelTower = new ModelRelayTower();
-	private ModelRelayTower modelTorch = new ModelRelayTorch();
+	private final ModelRelayTower modelTower = new ModelRelayTower();
+	private final ModelRelayTorch modelTorch = new ModelRelayTorch();
 
 	public void render(TileEntityRelayTower tower, double x, double y, double z, float partialTicks) {
-		World world = tower.getWorldObj();
+		final World world = tower.getWorldObj();
 		int metadata = 0;
 
 		if(world != null) {
@@ -29,14 +27,14 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 		}
 
 		if(tower.isValid(metadata)) {
-			ModelRelayTower model = getModel(tower);
+			final ModelRelayTower model = getModel(tower);
 
 			GL11.glPushMatrix();
-			GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
+			GL11.glTranslated(x + 0.5D, y + 0.5D, z + 0.5D);
 			GL11.glScalef(1, -1F, -1F);
 
 			if(tower instanceof TileEntityRelayTorch && world != null) {
-				ForgeDirection dir = ForgeDirection.getOrientation(metadata);
+				final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
 
 				if(dir == ForgeDirection.UP) {
 					GL11.glTranslatef(0, 1, 0);

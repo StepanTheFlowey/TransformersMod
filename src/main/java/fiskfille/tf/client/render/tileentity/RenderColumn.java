@@ -1,5 +1,11 @@
 package fiskfille.tf.client.render.tileentity;
 
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.tileentity.ModelEnergyColumn;
+import fiskfille.tf.client.render.item.RenderItemPowerCanister;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.tileentity.TileEntityColumn;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -7,21 +13,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.tileentity.ModelEnergyColumn;
-import fiskfille.tf.client.render.item.RenderItemPowerCanister;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.tileentity.TileEntityColumn;
-import fiskfille.tf.helper.TFRenderHelper;
-
 public class RenderColumn extends TileEntitySpecialRenderer {
-	private ModelEnergyColumn model = new ModelEnergyColumn();
+	private final ModelEnergyColumn model = new ModelEnergyColumn();
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_column.png");
+	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_column_lights.png");
 
 	public void render(TileEntityColumn tile, double x, double y, double z, float partialTicks) {
-		World world = tile.getWorldObj();
+		final World world = tile.getWorldObj();
 		int metadata = 0;
 
 		if(world != null) {
@@ -29,29 +29,30 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 		}
 
 		if(metadata < 4) {
+			bindTexture(texture);
 			GL11.glPushMatrix();
-			GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-			GL11.glScalef(1, -1F, -1F);
-			GL11.glRotatef(metadata * 90, 0, 1, 0);
+			GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
+			GL11.glScalef(1F, -1F, -1F);
+			GL11.glRotatef(metadata * 90F, 0F, 1F, 0F);
 
-			bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_column.png"));
 			model.setBreaking(false);
 			model.render(tile);
 
-			bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_column_lights.png"));
+			bindTexture(textureLights);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
+
 			model.render(tile);
 
-			Tessellator tessellator = Tessellator.instance;
-			float f = 0.001F;
-			float texX = 30;
-			float texY = 31;
-			float texWidth = 7;
-			float width = texWidth * 0.0625F;
+			final float f = 0.001F;
+			float texX = 30F;
+			final float texY = 31F;
+			final float texWidth = 7F;
+			final float width = texWidth * 0.0625F;
 
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
 			tessellator.addVertexWithUV(width / 2, -(0.5F + f), -width / 2, (texX + texWidth) * (1F / 128), (texY + texWidth) * (1F / 64));
 			tessellator.addVertexWithUV(width / 2, -(0.5F + f), width / 2, (texX + texWidth) * (1F / 128), texY * (1F / 64));
@@ -67,7 +68,7 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 			GL11.glEnable(GL11.GL_LIGHTING);
 
 			if(world != null) {
-				int progress = TFRenderHelper.getBlockDestroyProgress(world, tile.xCoord, tile.yCoord, tile.zCoord);
+				final int progress = TFRenderHelper.getBlockDestroyProgress(world, tile.xCoord, tile.yCoord, tile.zCoord);
 
 				if(progress >= 0) {
 					OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -90,7 +91,7 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 			GL11.glDisable(GL11.GL_BLEND);
 
 			for(int i = 0; i < tile.getSizeInventory(); ++i) {
-				ItemStack itemstack = tile.getStackInSlot(i);
+				final ItemStack itemstack = tile.getStackInSlot(i);
 
 				if(itemstack != null && itemstack.getItem() == TFItems.powerCanister) {
 					GL11.glPushMatrix();
@@ -98,6 +99,7 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 					GL11.glTranslatef(0.0625F * 7, 0.0625F * 12, 0);
 
 					RenderItemPowerCanister.renderCanister(itemstack);
+
 					GL11.glPopMatrix();
 				}
 			}

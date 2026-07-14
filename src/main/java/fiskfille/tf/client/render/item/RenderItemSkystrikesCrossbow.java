@@ -10,7 +10,8 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class RenderItemSkystrikesCrossbow implements IItemRenderer {
-	private ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
+	private final ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/skystrikes_crossbow.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -24,55 +25,41 @@ public class RenderItemSkystrikesCrossbow implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/skystrikes_crossbow.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
-			GL11.glPushMatrix();
-
 			if(data[1] instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) data[1];
-
-				if(player.getItemInUseDuration() == 0) {
-					GL11.glRotatef(7, 1F, 0F, 0F);
-					GL11.glRotatef(-15, 0F, 1F, 0F);
-					GL11.glRotatef(20, 0F, 0F, 1F);
+				if(((EntityPlayer) data[1]).getItemInUseDuration() == 0) {
+					GL11.glRotatef(7F, 1F, 0F, 0F);
+					GL11.glRotatef(-15F, 0F, 1F, 0F);
+					GL11.glRotatef(20F, 0F, 0F, 1F);
 					GL11.glTranslatef(0.4F, 0.3F, -0.4F);
 				}
 				else {
-					GL11.glRotatef(0, 1F, 0F, 0F);
-					GL11.glRotatef(-10, 0F, 1F, 0F);
-					GL11.glRotatef(40, 0F, 0F, 1F);
+					GL11.glRotatef(-10F, 0F, 1F, 0F);
+					GL11.glRotatef(40F, 0F, 0F, 1F);
 					GL11.glTranslatef(0.8F, -0.2F, -0.1F);
 				}
 			}
 			else {
-				GL11.glRotatef(7, 1F, 0F, 0F);
-				GL11.glRotatef(-15, 0F, 1F, 0F);
-				GL11.glRotatef(20, 0F, 0F, 1F);
+				GL11.glRotatef(7F, 1F, 0F, 0F);
+				GL11.glRotatef(-15F, 0F, 1F, 0F);
+				GL11.glRotatef(20F, 0F, 0F, 1F);
 				GL11.glTranslatef(0.4F, 0.3F, -0.4F);
 			}
 
-			GL11.glRotatef(110, 0.2F, 6F, 4F);
-			GL11.glRotatef(165, -2.35F, 0.8F, 0.2F);
-
-			float f = 1F;
-			GL11.glScalef(f, f, f);
-			model.render();
-			GL11.glPopMatrix();
+			GL11.glRotatef(110F, 0.2F, 6F, 4F);
+			GL11.glRotatef(165F, -2.35F, 0.8F, 0.2F);
 		}
 		else if(type == ItemRenderType.EQUIPPED) {
-			GL11.glPushMatrix();
-			GL11.glRotatef(-90, 0F, 1F, 0F);
-			GL11.glRotatef(180, 0F, 0F, 1F);
-			GL11.glRotatef(-45, 1F, 0F, 0F);
-			GL11.glRotatef(5, 0F, 1F, 0F);
-			GL11.glRotatef(-10, 1F, 0F, 0F);
+			GL11.glRotatef(-90F, 0F, 1F, 0F);
+			GL11.glRotatef(180F, 0F, 0F, 1F);
+			GL11.glRotatef(-45F, 1F, 0F, 0F);
+			GL11.glRotatef(5F, 0F, 1F, 0F);
+			GL11.glRotatef(-10F, 1F, 0F, 0F);
 			GL11.glTranslatef(0.1F, 0.5F, -0.6F);
-
-			float f = 1F;
-			GL11.glScalef(f, f, f);
-			model.render();
-			GL11.glPopMatrix();
 		}
+
+		model.render();
 	}
 }

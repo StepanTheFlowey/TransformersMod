@@ -1,5 +1,13 @@
 package fiskfille.tf.client.render.tileentity;
 
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.tileentity.ModelControlPanel;
+import fiskfille.tf.common.block.BlockControlPanel;
+import fiskfille.tf.common.data.tile.TileDataControlPanel;
+import fiskfille.tf.common.groundbridge.DataCore;
+import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import fiskfille.tf.helper.TFDimensionHelper;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -9,22 +17,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.tileentity.ModelControlPanel;
-import fiskfille.tf.common.block.BlockControlPanel;
-import fiskfille.tf.common.data.tile.TileDataControlPanel;
-import fiskfille.tf.common.groundbridge.DataCore;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.helper.TFDimensionHelper;
-import fiskfille.tf.helper.TFRenderHelper;
-
 public class RenderControlPanel extends TileEntitySpecialRenderer {
-	private Minecraft mc = Minecraft.getMinecraft();
-	private ItemRenderer itemRenderer = new ItemRenderer(mc);
-	private ModelControlPanel model = new ModelControlPanel();
+	private final Minecraft mc = Minecraft.getMinecraft();
+	private final ModelControlPanel model = new ModelControlPanel();
+	private final ItemRenderer itemRenderer = new ItemRenderer(mc);
 
 	public void render(TileEntityControlPanel tile, double x, double y, double z, float partialTicks) {
 		int metadata = 0;
@@ -34,7 +32,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		}
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
 		GL11.glScalef(1F, -1F, -1F);
 		GL11.glRotatef(BlockControlPanel.getDirection(metadata) * 90 + 180, 0F, 1F, 0F);
 
@@ -45,24 +43,24 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 			for(int i = 0; i < tile.getSizeInventory(); ++i) {
-				ItemStack itemstack = tile.getStackInSlot(i);
-
-				if(itemstack != null) {
-					GL11.glPushMatrix();
-					GL11.glDisable(GL11.GL_LIGHTING);
-					GL11.glRotatef(-90, 0, 1, 0);
-					GL11.glScalef(2, 2, 2);
-					GL11.glTranslatef(-0.497F / 2, 0.8765F / 2, (-0.2825F - i * 0.2175F) / 2);
-
-					float scale = 0.155F;
-					GL11.glScalef(-scale, -scale, scale);
-
-					GL11.glColor3f(1F, 1F, 1F);
-					itemRenderer.renderItem(mc.thePlayer, itemstack, 0);
-					GL11.glColor3f(1F, 1F, 1F);
-					GL11.glEnable(GL11.GL_LIGHTING);
-					GL11.glPopMatrix();
+				final ItemStack itemstack = tile.getStackInSlot(i);
+				if(itemstack == null) {
+					continue;
 				}
+
+				GL11.glPushMatrix();
+				GL11.glDisable(GL11.GL_LIGHTING);
+				GL11.glRotatef(-90, 0, 1, 0);
+				GL11.glScalef(2, 2, 2);
+				GL11.glTranslatef(-0.497F / 2, 0.8765F / 2, (-0.2825F - i * 0.2175F) / 2);
+				GL11.glScalef(-0.155F, -0.155F, 0.155F);
+				GL11.glColor3f(1F, 1F, 1F);
+
+				itemRenderer.renderItem(mc.thePlayer, itemstack, 0);
+
+				GL11.glColor3f(1F, 1F, 1F);
+				GL11.glEnable(GL11.GL_LIGHTING);
+				GL11.glPopMatrix();
 			}
 
 			GL11.glEnable(GL11.GL_BLEND);

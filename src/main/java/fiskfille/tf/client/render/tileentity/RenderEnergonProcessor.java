@@ -1,20 +1,18 @@
 package fiskfille.tf.client.render.tileentity;
 
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tileentity.ModelEnergonProcessor;
 import fiskfille.tf.common.tileentity.TileEntityEnergonProcessor;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
-	private ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energon_processor.png");
-	private ModelEnergonProcessor model = new ModelEnergonProcessor();
+	private final ModelEnergonProcessor model = new ModelEnergonProcessor();
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energon_processor.png");
 
 	public void render(TileEntityEnergonProcessor tileentity, double x, double y, double z, float partialTicks) {
 		int metadata = 0;

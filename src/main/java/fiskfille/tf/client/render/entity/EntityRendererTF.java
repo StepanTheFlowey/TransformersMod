@@ -7,11 +7,10 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class EntityRendererTF extends EntityRenderer {
-	private final Minecraft mc;
+	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	public EntityRendererTF(Minecraft mc) {
 		super(mc, mc.getResourceManager());
-		this.mc = mc;
 	}
 
 	@Override
@@ -23,7 +22,7 @@ public class EntityRendererTF extends EntityRenderer {
 		}
 
 		final float scale = TFHelper.getHeight(player) / 1.8F;
-		player.yOffset = -(scale - 1) * 1.62F + 1.62F;
+		player.yOffset = -(scale - 1F) * 1.62F + 1.62F;
 		super.updateCameraAndRender(partialTick);
 		player.yOffset = 1.62F;
 	}

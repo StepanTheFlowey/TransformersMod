@@ -2,14 +2,11 @@ package fiskfille.tf.client.render.entity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import fiskfille.tf.client.model.ModelTankShell;
 import fiskfille.tf.TransformersMod;
-
+import fiskfille.tf.client.model.ModelTankShell;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -23,11 +20,11 @@ public class RenderTankShell extends Render {
 		GL11.glTranslated(x, y, z);
 		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 + 180, 0F, 1F, 0F);
 		GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 1F, 0F, 0F);
-		final float scale = 1.75F;
-		GL11.glScalef(scale, scale, scale);
+		GL11.glScalef(1.75F, 1.75F, 1.75F);
 		bindEntityTexture(entity);
 
 		model.render();
+
 		GL11.glPopMatrix();
 	}
 

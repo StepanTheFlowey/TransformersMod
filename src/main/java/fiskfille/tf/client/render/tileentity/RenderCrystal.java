@@ -1,21 +1,19 @@
 package fiskfille.tf.client.render.tileentity;
 
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.client.model.tileentity.ModelCrystal;
 import fiskfille.tf.common.block.BlockEnergonCrystal;
 import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.common.tileentity.TileEntityCrystal;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.ForgeDirection;
+import org.lwjgl.opengl.GL11;
 
 public class RenderCrystal extends TileEntitySpecialRenderer {
-	private ModelCrystal model = new ModelCrystal();
+	private final ModelCrystal model = new ModelCrystal();
 
 	public void render(TileEntityCrystal tile, double x, double y, double z, float partialTicks) {
 		BlockEnergonCrystal block = (BlockEnergonCrystal) tile.getBlockType();
@@ -26,7 +24,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 		GL11.glScalef(1, -1F, -1F);
 		adjustRotation(tile, x, y, z, partialTicks);
 
-		float[] rgb = TFRenderHelper.hexToRGB(energon.getColor());
+		final float[] rgb = TFRenderHelper.hexToRGB(energon.getColor());
 		GL11.glColor4f(rgb[0], rgb[1], rgb[2], 0.5F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -42,7 +40,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 			if(progress >= 0) {
 				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 				bindTexture(new ResourceLocation(String.format("textures/blocks/destroy_stage_%s.png", progress)));
-				GL11.glColor4f(1, 1, 1, 0.5F);
+				GL11.glColor4f(1F, 1F, 1F, 0.5F);
 				GL11.glPushMatrix();
 				GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
 				GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
@@ -62,8 +60,8 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 	}
 
 	public void adjustRotation(TileEntityCrystal tile, double x, double y, double z, float partialTicks) {
-		int metadata = tile.getBlockMetadata();
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
+		final int metadata = tile.getBlockMetadata();
+		final ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
 
 		if(dir == ForgeDirection.UP) {
 			GL11.glTranslatef(0, 1, 0);

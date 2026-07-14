@@ -1,23 +1,21 @@
 package fiskfille.tf.client.render.tileentity;
 
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.tileentity.ModelEnergyPort;
+import fiskfille.tf.common.tileentity.TileEntityEnergyPort;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.tileentity.ModelEnergyPort;
-import fiskfille.tf.common.tileentity.TileEntityEnergyPort;
-import fiskfille.tf.helper.TFRenderHelper;
-
 public class RenderEnergyPort extends TileEntitySpecialRenderer {
-	private ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port.png");
-	private ResourceLocation textureOff = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port_overlay_off.png");
-	private ResourceLocation textureOn = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port_overlay_on.png");
-	private ModelEnergyPort model = new ModelEnergyPort();
+	private final ModelEnergyPort model = new ModelEnergyPort();
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port.png");
+	private final ResourceLocation textureOff = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port_overlay_off.png");
+	private final ResourceLocation textureOn = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port_overlay_on.png");
 
 	public void render(TileEntityEnergyPort tile, double x, double y, double z, float partialTicks) {
 		GL11.glPushMatrix();

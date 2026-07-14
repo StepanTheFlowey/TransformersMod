@@ -1,20 +1,18 @@
 package fiskfille.tf.client.render.tileentity;
 
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.tileentity.ModelTransmitter;
+import fiskfille.tf.common.tileentity.TileEntityTransmitter;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.tileentity.ModelTransmitter;
-import fiskfille.tf.common.tileentity.TileEntityTransmitter;
-import fiskfille.tf.helper.TFRenderHelper;
-
 public class RenderTransmitter extends TileEntitySpecialRenderer {
-	private ModelTransmitter model = new ModelTransmitter();
+	private final ModelTransmitter model = new ModelTransmitter();
 
 	public void render(TileEntityTransmitter transmitter, double x, double y, double z, float partialTicks) {
 		World world = transmitter.getWorldObj();

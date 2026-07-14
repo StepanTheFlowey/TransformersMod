@@ -1,18 +1,18 @@
 package fiskfille.tf.client.render.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import fiskfille.tf.common.block.BlockEnergonTank;
 import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
 
 public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
-	public static RenderBlockEnergonTank instance = new RenderBlockEnergonTank();
-	public static int renderId = RenderingRegistry.getNextAvailableRenderId();
+	public static final RenderBlockEnergonTank instance = new RenderBlockEnergonTank();
+	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
@@ -47,8 +47,8 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
 				BlockEnergonTank.renderSide = 4;
 			}
 
-			float min = 0.001F;
-			float max = 1F - min;
+			final float min = 0.001F;
+			final float max = 1F - min;
 			renderer.setRenderBounds(min, min, min, max, max, max);
 			flag |= renderer.renderStandardBlock(block, x, y, z);
 			renderer.setRenderBoundsFromBlock(block);
@@ -84,9 +84,7 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
 			renderer.uvRotateBottom = 1;
 		}
 
-		float min = connectAbove || connectBelow ? 0.002F : 0.002F;
-		float max = 1F - min;
-
+		final float min = 0.002F, max = 1F - min;
 		for(int i = 0; i < 2; ++i) {
 			BlockEnergonTank.renderingInside = i != 0;
 			flag |= renderer.renderStandardBlock(block, x, y, z);
@@ -134,8 +132,7 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		float min = 0.0001F;
-		float max = 1F - min;
+		final float min = 0.0001F, max = 1F - min;
 		BlockEnergonTank.renderSide = 4;
 		renderer.setRenderBounds(min, min, min, max, max, max);
 		TFRenderHelper.renderBlock(block, metadata, renderer);

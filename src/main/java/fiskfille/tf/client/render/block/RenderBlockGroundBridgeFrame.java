@@ -1,27 +1,25 @@
 package fiskfille.tf.client.render.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import fiskfille.tf.common.block.BlockGroundBridgeFrame;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
+import org.lwjgl.opengl.GL11;
 
 public class RenderBlockGroundBridgeFrame implements ISimpleBlockRenderingHandler {
-	public static RenderBlockGroundBridgeFrame instance = new RenderBlockGroundBridgeFrame();
-	public static int renderId = RenderingRegistry.getNextAvailableRenderId();
+	public static final RenderBlockGroundBridgeFrame instance = new RenderBlockGroundBridgeFrame();
+	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		ForgeDirection dir = BlockGroundBridgeFrame.getFrameDirection(world, x, y, z);
+		final ForgeDirection dir = BlockGroundBridgeFrame.getFrameDirection(world, x, y, z);
 
 		if(dir != null) {
-			int metadata = world.getBlockMetadata(x, y, z);
+			final int metadata = world.getBlockMetadata(x, y, z);
 
 			if(dir == ForgeDirection.EAST) {
 				renderer.uvRotateTop = metadata == 0 ? 1 : 2;
@@ -31,9 +29,8 @@ public class RenderBlockGroundBridgeFrame implements ISimpleBlockRenderingHandle
 			}
 		}
 
-		boolean flag = renderer.renderStandardBlock(block, x, y, z);
+		final boolean flag = renderer.renderStandardBlock(block, x, y, z);
 		renderer.uvRotateTop = 0;
-
 		return flag;
 	}
 
@@ -45,8 +42,6 @@ public class RenderBlockGroundBridgeFrame implements ISimpleBlockRenderingHandle
 		block.setBlockBoundsForItemRender();
 		renderer.setRenderBoundsFromBlock(block);
 		TFRenderHelper.renderBlock(block, metadata, renderer);
-
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class RenderBassCharge extends Render {
 		final float f1 = 0.2F + entity.ticksExisted / 10F;
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x, (float) y, (float) z);
+		GL11.glTranslated(x, y, z);
 		GL11.glRotatef(pitch, 1F, 0F, 0F);
 		GL11.glRotatef(yaw, 0F, 1F, 0F);
 		GL11.glScalef(f1, f1, f1);

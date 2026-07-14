@@ -2,22 +2,19 @@ package fiskfille.tf.client.render.entity.player;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+import fiskfille.tf.client.model.transformer.ModelTransformerBase;
 import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
 import fiskfille.tf.client.model.transformer.definition.TransformerModel;
-import fiskfille.tf.client.model.transformer.ModelTransformerBase;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTextureHelper;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
-
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -65,7 +62,7 @@ public class RenderPlayerHand extends RenderPlayer {
 					if((pass & 15) == 15) {
 						bindTexture(TFTextureHelper.RES_ITEM_GLINT);
 						GL11.glEnable(GL11.GL_BLEND);
-						GL11.glColor4f(0.5F, 0.5F, 0.5F, 1);
+						GL11.glColor3f(0.5F, 0.5F, 0.5F);
 						GL11.glDepthFunc(GL11.GL_EQUAL);
 						GL11.glDepthMask(false);
 
@@ -75,13 +72,13 @@ public class RenderPlayerHand extends RenderPlayer {
 							final float f2 = 0.33333334F;
 
 							GL11.glDisable(GL11.GL_LIGHTING);
-							GL11.glColor4f(0.5F * f, 0.25F * f, 0.8F * f, 1);
+							GL11.glColor3f(0.5F * f, 0.25F * f, 0.8F * f);
 							GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 							GL11.glMatrixMode(GL11.GL_TEXTURE);
 							GL11.glLoadIdentity();
 							GL11.glScalef(f2, f2, f2);
-							GL11.glRotatef(30 - i * 60, 0, 0, 1);
-							GL11.glTranslatef(0, f1, 0);
+							GL11.glRotatef(30 - i * 60, 0F, 0F, 1F);
+							GL11.glTranslatef(0F, f1, 0F);
 							GL11.glMatrixMode(GL11.GL_MODELVIEW);
 							TFRenderHelper.setupRenderLayers(player, player.getCurrentArmor(2), upperArm);
 						}

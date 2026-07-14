@@ -1,12 +1,9 @@
 package fiskfille.tf.client.render.item;
 
+import fiskfille.tf.common.block.TFBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
-
 import org.lwjgl.opengl.GL11;
-
-import fiskfille.tf.common.block.TFBlocks;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
 
 public class RenderItemDisplayStation extends RenderItemTileEntity {
 	public RenderItemDisplayStation() {
@@ -15,24 +12,23 @@ public class RenderItemDisplayStation extends RenderItemTileEntity {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		float scale = 0.6F;
-		GL11.glScalef(scale, scale, scale);
+		GL11.glScalef(0.6F, 0.6F, 0.6F);
 
 		if(type == ItemRenderType.ENTITY || type == ItemRenderType.INVENTORY) {
 			if(type == ItemRenderType.INVENTORY) {
 				GL11.glRotatef(90, 0, 1, 0);
 			}
 			else {
-				GL11.glRotatef(180, 0, 1, 0);
+				GL11.glRotatef(180F, 0F, 1F, 0F);
 			}
 
-			GL11.glTranslatef(-0.5F, -1, -0.5F);
+			GL11.glTranslatef(-0.5F, -1F, -0.5F);
 		}
 		else if(type == ItemRenderType.EQUIPPED) {
-			GL11.glTranslatef(0.5F, 0, 0.5F);
+			GL11.glTranslatef(0.5F, 0F, 0.5F);
 		}
 		else if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP) {
-			GL11.glTranslatef(0.5F, 0, 0.5F);
+			GL11.glTranslatef(0.5F, 0F, 0.5F);
 		}
 
 		try {

@@ -1,5 +1,9 @@
 package fiskfille.tf.client.render.tileentity;
 
+import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
+import fiskfille.tf.helper.TFFluidRenderHelper;
+import fiskfille.tf.helper.TFRenderHelper;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -7,13 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.lwjgl.opengl.GL11;
-
-import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
-import fiskfille.tf.helper.TFFluidRenderHelper;
-import fiskfille.tf.helper.TFRenderHelper;
-import fiskfille.tf.helper.TFTileHelper;
 
 public class RenderEnergonTank extends TileEntitySpecialRenderer {
 	private RenderBlocks renderBlocks = RenderBlocks.getInstance();

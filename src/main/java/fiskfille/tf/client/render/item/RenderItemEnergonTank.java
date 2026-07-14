@@ -1,16 +1,14 @@
 package fiskfille.tf.client.render.item;
 
+import fiskfille.tf.common.block.TFBlocks;
+import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants.NBT;
-
 import org.lwjgl.opengl.GL11;
-
-import fiskfille.tf.common.block.TFBlocks;
-import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 
 public class RenderItemEnergonTank extends RenderItemTileEntity {
 	public RenderItemEnergonTank() {
@@ -22,7 +20,7 @@ public class RenderItemEnergonTank extends RenderItemTileEntity {
 		tileentity = new TileEntityEnergonTank();
 
 		if(item.hasTagCompound() && item.getTagCompound().hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-			NBTTagCompound nbt = new NBTTagCompound();
+			final NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setTag("ConfigDataTF", item.getTagCompound().getTag("ConfigDataTF"));
 			tileentity.readFromNBT(nbt);
 		}

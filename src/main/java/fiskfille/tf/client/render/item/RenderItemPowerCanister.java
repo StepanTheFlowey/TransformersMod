@@ -1,5 +1,11 @@
 package fiskfille.tf.client.render.item;
 
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.item.ModelPowerCanister;
+import fiskfille.tf.common.energon.power.IEnergyContainerItem;
+import fiskfille.tf.common.item.ItemPowerCanister;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -7,21 +13,29 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.item.ModelPowerCanister;
-import fiskfille.tf.common.energon.power.IEnergyContainerItem;
-import fiskfille.tf.common.item.ItemPowerCanister;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.helper.TFRenderHelper;
-
 public class RenderItemPowerCanister implements IItemRenderer {
-	private static ModelPowerCanister modelCanister = new ModelPowerCanister();
+	private static final ModelPowerCanister modelCanister = new ModelPowerCanister();
 
-	private static Minecraft mc = Minecraft.getMinecraft();
-	private static RenderItem renderItem = new RenderItem();
+	private static final Minecraft mc = Minecraft.getMinecraft();
+	private static final RenderItem renderItem = new RenderItem();
+
+	public static void renderCanister(ItemStack itemstack) {
+		ItemPowerCanister container = (ItemPowerCanister) itemstack.getItem();
+		float energy = container.getEnergyStored(itemstack);
+		float max = container.getEnergyCapacity(itemstack);
+
+		if(energy > 0) {
+			Vec3 vec3 = Vec3.createVectorHelper(0, 0.0625F * 8.5F, 0);
+			TFRenderHelper.renderEnergyStatic(vec3, vec3.addVector(0, -0.0625F * 7, 0), 1F / (128 + 256 * (1 - energy / max)), energy / max, 16, itemstack.hashCode());
+		}
+
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
+		modelCanister.render();
+		GL11.glEnable(GL11.GL_CULL_FACE);
+	}
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -59,17 +73,17 @@ public class RenderItemPowerCanister implements IItemRenderer {
 					TFRenderHelper.resetLighting();
 				}
 
-				int shade = Math.round(255);
-
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glDisable(GL11.GL_DEPTH_TEST);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDisable(GL11.GL_ALPHA_TEST);
 				GL11.glShadeModel(GL11.GL_SMOOTH);
-				Tessellator tessellator = Tessellator.instance;
-				renderQuad(tessellator, 2, 13, 13, 2, 0);
-				renderQuad(tessellator, 2, 13, 12, 1, 0x003838);
-				renderQuad(tessellator, 2, 13, filled * 12, 1, 0x005151, shade << 8 | shade);
+
+				final Tessellator tessellator = Tessellator.instance;
+				renderQuad(tessellator, 13, 2, 0);
+				renderQuad(tessellator, 12, 1, 0x003838);
+				renderQuad(tessellator, 2, 13, filled * 12, 1, 0x005151, 0xFFFF);
+
 				GL11.glEnable(GL11.GL_ALPHA_TEST);
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glEnable(GL11.GL_LIGHTING);
@@ -78,8 +92,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 			}
 		}
 		else {
-			GL11.glPushMatrix();
-			float scale = 2;
+			float scale = 2F;
 
 			if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED) {
 				GL11.glTranslatef(0.5F, 0, 0.5F);
@@ -91,24 +104,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 
 			GL11.glScalef(scale, -scale, -scale);
 			renderCanister(itemstack);
-			GL11.glPopMatrix();
 		}
-	}
-
-	public static void renderCanister(ItemStack itemstack) {
-		ItemPowerCanister container = (ItemPowerCanister) itemstack.getItem();
-		float energy = container.getEnergyStored(itemstack);
-		float max = container.getEnergyCapacity(itemstack);
-
-		if(energy > 0) {
-			Vec3 vec3 = Vec3.createVectorHelper(0, 0.0625F * 8.5F, 0);
-			TFRenderHelper.renderEnergyStatic(vec3, vec3.addVector(0, -0.0625F * 7, 0), 1F / (128 + 256 * (1 - energy / max)), energy / max, 16, itemstack.hashCode());
-		}
-
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
-		modelCanister.render();
-		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
 
 	private void renderQuad(Tessellator tessellator, float x, float y, float width, float height, int color1, int color2) {
@@ -122,7 +118,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 		tessellator.draw();
 	}
 
-	private void renderQuad(Tessellator tessellator, float x, float y, float width, float height, int color) {
-		renderQuad(tessellator, x, y, width, height, color, color);
+	private void renderQuad(Tessellator tessellator, float width, float height, int color) {
+		renderQuad(tessellator, 2F, 13F, width, height, color, color);
 	}
 }

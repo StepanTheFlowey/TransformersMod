@@ -1,21 +1,19 @@
 package fiskfille.tf.client.render.tileentity;
 
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.tileentity.ModelDisplayStation;
+import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.tileentity.ModelDisplayStation;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
-import fiskfille.tf.helper.TFRenderHelper;
-
 public class RenderDisplayStation extends TileEntitySpecialRenderer {
-	private ModelDisplayStation model = new ModelDisplayStation();
+	private final ModelDisplayStation model = new ModelDisplayStation();
 
 	public void render(TileEntityDisplayStation tile, double x, double y, double z, float partialTicks) {
 		int metadata = 0;

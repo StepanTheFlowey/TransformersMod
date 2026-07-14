@@ -1,17 +1,14 @@
 package fiskfille.tf.client.render.item;
 
+import fiskfille.tf.common.block.TFBlocks;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
-
-import fiskfille.tf.common.block.TFBlocks;
-import fiskfille.tf.helper.TFRenderHelper;
 
 public class RenderItemDataCore implements IItemRenderer {
 	public RenderBlocks renderBlocks = RenderBlocks.getInstance();
@@ -29,9 +26,8 @@ public class RenderItemDataCore implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		GL11.glColor3f(1F, 1F, 1F);
-		GL11.glPushMatrix();
-		float scale = type != ItemRenderType.INVENTORY ? 0.5F : 1;
 
+		float scale = type != ItemRenderType.INVENTORY ? 0.5F : 1F;
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED) {
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		}
@@ -41,24 +37,22 @@ public class RenderItemDataCore implements IItemRenderer {
 
 		GL11.glScalef(scale, scale, scale);
 		render(item);
-		GL11.glPopMatrix();
 	}
 
 	public void render(ItemStack itemstack) {
-		Block block = TFBlocks.groundBridgeControlPanel;
-		Tessellator tessellator = Tessellator.instance;
-		float colorMultiplier = 1;
+		final Block block = TFBlocks.groundBridgeControlPanel;
+		final Tessellator tessellator = Tessellator.instance;
 
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 
 		for(int i = 0; i < 2; ++i) {
-			IIcon icon = itemstack.getItem().getIcon(itemstack, i);
-			int color = itemstack.getItem().getColorFromItemStack(itemstack, i);
-			float f1 = (float) (color >> 16 & 255) / 255;
-			float f2 = (float) (color >> 8 & 255) / 255;
-			float f3 = (float) (color & 255) / 255;
+			final IIcon icon = itemstack.getItem().getIcon(itemstack, i);
+			final int color = itemstack.getItem().getColorFromItemStack(itemstack, i);
+			final float f1 = (color >> 16 & 255) / 255F;
+			final float f2 = (color >> 8 & 255) / 255F;
+			final float f3 = (color & 255) / 255F;
 
 			if(i == 1) {
 				GL11.glDisable(GL11.GL_LIGHTING);
@@ -66,7 +60,7 @@ public class RenderItemDataCore implements IItemRenderer {
 			}
 
 			if(renderBlocks.useInventoryTint) {
-				GL11.glColor4f(f1 * colorMultiplier, f2 * colorMultiplier, f3 * colorMultiplier, 1);
+				GL11.glColor3f(f1, f2, f3);
 			}
 
 			renderBlocks.setRenderBounds(0, 0, 0, 1, 1, 1);

@@ -2,12 +2,7 @@ package fiskfille.tf.client.render.shader;
 
 import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.ARBFragmentShader;
-import org.lwjgl.opengl.ARBGeometryShader4;
-import org.lwjgl.opengl.ARBShaderObjects;
-import org.lwjgl.opengl.ARBVertexShader;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
@@ -26,14 +21,13 @@ public abstract class ShaderProgram {
 
 	private static final List<ShaderProgram> PROGRAMS = new ArrayList<ShaderProgram>();
 
-	private Map<String, Integer> uniforms = new HashMap<String, Integer>();
+	private final Map<String, Integer> uniforms = new HashMap<String, Integer>();
 
-	private int programID;
-	private int vertexShaderID;
+	private final int programID;
+	private final int vertexShaderID;
+	private final int fragmentShaderID;
+	private final boolean hasGeometryShader;
 	private int geometryShaderID;
-	private int fragmentShaderID;
-
-	private boolean hasGeometryShader;
 
 	public ShaderProgram(String vertex, String fragment, String geometry) throws Exception {
 		this.hasGeometryShader = geometry != null;
@@ -87,6 +81,45 @@ public abstract class ShaderProgram {
 
 	public ShaderProgram(String vertex, String fragment) throws Exception {
 		this(vertex, fragment, null);
+	}
+
+	public static int loadShader(String resource, int type) throws Exception {
+		BufferedReader in = new BufferedReader(new InputStreamReader(ShaderProgram.class.getResourceAsStream("/assets/transformers/shaders/" + resource)));
+
+		String line, source = "";
+		while((line = in.readLine()) != null) {
+			source += line + "\n";
+		}
+
+		final int shaderID = OpenGlHelper.func_153195_b(type);
+		final byte[] bytes = source.getBytes();
+		final ByteBuffer buffer = BufferUtils.createByteBuffer(bytes.length).put(bytes);
+		buffer.flip();
+		OpenGlHelper.func_153169_a(shaderID, buffer);
+		OpenGlHelper.func_153170_c(shaderID);
+
+		if(OpenGlHelper.func_153157_c(shaderID, ARBShaderObjects.GL_OBJECT_COMPILE_STATUS_ARB) == GL11.GL_FALSE) {
+			System.err.println("Failed to compile shader: " + resource);
+			System.err.println(getLogInfoShader(shaderID));
+		}
+
+		return shaderID;
+	}
+
+	public static void deletePrograms() {
+		for(ShaderProgram program : PROGRAMS) {
+			program.delete();
+		}
+
+		PROGRAMS.clear();
+	}
+
+	private static String getLogInfoShader(int shader) {
+		return OpenGlHelper.func_153158_d(shader, OpenGlHelper.func_153157_c(shader, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
+	}
+
+	private static String getLogInfoProgram(int program) {
+		return OpenGlHelper.func_153166_e(program, OpenGlHelper.func_153175_a(program, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
 	}
 
 	protected abstract void bindAttributes();
@@ -154,48 +187,5 @@ public abstract class ShaderProgram {
 
 		OpenGlHelper.func_153187_e(this.programID);
 		PROGRAMS.remove(this);
-	}
-
-	public static int loadShader(String resource, int type) throws Exception {
-		String source = "";
-		BufferedReader in = new BufferedReader(new InputStreamReader(ShaderProgram.class.getResourceAsStream("/assets/transformers/shaders/" + resource)));
-
-		String line;
-
-		while((line = in.readLine()) != null) {
-			source += line + "\n";
-		}
-
-		int shaderID = OpenGlHelper.func_153195_b(type);
-		byte[] bytes = source.getBytes();
-		ByteBuffer buffer = BufferUtils.createByteBuffer(bytes.length).put(bytes);
-		buffer.flip();
-		OpenGlHelper.func_153169_a(shaderID, buffer);
-		OpenGlHelper.func_153170_c(shaderID);
-
-		if(OpenGlHelper.func_153157_c(shaderID, ARBShaderObjects.GL_OBJECT_COMPILE_STATUS_ARB) == GL11.GL_FALSE) {
-			System.err.println("Failed to compile shader: " + resource);
-			System.err.println(getLogInfoShader(shaderID));
-		}
-
-		return shaderID;
-	}
-
-	public static void deletePrograms() {
-		int size = PROGRAMS.size();
-
-		for(int i = 0; i < size; i++) {
-			PROGRAMS.get(0).delete();
-		}
-
-		PROGRAMS.clear();
-	}
-
-	private static String getLogInfoShader(int shader) {
-		return OpenGlHelper.func_153158_d(shader, OpenGlHelper.func_153157_c(shader, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
-	}
-
-	private static String getLogInfoProgram(int program) {
-		return OpenGlHelper.func_153166_e(program, OpenGlHelper.func_153175_a(program, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
 	}
 }
