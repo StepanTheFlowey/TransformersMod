@@ -1,3 +1,7 @@
 plugins {
 	id("com.gtnewhorizons.gtnhconvention")
 }
+
+runClient {
+    jvmArgs "-Xmx2G", "-Xms2G", "-XX:+UseTransparentHugePages", "-XX:+UseCompressedOops", "-XX:+ParallelRefProcEnabled", "-XX:+AlwaysPreTouch", "-XX:-DontCompileHugeMethods", "-XX:+UseStringDeduplication", "-XX:+OptimizeFill"
+}
