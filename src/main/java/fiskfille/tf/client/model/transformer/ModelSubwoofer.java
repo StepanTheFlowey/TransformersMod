@@ -1,13 +1,5 @@
 package fiskfille.tf.client.model.transformer;
 
-import static fiskfille.tf.common.data.TFPredicates.isBacking;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformerManager;
 import fiskfille.tf.client.model.AnimationModifier;
 import fiskfille.tf.client.model.AnimationModifier.Type;
@@ -20,6 +12,12 @@ import fiskfille.tf.helper.ModelOffset;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFModelHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
+
+import static fiskfille.tf.common.data.TFPredicates.isBacking;
 
 public class ModelSubwoofer extends ModelTransformerBase {
 	public ModelRendererTF waist;
@@ -574,13 +572,13 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		lowerArmR.rotateAngleX -= 0.1;
 		head.rotateAngleX += 0.1;
 
-		bob(waist, 1F * globalSpeed, 1.7F * globalDegree, false, limbSwing, limbSwingAmount);
+		bob(waist, globalSpeed, 1.7F * globalDegree, false, limbSwing, limbSwingAmount);
 		waist.rotationPointY += 1 * limbSwingAmount + 3;
-		walk(waist, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
-		walk(chestmain1, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(waist, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(chestmain1, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 		swing(chestmain1, 0.5F * globalSpeed, 0.6F * globalDegree, true, 0, 0, limbSwing, limbSwingAmount);
 		swing(waist, 0.5F * globalSpeed, 0.2F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
-		walk(head, 1F * globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(head, globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 
 		swing(head, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
 		head.rotationPointX += 0.6 * globalDegree * limbSwingAmount * Math.cos(limbSwing * 0.5F * globalSpeed);

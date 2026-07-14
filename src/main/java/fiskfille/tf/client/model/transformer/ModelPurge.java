@@ -1,13 +1,5 @@
 package fiskfille.tf.client.model.transformer;
 
-import static fiskfille.tf.common.data.TFPredicates.isBacking;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformerManager;
 import fiskfille.tf.client.model.AnimationModifier;
 import fiskfille.tf.client.model.AnimationModifier.Type;
@@ -20,6 +12,12 @@ import fiskfille.tf.helper.ModelOffset;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFModelHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
+
+import static fiskfille.tf.common.data.TFPredicates.isBacking;
 
 public class ModelPurge extends ModelTransformerBase {
 	public ModelRendererTF waist;
@@ -1190,14 +1188,14 @@ public class ModelPurge extends ModelTransformerBase {
 		ModelRendererTF armR = torsobaseR;
 		ModelRendererTF armL = torsobaseL;
 
-		bob(waist, 1F * globalSpeed, 1.7F * globalDegree, false, limbSwing, limbSwingAmount);
+		bob(waist, globalSpeed, 1.7F * globalDegree, false, limbSwing, limbSwingAmount);
 		waist.rotationPointY += 1.2 * limbSwingAmount;
-		walk(waist, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
-		walk(torsobase, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(waist, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(torsobase, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 		swing(torsobase, 0.5F * globalSpeed, 0.4F * globalDegree, true, 0, 0, limbSwing, limbSwingAmount);
 		swing(waist, 0.5F * globalSpeed, 0.2F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
 		swing(headbase, 0.5F * globalSpeed, 0.2F * globalDegree, true, 0, 0, limbSwing, limbSwingAmount);
-		walk(headbase, 1F * globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(headbase, globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 
 		swing(headbase, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
 		headbase.rotationPointX += 0.6 * globalDegree * limbSwingAmount * Math.cos(limbSwing * 0.5F * globalSpeed);
@@ -1213,9 +1211,9 @@ public class ModelPurge extends ModelTransformerBase {
 		walk(lowerArmR, 0.5F * globalSpeed, 0.5F * globalDegree, true, -1F * backwardInverter, -0.5F * limbSwingAmount, limbSwing, limbSwingAmount);
 		walk(lowerArmL, 0.5F * globalSpeed, 0.5F * globalDegree, false, -1F * backwardInverter, -0.5F * limbSwingAmount, limbSwing, limbSwingAmount);
 
-		flap(skirtR1, 1F * globalSpeed, 0.2F * globalDegree, false, -1, 0, limbSwing, limbSwingAmount);
-		flap(skirtL1, 1F * globalSpeed, 0.2F * globalDegree, true, -1, 0, limbSwing, limbSwingAmount);
-		walk(barrelbase1, 1F * globalSpeed, -0.3F * globalDegree, false, -1, 0, limbSwing, limbSwingAmount);
+		flap(skirtR1, globalSpeed, 0.2F * globalDegree, false, -1, 0, limbSwing, limbSwingAmount);
+		flap(skirtL1, globalSpeed, 0.2F * globalDegree, true, -1, 0, limbSwing, limbSwingAmount);
+		walk(barrelbase1, globalSpeed, -0.3F * globalDegree, false, -1, 0, limbSwing, limbSwingAmount);
 
 		if(player.isSneaking()) {
 			waist.rotationPointY += 1.8F;

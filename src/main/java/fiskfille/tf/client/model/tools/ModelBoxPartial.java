@@ -1,31 +1,28 @@
 package fiskfille.tf.client.model.tools;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.AxisAlignedBB;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModelBoxPartial extends ModelBox {
-	private PositionTextureVertex[] vertexPositions;
-	private TexturedQuadPartial[] quadList;
-
 	public float posX1;
 	public float posY1;
 	public float posZ1;
 	public float posX2;
 	public float posY2;
 	public float posZ2;
-
+	public ModelRendererPartial model;
 	protected float width;
 	protected float height;
 	protected float depth;
 	protected float scale;
 	protected float textureX;
 	protected float textureY;
-
-	public ModelRendererPartial model;
+	private PositionTextureVertex[] vertexPositions;
+	private TexturedQuadPartial[] quadList;
 
 	public ModelBoxPartial(ModelRendererPartial modelRenderer, int texX, int texY, float x, float y, float z, int w, int h, int d, float mcScale) {
 		super(modelRenderer, texX, texY, x, y, z, w, h, d, mcScale);

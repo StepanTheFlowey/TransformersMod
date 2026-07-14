@@ -1,18 +1,15 @@
 package fiskfille.tf.client.model.tools;
 
+import com.google.common.collect.Lists;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import org.lwjgl.opengl.GL11;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Lists;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModelRendererTF extends MowzieModelRenderer {
 	private List<ModelRenderer> hideUntil = Lists.newArrayList();

@@ -1,12 +1,11 @@
 package fiskfille.tf.client.model.tileentity;
 
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.client.model.tools.ModelRendererBreakable;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.tileentity.TileEntityColumn;
+import org.lwjgl.opengl.GL11;
 
 public class ModelEnergyColumn extends MowzieModelBase {
 	public MowzieModelRenderer columnBase1;

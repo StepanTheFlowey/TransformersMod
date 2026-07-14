@@ -1,7 +1,7 @@
 package fiskfille.tf.client.model.player;
 
-import net.minecraft.client.model.ModelBiped;
 import fiskfille.tf.client.model.tools.ModelRendererPartial;
+import net.minecraft.client.model.ModelBiped;
 
 public class ModelBipedPartial extends ModelBiped {
 	public ModelBipedPartial() {

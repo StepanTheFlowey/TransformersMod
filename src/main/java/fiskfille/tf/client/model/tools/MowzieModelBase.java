@@ -1,33 +1,39 @@
 package fiskfille.tf.client.model.tools;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.client.Minecraft;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author BobMowzie, gegy1000
  */
 @SideOnly(Side.CLIENT)
 public class MowzieModelBase extends ModelBiped {
-	public float PI = (float) Math.PI;
+	public static float PI = (float) Math.PI;
 
 	/**
 	 * Store every MowzieModelRenderer in this array
 	 */
 	protected List<MowzieModelRenderer> parts;
 
+	public static void setRotateAngle(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
 	@Override
 	public ModelRenderer getRandomModelBox(Random rand) {
-		if(parts.size() > 0) {
+		if(!parts.isEmpty()) {
 			return parts.get(rand.nextInt(parts.size()));
 		}
 
@@ -84,8 +90,6 @@ public class MowzieModelBase extends ModelBiped {
 	 * Don't use this yet. I'm trying to refine the parenting method, but it's not ready yet.
 	 */
 	protected void newAddChildTo(ModelRenderer child, ModelRenderer parent) {
-		Math.sqrt(Math.pow(child.rotationPointZ - parent.rotationPointZ, 2) + Math.pow(child.rotationPointY - parent.rotationPointY, 2));
-		Math.atan2(child.rotationPointY - parent.rotationPointY, child.rotationPointZ - parent.rotationPointZ);
 		parent.addChild(child);
 		child.rotateAngleX -= parent.rotateAngleX;
 		child.rotateAngleY -= parent.rotateAngleY;
@@ -227,11 +231,9 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1     is the walk speed.
 	 */
 	public void bob(MowzieModelRenderer box, float speed, float degree, boolean bounce, float f, float f1) {
-		float bob = (float) (Math.sin(f * speed) * f1 * degree - f1 * degree);
-		if(bounce) {
-			bob = (float) -Math.abs(Math.sin(f * speed) * f1 * degree);
-		}
-		box.rotationPointY += bob;
+		final double a = Math.sin(f * speed) * f1 * degree;
+		final double bob = bounce ? -Math.abs(a) : (a - f1 * degree);
+		box.rotationPointY += (float) bob;
 	}
 
 	/**
@@ -311,7 +313,7 @@ public class MowzieModelBase extends ModelBiped {
 				moveY = ((AxisAlignedBB) collidingEntity).calculateYOffset(entity.boundingBox, moveY);
 			}
 
-			onGround = actualMoveY != moveY && actualMoveY < 0D;
+			onGround = actualMoveY != moveY;
 		}
 
 		return onGround || isRiding;
@@ -354,12 +356,6 @@ public class MowzieModelBase extends ModelBiped {
 		}
 
 		parts.add(mowzieModelRenderer);
-	}
-
-	public void setRotateAngle(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	public MowzieModelBase setBreaking(boolean breaking) {

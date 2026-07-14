@@ -1,10 +1,10 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
+import fiskfille.tf.client.model.tools.MowzieModelRenderer;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import fiskfille.tf.client.model.tools.MowzieModelRenderer;
-import fiskfille.tf.helper.TFRenderHelper;
 
 public class ModelCloudtrapVehicle extends ModelVehicleBase {
 	public MowzieModelRenderer vehicleBody;

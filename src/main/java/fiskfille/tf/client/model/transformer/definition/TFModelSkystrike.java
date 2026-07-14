@@ -1,23 +1,21 @@
 package fiskfille.tf.client.model.transformer.definition;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tools.ModelRendererTF;
 import fiskfille.tf.client.model.transformer.ModelSkystrike;
 import fiskfille.tf.client.model.transformer.ModelTransformerBase;
 import fiskfille.tf.client.model.transformer.vehicle.ModelSkystrikeVehicle;
 import fiskfille.tf.client.model.transformer.vehicle.ModelVehicleBase;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class TFModelSkystrike extends TransformerModel {
-	private ModelSkystrike model;
-	private ModelSkystrike modelItem;
-	private ModelSkystrikeVehicle vehicle;
+	private final ModelSkystrike model;
+	private final ModelSkystrike modelItem;
+	private final ModelSkystrikeVehicle vehicle;
 
 	public TFModelSkystrike() {
 		model = new ModelSkystrike();

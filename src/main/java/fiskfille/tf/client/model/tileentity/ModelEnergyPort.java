@@ -1,9 +1,8 @@
 package fiskfille.tf.client.model.tileentity;
 
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
+import org.lwjgl.opengl.GL11;
 
 public class ModelEnergyPort extends MowzieModelBase {
 	public MowzieModelRenderer shape1;

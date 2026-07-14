@@ -1,12 +1,5 @@
 package fiskfille.tf.client.model.transformer.definition;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tools.ModelRendererTF;
 import fiskfille.tf.client.model.transformer.ModelSubwoofer;
@@ -14,12 +7,17 @@ import fiskfille.tf.client.model.transformer.ModelTransformerBase;
 import fiskfille.tf.client.model.transformer.stealth.ModelSubwooferStealth;
 import fiskfille.tf.client.model.transformer.vehicle.ModelSubwooferVehicle;
 import fiskfille.tf.client.model.transformer.vehicle.ModelVehicleBase;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class TFModelSubwoofer extends TransformerModel {
-	private ModelSubwoofer model;
-	private ModelSubwoofer modelItem;
-	private ModelSubwooferVehicle vehicle;
-	private ModelSubwooferStealth stealth;
+	private final ModelSubwoofer model;
+	private final ModelSubwoofer modelItem;
+	private final ModelSubwooferVehicle vehicle;
+	private final ModelSubwooferStealth stealth;
 
 	public TFModelSubwoofer() {
 		model = new ModelSubwoofer();

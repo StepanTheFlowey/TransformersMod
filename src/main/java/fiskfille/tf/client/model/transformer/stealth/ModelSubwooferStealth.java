@@ -1,16 +1,16 @@
 package fiskfille.tf.client.model.transformer.stealth;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import fiskfille.tf.client.model.tools.ModelRendererTF;
 import fiskfille.tf.client.model.transformer.vehicle.ModelSubwooferVehicle;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class ModelSubwooferStealth extends ModelSubwooferVehicle {
 	public ModelRendererTF vehicleBase;

@@ -5,9 +5,9 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.TextureOffset;
 
 public class ModelRendererPartial extends MowzieModelRenderer {
+	private final ModelBase baseModel;
 	private int textureOffsetX;
 	private int textureOffsetY;
-	private ModelBase baseModel;
 
 	public ModelRendererPartial(ModelBase modelBase, String name) {
 		super(modelBase, name);

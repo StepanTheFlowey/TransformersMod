@@ -1,16 +1,6 @@
 package fiskfille.tf.client.model.transformer;
 
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-
 import com.google.common.collect.Lists;
-
 import fiskfille.tf.client.model.AnimationModifier;
 import fiskfille.tf.client.model.tools.ModelRendererTF;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
@@ -21,11 +11,19 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFArmorDyeHelper;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class ModelTransformerBase extends MowzieModelBase {
 	private final float baseSpeed;
 	private final float baseDegree;
-	private AnimationModifier[] animModifiers;
+	private final AnimationModifier[] animModifiers;
 
 	public int layerToRender;
 
@@ -278,18 +276,18 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 	protected void applyDefaultHittingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer head, ModelRenderer chest, ModelRenderer lowerArmR, ModelRenderer lowerArmL) {
 		if(onGround > -9990F) {
 			float hitAnimation = onGround;
+			final float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * PI * 2F) * 0.2F;
 
-			float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * PI * 2F) * 0.2F;
 			chest.rotateAngleY += change;
 			head.rotateAngleY -= change;
 
-			upperArmR.rotateAngleY += change * 0.5;
-			upperArmL.rotateAngleY += change * 0.5;
-			upperArmL.rotateAngleX += change * 0.5;
+			upperArmR.rotateAngleY += change * 0.5F;
+			upperArmL.rotateAngleY += change * 0.5F;
+			upperArmL.rotateAngleX += change * 0.5F;
 
-			lowerArmR.rotateAngleY += change * 0.5;
-			lowerArmL.rotateAngleY += change * 0.5;
-			lowerArmL.rotateAngleX += change * 0.5;
+			lowerArmR.rotateAngleY += change * 0.5F;
+			lowerArmL.rotateAngleY += change * 0.5F;
+			lowerArmL.rotateAngleX += change * 0.5F;
 
 			hitAnimation = 1F - onGround;
 			hitAnimation *= hitAnimation;
@@ -302,11 +300,11 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 			float armRZChange = MathHelper.sin(onGround * PI) * -0.4F * 0.5F;
 
 			upperArmR.rotateAngleX += armRXChange;
-			upperArmR.rotateAngleY += change * 2F * 0.5;
+			upperArmR.rotateAngleY += change;
 			upperArmR.rotateAngleZ += armRZChange;
 
 			lowerArmR.rotateAngleX += armRXChange;
-			lowerArmR.rotateAngleY += change * 2F * 0.5;
+			lowerArmR.rotateAngleY += change;
 			lowerArmR.rotateAngleZ += armRZChange;
 		}
 	}
@@ -327,6 +325,5 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		return null;
 	}
 
-	public void renderArmorPiece(int armorPiece) {
-	}
+	public void renderArmorPiece(int armorPiece) {}
 }

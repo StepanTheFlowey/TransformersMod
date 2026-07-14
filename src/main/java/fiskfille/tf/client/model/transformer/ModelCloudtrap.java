@@ -1,16 +1,5 @@
 package fiskfille.tf.client.model.transformer;
 
-import static fiskfille.tf.common.data.TFPredicates.and;
-import static fiskfille.tf.common.data.TFPredicates.isFlying;
-import static fiskfille.tf.common.data.TFPredicates.isSneaking;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
-
 import fiskfille.tf.TransformerManager;
 import fiskfille.tf.client.model.AnimationModifier;
 import fiskfille.tf.client.model.AnimationModifier.Type;
@@ -22,6 +11,13 @@ import fiskfille.tf.helper.ModelOffset;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFModelHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
+
+import static fiskfille.tf.common.data.TFPredicates.*;
 
 public class ModelCloudtrap extends ModelTransformerBase {
 	public ModelRendererTF waist;
@@ -1024,26 +1020,26 @@ public class ModelCloudtrap extends ModelTransformerBase {
 
 	@Override
 	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		bob(waist, globalSpeed * 1F, globalDegree * 1, false, limbSwing, limbSwingAmount);
+		bob(waist, globalSpeed, globalDegree, false, limbSwing, limbSwingAmount);
 
 		waist.rotationPointY += 1 * limbSwingAmount * 1.25F;
-		walk(waist, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
-		walk(torsoConnector, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(waist, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(torsoConnector, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 		swing(torsoConnector, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
 		swing(torsoConnector, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
 		swing(waist, 0.5F * globalSpeed, 0.4F * globalDegree, true, 0, 0, limbSwing, limbSwingAmount);
-		walk(head, 1F * globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
+		walk(head, globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 		swing(head, 0.5F * globalSpeed, -0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
 
 		swing(upperLegL, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0F, limbSwing, limbSwingAmount);
 		swing(upperLegR, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0F, limbSwing, limbSwingAmount);
 
-		walk(upperLegR, globalSpeed * 0.5F, globalDegree * 1F, true, 0, 0.2F, limbSwing, limbSwingAmount);
+		walk(upperLegR, globalSpeed * 0.5F, globalDegree, true, 0, 0.2F, limbSwing, limbSwingAmount);
 		walk(lowerlegRbase, 0.5F * globalSpeed, 1.3F * globalDegree, false, 1F * backwardInverter, 0.2F, limbSwing, limbSwingAmount);
 		walk(feetbaseR, 0.5F * globalSpeed, 0.6F * globalDegree, true, 0F, 0F, limbSwing, limbSwingAmount);
 		walk(feetbaseR, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0.5F * backwardInverter, 0.3F, limbSwing, limbSwingAmount);
 
-		walk(upperLegL, globalSpeed * 0.5F, globalDegree * 1F, false, 0, 0.2F, limbSwing, limbSwingAmount);
+		walk(upperLegL, globalSpeed * 0.5F, globalDegree, false, 0, 0.2F, limbSwing, limbSwingAmount);
 		walk(lowerlegLbase, 0.5F * globalSpeed, 1.3F * globalDegree, true, 1F * backwardInverter, 0.2F, limbSwing, limbSwingAmount);
 		walk(feetbaseL, 0.5F * globalSpeed, 0.6F * globalDegree, false, 0F, 0F, limbSwing, limbSwingAmount);
 		walk(feetbaseL, 0.5F * globalSpeed, 0.4F * globalDegree, true, 0.5F * backwardInverter, 0.3F, limbSwing, limbSwingAmount);
@@ -1057,42 +1053,42 @@ public class ModelCloudtrap extends ModelTransformerBase {
 			waist.rotateAngleX -= 0.1F;
 			waist.rotationPointY += 0.5F;
 			waist.rotationPointY -= limbSwing * limbSwingAmount * 0.0005F;
-			torsoConnector.rotateAngleX += 0.5;
-			head.rotateAngleX -= 0.5;
-			upperLegR.rotateAngleX -= 0.4;
-			upperLegL.rotateAngleX -= 0.4;
-			upperLegR.rotateAngleZ += 0.1;
-			upperLegL.rotateAngleZ -= 0.1;
-			upperLegR.rotateAngleY += 0.2;
-			upperLegL.rotateAngleY -= 0.2;
-			lowerlegRbase.rotateAngleX += 0.7;
-			lowerlegLbase.rotateAngleX += 0.7;
-			feetbaseR.rotateAngleX -= 0.15;
-			feetbaseL.rotateAngleX -= 0.15;
-			feetbaseR.rotateAngleZ -= 0.05;
-			feetbaseL.rotateAngleZ += 0.05;
-			upperArmR.rotateAngleX -= 0.5;
-			upperArmL.rotateAngleX -= 0.5;
-			upperArmR.rotateAngleZ += 0.5;
-			upperArmL.rotateAngleZ -= 0.5;
-			lowerArmR.rotateAngleZ -= 0.5;
-			lowerArmL.rotateAngleZ += 0.5;
+			torsoConnector.rotateAngleX += 0.5F;
+			head.rotateAngleX -= 0.5F;
+			upperLegR.rotateAngleX -= 0.4F;
+			upperLegL.rotateAngleX -= 0.4F;
+			upperLegR.rotateAngleZ += 0.1F;
+			upperLegL.rotateAngleZ -= 0.1F;
+			upperLegR.rotateAngleY += 0.2F;
+			upperLegL.rotateAngleY -= 0.2F;
+			lowerlegRbase.rotateAngleX += 0.7F;
+			lowerlegLbase.rotateAngleX += 0.7F;
+			feetbaseR.rotateAngleX -= 0.15F;
+			feetbaseL.rotateAngleX -= 0.15F;
+			feetbaseR.rotateAngleZ -= 0.05F;
+			feetbaseL.rotateAngleZ += 0.05F;
+			upperArmR.rotateAngleX -= 0.5F;
+			upperArmL.rotateAngleX -= 0.5F;
+			upperArmR.rotateAngleZ += 0.5F;
+			upperArmL.rotateAngleZ -= 0.5F;
+			lowerArmR.rotateAngleZ -= 0.5F;
+			lowerArmL.rotateAngleZ += 0.5F;
 		}
 		else {
-			upperArmR.rotateAngleZ += 0.075;
-			upperArmL.rotateAngleZ -= 0.075;
-			lowerArmR.rotateAngleZ -= 0.1;
-			lowerArmL.rotateAngleZ += 0.1;
-			lowerArmR.rotateAngleX -= 0.1;
-			lowerArmL.rotateAngleX -= 0.1;
+			upperArmR.rotateAngleZ += 0.075F;
+			upperArmL.rotateAngleZ -= 0.075F;
+			lowerArmR.rotateAngleZ -= 0.1F;
+			lowerArmL.rotateAngleZ += 0.1F;
+			lowerArmR.rotateAngleX -= 0.1F;
+			lowerArmL.rotateAngleX -= 0.1F;
 
-			upperLegR.rotateAngleZ += 0.05;
-			upperLegL.rotateAngleZ -= 0.05;
+			upperLegR.rotateAngleZ += 0.05F;
+			upperLegL.rotateAngleZ -= 0.05F;
 
-			lowerlegRbase.rotateAngleZ -= 0.025;
-			lowerlegLbase.rotateAngleZ += 0.025;
-			feetbaseR.rotateAngleZ -= 0.025;
-			feetbaseL.rotateAngleZ += 0.025;
+			lowerlegRbase.rotateAngleZ -= 0.025F;
+			lowerlegLbase.rotateAngleZ += 0.025F;
+			feetbaseR.rotateAngleZ -= 0.025F;
+			feetbaseL.rotateAngleZ += 0.025F;
 		}
 	}
 

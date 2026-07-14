@@ -1,11 +1,11 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
+import fiskfille.tf.client.model.tools.MowzieModelRenderer;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
-import fiskfille.tf.client.model.tools.MowzieModelRenderer;
-import fiskfille.tf.helper.TFRenderHelper;
 
 public class ModelPurgeVehicle extends ModelVehicleBase {
 	public MowzieModelRenderer vehiclebase;

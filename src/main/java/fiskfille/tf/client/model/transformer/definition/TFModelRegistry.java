@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TFModelRegistry {
-	private static Map<Transformer, TransformerModel> models = new HashMap<Transformer, TransformerModel>();
+	private static final Map<Transformer, TransformerModel> models = new HashMap<Transformer, TransformerModel>();
 
 	public static void registerModel(Transformer transformer, TransformerModel model) {
 		models.put(transformer, model);

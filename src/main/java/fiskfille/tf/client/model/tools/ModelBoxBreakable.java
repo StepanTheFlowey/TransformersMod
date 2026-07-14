@@ -1,16 +1,15 @@
 package fiskfille.tf.client.model.tools;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModelBoxBreakable extends ModelBox {
-	private PositionTextureVertex[] vertexPositions;
-	private TexturedQuad[] quadList;
-
+	private final PositionTextureVertex[] vertexPositions;
+	private final TexturedQuad[] quadList;
 	public ModelRendererBreakable model;
 
 	public ModelBoxBreakable(ModelRendererBreakable modelRenderer, int textureX, int textureY, float x, float y, float z, int width, int height, int depth, float mcScale) {

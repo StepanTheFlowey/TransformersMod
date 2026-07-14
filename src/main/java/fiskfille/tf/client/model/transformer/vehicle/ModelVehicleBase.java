@@ -1,11 +1,11 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.common.item.ItemDisplayVehicle;
 import fiskfille.tf.helper.TFArmorDyeHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class ModelVehicleBase extends MowzieModelBase {
 	public void renderDisplayVehicle(ItemStack itemstack) {

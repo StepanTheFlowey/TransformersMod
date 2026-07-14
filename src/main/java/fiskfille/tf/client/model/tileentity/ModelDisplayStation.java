@@ -1,6 +1,5 @@
 package fiskfille.tf.client.model.tileentity;
 
-import net.minecraft.client.model.ModelRenderer;
 import fiskfille.tf.client.model.tools.ModelRendererBreakable;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
@@ -196,12 +195,5 @@ public class ModelDisplayStation extends MowzieModelBase {
 	public void render() {
 		setToInitPose();
 		shape1.render(0.0625F);
-	}
-
-	@Override
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
 	}
 }
