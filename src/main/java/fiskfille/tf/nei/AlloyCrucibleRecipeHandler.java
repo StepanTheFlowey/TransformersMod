@@ -47,8 +47,8 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 				LinkedList<ItemStack> ingredients = Lists.newLinkedList();
 				List<String> list = alloy.getOreDictNames(i);
 
-				for(int j = 0; j < list.size(); ++j) {
-					ingredients.addAll(OreDictionary.getOres(list.get(j)));
+				for(String s : list) {
+					ingredients.addAll(OreDictionary.getOres(s));
 				}
 
 				Object items = ingredients;
