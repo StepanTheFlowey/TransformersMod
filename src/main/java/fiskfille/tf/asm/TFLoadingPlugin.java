@@ -12,38 +12,32 @@ import fiskfille.tf.asm.transformers.ClassTransformerRenderPlayer;
 
 @MCVersion("1.7.10")
 @TransformerExclusions("fiskfille.tf.asm")
-public class TFLoadingPlugin implements IFMLLoadingPlugin
-{
-    public static boolean loaded;
+public class TFLoadingPlugin implements IFMLLoadingPlugin {
+	public static boolean loaded;
 
-    @Override
-    public String[] getASMTransformerClass()
-    {
-        return new String[] {ClassTransformerRenderPlayer.class.getName(), ClassTransformerEntity.class.getName(), ClassTransformerModelBiped.class.getName(), ClassTransformerGuiContainer.class.getName()};
-    }
+	@Override
+	public String[] getASMTransformerClass() {
+		return new String[]{ClassTransformerRenderPlayer.class.getName(), ClassTransformerEntity.class.getName(), ClassTransformerModelBiped.class.getName(), ClassTransformerGuiContainer.class.getName()};
+	}
 
-    @Override
-    public String getAccessTransformerClass()
-    {
-        return null;
-    }
+	@Override
+	public String getAccessTransformerClass() {
+		return null;
+	}
 
-    @Override
-    public String getModContainerClass()
-    {
-        return null;
-    }
+	@Override
+	public String getModContainerClass() {
+		return null;
+	}
 
-    @Override
-    public String getSetupClass()
-    {
-        return null;
-    }
+	@Override
+	public String getSetupClass() {
+		return null;
+	}
 
-    @Override
-    public void injectData(Map<String, Object> data)
-    {
-        TFTranslator.obfuscatedEnv = Boolean.class.cast(data.get("runtimeDeobfuscationEnabled"));
-        loaded = true;
-    }
+	@Override
+	public void injectData(Map<String, Object> data) {
+		TFTranslator.obfuscatedEnv = Boolean.class.cast(data.get("runtimeDeobfuscationEnabled"));
+		loaded = true;
+	}
 }

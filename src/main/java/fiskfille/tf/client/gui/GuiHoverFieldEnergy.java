@@ -9,24 +9,20 @@ import fiskfille.tf.common.energon.power.EnergyStorage;
 import fiskfille.tf.helper.TFFormatHelper;
 
 @SideOnly(Side.CLIENT)
-public class GuiHoverFieldEnergy extends GuiHoverField
-{
-    private EnergyStorage energyStorage;
+public class GuiHoverFieldEnergy extends GuiHoverField {
+	private EnergyStorage energyStorage;
 
-    public GuiHoverFieldEnergy(int x, int y, int width, int height, EnergyStorage storage)
-    {
-        super(x, y, width, height, new ArrayList<String>());
-        energyStorage = storage;
-    }
+	public GuiHoverFieldEnergy(int x, int y, int width, int height, EnergyStorage storage) {
+		super(x, y, width, height, new ArrayList<String>());
+		energyStorage = storage;
+	}
 
-    public void update(EnergyStorage storage)
-    {
-        energyStorage = storage;
-    }
+	public void update(EnergyStorage storage) {
+		energyStorage = storage;
+	}
 
-    @Override
-    public List<String> getHoverText()
-    {
-        return TFFormatHelper.toString(energyStorage.format());
-    }
+	@Override
+	public List<String> getHoverText() {
+		return TFFormatHelper.toString(energyStorage.format());
+	}
 }

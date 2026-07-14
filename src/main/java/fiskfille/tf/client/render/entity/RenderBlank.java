@@ -8,21 +8,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class RenderBlank extends Render
-{
-    public RenderBlank()
-    {
-        shadowSize = 0F;
-    }
+public class RenderBlank extends Render {
+	public RenderBlank() {
+		shadowSize = 0F;
+	}
 
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
-        return null;
-    }
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return null;
+	}
 
-    @Override
-    public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks)
-    {
-    }
+	@Override
+	public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks) {
+	}
 }

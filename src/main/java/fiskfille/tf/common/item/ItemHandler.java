@@ -15,91 +15,75 @@ import fiskfille.tf.common.data.TFWorldData;
 import fiskfille.tf.common.event.ItemHandlerEvent;
 import fiskfille.tf.common.event.ItemStitchEvent;
 
-public class ItemHandler
-{
-    private static Map<Class, String> itemHandlers = Maps.newHashMap();
-    public static boolean hasInit = false;
+public class ItemHandler {
+	private static Map<Class, String> itemHandlers = Maps.newHashMap();
+	public static boolean hasInit = false;
 
-    public static void init()
-    {
-        List<String> names = Lists.newLinkedList();
-        List<String> domains = Lists.newLinkedList();
+	public static void init() {
+		List<String> names = Lists.newLinkedList();
+		List<String> domains = Lists.newLinkedList();
 
-        MinecraftForge.EVENT_BUS.post(new ItemHandlerEvent.Init(itemHandlers));
-        hasInit = true;
+		MinecraftForge.EVENT_BUS.post(new ItemHandlerEvent.Init(itemHandlers));
+		hasInit = true;
 
-        for (Map.Entry<Class, String> e : itemHandlers.entrySet())
-        {
-            for (Field field : e.getKey().getFields())
-            {
-                String s = field.getType().getName();
+		for(Map.Entry<Class, String> e : itemHandlers.entrySet()) {
+			for(Field field : e.getKey().getFields()) {
+				String s = field.getType().getName();
 
-                if (s.equals(ItemStack[].class.getName()))
-                {
-                    names.add(field.getName());
-                    domains.add(e.getValue());
-                }
-            }
-        }
+				if(s.equals(ItemStack[].class.getName())) {
+					names.add(field.getName());
+					domains.add(e.getValue());
+				}
+			}
+		}
 
-        ItemMetaBasic.iconNames = names.toArray(new String[names.size()]);
-        ItemMetaBasic.iconDomains = domains.toArray(new String[domains.size()]);
-    }
+		ItemMetaBasic.iconNames = names.toArray(new String[names.size()]);
+		ItemMetaBasic.iconDomains = domains.toArray(new String[domains.size()]);
+	}
 
-    public static void load(World world)
-    {
-        TFWorldData data = TFWorldData.get(world);
-        MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Pre(world));
+	public static void load(World world) {
+		TFWorldData data = TFWorldData.get(world);
+		MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Pre(world));
 
-        for (Map.Entry<Class, String> e : itemHandlers.entrySet())
-        {
-            for (Field field : e.getKey().getFields())
-            {
-                String s = field.getType().getName();
+		for(Map.Entry<Class, String> e : itemHandlers.entrySet()) {
+			for(Field field : e.getKey().getFields()) {
+				String s = field.getType().getName();
 
-                if (s.equals(ItemStack[].class.getName()))
-                {
-                    try
-                    {
-                        ItemStack[] itemstacks = new ItemStack[65];
-                        String name = field.getName();
-                        int id = data.getNextAvailableId();
+				if(s.equals(ItemStack[].class.getName())) {
+					try {
+						ItemStack[] itemstacks = new ItemStack[65];
+						String name = field.getName();
+						int id = data.getNextAvailableId();
 
-                        if (data.subItems.containsKey(name))
-                        {
-                            id = data.subItems.get(name);
-                        }
-                        else
-                        {
-                            data.subItems.put(name, id);
-                        }
+						if(data.subItems.containsKey(name)) {
+							id = data.subItems.get(name);
+						}
+						else {
+							data.subItems.put(name, id);
+						}
 
-                        for (int amount = 0; amount < itemstacks.length; ++amount)
-                        {
-                            itemstacks[amount] = new ItemStack(TFItems.craftingMaterial, amount, id);
-                        }
+						for(int amount = 0; amount < itemstacks.length; ++amount) {
+							itemstacks[amount] = new ItemStack(TFItems.craftingMaterial, amount, id);
+						}
 
-                        field.set(null, itemstacks);
-                    }
-                    catch (Exception exception)
-                    {
-                        exception.printStackTrace();
-                    }
-                }
-            }
-        }
+						field.set(null, itemstacks);
+					}
+					catch(Exception exception) {
+						exception.printStackTrace();
+					}
+				}
+			}
+		}
 
-        ItemMetaBasic.subItems = data.subItems;
-        MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Post(world));
-    }
+		ItemMetaBasic.subItems = data.subItems;
+		MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Post(world));
+	}
 
-    public static boolean matches(ItemStack itemstack, ItemStack[] item)
-    {
-        if (itemstack != null && item[1].getItem() == itemstack.getItem() && item[1].getItemDamage() == itemstack.getItemDamage())
-        {
-            return true;
-        }
+	public static boolean matches(ItemStack itemstack, ItemStack[] item) {
+		if(itemstack != null && item[1].getItem() == itemstack.getItem() && item[1].getItemDamage() == itemstack.getItemDamage()) {
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

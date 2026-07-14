@@ -16,89 +16,74 @@ import fiskfille.tf.helper.TFVectorHelper;
 /**
  * @author gegy1000
  */
-public abstract class TransformerTruck extends Transformer
-{
-    public TransformerTruck(String name)
-    {
-        super(name);
-    }
+public abstract class TransformerTruck extends Transformer {
+	public TransformerTruck(String name) {
+		super(name);
+	}
 
-    @Override
-    public float fall(EntityPlayer player, float distance, int altMode)
-    {
-        return TFHelper.isFullyTransformed(player) ? distance / 4 : super.fall(player, distance, altMode);
-    }
+	@Override
+	public float fall(EntityPlayer player, float distance, int altMode) {
+		return TFHelper.isFullyTransformed(player) ? distance / 4 : super.fall(player, distance, altMode);
+	}
 
-    @Override
-    public boolean hasStealthForce(EntityPlayer player, int altMode)
-    {
-        return true;
-    }
+	@Override
+	public boolean hasStealthForce(EntityPlayer player, int altMode) {
+		return true;
+	}
 
-    @Override
-    public boolean canJumpAsVehicle(EntityPlayer player, int altMode)
-    {
-        return TFHelper.isInStealthMode(player);
-    }
+	@Override
+	public boolean canJumpAsVehicle(EntityPlayer player, int altMode) {
+		return TFHelper.isInStealthMode(player);
+	}
 
-    @Override
-    public float getHeightOffset(EntityPlayer player, int altMode)
-    {
-        return -1F;
-    }
+	@Override
+	public float getHeightOffset(EntityPlayer player, int altMode) {
+		return -1F;
+	}
 
-    @Override
-    public boolean canUseNitro(EntityPlayer player, int altMode)
-    {
-        return !TFHelper.isInStealthMode(player);
-    }
+	@Override
+	public boolean canUseNitro(EntityPlayer player, int altMode) {
+		return !TFHelper.isInStealthMode(player);
+	}
 
-    @Override
-    public void updateMovement(EntityPlayer player, int altMode)
-    {
-        TFMotionManager.motion(player, 40, 60, 20, 10, false, true, TFHelper.isInStealthMode(player));
-    }
+	@Override
+	public void updateMovement(EntityPlayer player, int altMode) {
+		TFMotionManager.motion(player, 40, 60, 20, 10, false, true, TFHelper.isInStealthMode(player));
+	}
 
-    @Override
-    public boolean canShoot(EntityPlayer player, int altMode)
-    {
-        return TFHelper.isInStealthMode(player);
-    }
+	@Override
+	public boolean canShoot(EntityPlayer player, int altMode) {
+		return TFHelper.isInStealthMode(player);
+	}
 
-    @Override
-    public Item getShootItem(int altMode)
-    {
-        return TFItems.missile;
-    }
+	@Override
+	public Item getShootItem(int altMode) {
+		return TFItems.missile;
+	}
 
-    @Override
-    public Entity getShootEntity(EntityPlayer player, int altMode)
-    {
-        EntityMissile entityMissile = new EntityMissile(player.worldObj, player, TFConfig.allowMissileExplosions, TFHelper.isInStealthMode(player));
-        return entityMissile;
-    }
+	@Override
+	public Entity getShootEntity(EntityPlayer player, int altMode) {
+		EntityMissile entityMissile = new EntityMissile(player.worldObj, player, TFConfig.allowMissileExplosions, TFHelper.isInStealthMode(player));
+		return entityMissile;
+	}
 
-    @Override
-    public int getShots(int altMode)
-    {
-        return 8;
-    }
+	@Override
+	public int getShots(int altMode) {
+		return 8;
+	}
 
-    @Override
-    public void doNitroParticles(EntityPlayer player, int altMode)
-    {
-        Random rand = new Random();
+	@Override
+	public void doNitroParticles(EntityPlayer player, int altMode) {
+		Random rand = new Random();
 
-        for (int i = 0; i < 4; ++i)
-        {
-            Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -0.9, false);
-            player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);
-        }
+		for(int i = 0; i < 4; ++i) {
+			Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -0.9, false);
+			player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);
+		}
 
-        for (int i = 0; i < 10; ++i)
-        {
-            Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -0.9, false);
-            player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 10, rand.nextFloat() / 10 + 0.05F, rand.nextFloat() / 10);
-        }
-    }
+		for(int i = 0; i < 10; ++i) {
+			Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -0.9, false);
+			player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 10, rand.nextFloat() / 10 + 0.05F, rand.nextFloat() / 10);
+		}
+	}
 }

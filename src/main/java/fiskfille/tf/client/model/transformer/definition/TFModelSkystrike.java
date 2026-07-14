@@ -14,100 +14,84 @@ import fiskfille.tf.client.model.transformer.ModelTransformerBase;
 import fiskfille.tf.client.model.transformer.vehicle.ModelSkystrikeVehicle;
 import fiskfille.tf.client.model.transformer.vehicle.ModelVehicleBase;
 
-public class TFModelSkystrike extends TransformerModel
-{
-    private ModelSkystrike model;
-    private ModelSkystrike modelItem;
-    private ModelSkystrikeVehicle vehicle;
+public class TFModelSkystrike extends TransformerModel {
+	private ModelSkystrike model;
+	private ModelSkystrike modelItem;
+	private ModelSkystrikeVehicle vehicle;
 
-    public TFModelSkystrike()
-    {
-        model = new ModelSkystrike();
-        modelItem = new ModelSkystrike();
-        vehicle = new ModelSkystrikeVehicle();
-    }
+	public TFModelSkystrike() {
+		model = new ModelSkystrike();
+		modelItem = new ModelSkystrike();
+		vehicle = new ModelSkystrikeVehicle();
+	}
 
-    @Override
-    public ModelTransformerBase getMainModel()
-    {
-        return model;
-    }
+	@Override
+	public ModelTransformerBase getMainModel() {
+		return model;
+	}
 
-    @Override
-    public ModelVehicleBase getVehicleModel()
-    {
-        return vehicle;
-    }
+	@Override
+	public ModelVehicleBase getVehicleModel() {
+		return vehicle;
+	}
 
-    @Override
-    public ModelRendererTF[] getFeet()
-    {
-        return new ModelRendererTF[] {model.feetbaseL1, model.feetbaseR1};
-    }
+	@Override
+	public ModelRendererTF[] getFeet() {
+		return new ModelRendererTF[]{model.feetbaseL1, model.feetbaseR1};
+	}
 
-    @Override
-    public ModelRendererTF[] getLegs()
-    {
-        return new ModelRendererTF[] {model.upperlegL1, model.upperlegR1};
-    }
+	@Override
+	public ModelRendererTF[] getLegs() {
+		return new ModelRendererTF[]{model.upperlegL1, model.upperlegR1};
+	}
 
-    @Override
-    public ModelRendererTF getLowerArm()
-    {
-        return model.lowerarmR1;
-    }
+	@Override
+	public ModelRendererTF getLowerArm() {
+		return model.lowerarmR1;
+	}
 
-    @Override
-    public ModelRendererTF getUpperArm()
-    {
-        return model.shoulderRbase;
-    }
+	@Override
+	public ModelRendererTF getUpperArm() {
+		return model.shoulderRbase;
+	}
 
-    @Override
-    public ModelRendererTF getBody()
-    {
-        return model.torsobase1;
-    }
+	@Override
+	public ModelRendererTF getBody() {
+		return model.torsobase1;
+	}
 
-    @Override
-    public ModelRendererTF getHead()
-    {
-        return model.headbase;
-    }
+	@Override
+	public ModelRendererTF getHead() {
+		return model.headbase;
+	}
 
-    @Override
-    public float getFootHeight()
-    {
-        return 1.25F;
-    }
+	@Override
+	public float getFootHeight() {
+		return 1.25F;
+	}
 
-    @Override
-    public void renderItem(EntityPlayer player, ItemStack stack)
-    {
-        GL11.glTranslatef(0.15F, -0.1F, 0.1F);
-    }
+	@Override
+	public void renderItem(EntityPlayer player, ItemStack stack) {
+		GL11.glTranslatef(0.15F, -0.1F, 0.1F);
+	}
 
-    @Override
-    public void renderCape(EntityPlayer player)
-    {
-        GL11.glTranslatef(0, -0.1F, 0.1F);
-    }
+	@Override
+	public void renderCape(EntityPlayer player) {
+		GL11.glTranslatef(0, -0.1F, 0.1F);
+	}
 
-    @Override
-    public void renderFirstPersonArm(EntityPlayer player)
-    {
-        GL11.glTranslatef(0, -0.05F, 0.1F);
-    }
+	@Override
+	public void renderFirstPersonArm(EntityPlayer player) {
+		GL11.glTranslatef(0, -0.05F, 0.1F);
+	}
 
-    @Override
-    public ResourceLocation getTexture(Entity entity, String suffix)
-    {
-        return new ResourceLocation(TransformersMod.modid, String.format("textures/models/skystrike/skystrike%s.png", suffix));
-    }
+	@Override
+	public ResourceLocation getTexture(Entity entity, String suffix) {
+		return new ResourceLocation(TransformersMod.modid, String.format("textures/models/skystrike/skystrike%s.png", suffix));
+	}
 
-    @Override
-    public ModelTransformerBase getItemInventoryModel()
-    {
-        return modelItem;
-    }
+	@Override
+	public ModelTransformerBase getItemInventoryModel() {
+		return modelItem;
+	}
 }

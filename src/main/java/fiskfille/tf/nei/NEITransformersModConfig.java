@@ -9,41 +9,34 @@ import codechicken.nei.recipe.IUsageHandler;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.block.TFBlocks;
 
-public class NEITransformersModConfig implements IConfigureNEI
-{
-    @Override
-    public void loadConfig()
-    {
-        registerHandler(new EnergonProcessorRecipeHandler());
-        registerHandler(new PowerSourceRecipeHandler());
-        registerHandler(new AssemblyTableRecipeHandler());
-        registerHandler(new AlloyCrucibleRecipeHandler());
+public class NEITransformersModConfig implements IConfigureNEI {
+	@Override
+	public void loadConfig() {
+		registerHandler(new EnergonProcessorRecipeHandler());
+		registerHandler(new PowerSourceRecipeHandler());
+		registerHandler(new AssemblyTableRecipeHandler());
+		registerHandler(new AlloyCrucibleRecipeHandler());
 
-        API.hideItem(new ItemStack(TFBlocks.groundBridgeTeleporter, 1, OreDictionary.WILDCARD_VALUE));
-    }
+		API.hideItem(new ItemStack(TFBlocks.groundBridgeTeleporter, 1, OreDictionary.WILDCARD_VALUE));
+	}
 
-    public void registerHandler(Object obj)
-    {
-        if (obj instanceof ICraftingHandler)
-        {
-            API.registerRecipeHandler((ICraftingHandler) obj);
-        }
+	public void registerHandler(Object obj) {
+		if(obj instanceof ICraftingHandler) {
+			API.registerRecipeHandler((ICraftingHandler) obj);
+		}
 
-        if (obj instanceof IUsageHandler)
-        {
-            API.registerUsageHandler((IUsageHandler) obj);
-        }
-    }
+		if(obj instanceof IUsageHandler) {
+			API.registerUsageHandler((IUsageHandler) obj);
+		}
+	}
 
-    @Override
-    public String getName()
-    {
-        return "TransformersMod NEI Plugin";
-    }
+	@Override
+	public String getName() {
+		return "TransformersMod NEI Plugin";
+	}
 
-    @Override
-    public String getVersion()
-    {
-        return TransformersMod.version;
-    }
+	@Override
+	public String getVersion() {
+		return TransformersMod.version;
+	}
 }

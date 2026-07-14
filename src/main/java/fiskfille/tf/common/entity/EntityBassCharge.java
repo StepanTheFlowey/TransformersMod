@@ -9,76 +9,63 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-public class EntityBassCharge extends EntityThrowable
-{
-    public EntityBassCharge(World world)
-    {
-        super(world);
-        setSize(1F, 1F);
-    }
+public class EntityBassCharge extends EntityThrowable {
+	public EntityBassCharge(World world) {
+		super(world);
+		setSize(1F, 1F);
+	}
 
-    public EntityBassCharge(World world, EntityLivingBase entity)
-    {
-        super(world, entity);
-        setSize(1F, 1F);
-    }
+	public EntityBassCharge(World world, EntityLivingBase entity) {
+		super(world, entity);
+		setSize(1F, 1F);
+	}
 
-    public EntityBassCharge(World world, double x, double y, double z)
-    {
-        super(world, x, y, z);
-        setSize(1F, 1F);
-    }
+	public EntityBassCharge(World world, double x, double y, double z) {
+		super(world, x, y, z);
+		setSize(1F, 1F);
+	}
 
-    @Override
-    public void onUpdate()
-    {
-        super.onUpdate();
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
 
-        if (ticksExisted > 20)
-        {
-            setDead();
-        }
-    }
+		if(ticksExisted > 20) {
+			setDead();
+		}
+	}
 
-    @Override
-    protected float getGravityVelocity()
-    {
-        return 0F;
-    }
+	@Override
+	protected float getGravityVelocity() {
+		return 0F;
+	}
 
-    @Override
-    protected float func_70182_d()
-    {
-        return 3F;
-    }
+	@Override
+	protected float func_70182_d() {
+		return 3F;
+	}
 
-    @Override
-    protected void onImpact(MovingObjectPosition mop)
-    {
-        if (mop.entityHit != null)
-        {
-            float f = 2F * (1F - (float) ticksExisted / 20);
-            mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), f);
-            mop.entityHit.hurtResistantTime = 0;
-        }
-        else if (mop.typeOfHit == MovingObjectType.BLOCK)
-        {
-            int x = mop.blockX;
-            int y = mop.blockY;
-            int z = mop.blockZ;
-            Block block = worldObj.getBlock(x, y, z);
+	@Override
+	protected void onImpact(MovingObjectPosition mop) {
+		if(mop.entityHit != null) {
+			float f = 2F * (1F - (float) ticksExisted / 20);
+			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), f);
+			mop.entityHit.hurtResistantTime = 0;
+		}
+		else if(mop.typeOfHit == MovingObjectType.BLOCK) {
+			int x = mop.blockX;
+			int y = mop.blockY;
+			int z = mop.blockZ;
+			Block block = worldObj.getBlock(x, y, z);
 
-            if (block.getMaterial().equals(Material.glass))
-            {
-                worldObj.playAuxSFX(2001, x, y + 1, z, Block.getIdFromBlock(worldObj.getBlock(x, y, z)) + (worldObj.getBlockMetadata(x, y, z) << 12));
-                worldObj.setBlockToAir(x, y, z);
-            }
-            else
-            {
+			if(block.getMaterial().equals(Material.glass)) {
+				worldObj.playAuxSFX(2001, x, y + 1, z, Block.getIdFromBlock(worldObj.getBlock(x, y, z)) + (worldObj.getBlockMetadata(x, y, z) << 12));
+				worldObj.setBlockToAir(x, y, z);
+			}
+			else {
 
-            }
-        }
+			}
+		}
 
-        setThrowableHeading(motionX, motionY, motionZ, -0.001F, 0);
-    }
+		setThrowableHeading(motionX, motionY, motionZ, -0.001F, 0);
+	}
 }

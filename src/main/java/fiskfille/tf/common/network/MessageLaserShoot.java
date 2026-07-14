@@ -18,85 +18,71 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageLaserShoot implements IMessage
-{
-    public int id;
-    public boolean consume;
+public class MessageLaserShoot implements IMessage {
+	public int id;
+	public boolean consume;
 
-    public MessageLaserShoot()
-    {
+	public MessageLaserShoot() {
 
-    }
+	}
 
-    public MessageLaserShoot(EntityPlayer player, boolean consumeItems)
-    {
-        id = player.getEntityId();
-        consume = consumeItems;
-    }
+	public MessageLaserShoot(EntityPlayer player, boolean consumeItems) {
+		id = player.getEntityId();
+		consume = consumeItems;
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        id = buf.readInt();
-        consume = buf.readBoolean();
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		id = buf.readInt();
+		consume = buf.readBoolean();
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeInt(id);
-        buf.writeBoolean(consume);
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeInt(id);
+		buf.writeBoolean(consume);
+	}
 
-    public static class Handler implements IMessageHandler<MessageLaserShoot, IMessage>
-    {
-        @Override
-        public IMessage onMessage(MessageLaserShoot message, MessageContext ctx)
-        {
-            if (!ctx.side.isClient())
-            {
-                EntityPlayer from = null;
+	public static class Handler implements IMessageHandler<MessageLaserShoot, IMessage> {
+		@Override
+		public IMessage onMessage(MessageLaserShoot message, MessageContext ctx) {
+			if(!ctx.side.isClient()) {
+				EntityPlayer from = null;
 
-                for (World world : MinecraftServer.getServer().worldServers)
-                {
-                    Entity entity = world.getEntityByID(message.id);
+				for(World world : MinecraftServer.getServer().worldServers) {
+					Entity entity = world.getEntityByID(message.id);
 
-                    if (entity instanceof EntityPlayer)
-                    {
-                        from = (EntityPlayer) entity;
-                        break;
-                    }
-                }
+					if(entity instanceof EntityPlayer) {
+						from = (EntityPlayer) entity;
+						break;
+					}
+				}
 
-                if (from != null)
-                {
-                    Transformer transformer = TFHelper.getTransformer(from);
-                    ItemStack heldItem = from.getHeldItem();
-                    boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.getTransformationTimer(from) == 0;
+				if(from != null) {
+					Transformer transformer = TFHelper.getTransformer(from);
+					ItemStack heldItem = from.getHeldItem();
+					boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.getTransformationTimer(from) == 0;
 
-                    int altMode = TFData.ALT_MODE.get(from);
+					int altMode = TFData.ALT_MODE.get(from);
 
-                    if (transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(from, altMode)))
-                    {
-                        Item shootItem = Item.getItemFromBlock(TFBlocks.energonCube);
-                        boolean isCreative = from.capabilities.isCreativeMode;
-                        boolean consumeItems = !isCreative || from.inventory.hasItem(shootItem) && message.consume;
+					if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(from, altMode))) {
+						Item shootItem = Item.getItemFromBlock(TFBlocks.energonCube);
+						boolean isCreative = from.capabilities.isCreativeMode;
+						boolean consumeItems = !isCreative || from.inventory.hasItem(shootItem) && message.consume;
 
-                        if (!message.consume)
-                        {
-                            World world = from.worldObj;
-                            Entity entity = new EntityLaser(world, from);
-                            world.spawnEntityInWorld(entity);
-                        }
-                        else if (consumeItems && !isCreative)
-                        {
-                            from.inventory.consumeInventoryItem(shootItem);
-                        }
-                    }
-                }
-            }
+						if(!message.consume) {
+							World world = from.worldObj;
+							Entity entity = new EntityLaser(world, from);
+							world.spawnEntityInWorld(entity);
+						}
+						else if(consumeItems && !isCreative) {
+							from.inventory.consumeInventoryItem(shootItem);
+						}
+					}
+				}
+			}
 
-            return null;
-        }
-    }
+			return null;
+		}
+	}
 }

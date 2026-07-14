@@ -14,70 +14,58 @@ import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.data.TFPlayerData;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 
-public class MessageSetPlayerData extends MessageSyncBase
-{
-    public int id;
+public class MessageSetPlayerData extends MessageSyncBase {
+	public int id;
 
-    public MessageSetPlayerData()
-    {
+	public MessageSetPlayerData() {
 
-    }
+	}
 
-    public MessageSetPlayerData(EntityPlayer player, Map<TFData, Object> data)
-    {
-        super(player);
-        id = player.getEntityId();
-        playerData = data;
-    }
+	public MessageSetPlayerData(EntityPlayer player, Map<TFData, Object> data) {
+		super(player);
+		id = player.getEntityId();
+		playerData = data;
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        super.fromBytes(buf);
-        id = buf.readInt();
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		super.fromBytes(buf);
+		id = buf.readInt();
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        super.fromBytes(buf);
-        buf.writeInt(id);
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		super.fromBytes(buf);
+		buf.writeInt(id);
+	}
 
-    public static class Handler implements IMessageHandler<MessageSetPlayerData, IMessage>
-    {
-        @Override
-        public IMessage onMessage(MessageSetPlayerData message, MessageContext ctx)
-        {
-            Map<TFData, Object> playerData = message.playerData;
+	public static class Handler implements IMessageHandler<MessageSetPlayerData, IMessage> {
+		@Override
+		public IMessage onMessage(MessageSetPlayerData message, MessageContext ctx) {
+			Map<TFData, Object> playerData = message.playerData;
 
-            if (ctx.side.isClient())
-            {
-                EntityPlayer player = TransformersMod.proxy.getPlayer();
-                Entity entity = player.worldObj.getEntityByID(message.id);
+			if(ctx.side.isClient()) {
+				EntityPlayer player = TransformersMod.proxy.getPlayer();
+				Entity entity = player.worldObj.getEntityByID(message.id);
 
-                if (entity instanceof EntityPlayer)
-                {
-                    TFPlayerData.getData((EntityPlayer) entity).data = playerData;
-                }
-            }
-            else
-            {
-                EntityPlayer player = ctx.getServerHandler().playerEntity;
+				if(entity instanceof EntityPlayer) {
+					TFPlayerData.getData((EntityPlayer) entity).data = playerData;
+				}
+			}
+			else {
+				EntityPlayer player = ctx.getServerHandler().playerEntity;
 
-                if (player != null)
-                {
-                    Entity entity = player.worldObj.getEntityByID(message.id);
+				if(player != null) {
+					Entity entity = player.worldObj.getEntityByID(message.id);
 
-                    if (entity instanceof EntityPlayer)
-                    {
-                        TFPlayerData.getData((EntityPlayer) entity).data = playerData;
-                        TFNetworkManager.networkWrapper.sendToDimension(new MessageSetPlayerData((EntityPlayer) entity, playerData), player.dimension);
-                    }
-                }
-            }
+					if(entity instanceof EntityPlayer) {
+						TFPlayerData.getData((EntityPlayer) entity).data = playerData;
+						TFNetworkManager.networkWrapper.sendToDimension(new MessageSetPlayerData((EntityPlayer) entity, playerData), player.dimension);
+					}
+				}
+			}
 
-            return null;
-        }
-    }
+			return null;
+		}
+	}
 }

@@ -4,24 +4,20 @@ import net.minecraft.item.Item;
 import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.common.energon.IEnergon;
 
-public class ItemEnergon extends Item implements IEnergon
-{
-    private Energon energonType;
+public class ItemEnergon extends Item implements IEnergon {
+	private Energon energonType;
 
-    public ItemEnergon(Energon type)
-    {
-        energonType = type;
-    }
+	public ItemEnergon(Energon type) {
+		energonType = type;
+	}
 
-    @Override
-    public Energon getEnergonType()
-    {
-        return energonType;
-    }
+	@Override
+	public Energon getEnergonType() {
+		return energonType;
+	}
 
-    @Override
-    public int getMass()
-    {
-        return Energon.CRYSTAL_SHARD;
-    }
+	@Override
+	public int getMass() {
+		return Energon.CRYSTAL_SHARD;
+	}
 }

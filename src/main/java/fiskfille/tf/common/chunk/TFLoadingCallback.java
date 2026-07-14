@@ -11,52 +11,42 @@ import com.google.common.collect.Lists;
 
 import fiskfille.tf.common.tileentity.IChunkLoaderTile;
 
-public class TFLoadingCallback implements ForgeChunkManager.OrderedLoadingCallback
-{
-    @Override
-    public void ticketsLoaded(List<Ticket> tickets, World world)
-    {
-        for (Ticket ticket : tickets)
-        {
-            List<SubTicket> subTickets = SubTicket.getChildren(ticket);
+public class TFLoadingCallback implements ForgeChunkManager.OrderedLoadingCallback {
+	@Override
+	public void ticketsLoaded(List<Ticket> tickets, World world) {
+		for(Ticket ticket : tickets) {
+			List<SubTicket> subTickets = SubTicket.getChildren(ticket);
 
-            for (SubTicket subTicket : subTickets)
-            {
-                TileEntity tile = world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord);
+			for(SubTicket subTicket : subTickets) {
+				TileEntity tile = world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord);
 
-                if (tile instanceof IChunkLoaderTile)
-                {
-                    ((IChunkLoaderTile) tile).forceChunks(subTicket);
-                }
-            }
-        }
-    }
+				if(tile instanceof IChunkLoaderTile) {
+					((IChunkLoaderTile) tile).forceChunks(subTicket);
+				}
+			}
+		}
+	}
 
-    @Override
-    public List<Ticket> ticketsLoaded(List<Ticket> tickets, World world, int maxTicketCount)
-    {
-        List<Ticket> validTickets = Lists.newArrayList();
+	@Override
+	public List<Ticket> ticketsLoaded(List<Ticket> tickets, World world, int maxTicketCount) {
+		List<Ticket> validTickets = Lists.newArrayList();
 
-        for (Ticket ticket : tickets)
-        {
-            List<SubTicket> subTickets = SubTicket.getChildren(ticket);
+		for(Ticket ticket : tickets) {
+			List<SubTicket> subTickets = SubTicket.getChildren(ticket);
 
-            for (int i = 0; i < subTickets.size(); ++i)
-            {
-                SubTicket subTicket = subTickets.get(i);
+			for(int i = 0; i < subTickets.size(); ++i) {
+				SubTicket subTicket = subTickets.get(i);
 
-                if (world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord) instanceof IChunkLoaderTile)
-                {
-                    validTickets.add(ticket);
-                    break;
-                }
-                else
-                {
-                    subTicket.remove();
-                }
-            }
-        }
+				if(world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord) instanceof IChunkLoaderTile) {
+					validTickets.add(ticket);
+					break;
+				}
+				else {
+					subTicket.remove();
+				}
+			}
+		}
 
-        return validTickets;
-    }
+		return validTickets;
+	}
 }

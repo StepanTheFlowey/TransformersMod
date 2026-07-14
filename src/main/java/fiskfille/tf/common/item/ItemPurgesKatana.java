@@ -22,81 +22,68 @@ import fiskfille.tf.common.transformer.TransformerPurge;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFVectorHelper;
 
-public class ItemPurgesKatana extends ItemSword
-{
-    public ItemPurgesKatana()
-    {
-        super(ToolMaterial.EMERALD);
-        setMaxDamage(1500);
-        setCreativeTab(TransformersMod.tabTransformers);
-    }
+public class ItemPurgesKatana extends ItemSword {
+	public ItemPurgesKatana() {
+		super(ToolMaterial.EMERALD);
+		setMaxDamage(1500);
+		setCreativeTab(TransformersMod.tabTransformers);
+	}
 
-    @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time)
-    {
-        if (!TFHelper.isFullyTransformed(player) && TFHelper.getTransformer(player) instanceof TransformerPurge)
-        {
-            int timeLeft = getMaxItemUseDuration(stack) - time;
-            double force = (double) timeLeft / 10;
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
+		if(!TFHelper.isFullyTransformed(player) && TFHelper.getTransformer(player) instanceof TransformerPurge) {
+			int timeLeft = getMaxItemUseDuration(stack) - time;
+			double force = (double) timeLeft / 10;
 
-            if (force > 2D)
-            {
-                force = 2D;
-            }
+			if(force > 2D) {
+				force = 2D;
+			}
 
-            stack.damageItem(1, player);
-            Vec3 vec3 = TFVectorHelper.getFrontCoords(player, player.onGround ? force : force * 0.75D, true);
-            player.motionX += vec3.xCoord - player.posX;
-            player.motionY += vec3.yCoord - player.boundingBox.minY;
-            player.motionZ += vec3.zCoord - player.posZ;
-            player.fallDistance = 0;
-            player.swingItem();
-        }
-    }
+			stack.damageItem(1, player);
+			Vec3 vec3 = TFVectorHelper.getFrontCoords(player, player.onGround ? force : force * 0.75D, true);
+			player.motionX += vec3.xCoord - player.posX;
+			player.motionY += vec3.yCoord - player.boundingBox.minY;
+			player.motionZ += vec3.zCoord - player.posZ;
+			player.fallDistance = 0;
+			player.swingItem();
+		}
+	}
 
-    @Override
-    public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
-    {
-        return stack;
-    }
+	@Override
+	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
+		return stack;
+	}
 
-    @Override
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
-        return 72000;
-    }
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return 72000;
+	}
 
-    @Override
-    public EnumAction getItemUseAction(ItemStack stack)
-    {
-        return EnumAction.drink;
-    }
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+		return EnumAction.drink;
+	}
 
-    @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
-    {
-        if (TFHelper.getTransformer(player) instanceof TransformerPurge)
-        {
-            if (!TFHelper.isFullyTransformed(player))
-            {
-                player.setItemInUse(stack, getMaxItemUseDuration(stack));
-            }
-        }
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if(TFHelper.getTransformer(player) instanceof TransformerPurge) {
+			if(!TFHelper.isFullyTransformed(player)) {
+				player.setItemInUse(stack, getMaxItemUseDuration(stack));
+			}
+		}
 
-        return stack;
-    }
+		return stack;
+	}
 
-    public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float range)
-    {
-        return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range), IEntitySelector.selectAnything);
-    }
+	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float range) {
+		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range), IEntitySelector.selectAnything);
+	}
 
-    @Override
-    public Multimap getItemAttributeModifiers()
-    {
-        Multimap multimap = super.getItemAttributeModifiers();
-        multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 8D, 0));
-        return multimap;
-    }
+	@Override
+	public Multimap getItemAttributeModifiers() {
+		Multimap multimap = super.getItemAttributeModifiers();
+		multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 8D, 0));
+		return multimap;
+	}
 }

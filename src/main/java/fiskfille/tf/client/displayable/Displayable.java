@@ -4,14 +4,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class Displayable
-{
-    protected static final Minecraft mc = Minecraft.getMinecraft();
+public abstract class Displayable {
+	protected static final Minecraft mc = Minecraft.getMinecraft();
 
-    public abstract void render(ItemStack itemstack);
+	public abstract void render(ItemStack itemstack);
 
-    protected void bindTexture(ResourceLocation resourcelocation)
-    {
-        mc.getTextureManager().bindTexture(resourcelocation);
-    }
+	protected void bindTexture(ResourceLocation resourcelocation) {
+		mc.getTextureManager().bindTexture(resourcelocation);
+	}
 }

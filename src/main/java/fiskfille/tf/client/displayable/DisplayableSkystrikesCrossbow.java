@@ -10,22 +10,20 @@ import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelSkystrikesCrossbow;
 import fiskfille.tf.common.tick.ClientTickHandler;
 
-public class DisplayableSkystrikesCrossbow extends Displayable
-{
-    private final ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
+public class DisplayableSkystrikesCrossbow extends Displayable {
+	private final ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
 
-    @Override
-    public void render(ItemStack itemstack)
-    {
-        bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/skystrikes_crossbow.png"));
+	@Override
+	public void render(ItemStack itemstack) {
+		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/skystrikes_crossbow.png"));
 
-        float f = 0.5F;
-        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-        GL11.glScalef(f, f, f);
-        GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
-        GL11.glTranslatef(0, 1.4F + f1, -0.0625F);
-        GL11.glRotatef(-90, 1, 0, 0);
+		float f = 0.5F;
+		float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
+		GL11.glScalef(f, f, f);
+		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+		GL11.glTranslatef(0, 1.4F + f1, -0.0625F);
+		GL11.glRotatef(-90, 1, 0, 0);
 
-        model.render();
-    }
+		model.render();
+	}
 }

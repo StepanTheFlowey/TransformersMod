@@ -11,48 +11,43 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import fiskfille.tf.common.block.BlockEnergonOre;
 import fiskfille.tf.helper.TFRenderHelper;
 
-public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler
-{
-    public static RenderBlockEnergonOre instance = new RenderBlockEnergonOre();
-    public static int renderId = RenderingRegistry.getNextAvailableRenderId();
+public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler {
+	public static RenderBlockEnergonOre instance = new RenderBlockEnergonOre();
+	public static int renderId = RenderingRegistry.getNextAvailableRenderId();
 
-    @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-    {
-        boolean flag = false;
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+		boolean flag = false;
 
-        BlockEnergonOre.renderPass = 1;
-        flag |= renderer.renderStandardBlock(block, x, y, z);
-        BlockEnergonOre.renderPass = 2;
-        flag |= renderer.renderStandardBlock(block, x, y, z);
-        BlockEnergonOre.renderPass = 0;
+		BlockEnergonOre.renderPass = 1;
+		flag |= renderer.renderStandardBlock(block, x, y, z);
+		BlockEnergonOre.renderPass = 2;
+		flag |= renderer.renderStandardBlock(block, x, y, z);
+		BlockEnergonOre.renderPass = 0;
 
-        return flag;
-    }
+		return flag;
+	}
 
-    @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-    {
-        GL11.glRotatef(90F, 0F, 1F, 0F);
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		GL11.glRotatef(90F, 0F, 1F, 0F);
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
-        BlockEnergonOre.renderPass = 0;
-        block.setBlockBoundsForItemRender();
-        renderer.setRenderBoundsFromBlock(block);
-        TFRenderHelper.renderBlock(block, metadata, renderer);
+		BlockEnergonOre.renderPass = 0;
+		block.setBlockBoundsForItemRender();
+		renderer.setRenderBoundsFromBlock(block);
+		TFRenderHelper.renderBlock(block, metadata, renderer);
 
-        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-    }
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+	}
 
-    @Override
-    public boolean shouldRender3DInInventory(int modelId)
-    {
-        return true;
-    }
+	@Override
+	public boolean shouldRender3DInInventory(int modelId) {
+		return true;
+	}
 
-    @Override
-    public int getRenderId()
-    {
-        return renderId;
-    }
+	@Override
+	public int getRenderId() {
+		return renderId;
+	}
 }

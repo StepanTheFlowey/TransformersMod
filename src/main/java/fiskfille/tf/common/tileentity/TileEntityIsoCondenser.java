@@ -19,154 +19,128 @@ import fiskfille.tf.common.energon.power.IEnergyContainer;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.helper.TFTileHelper;
 
-public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergyContainer
-{
-    public TileDataEnergyContainer data = new TileDataEnergyContainer(8000);
-    public Map<ForgeDirection, Block> providers = Maps.newHashMap();
-    public Map<ForgeDirection, Float> animationTimer = Maps.newHashMap();
-    public Map<ForgeDirection, Float> prevAnimationTimer = Maps.newHashMap();
+public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergyContainer {
+	public TileDataEnergyContainer data = new TileDataEnergyContainer(8000);
+	public Map<ForgeDirection, Block> providers = Maps.newHashMap();
+	public Map<ForgeDirection, Float> animationTimer = Maps.newHashMap();
+	public Map<ForgeDirection, Float> prevAnimationTimer = Maps.newHashMap();
 
-    @Override
-    public void updateEntity()
-    {
-        super.updateEntity();
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
 
-        for (Map.Entry<ForgeDirection, Float> e : animationTimer.entrySet())
-        {
-            prevAnimationTimer.put(e.getKey(), e.getValue());
-        }
+		for(Map.Entry<ForgeDirection, Float> e : animationTimer.entrySet()) {
+			prevAnimationTimer.put(e.getKey(), e.getValue());
+		}
 
-        if (!data.isInitialized())
-        {
-            data.initialize(this);
-        }
+		if(!data.isInitialized()) {
+			data.initialize(this);
+		}
 
-        providers.clear();
+		providers.clear();
 
-        for (ForgeDirection dir : new ForgeDirection[] {ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST})
-        {
-            Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-            float f = animationTimer.get(dir) == null ? 0 : animationTimer.get(dir);
+		for(ForgeDirection dir : new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST}) {
+			Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			float f = animationTimer.get(dir) == null ? 0 : animationTimer.get(dir);
 
-            boolean active = false;
+			boolean active = false;
 
-            if (block instanceof IEnergon && ((IEnergon) block).getMass() > 0)
-            {
-                providers.put(dir, block);
-                active = canActivate();
-            }
+			if(block instanceof IEnergon && ((IEnergon) block).getMass() > 0) {
+				providers.put(dir, block);
+				active = canActivate();
+			}
 
-            if (active)
-            {
-                animationTimer.put(dir, MathHelper.clamp_float(f + 1F / 10, 0, 1));
-            }
-            else
-            {
-                animationTimer.put(dir, MathHelper.clamp_float(f - 1F / 10, 0, 1));
-            }
-        }
+			if(active) {
+				animationTimer.put(dir, MathHelper.clamp_float(f + 1F / 10, 0, 1));
+			}
+			else {
+				animationTimer.put(dir, MathHelper.clamp_float(f - 1F / 10, 0, 1));
+			}
+		}
 
-        if (!worldObj.isRemote)
-        {
-            if (canActivate())
-            {
-                for (Map.Entry<ForgeDirection, Block> e : providers.entrySet())
-                {
-                    IEnergon ienergon = (IEnergon) e.getValue();
-                    receiveEnergy(getGenerationRate(ienergon.getMass()), false);
-                }
-            }
+		if(!worldObj.isRemote) {
+			if(canActivate()) {
+				for(Map.Entry<ForgeDirection, Block> e : providers.entrySet()) {
+					IEnergon ienergon = (IEnergon) e.getValue();
+					receiveEnergy(getGenerationRate(ienergon.getMass()), false);
+				}
+			}
 
-            data.serverTick();
-        }
+			data.serverTick();
+		}
 
-        TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
+		TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
 
-        if (prevData instanceof TileDataEnergyContainer)
-        {
-            data = new TileDataEnergyContainer((TileDataEnergyContainer) prevData);
-        }
-    }
+		if(prevData instanceof TileDataEnergyContainer) {
+			data = new TileDataEnergyContainer((TileDataEnergyContainer) prevData);
+		}
+	}
 
-    public float getGenerationRate(int mass)
-    {
-        if (!canActivate())
-        {
-            return 0;
-        }
+	public float getGenerationRate(int mass) {
+		if(!canActivate()) {
+			return 0;
+		}
 
-        return (float) mass / Energon.CRYSTAL_BLOCK * 0.1F;
-    }
+		return (float) mass / Energon.CRYSTAL_BLOCK * 0.1F;
+	}
 
-    @Override
-    public void invalidate()
-    {
-        super.invalidate();
+	@Override
+	public void invalidate() {
+		super.invalidate();
 
-        if (!worldObj.isRemote)
-        {
-            data.kill();
-        }
-    }
+		if(!worldObj.isRemote) {
+			data.kill();
+		}
+	}
 
-    @Override
-    public AxisAlignedBB getRenderBoundingBox()
-    {
-        return super.getRenderBoundingBox().expand(1, 1, 1);
-    }
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		return super.getRenderBoundingBox().expand(1, 1, 1);
+	}
 
-    @Override
-    public void readCustomNBT(NBTTagCompound nbt)
-    {
-        super.readCustomNBT(nbt);
+	@Override
+	public void readCustomNBT(NBTTagCompound nbt) {
+		super.readCustomNBT(nbt);
 
-        if (nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND))
-        {
-            NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
-            data.storage.readFromNBT(config);
-        }
-    }
+		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
+			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			data.storage.readFromNBT(config);
+		}
+	}
 
-    @Override
-    public void writeCustomNBT(NBTTagCompound nbt)
-    {
-        super.writeCustomNBT(nbt);
+	@Override
+	public void writeCustomNBT(NBTTagCompound nbt) {
+		super.writeCustomNBT(nbt);
 
-        if (data.storage.getEnergy() > 0)
-        {
-            NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
-            data.storage.writeToNBT(config);
-            nbt.setTag("ConfigDataTF", config);
-        }
-    }
+		if(data.storage.getEnergy() > 0) {
+			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			data.storage.writeToNBT(config);
+			nbt.setTag("ConfigDataTF", config);
+		}
+	}
 
-    @Override
-    public float receiveEnergy(float amount, boolean simulate)
-    {
-        return data.storage.add(amount, simulate);
-    }
+	@Override
+	public float receiveEnergy(float amount, boolean simulate) {
+		return data.storage.add(amount, simulate);
+	}
 
-    @Override
-    public float extractEnergy(float amount, boolean simulate)
-    {
-        return data.storage.remove(amount, simulate);
-    }
+	@Override
+	public float extractEnergy(float amount, boolean simulate) {
+		return data.storage.remove(amount, simulate);
+	}
 
-    @Override
-    public float getEnergy()
-    {
-        return data.getEnergy();
-    }
+	@Override
+	public float getEnergy() {
+		return data.getEnergy();
+	}
 
-    @Override
-    public float getMaxEnergy()
-    {
-        return data.getMaxEnergy();
-    }
+	@Override
+	public float getMaxEnergy() {
+		return data.getMaxEnergy();
+	}
 
-    @Override
-    public float getEnergyUsage()
-    {
-        return data.storage.getUsage();
-    }
+	@Override
+	public float getEnergyUsage() {
+		return data.storage.getUsage();
+	}
 }

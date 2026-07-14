@@ -9,54 +9,45 @@ import net.minecraft.item.Item;
 /**
  * @author gegy1000
  */
-public class TransformerPurge extends TransformerTank
-{
-    public TransformerPurge()
-    {
-        super("Purge");
-    }
+public class TransformerPurge extends TransformerTank {
+	public TransformerPurge() {
+		super("Purge");
+	}
 
-    @Override
-    public Item getHelmet()
-    {
-        return TFItems.purgeHelmet;
-    }
+	@Override
+	public Item getHelmet() {
+		return TFItems.purgeHelmet;
+	}
 
-    @Override
-    public Item getChestplate()
-    {
-        return TFItems.purgeChestplate;
-    }
+	@Override
+	public Item getChestplate() {
+		return TFItems.purgeChestplate;
+	}
 
-    @Override
-    public Item getLeggings()
-    {
-        return TFItems.purgeLeggings;
-    }
+	@Override
+	public Item getLeggings() {
+		return TFItems.purgeLeggings;
+	}
 
-    @Override
-    public Item getBoots()
-    {
-        return TFItems.purgeBoots;
-    }
+	@Override
+	public Item getBoots() {
+		return TFItems.purgeBoots;
+	}
 
-    @Override
-    public float getHeightOffset(EntityPlayer player, int altMode)
-    {
-        return -0.1F;
-    }
+	@Override
+	public float getHeightOffset(EntityPlayer player, int altMode) {
+		return -0.1F;
+	}
 
-    @Override
-    public float getVehicleHeightOffset(EntityPlayer player, int altMode)
-    {
-        return -1.1F;
-    }
+	@Override
+	public float getVehicleHeightOffset(EntityPlayer player, int altMode) {
+		return -1.1F;
+	}
 
-    @Override
-    public void tick(EntityPlayer player, float timer)
-    {
-        super.tick(player, timer);
+	@Override
+	public void tick(EntityPlayer player, float timer) {
+		super.tick(player, timer);
 
-        player.addStat(TFAchievements.purge, 1);
-    }
+		player.addStat(TFAchievements.purge, 1);
+	}
 }

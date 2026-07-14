@@ -9,56 +9,47 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-public class MessageClosePortal implements IMessage
-{
-    private int x;
-    private int y;
-    private int z;
+public class MessageClosePortal implements IMessage {
+	private int x;
+	private int y;
+	private int z;
 
-    public MessageClosePortal()
-    {
-    }
+	public MessageClosePortal() {
+	}
 
-    public MessageClosePortal(int x, int y, int z)
-    {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
+	public MessageClosePortal(int x, int y, int z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        x = buf.readInt();
-        y = buf.readInt();
-        z = buf.readInt();
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		x = buf.readInt();
+		y = buf.readInt();
+		z = buf.readInt();
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeInt(x);
-        buf.writeInt(y);
-        buf.writeInt(z);
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeInt(x);
+		buf.writeInt(y);
+		buf.writeInt(z);
+	}
 
-    public static class Handler implements IMessageHandler<MessageClosePortal, IMessage>
-    {
-        @Override
-        public IMessage onMessage(MessageClosePortal message, MessageContext ctx)
-        {
-            if (ctx.side.isClient())
-            {
-                EntityPlayer player = TransformersMod.proxy.getPlayer();
-                TileEntity tile = player.worldObj.getTileEntity(message.x, message.y, message.z);
+	public static class Handler implements IMessageHandler<MessageClosePortal, IMessage> {
+		@Override
+		public IMessage onMessage(MessageClosePortal message, MessageContext ctx) {
+			if(ctx.side.isClient()) {
+				EntityPlayer player = TransformersMod.proxy.getPlayer();
+				TileEntity tile = player.worldObj.getTileEntity(message.x, message.y, message.z);
 
-                if (tile instanceof TileEntityGroundBridgeTeleporter)
-                {
-                    ((TileEntityGroundBridgeTeleporter) tile).clientClosing = true;
-                }
-            }
+				if(tile instanceof TileEntityGroundBridgeTeleporter) {
+					((TileEntityGroundBridgeTeleporter) tile).clientClosing = true;
+				}
+			}
 
-            return null;
-        }
-    }
+			return null;
+		}
+	}
 }

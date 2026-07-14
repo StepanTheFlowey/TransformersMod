@@ -25,72 +25,61 @@ import fiskfille.tf.common.registry.TFOreDictRegistry;
 import fiskfille.tf.common.tick.CommonTickHandler;
 import fiskfille.tf.helper.TFShootManager;
 
-public class CommonProxy
-{
-    protected Queue<Runnable> tasks = new LinkedBlockingDeque<Runnable>();
+public class CommonProxy {
+	protected Queue<Runnable> tasks = new LinkedBlockingDeque<Runnable>();
 
-    public void preInit()
-    {
-        TFReflection.common();
+	public void preInit() {
+		TFReflection.common();
 
-        TFEnergonManager.registerEnergonTypes();
-        TFItems.register();
-        TFBlocks.register();
-        TFFluids.register();
-        TFOreDictRegistry.register();
-        TFEntities.register();
-        TFDisplayableManager.registerDisplayables();
-        TFGui.register();
+		TFEnergonManager.registerEnergonTypes();
+		TFItems.register();
+		TFBlocks.register();
+		TFFluids.register();
+		TFOreDictRegistry.register();
+		TFEntities.register();
+		TFDisplayableManager.registerDisplayables();
+		TFGui.register();
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(TransformersMod.modid, new GuiHandlerTF());
-        registerEventHandler(new TFWorldGenHandler());
-        registerEventHandler(new CommonEventHandler());
-        registerEventHandler(new CommonTickHandler());
-        registerEventHandler(new TFShootManager());
-    }
+		NetworkRegistry.INSTANCE.registerGuiHandler(TransformersMod.modid, new GuiHandlerTF());
+		registerEventHandler(new TFWorldGenHandler());
+		registerEventHandler(new CommonEventHandler());
+		registerEventHandler(new CommonTickHandler());
+		registerEventHandler(new TFShootManager());
+	}
 
-    public void init()
-    {
-        ItemHandler.init();
-    }
+	public void init() {
+		ItemHandler.init();
+	}
 
-    public void registerEventHandler(Object obj)
-    {
-        MinecraftForge.EVENT_BUS.register(obj);
-        MinecraftForge.ORE_GEN_BUS.register(obj);
-        FMLCommonHandler.instance().bus().register(obj);
-    }
+	public void registerEventHandler(Object obj) {
+		MinecraftForge.EVENT_BUS.register(obj);
+		MinecraftForge.ORE_GEN_BUS.register(obj);
+		FMLCommonHandler.instance().bus().register(obj);
+	}
 
-    public World getWorld()
-    {
-        return null;
-    }
+	public World getWorld() {
+		return null;
+	}
 
-    public EntityPlayer getPlayer()
-    {
-        return null;
-    }
+	public EntityPlayer getPlayer() {
+		return null;
+	}
 
-    public float getRenderTick()
-    {
-        return 0;
-    }
+	public float getRenderTick() {
+		return 0;
+	}
 
-    public void queueTask(Runnable task)
-    {
-        tasks.add(task);
-    }
+	public void queueTask(Runnable task) {
+		tasks.add(task);
+	}
 
-    public void runTasks()
-    {
-        while (!tasks.isEmpty())
-        {
-            Runnable task = tasks.poll();
+	public void runTasks() {
+		while(!tasks.isEmpty()) {
+			Runnable task = tasks.poll();
 
-            if (task != null)
-            {
-                task.run();
-            }
-        }
-    }
+			if(task != null) {
+				task.run();
+			}
+		}
+	}
 }

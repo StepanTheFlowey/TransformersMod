@@ -27,89 +27,84 @@ import fiskfille.tf.common.proxy.CommonProxy;
 import fiskfille.tf.common.tab.CreativeTabTransformers;
 import fiskfille.tf.config.TFConfig;
 
-@Mod(modid = TransformersMod.modid, name = "Transformers Mod", version = TransformersMod.version, guiFactory = "fiskfille.tf.client.gui.TFGuiFactory")
-public class TransformersMod
-{
-    public static final String modid = "transformers";
-    public static final String version = "0.6.5";
+@Mod(
+				modid = TransformersMod.modid,
+				name = "Transformers Mod",
+				version = TransformersMod.version,
+				guiFactory = "fiskfille.tf.client.gui.TFGuiFactory"
+)
+public class TransformersMod {
+	public static final String modid = "transformers";
+	public static final String version = "0.6.5";
 
-    @Instance(TransformersMod.modid)
-    public static TransformersMod instance;
+	@Instance(TransformersMod.modid)
+	public static TransformersMod instance;
 
-    @SidedProxy(clientSide = "fiskfille.tf.common.proxy.ClientProxy", serverSide = "fiskfille.tf.common.proxy.CommonProxy")
-    public static CommonProxy proxy;
+	@SidedProxy(
+					clientSide = "fiskfille.tf.common.proxy.ClientProxy",
+					serverSide = "fiskfille.tf.common.proxy.CommonProxy"
+	)
+	public static CommonProxy proxy;
 
-    public static CreativeTabs tabTransformers = new CreativeTabTransformers();
+	public static CreativeTabs tabTransformers = new CreativeTabTransformers();
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        if (!TFLoadingPlugin.loaded)
-        {
-            System.out.println("TransformersMod coremod not added! -Dfml.coreMods.load=fiskfille.tf.asm.TFLoadingPlugin");
-            FMLCommonHandler.instance().exitJava(0, false);
-        }
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		if(!TFLoadingPlugin.loaded) {
+			System.out.println("TransformersMod coremod not added! -Dfml.coreMods.load=fiskfille.tf.asm.TFLoadingPlugin");
+			FMLCommonHandler.instance().exitJava(0, false);
+		}
 
-        TransformerManager.register();
+		TransformerManager.register();
 
-        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-        config.load();
-        TFConfig.load(config);
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		config.load();
+		TFConfig.load(config);
 
-        if (config.hasChanged())
-        {
-            config.save();
-        }
+		if(config.hasChanged()) {
+			config.save();
+		}
 
-        TFNetworkManager.registerPackets();
-        proxy.preInit();
-    }
+		TFNetworkManager.registerPackets();
+		proxy.preInit();
+	}
 
-    @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        proxy.init();
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
+		proxy.init();
 
-        if (Loader.isModLoaded("Waila"))
-        {
-            FMLInterModComms.sendMessage("Waila", "register", "fiskfille.tf.waila.WailaRegistrar.wailaCallback");
-        }
-    }
+		if(Loader.isModLoaded("Waila")) {
+			FMLInterModComms.sendMessage("Waila", "register", "fiskfille.tf.waila.WailaRegistrar.wailaCallback");
+		}
+	}
 
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        ForgeChunkManager.setForcedChunkLoadingCallback(this, new TFLoadingCallback());
-    }
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		ForgeChunkManager.setForcedChunkLoadingCallback(this, new TFLoadingCallback());
+	}
 
-    @EventHandler
-    public void missingMappings(FMLMissingMappingsEvent event)
-    {
-        for (MissingMapping mapping : event.get())
-        {
-            remap(mapping, "transformium", TFItems.transformiumFragment);
-            remap(mapping, "energon_crystal_piece", TFItems.energonCrystalShard);
-            remap(mapping, "red_energon_crystal_piece", TFItems.redEnergonCrystalShard);
+	@EventHandler
+	public void missingMappings(FMLMissingMappingsEvent event) {
+		for(MissingMapping mapping : event.get()) {
+			remap(mapping, "transformium", TFItems.transformiumFragment);
+			remap(mapping, "energon_crystal_piece", TFItems.energonCrystalShard);
+			remap(mapping, "red_energon_crystal_piece", TFItems.redEnergonCrystalShard);
 
-            remap(mapping, "display_pillar", TFBlocks.displayPedestal);
-        }
-    }
+			remap(mapping, "display_pillar", TFBlocks.displayPedestal);
+		}
+	}
 
-    private void remap(MissingMapping mapping, String name, Item item)
-    {
-        if (mapping.type == GameRegistry.Type.ITEM && mapping.name.equals(modid + ":" + name))
-        {
-            mapping.remap(item);
-        }
-    }
+	private void remap(MissingMapping mapping, String name, Item item) {
+		if(mapping.type == GameRegistry.Type.ITEM && mapping.name.equals(modid + ":" + name)) {
+			mapping.remap(item);
+		}
+	}
 
-    private void remap(MissingMapping mapping, String name, Block block)
-    {
-        remap(mapping, name, Item.getItemFromBlock(block));
+	private void remap(MissingMapping mapping, String name, Block block) {
+		remap(mapping, name, Item.getItemFromBlock(block));
 
-        if (mapping.type == GameRegistry.Type.BLOCK && mapping.name.equals(modid + ":" + name))
-        {
-            mapping.remap(block);
-        }
-    }
+		if(mapping.type == GameRegistry.Type.BLOCK && mapping.name.equals(modid + ":" + name)) {
+			mapping.remap(block);
+		}
+	}
 }

@@ -9,80 +9,66 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiSliderBase extends GuiButton
-{
-    public float percentage;
-    public float prevPercentage;
-    public boolean dragging;
+public class GuiSliderBase extends GuiButton {
+	public float percentage;
+	public float prevPercentage;
+	public boolean dragging;
 
-    public GuiSliderBase(int id, int x, int y, int width, int height, String s)
-    {
-        super(id, x, y, width, height, s);
-        percentage = 1F;
-        prevPercentage = 1F;
-    }
+	public GuiSliderBase(int id, int x, int y, int width, int height, String s) {
+		super(id, x, y, width, height, s);
+		percentage = 1F;
+		prevPercentage = 1F;
+	}
 
-    @Override
-    public int getHoverState(boolean b)
-    {
-        return 0;
-    }
+	@Override
+	public int getHoverState(boolean b) {
+		return 0;
+	}
 
-    @Override
-    protected void mouseDragged(Minecraft mc, int mouseX, int mouseY)
-    {
-        if (visible)
-        {
-            if (dragging)
-            {
-                percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
+	@Override
+	protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
+		if(visible) {
+			if(dragging) {
+				percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
 
-                if (percentage < 0F)
-                {
-                    percentage = 0F;
-                }
+				if(percentage < 0F) {
+					percentage = 0F;
+				}
 
-                if (percentage > 1F)
-                {
-                    percentage = 1F;
-                }
-            }
+				if(percentage > 1F) {
+					percentage = 1F;
+				}
+			}
 
-            GL11.glColor4f(1F, 1F, 1F, 1F);
-            drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)), yPosition, 0, 66, 4, 20);
-            drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)) + 4, yPosition, 196, 66, 4, 20);
-        }
-    }
+			GL11.glColor4f(1F, 1F, 1F, 1F);
+			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)), yPosition, 0, 66, 4, 20);
+			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)) + 4, yPosition, 196, 66, 4, 20);
+		}
+	}
 
-    @Override
-    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
-    {
-        if (super.mousePressed(mc, mouseX, mouseY))
-        {
-            percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
+	@Override
+	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+		if(super.mousePressed(mc, mouseX, mouseY)) {
+			percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
 
-            if (percentage < 0F)
-            {
-                percentage = 0F;
-            }
+			if(percentage < 0F) {
+				percentage = 0F;
+			}
 
-            if (percentage > 1F)
-            {
-                percentage = 1F;
-            }
+			if(percentage > 1F) {
+				percentage = 1F;
+			}
 
-            dragging = true;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+			dragging = true;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
-    @Override
-    public void mouseReleased(int mouseX, int mouseY)
-    {
-        dragging = false;
-    }
+	@Override
+	public void mouseReleased(int mouseX, int mouseY) {
+		dragging = false;
+	}
 }

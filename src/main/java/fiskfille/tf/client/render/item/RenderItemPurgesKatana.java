@@ -8,48 +8,42 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemPurgesKatana implements IItemRenderer
-{
-    private ModelPurgesKatana model = new ModelPurgesKatana();
+public class RenderItemPurgesKatana implements IItemRenderer {
+	private ModelPurgesKatana model = new ModelPurgesKatana();
 
-    @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type)
-    {
-        return type != ItemRenderType.ENTITY && type != ItemRenderType.INVENTORY;
-    }
+	@Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		return type != ItemRenderType.ENTITY && type != ItemRenderType.INVENTORY;
+	}
 
-    @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-    {
-        return false;
-    }
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return false;
+	}
 
-    @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-    {
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png"));
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png"));
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP)
-        {
-            GL11.glPushMatrix();
-            GL11.glRotatef(0, 1F, 0F, 0F);
-            GL11.glRotatef(0, 0F, 1F, 0F);
-            GL11.glRotatef(210, 0F, 0F, 1F);
-            GL11.glTranslatef(-0.7F, 0.2F, -0F);
+		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP) {
+			GL11.glPushMatrix();
+			GL11.glRotatef(0, 1F, 0F, 0F);
+			GL11.glRotatef(0, 0F, 1F, 0F);
+			GL11.glRotatef(210, 0F, 0F, 1F);
+			GL11.glTranslatef(-0.7F, 0.2F, -0F);
 
-            model.render();
-            GL11.glPopMatrix();
-        }
-        else if (type == ItemRenderType.EQUIPPED)
-        {
-            GL11.glPushMatrix();
-            GL11.glRotatef(5, 1F, 0F, 0F);
-            GL11.glRotatef(-5, 0F, 1F, 0F);
-            GL11.glRotatef(215, 0F, 0F, 1F);
-            GL11.glTranslatef(-0.715F, 0.265F, -0.07F);
+			model.render();
+			GL11.glPopMatrix();
+		}
+		else if(type == ItemRenderType.EQUIPPED) {
+			GL11.glPushMatrix();
+			GL11.glRotatef(5, 1F, 0F, 0F);
+			GL11.glRotatef(-5, 0F, 1F, 0F);
+			GL11.glRotatef(215, 0F, 0F, 1F);
+			GL11.glTranslatef(-0.715F, 0.265F, -0.07F);
 
-            model.render();
-            GL11.glPopMatrix();
-        }
-    }
+			model.render();
+			GL11.glPopMatrix();
+		}
+	}
 }

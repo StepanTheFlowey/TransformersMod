@@ -10,21 +10,19 @@ import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelBassBlaster;
 import fiskfille.tf.common.tick.ClientTickHandler;
 
-public class DisplayableBassBlaster extends Displayable
-{
-    private final ModelBassBlaster model = new ModelBassBlaster();
+public class DisplayableBassBlaster extends Displayable {
+	private final ModelBassBlaster model = new ModelBassBlaster();
 
-    @Override
-    public void render(ItemStack itemstack)
-    {
-        bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/bass_blaster.png"));
+	@Override
+	public void render(ItemStack itemstack) {
+		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/bass_blaster.png"));
 
-        float f = 0.75F;
-        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-        GL11.glScalef(f, f, f);
-        GL11.glRotatef(mc.thePlayer.ticksExisted * 0.75F, 0F, 1F, 0F);
-        GL11.glTranslatef(0, 0.95F + f1, 0.1F);
+		float f = 0.75F;
+		float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
+		GL11.glScalef(f, f, f);
+		GL11.glRotatef(mc.thePlayer.ticksExisted * 0.75F, 0F, 1F, 0F);
+		GL11.glTranslatef(0, 0.95F + f1, 0.1F);
 
-        model.render();
-    }
+		model.render();
+	}
 }

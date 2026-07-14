@@ -7,19 +7,16 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
 
-public class TFOreDictHelper
-{
-    public static List<String> getAliases(ItemStack itemstack)
-    {
-        List<String> list = Lists.newArrayList();
-        int[] ids = OreDictionary.getOreIDs(itemstack);
+public class TFOreDictHelper {
+	public static List<String> getAliases(ItemStack itemstack) {
+		List<String> list = Lists.newArrayList();
+		int[] ids = OreDictionary.getOreIDs(itemstack);
 
-        for (int i = 0; i < ids.length; ++i)
-        {
-            int id = ids[i];
-            list.add(OreDictionary.getOreName(id));
-        }
+		for(int i = 0; i < ids.length; ++i) {
+			int id = ids[i];
+			list.add(OreDictionary.getOreName(id));
+		}
 
-        return list;
-    }
+		return list;
+	}
 }

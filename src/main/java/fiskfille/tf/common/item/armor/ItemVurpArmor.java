@@ -4,16 +4,13 @@ import fiskfille.tf.TransformerManager;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.transformer.base.Transformer;
 
-public class ItemVurpArmor extends ItemTransformerArmor
-{
-    public ItemVurpArmor(int armorPiece)
-    {
-        super(TFItems.TRANSFORMERMATERIAL, 4, armorPiece);
-    }
+public class ItemVurpArmor extends ItemTransformerArmor {
+	public ItemVurpArmor(int armorPiece) {
+		super(TFItems.TRANSFORMERMATERIAL, 4, armorPiece);
+	}
 
-    @Override
-    public Transformer getTransformer()
-    {
-        return TransformerManager.VURP;
-    }
+	@Override
+	public Transformer getTransformer() {
+		return TransformerManager.VURP;
+	}
 }

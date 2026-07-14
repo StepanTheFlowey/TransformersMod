@@ -10,22 +10,20 @@ import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelPurgesKatana;
 import fiskfille.tf.common.tick.ClientTickHandler;
 
-public class DisplayablePurgesKatana extends Displayable
-{
-    private final ModelPurgesKatana model = new ModelPurgesKatana();
+public class DisplayablePurgesKatana extends Displayable {
+	private final ModelPurgesKatana model = new ModelPurgesKatana();
 
-    @Override
-    public void render(ItemStack itemstack)
-    {
-        bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png"));
+	@Override
+	public void render(ItemStack itemstack) {
+		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png"));
 
-        float f = 1F;
-        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-        GL11.glScalef(f, f, f);
-        GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
-        GL11.glTranslatef(0, 0.7F + f1, -0.55F);
-        GL11.glRotatef(-90, 1, 0, 0);
+		float f = 1F;
+		float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
+		GL11.glScalef(f, f, f);
+		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+		GL11.glTranslatef(0, 0.7F + f1, -0.55F);
+		GL11.glRotatef(-90, 1, 0, 0);
 
-        model.render();
-    }
+		model.render();
+	}
 }

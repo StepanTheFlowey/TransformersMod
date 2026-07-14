@@ -7,61 +7,51 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
 
-public class BlockIsoCondenser extends BlockMachineBase
-{
-    public BlockIsoCondenser()
-    {
-        super(Material.iron);
-        setHarvestLevel("pickaxe", 1);
-        setHardness(6F);
-        setResistance(10F);
-    }
+public class BlockIsoCondenser extends BlockMachineBase {
+	public BlockIsoCondenser() {
+		super(Material.iron);
+		setHarvestLevel("pickaxe", 1);
+		setHardness(6F);
+		setResistance(10F);
+	}
 
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-    {
-        float f = 0.0625F * 3;
-        setBlockBounds(f, 0, f, 1 - f, 1, 1 - f);
-    }
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+		float f = 0.0625F * 3;
+		setBlockBounds(f, 0, f, 1 - f, 1, 1 - f);
+	}
 
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
 
-    @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-    @Override
-    public int getRenderType()
-    {
-        return -1;
-    }
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
-    {
-        if (super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ))
-        {
-            return true;
-        }
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
+			return true;
+		}
 
-        if (!player.isSneaking())
-        {
-            TFGui.ISOTOPIC_CONDENSER.open(player, x, y, z);
-            return true;
-        }
+		if(!player.isSneaking()) {
+			TFGui.ISOTOPIC_CONDENSER.open(player, x, y, z);
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-        blockIcon = iconRegister.registerIcon("iron_block");
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		blockIcon = iconRegister.registerIcon("iron_block");
+	}
 }

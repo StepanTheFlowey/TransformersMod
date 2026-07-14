@@ -19,129 +19,106 @@ import fiskfille.tf.helper.TFHelper;
 /**
  * @author gegy1000, FiskFille
  */
-public class TransformerVurp extends TransformerCar
-{
-    public TransformerVurp()
-    {
-        super("Vurp");
-    }
+public class TransformerVurp extends TransformerCar {
+	public TransformerVurp() {
+		super("Vurp");
+	}
 
-    @Override
-    public Item getHelmet()
-    {
-        return TFItems.vurpHelmet;
-    }
+	@Override
+	public Item getHelmet() {
+		return TFItems.vurpHelmet;
+	}
 
-    @Override
-    public Item getChestplate()
-    {
-        return TFItems.vurpChestplate;
-    }
+	@Override
+	public Item getChestplate() {
+		return TFItems.vurpChestplate;
+	}
 
-    @Override
-    public Item getLeggings()
-    {
-        return TFItems.vurpLeggings;
-    }
+	@Override
+	public Item getLeggings() {
+		return TFItems.vurpLeggings;
+	}
 
-    @Override
-    public Item getBoots()
-    {
-        return TFItems.vurpBoots;
-    }
+	@Override
+	public Item getBoots() {
+		return TFItems.vurpBoots;
+	}
 
-    @Override
-    public float getHeightOffset(EntityPlayer player, int altMode)
-    {
-        return -0.3F;
-    }
+	@Override
+	public float getHeightOffset(EntityPlayer player, int altMode) {
+		return -0.3F;
+	}
 
-    @Override
-    public float getVehicleHeightOffset(EntityPlayer player, int altMode)
-    {
-        return -1.4F;
-    }
+	@Override
+	public float getVehicleHeightOffset(EntityPlayer player, int altMode) {
+		return -1.4F;
+	}
 
-    @Override
-    public Item getShootItem(int altMode)
-    {
-        return Item.getItemFromBlock(TFBlocks.energonCube);
-    }
+	@Override
+	public Item getShootItem(int altMode) {
+		return Item.getItemFromBlock(TFBlocks.energonCube);
+	}
 
-    @Override
-    public Entity getShootEntity(EntityPlayer player, int altMode)
-    {
-        EntityLaser entityLaser = new EntityLaser(player.worldObj, player);
-        return entityLaser;
-    }
+	@Override
+	public Entity getShootEntity(EntityPlayer player, int altMode) {
+		EntityLaser entityLaser = new EntityLaser(player.worldObj, player);
+		return entityLaser;
+	}
 
-    @Override
-    public String getShootSound(int altMode)
-    {
-        return "random.fizz";
-    }
+	@Override
+	public String getShootSound(int altMode) {
+		return "random.fizz";
+	}
 
-    @Override
-    public float getShootVolume(int altMode)
-    {
-        return 0.3F;
-    }
+	@Override
+	public float getShootVolume(int altMode) {
+		return 0.3F;
+	}
 
-    @Override
-    public int getShots(int altMode)
-    {
-        return 64;
-    }
+	@Override
+	public int getShots(int altMode) {
+		return 64;
+	}
 
-    @Override
-    public boolean hasRapidFire(int altMode)
-    {
-        return true;
-    }
+	@Override
+	public boolean hasRapidFire(int altMode) {
+		return true;
+	}
 
-    @Override
-    public void tick(EntityPlayer player, float timer)
-    {
-        super.tick(player, timer);
+	@Override
+	public void tick(EntityPlayer player, float timer) {
+		super.tick(player, timer);
 
-        ItemStack heldItem = player.getHeldItem();
+		ItemStack heldItem = player.getHeldItem();
 
-        boolean holdingSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper;
+		boolean holdingSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper;
 
-        int zoomTimer = TFDataManager.getZoomTimer(player);
+		int zoomTimer = TFDataManager.getZoomTimer(player);
 
-        PotionEffect activePotionEffect = player.getActivePotionEffect(Potion.nightVision);
+		PotionEffect activePotionEffect = player.getActivePotionEffect(Potion.nightVision);
 
-        if (activePotionEffect == null || activePotionEffect != null && activePotionEffect.getDuration() == 0)
-        {
-            if (holdingSniper && zoomTimer > 7)
-            {
-                player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1, 0));
-            }
-            else
-            {
-                player.removePotionEffect(Potion.nightVision.id);
-            }
-        }
+		if(activePotionEffect == null || activePotionEffect != null && activePotionEffect.getDuration() == 0) {
+			if(holdingSniper && zoomTimer > 7) {
+				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1, 0));
+			}
+			else {
+				player.removePotionEffect(Potion.nightVision.id);
+			}
+		}
 
-        if (player.worldObj.isRemote)
-        {
-            if (holdingSniper && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFHelper.isFullyTransformed(player))
-            {
-                if (zoomTimer < 10)
-                {
-                    TFDataManager.setZoomTimer(player, zoomTimer + 1);
-                }
-            }
-            else
-            {
-                if (zoomTimer > 0)
-                {
-                    TFDataManager.setZoomTimer(player, zoomTimer - 1);
-                }
-            }
-        }
+		if(player.worldObj.isRemote) {
+			if(holdingSniper && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFHelper.isFullyTransformed(player)) {
+				if(zoomTimer < 10) {
+					TFDataManager.setZoomTimer(player, zoomTimer + 1);
+				}
+			}
+			else {
+				if(zoomTimer > 0) {
+					TFDataManager.setZoomTimer(player, zoomTimer - 1);
+				}
+			}
+		}
 
-        player.addStat(TFAchievements.vurp, 1);
-    }
+		player.addStat(TFAchievements.vurp, 1);
+	}
 }

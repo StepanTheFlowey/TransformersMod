@@ -10,89 +10,75 @@ import net.minecraft.util.StatCollector;
 import fiskfille.tf.common.energon.power.IEnergyContainerItem;
 import fiskfille.tf.helper.TFFormatHelper;
 
-public class ItemEnergyContainer extends Item implements IEnergyContainerItem
-{
-    protected float capacity;
+public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
+	protected float capacity;
 
-    public ItemEnergyContainer(float max)
-    {
-        setMaxStackSize(1);
-        capacity = max;
-    }
+	public ItemEnergyContainer(float max) {
+		setMaxStackSize(1);
+		capacity = max;
+	}
 
-    public ItemEnergyContainer setCapacity(float max)
-    {
-        capacity = max;
-        return this;
-    }
+	public ItemEnergyContainer setCapacity(float max) {
+		capacity = max;
+		return this;
+	}
 
-    @Override
-    public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag)
-    {
-        list.add(StatCollector.translateToLocalFormatted("gui.emb.storage", TFFormatHelper.formatNumber(getEnergyStored(itemstack)), TFFormatHelper.formatNumber(getEnergyCapacity(itemstack))));
-    }
+	@Override
+	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
+		list.add(StatCollector.translateToLocalFormatted("gui.emb.storage", TFFormatHelper.formatNumber(getEnergyStored(itemstack)), TFFormatHelper.formatNumber(getEnergyCapacity(itemstack))));
+	}
 
-    @Override
-    public float receiveEnergy(ItemStack itemstack, float amount, boolean simulate)
-    {
-        if (!itemstack.hasTagCompound())
-        {
-            itemstack.setTagCompound(new NBTTagCompound());
-        }
+	@Override
+	public float receiveEnergy(ItemStack itemstack, float amount, boolean simulate) {
+		if(!itemstack.hasTagCompound()) {
+			itemstack.setTagCompound(new NBTTagCompound());
+		}
 
-        float energy = itemstack.getTagCompound().getFloat("Energy");
-        float energyReceived = Math.min(getEnergyCapacity(itemstack) - energy, amount);
+		float energy = itemstack.getTagCompound().getFloat("Energy");
+		float energyReceived = Math.min(getEnergyCapacity(itemstack) - energy, amount);
 
-        if (!simulate)
-        {
-            energy += energyReceived;
-            itemstack.getTagCompound().setFloat("Energy", energy);
-        }
+		if(!simulate) {
+			energy += energyReceived;
+			itemstack.getTagCompound().setFloat("Energy", energy);
+		}
 
-        return energyReceived;
-    }
+		return energyReceived;
+	}
 
-    @Override
-    public float extractEnergy(ItemStack itemstack, float amount, boolean simulate)
-    {
-        if (!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy"))
-        {
-            return 0;
-        }
+	@Override
+	public float extractEnergy(ItemStack itemstack, float amount, boolean simulate) {
+		if(!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy")) {
+			return 0;
+		}
 
-        float energy = itemstack.getTagCompound().getFloat("Energy");
-        float energyExtracted = Math.min(energy, amount);
+		float energy = itemstack.getTagCompound().getFloat("Energy");
+		float energyExtracted = Math.min(energy, amount);
 
-        if (!simulate)
-        {
-            energy -= energyExtracted;
-            itemstack.getTagCompound().setFloat("Energy", energy);
-        }
+		if(!simulate) {
+			energy -= energyExtracted;
+			itemstack.getTagCompound().setFloat("Energy", energy);
+		}
 
-        return energyExtracted;
-    }
+		return energyExtracted;
+	}
 
-    @Override
-    public float getEnergyStored(ItemStack itemstack)
-    {
-        if (!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy"))
-        {
-            return 0;
-        }
+	@Override
+	public float getEnergyStored(ItemStack itemstack) {
+		if(!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy")) {
+			return 0;
+		}
 
-        float energy = itemstack.getTagCompound().getFloat("Energy");
+		float energy = itemstack.getTagCompound().getFloat("Energy");
 
-        if (energy <= 1E-16)
-        {
-            itemstack.getTagCompound().setFloat("Energy", energy = 0);
-        }
+		if(energy <= 1E-16) {
+			itemstack.getTagCompound().setFloat("Energy", energy = 0);
+		}
 
-        return energy;
-    }
+		return energy;
+	}
 
-    @Override
-    public float getEnergyCapacity(ItemStack itemstack)
-    {
-        return capacity;
-    }
+	@Override
+	public float getEnergyCapacity(ItemStack itemstack) {
+		return capacity;
+	}
 }

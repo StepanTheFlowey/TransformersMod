@@ -10,21 +10,19 @@ import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelVurpsSniper;
 import fiskfille.tf.common.tick.ClientTickHandler;
 
-public class DisplayableVurpsSniper extends Displayable
-{
-    private ModelVurpsSniper model = new ModelVurpsSniper();
+public class DisplayableVurpsSniper extends Displayable {
+	private ModelVurpsSniper model = new ModelVurpsSniper();
 
-    @Override
-    public void render(ItemStack itemstack)
-    {
-        bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/sniper.png"));
+	@Override
+	public void render(ItemStack itemstack) {
+		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/sniper.png"));
 
-        float f = 0.75F;
-        float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-        GL11.glScalef(f, f, f);
-        GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
-        GL11.glTranslatef(0, 0.95F + f1, 0.1F);
+		float f = 0.75F;
+		float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
+		GL11.glScalef(f, f, f);
+		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+		GL11.glTranslatef(0, 0.95F + f1, 0.1F);
 
-        model.render();
-    }
+		model.render();
+	}
 }
