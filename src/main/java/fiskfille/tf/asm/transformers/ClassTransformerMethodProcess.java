@@ -16,9 +16,6 @@ public abstract class ClassTransformerMethodProcess extends ClassTransformerBase
     private String methName;
     private String methDesc;
 
-    public static String varPlayer;
-    public static String varEntity;
-
     public ClassTransformerMethodProcess(String classPath, String methodName, String methodNameDev, String methodDesc, String methodDescDev)
     {
         super(classPath);
@@ -56,8 +53,5 @@ public abstract class ClassTransformerMethodProcess extends ClassTransformerBase
     {
         methName = TFTranslator.getMappedName(methodName, methodNameDev);
         methDesc = TFTranslator.getMappedName(methodDesc, methodDescDev);
-
-        varPlayer = TFTranslator.getMappedName("yz", "net/minecraft/entity/player/EntityPlayer");
-        varEntity = TFTranslator.getMappedName("sa", "net/minecraft/entity/Entity");
     }
 }

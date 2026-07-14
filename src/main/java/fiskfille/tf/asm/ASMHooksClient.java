@@ -16,19 +16,18 @@ import fiskfille.tf.helper.TFHelper;
 
 public class ASMHooksClient
 {
-    private static Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft mc = Minecraft.getMinecraft();
 
     public static int getBrightnessForRender(Entity entity)
     {
         if (entity instanceof EntityPlayer)
         {
-            EntityPlayer player = (EntityPlayer) entity;
-            float scale = TFHelper.getHeight(player) / 1.8F;
+            final float scale = TFHelper.getHeight((EntityPlayer) entity) / 1.8F;
 
             return MathHelper.floor_double(entity.boundingBox.minY + scale * 1.62F);
         }
 
-        double d0 = (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.66D;
+        final double d0 = (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.66D;
         return MathHelper.floor_double(entity.posY - entity.yOffset + d0);
     }
 
@@ -36,10 +35,10 @@ public class ASMHooksClient
     {
         if (player == mc.thePlayer)
         {
-            GL11.glTranslatef(0, player.yOffset - 1.62F, 0);
+            GL11.glTranslatef(0F, player.yOffset - 1.62F, 0F);
         }
 
-        GL11.glTranslatef((float) x, (float) y, (float) z);
+        GL11.glTranslated(x, y, z);
     }
 
     public static double getScaledSneakOffset(EntityPlayer player)

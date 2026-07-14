@@ -15,8 +15,7 @@ import fiskfille.tf.asm.TFTranslator;
 
 public class ClassTransformerEntity extends ClassTransformerBase
 {
-    public static String varPlayer;
-    public static String varEntity;
+    public String varEntity;
 
     public ClassTransformerEntity()
     {
@@ -32,17 +31,17 @@ public class ClassTransformerEntity extends ClassTransformerBase
         {
             if (method.name.equals(TFTranslator.getMappedName("c", "getBrightnessForRender")) && method.desc.equals("(F)I"))
             {
-                InsnList list = new InsnList();
+                final InsnList list = new InsnList();
                 int startIndex = -1;
                 int endIndex = -1;
 
                 for (int i = 0; i < method.instructions.size(); ++i)
                 {
-                    AbstractInsnNode node = method.instructions.get(i);
+                    final AbstractInsnNode node = method.instructions.get(i);
 
                     if (i + 9 < method.instructions.size())
                     {
-                        AbstractInsnNode endNode = method.instructions.get(i + 9);
+                        final AbstractInsnNode endNode = method.instructions.get(i + 9);
 
                         if (endNode instanceof VarInsnNode && ((VarInsnNode) endNode).var == 6 && endNode.getOpcode() == ISTORE)
                         {
@@ -79,7 +78,6 @@ public class ClassTransformerEntity extends ClassTransformerBase
     @Override
     public void setupMappings()
     {
-        varPlayer = TFTranslator.getMappedName("yz", "net/minecraft/entity/player/EntityPlayer");
         varEntity = TFTranslator.getMappedName("sa", "net/minecraft/entity/Entity");
     }
 }

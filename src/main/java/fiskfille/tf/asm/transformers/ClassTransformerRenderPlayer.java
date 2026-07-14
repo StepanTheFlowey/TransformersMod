@@ -33,15 +33,15 @@ public class ClassTransformerRenderPlayer extends ClassTransformerBase
         {
             if (method.name.equals(TFTranslator.getMappedName("a", "renderLivingAt")) && method.desc.equals(TFTranslator.getMappedName("(Lsv;DDD)V", "(Lnet/minecraft/entity/EntityLivingBase;DDD)V")))
             {
-                InsnList list = new InsnList();
+                final InsnList list = new InsnList();
 
                 for (int i = 0; i < method.instructions.size(); ++i)
                 {
-                    AbstractInsnNode node = method.instructions.get(i);
+                    final AbstractInsnNode node = method.instructions.get(i);
 
                     if (node instanceof MethodInsnNode)
                     {
-                        MethodInsnNode methodNode = (MethodInsnNode) node;
+                        final MethodInsnNode methodNode = (MethodInsnNode) node;
 
                         if (methodNode.getOpcode() == INVOKEVIRTUAL && methodNode.desc.equals(TFTranslator.getMappedName("(Lblg;DDD)V", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V")))
                         {
@@ -59,15 +59,15 @@ public class ClassTransformerRenderPlayer extends ClassTransformerBase
             }
             else if (method.name.equals(TFTranslator.getMappedName("a", "doRender")) && method.desc.equals(TFTranslator.getMappedName("(Lblg;DDDFF)V", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V")))
             {
-                InsnList list = new InsnList();
+                final InsnList list = new InsnList();
 
                 for (int i = 0; i < method.instructions.size(); ++i)
                 {
-                    AbstractInsnNode node = method.instructions.get(i);
+                    final AbstractInsnNode node = method.instructions.get(i);
 
                     if (node instanceof LdcInsnNode)
                     {
-                        LdcInsnNode ldcNode = (LdcInsnNode) node;
+                        final LdcInsnNode ldcNode = (LdcInsnNode) node;
 
                         if (ldcNode.cst instanceof Double && (Double) ldcNode.cst == 0.125D)
                         {

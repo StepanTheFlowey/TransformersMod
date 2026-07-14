@@ -16,12 +16,10 @@ public class TFLoadingPlugin implements IFMLLoadingPlugin
 {
     public static boolean loaded;
 
-    private static final String[] transformers = new String[] {ClassTransformerRenderPlayer.class.getName(), ClassTransformerEntity.class.getName(), ClassTransformerModelBiped.class.getName(), ClassTransformerGuiContainer.class.getName()};
-
     @Override
     public String[] getASMTransformerClass()
     {
-        return transformers;
+        return new String[] {ClassTransformerRenderPlayer.class.getName(), ClassTransformerEntity.class.getName(), ClassTransformerModelBiped.class.getName(), ClassTransformerGuiContainer.class.getName()};
     }
 
     @Override

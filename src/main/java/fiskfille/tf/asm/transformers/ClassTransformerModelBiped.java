@@ -15,9 +15,6 @@ import fiskfille.tf.helper.TFModelHelper;
 
 public class ClassTransformerModelBiped extends ClassTransformerBase
 {
-    public static String varPlayer;
-    public static String varEntity;
-
     public ClassTransformerModelBiped()
     {
         super("net.minecraft.client.model.ModelBiped");
@@ -78,14 +75,14 @@ public class ClassTransformerModelBiped extends ClassTransformerBase
                 method.instructions.add(list);
                 flag = true;
             }
-            else if (method.name.equals(TFTranslator.getMappedName("a", "setRotationAngles")) && method.desc.equals(TFTranslator.getMappedName("(FFFFFFLsa;)V", "(FFFFFFLnet/minecraft/entity/Entity;)V")))
-            {
-                InsnList list = new InsnList();
-
-                for (int i = 0; i < method.instructions.size(); ++i)
-                {
-                    AbstractInsnNode node = method.instructions.get(i);
-
+//          else if (method.name.equals(TFTranslator.getMappedName("a", "setRotationAngles")) && method.desc.equals(TFTranslator.getMappedName("(FFFFFFLsa;)V", "(FFFFFFLnet/minecraft/entity/Entity;)V")))
+//          {
+//              InsnList list = new InsnList();
+//
+//              for (int i = 0; i < method.instructions.size(); ++i)
+//              {
+//                  AbstractInsnNode node = method.instructions.get(i);
+//
 //                  if (node.getOpcode() == RETURN)
 //                  {
 //                      list.add(new VarInsnNode(ALOAD, 0));
@@ -98,14 +95,14 @@ public class ClassTransformerModelBiped extends ClassTransformerBase
 //                      list.add(new VarInsnNode(ALOAD, 7));
 //                      list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(ModelHelper.class), "setRotationAngles", ALTranslator.getMappedName("(Lbhm;FFFFFFFLsa;)V", "(Lnet/minecraft/client/model/ModelBiped;FFFFFFLnet/minecraft/entity/Entity;)V"), false));
 //                  }
-
-                    list.add(node);
-                }
-
-                method.instructions.clear();
-                method.instructions.add(list);
-                flag = true;
-            }
+//
+//                  list.add(node);
+//              }
+//
+//              method.instructions.clear();
+//              method.instructions.add(list);
+//              flag = true;
+//          }
         }
 
         return flag;
@@ -120,7 +117,5 @@ public class ClassTransformerModelBiped extends ClassTransformerBase
     @Override
     public void setupMappings()
     {
-        varPlayer = TFTranslator.getMappedName("yz", "net/minecraft/entity/player/EntityPlayer");
-        varEntity = TFTranslator.getMappedName("sa", "net/minecraft/entity/Entity");
     }
 }

@@ -34,26 +34,26 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
         {
             if (transformedName.equals(classPath))
             {
-                TFLog.info("Patching Class %s (%s)", unobfClass, name);
+                TFLog.info("Patching class %s (%s)...", unobfClass, name);
 
-                ClassReader cr = new ClassReader(bytes);
-                ClassNode cn = new ClassNode();
+                final ClassReader cr = new ClassReader(bytes);
+                final ClassNode cn = new ClassNode();
                 cr.accept(cn, 0);
 
                 setupMappings();
                 boolean success = processFields(cn.fields) && processMethods(cn.methods);
                 addInterface(cn.interfaces);
 
-                ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+                final ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
                 cn.accept(cw);
 
                 if (success)
                 {
-                    TFLog.info("Patching Class %s done", unobfClass);
+                    TFLog.info("Patching class %s done.", unobfClass);
                 }
                 else
                 {
-                    TFLog.error("Patching Class %s FAILED!", unobfClass);
+                    TFLog.error("Patching class %s failed!", unobfClass);
                 }
 
                 return cw.toByteArray();
@@ -85,7 +85,7 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 
     public static MethodNode generateSetter(String className, String methodName, String fieldName, String fieldType)
     {
-        MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "(" + fieldType + ")V", null, null);
+        final MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "(" + fieldType + ")V", null, null);
         mn.visitCode();
         mn.visitVarInsn(ALOAD, 0);
         int opCode;
@@ -121,7 +121,7 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 
     public static MethodNode generateGetter(String className, String methodName, String fieldName, String fieldType)
     {
-        MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "()" + fieldType, null, null);
+        final MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "()" + fieldType, null, null);
         mn.visitCode();
         mn.visitVarInsn(ALOAD, 0);
         mn.visitFieldInsn(GETFIELD, className, fieldName, fieldType);

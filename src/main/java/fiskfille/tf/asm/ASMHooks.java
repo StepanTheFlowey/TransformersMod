@@ -7,21 +7,11 @@ public class ASMHooks
 {
     public static float getEntityScale(Entity entity)
     {
-        if (entity instanceof EntityPlayer)
-        {
-//            return SHData.getFloat((EntityPlayer) entity, SHData.SCALE);
-        }
-
         return 1F;
     }
 
     public static float getModifiedEntityScale(Entity entity)
     {
-        if (getEntityScale(entity) > 1)
-        {
-            return getEntityScale(entity);
-        }
-
         return 1F;
     }
 
