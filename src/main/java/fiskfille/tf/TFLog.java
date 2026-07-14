@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class TFLog {
-	private static Logger logger = LogManager.getLogger("Transformers Mod");
+	private static final Logger logger = LogManager.getLogger("Transformers Mod");
 
 	public static void info(String s, Object... args) {
 		log(Level.INFO, s, args);

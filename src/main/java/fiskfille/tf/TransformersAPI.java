@@ -18,10 +18,10 @@ import fiskfille.tf.common.transformer.base.Transformer;
  * @author gegy1000, FiskFille
  */
 public class TransformersAPI {
-	private static List<Transformer> transformers = Lists.newArrayList();
-	private static List<Energon> energonTypes = Lists.newArrayList();
-	private static Map<Item, Displayable> displayables = Maps.newHashMap();
-	private static List<Item> displayablesServer = Lists.newArrayList();
+	private static final List<Transformer> transformers = Lists.newArrayList();
+	private static final List<Energon> energonTypes = Lists.newArrayList();
+	private static final Map<Item, Displayable> displayables = Maps.newHashMap();
+	private static final List<Item> displayablesServer = Lists.newArrayList();
 
 	/**
 	 * Used to register the specified Transformer.
@@ -102,12 +102,9 @@ public class TransformersAPI {
 	 * @param displayable The Displayable registered.
 	 */
 	public static void registerDisplayable(Item item, Class<? extends Displayable> displayableClass) {
-		Side side = FMLCommonHandler.instance().getSide();
-
-		if(side == Side.CLIENT) {
+		if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			try {
-				Displayable displayable = displayableClass.newInstance();
-				displayables.put(item, displayable);
+				displayables.put(item, displayableClass.newInstance());
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -144,9 +141,7 @@ public class TransformersAPI {
 	 * @return if the specific item has a Displayable on the client side.
 	 */
 	public static boolean hasDisplayable(Item item) {
-		Side side = FMLCommonHandler.instance().getSide();
-
-		if(side == Side.CLIENT) {
+		if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			return getDisplayableFor(item) != null;
 		}
 		else {

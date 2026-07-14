@@ -57,10 +57,9 @@ public class TransformersMod {
 
 		TransformerManager.register();
 
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		final Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 		TFConfig.load(config);
-
 		if(config.hasChanged()) {
 			config.save();
 		}
