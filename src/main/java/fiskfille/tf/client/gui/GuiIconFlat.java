@@ -1,13 +1,12 @@
 package fiskfille.tf.client.gui;
 
-import java.awt.Rectangle;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
-
 import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.util.List;
 
 public class GuiIconFlat extends GuiButtonFlat {
 	public IButtonRenderCallback callback;
@@ -23,7 +22,7 @@ public class GuiIconFlat extends GuiButtonFlat {
 		if(visible) {
 			mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
 
-			GL11.glColor4f(1, 1, 1, 1);
+			GL11.glColor4f(1F, 1F, 1F, 1F);
 			field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
 			int hoverState = getHoverState(field_146123_n);
 
@@ -46,7 +45,7 @@ public class GuiIconFlat extends GuiButtonFlat {
 		return callback.getHoverText(this);
 	}
 
-	public static interface IButtonRenderCallback {
+	public interface IButtonRenderCallback {
 		void render(GuiButton button, int mouseX, int mouseY);
 
 		List<String> getHoverText(GuiButton button);

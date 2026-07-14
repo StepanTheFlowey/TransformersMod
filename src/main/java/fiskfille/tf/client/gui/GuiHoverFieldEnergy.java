@@ -1,12 +1,12 @@
 package fiskfille.tf.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.common.energon.power.EnergyStorage;
 import fiskfille.tf.helper.TFFormatHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiHoverFieldEnergy extends GuiHoverField {

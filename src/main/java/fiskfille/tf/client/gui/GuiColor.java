@@ -1,7 +1,14 @@
 package fiskfille.tf.client.gui;
 
-import java.awt.Color;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.network.MessageColorArmor;
+import fiskfille.tf.common.network.base.TFNetworkManager;
+import fiskfille.tf.common.proxy.ClientProxy;
+import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
+import fiskfille.tf.helper.TFArmorDyeHelper;
+import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -12,36 +19,28 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.network.MessageColorArmor;
-import fiskfille.tf.common.network.base.TFNetworkManager;
-import fiskfille.tf.common.proxy.ClientProxy;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
-import fiskfille.tf.helper.TFArmorDyeHelper;
-import fiskfille.tf.helper.TFRenderHelper;
+import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiColor extends GuiScreen {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/display_station.png");
-	private TileEntityDisplayStation tileentity;
-
 	public static int ticks;
 	public static boolean fromPresetMenu = false;
-
 	public static int layerSelected;
 	public static float[][] layerColors = {{1, 1, 1}, {1, 1, 1}};
-
 	public static GuiColorSlider sliderRed;
 	public static GuiColorSlider sliderGreen;
 	public static GuiColorSlider sliderBlue;
 	public static GuiTextField inputField;
+	private final TileEntityDisplayStation tileentity;
+
+	public GuiColor(TileEntityDisplayStation tile) {
+		tileentity = tile;
+	}
 
 	@Override
 	public void initGui() {
@@ -54,8 +53,7 @@ public class GuiColor extends GuiScreen {
 		buttonList.add(new GuiButtonSwapColors(5, width / 2 + 108, height / 6 + 63));
 		buttonList.add(new GuiButtonAlt(6, width / 2 + 112, height / 6 + 84, 16, 16, "X"));
 
-		ItemStack head = tileentity.getStackInSlot(0).copy();
-
+		final ItemStack head = tileentity.getStackInSlot(0).copy();
 		if(TFArmorDyeHelper.isDyed(head) && !fromPresetMenu) {
 			Color primary = new Color(TFArmorDyeHelper.getPrimaryColor(head));
 			Color secondary = new Color(TFArmorDyeHelper.getSecondaryColor(head));
@@ -78,10 +76,6 @@ public class GuiColor extends GuiScreen {
 		inputField.setMaxStringLength(20);
 	}
 
-	public GuiColor(TileEntityDisplayStation tile) {
-		tileentity = tile;
-	}
-
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
@@ -93,17 +87,15 @@ public class GuiColor extends GuiScreen {
 		layerColors[layerSelected][2] = sliderBlue.percentage;
 
 		if(!inputField.isFocused()) {
-			Color color = new Color(sliderRed.percentage, sliderGreen.percentage, sliderBlue.percentage);
+			final Color color = new Color(sliderRed.percentage, sliderGreen.percentage, sliderBlue.percentage);
 			inputField.setText(Integer.toHexString(color.getRGB()).substring(2).toUpperCase());
 		}
 		else {
 			try {
-				String s = inputField.getText();
-				int i = (int) Long.parseLong(s, 16);
-				Color color = new Color(i);
-				sliderRed.percentage = (float) color.getRed() / 255;
-				sliderGreen.percentage = (float) color.getGreen() / 255;
-				sliderBlue.percentage = (float) color.getBlue() / 255;
+				final Color color = new Color(Integer.parseUnsignedInt(inputField.getText(), 16));
+				sliderRed.percentage = (float) color.getRed() / 255F;
+				sliderGreen.percentage = (float) color.getGreen() / 255F;
+				sliderBlue.percentage = (float) color.getBlue() / 255F;
 			}
 			catch(Exception e) {
 			}
@@ -121,7 +113,7 @@ public class GuiColor extends GuiScreen {
 	@Override
 	protected void keyTyped(char c, int key) {
 		if(key == 1) {
-			mc.displayGuiScreen((GuiScreen) null);
+			mc.displayGuiScreen(null);
 		}
 		else {
 			inputField.textboxKeyTyped(Character.toUpperCase(c), Character.toUpperCase(key));
@@ -130,11 +122,11 @@ public class GuiColor extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
+		final int id = button.id;
 
 		if(id == 0) {
-			Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
-			Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
+			final Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
+			final Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
 			TFNetworkManager.networkWrapper.sendToServer(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, primary.getRGB(), secondary.getRGB()));
 			TFNetworkManager.networkWrapper.sendToAll(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, primary.getRGB(), secondary.getRGB()));
 
@@ -196,6 +188,7 @@ public class GuiColor extends GuiScreen {
 		inputField.drawTextBox();
 		drawCenteredString(fontRendererObj, I18n.format("gui.display_station.color"), width / 2, 15, 16777215);
 
+		GL11.glPushAttrib(GL11.GL_ENABLE_BIT | GL11.GL_COLOR_BUFFER_BIT);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -253,7 +246,7 @@ public class GuiColor extends GuiScreen {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		GL11.glColor4f(0, 0, 0, 1);
+		GL11.glColor4f(0F, 0F, 0F, 1F);
 		drawTexturedModalRect(width / 2 - 22, height / 6 + 84, 0, 0, 66, 66);
 		drawTexturedModalRect(width / 2 - 22 + 67, height / 6 + 84, 0, 0, 66, 66);
 
@@ -263,13 +256,14 @@ public class GuiColor extends GuiScreen {
 		GL11.glColor4f(1, 1, 0, opacity / opacityMax + 0.1F);
 		drawTexturedModalRect(width / 2 - 23 + 67 * layerSelected, height / 6 + 83, 0, 0, 68, 68);
 
-		GL11.glColor4f(layerColors[0][0], layerColors[0][1], layerColors[0][2], 1);
+		GL11.glColor4f(layerColors[0][0], layerColors[0][1], layerColors[0][2], 1F);
 		drawTexturedModalRect(width / 2 - 21, height / 6 + 85, 0, 0, 64, 64);
 
-		GL11.glColor4f(layerColors[1][0], layerColors[1][1], layerColors[1][2], 1);
+		GL11.glColor4f(layerColors[1][0], layerColors[1][1], layerColors[1][2], 1F);
 		drawTexturedModalRect(width / 2 - 21 + 67, height / 6 + 85, 0, 0, 64, 64);
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		super.drawScreen(mouseX, mouseY, partialTicks);
+		GL11.glPopAttrib();
 	}
 }

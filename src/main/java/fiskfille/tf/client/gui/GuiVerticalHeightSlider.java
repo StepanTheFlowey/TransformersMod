@@ -6,8 +6,8 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 public class GuiVerticalHeightSlider extends GuiVerticalSlider {
+	private final Runnable onChange;
 	public GuiSelectReceivers parent;
-	private Runnable onChange;
 
 	public GuiVerticalHeightSlider(int id, GuiSelectReceivers parentScreen, int x, int y, int height, Runnable onChange) {
 		super(id, x, y, height);
@@ -39,7 +39,7 @@ public class GuiVerticalHeightSlider extends GuiVerticalSlider {
 			}
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glColor4f(1, 1, 1, 1);
+			GL11.glColor4f(1F, 1F, 1F, 1F);
 			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)), 20, 0, width, 4);
 			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)) + 4, 20, 196, width, 4);
 

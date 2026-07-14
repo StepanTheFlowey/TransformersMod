@@ -1,21 +1,5 @@
 package fiskfille.tf.client.gui;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
@@ -27,11 +11,25 @@ import fiskfille.tf.common.network.MessageTileTrigger;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible;
 import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible.EnumSmeltingMode;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCallback {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/alloy_crucible.png");
-	private TileEntityAlloyCrucible tileentity;
+	private final TileEntityAlloyCrucible tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;
 

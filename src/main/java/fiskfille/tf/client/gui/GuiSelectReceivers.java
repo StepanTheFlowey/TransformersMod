@@ -1,25 +1,6 @@
 package fiskfille.tf.client.gui;
 
-import java.awt.Rectangle;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
-
-import org.lwjgl.opengl.GL11;
-
 import com.google.common.collect.Lists;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.common.energon.power.IEnergyReceiver;
@@ -31,6 +12,22 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.helper.TFEnergyHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFVectorHelper;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @SideOnly(Side.CLIENT)
 public class GuiSelectReceivers extends GuiScreen {
@@ -287,7 +284,7 @@ public class GuiSelectReceivers extends GuiScreen {
 					GL11.glColor4f(0.075F, 0.075F, 0.075F, 1);
 					drawTexturedModalRect(x, y, 0, 0, size, size);
 
-					DimensionalCoords coords = coordArray[i + j * boardWidth];
+					final DimensionalCoords coords = coordArray[i + j * boardWidth];
 
 					if(coords != null) {
 						if(!mc.theWorld.isAirBlock(coords.posX, coords.posY, coords.posZ)) {

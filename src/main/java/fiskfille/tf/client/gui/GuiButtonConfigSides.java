@@ -1,16 +1,14 @@
 package fiskfille.tf.client.gui;
 
-import java.awt.Rectangle;
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonConfigSides extends GuiButtonFlat {
@@ -20,16 +18,18 @@ public class GuiButtonConfigSides extends GuiButtonFlat {
 
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-		if(visible) {
-			mc.getTextureManager().bindTexture(tfButtonTextures);
-			GL11.glColor4f(1, 1, 1, 1);
-			field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
-			drawTexturedModalRect(xPosition, yPosition, 230 + (field_146123_n ? width : 0), 0, width, height);
+		if(!visible) {
+			return;
 		}
+
+		mc.getTextureManager().bindTexture(tfButtonTextures);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
+		drawTexturedModalRect(xPosition, yPosition, 230 + (field_146123_n ? width : 0), 0, width, height);
 	}
 
 	@Override
 	public List<String> getHoverText() {
-		return Arrays.asList(I18n.format("gui.tf.io.desc"));
+		return Collections.singletonList(I18n.format("gui.tf.io.desc"));
 	}
 }

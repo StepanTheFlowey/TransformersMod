@@ -1,19 +1,6 @@
 package fiskfille.tf.client.gui;
 
-import java.util.List;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import com.google.common.collect.Lists;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersAPI;
@@ -27,11 +14,21 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFArmorHelper;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiDisplayStationArmor extends GuiContainer {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/display_station_armor.png");
-	private TileEntityDisplayStation tileentity;
+	private final TileEntityDisplayStation tileentity;
 
 	public GuiDisplayStationArmor(InventoryPlayer inventoryPlayer, TileEntityDisplayStation tile) {
 		super(new ContainerDisplayStationArmor(inventoryPlayer, tile));
@@ -105,7 +102,7 @@ public class GuiDisplayStationArmor extends GuiContainer {
 			}
 
 			itemRender.renderWithColor = prevColor;
-			GL11.glColor4f(1, 1, 1, 1);
+			GL11.glColor4f(1F, 1F, 1F, 1F);
 			TFRenderHelper.finishRenderItemIntoGUI();
 		}
 	}

@@ -1,14 +1,5 @@
 package fiskfille.tf.client.gui;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
@@ -20,14 +11,19 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 import fiskfille.tf.helper.TFFluidRenderHelper;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiEnergonTank extends GuiContainerTF {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/energon_fluid_tank.png");
-	private TileEntityEnergonTank tileentity;
-
+	private final TileEntityEnergonTank tileentity;
 	public FluidTankTF fluidTank;
-
 	private GuiHoverFieldFluid fieldFluid;
 
 	public GuiEnergonTank(InventoryPlayer inventoryPlayer, TileEntityEnergonTank tile) {
@@ -38,9 +34,8 @@ public class GuiEnergonTank extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
 
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		buttonList.add(fieldFluid = new GuiHoverFieldFluid(x + 61, y + 17, 52, 52, tileentity.data.tank));
 		buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 5, tileentity));
 	}
@@ -54,15 +49,13 @@ public class GuiEnergonTank extends GuiContainerTF {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
-
-		if(id == 1) {
+		if(button.id == 1) {
 			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
 		}
 	}
 
 	public void updateFluids() {
-		TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(tileentity);
+		final TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(tileentity);
 		FluidStack stack = null;
 		int y = tileBase.yCoord;
 		int capacity = 0;
@@ -89,10 +82,8 @@ public class GuiEnergonTank extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-
-		String s = I18n.format(tileentity.getInventoryName());
+		final String s = I18n.format(tileentity.getInventoryName());
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
 
@@ -103,10 +94,9 @@ public class GuiEnergonTank extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 

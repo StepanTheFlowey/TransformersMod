@@ -1,5 +1,7 @@
 package fiskfille.tf.client.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -8,11 +10,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ChatAllowedCharacters;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiTextFieldFlat extends GuiTextField {
@@ -51,6 +49,11 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
+	public String getText() {
+		return text;
+	}
+
+	@Override
 	public void setText(String s) {
 		if(s.length() > maxStringLength) {
 			text = s.substring(0, maxStringLength);
@@ -63,14 +66,9 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public String getText() {
-		return text;
-	}
-
-	@Override
 	public String getSelectedText() {
-		int start = cursorPosition < selectionEnd ? cursorPosition : selectionEnd;
-		int end = cursorPosition < selectionEnd ? selectionEnd : cursorPosition;
+		int start = Math.min(cursorPosition, selectionEnd);
+		int end = Math.max(cursorPosition, selectionEnd);
 		return text.substring(start, end);
 	}
 
@@ -78,10 +76,10 @@ public class GuiTextFieldFlat extends GuiTextField {
 	public void writeText(String s) {
 		String s1 = "";
 		String s2 = ChatAllowedCharacters.filerAllowedCharacters(s);
-		int i = cursorPosition < selectionEnd ? cursorPosition : selectionEnd;
-		int j = cursorPosition < selectionEnd ? selectionEnd : cursorPosition;
+		int i = Math.min(cursorPosition, selectionEnd);
+		int j = Math.max(cursorPosition, selectionEnd);
 		int k = maxStringLength - text.length() - (i - selectionEnd);
-		if(text.length() > 0) {
+		if(!text.isEmpty()) {
 			s1 = s1 + text.substring(0, i);
 		}
 
@@ -96,7 +94,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 			l = s2.length();
 		}
 
-		if(text.length() > 0 && j < text.length()) {
+		if(!text.isEmpty() && j < text.length()) {
 			s1 = s1 + text.substring(j);
 		}
 
@@ -106,7 +104,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 
 	@Override
 	public void deleteWords(int num) {
-		if(text.length() != 0) {
+		if(!text.isEmpty()) {
 			if(selectionEnd != cursorPosition) {
 				writeText("");
 			}
@@ -118,7 +116,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 
 	@Override
 	public void deleteFromCursor(int num) {
-		if(text.length() != 0) {
+		if(!text.isEmpty()) {
 			if(selectionEnd != cursorPosition) {
 				writeText("");
 			}
@@ -192,22 +190,6 @@ public class GuiTextFieldFlat extends GuiTextField {
 	@Override
 	public void moveCursorBy(int amount) {
 		setCursorPosition(selectionEnd + amount);
-	}
-
-	@Override
-	public void setCursorPosition(int pos) {
-		cursorPosition = pos;
-		int j = text.length();
-
-		if(cursorPosition < 0) {
-			cursorPosition = 0;
-		}
-
-		if(cursorPosition > j) {
-			cursorPosition = j;
-		}
-
-		setSelectionPos(cursorPosition);
 	}
 
 	@Override
@@ -372,7 +354,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 				GL11.glEnable(GL11.GL_BLEND);
 				OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(1, 1, 1, 1);
+				GL11.glColor4f(1F, 1F, 1F, 1F);
 
 				if(width % 2 == 0) {
 					drawTexturedModalRect(xPosition, yPosition, 60, 39 + (isEnabled ? 13 : 0), width / 2, height);
@@ -398,7 +380,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 				k = s.length();
 			}
 
-			if(s.length() > 0) {
+			if(!s.isEmpty()) {
 				String s1 = flag ? s.substring(0, j) : s;
 				j1 = fontRendererObj.drawString(s1, l, i1, i);
 			}
@@ -414,7 +396,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 				--j1;
 			}
 
-			if(s.length() > 0 && flag && j < s.length()) {
+			if(!s.isEmpty() && flag && j < s.length()) {
 				fontRendererObj.drawString(s.substring(j), j1, i1, i);
 			}
 
@@ -473,6 +455,11 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
+	public int getMaxStringLength() {
+		return maxStringLength;
+	}
+
+	@Override
 	public void setMaxStringLength(int length) {
 		maxStringLength = length;
 
@@ -482,13 +469,24 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public int getMaxStringLength() {
-		return maxStringLength;
+	public int getCursorPosition() {
+		return cursorPosition;
 	}
 
 	@Override
-	public int getCursorPosition() {
-		return cursorPosition;
+	public void setCursorPosition(int pos) {
+		cursorPosition = pos;
+		int j = text.length();
+
+		if(cursorPosition < 0) {
+			cursorPosition = 0;
+		}
+
+		if(cursorPosition > j) {
+			cursorPosition = j;
+		}
+
+		setSelectionPos(cursorPosition);
 	}
 
 	@Override
@@ -512,17 +510,17 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
+	public boolean isFocused() {
+		return isFocused;
+	}
+
+	@Override
 	public void setFocused(boolean focused) {
 		if(focused && !isFocused) {
 			cursorCounter = 0;
 		}
 
 		isFocused = focused;
-	}
-
-	@Override
-	public boolean isFocused() {
-		return isFocused;
 	}
 
 	@Override

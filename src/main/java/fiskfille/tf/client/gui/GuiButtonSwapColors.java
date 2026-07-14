@@ -1,14 +1,12 @@
 package fiskfille.tf.client.gui;
 
-import java.awt.Rectangle;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonSwapColors extends GuiButton {
@@ -19,10 +17,12 @@ public class GuiButtonSwapColors extends GuiButton {
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 		if(visible) {
-			mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
-			GL11.glColor4f(1, 1, 1, 1);
-			boolean flag = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
-			drawTexturedModalRect(xPosition, yPosition, 0, 200 + (flag ? height : 0), width, height);
+			return;
 		}
+
+		mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		final boolean flag = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
+		drawTexturedModalRect(xPosition, yPosition, 0, 200 + (flag ? height : 0), width, height);
 	}
 }

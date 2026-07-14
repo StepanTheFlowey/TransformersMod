@@ -1,21 +1,7 @@
 package fiskfille.tf.client.gui;
 
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
@@ -27,11 +13,22 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityIsoCondenser;
 import fiskfille.tf.helper.TFFormatHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.ForgeDirection;
+import org.lwjgl.opengl.GL11;
+
+import java.util.List;
+import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class GuiIsoCondenser extends GuiContainerTF {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/isotopic_condenser.png");
-	private TileEntityIsoCondenser tileentity;
+	private final TileEntityIsoCondenser tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;
 

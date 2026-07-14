@@ -1,9 +1,21 @@
 package fiskfille.tf.client.gui;
 
-import java.util.List;
-
-import javax.vecmath.Vector3d;
-
+import com.google.common.collect.Lists;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.block.BlockMachineBase;
+import fiskfille.tf.common.container.ContainerEmpty;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.network.MessageTileTrigger;
+import fiskfille.tf.common.network.base.TFNetworkManager;
+import fiskfille.tf.common.tick.ClientTickHandler;
+import fiskfille.tf.common.tileentity.TileEntityMachine;
+import fiskfille.tf.common.tileentity.TileEntityMachine.EnumIO;
+import fiskfille.tf.helper.TFHelper;
+import fiskfille.tf.helper.TFRenderHelper;
+import fiskfille.tf.helper.TFTextureHelper;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -21,43 +33,25 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL14;
 
-import com.google.common.collect.Lists;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.block.BlockMachineBase;
-import fiskfille.tf.common.container.ContainerEmpty;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.network.MessageTileTrigger;
-import fiskfille.tf.common.network.base.TFNetworkManager;
-import fiskfille.tf.common.tick.ClientTickHandler;
-import fiskfille.tf.common.tileentity.TileEntityMachine;
-import fiskfille.tf.common.tileentity.TileEntityMachine.EnumIO;
-import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.helper.TFRenderHelper;
-import fiskfille.tf.helper.TFTextureHelper;
-import fiskfille.tf.helper.TFTileHelper;
+import javax.vecmath.Vector3d;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiConfigSides extends GuiContainerTF {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/configure.png");
-	private TileEntityMachine machine;
-	private GuiScreen parent;
+	private final TileEntityMachine machine;
+	private final GuiScreen parent;
+	private final RenderBlocks renderBlocks;
+	private final World world;
+	private final List<ChunkCoordinates> neighbors = Lists.newArrayList();
+	private final List<ChunkCoordinates> configurables = Lists.newArrayList();
+	private final Vector3d camera;
+	private final boolean renderNeighbours = true;
 	private GuiButton buttonDistribution;
-
-	private RenderBlocks renderBlocks;
-	private World world;
-
-	private List<ChunkCoordinates> neighbors = Lists.newArrayList();
-	private List<ChunkCoordinates> configurables = Lists.newArrayList();
-	private Vector3d camera;
-	private boolean renderNeighbours = true;
 
 	public GuiConfigSides(InventoryPlayer inventoryPlayer, GuiScreen gui, TileEntityMachine tile) {
 		super(new ContainerEmpty(inventoryPlayer, 16));
@@ -153,7 +147,7 @@ public class GuiConfigSides extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
@@ -233,7 +227,7 @@ public class GuiConfigSides extends GuiContainerTF {
 								break;
 							}
 
-							GL11.glColor4f(1, 1, 1, 1);
+							GL11.glColor4f(1F, 1F, 1F, 1F);
 							renderBlocks.setRenderBounds(0, 0, 0, 1, 1, 1);
 							icon = TFTextureHelper.ioIcons[io.ordinal()];
 						}
@@ -246,7 +240,7 @@ public class GuiConfigSides extends GuiContainerTF {
 			}
 		}
 
-		//        GL11.glColor4f(1, 1, 1, 1);
+		//        GL11.glColor4f(1F, 1F, 1F, 1F);
 		//
 		//        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 		//        {
@@ -300,7 +294,7 @@ public class GuiConfigSides extends GuiContainerTF {
 			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(coords.posX, coords.posY, coords.posZ));
 
 			if(tile != null) {
-				GL11.glColor4f(1, 1, 1, 1);
+				GL11.glColor4f(1F, 1F, 1F, 1F);
 				TileEntityRendererDispatcher.instance.renderTileEntityAt(tile, tile.xCoord + camera.x, tile.yCoord + camera.y, tile.zCoord + camera.z, 0);
 			}
 		}
@@ -331,7 +325,7 @@ public class GuiConfigSides extends GuiContainerTF {
 	}
 
 	private void setGlStateForPass(int pass, boolean isNeighbour) {
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
 
 		if(isNeighbour) {
 			float alpha = 0.6F;

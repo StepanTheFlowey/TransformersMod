@@ -1,11 +1,11 @@
 package fiskfille.tf.client.gui;
 
-import java.awt.Rectangle;
-import java.util.List;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+
+import java.awt.*;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiHoverField extends GuiButtonFlat {

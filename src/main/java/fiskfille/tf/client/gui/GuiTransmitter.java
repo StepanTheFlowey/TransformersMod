@@ -1,12 +1,5 @@
 package fiskfille.tf.client.gui;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
@@ -16,11 +9,16 @@ import fiskfille.tf.common.network.MessageTileTrigger;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityTransmitter;
 import fiskfille.tf.helper.TFFluidRenderHelper;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiTransmitter extends GuiContainerTF {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/transmitter.png");
-	private TileEntityTransmitter tileentity;
+	private final TileEntityTransmitter tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;
 	private GuiHoverFieldFluid fieldFluid;

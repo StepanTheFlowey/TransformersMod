@@ -1,5 +1,19 @@
 package fiskfille.tf.client.gui;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.data.TFData;
+import fiskfille.tf.common.data.TFDataManager;
+import fiskfille.tf.common.item.ItemVurpsSniper;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.transformer.TransformerPurge;
+import fiskfille.tf.common.transformer.TransformerVurp;
+import fiskfille.tf.common.transformer.base.Transformer;
+import fiskfille.tf.config.TFConfig;
+import fiskfille.tf.helper.TFHelper;
+import fiskfille.tf.helper.TFShootManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -13,55 +27,38 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersAPI;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.data.TFData;
-import fiskfille.tf.common.data.TFDataManager;
-import fiskfille.tf.common.item.ItemVurpsSniper;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.transformer.TransformerPurge;
-import fiskfille.tf.common.transformer.TransformerVurp;
-import fiskfille.tf.common.transformer.base.Transformer;
-import fiskfille.tf.config.TFConfig;
-import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.helper.TFShootManager;
-
 public class GuiOverlay extends Gui {
-	private Minecraft mc = Minecraft.getMinecraft();
-	private RenderItem itemRenderer = new RenderItem();
-
 	public static final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/gui/mod_icons.png");
-
+	private static final Minecraft mc = Minecraft.getMinecraft();
 	public static double prevSpeed;
 	public static double speed;
+	private final RenderItem itemRenderer = new RenderItem();
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onRender(RenderGameOverlayEvent.Pre event) {
-		if(!event.isCanceled()) {
-			int width = event.resolution.getScaledWidth();
-			int height = event.resolution.getScaledHeight();
-			EntityPlayer player = mc.thePlayer;
+		if(event.isCanceled()) {
+			return;
+		}
 
-			if(event.type == ElementType.HOTBAR) {
-				Transformer transformer = TFHelper.getTransformer(player);
-				boolean flag = transformer == null || transformer.renderSpeedAndNitro(player, TFData.ALT_MODE.get(player));
+		final EntityPlayer player = mc.thePlayer;
+		final int width = event.resolution.getScaledWidth();
+		final int height = event.resolution.getScaledHeight();
 
-				if(flag) {
-					renderNitroAndSpeed(event, width, height, player);
-				}
+		if(event.type == ElementType.HOTBAR) {
+			final Transformer transformer = TFHelper.getTransformer(player);
+			final boolean flag = transformer == null || transformer.renderSpeedAndNitro(player, TFData.ALT_MODE.get(player));
 
-				renderKatanaDash(event, width, height, player);
-				renderShotsLeft(event, width, height, player);
-				renderLaserCharge(event, width, height, player);
+			if(flag) {
+				renderNitroAndSpeed(event, width, height, player);
 			}
+
+			renderKatanaDash(event, width, height, player);
+			renderShotsLeft(event, width, height, player);
+			renderLaserCharge(event, width, height, player);
 		}
 	}
 
@@ -143,15 +140,18 @@ public class GuiOverlay extends Gui {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4f(0F, 0F, 0F, 0.3F);
+
 			// Speed Outline
 			drawTexturedModalRect(5 - offset, 3, 0, 0, 202, 12);
 
 			// Nitro Outline
 			drawTexturedModalRect(5 - offset, 16, 0, 0, 202, 12);
 			GL11.glColor4f(0F, 1F, 1F, 0.5F);
+
 			// Nitro Bar
 			drawTexturedModalRect(6 - offset, 4, 0, 0, Math.round(nitro * 200), 10);
 			GL11.glColor4f(1F, 0F, 0F, 0.5F);
+
 			// Speed Bar
 			drawTexturedModalRect(6 - offset, 17, 0, 0, speed > 200 ? 200 : (int) speed, 10);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);

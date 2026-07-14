@@ -1,8 +1,14 @@
 package fiskfille.tf.client.gui;
 
-import java.lang.reflect.Constructor;
-import java.util.List;
-
+import com.google.common.collect.Lists;
+import cpw.mods.fml.common.network.IGuiHandler;
+import fiskfille.tf.TFLog;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.block.TFBlocks;
+import fiskfille.tf.common.container.*;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,33 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Lists;
-
-import cpw.mods.fml.common.network.IGuiHandler;
-import fiskfille.tf.TFLog;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.block.TFBlocks;
-import fiskfille.tf.common.container.ContainerAlloyCrucible;
-import fiskfille.tf.common.container.ContainerAssemblyTable;
-import fiskfille.tf.common.container.ContainerColumn;
-import fiskfille.tf.common.container.ContainerDisplayStation;
-import fiskfille.tf.common.container.ContainerDisplayStationArmor;
-import fiskfille.tf.common.container.ContainerEmpty;
-import fiskfille.tf.common.container.ContainerEnergonProcessor;
-import fiskfille.tf.common.container.ContainerEnergonTank;
-import fiskfille.tf.common.container.ContainerGroundBridge;
-import fiskfille.tf.common.container.ContainerTransmitter;
-import fiskfille.tf.common.container.InventoryGroundBridge;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible;
-import fiskfille.tf.common.tileentity.TileEntityAssemblyTable;
-import fiskfille.tf.common.tileentity.TileEntityColumn;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
-import fiskfille.tf.common.tileentity.TileEntityEnergonProcessor;
-import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
-import fiskfille.tf.common.tileentity.TileEntityIsoCondenser;
-import fiskfille.tf.common.tileentity.TileEntityTransmitter;
+import java.lang.reflect.Constructor;
+import java.util.List;
 
 public class GuiHandlerTF implements IGuiHandler {
 	@Override
@@ -182,8 +163,6 @@ public class GuiHandlerTF implements IGuiHandler {
 
 	public static class TFGui {
 		private static final List<TFGui> guis = Lists.newArrayList();
-		private static int nextId = -1;
-
 		public static TFGui ALLOY_CRUCIBLE;
 		public static TFGui ASSEMBLY_TABLE;
 		public static TFGui DISPLAY_STATION;
@@ -196,7 +175,7 @@ public class GuiHandlerTF implements IGuiHandler {
 		public static TFGui GROUND_BRIDGE_REMOTE;
 		public static TFGui ISOTOPIC_CONDENSER;
 		public static TFGui RECEIVER_NETWORK;
-
+		private static int nextId = -1;
 		public final int guiId;
 		private final Block containerBlock;
 		private final Class containerClass;
@@ -242,6 +221,16 @@ public class GuiHandlerTF implements IGuiHandler {
 			RECEIVER_NETWORK = new TFGui(null, null, "fiskfille.tf.client.gui.GuiSelectReceivers", TileEntity.class);
 		}
 
+		public static TFGui get(int id) {
+			for(TFGui gui : guis) {
+				if(gui.guiId == id) {
+					return gui;
+				}
+			}
+
+			return null;
+		}
+
 		public void open(EntityPlayer player, TileEntity tile) {
 			open(player, player.worldObj, tile);
 		}
@@ -256,16 +245,6 @@ public class GuiHandlerTF implements IGuiHandler {
 
 		public void open(EntityPlayer player, World world, int x, int y, int z) {
 			player.openGui(TransformersMod.instance, guiId, world, x, y, z);
-		}
-
-		public static TFGui get(int id) {
-			for(TFGui gui : guis) {
-				if(gui.guiId == id) {
-					return gui;
-				}
-			}
-
-			return null;
 		}
 
 		@Override

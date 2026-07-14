@@ -1,18 +1,16 @@
 package fiskfille.tf.client.gui;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.google.common.collect.Lists;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class GuiContainerTF extends GuiContainer {
 	public GuiContainerTF(Container container) {

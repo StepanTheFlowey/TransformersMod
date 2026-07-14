@@ -1,22 +1,5 @@
 package fiskfille.tf.client.gui;
 
-import java.awt.Rectangle;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
@@ -38,6 +21,20 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.helper.TFDimensionHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 @Optional.Interface(
@@ -56,11 +53,9 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	public GuiButton buttonDimRight;
 	public GuiButton buttonDimLeft;
 	public GuiButton buttonDirection;
-
-	private GuiHoverFieldEnergy fieldEnergy;
-
 	public DimensionalCoords tileCoords;
 	public TileDataControlPanel data;
+	private GuiHoverFieldEnergy fieldEnergy;
 
 	public GuiGroundBridge(InventoryPlayer inventoryPlayer, InventoryGroundBridge inventoryGroundBridge, DimensionalCoords coords) {
 		super(new ContainerGroundBridge(inventoryPlayer, inventoryGroundBridge));
@@ -257,7 +252,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
@@ -288,23 +283,19 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		int y = (height - ySize) / 2;
 
 		for(int i = 0; i < data.upgrades.size(); ++i) {
-			DataCore core = data.upgrades.get(i);
+			final DataCore core = data.upgrades.get(i);
 
 			if(core != null && new Rectangle(x + 115 + i * 18, y + 27, 18, 18).contains(mouseX, mouseY)) {
-				drawHoveringText(Arrays.asList(core.getTranslatedName()), mouseX, mouseY, fontRendererObj);
+				drawHoveringText(Collections.singletonList(core.getTranslatedName()), mouseX, mouseY, fontRendererObj);
 			}
 		}
 
 		for(int i = 0; i < data.errors.size(); ++i) {
-			ErrorContainer container = data.errors.get(i);
+			final ErrorContainer container = data.errors.get(i);
 
 			if(new Rectangle(x + xSize + 20, y + 10 + i * 17, 16, 16).contains(mouseX, mouseY)) {
-				List<String> list = fontRendererObj.listFormattedStringToWidth(container.translate(), 200);
-
-				for(int j = 0; j < list.size(); ++j) {
-					list.set(j, EnumChatFormatting.RED + list.get(j));
-				}
-
+				final List<String> list = fontRendererObj.listFormattedStringToWidth(container.translate(), 200);
+				list.replaceAll(s -> EnumChatFormatting.RED + s);
 				drawHoveringText(list, mouseX, mouseY, fontRendererObj);
 			}
 		}
@@ -312,12 +303,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 
 	@Override
 	public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility) {
-		if(width - xSize < 107) {
-			currentVisibility.showWidgets = false;
-		}
-		else {
-			currentVisibility.showWidgets = true;
-		}
+		currentVisibility.showWidgets = width - xSize >= 107;
 
 		if(guiLeft < 58) {
 			currentVisibility.showStateButtons = false;
@@ -343,8 +329,8 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 
 	@Override
 	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) {
-		Rectangle slot = new Rectangle(x, y, w, h);
-		Rectangle bounds = new Rectangle(guiLeft + xSize, guiTop, 18, 88);
+		final Rectangle slot = new Rectangle(x, y, w, h);
+		final Rectangle bounds = new Rectangle(guiLeft + xSize, guiTop, 18, 88);
 
 		slot.grow(4, 4);
 
@@ -352,10 +338,6 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 			bounds.width += 18;
 		}
 
-		if(slot.intersects(bounds)) {
-			return true;
-		}
-
-		return false;
+		return slot.intersects(bounds);
 	}
 }

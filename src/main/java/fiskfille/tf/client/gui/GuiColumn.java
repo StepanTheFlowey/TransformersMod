@@ -1,13 +1,5 @@
 package fiskfille.tf.client.gui;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
@@ -17,11 +9,17 @@ import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.network.MessageTileTrigger;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityColumn;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiColumn extends GuiContainerTF {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/energy_column.png");
-	private TileEntityColumn tileentity;
+	private final TileEntityColumn tileentity;
 
 	private GuiHoverFieldEnergy[] fieldEnergy;
 

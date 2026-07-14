@@ -1,19 +1,19 @@
 package fiskfille.tf.client.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.common.tileentity.TileEntityMachine;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.EnumChatFormatting;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.EnumChatFormatting;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.common.tileentity.TileEntityMachine;
-
 @SideOnly(Side.CLIENT)
 public class GuiButtonDistribution extends GuiButtonFlat {
-	public TileEntityMachine machine;
+	public final TileEntityMachine machine;
 
 	public GuiButtonDistribution(int id, int x, int y, TileEntityMachine tile) {
 		super(id, x, y, 13, "");
@@ -26,6 +26,7 @@ public class GuiButtonDistribution extends GuiButtonFlat {
 			case QUEUED:
 				displayString = "=";
 				break;
+
 			case SPREAD:
 				displayString = "/";
 				break;
