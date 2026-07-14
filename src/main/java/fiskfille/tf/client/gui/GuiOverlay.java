@@ -233,7 +233,7 @@ public class GuiOverlay extends Gui {
 						GL11.glDisable(GL11.GL_DEPTH_TEST);
 						GL11.glDepthMask(false);
 						OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-						GL11.glColor4f(1F, 1F, 1F, 1F);
+						GL11.glColor3f(1F, 1F, 1F);
 						GL11.glDisable(GL11.GL_ALPHA_TEST);
 						mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, "textures/misc/sniper_scope.png"));
 						Tessellator tessellator = Tessellator.instance;
@@ -246,7 +246,7 @@ public class GuiOverlay extends Gui {
 						GL11.glDepthMask(true);
 						GL11.glEnable(GL11.GL_DEPTH_TEST);
 						GL11.glEnable(GL11.GL_ALPHA_TEST);
-						GL11.glColor4f(1F, 1F, 1F, 1F);
+						GL11.glColor3f(1F, 1F, 1F);
 					}
 				}
 			}

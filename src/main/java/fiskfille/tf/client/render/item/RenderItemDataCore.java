@@ -28,7 +28,7 @@ public class RenderItemDataCore implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glPushMatrix();
 		float scale = type != ItemRenderType.INVENTORY ? 0.5F : 1;
 

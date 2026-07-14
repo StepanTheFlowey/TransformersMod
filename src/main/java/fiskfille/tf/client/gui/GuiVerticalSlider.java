@@ -22,7 +22,7 @@ public class GuiVerticalSlider extends GuiSliderBase {
 			return;
 		}
 		mc.getTextureManager().bindTexture(buttonTextures);
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		field_146123_n = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
 		int k = getHoverState(field_146123_n);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -69,7 +69,7 @@ public class GuiVerticalSlider extends GuiSliderBase {
 				}
 			}
 
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GL11.glColor3f(1F, 1F, 1F);
 			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)), 20, 0, 20, 4);
 			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)) + 4, 20, 196, 20, 4);
 		}

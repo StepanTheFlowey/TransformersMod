@@ -69,15 +69,15 @@ public class RenderItemArmor implements IItemRenderer {
 			float[] primaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getPrimaryColor(item));
 			float[] secondaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(item));
 
-			GL11.glColor4f(primaryColor[0], primaryColor[1], primaryColor[2], 1);
+			GL11.glColor3f(primaryColor[0], primaryColor[1], primaryColor[2]);
 			mc.getTextureManager().bindTexture(tfModel.getTexture(null, "_primary"));
 			renderArmor(type, model);
 
-			GL11.glColor4f(secondaryColor[0], secondaryColor[1], secondaryColor[2], 1);
+			GL11.glColor3f(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
 			mc.getTextureManager().bindTexture(tfModel.getTexture(null, "_secondary"));
 			renderArmor(type, model);
 
-			GL11.glColor4f(1, 1, 1, 1);
+			GL11.glColor3f(1F, 1F, 1F);
 			mc.getTextureManager().bindTexture(tfModel.getTexture(null, "_base"));
 			renderArmor(type, model);
 		}
@@ -96,7 +96,7 @@ public class RenderItemArmor implements IItemRenderer {
 
 		if(item.hasEffect(0)) {
 			mc.getTextureManager().bindTexture(TFTextureHelper.RES_ITEM_GLINT);
-			GL11.glColor4f(0.5F, 0.5F, 0.5F, 1);
+			GL11.glColor3f(0.5F, 0.5F, 0.5F);
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDepthMask(false);
 
@@ -105,7 +105,7 @@ public class RenderItemArmor implements IItemRenderer {
 				float f2 = 0.33333334F;
 
 				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glColor4f(0.5F, 0.25F, 0.8F, 1);
+				GL11.glColor3f(0.5F, 0.25F, 0.8F);
 				GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 				GL11.glMatrixMode(GL11.GL_TEXTURE);
 				GL11.glLoadIdentity();
@@ -116,7 +116,7 @@ public class RenderItemArmor implements IItemRenderer {
 				renderArmor(type, model);
 			}
 
-			GL11.glColor4f(1, 1, 1, 1);
+			GL11.glColor3f(1F, 1F, 1F);
 			GL11.glMatrixMode(GL11.GL_TEXTURE);
 			GL11.glDepthMask(true);
 			GL11.glLoadIdentity();

@@ -64,7 +64,7 @@ public class GuiEnergonProcessor extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

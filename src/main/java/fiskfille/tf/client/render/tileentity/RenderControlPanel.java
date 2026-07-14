@@ -57,9 +57,9 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 					float scale = 0.155F;
 					GL11.glScalef(-scale, -scale, scale);
 
-					GL11.glColor4f(1, 1, 1, 1);
+					GL11.glColor3f(1F, 1F, 1F);
 					itemRenderer.renderItem(mc.thePlayer, itemstack, 0);
-					GL11.glColor4f(1, 1, 1, 1);
+					GL11.glColor3f(1F, 1F, 1F);
 					GL11.glEnable(GL11.GL_LIGHTING);
 					GL11.glPopMatrix();
 				}
@@ -225,7 +225,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
 		GL11.glScalef(scale, scale, -scale);
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		mc.fontRenderer.drawSplitString(s, 0, 0, 200, color);
 		GL11.glEnable(GL11.GL_LIGHTING);
@@ -238,7 +238,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
 		GL11.glScalef(scale, scale, -scale);
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		mc.fontRenderer.drawString(s, -mc.fontRenderer.getStringWidth(s) / 2, 0, color);
 		GL11.glEnable(GL11.GL_LIGHTING);

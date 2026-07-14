@@ -74,7 +74,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
-				GL11.glColor4f(1, 1, 1, 1);
+				GL11.glColor3f(1F, 1F, 1F);
 			}
 		}
 		else {

@@ -354,7 +354,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 				GL11.glEnable(GL11.GL_BLEND);
 				OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(1F, 1F, 1F, 1F);
+				GL11.glColor3f(1F, 1F, 1F);
 
 				if(width % 2 == 0) {
 					drawTexturedModalRect(xPosition, yPosition, 60, 39 + (isEnabled ? 13 : 0), width / 2, height);
@@ -440,7 +440,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 		}
 
 		Tessellator tessellator = Tessellator.instance;
-		GL11.glColor4f(0F, 0F, 255F, 255F);
+		GL11.glColor3f(0F, 0F, 1F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_COLOR_LOGIC_OP);
 		GL11.glLogicOp(GL11.GL_OR_REVERSE);

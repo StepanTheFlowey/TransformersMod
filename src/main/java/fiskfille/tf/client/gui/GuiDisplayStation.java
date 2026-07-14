@@ -99,7 +99,7 @@ public class GuiDisplayStation extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
@@ -144,7 +144,7 @@ public class GuiDisplayStation extends GuiContainerTF {
 			}
 
 			itemRender.renderWithColor = prevColor;
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GL11.glColor3f(1F, 1F, 1F);
 			TFRenderHelper.finishRenderItemIntoGUI();
 		}
 	}

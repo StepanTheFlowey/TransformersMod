@@ -192,7 +192,7 @@ public class GuiColor extends GuiScreen {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(0, 0, 0, 0.4F);
+		GL11.glColor4f(0F, 0F, 0F, 0.4F);
 		drawTexturedModalRect(width / 2 - 128, height / 6, 0, 0, 100, 150);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
@@ -246,7 +246,7 @@ public class GuiColor extends GuiScreen {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		GL11.glColor4f(0F, 0F, 0F, 1F);
+		GL11.glColor3f(0F, 0F, 0F);
 		drawTexturedModalRect(width / 2 - 22, height / 6 + 84, 0, 0, 66, 66);
 		drawTexturedModalRect(width / 2 - 22 + 67, height / 6 + 84, 0, 0, 66, 66);
 
@@ -256,10 +256,10 @@ public class GuiColor extends GuiScreen {
 		GL11.glColor4f(1, 1, 0, opacity / opacityMax + 0.1F);
 		drawTexturedModalRect(width / 2 - 23 + 67 * layerSelected, height / 6 + 83, 0, 0, 68, 68);
 
-		GL11.glColor4f(layerColors[0][0], layerColors[0][1], layerColors[0][2], 1F);
+		GL11.glColor3f(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
 		drawTexturedModalRect(width / 2 - 21, height / 6 + 85, 0, 0, 64, 64);
 
-		GL11.glColor4f(layerColors[1][0], layerColors[1][1], layerColors[1][2], 1F);
+		GL11.glColor3f(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
 		drawTexturedModalRect(width / 2 - 21 + 67, height / 6 + 85, 0, 0, 64, 64);
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);

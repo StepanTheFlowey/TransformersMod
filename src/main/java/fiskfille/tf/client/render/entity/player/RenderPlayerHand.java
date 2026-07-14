@@ -86,7 +86,7 @@ public class RenderPlayerHand extends RenderPlayer {
 							TFRenderHelper.setupRenderLayers(player, player.getCurrentArmor(2), upperArm);
 						}
 
-						GL11.glColor4f(1, 1, 1, 1);
+						GL11.glColor3f(1F, 1F, 1F);
 						GL11.glMatrixMode(GL11.GL_TEXTURE);
 						GL11.glDepthMask(true);
 						GL11.glLoadIdentity();

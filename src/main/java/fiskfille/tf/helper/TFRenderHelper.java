@@ -104,7 +104,7 @@ public class TFRenderHelper {
 					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_secondary"));
 					model.render(0.0625F);
 
-					GL11.glColor4f(1, 1, 1, 1);
+					GL11.glColor3f(1F, 1F, 1F);
 					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_base"));
 				}
 				else {
@@ -189,7 +189,7 @@ public class TFRenderHelper {
 		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, -1);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glPopMatrix();
 	}
 
@@ -597,6 +597,6 @@ public class TFRenderHelper {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDepthMask(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glColor3f(1F, 1F, 1F);
 	}
 }

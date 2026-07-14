@@ -52,7 +52,7 @@ public class GuiDisplayStationArmor extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
@@ -102,7 +102,7 @@ public class GuiDisplayStationArmor extends GuiContainer {
 			}
 
 			itemRender.renderWithColor = prevColor;
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GL11.glColor3f(1F, 1F, 1F);
 			TFRenderHelper.finishRenderItemIntoGUI();
 		}
 	}

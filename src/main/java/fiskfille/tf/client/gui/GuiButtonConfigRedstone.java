@@ -29,7 +29,7 @@ public class GuiButtonConfigRedstone extends GuiButtonFlat {
 		}
 
 		mc.getTextureManager().bindTexture(tfButtonTextures);
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
 		drawTexturedModalRect(xPosition, yPosition, 230 + (field_146123_n ? width : 0), 13 + machine.redstoneMode.ordinal() * height, width, height);
 	}

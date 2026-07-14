@@ -147,7 +147,7 @@ public class GuiConfigSides extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
@@ -227,7 +227,7 @@ public class GuiConfigSides extends GuiContainerTF {
 								break;
 							}
 
-							GL11.glColor4f(1F, 1F, 1F, 1F);
+							GL11.glColor3f(1F, 1F, 1F);
 							renderBlocks.setRenderBounds(0, 0, 0, 1, 1, 1);
 							icon = TFTextureHelper.ioIcons[io.ordinal()];
 						}
@@ -240,7 +240,7 @@ public class GuiConfigSides extends GuiContainerTF {
 			}
 		}
 
-		//        GL11.glColor4f(1F, 1F, 1F, 1F);
+		//        GL11.glColor3f(1F, 1F, 1F);
 		//
 		//        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 		//        {
@@ -294,7 +294,7 @@ public class GuiConfigSides extends GuiContainerTF {
 			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(coords.posX, coords.posY, coords.posZ));
 
 			if(tile != null) {
-				GL11.glColor4f(1F, 1F, 1F, 1F);
+				GL11.glColor3f(1F, 1F, 1F);
 				TileEntityRendererDispatcher.instance.renderTileEntityAt(tile, tile.xCoord + camera.x, tile.yCoord + camera.y, tile.zCoord + camera.z, 0);
 			}
 		}
@@ -325,7 +325,7 @@ public class GuiConfigSides extends GuiContainerTF {
 	}
 
 	private void setGlStateForPass(int pass, boolean isNeighbour) {
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 
 		if(isNeighbour) {
 			float alpha = 0.6F;

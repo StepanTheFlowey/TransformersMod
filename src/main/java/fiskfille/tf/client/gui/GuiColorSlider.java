@@ -25,7 +25,7 @@ public class GuiColorSlider extends GuiSliderBase {
 		if(visible) {
 			FontRenderer fontrenderer = mc.fontRenderer;
 			mc.getTextureManager().bindTexture(buttonTextures);
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GL11.glColor3f(1F, 1F, 1F);
 			field_146123_n = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
 			int k = getHoverState(field_146123_n);
 			GL11.glEnable(GL11.GL_BLEND);
@@ -84,7 +84,7 @@ public class GuiColorSlider extends GuiSliderBase {
 				}
 			}
 
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GL11.glColor3f(1F, 1F, 1F);
 			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)), yPosition, 0, 66, 4, 20);
 			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)) + 4, yPosition, 196, 66, 4, 20);
 		}

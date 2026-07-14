@@ -96,7 +96,7 @@ public class GuiEnergonTank extends GuiContainerTF {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 

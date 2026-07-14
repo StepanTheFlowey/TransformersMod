@@ -166,7 +166,7 @@ public class GuiColorPresets extends GuiScreen {
 					float opacityMax = 20;
 					float opacity = (ticks + partialTicks) % opacityMax;
 					opacity = opacity > opacityMax / 2 ? opacityMax / 2 - (opacity - opacityMax / 2) : opacity;
-					GL11.glColor4f(1, 1, 0, opacity / opacityMax + 0.1F);
+					GL11.glColor4f(1F, 1F, 0F, opacity / opacityMax + 0.1F);
 					drawTexturedModalRect(preset.posX - 2, preset.posY - 2, 0, 0, 54, 2);
 					drawTexturedModalRect(preset.posX - 2, preset.posY + 50, 0, 0, 54, 2);
 					drawTexturedModalRect(preset.posX - 2, preset.posY, 0, 0, 2, 50);

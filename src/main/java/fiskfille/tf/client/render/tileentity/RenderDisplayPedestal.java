@@ -27,7 +27,7 @@ public class RenderDisplayPedestal extends TileEntitySpecialRenderer {
 				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 				displayable.render(displayItem);
 				GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-				GL11.glColor4f(1, 1, 1, 1);
+				GL11.glColor3f(1F, 1F, 1F);
 				GL11.glPopMatrix();
 			}
 		}

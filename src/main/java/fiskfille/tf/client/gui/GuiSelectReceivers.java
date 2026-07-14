@@ -254,7 +254,7 @@ public class GuiSelectReceivers extends GuiScreen {
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-			GL11.glColor4f(0.1F, 0.1F, 0.1F, 1);
+			GL11.glColor3f(0.1F, 0.1F, 0.1F);
 			drawTexturedModalRect(baseX - spacing, baseY - spacing, 0, 0, MathHelper.floor_float((spacing + size) * boardWidth) + spacing, MathHelper.floor_float((spacing + size) * boardWidth) + spacing);
 			Vec3 src = Vec3.createVectorHelper(size * getRange() - 0.5F, size * getRange() - 0.5F, 0);
 
@@ -281,7 +281,7 @@ public class GuiSelectReceivers extends GuiScreen {
 					int x = baseX + (spacing + size) * i;
 					int y = baseY + (spacing + size) * j;
 
-					GL11.glColor4f(0.075F, 0.075F, 0.075F, 1);
+					GL11.glColor3f(0.075F, 0.075F, 0.075F);
 					drawTexturedModalRect(x, y, 0, 0, size, size);
 
 					final DimensionalCoords coords = coordArray[i + j * boardWidth];
@@ -306,7 +306,7 @@ public class GuiSelectReceivers extends GuiScreen {
 			Tessellator tessellator = Tessellator.instance;
 			float prevWidth = GL11.glGetFloat(GL11.GL_LINE_WIDTH);
 			GL11.glLineWidth(size);
-			GL11.glColor4f(0, 1, 1, 1);
+			GL11.glColor3f(0F, 1F, 1F);
 
 			List<DimensionalCoords> coordList = Lists.newArrayList(coordArray);
 			//            float f = 1 - ((mc.thePlayer.ticksExisted + partialTicks) / 30) % 1;

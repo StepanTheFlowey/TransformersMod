@@ -22,7 +22,7 @@ public class GuiIconFlat extends GuiButtonFlat {
 		if(visible) {
 			mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
 
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GL11.glColor3f(1F, 1F, 1F);
 			field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
 			int hoverState = getHoverState(field_146123_n);
 
