@@ -56,7 +56,6 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
                     TFLog.error("Patching Class %s FAILED!", unobfClass);
                 }
 
-                writeClassFile(cw, unobfClass + " (" + name + ")");
                 return cw.toByteArray();
             }
         }
@@ -82,23 +81,6 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
     public void sendPatchLog(String method)
     {
         TFLog.info("\tPatching method %s in %s", method, unobfClass);
-    }
-
-    public static void writeClassFile(ClassWriter cw, String name)
-    {
-        try
-        {
-            File outDir = new File("debug/");
-            outDir.mkdirs();
-            DataOutputStream dout = new DataOutputStream(new FileOutputStream(new File(outDir, name + ".class")));
-            dout.write(cw.toByteArray());
-            dout.flush();
-            dout.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public static MethodNode generateSetter(String className, String methodName, String fieldName, String fieldType)
