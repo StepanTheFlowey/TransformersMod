@@ -1,12 +1,5 @@
 package fiskfille.tf.common.tick;
 
-import java.util.UUID;
-
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -16,15 +9,21 @@ import fiskfille.tf.common.data.TFPlayerData;
 import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+
+import java.util.UUID;
 
 public class CommonTickHandler {
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent event) {
-		EntityPlayer player = event.player;
-		Transformer transformer = TFHelper.getTransformer(player);
-
-		int altMode = TFData.ALT_MODE.get(player);
-		float transformationTimer = TFHelper.getTransformationTimer(player);
+		final EntityPlayer player = event.player;
+		final Transformer transformer = TFHelper.getTransformer(player);
+		final int altMode = TFData.ALT_MODE.get(player);
+		final float transformationTimer = TFHelper.getTransformationTimer(player);
 		TFHelper.getStealthModeTimer(player);
 
 		if(event.phase == TickEvent.Phase.START) {
@@ -100,8 +99,8 @@ public class CommonTickHandler {
 				}
 			}
 
+			float stealthTicks = 5F;
 			int transformTicks = 10;
-			int stealthTicks = 5;
 			int nitroTicks = 200;
 
 			if(TFData.ALT_MODE.get(player) == -1 && TFHelper.isInStealthMode(player)) {

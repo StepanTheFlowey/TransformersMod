@@ -1,16 +1,5 @@
 package fiskfille.tf.common.tick;
 
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.stats.StatFileWriter;
-import net.minecraft.util.MovementInputFromOptions;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
@@ -28,12 +17,22 @@ import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.stats.StatFileWriter;
+import net.minecraft.util.MovementInputFromOptions;
+import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Map;
 
 public class ClientTickHandler {
-	private Minecraft mc = Minecraft.getMinecraft();
-
-	private EntityRenderer renderer, prevRenderer;
 	public static float renderTick;
+	private final Minecraft mc = Minecraft.getMinecraft();
+	private EntityRenderer renderer, prevRenderer;
 
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent event) {
@@ -151,10 +150,10 @@ public class ClientTickHandler {
 						float thirdPersonDistance = 4 - TFHelper.getTransformationTimer(player) * 2;
 						int altMode = TFData.ALT_MODE.get(player);
 
-						if(transformer != null && transformer.canZoom(player) && TFHelper.isFullyTransformed(player) && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFKeyBinds.keyBindingViewFront.getIsKeyPressed()) {
+						if(transformer.canZoom(player) && TFHelper.isFullyTransformed(player) && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFKeyBinds.keyBindingViewFront.getIsKeyPressed()) {
 							thirdPersonDistance = transformer.getZoomAmount(player, altMode);
 						}
-						else if(transformer != null) {
+						else {
 							thirdPersonDistance = transformer.getThirdPersonDistance(player, altMode);
 						}
 
