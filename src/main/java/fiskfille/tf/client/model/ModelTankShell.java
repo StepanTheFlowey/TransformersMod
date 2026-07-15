@@ -9,6 +9,7 @@ public class ModelTankShell extends ModelBase {
 	public ModelTankShell() {
 		textureWidth = 16;
 		textureHeight = 8;
+
 		shell = new ModelRenderer(this, 0, 0);
 		shell.setRotationPoint(0F, 0F, 0F);
 		shell.addBox(-3F, -1F, -1F, 6, 2, 2);
