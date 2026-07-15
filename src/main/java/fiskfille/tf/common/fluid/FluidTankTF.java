@@ -94,12 +94,10 @@ public class FluidTankTF extends FluidTank {
 		lastFluidAmount = getFluidAmount();
 	}
 
-	public int calculateUsage() {
-		int amount = getFluidAmount();
+	public void calculateUsage() {
+		final int amount = getFluidAmount();
 		fluidUsage = amount - lastFluidAmount;
 		lastFluidAmount = amount;
-
-		return fluidUsage;
 	}
 
 	public List<IChatComponent> format() {

@@ -221,14 +221,14 @@ public class BlockControlPanel extends BlockMachineBase {
 			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 			if(tile instanceof TileEntityControlPanel) {
-				return onRightClick(world, tile.xCoord, tile.yCoord, tile.zCoord, (TileEntityControlPanel) tile, player, face, hitX, hitY);
+				return onRightClick(world, (TileEntityControlPanel) tile, player, face, hitX, hitY);
 			}
 		}
 
 		return false;
 	}
 
-	public boolean onRightClick(World world, int x, int y, int z, TileEntityControlPanel tile, EntityPlayer player, int face, float hitX, float hitY) {
+	public boolean onRightClick(World world, TileEntityControlPanel tile, EntityPlayer player, int face, float hitX, float hitY) {
 		// 0 = front, 1 = back, 2 = right, 3 = left, 4 = top, 5 = bottom
 		float f = 0.0625F;
 

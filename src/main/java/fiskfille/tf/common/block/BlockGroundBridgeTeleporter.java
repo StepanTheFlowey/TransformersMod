@@ -35,20 +35,17 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		// setLightLevel(1);
 	}
 
-	public static boolean spawnTeleporter(World world, int x, int y, int z, TileEntityControlPanel tile) {
+	public static void spawnTeleporter(World world, int x, int y, int z, TileEntityControlPanel tile) {
 		if(!tile.data.errors.isEmpty()) {
-			return false;
+			return;
 		}
-		else if(isNorthSouthFacingFramePresent(world, x, y, z)) {
+
+		if(isNorthSouthFacingFramePresent(world, x, y, z)) {
 			fillNorthFacingFrame(world, x, y, z, TFBlocks.groundBridgeTeleporter, tile, false);
-			return true;
 		}
 		else if(isEastWestFacingFramePresent(world, x, y, z)) {
 			fillEastFacingFrame(world, x, y, z, TFBlocks.groundBridgeTeleporter, tile, false);
-			return true;
 		}
-
-		return false;
 	}
 
 	public static void doTeleport(Entity entity, TileEntityGroundBridgeTeleporter teleporter) {

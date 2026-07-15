@@ -103,10 +103,9 @@ public class EnergyStorage {
 		lastEnergy = energy;
 	}
 
-	public float calculateUsage() {
+	public void calculateUsage() {
 		energyUsage = energy - lastEnergy;
 		lastEnergy = energy;
-		return energyUsage;
 	}
 
 	public List<IChatComponent> format() {

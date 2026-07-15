@@ -38,11 +38,6 @@ public class TFFormatHelper {
 		return s;
 	}
 
-	public static String getConventionalName(String s) {
-		String s1 = s.replace(" ", "").replace("'", "").replace("/", "").replace("\\", "").replace("_", "").replace("-", "").replace("(", "").replace(")", "");
-		return s1.substring(0, 1).toLowerCase() + s1.substring(1);
-	}
-
 	public static String getUnconventionalName(String s) {
 		s = s.toLowerCase();
 

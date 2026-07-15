@@ -95,26 +95,6 @@ public class FluidEnergon extends Fluid {
 		return map;
 	}
 
-	public static void setRatio(FluidStack stack, String name, float ratio) {
-		refreshNBT(stack);
-		NBTTagCompound nbttagcompound = stack.tag.getCompoundTag("Ratio");
-		nbttagcompound.setFloat(name, ratio);
-		stack.tag.setTag("Ratio", nbttagcompound);
-
-		calculateLiquidColor(stack);
-	}
-
-	public static float getRatio(FluidStack stack, String name) {
-		refreshNBT(stack);
-		final NBTTagCompound nbttagcompound = stack.tag.getCompoundTag("Ratio");
-
-		if(nbttagcompound.hasKey(name)) {
-			return nbttagcompound.getFloat(name);
-		}
-
-		return 0;
-	}
-
 	public static void calculateLiquidColor(FluidStack stack) {
 		Map<String, Float> ratios = getRatios(stack);
 		int liquidColor = -1;

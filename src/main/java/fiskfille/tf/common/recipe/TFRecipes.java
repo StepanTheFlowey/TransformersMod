@@ -33,8 +33,8 @@ public class TFRecipes {
 	public static List<IRecipe> prevRecipes = Lists.newArrayList();
 	public static List<ItemStack> prevFurnaceRecipes = Lists.newArrayList();
 
-	public static List<IRecipe> tempRecipes = Lists.newArrayList();
-	public static List<ItemStack> tempFurnaceRecipes = Lists.newArrayList();
+	public static final List<IRecipe> tempRecipes = Lists.newArrayList();
+	public static final List<ItemStack> tempFurnaceRecipes = Lists.newArrayList();
 
 	public static void register() {
 		AssemblyTableCraftingManager.getInstance().getRecipeList().clear();

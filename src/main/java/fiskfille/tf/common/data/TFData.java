@@ -68,7 +68,7 @@ public class TFData<T> {
 		this.defaultValue = defaultValue;
 	}
 
-	public static NBTTagCompound writeToNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
+	public static void writeToNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
 		NBTTagCompound nbttagcompound = new NBTTagCompound();
 
 		for(Map.Entry<TFData, Object> e : data.entrySet()) {
@@ -84,8 +84,6 @@ public class TFData<T> {
 		}
 
 		nbt.setTag("DataArray", nbttagcompound);
-
-		return nbt;
 	}
 
 	public static Map<TFData, Object> readFromNBT(NBTTagCompound nbt, Map<TFData, Object> data) {

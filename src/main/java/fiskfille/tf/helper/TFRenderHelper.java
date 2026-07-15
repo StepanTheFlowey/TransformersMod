@@ -10,7 +10,6 @@ import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.common.tileentity.TileEntityMachine;
 import fiskfille.tf.common.tileentity.TileEntityRelayTower;
-import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -44,13 +43,9 @@ public class TFRenderHelper {
 	private static float lastBrightnessY;
 
 	public static void setLighting(int lighting) {
-		storeLighting();
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lighting % 65536 / 255F, lighting / 65536 / 255F);
-	}
-
-	public static void storeLighting() {
 		lastBrightnessX = OpenGlHelper.lastBrightnessX;
 		lastBrightnessY = OpenGlHelper.lastBrightnessY;
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lighting % 65536 / 255F, lighting / 65536 / 255F);
 	}
 
 	public static void resetLighting() {
@@ -66,8 +61,7 @@ public class TFRenderHelper {
 
 	public static void setupRenderLayers(Entity entity, ItemStack itemstack, ModelRenderer model) {
 		if(itemstack != null && itemstack.getItem() instanceof ItemTransformerArmor) {
-			Transformer transformer = ((ItemTransformerArmor) itemstack.getItem()).getTransformer();
-			TransformerModel tfModel = TFModelRegistry.getModel(transformer);
+			final TransformerModel tfModel = TFModelRegistry.getModel(((ItemTransformerArmor) itemstack.getItem()).getTransformer());
 
 			if(TFTextureHelper.isBoundTexture(TFTextureHelper.RES_ITEM_GLINT)) {
 				model.render(0.0625F);
@@ -77,14 +71,14 @@ public class TFRenderHelper {
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 				if(TFArmorDyeHelper.isDyed(itemstack)) {
-					float[] primaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getPrimaryColor(itemstack));
-					float[] secondaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(itemstack));
+					final float[] primaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getPrimaryColor(itemstack));
+					final float[] secondaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(itemstack));
 
-					GL11.glColor4f(primaryColor[0], primaryColor[1], primaryColor[2], 1);
+					GL11.glColor3f(primaryColor[0], primaryColor[1], primaryColor[2]);
 					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_primary"));
 					model.render(0.0625F);
 
-					GL11.glColor4f(secondaryColor[0], secondaryColor[1], secondaryColor[2], 1);
+					GL11.glColor3f(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
 					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_secondary"));
 					model.render(0.0625F);
 
@@ -110,10 +104,9 @@ public class TFRenderHelper {
 	}
 
 	public static void startGlScissor(int x, int y, int width, int height) {
-		ScaledResolution reso = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-
-		double scaleW = mc.displayWidth / reso.getScaledWidth_double();
-		double scaleH = mc.displayHeight / reso.getScaledHeight_double();
+		final ScaledResolution reso = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+		final double scaleW = mc.displayWidth / reso.getScaledWidth_double();
+		final double scaleH = mc.displayHeight / reso.getScaledHeight_double();
 
 		if(width <= 0 || height <= 0) {
 			return;
@@ -126,7 +119,12 @@ public class TFRenderHelper {
 		}
 
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
-		GL11.glScissor((int) Math.floor(x * scaleW), (int) Math.floor(mc.displayHeight - (y + height) * scaleH), (int) Math.floor((x + width) * scaleW) - (int) Math.floor(x * scaleW), (int) Math.floor(mc.displayHeight - y * scaleH) - (int) Math.floor(mc.displayHeight - (y + height) * scaleH));
+		GL11.glScissor(
+						MathHelper.floor_double(x * scaleW),
+						MathHelper.floor_double(mc.displayHeight - (y + height) * scaleH),
+						MathHelper.floor_double((x + width) * scaleW) - MathHelper.floor_double(x * scaleW),
+						MathHelper.floor_double(mc.displayHeight - y * scaleH) - MathHelper.floor_double(mc.displayHeight - (y + height) * scaleH)
+		);
 	}
 
 	public static void endGlScissor() {
@@ -134,8 +132,8 @@ public class TFRenderHelper {
 	}
 
 	public static double getMotionY(EntityPlayer player) {
-		double current = player == mc.thePlayer ? player.motionY : player.posY - player.prevPosY;
-		double previous = previousMotionY.containsKey(player) ? previousMotionY.get(player) : 0D;
+		final double current = player == mc.thePlayer ? player.motionY : player.posY - player.prevPosY;
+		final double previous = previousMotionY.getOrDefault(player, 0D);
 
 		return TFHelper.median(current, previous, ClientTickHandler.renderTick);
 	}
@@ -145,32 +143,35 @@ public class TFRenderHelper {
 	}
 
 	public static void renderTag(String s, float x, float y, float z) {
-		RenderManager renderManager = RenderManager.instance;
-		FontRenderer fontrenderer = renderManager.getFontRenderer();
-		final float f2 = -0.02F;
+		final FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
+
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glNormal3f(0F, 1F, 0F);
-		GL11.glRotatef(mc.thePlayer.rotationYaw + 180, 0F, 1F, 0F);
+		GL11.glRotatef(mc.thePlayer.rotationYaw + 180F, 0F, 1F, 0F);
 		GL11.glRotatef(-mc.thePlayer.rotationPitch, 1F, 0F, 0F);
-		GL11.glScalef(-f2, -f2, f2);
+		GL11.glScalef(0.02F, 0.02F, -0.02F);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-		Tessellator tessellator = Tessellator.instance;
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		tessellator.startDrawingQuads();
+
 		final int i = fontrenderer.getStringWidth(s) / 2;
+		final Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
 		tessellator.setColorRGBA_F(0F, 0F, 0F, 0.25F);
 		tessellator.addVertex(-i - 1, -1D, 0D);
 		tessellator.addVertex(-i - 1, 8D, 0D);
 		tessellator.addVertex(i + 1, 8D, 0D);
 		tessellator.addVertex(i + 1, -1D, 0D);
 		tessellator.draw();
+
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(true);
+
 		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, -1);
+
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glColor3f(1F, 1F, 1F);
@@ -185,11 +186,11 @@ public class TFRenderHelper {
 
 		final double yaw = Math.atan2(d2, d0) * 180D / Math.PI - 90D;
 		final double pitch = Math.atan2(d1, d3) * 180D / Math.PI;
-		GL11.glRotated(-yaw, 0, 1, 0);
-		GL11.glRotated(-pitch, 1, 0, 0);
+		GL11.glRotated(-yaw, 0D, 1D, 0D);
+		GL11.glRotated(-pitch, 1D, 0D, 0D);
 	}
 
-	public static void renderEnergyTransmissions(TileEntity transmitterTile, double x, double y, double z, float partialTicks) {
+	public static void renderEnergyTransmissions(TileEntity transmitterTile, double x, double y, double z) {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -226,8 +227,6 @@ public class TFRenderHelper {
 				TileEntity tile = transmitterTile;
 				Vec3 srcOffset1 = transmitter.getEnergyOutputOffset();
 				Vec3 dstOffset1 = entry.getReceiver().getEnergyInputOffset();
-				Vec3 srcOffset;
-				Vec3 dstOffset;
 
 				if(tile instanceof ITransmitterRender) {
 					srcOffset1 = ((ITransmitterRender) tile).getRenderOutputOffset();
@@ -237,6 +236,7 @@ public class TFRenderHelper {
 					dstOffset1 = ((IReceiverRender) entry.getTile()).getRenderInputOffset();
 				}
 
+				Vec3 srcOffset, dstOffset;
 				if(invertCurrent) {
 					tile = entry.getTile();
 					entry = new ReceiverEntry(transmitterTile);
@@ -250,27 +250,26 @@ public class TFRenderHelper {
 					dstOffset = dstOffset1.addVector(0, 0, 0);
 				}
 
-				IEnergyReceiver receiver = entry.getReceiver();
-				DimensionalCoords coords = entry.getCoords();
+				final DimensionalCoords coords = entry.getCoords();
 				Vec3 src = srcOffset.addVector(tile.xCoord + 0.5F, tile.yCoord + 0.5F, tile.zCoord + 0.5F);
 				Vec3 dst = dstOffset.addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
 
 				if(!canReach) {
-					double d = 1F / dst.distanceTo(src);
+					final double d = 1D / dst.distanceTo(src);
 					src = Vec3.createVectorHelper(src.xCoord + (dst.xCoord - src.xCoord) * d, src.yCoord + (dst.yCoord - src.yCoord) * d, src.zCoord + (dst.zCoord - src.zCoord) * d);
-					MovingObjectPosition mop = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), src, dst);
 
+					final MovingObjectPosition mop = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), src, dst);
 					if(mop != null) {
 						dst = mop.hitVec;
 					}
 				}
 
-				double x1 = 0.5F + srcOffset.xCoord;
-				double y1 = 0.5F + srcOffset.yCoord;
-				double z1 = 0.5F + srcOffset.zCoord;
-				double deltaX = dst.xCoord - tile.xCoord;
-				double deltaY = dst.yCoord - tile.yCoord;
-				double deltaZ = dst.zCoord - tile.zCoord;
+				final double x1 = 0.5D + srcOffset.xCoord;
+				final double y1 = 0.5D + srcOffset.yCoord;
+				final double z1 = 0.5D + srcOffset.zCoord;
+				final double deltaX = dst.xCoord - tile.xCoord;
+				final double deltaY = dst.yCoord - tile.yCoord;
+				final double deltaZ = dst.zCoord - tile.zCoord;
 
 				src = Vec3.createVectorHelper(x1, y1, z1);
 				dst = Vec3.createVectorHelper(deltaX, deltaY, deltaZ);
@@ -284,17 +283,20 @@ public class TFRenderHelper {
 					primary = 0xAF5B57;
 					secondary = 0xF8817B;
 				}
-//              else if (!(receiverTile instanceof IEnergyTransmitter) && receiver.getEnergy() >= receiver.getMaxEnergy())
-//              {
-//                  primary = 0x62AF57;
-//                  secondary = 0x8AF87B;
-//              }
+//			else if (!(receiverTile instanceof IEnergyTransmitter) && receiver.getEnergy() >= receiver.getMaxEnergy()) {
+//				primary = 0x62AF57;
+//				secondary = 0x8AF87B;
+//			}
 
 				GL11.glPushMatrix();
 				GL11.glTranslated(x + x1, y + y1, z + z1);
 
 				if(invertCurrent) {
-					GL11.glTranslated((tile.xCoord - coords.posX), (tile.yCoord - coords.posY), (tile.zCoord - coords.posZ));
+					GL11.glTranslated(
+									tile.xCoord - coords.posX,
+									tile.yCoord - coords.posY,
+									tile.zCoord - coords.posZ
+					);
 				}
 
 				renderEnergyBeam(src, dst, primary, secondary, parentPrimary, parentSecondary);

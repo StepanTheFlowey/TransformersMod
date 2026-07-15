@@ -94,7 +94,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 			GL11.glPopMatrix();
 
 			if(world != null) {
-				TFRenderHelper.renderEnergyTransmissions(tower, x, y, z, partialTicks);
+				TFRenderHelper.renderEnergyTransmissions(tower, x, y, z);
 			}
 		}
 	}

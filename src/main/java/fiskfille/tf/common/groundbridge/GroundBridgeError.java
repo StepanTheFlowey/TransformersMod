@@ -42,10 +42,6 @@ public enum GroundBridgeError {
 			return error;
 		}
 
-		public Integer[] getArguments() {
-			return arguments;
-		}
-
 		public String translate() {
 			return StatCollector.translateToLocalFormatted("ground_bridge.error." + error.name().toLowerCase(), (Object[]) arguments);
 		}

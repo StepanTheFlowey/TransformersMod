@@ -37,26 +37,19 @@ public class ModelBoxPartial extends ModelBox {
 		return AxisAlignedBB.getBoundingBox(posX1, posY1, posZ1, posX2, posY2, posZ2);
 	}
 
-	public boolean setBounds(AxisAlignedBB aabb) {
-		//        if (aabb.minX != posX1 || aabb.minY != posY1 || aabb.minZ != posZ1 || aabb.maxX != posX2 || aabb.maxY != posY2 || aabb.maxZ != posZ2)
-		{
-			width = (float) (aabb.maxX - aabb.minX);
-			height = (float) (aabb.maxY - aabb.minY);
-			depth = (float) (aabb.maxZ - aabb.minZ);
-			posX1 = (float) aabb.minX;
-			posY1 = (float) aabb.minY;
-			posZ1 = (float) aabb.minZ;
-			posX2 = posX1 + width;
-			posY2 = posY1 + height;
-			posZ2 = posZ1 + depth;
-			model.compiled = false;
+	public void setBounds(AxisAlignedBB aabb) {
+		width = (float) (aabb.maxX - aabb.minX);
+		height = (float) (aabb.maxY - aabb.minY);
+		depth = (float) (aabb.maxZ - aabb.minZ);
+		posX1 = (float) aabb.minX;
+		posY1 = (float) aabb.minY;
+		posZ1 = (float) aabb.minZ;
+		posX2 = posX1 + width;
+		posY2 = posY1 + height;
+		posZ2 = posZ1 + depth;
+		model.compiled = false;
 
-			calculateQuads();
-
-			return true;
-		}
-
-		//        return false;
+		calculateQuads();
 	}
 
 	public void calculateQuads() {

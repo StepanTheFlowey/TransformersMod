@@ -66,7 +66,7 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 			GL11.glPopMatrix();
 
 			if(world != null) {
-				TFRenderHelper.renderEnergyTransmissions(transmitter, x, y, z, partialTicks);
+				TFRenderHelper.renderEnergyTransmissions(transmitter, x, y, z);
 			}
 		}
 	}

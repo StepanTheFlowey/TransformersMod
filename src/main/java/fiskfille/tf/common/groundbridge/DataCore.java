@@ -1,6 +1,5 @@
 package fiskfille.tf.common.groundbridge;
 
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
 import java.util.ArrayList;
@@ -23,10 +22,6 @@ public class DataCore {
 
 	public static DataCore get(int index) {
 		return dataCores.get(index);
-	}
-
-	public String getId() {
-		return id;
 	}
 
 	public String getTranslatedName() {

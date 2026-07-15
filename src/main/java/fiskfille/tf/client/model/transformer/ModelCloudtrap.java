@@ -928,12 +928,11 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		GL11.glPushMatrix();
-
-		float scale = 1.1F;
-		GL11.glScalef(scale, scale, scale);
-		GL11.glTranslatef(0, -scale * 0.0625F, 0);
+		GL11.glScalef(1.1F, 1.1F, 1.1F);
+		GL11.glTranslatef(0, -1.1F * 0.0625F, 0);
 
 		super.render(entity, f, f1, f2, f3, f4, f5);
+
 		GL11.glPopMatrix();
 	}
 
@@ -949,7 +948,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 
 	@Override
 	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		ModelOffset offsets = TFModelHelper.getOffsets(player);
+		final ModelOffset offsets = TFModelHelper.getOffsets(player);
 		head.rotationPointX += offsets.headOffsetX;
 		head.rotationPointY += offsets.headOffsetY;
 		head.rotationPointZ += offsets.headOffsetZ;
@@ -1010,8 +1009,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 			upperArmL.rotateAngleX += 0.25F;
 		}
 
-		ItemStack heldItem = player.getHeldItem();
-
+		final ItemStack heldItem = player.getHeldItem();
 		if(heldItem != null && heldItem.getItem() == TFItems.cloudtrapsFlamethrower && TFHelper.isFullyTransformed(player) && player.isUsingItem()) {
 			setRotateAngle(upperArmR, bipedHead.rotateAngleX - PI / 2 + 0.2F, bipedHead.rotateAngleY, 0.1F);
 			setRotateAngle(lowerArmR, -0.2F, 0, 0);
@@ -1199,7 +1197,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 
 	@Override
 	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		ModelCloudtrapVehicle vehicle = (ModelCloudtrapVehicle) getTransformerModel().getVehicleModel();
+		final ModelCloudtrapVehicle vehicle = (ModelCloudtrapVehicle) getTransformerModel().getVehicleModel();
 
 		rotateTo(waist, vehicle.vehicleBody, progress);
 		rotateTo(upperLegL, vehicle.vehicleUpperlegLbase, progress);
@@ -1338,18 +1336,21 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		setToInitPose();
 
 		if(armorPiece == 0) {
-			GL11.glTranslatef(0, 0, -0.125F);
-			head.rotationPointX = 0;
-			head.rotationPointY = 0;
-			head.rotationPointZ = 0;
+			GL11.glTranslatef(0F, 0F, -0.125F);
+			head.rotationPointX = 0F;
+			head.rotationPointY = 0F;
+			head.rotationPointZ = 0F;
+
 			head.render(0.0625F);
 		}
 		else if(armorPiece == 1) {
-			GL11.glTranslatef(0, -0.1F, 0.0625F);
+			GL11.glTranslatef(0F, -0.1F, 0.0625F);
 			upperLegL.showModel = false;
 			upperLegR.showModel = false;
 			head.showModel = false;
+
 			waist.render(0.0625F);
+
 			upperLegL.showModel = true;
 			upperLegR.showModel = true;
 			head.showModel = true;
@@ -1357,19 +1358,22 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		else if(armorPiece == 2) {
 			feetbaseL.showModel = false;
 			feetbaseR.showModel = false;
+
 			upperLegL.render(0.0625F);
 			upperLegR.render(0.0625F);
+
 			feetbaseL.showModel = true;
 			feetbaseR.showModel = true;
 		}
 		else if(armorPiece == 3) {
-			GL11.glRotatef(5.5F, 1, 0, 0);
+			GL11.glRotatef(5.5F, 1F, 0F, 0F);
 			feetbaseL.rotationPointX -= 3.5F;
 			feetbaseR.rotationPointX += 3.5F;
 			feetbaseL.rotateAngleX += 0.2F;
 			feetbaseL.rotateAngleY += 0.1F;
 			feetbaseR.rotateAngleX += 0.2F;
 			feetbaseR.rotateAngleY -= 0.1F;
+
 			feetbaseL.render(0.0625F);
 			feetbaseR.render(0.0625F);
 		}

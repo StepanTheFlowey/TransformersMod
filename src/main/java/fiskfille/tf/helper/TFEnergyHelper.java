@@ -322,8 +322,8 @@ public class TFEnergyHelper {
 		return isPowering(transmitter, new DimensionalCoords(tile));
 	}
 
-	public static float transferEnergy(IEnergyContainer to, IEnergyContainer from, float amount, boolean simulate) {
-		return to.receiveEnergy(from.extractEnergy(to.receiveEnergy(amount, true), simulate), simulate);
+	public static void transferEnergy(IEnergyContainer to, IEnergyContainer from, float amount, boolean simulate) {
+		to.receiveEnergy(from.extractEnergy(to.receiveEnergy(amount, true), simulate), simulate);
 	}
 
 	public static void applyEnergyUsage(EnergyStorage storage) {

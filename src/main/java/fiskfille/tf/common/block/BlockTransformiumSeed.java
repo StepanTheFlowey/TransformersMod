@@ -37,7 +37,7 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
 
 	public void ignite(World world, int x, int y, int z, int metadata, EntityLivingBase entity) {
 		if(!world.isRemote) {
-			EntityTransformiumSeed seed = new EntityTransformiumSeed(world, x + 0.5F, y, z + 0.5F, entity);
+			EntityTransformiumSeed seed = new EntityTransformiumSeed(world, x + 0.5F, y, z + 0.5F);
 			world.spawnEntityInWorld(seed);
 			world.playSoundAtEntity(seed, "note.pling", 1F, 0.5F);
 		}

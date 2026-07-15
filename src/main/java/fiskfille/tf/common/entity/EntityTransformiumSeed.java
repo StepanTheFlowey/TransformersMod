@@ -20,7 +20,6 @@ import java.util.List;
 public class EntityTransformiumSeed extends Entity {
 	public int fuse;
 	public int maxFuse;
-	private EntityLivingBase placedBye;
 
 	public EntityTransformiumSeed(World world) {
 		super(world);
@@ -29,17 +28,16 @@ public class EntityTransformiumSeed extends Entity {
 		yOffset = height / 2F;
 	}
 
-	public EntityTransformiumSeed(World world, double x, double y, double z, EntityLivingBase entity) {
+	public EntityTransformiumSeed(World world, double x, double y, double z) {
 		this(world);
 		setPosition(x, y, z);
 		motionY = 0.05D;
 		prevPosX = x;
 		prevPosY = y;
 		prevPosZ = z;
-		placedBye = entity;
 	}
 
-	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float radius) {
+	public static List getEntitiesNear(World world, double x, double y, double z, float radius) {
 		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius), IEntitySelector.selectAnything);
 	}
 
@@ -155,9 +153,5 @@ public class EntityTransformiumSeed extends Entity {
 
 	@Override
 	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int steps) {
-	}
-
-	public EntityLivingBase getSeedPlacedBy() {
-		return placedBye;
 	}
 }

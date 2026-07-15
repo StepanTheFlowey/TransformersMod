@@ -109,11 +109,9 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public float calculateUsage() {
-		float energy = getEnergy();
+	public void calculateUsage() {
+		final float energy = getEnergy();
 		energyUsage = energy - lastEnergy;
 		lastEnergy = energy;
-
-		return energyUsage;
 	}
 }

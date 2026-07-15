@@ -31,7 +31,7 @@ public class ItemCSD extends Item {
 		return coords;
 	}
 
-	public static DimensionalCoords setCoords(ItemStack itemstack, DimensionalCoords coords) {
+	public static void setCoords(ItemStack itemstack, DimensionalCoords coords) {
 		if(!itemstack.hasTagCompound()) {
 			itemstack.setTagCompound(new NBTTagCompound());
 		}
@@ -43,8 +43,6 @@ public class ItemCSD extends Item {
 		nbttagcompound.setInteger("dim", coords.dimension);
 
 		itemstack.getTagCompound().setTag("Coordinates", nbttagcompound);
-
-		return coords;
 	}
 
 	@Override

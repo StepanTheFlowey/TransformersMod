@@ -15,18 +15,10 @@ public class TFEntities {
 		registerEntity(EntityLaserBeam.class, "laser_beam", 20, 10, true);
 	}
 
-	private static void registerEntityWithEgg(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates, int primary, int secondary) {
-		name = "tf_" + name;
-
-		int id = EntityRegistry.findGlobalUniqueEntityId();
-		EntityRegistry.registerGlobalEntityID(entityClass, name, id, primary, secondary);
-		EntityRegistry.registerModEntity(entityClass, name, id, TransformersMod.instance, trackingRange, updateFrequency, sendVelocityUpdates);
-	}
-
 	private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates) {
 		name = "tf_" + name;
 
-		int id = EntityRegistry.findGlobalUniqueEntityId();
+		final int id = EntityRegistry.findGlobalUniqueEntityId();
 		EntityRegistry.registerGlobalEntityID(entityClass, name, id);
 		EntityRegistry.registerModEntity(entityClass, name, id, TransformersMod.instance, trackingRange, updateFrequency, sendVelocityUpdates);
 	}

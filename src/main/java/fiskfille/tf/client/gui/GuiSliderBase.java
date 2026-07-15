@@ -9,13 +9,11 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiSliderBase extends GuiButton {
 	public float percentage;
-	public float prevPercentage;
 	public boolean dragging;
 
 	public GuiSliderBase(int id, int x, int y, int width, int height, String s) {
 		super(id, x, y, width, height, s);
 		percentage = 1F;
-		prevPercentage = 1F;
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package fiskfille.tf.client.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.network.MessageColorArmor;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.proxy.ClientProxy;
@@ -18,7 +17,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -28,7 +26,6 @@ import java.awt.*;
 @SideOnly(Side.CLIENT)
 public class GuiColor extends GuiScreen {
 	public static final float[][] layerColors = {{1, 1, 1}, {1, 1, 1}};
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/display_station.png");
 	public static int ticks;
 	public static boolean fromPresetMenu = false;
 	public static int layerSelected;
@@ -100,10 +97,6 @@ public class GuiColor extends GuiScreen {
 			catch(Exception e) {
 			}
 		}
-
-		sliderRed.prevPercentage = sliderRed.percentage;
-		sliderGreen.prevPercentage = sliderGreen.percentage;
-		sliderBlue.prevPercentage = sliderBlue.percentage;
 	}
 
 	@Override

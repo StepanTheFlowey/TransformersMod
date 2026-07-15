@@ -108,7 +108,7 @@ public class SubTicket {
 
 		owner.getModData().setTag("SubTickets", new NBTTagList());
 
-		for(SubTicket subTicket : list1) {
+		for(SubTicket ignored : list1) {
 			assign(owner);
 		}
 

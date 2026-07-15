@@ -186,13 +186,13 @@ public class ModelMissile extends ModelBase {
 		missileBase.addChild(engine);
 	}
 
-	public void render() {
-		missileBase.render(0.0625F);
-	}
-
 	public static void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	public void render() {
+		missileBase.render(0.0625F);
 	}
 }

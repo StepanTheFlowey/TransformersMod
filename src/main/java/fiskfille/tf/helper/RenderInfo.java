@@ -14,12 +14,12 @@ import java.util.Arrays;
 public class RenderInfo {
 	public final boolean[] renderSide = new boolean[]{true, true, true, true, true, true};
 	public final int light = -1;
-	public double minX = 0F;
-	public double minY = 0F;
-	public double minZ = 0F;
-	public double maxX = 1F;
-	public double maxY = 1F;
-	public double maxZ = 1F;
+	public double minX = 0D;
+	public double minY = 0D;
+	public double minZ = 0D;
+	public double maxX = 1D;
+	public double maxY = 1D;
+	public double maxZ = 1D;
 	public Block baseBlock = Blocks.sand;
 	public IIcon texture = null;
 	public IIcon[] textureArray = null;

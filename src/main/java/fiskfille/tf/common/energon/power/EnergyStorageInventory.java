@@ -108,7 +108,7 @@ public class EnergyStorageInventory extends EnergyStorage {
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 				IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
-				max += container.getEnergyCapacity(stack);
+				max += (int) container.getEnergyCapacity(stack);
 			}
 		}
 
@@ -122,20 +122,8 @@ public class EnergyStorageInventory extends EnergyStorage {
 	}
 
 	@Override
-	public float getUsage() {
-		return energyUsage;
-	}
-
-	@Override
 	public void setUsage(float usage) {
 		energyUsage = usage;
 		lastEnergy = getEnergy();
-	}
-
-	@Override
-	public float calculateUsage() {
-		energyUsage = energy - lastEnergy;
-		lastEnergy = energy;
-		return energyUsage;
 	}
 }
