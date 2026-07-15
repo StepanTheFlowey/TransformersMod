@@ -3,12 +3,13 @@ package fiskfille.tf.common.groundbridge;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
+import java.util.ArrayList;
+
 public class DataCore {
-	public static final DataCore[] dataCores = new DataCore[16];
+	public static final ArrayList<DataCore> dataCores = new ArrayList<>();
 	public static final DataCore spaceBridge = new DataCore("space_bridge", 0x5FEEEE);
 	public static final DataCore leveler = new DataCore("leveler", 0x61C37B);
 	public static final DataCore range = new DataCore("range", 0x7C65EA);
-	public static int indexes = -1;
 	public final int index;
 	private final String id;
 	private final int color;
@@ -16,12 +17,12 @@ public class DataCore {
 	public DataCore(String s, int i) {
 		id = s;
 		color = i;
-
-		dataCores[index = ++indexes] = this;
+		index = dataCores.size();
+		dataCores.add(this);
 	}
 
 	public static DataCore get(int index) {
-		return dataCores[MathHelper.clamp_int(index, 0, indexes)];
+		return dataCores.get(index);
 	}
 
 	public String getId() {

@@ -28,7 +28,7 @@ public class ItemDataCore extends Item {
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
-		for(int i = 0; i <= DataCore.indexes; ++i) {
+		for(int i = 0; i < DataCore.dataCores.size(); ++i) {
 			subItems.add(new ItemStack(this, 1, i));
 		}
 	}
