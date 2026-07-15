@@ -1,31 +1,6 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import net.minecraftforge.common.util.Constants.NBT;
-import net.minecraftforge.common.util.ForgeDirection;
-
 import com.google.common.collect.Lists;
-
 import fiskfille.tf.common.block.BlockControlPanel;
 import fiskfille.tf.common.block.BlockGroundBridgeFrame;
 import fiskfille.tf.common.block.BlockGroundBridgeTeleporter;
@@ -47,6 +22,24 @@ import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFDimensionHelper;
 import fiskfille.tf.helper.TFMathHelper;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.*;
 
 public class TileEntityControlPanel extends TileEntityMachineContainer implements IEnergyReceiver, ITileDataCallback, IChunkLoaderTile, IMultiTile {
 	public static final int[][] directions = new int[][]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
@@ -69,8 +62,8 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	public int destDimIndex = 1;
 	public int prevYCoord;
 
-	public LinkedList<Ticket> chunkTickets = Lists.newLinkedList(Arrays.asList((Ticket) null, (Ticket) null));
-	public LinkedList<ForcedChunk> forcedChunks = Lists.newLinkedList(Arrays.asList((ForcedChunk) null, (ForcedChunk) null));
+	public LinkedList<Ticket> chunkTickets = Lists.newLinkedList(Arrays.asList(null, null));
+	public LinkedList<ForcedChunk> forcedChunks = Lists.newLinkedList(Arrays.asList(null, null));
 
 	@Override
 	public void updateEntity() {
@@ -481,11 +474,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 
 				if(subTicket != null) {
 					NBTTagCompound nbt = subTicket.getTag();
-					boolean updateTicket = true;
-
-					if(data.destination.posX == nbt.getInteger("destX") && data.destination.posZ == nbt.getInteger("destZ") && getDestWorld() == subTicket.owner.world) {
-						updateTicket = false;
-					}
+					boolean updateTicket = data.destination.posX != nbt.getInteger("destX") || data.destination.posZ != nbt.getInteger("destZ") || getDestWorld() != subTicket.owner.world;
 
 					if(updateTicket) {
 						releaseChunk(1);

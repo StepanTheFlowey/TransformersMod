@@ -1,11 +1,11 @@
 package fiskfille.tf.common.tileentity;
 
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import fiskfille.tf.helper.TFTileHelper;
 
 public abstract class TileEntityTF extends TileEntity {
 	@Override

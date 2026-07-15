@@ -1,8 +1,8 @@
 package fiskfille.tf.common.data.tile;
 
-import io.netty.buffer.ByteBuf;
 import fiskfille.tf.common.energon.power.EnergyStorage;
 import fiskfille.tf.helper.TFEnergyHelper;
+import io.netty.buffer.ByteBuf;
 
 public class TileDataEnergyContainer extends TileData {
 	public EnergyStorage storage;

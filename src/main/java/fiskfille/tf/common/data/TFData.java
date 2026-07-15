@@ -1,28 +1,8 @@
 package fiskfille.tf.common.data;
 
-import static fiskfille.tf.common.data.TFPredicates.and;
-import static fiskfille.tf.common.data.TFPredicates.hasStealthForce;
-import static fiskfille.tf.common.data.TFPredicates.isInVehicleMode;
-import static fiskfille.tf.common.data.TFPredicates.isTransformer;
-
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagByte;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagFloat;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraftforge.common.MinecraftForge;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.common.achievement.TFAchievements;
 import fiskfille.tf.common.event.PlayerTransformEvent;
@@ -31,28 +11,53 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFFormatHelper;
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.*;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
+
+import static fiskfille.tf.common.data.TFPredicates.*;
 
 public class TFData<T> {
 	public static final TFData<Integer> ALT_MODE = new TFData<Integer>(-1, isTransformer());
-	public static final TFData<Boolean> STEALTH_FORCE = new TFData<Boolean>(false, and(isInVehicleMode(), hasStealthForce()));
 	public static final TFData<Float> TRANSFORM_PROGRESS = new TFData<Float>(0F, isTransformer());
-	public static final TFData<Float> STEALTH_FORCE_PROGRESS = new TFData<Float>(0F, isInVehicleMode());
-	public static final TFData<Double> FORWARD_VELOCITY = new TFData<Double>(0D, Predicates.<EntityPlayer>alwaysTrue());
-	public static final TFData<Double> HORIZONTAL_VELOCITY = new TFData<Double>(0D, Predicates.<EntityPlayer>alwaysTrue());
-	public static final TFData<Boolean> BOOSTING = new TFData<Boolean>(false, Predicates.<EntityPlayer>alwaysTrue());
-	public static final TFData<Float> NITRO = new TFData<Float>(1F, Predicates.<EntityPlayer>alwaysTrue());
-
+	public static final TFData<Double> FORWARD_VELOCITY = new TFData<Double>(0D, Predicates.alwaysTrue());
+	public static final TFData<Double> HORIZONTAL_VELOCITY = new TFData<Double>(0D, Predicates.alwaysTrue());
+	public static final TFData<Boolean> BOOSTING = new TFData<Boolean>(false, Predicates.alwaysTrue());
+	public static final TFData<Float> NITRO = new TFData<Float>(1F, Predicates.alwaysTrue());
 	public static final TFData<Integer> PREV_ALT_MODE = new TFDataPrev(ALT_MODE);
 	public static final TFData<Float> PREV_TRANSFORM_PROGRESS = new TFData<Float>(0F, isTransformer());
+	public static final TFData<Boolean> STEALTH_FORCE = new TFData<Boolean>(false, and(isInVehicleMode(), hasStealthForce()));
+	public static final TFData<Float> STEALTH_FORCE_PROGRESS = new TFData<Float>(0F, isInVehicleMode());
 	public static final TFData<Float> PREV_STEALTH_FORCE_PROGRESS = new TFData<Float>(0F, isInVehicleMode());
-	public static final TFData<Transformer> PREV_TRANSFORMER = new TFData<Transformer>(null, Predicates.<EntityPlayer>alwaysTrue());
-	public static final TFData<Float> PREV_NITRO = new TFData<Float>(1F, Predicates.<EntityPlayer>alwaysTrue());
+	public static final TFData<Transformer> PREV_TRANSFORMER = new TFData<Transformer>(null, Predicates.alwaysTrue());
+	public static final TFData<Float> PREV_NITRO = new TFData<Float>(1F, Predicates.alwaysTrue());
 
 	public static final List<TFData<?>> VALUES = Lists.newArrayList();
 
-	public String id;
+	static {
+		for(Field field : TFData.class.getFields()) {
+			String s = field.getType().getName();
+
+			if(s.equals(TFData.class.getName())) {
+				try {
+					TFData<?> data = (TFData<?>) field.get(null);
+					data.id = TFFormatHelper.getUnconventionalName(field.getName());
+					TFData.VALUES.add(data);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	public final boolean save;
 	public final T defaultValue;
+	public String id;
 
 	protected TFData(T defaultValue, Predicate<EntityPlayer> canSet) {
 		this(true, defaultValue, canSet);
@@ -61,6 +66,46 @@ public class TFData<T> {
 	protected TFData(boolean save, T defaultValue, Predicate<EntityPlayer> canSet) {
 		this.save = save;
 		this.defaultValue = defaultValue;
+	}
+
+	public static NBTTagCompound writeToNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
+		NBTTagCompound nbttagcompound = new NBTTagCompound();
+
+		for(Map.Entry<TFData, Object> e : data.entrySet()) {
+			if(e.getKey().save) {
+				Object obj = e.getValue();
+
+				if(obj instanceof Transformer) {
+					obj = ((Transformer) obj).getName();
+				}
+
+				e.getKey().writeDataToNBT(nbttagcompound, obj);
+			}
+		}
+
+		nbt.setTag("DataArray", nbttagcompound);
+
+		return nbt;
+	}
+
+	public static Map<TFData, Object> readFromNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
+		NBTTagCompound nbttagcompound = nbt.getCompoundTag("DataArray");
+
+		for(TFData<?> type : TFData.VALUES) {
+			if(type.save) {
+				Object obj = type.readDataFromNBT(nbttagcompound);
+
+				if(obj != null) {
+					if(type.defaultValue instanceof Transformer && obj instanceof String) {
+						obj = TransformersAPI.getTransformerByName((String) obj);
+					}
+
+					data.put(type, obj);
+				}
+			}
+		}
+
+		return data;
 	}
 
 	public Predicate<EntityPlayer> predicate(final TFData data, final T value) {
@@ -146,7 +191,7 @@ public class TFData<T> {
 			set(player, (T) d);
 		}
 		else if(value instanceof String) {
-			String s = (String) get(player) + (String) value;
+			String s = get(player) + (String) value;
 			set(player, (T) s);
 		}
 		else {
@@ -168,7 +213,7 @@ public class TFData<T> {
 			setWithoutNotify(player, (T) d);
 		}
 		else if(value instanceof String) {
-			String s = (String) get(player) + (String) value;
+			String s = get(player) + (String) value;
 			setWithoutNotify(player, (T) s);
 		}
 		else {
@@ -249,46 +294,6 @@ public class TFData<T> {
 		return value;
 	}
 
-	public static NBTTagCompound writeToNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
-
-		for(Map.Entry<TFData, Object> e : data.entrySet()) {
-			if(e.getKey().save) {
-				Object obj = e.getValue();
-
-				if(obj instanceof Transformer) {
-					obj = ((Transformer) obj).getName();
-				}
-
-				e.getKey().writeDataToNBT(nbttagcompound, obj);
-			}
-		}
-
-		nbt.setTag("DataArray", nbttagcompound);
-
-		return nbt;
-	}
-
-	public static Map<TFData, Object> readFromNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
-		NBTTagCompound nbttagcompound = nbt.getCompoundTag("DataArray");
-
-		for(TFData<?> type : TFData.VALUES) {
-			if(type.save) {
-				Object obj = type.readDataFromNBT(nbttagcompound);
-
-				if(obj != null) {
-					if(type.defaultValue instanceof Transformer && obj instanceof String) {
-						obj = TransformersAPI.getTransformerByName((String) obj);
-					}
-
-					data.put(type, obj);
-				}
-			}
-		}
-
-		return data;
-	}
-
 	public NBTTagCompound writeDataToNBT(NBTTagCompound nbt, Object obj) {
 		if(obj instanceof Integer) {
 			nbt.setInteger(id, (Integer) obj);
@@ -332,22 +337,5 @@ public class TFData<T> {
 		}
 
 		return null;
-	}
-
-	static {
-		for(Field field : TFData.class.getFields()) {
-			String s = field.getType().getName();
-
-			if(s.equals(TFData.class.getName())) {
-				try {
-					TFData<?> data = (TFData<?>) field.get(null);
-					data.id = TFFormatHelper.getUnconventionalName(field.getName());
-					TFData.VALUES.add(data);
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 }

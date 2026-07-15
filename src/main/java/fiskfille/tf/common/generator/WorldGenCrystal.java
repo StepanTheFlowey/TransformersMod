@@ -1,7 +1,5 @@
 package fiskfille.tf.common.generator;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -9,9 +7,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.Random;
+
 public class WorldGenCrystal extends WorldGenerator {
-	private Block target;
-	private Material growthMaterial;
+	private final Block target;
+	private final Material growthMaterial;
 
 	public WorldGenCrystal(Block block, Material material) {
 		target = block;
@@ -27,7 +27,7 @@ public class WorldGenCrystal extends WorldGenerator {
 			for(int j = -range; j <= range; ++j) {
 				int xPosition = x >> 4 + i;
 				int zPosition = z >> 4 + j;
-				Random random = new Random(world.getSeed() + (long) (xPosition * xPosition * 0x4c1906) + (long) (xPosition * 0x5ac0db) + (long) (zPosition * zPosition) * 0x4307a7L + (long) (zPosition * 0x5f24f) ^ 0x3ad8025f);
+				Random random = new Random(world.getSeed() + (long) ((long) xPosition * xPosition * 0x4c1906) + (long) (xPosition * 0x5ac0dbL) + (long) ((long) zPosition * zPosition) * 0x4307a7L + (long) (zPosition * 0x5f24fL) ^ 0x3ad8025f);
 
 				if(random.nextInt(300) == 0) {
 					flag = true;

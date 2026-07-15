@@ -1,18 +1,16 @@
 package fiskfille.tf;
 
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.item.Item;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import fiskfille.tf.client.displayable.Displayable;
 import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.common.transformer.base.Transformer;
+import net.minecraft.item.Item;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author gegy1000, FiskFille

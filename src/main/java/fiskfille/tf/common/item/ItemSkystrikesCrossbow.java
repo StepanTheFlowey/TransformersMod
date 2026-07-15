@@ -1,7 +1,9 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import com.google.common.collect.Multimap;
+import fiskfille.tf.common.entity.EntityLaserBeam;
+import fiskfille.tf.common.transformer.TransformerSkystrike;
+import fiskfille.tf.helper.TFHelper;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,11 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Multimap;
-
-import fiskfille.tf.common.entity.EntityLaserBeam;
-import fiskfille.tf.common.transformer.TransformerSkystrike;
-import fiskfille.tf.helper.TFHelper;
+import java.util.List;
 
 public class ItemSkystrikesCrossbow extends Item {
 	public ItemSkystrikesCrossbow() {

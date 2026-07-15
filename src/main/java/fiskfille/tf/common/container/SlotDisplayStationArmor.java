@@ -1,21 +1,21 @@
 package fiskfille.tf.common.container;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.common.item.armor.ItemTransformerArmor;
+import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
+import fiskfille.tf.helper.TFArmorHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.common.item.armor.ItemTransformerArmor;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
-import fiskfille.tf.helper.TFArmorHelper;
 
 public class SlotDisplayStationArmor extends Slot {
-	private ContainerDisplayStationArmor parent;
-	private TileEntityDisplayStation tile;
-	private boolean type;
+	private final ContainerDisplayStationArmor parent;
+	private final TileEntityDisplayStation tile;
+	private final boolean type;
 
 	public SlotDisplayStationArmor(ContainerDisplayStationArmor parent, IInventory inventory, TileEntityDisplayStation tile, int id, int x, int y) {
 		super(inventory, id, x, y);

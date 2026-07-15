@@ -1,8 +1,7 @@
 package fiskfille.tf.common.data;
 
-import net.minecraft.entity.player.EntityPlayer;
-
 import com.google.common.base.Predicates;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class TFDataPrev extends TFData {
 	public final TFData tracking;

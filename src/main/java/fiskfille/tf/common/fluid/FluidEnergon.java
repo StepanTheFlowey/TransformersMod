@@ -1,7 +1,11 @@
 package fiskfille.tf.common.fluid;
 
-import java.util.Map;
-
+import com.google.common.collect.Maps;
+import fiskfille.tf.TransformersAPI;
+import fiskfille.tf.common.energon.Energon;
+import fiskfille.tf.common.energon.IEnergon;
+import fiskfille.tf.helper.TFHelper;
+import fiskfille.tf.helper.TFTextureHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -10,32 +14,11 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.google.common.collect.Maps;
-
-import fiskfille.tf.TransformersAPI;
-import fiskfille.tf.common.energon.Energon;
-import fiskfille.tf.common.energon.IEnergon;
-import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.helper.TFTextureHelper;
+import java.util.Map;
 
 public class FluidEnergon extends Fluid {
 	public FluidEnergon(String fluidName) {
 		super(fluidName);
-	}
-
-	@Override
-	public IIcon getStillIcon() {
-		return TFTextureHelper.energonStillIcon;
-	}
-
-	@Override
-	public IIcon getFlowingIcon() {
-		return TFTextureHelper.energonFlowingIcon;
-	}
-
-	@Override
-	public int getColor(FluidStack stack) {
-		return getLiquidColor(stack);
 	}
 
 	public static void refreshNBT(FluidStack stack) {
@@ -162,5 +145,20 @@ public class FluidEnergon extends Fluid {
 
 	public static int getLiquidColor(FluidStack stack) {
 		return stack.tag != null && stack.tag.hasKey("Color") ? stack.tag.getInteger("Color") : -1;
+	}
+
+	@Override
+	public IIcon getStillIcon() {
+		return TFTextureHelper.energonStillIcon;
+	}
+
+	@Override
+	public IIcon getFlowingIcon() {
+		return TFTextureHelper.energonFlowingIcon;
+	}
+
+	@Override
+	public int getColor(FluidStack stack) {
+		return getLiquidColor(stack);
 	}
 }

@@ -1,15 +1,13 @@
 package fiskfille.tf.common.chunk;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
+import fiskfille.tf.common.tileentity.IChunkLoaderTile;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
-import com.google.common.collect.Lists;
-
-import fiskfille.tf.common.tileentity.IChunkLoaderTile;
+import java.util.List;
 
 public class TFLoadingCallback implements ForgeChunkManager.OrderedLoadingCallback {
 	@Override

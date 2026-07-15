@@ -1,8 +1,8 @@
 package fiskfille.tf.common.tileentity;
 
+import fiskfille.tf.TransformersAPI;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import fiskfille.tf.TransformersAPI;
 
 public class TileEntityDisplayPedestal extends TileEntityContainer {
 	@Override

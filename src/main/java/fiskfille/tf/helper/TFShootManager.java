@@ -1,15 +1,5 @@
 package fiskfille.tf.helper;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
-
-import org.lwjgl.input.Mouse;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.network.MessageLaserShoot;
@@ -17,6 +7,14 @@ import fiskfille.tf.common.network.MessageVehicleShoot;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.transformer.TransformerVurp;
 import fiskfille.tf.common.transformer.base.Transformer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import org.lwjgl.input.Mouse;
 
 import static fiskfille.tf.TransformersMod.mc;
 

@@ -1,26 +1,22 @@
 package fiskfille.tf.common.container;
 
-import java.util.Map;
-
+import cpw.mods.fml.common.FMLCommonHandler;
+import fiskfille.tf.common.recipe.AssemblyTableCraftingManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.stats.AchievementList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import fiskfille.tf.common.recipe.AssemblyTableCraftingManager;
+
+import java.util.Map;
 
 public class SlotAssembly extends Slot {
 	private final InventoryAssembly craftMatrix;
-	private EntityPlayer thePlayer;
+	private final EntityPlayer thePlayer;
 	private int amountCrafted;
 
 	public SlotAssembly(EntityPlayer player, InventoryAssembly inventory1, IInventory inventory2, int id, int x, int y) {

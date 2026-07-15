@@ -1,8 +1,8 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
-import net.minecraft.client.Minecraft;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.common.block.TFBlocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -11,9 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.common.block.TFBlocks;
+
+import java.util.List;
 
 import static fiskfille.tf.TransformersMod.mc;
 

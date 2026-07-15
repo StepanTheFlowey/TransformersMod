@@ -6,9 +6,9 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 
 public class InventoryAssembly extends InventoryCrafting {
-	private ItemStack[] stackList;
-	private int inventoryWidth;
-	private Container eventHandler;
+	private final ItemStack[] stackList;
+	private final int inventoryWidth;
+	private final Container eventHandler;
 
 	public InventoryAssembly(Container container, int width, int height) {
 		super(container, width, height);

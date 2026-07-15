@@ -1,15 +1,7 @@
 package fiskfille.tf.waila;
 
+import fiskfille.tf.common.tileentity.*;
 import mcp.mobius.waila.api.IWailaRegistrar;
-import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible;
-import fiskfille.tf.common.tileentity.TileEntityColumn;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.common.tileentity.TileEntityEnergonProcessor;
-import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
-import fiskfille.tf.common.tileentity.TileEntityIsoCondenser;
-import fiskfille.tf.common.tileentity.TileEntityRelayTorch;
-import fiskfille.tf.common.tileentity.TileEntityRelayTower;
-import fiskfille.tf.common.tileentity.TileEntityTransmitter;
 
 public class WailaRegistrar {
 	public static void wailaCallback(IWailaRegistrar registrar) {

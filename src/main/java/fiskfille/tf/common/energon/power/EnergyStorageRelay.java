@@ -1,12 +1,11 @@
 package fiskfille.tf.common.energon.power;
 
-import io.netty.buffer.ByteBuf;
-
-import java.util.List;
-
-import net.minecraft.nbt.NBTTagCompound;
 import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 import fiskfille.tf.helper.TFEnergyHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.List;
 
 public class EnergyStorageRelay extends EnergyStorage {
 	protected final TileEntityRelayTower relay;
@@ -99,14 +98,14 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public void setUsage(float usage) {
-		energyUsage = usage;
-		lastEnergy = getEnergy();
+	public float getUsage() {
+		return energyUsage;
 	}
 
 	@Override
-	public float getUsage() {
-		return energyUsage;
+	public void setUsage(float usage) {
+		energyUsage = usage;
+		lastEnergy = getEnergy();
 	}
 
 	@Override

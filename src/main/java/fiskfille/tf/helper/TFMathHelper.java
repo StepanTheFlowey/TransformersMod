@@ -5,7 +5,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.util.MathHelper;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 

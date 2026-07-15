@@ -1,31 +1,12 @@
 package fiskfille.tf.nei;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidContainerItem;
-
-import org.lwjgl.opengl.GL11;
-
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.ItemList;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-
 import com.google.common.collect.Lists;
-
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.TransformersMod;
@@ -40,59 +21,22 @@ import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.recipe.PowerManager;
 import fiskfille.tf.helper.TFFluidRenderHelper;
 import fiskfille.tf.helper.TFFormatHelper;
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
-	public class CachedProcessorRecipe extends CachedRecipe {
-		public PositionedStack ingredient;
-		public PositionedStack result;
-
-		public FluidTankTF tank = new FluidTankTF(2000);
-
-		public CachedProcessorRecipe(ItemStack in, ItemStack out) {
-			ingredient = new PositionedStack(in, 19, 6);
-			result = new PositionedStack(out, 133, 42);
-		}
-
-		@Override
-		public PositionedStack getIngredient() {
-			return ingredient;
-		}
-
-		@Override
-		public PositionedStack getResult() {
-			return result;
-		}
-
-		@Override
-		public PositionedStack getOtherStack() {
-			return powerSources.get(cycleticks / 48 % powerSources.size()).stack;
-		}
-
-		public void computeVisuals() {
-			ingredient.generatePermutations();
-		}
-	}
-
-	public static class PowerSourcePair {
-		public PositionedStack stack;
-		public int burnTime;
-
-		public PowerSourcePair(ItemStack ingred, int burnTime) {
-			this.stack = new PositionedStack(ingred, 19, 42, false);
-			this.burnTime = burnTime;
-		}
-	}
-
-	public static class CrystalPair {
-		public ItemStack stack;
-		public IEnergon energon;
-
-		public CrystalPair(ItemStack ingred, IEnergon energon) {
-			this.stack = ingred;
-			this.energon = energon;
-		}
-	}
-
 	public static ArrayList<PowerSourcePair> powerSources;
 	public static ArrayList<CrystalPair> crystals;
 
@@ -247,5 +191,56 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 		}
 
 		return list;
+	}
+
+	public static class PowerSourcePair {
+		public PositionedStack stack;
+		public int burnTime;
+
+		public PowerSourcePair(ItemStack ingred, int burnTime) {
+			this.stack = new PositionedStack(ingred, 19, 42, false);
+			this.burnTime = burnTime;
+		}
+	}
+
+	public static class CrystalPair {
+		public ItemStack stack;
+		public IEnergon energon;
+
+		public CrystalPair(ItemStack ingred, IEnergon energon) {
+			this.stack = ingred;
+			this.energon = energon;
+		}
+	}
+
+	public class CachedProcessorRecipe extends CachedRecipe {
+		public PositionedStack ingredient;
+		public PositionedStack result;
+
+		public FluidTankTF tank = new FluidTankTF(2000);
+
+		public CachedProcessorRecipe(ItemStack in, ItemStack out) {
+			ingredient = new PositionedStack(in, 19, 6);
+			result = new PositionedStack(out, 133, 42);
+		}
+
+		@Override
+		public PositionedStack getIngredient() {
+			return ingredient;
+		}
+
+		@Override
+		public PositionedStack getResult() {
+			return result;
+		}
+
+		@Override
+		public PositionedStack getOtherStack() {
+			return powerSources.get(cycleticks / 48 % powerSources.size()).stack;
+		}
+
+		public void computeVisuals() {
+			ingredient.generatePermutations();
+		}
 	}
 }

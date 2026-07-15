@@ -1,13 +1,13 @@
 package fiskfille.tf.common.energon.power;
 
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 
 public class NetworkEntry {
-	private DimensionalCoords coords;
+	private final DimensionalCoords coords;
 	private TileEntity owner;
 
 	protected NetworkEntry(DimensionalCoords coordinates, TileEntity tile) {
@@ -17,6 +17,14 @@ public class NetworkEntry {
 
 	public NetworkEntry(TileEntity tile) {
 		this(new DimensionalCoords(tile), tile);
+	}
+
+	public static NetworkEntry readFromNBT(NBTTagCompound compound) {
+		return new NetworkEntry(new DimensionalCoords(compound.getInteger("X"), compound.getInteger("Y"), compound.getInteger("Z"), compound.getInteger("Dim")), null);
+	}
+
+	public static NetworkEntry fromBytes(ByteBuf buf) {
+		return new NetworkEntry(new DimensionalCoords().fromBytes(buf), null);
 	}
 
 	public DimensionalCoords getCoords() {
@@ -50,16 +58,8 @@ public class NetworkEntry {
 		compound.setInteger("Dim", coords.dimension);
 	}
 
-	public static NetworkEntry readFromNBT(NBTTagCompound compound) {
-		return new NetworkEntry(new DimensionalCoords(compound.getInteger("X"), compound.getInteger("Y"), compound.getInteger("Z"), compound.getInteger("Dim")), null);
-	}
-
 	public void toBytes(ByteBuf buf) {
 		coords.toBytes(buf);
-	}
-
-	public static NetworkEntry fromBytes(ByteBuf buf) {
-		return new NetworkEntry(new DimensionalCoords().fromBytes(buf), null);
 	}
 
 	@Override

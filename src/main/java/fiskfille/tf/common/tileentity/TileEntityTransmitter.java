@@ -1,9 +1,22 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import fiskfille.tf.TransformersAPI;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.chunk.ForcedChunk;
+import fiskfille.tf.common.chunk.SubTicket;
+import fiskfille.tf.common.chunk.TFChunkManager;
+import fiskfille.tf.common.data.tile.TileData;
+import fiskfille.tf.common.data.tile.TileDataTransmitter;
+import fiskfille.tf.common.energon.Energon;
+import fiskfille.tf.common.energon.power.*;
+import fiskfille.tf.common.fluid.FluidEnergon;
+import fiskfille.tf.common.fluid.FluidTankTF;
+import fiskfille.tf.common.fluid.IFluidHandlerTF;
+import fiskfille.tf.common.fluid.TFFluids;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.item.ItemFuelCanister;
+import fiskfille.tf.helper.TFEnergyHelper;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,27 +30,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidContainerItem;
-import fiskfille.tf.TransformersAPI;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.chunk.ForcedChunk;
-import fiskfille.tf.common.chunk.SubTicket;
-import fiskfille.tf.common.chunk.TFChunkManager;
-import fiskfille.tf.common.data.tile.TileData;
-import fiskfille.tf.common.data.tile.TileDataTransmitter;
-import fiskfille.tf.common.energon.Energon;
-import fiskfille.tf.common.energon.power.IEnergyReceiver;
-import fiskfille.tf.common.energon.power.IEnergyTransmitter;
-import fiskfille.tf.common.energon.power.ITransmitterRender;
-import fiskfille.tf.common.energon.power.ReceiverEntry;
-import fiskfille.tf.common.energon.power.TransmissionHandler;
-import fiskfille.tf.common.fluid.FluidEnergon;
-import fiskfille.tf.common.fluid.FluidTankTF;
-import fiskfille.tf.common.fluid.IFluidHandlerTF;
-import fiskfille.tf.common.fluid.TFFluids;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.item.ItemFuelCanister;
-import fiskfille.tf.helper.TFEnergyHelper;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class TileEntityTransmitter extends TileEntityMachineContainer implements IEnergyTransmitter, IFluidHandlerTF, ISidedInventory, IChunkLoaderTile, IMultiTile, ITransmitterRender {
 	public TileDataTransmitter data = new TileDataTransmitter(16000, 6000);

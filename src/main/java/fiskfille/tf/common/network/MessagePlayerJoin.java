@@ -1,20 +1,7 @@
 package fiskfille.tf.common.network;
 
-import io.netty.buffer.ByteBuf;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -25,6 +12,16 @@ import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFDimensionHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 public class MessagePlayerJoin extends MessageSyncBase {
 	private Map<Transformer, Boolean> canTransform;

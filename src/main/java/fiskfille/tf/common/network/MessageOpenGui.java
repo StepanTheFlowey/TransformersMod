@@ -1,12 +1,12 @@
 package fiskfille.tf.common.network;
 
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import fiskfille.tf.TransformersMod;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageOpenGui implements IMessage {
 	public int id;
@@ -53,7 +53,7 @@ public class MessageOpenGui implements IMessage {
 				Entity entity = player.worldObj.getEntityByID(message.id);
 
 				if(entity instanceof EntityPlayer) {
-					((EntityPlayer) entity).openGui(TransformersMod.instance, message.modGuiId, ((EntityPlayer) entity).worldObj, message.x, message.y, message.z);
+					((EntityPlayer) entity).openGui(TransformersMod.instance, message.modGuiId, entity.worldObj, message.x, message.y, message.z);
 				}
 			}
 			else {
@@ -63,7 +63,7 @@ public class MessageOpenGui implements IMessage {
 					Entity entity = player.worldObj.getEntityByID(message.id);
 
 					if(entity instanceof EntityPlayer) {
-						((EntityPlayer) entity).openGui(TransformersMod.instance, message.modGuiId, ((EntityPlayer) entity).worldObj, message.x, message.y, message.z);
+						((EntityPlayer) entity).openGui(TransformersMod.instance, message.modGuiId, entity.worldObj, message.x, message.y, message.z);
 					}
 				}
 			}

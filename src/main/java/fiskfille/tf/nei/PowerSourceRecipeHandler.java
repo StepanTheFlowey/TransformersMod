@@ -1,25 +1,10 @@
 package fiskfille.tf.nei;
 
-import static codechicken.nei.NEIClientUtils.translate;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidContainerItem;
 import codechicken.nei.ItemList;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-
 import com.google.common.collect.Lists;
-
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.common.energon.IEnergon;
@@ -27,31 +12,21 @@ import fiskfille.tf.common.fluid.FluidEnergon;
 import fiskfille.tf.common.fluid.TFFluids;
 import fiskfille.tf.common.item.ItemFuelCanister;
 import fiskfille.tf.common.item.TFItems;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static codechicken.nei.NEIClientUtils.translate;
 
 public class PowerSourceRecipeHandler extends EnergonProcessorRecipeHandler {
-	public class CachedPowerSourceRecipe extends CachedRecipe {
-		public PowerSourcePair powerSource;
-
-		public CachedPowerSourceRecipe(PowerSourcePair powerSource) {
-			this.powerSource = powerSource;
-		}
-
-		@Override
-		public PositionedStack getIngredient() {
-			return processorRecipes.get(cycleticks / 48 % processorRecipes.size()).ingredient;
-		}
-
-		@Override
-		public PositionedStack getResult() {
-			return processorRecipes.get(cycleticks / 48 % processorRecipes.size()).result;
-		}
-
-		@Override
-		public PositionedStack getOtherStack() {
-			return powerSource.stack;
-		}
-	}
-
 	private ArrayList<CachedProcessorRecipe> processorRecipes;
 
 	@Override
@@ -184,5 +159,28 @@ public class PowerSourceRecipeHandler extends EnergonProcessorRecipeHandler {
 	@Override
 	public List<CachedProcessorRecipe> getProcessorRecipes() {
 		return processorRecipes;
+	}
+
+	public class CachedPowerSourceRecipe extends CachedRecipe {
+		public PowerSourcePair powerSource;
+
+		public CachedPowerSourceRecipe(PowerSourcePair powerSource) {
+			this.powerSource = powerSource;
+		}
+
+		@Override
+		public PositionedStack getIngredient() {
+			return processorRecipes.get(cycleticks / 48 % processorRecipes.size()).ingredient;
+		}
+
+		@Override
+		public PositionedStack getResult() {
+			return processorRecipes.get(cycleticks / 48 % processorRecipes.size()).result;
+		}
+
+		@Override
+		public PositionedStack getOtherStack() {
+			return powerSource.stack;
+		}
 	}
 }

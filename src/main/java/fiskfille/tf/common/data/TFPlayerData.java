@@ -1,14 +1,13 @@
 package fiskfille.tf.common.data;
 
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
 
 public class TFPlayerData implements IExtendedEntityProperties {
 	public static final String IDENTIFIER = "TFPlayer";

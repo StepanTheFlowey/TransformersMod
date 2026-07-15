@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
 
 public class EntityTFFlameFX extends EntityFX {
-	private float flameScale;
+	private final float flameScale;
 
 	public EntityTFFlameFX(World world, double x, double y, double z, double motionX, double motionY, double motionZ) {
 		super(world, x, y, z, motionX, motionY, motionZ);

@@ -1,13 +1,13 @@
 package fiskfille.tf.nei;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.ICraftingHandler;
 import codechicken.nei.recipe.IUsageHandler;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.block.TFBlocks;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class NEITransformersModConfig implements IConfigureNEI {
 	@Override

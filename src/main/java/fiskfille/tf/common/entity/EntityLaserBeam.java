@@ -66,7 +66,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 			EntityLivingBase thrower = getThrower();
 
 			if(entityHit instanceof EntityLivingBase && thrower instanceof EntityPlayer && thrower != entityHit) {
-				((EntityLivingBase) entityHit).attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) thrower), 10F);
+				entityHit.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) thrower), 10F);
 			}
 		}
 

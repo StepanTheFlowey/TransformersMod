@@ -1,11 +1,5 @@
 package fiskfille.tf.common.proxy;
 
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingDeque;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import fiskfille.tf.TFReflection;
@@ -24,6 +18,12 @@ import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.registry.TFOreDictRegistry;
 import fiskfille.tf.common.tick.CommonTickHandler;
 import fiskfille.tf.helper.TFShootManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class CommonProxy {
 	protected Queue<Runnable> tasks = new LinkedBlockingDeque<Runnable>();

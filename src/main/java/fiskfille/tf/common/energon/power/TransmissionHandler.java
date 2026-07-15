@@ -3,13 +3,6 @@ package fiskfille.tf.common.energon.power;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.helper.TFEnergyHelper;
 import io.netty.buffer.ByteBuf;
-
-import java.util.ArrayDeque;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Queue;
-import java.util.Set;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -18,12 +11,14 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 
+import java.util.*;
+
 /**
  * Handles all receivers this transmitter is transmitting to
  */
 public class TransmissionHandler {
-	private Set<ReceiverEntry> receivers = new HashSet<ReceiverEntry>();
-	private Queue<ReceiverEntry> queuedReceivers = new ArrayDeque<ReceiverEntry>();
+	private final Set<ReceiverEntry> receivers = new HashSet<ReceiverEntry>();
+	private final Queue<ReceiverEntry> queuedReceivers = new ArrayDeque<ReceiverEntry>();
 
 	private NetworkEntry owner;
 	private boolean needsUpdate = false;

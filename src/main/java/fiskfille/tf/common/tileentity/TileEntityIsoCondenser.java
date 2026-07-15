@@ -1,16 +1,6 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.Map;
-
-import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.Constants.NBT;
-import net.minecraftforge.common.util.ForgeDirection;
-
 import com.google.common.collect.Maps;
-
 import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.data.tile.TileDataEnergyContainer;
 import fiskfille.tf.common.energon.Energon;
@@ -18,6 +8,14 @@ import fiskfille.tf.common.energon.IEnergon;
 import fiskfille.tf.common.energon.power.IEnergyContainer;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.Map;
 
 public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergyContainer {
 	public TileDataEnergyContainer data = new TileDataEnergyContainer(8000);

@@ -1,7 +1,9 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TransformersAPI;
+import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,32 +13,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersAPI;
-import fiskfille.tf.common.transformer.base.Transformer;
+
+import java.util.List;
 
 public class ItemDisplayVehicle extends Item {
 	public ItemDisplayVehicle() {
 		setMaxStackSize(1);
 		setHasSubtypes(true);
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
-		Transformer transformer = TransformersAPI.getTransformers().get(stack.getItemDamage());
-
-		if(transformer != null) {
-			return StatCollector.translateToLocal("item.display_" + transformer.getName().toLowerCase().replaceAll(" ", "_") + ".name");
-		}
-		else {
-			return super.getItemStackDisplayName(stack);
-		}
-	}
-
-	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean p_77624_4_) {
-		info.add("Equippable");
 	}
 
 	public static void setNBTData(ItemStack itemstack) {
@@ -69,6 +52,43 @@ public class ItemDisplayVehicle extends Item {
 		}
 	}
 
+	public static ItemStack[] getArmorFromNBT(ItemStack itemstack) {
+		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Items")) {
+			NBTTagList nbtItems = itemstack.getTagCompound().getTagList("Items", 10);
+			ItemStack[] items = new ItemStack[4];
+
+			for(int i = 0; i < nbtItems.tagCount(); ++i) {
+				NBTTagCompound item = nbtItems.getCompoundTagAt(i);
+				byte slot = item.getByte("Slot");
+
+				if(slot >= 0 && slot < items.length) {
+					items[slot] = ItemStack.loadItemStackFromNBT(item);
+				}
+			}
+
+			return items;
+		}
+
+		return null;
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		Transformer transformer = TransformersAPI.getTransformers().get(stack.getItemDamage());
+
+		if(transformer != null) {
+			return StatCollector.translateToLocal("item.display_" + transformer.getName().toLowerCase().replaceAll(" ", "_") + ".name");
+		}
+		else {
+			return super.getItemStackDisplayName(stack);
+		}
+	}
+
+	@Override
+	public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean p_77624_4_) {
+		info.add("Equippable");
+	}
+
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
 		if(!itemstack.hasTagCompound()) {
@@ -99,26 +119,6 @@ public class ItemDisplayVehicle extends Item {
 		}
 
 		return itemstack;
-	}
-
-	public static ItemStack[] getArmorFromNBT(ItemStack itemstack) {
-		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Items")) {
-			NBTTagList nbtItems = itemstack.getTagCompound().getTagList("Items", 10);
-			ItemStack[] items = new ItemStack[4];
-
-			for(int i = 0; i < nbtItems.tagCount(); ++i) {
-				NBTTagCompound item = nbtItems.getCompoundTagAt(i);
-				byte slot = item.getByte("Slot");
-
-				if(slot >= 0 && slot < items.length) {
-					items[slot] = ItemStack.loadItemStackFromNBT(item);
-				}
-			}
-
-			return items;
-		}
-
-		return null;
 	}
 
 	@Override

@@ -1,9 +1,7 @@
 package fiskfille.tf.common.generator;
 
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.CUSTOM;
-
-import java.util.Random;
-
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import fiskfille.tf.common.block.TFBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -11,19 +9,20 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import fiskfille.tf.common.block.TFBlocks;
+
+import java.util.Random;
+
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.CUSTOM;
 
 public class TFWorldGenHandler {
-	private World world;
-	private Random rand;
-	private int xCoord;
-	private int zCoord;
-
 	public WorldGenerator transformiumGen;
 	public WorldGenerator energonGen;
 	public WorldGenerator energonCrystalGen;
 	public WorldGenerator redEnergonCrystalGen;
+	private World world;
+	private Random rand;
+	private int xCoord;
+	private int zCoord;
 
 	public TFWorldGenHandler() {
 		transformiumGen = new WorldGenMinable(TFBlocks.transformiumOre, 8);

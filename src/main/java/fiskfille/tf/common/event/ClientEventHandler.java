@@ -1,11 +1,33 @@
 package fiskfille.tf.common.event;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
+import com.mojang.authlib.GameProfile;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import fiskfille.tf.TFReflection;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.gui.GuiOverlay;
+import fiskfille.tf.client.keybinds.TFKeyBinds;
+import fiskfille.tf.client.model.player.ModelBipedPartial;
+import fiskfille.tf.client.model.tools.ModelBoxPartial;
+import fiskfille.tf.client.model.tools.ModelRendererPartial;
+import fiskfille.tf.client.model.tools.ModelRendererTF;
+import fiskfille.tf.client.model.tools.MowzieModelRenderer;
+import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
+import fiskfille.tf.client.model.transformer.definition.TransformerModel;
+import fiskfille.tf.client.render.entity.player.RenderPlayerHand;
+import fiskfille.tf.common.data.TFData;
+import fiskfille.tf.common.data.TFDataManager;
+import fiskfille.tf.common.item.ItemHandler;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.transformer.TransformerVurp;
+import fiskfille.tf.common.transformer.base.Transformer;
+import fiskfille.tf.config.TFConfig;
+import fiskfille.tf.helper.*;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -36,41 +58,11 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
-
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.authlib.GameProfile;
-
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import fiskfille.tf.TFReflection;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.gui.GuiOverlay;
-import fiskfille.tf.client.keybinds.TFKeyBinds;
-import fiskfille.tf.client.model.player.ModelBipedPartial;
-import fiskfille.tf.client.model.tools.ModelBoxPartial;
-import fiskfille.tf.client.model.tools.ModelRendererPartial;
-import fiskfille.tf.client.model.tools.ModelRendererTF;
-import fiskfille.tf.client.model.tools.MowzieModelRenderer;
-import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
-import fiskfille.tf.client.model.transformer.definition.TransformerModel;
-import fiskfille.tf.client.render.entity.player.RenderPlayerHand;
-import fiskfille.tf.common.data.TFData;
-import fiskfille.tf.common.data.TFDataManager;
-import fiskfille.tf.common.item.ItemHandler;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.transformer.TransformerVurp;
-import fiskfille.tf.common.transformer.base.Transformer;
-import fiskfille.tf.config.TFConfig;
-import fiskfille.tf.helper.ModelOffset;
-import fiskfille.tf.helper.TFFluidRenderHelper;
-import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.helper.TFModelHelper;
-import fiskfille.tf.helper.TFTextureHelper;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import static fiskfille.tf.TransformersMod.mc;
 
@@ -78,10 +70,10 @@ public class ClientEventHandler {
 	public RenderPlayerHand renderHandInstance;
 	public boolean prevViewBobbing = mc.gameSettings.viewBobbing;
 
-	private Map<EntityPlayer, Item> prevHelm = new HashMap<EntityPlayer, Item>();
-	private Map<EntityPlayer, Item> prevChest = new HashMap<EntityPlayer, Item>();
-	private Map<EntityPlayer, Item> prevLegs = new HashMap<EntityPlayer, Item>();
-	private Map<EntityPlayer, Item> prevBoots = new HashMap<EntityPlayer, Item>();
+	private final Map<EntityPlayer, Item> prevHelm = new HashMap<EntityPlayer, Item>();
+	private final Map<EntityPlayer, Item> prevChest = new HashMap<EntityPlayer, Item>();
+	private final Map<EntityPlayer, Item> prevLegs = new HashMap<EntityPlayer, Item>();
+	private final Map<EntityPlayer, Item> prevBoots = new HashMap<EntityPlayer, Item>();
 
 	private double lastX;
 	private double lastY;
@@ -271,7 +263,7 @@ public class ClientEventHandler {
 									gameprofile = NBTUtil.func_152459_a(itemTag.getCompoundTag("SkullOwner"));
 								}
 								else if(itemTag.hasKey("SkullOwner", 8) && !StringUtils.isNullOrEmpty(itemTag.getString("SkullOwner"))) {
-									gameprofile = new GameProfile((UUID) null, itemTag.getString("SkullOwner"));
+									gameprofile = new GameProfile(null, itemTag.getString("SkullOwner"));
 								}
 							}
 

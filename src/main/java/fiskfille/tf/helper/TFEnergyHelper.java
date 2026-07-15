@@ -1,9 +1,9 @@
 package fiskfille.tf.helper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
+import com.google.common.collect.Lists;
+import fiskfille.tf.common.energon.power.*;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.tileentity.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
@@ -12,18 +12,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Lists;
-
-import fiskfille.tf.common.energon.power.EnergyStorage;
-import fiskfille.tf.common.energon.power.IEnergyContainer;
-import fiskfille.tf.common.energon.power.IEnergyReceiver;
-import fiskfille.tf.common.energon.power.IEnergyTransmitter;
-import fiskfille.tf.common.energon.power.NetworkEntry;
-import fiskfille.tf.common.energon.power.ReceiverEntry;
-import fiskfille.tf.common.energon.power.ReceiverHandler;
-import fiskfille.tf.common.energon.power.TransmissionHandler;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.tileentity.TileEntityMachine;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class TFEnergyHelper {
 	public static boolean isInRange(TileEntity transmitterTile, TileEntity receiverTile) {

@@ -1,9 +1,5 @@
 package fiskfille.tf.common.network;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -12,6 +8,10 @@ import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class MessagePlayerData implements IMessage {
 	public int id;

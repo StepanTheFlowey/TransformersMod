@@ -1,11 +1,11 @@
 package fiskfille.tf.common.data.tile;
 
+import fiskfille.tf.common.energon.power.TransmissionHandler;
+import fiskfille.tf.helper.TFTileHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
-import fiskfille.tf.common.energon.power.TransmissionHandler;
-import fiskfille.tf.helper.TFTileHelper;
 
 public class TileDataTransmitterBase extends TileDataEnergyContainer {
 	public TransmissionHandler transmissionHandler = new TransmissionHandler();

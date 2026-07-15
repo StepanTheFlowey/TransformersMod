@@ -1,8 +1,15 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.Map;
-import java.util.Set;
-
+import com.google.common.collect.Maps;
+import fiskfille.tf.common.chunk.ForcedChunk;
+import fiskfille.tf.common.chunk.SubTicket;
+import fiskfille.tf.common.chunk.TFChunkManager;
+import fiskfille.tf.common.data.tile.TileData;
+import fiskfille.tf.common.data.tile.TileDataRelay;
+import fiskfille.tf.common.energon.power.*;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.helper.TFEnergyHelper;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -10,23 +17,8 @@ import net.minecraft.util.Vec3;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.Constants.NBT;
 
-import com.google.common.collect.Maps;
-
-import fiskfille.tf.common.chunk.ForcedChunk;
-import fiskfille.tf.common.chunk.SubTicket;
-import fiskfille.tf.common.chunk.TFChunkManager;
-import fiskfille.tf.common.data.tile.TileData;
-import fiskfille.tf.common.data.tile.TileDataRelay;
-import fiskfille.tf.common.energon.power.EnergyStorage;
-import fiskfille.tf.common.energon.power.EnergyStorageRelay;
-import fiskfille.tf.common.energon.power.IEnergyReceiver;
-import fiskfille.tf.common.energon.power.IEnergyTransmitter;
-import fiskfille.tf.common.energon.power.ReceiverEntry;
-import fiskfille.tf.common.energon.power.ReceiverHandler;
-import fiskfille.tf.common.energon.power.TransmissionHandler;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.helper.TFEnergyHelper;
-import fiskfille.tf.helper.TFTileHelper;
+import java.util.Map;
+import java.util.Set;
 
 public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmitter, IEnergyReceiver, IChunkLoaderTile, IMultiTile {
 	public ReceiverHandler receiverHandler = new ReceiverHandler(this);

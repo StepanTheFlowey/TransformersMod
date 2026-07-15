@@ -1,21 +1,17 @@
 package fiskfille.tf.common.energon.power;
 
-import static net.minecraft.util.EnumChatFormatting.GRAY;
-import static net.minecraft.util.EnumChatFormatting.GREEN;
-import static net.minecraft.util.EnumChatFormatting.RED;
-
+import com.google.common.collect.Lists;
 import fiskfille.tf.helper.TFFormatHelper;
 import io.netty.buffer.ByteBuf;
-
-import java.util.List;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.IChatComponent;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+
+import static net.minecraft.util.EnumChatFormatting.*;
 
 public class EnergyStorage {
 	protected final float maxEnergy;
@@ -98,13 +94,13 @@ public class EnergyStorage {
 		return energy;
 	}
 
+	public float getUsage() {
+		return energyUsage;
+	}
+
 	public void setUsage(float usage) {
 		energyUsage = usage;
 		lastEnergy = energy;
-	}
-
-	public float getUsage() {
-		return energyUsage;
 	}
 
 	public float calculateUsage() {
@@ -119,7 +115,7 @@ public class EnergyStorage {
 
 		IChatComponent gain = new ChatComponentText("+").setChatStyle(new ChatStyle().setColor(GREEN));
 		IChatComponent loss = new ChatComponentText("-").setChatStyle(new ChatStyle().setColor(RED));
-		IChatComponent rate = new ChatComponentText(TFFormatHelper.formatNumberPrecise(Math.abs(usage)) + "");
+		IChatComponent rate = new ChatComponentText(TFFormatHelper.formatNumberPrecise(Math.abs(usage)));
 		IChatComponent prefix = new ChatComponentText("").setChatStyle(new ChatStyle().setColor(GRAY));
 		prefix = usage > 0 ? gain : usage < 0 ? loss : prefix;
 

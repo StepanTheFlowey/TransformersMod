@@ -11,7 +11,7 @@ public class AssemblyTableRecipe implements IRecipe {
 	public final int recipeHeight;
 	public final ItemStack[] recipeItems;
 	public final ItemStack[] recipeDyes;
-	private ItemStack recipeOutput;
+	private final ItemStack recipeOutput;
 	private boolean field_92101_f;
 
 	public AssemblyTableRecipe(int width, int height, ItemStack[] ingredients, ItemStack[] dyes, ItemStack result) {

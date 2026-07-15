@@ -1,12 +1,12 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.Set;
-
+import fiskfille.tf.common.energon.power.ReceiverEntry;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
-import fiskfille.tf.common.energon.power.ReceiverEntry;
+
+import java.util.Set;
 
 public class TileEntityRelayTorch extends TileEntityRelayTower {
 	@Override

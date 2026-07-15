@@ -1,19 +1,23 @@
 package fiskfille.tf.common.transformer.base;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
 import fiskfille.tf.client.model.transformer.definition.TransformerModel;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 
 /**
  * @author gegy1000, FiskFille
  */
 public abstract class Transformer {
-	private String name;
+	private final String name;
+
+	public Transformer(String name) {
+		this.name = name;
+	}
 
 	public abstract Item getHelmet();
 
@@ -38,10 +42,6 @@ public abstract class Transformer {
 	 */
 	public TransformerModel getModel() {
 		return TFModelRegistry.getModel(this);
-	}
-
-	public Transformer(String name) {
-		this.name = name;
 	}
 
 	/**

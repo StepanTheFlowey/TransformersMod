@@ -1,12 +1,12 @@
 package fiskfille.tf.common.data.tile;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.tileentity.TileEntity;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.network.MessageSetTileData;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.helper.TFTileHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileData {
 	private DimensionalCoords coords;

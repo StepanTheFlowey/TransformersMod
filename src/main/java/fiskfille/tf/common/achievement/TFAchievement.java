@@ -11,11 +11,11 @@ public class TFAchievement extends Achievement {
 		super("achievement.tf." + name, "tf." + name, x, y, Items.fish, parent);
 	}
 
-	public void setDisplayItem(ItemStack itemstack) {
-		displayItem = itemstack;
-	}
-
 	public ItemStack getDisplayItem() {
 		return displayItem;
+	}
+
+	public void setDisplayItem(ItemStack itemstack) {
+		displayItem = itemstack;
 	}
 }

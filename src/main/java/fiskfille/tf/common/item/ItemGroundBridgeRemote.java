@@ -1,7 +1,11 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
+import fiskfille.tf.common.block.BlockControlPanel;
+import fiskfille.tf.common.data.tile.TileDataControlPanel;
+import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,12 +19,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
-import fiskfille.tf.common.block.BlockControlPanel;
-import fiskfille.tf.common.data.tile.TileDataControlPanel;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.List;
 
 public class ItemGroundBridgeRemote extends Item {
 	public IIcon[] icons;

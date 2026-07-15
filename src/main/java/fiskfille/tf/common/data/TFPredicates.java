@@ -1,11 +1,9 @@
 package fiskfille.tf.common.data;
 
-import net.minecraft.entity.player.EntityPlayer;
-
 import com.google.common.base.Predicate;
-
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class TFPredicates {
 	public static Predicate<EntityPlayer> and(final Predicate... predicates) {

@@ -1,17 +1,17 @@
 package fiskfille.tf.common.transformer.base;
 
-import java.util.Random;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.util.Vec3;
 import fiskfille.tf.common.entity.EntityMissile;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.motion.TFMotionManager;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFVectorHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.util.Vec3;
+
+import java.util.Random;
 
 /**
  * @author gegy1000

@@ -1,23 +1,41 @@
 package fiskfille.tf.common.groundbridge;
 
+import com.google.common.collect.Lists;
 import io.netty.buffer.ByteBuf;
-
-import java.util.List;
-
 import net.minecraft.util.StatCollector;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 public enum GroundBridgeError {
 	INVALID_COORDS, NOT_ENOUGH_SPACE, NOT_ENOUGH_ENERGY, NO_PORTAL_LINKED, PORTAL_OBSTRUCTED, OUT_OF_BOUNDS;
 
 	public static class ErrorContainer {
-		private GroundBridgeError error;
-		private Integer[] arguments;
+		private final GroundBridgeError error;
+		private final Integer[] arguments;
 
 		public ErrorContainer(GroundBridgeError error, Integer... arguments) {
 			this.error = error;
 			this.arguments = arguments;
+		}
+
+		public static ErrorContainer fromBytes(ByteBuf buf) {
+			try {
+				GroundBridgeError error = GroundBridgeError.values()[buf.readByte()];
+				List<Integer> list = Lists.newArrayList();
+
+				int length = buf.readByte() & 0xFF;
+
+				for(int i = 0; i < length; ++i) {
+					list.add(buf.readInt());
+				}
+
+				return new ErrorContainer(error, list.toArray(new Integer[list.size()]));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+
+			return null;
 		}
 
 		public GroundBridgeError getError() {
@@ -39,26 +57,6 @@ public enum GroundBridgeError {
 			for(int i = 0; i < arguments.length; ++i) {
 				buf.writeInt(arguments[i]);
 			}
-		}
-
-		public static ErrorContainer fromBytes(ByteBuf buf) {
-			try {
-				GroundBridgeError error = GroundBridgeError.values()[buf.readByte()];
-				List<Integer> list = Lists.newArrayList();
-
-				int length = buf.readByte() & 0xFF;
-
-				for(int i = 0; i < length; ++i) {
-					list.add(buf.readInt());
-				}
-
-				return new ErrorContainer(error, list.toArray(new Integer[list.size()]));
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-
-			return null;
 		}
 
 		@Override

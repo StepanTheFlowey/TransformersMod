@@ -1,13 +1,12 @@
 package fiskfille.tf;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.entity.Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.entity.Entity;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class TFReflection {
 	public static Method renderHandMethod;

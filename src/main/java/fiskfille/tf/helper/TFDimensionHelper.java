@@ -1,7 +1,6 @@
 package fiskfille.tf.helper;
 
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.server.MinecraftServer;
@@ -9,7 +8,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
 
 public class TFDimensionHelper {
 	public static Map<Integer, String> dimensionNames = Maps.newHashMap();

@@ -1,7 +1,14 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TransformersAPI;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.energon.Energon;
+import fiskfille.tf.common.fluid.FluidEnergon;
+import fiskfille.tf.common.fluid.FluidTankTF;
+import fiskfille.tf.common.fluid.TFFluids;
+import fiskfille.tf.helper.TFFormatHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,15 +19,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.ItemFluidContainer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersAPI;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.energon.Energon;
-import fiskfille.tf.common.fluid.FluidEnergon;
-import fiskfille.tf.common.fluid.FluidTankTF;
-import fiskfille.tf.common.fluid.TFFluids;
-import fiskfille.tf.helper.TFFormatHelper;
+
+import java.util.List;
 
 public class ItemFuelCanister extends ItemFluidContainer {
 	public static final String[] unlocalizedNames = new String[]{"", "creative_"};

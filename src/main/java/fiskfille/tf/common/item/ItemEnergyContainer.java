@@ -1,14 +1,14 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import fiskfille.tf.common.energon.power.IEnergyContainerItem;
+import fiskfille.tf.helper.TFFormatHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
-import fiskfille.tf.common.energon.power.IEnergyContainerItem;
-import fiskfille.tf.helper.TFFormatHelper;
+
+import java.util.List;
 
 public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 	protected float capacity;

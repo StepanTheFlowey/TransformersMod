@@ -1,11 +1,11 @@
 package fiskfille.tf.common.tileentity;
 
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import fiskfille.tf.helper.TFTileHelper;
 
 public abstract class TileEntityContainer extends TileEntityTF implements IInventory {
 	protected ItemStack[] inventory = new ItemStack[getSizeInventory()];

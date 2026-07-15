@@ -1,13 +1,12 @@
 package fiskfille.tf.common.recipe;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import cpw.mods.fml.common.Loader;
+import fiskfille.tf.TFLog;
+import fiskfille.tf.common.block.TFBlocks;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.item.TFSubItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,21 +14,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import cpw.mods.fml.common.Loader;
-import fiskfille.tf.TFLog;
-import fiskfille.tf.common.block.TFBlocks;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.item.TFSubItems;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class AlloyRecipes {
 	private static final AlloyRecipes instance = new AlloyRecipes();
 
-	private Map<AlloyIngredients, ItemStack> smeltingMap = Maps.newHashMap();
-	private Map<ItemStack, Integer> durationMap = Maps.newHashMap();
-	private Map<ItemStack, Float> experienceMap = Maps.newHashMap();
+	private final Map<AlloyIngredients, ItemStack> smeltingMap = Maps.newHashMap();
+	private final Map<ItemStack, Integer> durationMap = Maps.newHashMap();
+	private final Map<ItemStack, Float> experienceMap = Maps.newHashMap();
 
 	public static AlloyRecipes getInstance() {
 		return instance;
@@ -40,6 +33,24 @@ public class AlloyRecipes {
 		getInstance().durationMap.clear();
 		getInstance().experienceMap.clear();
 		getInstance().registerRecipes();
+	}
+
+	public static boolean matches(ItemStack itemstack, String oreDict) {
+		List<ItemStack> aliases = OreDictionary.getOres(oreDict);
+
+		for(int i = 0; i < aliases.size(); ++i) {
+			ItemStack itemstack1 = aliases.get(i);
+
+			if(matches(itemstack, itemstack1)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean matches(ItemStack itemstack, ItemStack itemstack1) {
+		return itemstack1.getItem() == itemstack.getItem() && (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemstack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemstack1.getItemDamage() == itemstack.getItemDamage());
 	}
 
 	private void registerRecipes() {
@@ -91,24 +102,6 @@ public class AlloyRecipes {
 		while(!entry.getKey().matches(input1, input2, input3));
 
 		return entry.getValue();
-	}
-
-	public static boolean matches(ItemStack itemstack, String oreDict) {
-		List<ItemStack> aliases = OreDictionary.getOres(oreDict);
-
-		for(int i = 0; i < aliases.size(); ++i) {
-			ItemStack itemstack1 = aliases.get(i);
-
-			if(matches(itemstack, itemstack1)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public static boolean matches(ItemStack itemstack, ItemStack itemstack1) {
-		return itemstack1.getItem() == itemstack.getItem() && (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemstack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemstack1.getItemDamage() == itemstack.getItemDamage());
 	}
 
 	public Map getSmeltingList() {
@@ -184,7 +177,7 @@ public class AlloyRecipes {
 						list.add(list1.get(0));
 					}
 
-					oreDictNames.put(i, Arrays.asList((String) obj));
+					oreDictNames.put(i, Collections.singletonList((String) obj));
 				}
 				else {
 					ItemStack itemstack = getItemStack(obj);

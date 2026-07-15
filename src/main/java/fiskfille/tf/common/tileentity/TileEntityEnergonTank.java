@@ -1,22 +1,6 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.Constants.NBT;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidContainerItem;
-import net.minecraftforge.fluids.IFluidHandler;
-
 import com.google.common.collect.Lists;
-
 import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.data.tile.TileDataEnergonTank;
 import fiskfille.tf.common.fluid.FluidEnergon;
@@ -26,6 +10,16 @@ import fiskfille.tf.common.fluid.TFFluids;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.item.ItemFuelCanister;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.*;
+
+import java.util.List;
+import java.util.Map;
 
 public class TileEntityEnergonTank extends TileEntityMachineContainer implements IFluidHandlerTF, ISidedInventory, IMultiTile {
 	private static final int[] slotsSides = {0, 1};

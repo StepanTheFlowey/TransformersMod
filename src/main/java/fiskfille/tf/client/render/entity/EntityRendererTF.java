@@ -1,7 +1,7 @@
 package fiskfille.tf.client.render.entity;
 
-import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.TransformersMod;
+import fiskfille.tf.helper.TFHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayer;

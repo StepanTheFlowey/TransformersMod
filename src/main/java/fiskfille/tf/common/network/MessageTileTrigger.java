@@ -1,15 +1,15 @@
 package fiskfille.tf.common.network;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.network.base.TFNetworkManager;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
 
 public class MessageTileTrigger implements IMessage {
 	private DimensionalCoords coordinates;
@@ -45,6 +45,16 @@ public class MessageTileTrigger implements IMessage {
 		buf.writeInt(action);
 		buf.writeInt(playerDimension);
 		coordinates.toBytes(buf);
+	}
+
+	public interface ITileDataCallback {
+		/**
+		 * Called when a tile gets triggered
+		 *
+		 * @param player The player who triggered it, or null if none exists
+		 * @param action The trigger type
+		 */
+		void receive(EntityPlayer player, int action);
 	}
 
 	public static class Handler implements IMessageHandler<MessageTileTrigger, IMessage> {
@@ -88,15 +98,5 @@ public class MessageTileTrigger implements IMessage {
 
 			return null;
 		}
-	}
-
-	public static interface ITileDataCallback {
-		/**
-		 * Called when a tile gets triggered
-		 *
-		 * @param player The player who triggered it, or null if none exists
-		 * @param action The trigger type
-		 */
-		void receive(EntityPlayer player, int action);
 	}
 }

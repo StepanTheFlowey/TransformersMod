@@ -1,9 +1,9 @@
 package fiskfille.tf.common.data.tile;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraftforge.fluids.FluidStack;
 import fiskfille.tf.common.fluid.FluidTankTF;
 import fiskfille.tf.helper.TFHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fluids.FluidStack;
 
 public class TileDataTransmitter extends TileDataTransmitterBase {
 	public FluidTankTF tank;

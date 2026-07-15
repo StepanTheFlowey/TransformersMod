@@ -1,7 +1,12 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
+import fiskfille.tf.common.block.BlockMachineBase;
+import fiskfille.tf.common.container.ContainerEmpty;
+import fiskfille.tf.common.energon.power.IEnergyContainer;
+import fiskfille.tf.common.network.MessageTileTrigger.ITileDataCallback;
+import fiskfille.tf.helper.TFEnergyHelper;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,14 +16,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.google.common.collect.Lists;
-
-import fiskfille.tf.common.block.BlockMachineBase;
-import fiskfille.tf.common.container.ContainerEmpty;
-import fiskfille.tf.common.energon.power.IEnergyContainer;
-import fiskfille.tf.common.network.MessageTileTrigger.ITileDataCallback;
-import fiskfille.tf.helper.TFEnergyHelper;
-import fiskfille.tf.helper.TFTileHelper;
+import java.util.List;
 
 public abstract class TileEntityMachine extends TileEntityTF implements ITileDataCallback {
 	public final EnumIO[] io;
@@ -158,7 +156,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 
 	public boolean canTransfer(ForgeDirection dir) {
 		int x = xCoord + dir.offsetX;
-		int y = yCoord + dir.offsetY + (dir.offsetY > 0 ? ((BlockMachineBase) getBlockType()).getBlockHeight() - 1 : 0);
+		int y = yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0);
 		int z = zCoord + dir.offsetZ;
 		float f = 0.001F;
 

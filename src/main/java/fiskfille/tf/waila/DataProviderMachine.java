@@ -1,7 +1,11 @@
 package fiskfille.tf.waila;
 
-import java.util.List;
-
+import fiskfille.tf.common.energon.power.EnergyStorage;
+import fiskfille.tf.common.energon.power.IEnergyContainer;
+import fiskfille.tf.common.fluid.FluidTankTF;
+import fiskfille.tf.common.fluid.IFluidHandlerTF;
+import fiskfille.tf.helper.TFFormatHelper;
+import fiskfille.tf.helper.TFTileHelper;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -10,12 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import fiskfille.tf.common.energon.power.EnergyStorage;
-import fiskfille.tf.common.energon.power.IEnergyContainer;
-import fiskfille.tf.common.fluid.FluidTankTF;
-import fiskfille.tf.common.fluid.IFluidHandlerTF;
-import fiskfille.tf.helper.TFFormatHelper;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.List;
 
 public class DataProviderMachine implements IWailaDataProvider {
 	public String key;

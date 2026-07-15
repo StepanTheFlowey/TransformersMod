@@ -1,12 +1,12 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import fiskfille.tf.common.block.BlockDisplayPedestal;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import fiskfille.tf.common.block.BlockDisplayPedestal;
+
+import java.util.List;
 
 public class ItemDisplayPedestal extends ItemBlockWithMetadata {
 	public ItemDisplayPedestal(Block block) {

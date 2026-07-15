@@ -5,21 +5,23 @@ import net.minecraft.util.StatCollector;
 
 public class DataCore {
 	public static final DataCore[] dataCores = new DataCore[16];
-	public static int indexes = -1;
-
 	public static final DataCore spaceBridge = new DataCore("space_bridge", 0x5FEEEE);
 	public static final DataCore leveler = new DataCore("leveler", 0x61C37B);
 	public static final DataCore range = new DataCore("range", 0x7C65EA);
-
+	public static int indexes = -1;
+	public final int index;
 	private final String id;
 	private final int color;
-	public final int index;
 
 	public DataCore(String s, int i) {
 		id = s;
 		color = i;
 
 		dataCores[index = ++indexes] = this;
+	}
+
+	public static DataCore get(int index) {
+		return dataCores[MathHelper.clamp_int(index, 0, indexes)];
 	}
 
 	public String getId() {
@@ -32,9 +34,5 @@ public class DataCore {
 
 	public int getColor() {
 		return color;
-	}
-
-	public static DataCore get(int index) {
-		return dataCores[MathHelper.clamp_int(index, 0, indexes)];
 	}
 }

@@ -1,5 +1,8 @@
 package fiskfille.tf.common.container;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import fiskfille.tf.common.recipe.AlloyRecipes;
+import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -8,13 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.MathHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
-import fiskfille.tf.common.recipe.AlloyRecipes;
-import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible;
 
 public class SlotAlloyCrucible extends Slot {
-	private EntityPlayer thePlayer;
-	private TileEntityAlloyCrucible tileentity;
+	private final EntityPlayer thePlayer;
+	private final TileEntityAlloyCrucible tileentity;
 	private int amountTaken;
 
 	public SlotAlloyCrucible(EntityPlayer player, TileEntityAlloyCrucible tile, int id, int x, int y) {

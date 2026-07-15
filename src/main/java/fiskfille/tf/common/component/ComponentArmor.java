@@ -1,10 +1,10 @@
 package fiskfille.tf.common.component;
 
-import net.minecraft.entity.player.EntityPlayer;
 import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
 import fiskfille.tf.common.network.MessageOpenGui;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class ComponentArmor extends Component {
 	@Override

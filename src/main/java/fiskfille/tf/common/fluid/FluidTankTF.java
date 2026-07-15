@@ -1,17 +1,11 @@
 package fiskfille.tf.common.fluid;
 
-import static net.minecraft.util.EnumChatFormatting.GRAY;
-import static net.minecraft.util.EnumChatFormatting.RED;
-import static net.minecraft.util.EnumChatFormatting.YELLOW;
-
+import com.google.common.collect.Lists;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.helper.TFFormatHelper;
 import io.netty.buffer.ByteBuf;
-
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
@@ -21,9 +15,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Map;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
+import static net.minecraft.util.EnumChatFormatting.*;
 
 public class FluidTankTF extends FluidTank {
 	protected int fluidUsage;
@@ -90,13 +85,13 @@ public class FluidTankTF extends FluidTank {
 		return nbt;
 	}
 
+	public int getUsage() {
+		return fluidUsage;
+	}
+
 	public void setUsage(int usage) {
 		fluidUsage = usage;
 		lastFluidAmount = getFluidAmount();
-	}
-
-	public int getUsage() {
-		return fluidUsage;
 	}
 
 	public int calculateUsage() {

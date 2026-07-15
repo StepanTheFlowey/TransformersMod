@@ -1,14 +1,12 @@
 package fiskfille.tf.common.data.tile;
 
-import io.netty.buffer.ByteBuf;
-
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import fiskfille.tf.common.groundbridge.DataCore;
 import fiskfille.tf.common.groundbridge.GroundBridgeError.ErrorContainer;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import io.netty.buffer.ByteBuf;
+
+import java.util.List;
 
 public class TileDataControlPanel extends TileDataEnergyContainer {
 	public DimensionalCoords framePos;

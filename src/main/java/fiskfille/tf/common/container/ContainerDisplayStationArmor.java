@@ -1,12 +1,12 @@
 package fiskfille.tf.common.container;
 
+import fiskfille.tf.common.item.armor.ItemTransformerArmor;
+import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
+import fiskfille.tf.helper.TFArmorHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import fiskfille.tf.common.item.armor.ItemTransformerArmor;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
-import fiskfille.tf.helper.TFArmorHelper;
 
 public class ContainerDisplayStationArmor extends ContainerBasic {
 	public InventoryDisplayStationArmor craftMatrix = new InventoryDisplayStationArmor(this);
@@ -96,7 +96,7 @@ public class ContainerDisplayStationArmor extends ContainerBasic {
 			}
 
 			if(itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			}
 			else {
 				slot.onSlotChanged();

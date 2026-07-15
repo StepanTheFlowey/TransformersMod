@@ -1,13 +1,13 @@
 package fiskfille.tf.helper;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.client.model.player.ModelBipedPartial;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.Entity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author gegy1000, FiskFille

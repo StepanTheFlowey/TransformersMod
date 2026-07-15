@@ -1,8 +1,11 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-import java.util.Random;
-
+import fiskfille.tf.client.particle.TFParticleType;
+import fiskfille.tf.client.particle.TFParticles;
+import fiskfille.tf.common.entity.EntityFlamethrowerFire;
+import fiskfille.tf.common.transformer.TransformerCloudtrap;
+import fiskfille.tf.helper.TFHelper;
+import fiskfille.tf.helper.TFVectorHelper;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,12 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import fiskfille.tf.client.particle.TFParticleType;
-import fiskfille.tf.client.particle.TFParticles;
-import fiskfille.tf.common.entity.EntityFlamethrowerFire;
-import fiskfille.tf.common.transformer.TransformerCloudtrap;
-import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.helper.TFVectorHelper;
+
+import java.util.List;
+import java.util.Random;
 
 public class ItemFlamethrower extends Item {
 	public ItemFlamethrower() {

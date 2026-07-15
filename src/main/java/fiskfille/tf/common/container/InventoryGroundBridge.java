@@ -1,7 +1,12 @@
 package fiskfille.tf.common.container;
 
-import java.util.concurrent.Callable;
-
+import fiskfille.tf.common.block.BlockControlPanel;
+import fiskfille.tf.common.data.tile.TileDataControlPanel;
+import fiskfille.tf.common.item.ItemCSD;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import fiskfille.tf.helper.TFTileHelper;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,13 +18,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.WorldServer;
-import fiskfille.tf.common.block.BlockControlPanel;
-import fiskfille.tf.common.data.tile.TileDataControlPanel;
-import fiskfille.tf.common.item.ItemCSD;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.concurrent.Callable;
 
 public class InventoryGroundBridge implements IInventory {
 	public EntityPlayer player;

@@ -5,23 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import fiskfille.tf.common.network.MessageBroadcastState;
-import fiskfille.tf.common.network.MessageClosePortal;
-import fiskfille.tf.common.network.MessageCloudtrapJetpack;
-import fiskfille.tf.common.network.MessageColorArmor;
-import fiskfille.tf.common.network.MessageConnectReceiver;
-import fiskfille.tf.common.network.MessageControlPanelSetConfig;
-import fiskfille.tf.common.network.MessageGroundBridgeTeleport;
-import fiskfille.tf.common.network.MessageLaserShoot;
-import fiskfille.tf.common.network.MessageOpenGui;
-import fiskfille.tf.common.network.MessagePlayerData;
-import fiskfille.tf.common.network.MessagePlayerJoin;
-import fiskfille.tf.common.network.MessageSendFlying;
-import fiskfille.tf.common.network.MessageSetPlayerData;
-import fiskfille.tf.common.network.MessageSetTileData;
-import fiskfille.tf.common.network.MessageTileTrigger;
-import fiskfille.tf.common.network.MessageUpdateArmor;
-import fiskfille.tf.common.network.MessageVehicleShoot;
+import fiskfille.tf.common.network.*;
 
 public class TFNetworkManager {
 	public static SimpleNetworkWrapper networkWrapper;

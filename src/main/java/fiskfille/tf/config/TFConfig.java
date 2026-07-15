@@ -1,13 +1,11 @@
 package fiskfille.tf.config;
 
-import java.util.Map;
-
-import net.minecraftforge.common.config.Configuration;
-
 import com.google.common.collect.Maps;
-
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.common.transformer.base.Transformer;
+import net.minecraftforge.common.config.Configuration;
+
+import java.util.Map;
 
 public class TFConfig {
 	private static final String CATEGORY_GENERAL = "Options";

@@ -1,13 +1,13 @@
 package fiskfille.tf.common.network;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
 
 public class MessageControlPanelSetConfig implements IMessage {
 	private DimensionalCoords coordinates;

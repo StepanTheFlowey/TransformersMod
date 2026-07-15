@@ -1,13 +1,13 @@
 package fiskfille.tf.common.container;
 
+import fiskfille.tf.common.fluid.TFFluids;
+import fiskfille.tf.common.item.ItemFuelCanister;
+import fiskfille.tf.common.tileentity.TileEntityTransmitter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
-import fiskfille.tf.common.fluid.TFFluids;
-import fiskfille.tf.common.item.ItemFuelCanister;
-import fiskfille.tf.common.tileentity.TileEntityTransmitter;
 
 public class ContainerTransmitter extends ContainerBasic {
 	public ContainerTransmitter(InventoryPlayer inventoryPlayer, TileEntityTransmitter tile) {

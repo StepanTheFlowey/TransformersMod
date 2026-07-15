@@ -1,6 +1,5 @@
 package fiskfille.tf.common.network;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -9,6 +8,7 @@ import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.helper.TFTileHelper;
+import io.netty.buffer.ByteBuf;
 
 public class MessageSetTileData implements IMessage {
 	private TileData tileData;

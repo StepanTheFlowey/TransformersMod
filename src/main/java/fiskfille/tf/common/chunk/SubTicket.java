@@ -1,27 +1,68 @@
 package fiskfille.tf.common.chunk;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.Constants.NBT;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 public class SubTicket {
 	public Ticket owner;
-	private NBTTagCompound nbtTag;
-
 	public int xCoord;
 	public int yCoord;
 	public int zCoord;
+	private NBTTagCompound nbtTag;
 
 	public SubTicket(int x, int y, int z) {
 		xCoord = x;
 		yCoord = y;
 		zCoord = z;
+	}
+
+	public static SubTicket readFromNBT(NBTTagCompound nbttagcompound) {
+		SubTicket subTicket = new SubTicket(nbttagcompound.getInteger("xCoord"), nbttagcompound.getInteger("yCoord"), nbttagcompound.getInteger("zCoord"));
+		subTicket.nbtTag = nbttagcompound.getCompoundTag("Tag");
+
+		return subTicket;
+	}
+
+	public static List<SubTicket> getChildren(Ticket ticket) {
+		List<SubTicket> list = Lists.newArrayList();
+		NBTTagList nbttaglist = ticket.getModData().getTagList("SubTickets", NBT.TAG_COMPOUND);
+
+		for(int i = 0; i < nbttaglist.tagCount(); ++i) {
+			SubTicket subTicket = readFromNBT(nbttaglist.getCompoundTagAt(i));
+			subTicket.owner = ticket;
+			list.add(subTicket);
+		}
+
+		return list;
+	}
+
+	public static SubTicket get(Ticket ticket, TileEntity tile) {
+		List<SubTicket> list = getChildren(ticket);
+
+		for(SubTicket subTicket : list) {
+			if(subTicket.xCoord == tile.xCoord && subTicket.yCoord == tile.yCoord && subTicket.zCoord == tile.zCoord) {
+				return subTicket;
+			}
+		}
+
+		return null;
+	}
+
+	public static SubTicket fromTile(TileEntity tile) {
+		return fromTile(null, tile);
+	}
+
+	public static SubTicket fromTile(Ticket ticket, TileEntity tile) {
+		SubTicket subTicket = new SubTicket(tile.xCoord, tile.yCoord, tile.zCoord);
+		subTicket.owner = ticket;
+
+		return subTicket;
 	}
 
 	public boolean matches(Object obj) {
@@ -82,48 +123,5 @@ public class SubTicket {
 		nbttagcompound.setTag("Tag", getTag());
 
 		return nbttagcompound;
-	}
-
-	public static SubTicket readFromNBT(NBTTagCompound nbttagcompound) {
-		SubTicket subTicket = new SubTicket(nbttagcompound.getInteger("xCoord"), nbttagcompound.getInteger("yCoord"), nbttagcompound.getInteger("zCoord"));
-		subTicket.nbtTag = nbttagcompound.getCompoundTag("Tag");
-
-		return subTicket;
-	}
-
-	public static List<SubTicket> getChildren(Ticket ticket) {
-		List<SubTicket> list = Lists.newArrayList();
-		NBTTagList nbttaglist = ticket.getModData().getTagList("SubTickets", NBT.TAG_COMPOUND);
-
-		for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-			SubTicket subTicket = readFromNBT(nbttaglist.getCompoundTagAt(i));
-			subTicket.owner = ticket;
-			list.add(subTicket);
-		}
-
-		return list;
-	}
-
-	public static SubTicket get(Ticket ticket, TileEntity tile) {
-		List<SubTicket> list = getChildren(ticket);
-
-		for(SubTicket subTicket : list) {
-			if(subTicket.xCoord == tile.xCoord && subTicket.yCoord == tile.yCoord && subTicket.zCoord == tile.zCoord) {
-				return subTicket;
-			}
-		}
-
-		return null;
-	}
-
-	public static SubTicket fromTile(TileEntity tile) {
-		return fromTile(null, tile);
-	}
-
-	public static SubTicket fromTile(Ticket ticket, TileEntity tile) {
-		SubTicket subTicket = new SubTicket(tile.xCoord, tile.yCoord, tile.zCoord);
-		subTicket.owner = ticket;
-
-		return subTicket;
 	}
 }

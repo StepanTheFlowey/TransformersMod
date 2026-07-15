@@ -1,34 +1,18 @@
 package fiskfille.tf.common.motion;
 
-import static net.minecraft.block.material.Material.cactus;
-import static net.minecraft.block.material.Material.cake;
-import static net.minecraft.block.material.Material.clay;
-import static net.minecraft.block.material.Material.coral;
-import static net.minecraft.block.material.Material.craftedSnow;
-import static net.minecraft.block.material.Material.gourd;
-import static net.minecraft.block.material.Material.ground;
-import static net.minecraft.block.material.Material.ice;
-import static net.minecraft.block.material.Material.leaves;
-import static net.minecraft.block.material.Material.packedIce;
-import static net.minecraft.block.material.Material.plants;
-import static net.minecraft.block.material.Material.sand;
-import static net.minecraft.block.material.Material.snow;
-import static net.minecraft.block.material.Material.sponge;
-import static net.minecraft.block.material.Material.vine;
-import static net.minecraft.block.material.Material.web;
-
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Vec3;
 import fiskfille.tf.client.keybinds.TFKeyBinds;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFVectorHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Vec3;
+
+import java.util.Random;
 
 import static fiskfille.tf.TransformersMod.mc;
+import static net.minecraft.block.material.Material.*;
 
 /**
  * @author FiskFille
@@ -143,6 +127,7 @@ public class TFMotionManager {
 			for(Material mat : offroadMaterials) {
 				if(block.getMaterial().equals(mat)) {
 					isDrivingOffroad = true;
+					break;
 				}
 			}
 

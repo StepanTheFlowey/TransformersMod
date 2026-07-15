@@ -1,15 +1,15 @@
 package fiskfille.tf.helper;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.fluid.FluidTankTF;
 import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.transformer.base.Transformer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 /**
  * @author FiskFille, gegy1000

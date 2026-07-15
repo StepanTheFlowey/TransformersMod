@@ -1,23 +1,13 @@
 package fiskfille.tf;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fiskfille.tf.asm.TFLoadingPlugin;
 import fiskfille.tf.common.block.TFBlocks;
@@ -27,6 +17,12 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.proxy.CommonProxy;
 import fiskfille.tf.common.tab.CreativeTabTransformers;
 import fiskfille.tf.config.TFConfig;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.config.Configuration;
 
 @Mod(
 				modid = TransformersMod.modid,

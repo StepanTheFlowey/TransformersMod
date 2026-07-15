@@ -1,19 +1,19 @@
 package fiskfille.tf.common.container;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.item.armor.ItemTransformerArmor;
+import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.item.armor.ItemTransformerArmor;
-import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
 
 public class ContainerDisplayStation extends ContainerBasic {
-	private EntityPlayer player;
+	private final EntityPlayer player;
 
 	public ContainerDisplayStation(InventoryPlayer inventoryPlayer, final TileEntityDisplayStation tile) {
 		super(tile);
@@ -131,7 +131,7 @@ public class ContainerDisplayStation extends ContainerBasic {
 			}
 
 			if(itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			}
 			else {
 				slot.onSlotChanged();

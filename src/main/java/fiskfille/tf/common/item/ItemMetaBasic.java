@@ -1,9 +1,9 @@
 package fiskfille.tf.common.item;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -15,18 +15,15 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class ItemMetaBasic extends Item {
 	public static Map<String, Integer> subItems = Maps.newHashMap();
-	public Map<String, IIcon> mappedIcons = Maps.newHashMap();
-
 	public static String[] iconNames;
 	public static String[] iconDomains;
+	public Map<String, IIcon> mappedIcons = Maps.newHashMap();
 
 	public ItemMetaBasic() {
 		setHasSubtypes(true);

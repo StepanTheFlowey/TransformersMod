@@ -39,6 +39,10 @@ public class EntityTransformiumSeed extends Entity {
 		placedBye = entity;
 	}
 
+	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float radius) {
+		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius), IEntitySelector.selectAnything);
+	}
+
 	@Override
 	protected void entityInit() {
 	}
@@ -123,10 +127,6 @@ public class EntityTransformiumSeed extends Entity {
 				}
 			}
 		}
-	}
-
-	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float radius) {
-		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius), IEntitySelector.selectAnything);
 	}
 
 	private void explode() {

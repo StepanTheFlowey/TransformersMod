@@ -1,10 +1,6 @@
 package fiskfille.tf.common.recipe;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -12,11 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Maps;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AssemblyTableCraftingManager {
 	private static final AssemblyTableCraftingManager instance = new AssemblyTableCraftingManager();
-	private List recipes = new ArrayList();
+	private final List recipes = new ArrayList();
 
 	public static AssemblyTableCraftingManager getInstance() {
 		return instance;
@@ -83,9 +82,7 @@ public class AssemblyTableCraftingManager {
 
 		ItemStack[] aitemstack = new ItemStack[3];
 
-		for(int l = 0; l < dyes.length; ++l) {
-			aitemstack[l] = dyes[l];
-		}
+		System.arraycopy(dyes, 0, aitemstack, 0, dyes.length);
 
 		AssemblyTableRecipe recipe = new AssemblyTableRecipe(j, k, itemstacks, aitemstack, result);
 		recipes.add(recipe);

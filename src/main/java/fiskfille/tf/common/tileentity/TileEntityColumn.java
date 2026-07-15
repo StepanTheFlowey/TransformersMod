@@ -1,15 +1,15 @@
 package fiskfille.tf.common.tileentity;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Vec3;
 import fiskfille.tf.common.energon.power.EnergyStorage;
 import fiskfille.tf.common.energon.power.EnergyStorageInventory;
 import fiskfille.tf.common.energon.power.IEnergyReceiver;
 import fiskfille.tf.common.energon.power.ReceiverHandler;
 import fiskfille.tf.common.item.TFItems;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Vec3;
 
 public class TileEntityColumn extends TileEntityMachineContainer implements IEnergyReceiver, IMultiTile {
 	public ReceiverHandler receiverHandler = new ReceiverHandler(this);

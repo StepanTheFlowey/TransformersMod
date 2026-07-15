@@ -1,23 +1,21 @@
 package fiskfille.tf.common.item;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import fiskfille.tf.common.data.TFWorldData;
+import fiskfille.tf.common.event.ItemHandlerEvent;
+import fiskfille.tf.common.event.ItemStitchEvent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import fiskfille.tf.common.data.TFWorldData;
-import fiskfille.tf.common.event.ItemHandlerEvent;
-import fiskfille.tf.common.event.ItemStitchEvent;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
 
 public class ItemHandler {
-	private static Map<Class, String> itemHandlers = Maps.newHashMap();
 	public static boolean hasInit = false;
+	private static final Map<Class, String> itemHandlers = Maps.newHashMap();
 
 	public static void init() {
 		List<String> names = Lists.newLinkedList();
@@ -80,10 +78,6 @@ public class ItemHandler {
 	}
 
 	public static boolean matches(ItemStack itemstack, ItemStack[] item) {
-		if(itemstack != null && item[1].getItem() == itemstack.getItem() && item[1].getItemDamage() == itemstack.getItemDamage()) {
-			return true;
-		}
-
-		return false;
+		return itemstack != null && item[1].getItem() == itemstack.getItem() && item[1].getItemDamage() == itemstack.getItemDamage();
 	}
 }

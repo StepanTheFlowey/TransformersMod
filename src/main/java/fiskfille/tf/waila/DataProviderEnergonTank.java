@@ -1,13 +1,13 @@
 package fiskfille.tf.waila;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
 import fiskfille.tf.common.fluid.FluidTankTF;
 import fiskfille.tf.common.fluid.IFluidHandlerTF;
 import fiskfille.tf.common.fluid.TFFluids;
 import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class DataProviderEnergonTank extends DataProviderMachine {
 	public FluidTankTF fluidTank = new FluidTankTF(TFFluids.energon, 0, 0);

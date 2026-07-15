@@ -1,29 +1,50 @@
 package fiskfille.tf.common.item;
 
+import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import fiskfille.tf.helper.TFDimensionHelper;
+import fiskfille.tf.helper.TFTileHelper;
 import io.netty.buffer.ByteBuf;
-
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.helper.TFDimensionHelper;
-import fiskfille.tf.helper.TFTileHelper;
+
+import java.util.List;
 
 public class ItemCSD extends Item {
 	public ItemCSD() {
 		setMaxStackSize(1);
+	}
+
+	public static DimensionalCoords getCoords(ItemStack itemstack) {
+		DimensionalCoords coords = new DimensionalCoords();
+
+		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Coordinates", NBT.TAG_COMPOUND)) {
+			NBTTagCompound nbttagcompound = itemstack.getTagCompound().getCompoundTag("Coordinates");
+			coords.set(nbttagcompound.getInteger("x"), nbttagcompound.getInteger("y"), nbttagcompound.getInteger("z"), nbttagcompound.getInteger("dim"));
+		}
+
+		return coords;
+	}
+
+	public static DimensionalCoords setCoords(ItemStack itemstack, DimensionalCoords coords) {
+		if(!itemstack.hasTagCompound()) {
+			itemstack.setTagCompound(new NBTTagCompound());
+		}
+
+		NBTTagCompound nbttagcompound = new NBTTagCompound();
+		nbttagcompound.setInteger("x", coords.posX);
+		nbttagcompound.setInteger("y", coords.posY);
+		nbttagcompound.setInteger("z", coords.posZ);
+		nbttagcompound.setInteger("dim", coords.dimension);
+
+		itemstack.getTagCompound().setTag("Coordinates", nbttagcompound);
+
+		return coords;
 	}
 
 	@Override
@@ -78,33 +99,6 @@ public class ItemCSD extends Item {
 		return false;
 	}
 
-	public static DimensionalCoords getCoords(ItemStack itemstack) {
-		DimensionalCoords coords = new DimensionalCoords();
-
-		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Coordinates", NBT.TAG_COMPOUND)) {
-			NBTTagCompound nbttagcompound = itemstack.getTagCompound().getCompoundTag("Coordinates");
-			coords.set(nbttagcompound.getInteger("x"), nbttagcompound.getInteger("y"), nbttagcompound.getInteger("z"), nbttagcompound.getInteger("dim"));
-		}
-
-		return coords;
-	}
-
-	public static DimensionalCoords setCoords(ItemStack itemstack, DimensionalCoords coords) {
-		if(!itemstack.hasTagCompound()) {
-			itemstack.setTagCompound(new NBTTagCompound());
-		}
-
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
-		nbttagcompound.setInteger("x", coords.posX);
-		nbttagcompound.setInteger("y", coords.posY);
-		nbttagcompound.setInteger("z", coords.posZ);
-		nbttagcompound.setInteger("dim", coords.dimension);
-
-		itemstack.getTagCompound().setTag("Coordinates", nbttagcompound);
-
-		return coords;
-	}
-
 	public static class DimensionalCoords extends ChunkCoordinates {
 		public int dimension;
 
@@ -133,6 +127,14 @@ public class ItemCSD extends Item {
 			return null;
 		}
 
+		public static DimensionalCoords fromArray(int[] aint) {
+			int[] aint1 = new int[4];
+
+			System.arraycopy(aint, 0, aint1, 0, Math.min(aint.length, aint1.length));
+
+			return new DimensionalCoords(aint1[0], aint1[1], aint1[2], aint1[3]);
+		}
+
 		public DimensionalCoords set(int x, int y, int z, int dim) {
 			posX = x;
 			posY = y;
@@ -157,9 +159,7 @@ public class ItemCSD extends Item {
 		public DimensionalCoords set(int... args) {
 			int[] aint = toArray();
 
-			for(int i = 0; i < Math.min(args.length, aint.length); ++i) {
-				aint[i] = args[i];
-			}
+			System.arraycopy(args, 0, aint, 0, Math.min(args.length, aint.length));
 
 			return set(aint[0], aint[1], aint[2], aint[3]);
 		}
@@ -184,16 +184,6 @@ public class ItemCSD extends Item {
 
 		public int[] toArray() {
 			return new int[]{posX, posY, posZ, dimension};
-		}
-
-		public static DimensionalCoords fromArray(int[] aint) {
-			int[] aint1 = new int[4];
-
-			for(int i = 0; i < Math.min(aint.length, aint1.length); ++i) {
-				aint1[i] = aint[i];
-			}
-
-			return new DimensionalCoords(aint1[0], aint1[1], aint1[2], aint1[3]);
 		}
 
 		@Override

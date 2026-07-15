@@ -1,7 +1,7 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import fiskfille.tf.common.energon.power.IEnergyTransmitter;
+import fiskfille.tf.helper.TFFormatHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -11,8 +11,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
-import fiskfille.tf.common.energon.power.IEnergyTransmitter;
-import fiskfille.tf.helper.TFFormatHelper;
+
+import java.util.List;
 
 public class ItemMachine extends ItemBlock {
 	public ItemMachine(Block block) {

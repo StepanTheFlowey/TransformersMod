@@ -1,17 +1,15 @@
 package fiskfille.tf.helper;
 
-import fiskfille.tf.common.tileentity.TileEntityMachine.EnumIO;
 import fiskfille.tf.TransformersMod;
-
-import java.util.Locale;
-
+import fiskfille.tf.common.tileentity.TileEntityMachine.EnumIO;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
+
+import java.util.Locale;
 
 import static fiskfille.tf.TransformersMod.mc;
 

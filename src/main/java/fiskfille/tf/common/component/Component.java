@@ -1,7 +1,7 @@
 package fiskfille.tf.common.component;
 
-import net.minecraft.entity.player.EntityPlayer;
 import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class Component {
 	public boolean canLoad(TileEntityDisplayStation tile, int slot) {

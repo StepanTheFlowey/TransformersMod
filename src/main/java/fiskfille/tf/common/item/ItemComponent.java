@@ -1,15 +1,15 @@
 package fiskfille.tf.common.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.component.Component;
 import fiskfille.tf.common.component.IComponent;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
 
 public class ItemComponent extends Item implements IComponent {
 	public static IIcon outline;
-	private Component component;
+	private final Component component;
 
 	public ItemComponent(Component c) {
 		component = c;

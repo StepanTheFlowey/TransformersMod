@@ -1,10 +1,6 @@
 package fiskfille.tf;
 
-import fiskfille.tf.common.transformer.TransformerCloudtrap;
-import fiskfille.tf.common.transformer.TransformerPurge;
-import fiskfille.tf.common.transformer.TransformerSkystrike;
-import fiskfille.tf.common.transformer.TransformerSubwoofer;
-import fiskfille.tf.common.transformer.TransformerVurp;
+import fiskfille.tf.common.transformer.*;
 import fiskfille.tf.common.transformer.base.Transformer;
 
 public class TransformerManager {

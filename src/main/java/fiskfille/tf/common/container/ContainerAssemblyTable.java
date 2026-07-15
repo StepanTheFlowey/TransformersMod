@@ -1,13 +1,13 @@
 package fiskfille.tf.common.container;
 
+import fiskfille.tf.common.recipe.AssemblyTableCraftingManager;
+import fiskfille.tf.common.tileentity.TileEntityAssemblyTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import fiskfille.tf.common.recipe.AssemblyTableCraftingManager;
-import fiskfille.tf.common.tileentity.TileEntityAssemblyTable;
 
 public class ContainerAssemblyTable extends ContainerBasic {
 	public InventoryAssembly craftMatrix = new InventoryAssembly(this, 5, 5);
@@ -101,7 +101,7 @@ public class ContainerAssemblyTable extends ContainerBasic {
 			}
 
 			if(itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			}
 			else {
 				slot.onSlotChanged();

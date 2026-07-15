@@ -1,5 +1,9 @@
 package fiskfille.tf.common.recipe;
 
+import fiskfille.tf.TransformersAPI;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.item.armor.ItemTransformerArmor;
+import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -8,10 +12,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
-import fiskfille.tf.TransformersAPI;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.item.armor.ItemTransformerArmor;
-import fiskfille.tf.common.transformer.base.Transformer;
 
 public class RecipeDisplayItems implements IRecipe {
 	@Override

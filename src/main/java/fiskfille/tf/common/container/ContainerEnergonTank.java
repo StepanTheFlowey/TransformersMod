@@ -1,16 +1,16 @@
 package fiskfille.tf.common.container;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.common.fluid.TFFluids;
+import fiskfille.tf.common.item.ItemFuelCanister;
+import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.common.fluid.TFFluids;
-import fiskfille.tf.common.item.ItemFuelCanister;
-import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 
 public class ContainerEnergonTank extends ContainerBasic {
 	private int lastFillTime;

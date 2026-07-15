@@ -1,7 +1,12 @@
 package fiskfille.tf.common.item.armor;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.transformer.ModelTransformerBase;
+import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
+import fiskfille.tf.common.transformer.base.Transformer;
+import fiskfille.tf.helper.TFArmorHelper;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -12,13 +17,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.ISpecialArmor;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.transformer.ModelTransformerBase;
-import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
-import fiskfille.tf.common.transformer.base.Transformer;
-import fiskfille.tf.helper.TFArmorHelper;
+
+import java.util.List;
 
 public abstract class ItemTransformerArmor extends ItemArmor implements ISpecialArmor {
 	public ItemTransformerArmor(ArmorMaterial material, int renderIndex, int armorPiece) {

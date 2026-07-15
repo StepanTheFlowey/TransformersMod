@@ -1,7 +1,5 @@
 package fiskfille.tf.common.registry;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -9,6 +7,8 @@ import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.block.BlockMachineBase;
 import fiskfille.tf.common.item.ItemBlockWithMetadata;
 import fiskfille.tf.common.item.ItemMachine;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 
 public class TFBlockRegistry {
 	public static void registerBlock(Block block, String name) {

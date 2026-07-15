@@ -1,10 +1,10 @@
 package fiskfille.tf.common.container;
 
+import fiskfille.tf.common.tileentity.TileEntityColumn;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import fiskfille.tf.common.tileentity.TileEntityColumn;
 
 public class ContainerColumn extends ContainerBasic {
 	public ContainerColumn(InventoryPlayer inventoryPlayer, TileEntityColumn tile) {

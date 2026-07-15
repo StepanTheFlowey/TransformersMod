@@ -1,24 +1,22 @@
 package fiskfille.tf.common.chunk;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import fiskfille.tf.TFLog;
+import fiskfille.tf.TransformersMod;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import fiskfille.tf.TFLog;
-import fiskfille.tf.TransformersMod;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class TFChunkManager {
-	private static Map<World, LinkedList<Ticket>> ticketsForWorld = Maps.newHashMap();
-	private static Map<ForcedChunk, Integer> chunkForcers = Maps.newHashMap();
+	private static final Map<World, LinkedList<Ticket>> ticketsForWorld = Maps.newHashMap();
+	private static final Map<ForcedChunk, Integer> chunkForcers = Maps.newHashMap();
 
 	public static void forceChunk(Ticket ticket, ForcedChunk chunk) {
 		int i = chunkForcers.get(chunk) == null ? 0 : chunkForcers.get(chunk);

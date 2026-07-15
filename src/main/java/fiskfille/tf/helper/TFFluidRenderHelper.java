@@ -1,10 +1,6 @@
 package fiskfille.tf.helper;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.vecmath.Vector4d;
-
+import fiskfille.tf.common.fluid.FluidTankTF;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -14,10 +10,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.common.fluid.FluidTankTF;
+import javax.vecmath.Vector4d;
+import java.util.HashMap;
+import java.util.Map;
 
 import static fiskfille.tf.TransformersMod.mc;
 

@@ -1,16 +1,24 @@
 package fiskfille.tf.common.event;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.achievement.TFAchievements;
+import fiskfille.tf.common.data.*;
+import fiskfille.tf.common.item.ItemHandler;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.item.TFSubItems;
+import fiskfille.tf.common.network.MessageBroadcastState;
+import fiskfille.tf.common.network.MessageSendFlying;
+import fiskfille.tf.common.network.base.TFNetworkManager;
+import fiskfille.tf.common.recipe.TFRecipes;
+import fiskfille.tf.common.transformer.base.Transformer;
+import fiskfille.tf.helper.TFHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -23,34 +31,18 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.StartTracking;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.achievement.TFAchievements;
-import fiskfille.tf.common.data.TFData;
-import fiskfille.tf.common.data.TFDataManager;
-import fiskfille.tf.common.data.TFEntityData;
-import fiskfille.tf.common.data.TFPlayerData;
-import fiskfille.tf.common.data.TFWorldData;
-import fiskfille.tf.common.item.ItemHandler;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.item.TFSubItems;
-import fiskfille.tf.common.network.MessageBroadcastState;
-import fiskfille.tf.common.network.MessageSendFlying;
-import fiskfille.tf.common.network.base.TFNetworkManager;
-import fiskfille.tf.common.recipe.TFRecipes;
-import fiskfille.tf.common.transformer.base.Transformer;
-import fiskfille.tf.config.TFConfig;
-import fiskfille.tf.helper.TFHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CommonEventHandler {
-	private List<EntityPlayer> playersNotSunc = new ArrayList<EntityPlayer>();
+	private final List<EntityPlayer> playersNotSunc = new ArrayList<EntityPlayer>();
 
 	private boolean displayedUpdates;
 
-	private Map<EntityPlayer, Boolean> prevFlying = new HashMap<EntityPlayer, Boolean>();
+	private final Map<EntityPlayer, Boolean> prevFlying = new HashMap<EntityPlayer, Boolean>();
 
 	@SubscribeEvent
 	public void onHit(LivingAttackEvent event) {

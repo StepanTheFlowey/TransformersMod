@@ -1,11 +1,11 @@
 package fiskfille.tf.common.component;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import fiskfille.tf.client.gui.GuiHandlerTF.TFGui;
 import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class ComponentColor extends Component {
 	@Override

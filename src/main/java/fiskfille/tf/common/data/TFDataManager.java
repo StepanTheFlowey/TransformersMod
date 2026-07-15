@@ -1,18 +1,18 @@
 package fiskfille.tf.common.data;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import fiskfille.tf.common.network.MessagePlayerJoin;
 import fiskfille.tf.common.network.base.TFNetworkManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author FiskFille, gegy1000
  */
 public class TFDataManager {
-	private static Map<EntityPlayer, Integer> zoomTimerClient = new HashMap<EntityPlayer, Integer>();
+	private static final Map<EntityPlayer, Integer> zoomTimerClient = new HashMap<EntityPlayer, Integer>();
 
 	public static int getAltForTransformAnimation(EntityPlayer player) {
 		int alt = TFData.ALT_MODE.get(player);

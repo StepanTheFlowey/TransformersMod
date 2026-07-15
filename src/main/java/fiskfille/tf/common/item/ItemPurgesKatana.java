@@ -1,7 +1,10 @@
 package fiskfille.tf.common.item;
 
-import java.util.List;
-
+import com.google.common.collect.Multimap;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.transformer.TransformerPurge;
+import fiskfille.tf.helper.TFHelper;
+import fiskfille.tf.helper.TFVectorHelper;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,18 +18,17 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Multimap;
-
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.transformer.TransformerPurge;
-import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.helper.TFVectorHelper;
+import java.util.List;
 
 public class ItemPurgesKatana extends ItemSword {
 	public ItemPurgesKatana() {
 		super(ToolMaterial.EMERALD);
 		setMaxDamage(1500);
 		setCreativeTab(TransformersMod.tabTransformers);
+	}
+
+	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float range) {
+		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range), IEntitySelector.selectAnything);
 	}
 
 	@Override
@@ -73,10 +75,6 @@ public class ItemPurgesKatana extends ItemSword {
 		}
 
 		return stack;
-	}
-
-	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float range) {
-		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range), IEntitySelector.selectAnything);
 	}
 
 	@Override

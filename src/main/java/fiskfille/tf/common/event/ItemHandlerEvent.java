@@ -1,8 +1,8 @@
 package fiskfille.tf.common.event;
 
-import java.util.Map;
-
 import cpw.mods.fml.common.eventhandler.Event;
+
+import java.util.Map;
 
 public abstract class ItemHandlerEvent extends Event {
 	public static class Init extends ItemHandlerEvent {

@@ -1,12 +1,12 @@
 package fiskfille.tf.common.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.Constants.NBT;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import fiskfille.tf.common.block.BlockGroundBridgeTeleporter;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.network.MessageClosePortal;
 import fiskfille.tf.common.network.base.TFNetworkManager;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.Constants.NBT;
 
 public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 	public DimensionalCoords controlPanel;

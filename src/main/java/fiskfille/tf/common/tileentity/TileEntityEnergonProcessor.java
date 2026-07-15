@@ -1,17 +1,5 @@
 package fiskfille.tf.common.tileentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.Constants.NBT;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidContainerItem;
 import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.data.tile.TileDataEnergonTank;
 import fiskfille.tf.common.energon.IEnergon;
@@ -24,6 +12,18 @@ import fiskfille.tf.common.item.ItemFuelCanister;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.recipe.PowerManager;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.block.Block;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class TileEntityEnergonProcessor extends TileEntityMachineContainer implements IFluidHandlerTF, ISidedInventory {
 	private static final int[] slotsTop = {1};
@@ -193,9 +193,7 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 		if(itemstack != null && isItemValidForSlot(1, itemstack) && canActivate()) {
 			IEnergon ienergon = (IEnergon) (itemstack.getItem() instanceof ItemBlock ? Block.getBlockFromItem(itemstack.getItem()) : itemstack.getItem());
 
-			if(data.getFluidAmount() + ienergon.getMass() <= data.getCapacity()) {
-				return true;
-			}
+			return data.getFluidAmount() + ienergon.getMass() <= data.getCapacity();
 		}
 
 		return false;

@@ -1,8 +1,7 @@
 package fiskfille.tf.common.data;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
+import fiskfille.tf.common.item.ItemMetaBasic;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
@@ -10,9 +9,8 @@ import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraftforge.common.util.Constants.NBT;
 
-import com.google.common.collect.Maps;
-
-import fiskfille.tf.common.item.ItemMetaBasic;
+import java.util.Arrays;
+import java.util.Map;
 
 public class TFWorldData extends WorldSavedData {
 	public static final String KEY = "TFWorld";
@@ -42,6 +40,14 @@ public class TFWorldData extends WorldSavedData {
 		}
 	}
 
+	public static TFWorldData get(World world) {
+		if(instance == null && world.isRemote) {
+			instance = load(world);
+		}
+
+		return instance;
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		NBTTagList list = nbt.getTagList("SubItems", NBT.TAG_COMPOUND);
@@ -68,14 +74,6 @@ public class TFWorldData extends WorldSavedData {
 		}
 
 		nbt.setTag("SubItems", list);
-	}
-
-	public static TFWorldData get(World world) {
-		if(instance == null && world.isRemote) {
-			instance = load(world);
-		}
-
-		return instance;
 	}
 
 	public int getNextAvailableId() {

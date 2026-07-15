@@ -1,18 +1,15 @@
 package fiskfille.tf.common.data.tile;
 
+import com.google.common.collect.Lists;
+import fiskfille.tf.common.energon.power.TransmissionHandler;
+import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.helper.TFTileHelper;
 import io.netty.buffer.ByteBuf;
-
-import java.util.List;
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
-import com.google.common.collect.Lists;
-
-import fiskfille.tf.common.energon.power.TransmissionHandler;
-import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
-import fiskfille.tf.helper.TFTileHelper;
+import java.util.List;
 
 public class TileDataRelay extends TileData {
 	public TransmissionHandler transmissionHandler = new TransmissionHandler();

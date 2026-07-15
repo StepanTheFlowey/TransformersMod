@@ -1,40 +1,23 @@
 package fiskfille.tf.helper;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
-
 import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
 import fiskfille.tf.client.model.transformer.definition.TransformerModel;
 import fiskfille.tf.common.data.TFData;
-import fiskfille.tf.common.energon.power.IEnergyReceiver;
-import fiskfille.tf.common.energon.power.IEnergyTransmitter;
-import fiskfille.tf.common.energon.power.IReceiverRender;
-import fiskfille.tf.common.energon.power.ITransmitterRender;
-import fiskfille.tf.common.energon.power.ReceiverEntry;
-import fiskfille.tf.common.energon.power.TransmissionHandler;
-import fiskfille.tf.common.item.armor.ItemTransformerArmor;
+import fiskfille.tf.common.energon.power.*;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
+import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.common.tileentity.TileEntityMachine;
 import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 import fiskfille.tf.common.transformer.base.Transformer;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-import java.util.WeakHashMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.DestroyBlockProgress;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -44,9 +27,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
+import java.util.WeakHashMap;
 
 import static fiskfille.tf.TransformersMod.mc;
 

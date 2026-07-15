@@ -1,9 +1,9 @@
 package fiskfille.tf.common.recipe;
 
-import java.lang.reflect.Field;
-import java.util.LinkedList;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.common.item.TFItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockStainedGlass;
@@ -15,11 +15,9 @@ import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.common.item.TFItems;
+import java.lang.reflect.Field;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class Dyes {
 	public static final int BLACK = 0;
@@ -44,11 +42,28 @@ public class Dyes {
 	public static final int DARK_GRAY = 18;
 	public static final int PALE_GREEN = 19;
 	public static final int PALE_BROWN = 20;
-
-	private LinkedList<ItemStack> itemstacks = Lists.newLinkedList();
-	private static Map<Integer, String> names = Maps.newHashMap();
-
 	public static LinkedList<Integer> dyes = Lists.newLinkedList();
+	private static final Map<Integer, String> names = Maps.newHashMap();
+
+	static {
+		Lists.newArrayList();
+
+		for(Field field : Dyes.class.getFields()) {
+			String s = field.getType().getName();
+
+			if(s.equals("int")) {
+				try {
+					names.put(field.getInt(null), field.getName());
+					dyes.add(field.getInt(null));
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private final LinkedList<ItemStack> itemstacks = Lists.newLinkedList();
 
 	public Dyes(int... dyes) {
 		for(int i = 0; i < dyes.length; ++i) {
@@ -65,22 +80,6 @@ public class Dyes {
 				itemstacks.add(new ItemStack(item, amount, id));
 			}
 		}
-	}
-
-	public Dyes invert() {
-		for(int i = 0; i < itemstacks.size(); ++i) {
-			ItemStack itemstack = itemstacks.get(i);
-
-			if(itemstack.getItem() == Items.dye) {
-				itemstack.setItemDamage(15 - itemstack.getItemDamage());
-			}
-		}
-
-		return this;
-	}
-
-	public ItemStack[] compile() {
-		return itemstacks.toArray(new ItemStack[itemstacks.size()]);
 	}
 
 	public static ItemStack get(int id) {
@@ -150,21 +149,19 @@ public class Dyes {
 		return null;
 	}
 
-	static {
-		Lists.newArrayList();
+	public Dyes invert() {
+		for(int i = 0; i < itemstacks.size(); ++i) {
+			ItemStack itemstack = itemstacks.get(i);
 
-		for(Field field : Dyes.class.getFields()) {
-			String s = field.getType().getName();
-
-			if(s.equals("int")) {
-				try {
-					names.put(field.getInt(null), field.getName());
-					dyes.add(field.getInt(null));
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
+			if(itemstack.getItem() == Items.dye) {
+				itemstack.setItemDamage(15 - itemstack.getItemDamage());
 			}
 		}
+
+		return this;
+	}
+
+	public ItemStack[] compile() {
+		return itemstacks.toArray(new ItemStack[itemstacks.size()]);
 	}
 }

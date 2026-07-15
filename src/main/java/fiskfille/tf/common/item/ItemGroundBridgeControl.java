@@ -1,12 +1,12 @@
 package fiskfille.tf.common.item;
 
+import fiskfille.tf.common.block.BlockControlPanel;
+import fiskfille.tf.common.block.TFBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import fiskfille.tf.common.block.BlockControlPanel;
-import fiskfille.tf.common.block.TFBlocks;
 
 public class ItemGroundBridgeControl extends ItemMachine {
 	public ItemGroundBridgeControl(Block block) {

@@ -1,11 +1,10 @@
 package fiskfille.tf.helper;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IChatComponent;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 public class TFFormatHelper {
 	public static String formatNumber(float f) {

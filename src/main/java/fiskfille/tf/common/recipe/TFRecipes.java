@@ -1,26 +1,16 @@
 package fiskfille.tf.common.recipe;
 
-import static fiskfille.tf.common.recipe.Dyes.BEIGE;
-import static fiskfille.tf.common.recipe.Dyes.BLACK;
-import static fiskfille.tf.common.recipe.Dyes.BLUE;
-import static fiskfille.tf.common.recipe.Dyes.BROWN;
-import static fiskfille.tf.common.recipe.Dyes.DARK_GRAY;
-import static fiskfille.tf.common.recipe.Dyes.DARK_RED;
-import static fiskfille.tf.common.recipe.Dyes.GRAY;
-import static fiskfille.tf.common.recipe.Dyes.LIGHT_BLUE;
-import static fiskfille.tf.common.recipe.Dyes.LIME;
-import static fiskfille.tf.common.recipe.Dyes.PALE_BROWN;
-import static fiskfille.tf.common.recipe.Dyes.PALE_GREEN;
-import static fiskfille.tf.common.recipe.Dyes.PURPLE;
-import static fiskfille.tf.common.recipe.Dyes.RED;
-import static fiskfille.tf.common.recipe.Dyes.SILVER;
-import static fiskfille.tf.common.recipe.Dyes.WHITE;
-import static fiskfille.tf.common.recipe.Dyes.YELLOW;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import cpw.mods.fml.common.registry.GameRegistry;
+import fiskfille.tf.TransformersAPI;
+import fiskfille.tf.common.block.BlockDisplayPedestal;
+import fiskfille.tf.common.block.BlockDisplayPedestal.BlockIcon;
+import fiskfille.tf.common.block.TFBlocks;
+import fiskfille.tf.common.groundbridge.DataCore;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.item.TFSubItems;
+import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -33,18 +23,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import fiskfille.tf.TransformersAPI;
-import fiskfille.tf.common.block.BlockDisplayPedestal;
-import fiskfille.tf.common.block.BlockDisplayPedestal.BlockIcon;
-import fiskfille.tf.common.block.TFBlocks;
-import fiskfille.tf.common.groundbridge.DataCore;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.item.TFSubItems;
-import fiskfille.tf.common.transformer.base.Transformer;
+import static fiskfille.tf.common.recipe.Dyes.*;
 
 public class TFRecipes {
 	public static List<IRecipe> prevRecipes = Lists.newArrayList();

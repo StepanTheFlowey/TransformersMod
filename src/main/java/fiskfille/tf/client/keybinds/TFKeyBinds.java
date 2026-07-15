@@ -1,8 +1,7 @@
 package fiskfille.tf.client.keybinds;
 
-import org.lwjgl.input.Keyboard;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
+import org.lwjgl.input.Keyboard;
 
 public class TFKeyBinds {
 	public static final TFKeyBinding keyBindingTransform1 = new TFKeyBinding("key.transform1", Keyboard.KEY_C);

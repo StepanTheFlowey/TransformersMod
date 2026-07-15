@@ -1,7 +1,5 @@
 package fiskfille.tf.helper;
 
-import java.util.Arrays;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,6 +8,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Arrays;
 
 public class RenderInfo {
 	public double minX = 0F;

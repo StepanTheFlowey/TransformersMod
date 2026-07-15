@@ -1,11 +1,10 @@
 package fiskfille.tf.helper;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 public class TFOreDictHelper {
 	public static List<String> getAliases(ItemStack itemstack) {

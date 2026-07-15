@@ -1,14 +1,12 @@
 package fiskfille.tf.helper;
 
-import java.util.Map;
-
-import net.minecraft.tileentity.TileEntity;
-
 import com.google.common.collect.Maps;
-
 import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.tileentity.IMultiTile;
+import net.minecraft.tileentity.TileEntity;
+
+import java.util.Map;
 
 public class TFTileHelper {
 	private static final Map<DimensionalCoords, TileData> tileData = Maps.newHashMap();

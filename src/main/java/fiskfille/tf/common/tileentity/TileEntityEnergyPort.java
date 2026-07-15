@@ -1,15 +1,15 @@
 package fiskfille.tf.common.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.common.util.ForgeDirection;
 import fiskfille.tf.common.energon.power.IEnergyContainer;
 import fiskfille.tf.common.energon.power.IEnergyReceiver;
 import fiskfille.tf.common.energon.power.IReceiverRender;
 import fiskfille.tf.common.energon.power.ReceiverHandler;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Vec3;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceiver, IReceiverRender {
 	public ReceiverHandler receiverHandler = new ReceiverHandler(this);

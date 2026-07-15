@@ -1,31 +1,11 @@
 package fiskfille.tf.nei;
 
-import static codechicken.lib.gui.GuiDraw.changeTexture;
-import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
-
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.oredict.OreDictionary;
-
-import org.lwjgl.opengl.GL11;
-
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-
 import com.google.common.collect.Lists;
-
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.gui.GuiAlloyCrucible;
@@ -33,58 +13,23 @@ import fiskfille.tf.common.recipe.AlloyRecipes;
 import fiskfille.tf.common.recipe.AlloyRecipes.AlloyIngredients;
 import fiskfille.tf.common.tileentity.TileEntityAlloyCrucible;
 import fiskfille.tf.helper.TFFormatHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.oredict.OreDictionary;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import static codechicken.lib.gui.GuiDraw.changeTexture;
+import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
 public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
-	public class AlloyPair extends CachedRecipe {
-		public ArrayList<PositionedStack> ingredients;
-		public PositionedStack result;
-
-		public AlloyPair(AlloyIngredients alloy, ItemStack out) {
-			result = new PositionedStack(out, 107 - 5, 28 - 11);
-			ingredients = new ArrayList<PositionedStack>();
-
-			for(int i = 0; i < alloy.getIngredients().length; ++i) {
-				LinkedList<ItemStack> ingredients = Lists.newLinkedList();
-				List<String> list = alloy.getOreDictNames(i);
-
-				for(String s : list) {
-					ingredients.addAll(OreDictionary.getOres(s));
-				}
-
-				Object items = ingredients;
-
-				if(ingredients.isEmpty()) {
-					items = alloy.getIngredients()[i];
-				}
-
-				addSlotToContainer(73, 19 + i * 18, items);
-			}
-		}
-
-		private void addSlotToContainer(int x, int y, Object item) {
-			if(item != null) {
-				PositionedStack stack = new PositionedStack(item, x - 5, y - 11, false);
-				ingredients.add(stack);
-			}
-		}
-
-		@Override
-		public List<PositionedStack> getIngredients() {
-			return getCycledIngredients(cycleticks / 20, ingredients);
-		}
-
-		@Override
-		public PositionedStack getResult() {
-			return result;
-		}
-
-		public void computeVisuals() {
-			for(PositionedStack p : ingredients) {
-				p.generatePermutations();
-			}
-		}
-	}
-
 	public static TileEntityAlloyCrucible tileentity;
 
 	@Override
@@ -200,5 +145,55 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 	@Override
 	public String getOverlayIdentifier() {
 		return "alloy_crucible";
+	}
+
+	public class AlloyPair extends CachedRecipe {
+		public ArrayList<PositionedStack> ingredients;
+		public PositionedStack result;
+
+		public AlloyPair(AlloyIngredients alloy, ItemStack out) {
+			result = new PositionedStack(out, 107 - 5, 28 - 11);
+			ingredients = new ArrayList<PositionedStack>();
+
+			for(int i = 0; i < alloy.getIngredients().length; ++i) {
+				LinkedList<ItemStack> ingredients = Lists.newLinkedList();
+				List<String> list = alloy.getOreDictNames(i);
+
+				for(String s : list) {
+					ingredients.addAll(OreDictionary.getOres(s));
+				}
+
+				Object items = ingredients;
+
+				if(ingredients.isEmpty()) {
+					items = alloy.getIngredients()[i];
+				}
+
+				addSlotToContainer(73, 19 + i * 18, items);
+			}
+		}
+
+		private void addSlotToContainer(int x, int y, Object item) {
+			if(item != null) {
+				PositionedStack stack = new PositionedStack(item, x - 5, y - 11, false);
+				ingredients.add(stack);
+			}
+		}
+
+		@Override
+		public List<PositionedStack> getIngredients() {
+			return getCycledIngredients(cycleticks / 20, ingredients);
+		}
+
+		@Override
+		public PositionedStack getResult() {
+			return result;
+		}
+
+		public void computeVisuals() {
+			for(PositionedStack p : ingredients) {
+				p.generatePermutations();
+			}
+		}
 	}
 }

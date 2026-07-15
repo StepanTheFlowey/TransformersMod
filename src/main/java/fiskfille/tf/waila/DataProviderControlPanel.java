@@ -1,20 +1,18 @@
 package fiskfille.tf.waila;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
+import fiskfille.tf.common.groundbridge.DataCore;
+import fiskfille.tf.common.tileentity.TileEntityControlPanel;
+import fiskfille.tf.helper.TFTileHelper;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
-import com.google.common.collect.Maps;
-
-import fiskfille.tf.common.groundbridge.DataCore;
-import fiskfille.tf.common.tileentity.TileEntityControlPanel;
-import fiskfille.tf.helper.TFTileHelper;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DataProviderControlPanel extends DataProviderMachine {
 	public DataProviderControlPanel(String s) {

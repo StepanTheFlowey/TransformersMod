@@ -1,21 +1,6 @@
 package fiskfille.tf.common.tileentity;
 
-import java.util.UUID;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.stats.StatFileWriter;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovementInputFromOptions;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.util.FakePlayerFactory;
-
 import com.mojang.authlib.GameProfile;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersAPI;
@@ -27,13 +12,24 @@ import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.network.MessageTileTrigger.ITileDataCallback;
 import fiskfille.tf.helper.TFArmorDyeHelper;
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.stats.StatFileWriter;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovementInputFromOptions;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayerFactory;
+
+import java.util.UUID;
 
 import static fiskfille.tf.TransformersMod.mc;
 
 public class TileEntityDisplayStation extends TileEntityContainer implements IMultiTile, ITileDataCallback {
-	public boolean isRedstonePowered = false;
-
 	public final GameProfile username;
+	public boolean isRedstonePowered = false;
 	public EntityPlayer fakePlayer;
 
 	public TileEntityDisplayStation() {
