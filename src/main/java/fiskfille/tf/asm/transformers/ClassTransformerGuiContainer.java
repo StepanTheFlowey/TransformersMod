@@ -17,12 +17,7 @@ public class ClassTransformerGuiContainer extends ClassTransformerMethodProcess 
 		for(int i = 0; i < method.instructions.size(); ++i) {
 			final AbstractInsnNode node = method.instructions.get(i);
 
-			if(i == 0) {
-				list.add(new VarInsnNode(ALOAD, 0));
-				list.add(new VarInsnNode(ALOAD, 1));
-				list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(ASMHooksClient.class), "renderSlotPre", TFTranslator.getMappedName("(Lbex;Laay;)V", "(Lnet/minecraft/client/gui/inventory/GuiContainer;Lnet/minecraft/inventory/Slot;)V"), false));
-			}
-			else if(node.getOpcode() == RETURN) {
+			if(node.getOpcode() == RETURN) {
 				list.add(new VarInsnNode(ALOAD, 0));
 				list.add(new VarInsnNode(ALOAD, 1));
 				list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(ASMHooksClient.class), "renderSlotPost", TFTranslator.getMappedName("(Lbex;Laay;)V", "(Lnet/minecraft/client/gui/inventory/GuiContainer;Lnet/minecraft/inventory/Slot;)V"), false));

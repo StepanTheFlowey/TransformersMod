@@ -41,18 +41,6 @@ public class ClassTransformerModelBiped extends ClassTransformerBase {
 						}
 					}
 
-					if(node.getOpcode() == RETURN) {
-						list.add(new VarInsnNode(ALOAD, 0));
-						list.add(new VarInsnNode(ALOAD, 1));
-						list.add(new VarInsnNode(FLOAD, 2));
-						list.add(new VarInsnNode(FLOAD, 3));
-						list.add(new VarInsnNode(FLOAD, 4));
-						list.add(new VarInsnNode(FLOAD, 5));
-						list.add(new VarInsnNode(FLOAD, 6));
-						list.add(new VarInsnNode(FLOAD, 7));
-						list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(TFModelHelper.class), "renderBipedPost", TFTranslator.getMappedName("(Lbhm;Lsa;FFFFFF)V", "(Lnet/minecraft/client/model/ModelBiped;Lnet/minecraft/entity/Entity;FFFFFF)V"), false));
-					}
-
 					list.add(node);
 				}
 

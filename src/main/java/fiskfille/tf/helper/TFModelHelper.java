@@ -65,20 +65,4 @@ public class TFModelHelper {
 			model.bipedHeadwear.rotationPointZ = offset.headOffsetZ;
 		}
 	}
-
-	/**
-	 * Hooks into {@link ModelBiped#render}<br>
-	 * Called after after rendering
-	 *
-	 * @param model
-	 * @param entity
-	 * @param limbSwing
-	 * @param limbSwingAmount
-	 * @param ticks
-	 * @param rotationYaw
-	 * @param rotationPitch
-	 * @param scale
-	 */
-	public static void renderBipedPost(ModelBiped model, Entity entity, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale) {
-	}
 }

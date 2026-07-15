@@ -37,8 +37,6 @@ public class ASMHooksClient {
 		return 0.125D;
 	}
 
-	public static void renderSlotPre(GuiContainer gui, Slot slot) {}
-
 	public static void renderSlotPost(GuiContainer gui, Slot slot) {
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 	}
