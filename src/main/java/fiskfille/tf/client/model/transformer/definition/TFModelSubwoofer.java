@@ -14,17 +14,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TFModelSubwoofer extends TransformerModel {
-	private final ModelSubwoofer model;
-	private final ModelSubwoofer modelItem;
-	private final ModelSubwooferVehicle vehicle;
-	private final ModelSubwooferStealth stealth;
-
-	public TFModelSubwoofer() {
-		model = new ModelSubwoofer();
-		modelItem = new ModelSubwoofer();
-		vehicle = new ModelSubwooferVehicle();
-		stealth = new ModelSubwooferStealth();
-	}
+	private final ModelSubwoofer model = new ModelSubwoofer();
+	private final ModelSubwoofer modelItem = new ModelSubwoofer();
+	private final ModelSubwooferVehicle vehicle = new ModelSubwooferVehicle();
+	private final ModelSubwooferStealth stealth = new ModelSubwooferStealth();
 
 	@Override
 	public ModelTransformerBase getMainModel() {

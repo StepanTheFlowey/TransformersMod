@@ -13,15 +13,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TFModelPurge extends TransformerModel {
-	private final ModelPurge model;
-	private final ModelPurge modelItem;
-	private final ModelPurgeVehicle vehicle;
-
-	public TFModelPurge() {
-		model = new ModelPurge();
-		modelItem = new ModelPurge();
-		vehicle = new ModelPurgeVehicle();
-	}
+	private final ModelPurge model = new ModelPurge();
+	private final ModelPurge modelItem = new ModelPurge();
+	private final ModelPurgeVehicle vehicle = new ModelPurgeVehicle();
 
 	@Override
 	public ModelTransformerBase getMainModel() {

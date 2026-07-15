@@ -4,10 +4,9 @@ import fiskfille.tf.TransformerManager;
 import fiskfille.tf.common.transformer.base.Transformer;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class TFModelRegistry {
-	private static final Map<Transformer, TransformerModel> models = new HashMap<>();
+	private static final HashMap<Transformer, TransformerModel> models = new HashMap<>();
 
 	public static void registerModel(Transformer transformer, TransformerModel model) {
 		models.put(transformer, model);

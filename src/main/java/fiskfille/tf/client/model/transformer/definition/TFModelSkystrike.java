@@ -13,15 +13,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TFModelSkystrike extends TransformerModel {
-	private final ModelSkystrike model;
-	private final ModelSkystrike modelItem;
-	private final ModelSkystrikeVehicle vehicle;
-
-	public TFModelSkystrike() {
-		model = new ModelSkystrike();
-		modelItem = new ModelSkystrike();
-		vehicle = new ModelSkystrikeVehicle();
-	}
+	private final ModelSkystrike model = new ModelSkystrike();
+	private final ModelSkystrike modelItem = new ModelSkystrike();
+	private final ModelSkystrikeVehicle vehicle = new ModelSkystrikeVehicle();
 
 	@Override
 	public ModelTransformerBase getMainModel() {

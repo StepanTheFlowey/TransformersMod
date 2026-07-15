@@ -13,15 +13,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TFModelCloudtrap extends TransformerModel {
-	private final ModelCloudtrap model;
-	private final ModelCloudtrap modelItem;
-	private final ModelCloudtrapVehicle vehicle;
-
-	public TFModelCloudtrap() {
-		model = new ModelCloudtrap();
-		modelItem = new ModelCloudtrap();
-		vehicle = new ModelCloudtrapVehicle();
-	}
+	private final ModelCloudtrap model = new ModelCloudtrap();
+	private final ModelCloudtrap modelItem = new ModelCloudtrap();
+	private final ModelCloudtrapVehicle vehicle = new ModelCloudtrapVehicle();
 
 	@Override
 	public ModelTransformerBase getMainModel() {

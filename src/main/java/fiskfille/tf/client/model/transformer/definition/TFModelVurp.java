@@ -14,17 +14,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TFModelVurp extends TransformerModel {
-	private final ModelVurp model;
-	private final ModelVurp modelItem;
-	private final ModelVurpVehicle vehicle;
-	private final ModelVurpStealth stealth;
-
-	public TFModelVurp() {
-		model = new ModelVurp();
-		modelItem = new ModelVurp();
-		vehicle = new ModelVurpVehicle();
-		stealth = new ModelVurpStealth();
-	}
+	private final ModelVurp model = new ModelVurp();
+	private final ModelVurp modelItem = new ModelVurp();
+	private final ModelVurpVehicle vehicle = new ModelVurpVehicle();
+	private final ModelVurpStealth stealth = new ModelVurpStealth();
 
 	@Override
 	public ModelTransformerBase getMainModel() {
