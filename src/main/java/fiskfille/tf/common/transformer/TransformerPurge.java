@@ -35,12 +35,12 @@ public class TransformerPurge extends TransformerTank {
 	}
 
 	@Override
-	public float getHeightOffset(EntityPlayer player, int altMode) {
+	public float getHeightOffset() {
 		return -0.1F;
 	}
 
 	@Override
-	public float getVehicleHeightOffset(EntityPlayer player, int altMode) {
+	public float getVehicleHeightOffset() {
 		return -1.1F;
 	}
 

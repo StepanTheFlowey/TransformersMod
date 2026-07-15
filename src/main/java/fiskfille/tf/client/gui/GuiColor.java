@@ -27,11 +27,11 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiColor extends GuiScreen {
+	public static final float[][] layerColors = {{1, 1, 1}, {1, 1, 1}};
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/display_station.png");
 	public static int ticks;
 	public static boolean fromPresetMenu = false;
 	public static int layerSelected;
-	public static float[][] layerColors = {{1, 1, 1}, {1, 1, 1}};
 	public static GuiColorSlider sliderRed;
 	public static GuiColorSlider sliderGreen;
 	public static GuiColorSlider sliderBlue;
@@ -104,10 +104,6 @@ public class GuiColor extends GuiScreen {
 		sliderRed.prevPercentage = sliderRed.percentage;
 		sliderGreen.prevPercentage = sliderGreen.percentage;
 		sliderBlue.prevPercentage = sliderBlue.percentage;
-	}
-
-	public void updateSliders() {
-
 	}
 
 	@Override

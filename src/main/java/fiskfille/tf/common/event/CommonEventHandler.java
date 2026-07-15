@@ -38,23 +38,18 @@ import java.util.List;
 import java.util.Map;
 
 public class CommonEventHandler {
-	private final List<EntityPlayer> playersNotSunc = new ArrayList<EntityPlayer>();
-
-	private boolean displayedUpdates;
-
-	private final Map<EntityPlayer, Boolean> prevFlying = new HashMap<EntityPlayer, Boolean>();
+	private final List<EntityPlayer> playersNotSunc = new ArrayList<>();
+	private final Map<EntityPlayer, Boolean> prevFlying = new HashMap<>();
 
 	@SubscribeEvent
 	public void onHit(LivingAttackEvent event) {
 		Entity cause = event.source.getEntity();
 
 		if(cause instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) cause;
-			Transformer transformer = TFHelper.getTransformer(player);
+			final EntityPlayer player = (EntityPlayer) cause;
+			final Transformer transformer = TFHelper.getTransformer(player);
 
-			int altMode = TFData.ALT_MODE.get(player);
-
-			if(TFHelper.isFullyTransformed(player) && !event.source.isProjectile() && (transformer == null || transformer.canInteractInVehicleMode(player, altMode))) {
+			if(TFHelper.isFullyTransformed(player) && !event.source.isProjectile() && (transformer == null || transformer.canInteractInVehicleMode())) {
 				event.setCanceled(true);
 			}
 		}
@@ -90,7 +85,7 @@ public class CommonEventHandler {
 
 		int altMode = TFData.ALT_MODE.get(player);
 
-		if(TFHelper.isFullyTransformed(player) && (transformer == null || transformer.canInteractInVehicleMode(player, altMode))) {
+		if(TFHelper.isFullyTransformed(player) && (transformer == null || transformer.canInteractInVehicleMode())) {
 			event.setCanceled(true);
 		}
 	}
@@ -129,7 +124,7 @@ public class CommonEventHandler {
 
 		int altMode = TFData.ALT_MODE.get(player);
 
-		if(TFHelper.isFullyTransformed(player) && (transformer == null || transformer.canInteractInVehicleMode(player, altMode))) {
+		if(TFHelper.isFullyTransformed(player) && (transformer == null || transformer.canInteractInVehicleMode())) {
 			event.setCanceled(true);
 		}
 	}
@@ -166,7 +161,7 @@ public class CommonEventHandler {
 			if(transformer != null) {
 				int altMode = TFData.ALT_MODE.get(player);
 
-				if(!transformer.onJump(player) || !transformer.canJumpAsVehicle(player, altMode) && TFHelper.getTransformationTimer(player) >= 0.5F) {
+				if(!transformer.onJump(player) || !transformer.canJumpAsVehicle(player) && TFHelper.getTransformationTimer(player) >= 0.5F) {
 					player.motionY = 0;
 				}
 			}

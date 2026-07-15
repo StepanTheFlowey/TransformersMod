@@ -43,17 +43,16 @@ import java.util.List;
 )
 public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/ground_bridge.png");
-	public InventoryGroundBridge inventory;
+	public final InventoryGroundBridge inventory;
 
-	public GuiTextField[] coordinateFields = new GuiTextField[3];
+	public final GuiTextField[] coordinateFields = new GuiTextField[3];
+	public final DimensionalCoords tileCoords;
 	public GuiTextField dimensionField;
-
 	public GuiButton buttonDeactivate;
 	public GuiButton buttonActivate;
 	public GuiButton buttonDimRight;
 	public GuiButton buttonDimLeft;
 	public GuiButton buttonDirection;
-	public DimensionalCoords tileCoords;
 	public TileDataControlPanel data;
 	private GuiHoverFieldEnergy fieldEnergy;
 
@@ -192,18 +191,18 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 
 		for(GuiTextField coordinateField : coordinateFields) {
 			coordinateField.textboxKeyTyped(c, key);
-			String s = "";
+			StringBuilder s = new StringBuilder();
 
 			for(int k = 0; k < coordinateField.getText().length(); ++k) {
 				char c1 = coordinateField.getText().charAt(k);
 
 				if(Character.isDigit(c1) || k == 0 && c1 == '-') {
-					s += c1;
+					s.append(c1);
 				}
 			}
 
-			if(!s.equals(coordinateField.getText())) {
-				coordinateField.setText(s);
+			if(!s.toString().equals(coordinateField.getText())) {
+				coordinateField.setText(s.toString());
 			}
 		}
 	}
@@ -294,8 +293,10 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 			final ErrorContainer container = data.errors.get(i);
 
 			if(new Rectangle(x + xSize + 20, y + 10 + i * 17, 16, 16).contains(mouseX, mouseY)) {
-				final List<String> list = fontRendererObj.listFormattedStringToWidth(container.translate(), 200);
+				List<String> list = fontRendererObj.listFormattedStringToWidth(container.translate(), 200);
+
 				list.replaceAll(s -> EnumChatFormatting.RED + s);
+
 				drawHoveringText(list, mouseX, mouseY, fontRendererObj);
 			}
 		}

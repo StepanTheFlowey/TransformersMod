@@ -18,18 +18,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 import java.util.Map;
 
 public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergyContainer {
+	public final Map<ForgeDirection, Block> providers = Maps.newHashMap();
+	public final Map<ForgeDirection, Float> animationTimer = Maps.newHashMap();
+	public final Map<ForgeDirection, Float> prevAnimationTimer = Maps.newHashMap();
 	public TileDataEnergyContainer data = new TileDataEnergyContainer(8000);
-	public Map<ForgeDirection, Block> providers = Maps.newHashMap();
-	public Map<ForgeDirection, Float> animationTimer = Maps.newHashMap();
-	public Map<ForgeDirection, Float> prevAnimationTimer = Maps.newHashMap();
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
 
-		for(Map.Entry<ForgeDirection, Float> e : animationTimer.entrySet()) {
-			prevAnimationTimer.put(e.getKey(), e.getValue());
-		}
+		prevAnimationTimer.putAll(animationTimer);
 
 		if(!data.isInitialized()) {
 			data.initialize(this);

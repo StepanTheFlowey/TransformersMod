@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 
 public class InventoryDisplayStationArmor implements IInventory {
 	private final ItemStack[] stackList = new ItemStack[4];
-	private int inventoryWidth;
 	private final Container eventHandler;
+	private int inventoryWidth;
 
 	public InventoryDisplayStationArmor(Container container) {
 		this.eventHandler = container;

@@ -26,7 +26,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import static fiskfille.tf.TransformersMod.mc;
 
 public class ClientProxy extends CommonProxy {
-	public static GuiOverlay guiOverlay = new GuiOverlay();
+	public static final GuiOverlay guiOverlay = new GuiOverlay();
 	public static EntityClientPlayerMP fakePlayer;
 
 	@Override

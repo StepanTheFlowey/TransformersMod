@@ -16,7 +16,7 @@ public class TFWorldData extends WorldSavedData {
 	public static final String KEY = "TFWorld";
 	public static TFWorldData instance;
 
-	public Map<String, Integer> subItems = Maps.newHashMap();
+	public final Map<String, Integer> subItems = Maps.newHashMap();
 
 	public TFWorldData(String s) {
 		super(s);

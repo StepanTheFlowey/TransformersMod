@@ -94,9 +94,7 @@ public class TFRecipes {
 	public static void save() {
 		List<IRecipe> recipes = (List<IRecipe>) CraftingManager.getInstance().getRecipeList();
 
-		for(int i = 0; i < recipes.size(); ++i) {
-			IRecipe recipe = recipes.get(i);
-
+		for(IRecipe recipe : recipes) {
 			if(!prevRecipes.contains(recipe)) {
 				tempRecipes.add(recipe);
 			}

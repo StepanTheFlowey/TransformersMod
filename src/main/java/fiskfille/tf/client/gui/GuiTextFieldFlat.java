@@ -15,12 +15,11 @@ import static fiskfille.tf.TransformersMod.mc;
 
 @SideOnly(Side.CLIENT)
 public class GuiTextFieldFlat extends GuiTextField {
+	public final int xPosition;
+	public final int yPosition;
+	public final int width;
+	public final int height;
 	private final FontRenderer fontRendererObj;
-	public int xPosition;
-	public int yPosition;
-	public int width;
-	public int height;
-
 	private String text = "";
 	private int maxStringLength = 32;
 	private int cursorCounter;

@@ -5,23 +5,23 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelVurpsSniper extends ModelBase {
-	public ModelRenderer middlePiece;
-	public ModelRenderer handle;
-	public ModelRenderer backPiece1;
-	public ModelRenderer backPiece2;
-	public ModelRenderer bottomPiece1;
-	public ModelRenderer upperPiece1;
-	public ModelRenderer bottomPiece2;
-	public ModelRenderer muzzle;
-	public ModelRenderer scopeholda;
-	public ModelRenderer bodypart2;
-	public ModelRenderer barrellower;
-	public ModelRenderer barrel;
-	public ModelRenderer monitorA;
-	public ModelRenderer monitorB;
-	public ModelRenderer scope;
-	public ModelRenderer scopeholdB;
-	public ModelRenderer ammo;
+	public final ModelRenderer middlePiece;
+	public final ModelRenderer handle;
+	public final ModelRenderer backPiece1;
+	public final ModelRenderer backPiece2;
+	public final ModelRenderer bottomPiece1;
+	public final ModelRenderer upperPiece1;
+	public final ModelRenderer bottomPiece2;
+	public final ModelRenderer muzzle;
+	public final ModelRenderer scopeholda;
+	public final ModelRenderer bodypart2;
+	public final ModelRenderer barrellower;
+	public final ModelRenderer barrel;
+	public final ModelRenderer monitorA;
+	public final ModelRenderer monitorB;
+	public final ModelRenderer scope;
+	public final ModelRenderer scopeholdB;
+	public final ModelRenderer ammo;
 
 	public ModelVurpsSniper() {
 		textureWidth = 64;

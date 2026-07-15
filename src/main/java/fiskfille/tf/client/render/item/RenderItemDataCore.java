@@ -11,7 +11,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class RenderItemDataCore implements IItemRenderer {
-	public RenderBlocks renderBlocks = RenderBlocks.getInstance();
+	public final RenderBlocks renderBlocks = RenderBlocks.getInstance();
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

@@ -38,8 +38,8 @@ public class ContainerAlloyCrucible extends ContainerBasic {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for(int i = 0; i < crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) crafters.get(i);
+		for(Object crafter : crafters) {
+			ICrafting icrafting = (ICrafting) crafter;
 
 			if(lastSmeltTime != getTile().smeltTime) {
 				icrafting.sendProgressBarUpdate(this, 0, getTile().smeltTime);

@@ -17,7 +17,7 @@ import java.util.Random;
  * @author gegy1000
  */
 public class CloudtrapJetpackManager {
-	public static Map<EntityPlayer, Boolean> cloudtrapJetpacking = new HashMap<EntityPlayer, Boolean>();
+	public static final Map<EntityPlayer, Boolean> cloudtrapJetpacking = new HashMap<>();
 
 	private static boolean prevJetpacking;
 

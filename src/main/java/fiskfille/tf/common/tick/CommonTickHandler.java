@@ -75,7 +75,6 @@ public class CommonTickHandler {
 				float height = TFHelper.getHeight(player) * scale;
 
 				if(transformer == null && TFData.PREV_TRANSFORMER.get(player) != null) {
-					scale = 1;
 					width = 0.6F;
 					height = 1.8F;
 				}
@@ -90,7 +89,7 @@ public class CommonTickHandler {
 				transformer.tick(player, transformationTimer);
 
 				if(transformationTimer >= 0.5F) {
-					if(transformer.canUseNitro(player, altMode) || TFHelper.isInStealthMode(player)) {
+					if(transformer.canUseNitro(player) || TFHelper.isInStealthMode(player)) {
 						player.setSprinting(false);
 					}
 				}

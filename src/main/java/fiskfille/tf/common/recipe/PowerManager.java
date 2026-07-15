@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import java.util.Map;
 
 public class PowerManager {
-	public static Map<ItemStack, Integer> powerSources = Maps.newHashMap();
+	public static final Map<ItemStack, Integer> powerSources = Maps.newHashMap();
 
 	public static void register() {
 		powerSources.clear();

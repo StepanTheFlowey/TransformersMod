@@ -76,7 +76,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 		crystals = Lists.newArrayList();
 
 		for(ItemStack itemstack : ItemList.items) {
-			Item item = itemstack.getItem();
+			final Item item = itemstack.getItem();
 
 			if(item instanceof IEnergon || item instanceof ItemBlock && Block.getBlockFromItem(item) instanceof IEnergon) {
 				IEnergon ienergon = (IEnergon) (item instanceof ItemBlock ? Block.getBlockFromItem(item) : item);
@@ -87,7 +87,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
-		Item item = result.getItem();
+		final Item item = result.getItem();
 
 		if(item instanceof IFluidContainerItem) {
 			IFluidContainerItem container = (IFluidContainerItem) item;
@@ -194,8 +194,8 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public static class PowerSourcePair {
-		public PositionedStack stack;
-		public int burnTime;
+		public final PositionedStack stack;
+		public final int burnTime;
 
 		public PowerSourcePair(ItemStack ingred, int burnTime) {
 			this.stack = new PositionedStack(ingred, 19, 42, false);
@@ -204,8 +204,8 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public static class CrystalPair {
-		public ItemStack stack;
-		public IEnergon energon;
+		public final ItemStack stack;
+		public final IEnergon energon;
 
 		public CrystalPair(ItemStack ingred, IEnergon energon) {
 			this.stack = ingred;
@@ -214,10 +214,10 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public class CachedProcessorRecipe extends CachedRecipe {
-		public PositionedStack ingredient;
-		public PositionedStack result;
+		public final PositionedStack ingredient;
+		public final PositionedStack result;
 
-		public FluidTankTF tank = new FluidTankTF(2000);
+		public final FluidTankTF tank = new FluidTankTF(2000);
 
 		public CachedProcessorRecipe(ItemStack in, ItemStack out) {
 			ingredient = new PositionedStack(in, 19, 6);

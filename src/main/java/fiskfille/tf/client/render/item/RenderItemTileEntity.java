@@ -9,8 +9,8 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class RenderItemTileEntity implements IItemRenderer {
+	protected final Block block;
 	protected TileEntity tileentity;
-	protected Block block;
 
 	public RenderItemTileEntity(Block b) {
 		block = b;

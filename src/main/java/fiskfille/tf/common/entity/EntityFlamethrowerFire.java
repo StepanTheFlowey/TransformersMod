@@ -9,7 +9,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityFlamethrowerFire extends EntityThrowable {
-	protected int particleMaxAge = (int) (8D / (Math.random() * 0.8D + 0.2D)) + 2;
+	protected final int particleMaxAge = (int) (8D / (Math.random() * 0.8D + 0.2D)) + 2;
 
 	public EntityFlamethrowerFire(World world) {
 		super(world);

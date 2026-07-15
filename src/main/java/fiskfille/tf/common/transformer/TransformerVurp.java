@@ -45,43 +45,42 @@ public class TransformerVurp extends TransformerCar {
 	}
 
 	@Override
-	public float getHeightOffset(EntityPlayer player, int altMode) {
+	public float getHeightOffset() {
 		return -0.3F;
 	}
 
 	@Override
-	public float getVehicleHeightOffset(EntityPlayer player, int altMode) {
+	public float getVehicleHeightOffset() {
 		return -1.4F;
 	}
 
 	@Override
-	public Item getShootItem(int altMode) {
+	public Item getShootItem() {
 		return Item.getItemFromBlock(TFBlocks.energonCube);
 	}
 
 	@Override
-	public Entity getShootEntity(EntityPlayer player, int altMode) {
-		EntityLaser entityLaser = new EntityLaser(player.worldObj, player);
-		return entityLaser;
+	public Entity getShootEntity(EntityPlayer player) {
+		return new EntityLaser(player.worldObj, player);
 	}
 
 	@Override
-	public String getShootSound(int altMode) {
+	public String getShootSound() {
 		return "random.fizz";
 	}
 
 	@Override
-	public float getShootVolume(int altMode) {
+	public float getShootVolume() {
 		return 0.3F;
 	}
 
 	@Override
-	public int getShots(int altMode) {
+	public int getShots() {
 		return 64;
 	}
 
 	@Override
-	public boolean hasRapidFire(int altMode) {
+	public boolean hasRapidFire() {
 		return true;
 	}
 
@@ -96,8 +95,7 @@ public class TransformerVurp extends TransformerCar {
 		int zoomTimer = TFDataManager.getZoomTimer(player);
 
 		PotionEffect activePotionEffect = player.getActivePotionEffect(Potion.nightVision);
-
-		if(activePotionEffect == null || activePotionEffect != null && activePotionEffect.getDuration() == 0) {
+		if(activePotionEffect == null || activePotionEffect.getDuration() == 0) {
 			if(holdingSniper && zoomTimer > 7) {
 				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1, 0));
 			}

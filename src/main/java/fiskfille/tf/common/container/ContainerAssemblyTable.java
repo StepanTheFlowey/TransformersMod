@@ -10,8 +10,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerAssemblyTable extends ContainerBasic {
-	public InventoryAssembly craftMatrix = new InventoryAssembly(this, 5, 5);
-	public IInventory craftResult = new InventoryCraftResult();
+	public final InventoryAssembly craftMatrix = new InventoryAssembly(this, 5, 5);
+	public final IInventory craftResult = new InventoryCraftResult();
 
 	public ContainerAssemblyTable(InventoryPlayer inventoryPlayer, TileEntityAssemblyTable tile) {
 		super(tile);

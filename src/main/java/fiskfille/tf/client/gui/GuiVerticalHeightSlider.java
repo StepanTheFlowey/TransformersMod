@@ -6,8 +6,8 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 public class GuiVerticalHeightSlider extends GuiVerticalSlider {
+	public final GuiSelectReceivers parent;
 	private final Runnable onChange;
-	public GuiSelectReceivers parent;
 
 	public GuiVerticalHeightSlider(int id, GuiSelectReceivers parentScreen, int x, int y, int height, Runnable onChange) {
 		super(id, x, y, height);

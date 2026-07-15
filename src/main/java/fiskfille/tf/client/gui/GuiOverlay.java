@@ -50,7 +50,7 @@ public class GuiOverlay extends Gui {
 
 		if(event.type == ElementType.HOTBAR) {
 			final Transformer transformer = TFHelper.getTransformer(player);
-			final boolean flag = transformer == null || transformer.renderSpeedAndNitro(player, TFData.ALT_MODE.get(player));
+			final boolean flag = transformer == null || transformer.renderSpeedAndNitro();
 
 			if(flag) {
 				renderNitroAndSpeed(event, width, height, player);
@@ -63,13 +63,11 @@ public class GuiOverlay extends Gui {
 	}
 
 	public void renderLaserCharge(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
-		int altMode = TFData.ALT_MODE.get(player);
-
 		ItemStack heldItem = player.getHeldItem();
 		Transformer transformer = TFHelper.getTransformer(player);
 		boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.isInRobotMode(player);
 
-		if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(player, altMode))) {
+		if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(player))) {
 			float stealthModeTimer = TFHelper.getStealthModeTimer(player);
 
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -115,7 +113,7 @@ public class GuiOverlay extends Gui {
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 			GL11.glEnable(GL11.GL_LIGHTING);
-			itemRenderer.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(transformer.getShootItem(altMode)), x - 1, y);
+			itemRenderer.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1, y);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glDepthMask(true);
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -123,7 +121,7 @@ public class GuiOverlay extends Gui {
 			float scale = 0.5F;
 			GL11.glPushMatrix();
 			GL11.glScalef(scale, scale, scale);
-			drawString(mc.fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem(altMode).getUnlocalizedName() + ".name")), (int) ((x - 1) / scale), (int) ((y + 17) / scale), 0xffffff);
+			drawString(mc.fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), (int) ((x - 1) / scale), (int) ((y + 17) / scale), 0xffffff);
 			GL11.glPopMatrix();
 		}
 	}
@@ -169,10 +167,10 @@ public class GuiOverlay extends Gui {
 			float transformationTimer = TFHelper.getTransformationTimer(player);
 			float stealthModeTimer = TFHelper.getStealthModeTimer(player);
 
-			if(transformationTimer > 0 && transformer.canShoot(player, altMode)) {
+			if(transformationTimer > 0 && transformer.canShoot(player)) {
 				float f = transformationTimer;
 
-				if(transformer.hasStealthForce(player, altMode)) {
+				if(transformer.hasStealthForce()) {
 					f = stealthModeTimer;
 				}
 
@@ -205,7 +203,7 @@ public class GuiOverlay extends Gui {
 				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 				GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 				GL11.glEnable(GL11.GL_LIGHTING);
-				itemRenderer.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(transformer.getShootItem(altMode)), x - 1 - offset, y - 1);
+				itemRenderer.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1 - offset, y - 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glDepthMask(true);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -214,7 +212,7 @@ public class GuiOverlay extends Gui {
 				GL11.glPushMatrix();
 				GL11.glTranslatef(x - 1 - offset, y + 16, 0);
 				GL11.glScalef(scale, scale, scale);
-				drawString(mc.fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem(altMode).getUnlocalizedName() + ".name")), 0, 0, 0xffffff);
+				drawString(mc.fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), 0, 0, 0xffffff);
 				GL11.glPopMatrix();
 			}
 		}
@@ -269,8 +267,7 @@ public class GuiOverlay extends Gui {
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GL11.glColor4f(0F, 0F, 0F, 0.15F);
 
-				int y = 0;
-
+				int y;
 				if(TFConfig.purgeDashTop) {
 					y = 5;
 				}
@@ -285,9 +282,5 @@ public class GuiOverlay extends Gui {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 		}
-	}
-
-	public void renderCrossbowAmmo(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
-
 	}
 }

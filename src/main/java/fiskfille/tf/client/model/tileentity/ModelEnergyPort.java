@@ -5,15 +5,15 @@ import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class ModelEnergyPort extends MowzieModelBase {
-	public MowzieModelRenderer shape1;
-	public MowzieModelRenderer shape2;
-	public MowzieModelRenderer shape3;
-	public MowzieModelRenderer shape4;
-	public MowzieModelRenderer shape5;
-	public MowzieModelRenderer shape6;
-	public MowzieModelRenderer shape7;
-	public MowzieModelRenderer shape8;
-	public MowzieModelRenderer shape9;
+	public final MowzieModelRenderer shape1;
+	public final MowzieModelRenderer shape2;
+	public final MowzieModelRenderer shape3;
+	public final MowzieModelRenderer shape4;
+	public final MowzieModelRenderer shape5;
+	public final MowzieModelRenderer shape6;
+	public final MowzieModelRenderer shape7;
+	public final MowzieModelRenderer shape8;
+	public final MowzieModelRenderer shape9;
 
 	public ModelEnergyPort() {
 		textureWidth = 64;

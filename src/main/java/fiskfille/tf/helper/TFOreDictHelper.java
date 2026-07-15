@@ -11,8 +11,7 @@ public class TFOreDictHelper {
 		List<String> list = Lists.newArrayList();
 		int[] ids = OreDictionary.getOreIDs(itemstack);
 
-		for(int i = 0; i < ids.length; ++i) {
-			int id = ids[i];
+		for(int id : ids) {
 			list.add(OreDictionary.getOreName(id));
 		}
 

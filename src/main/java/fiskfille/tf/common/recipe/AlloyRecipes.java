@@ -38,9 +38,7 @@ public class AlloyRecipes {
 	public static boolean matches(ItemStack itemstack, String oreDict) {
 		List<ItemStack> aliases = OreDictionary.getOres(oreDict);
 
-		for(int i = 0; i < aliases.size(); ++i) {
-			ItemStack itemstack1 = aliases.get(i);
-
+		for(ItemStack itemstack1 : aliases) {
 			if(matches(itemstack, itemstack1)) {
 				return true;
 			}
@@ -154,13 +152,13 @@ public class AlloyRecipes {
 			LinkedList<ItemStack> list = Lists.newLinkedList();
 
 			for(int i = 0; i < objects.length; ++i) {
-				Object obj = objects[i];
+				final Object obj = objects[i];
 
 				if(obj instanceof List) {
 					List list1 = (List) obj;
 
-					for(int j = 0; j < list1.size(); ++j) {
-						List<ItemStack> list2 = OreDictionary.getOres((String) list1.get(j));
+					for(Object o : list1) {
+						List<ItemStack> list2 = OreDictionary.getOres((String) o);
 
 						if(!list2.isEmpty()) {
 							list.add(list2.get(0));
@@ -171,7 +169,7 @@ public class AlloyRecipes {
 					oreDictNames.put(i, list1);
 				}
 				else if(obj instanceof String) {
-					List<ItemStack> list1 = OreDictionary.getOres((String) obj);
+					final List<ItemStack> list1 = OreDictionary.getOres((String) obj);
 
 					if(!list1.isEmpty()) {
 						list.add(list1.get(0));
@@ -192,10 +190,10 @@ public class AlloyRecipes {
 		}
 
 		public boolean matches(ItemStack input1, ItemStack input2, ItemStack input3) {
-			ItemStack[] ingredients = new ItemStack[]{input1, input2, input3};
+			final ItemStack[] ingredients = new ItemStack[]{input1, input2, input3};
 
 			for(int i = 0; i < getIngredients().length; ++i) {
-				ItemStack itemstack = getIngredients()[i];
+				final ItemStack itemstack = getIngredients()[i];
 
 				if(itemstack == null && ingredients[i] == null) {
 					continue;
@@ -207,9 +205,7 @@ public class AlloyRecipes {
 				List<String> list = getOreDictNames(i);
 				boolean oreDictMatch = false;
 
-				for(int j = 0; j < list.size(); ++j) {
-					String oreDict = list.get(j);
-
+				for(String oreDict : list) {
 					if(AlloyRecipes.matches(ingredients[i], oreDict)) {
 						oreDictMatch = true;
 						break;
@@ -245,7 +241,7 @@ public class AlloyRecipes {
 		}
 
 		public List<String> getOreDictNames(int index) {
-			return oreDictNames.get(index) != null ? oreDictNames.get(index) : new ArrayList<String>();
+			return oreDictNames.get(index) != null ? oreDictNames.get(index) : new ArrayList<>();
 		}
 
 		@Override

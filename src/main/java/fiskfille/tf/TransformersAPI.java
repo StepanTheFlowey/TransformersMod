@@ -96,8 +96,8 @@ public class TransformersAPI {
 	/**
 	 * Used to register the specified Displayable.
 	 *
-	 * @param item        The item to be assigned to.
-	 * @param displayable The Displayable registered.
+	 * @param item             The item to be assigned to.
+	 * @param displayableClass The Displayable registered.
 	 */
 	public static void registerDisplayable(Item item, Class<? extends Displayable> displayableClass) {
 		if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {

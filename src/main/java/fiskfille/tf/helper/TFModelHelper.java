@@ -14,21 +14,14 @@ import java.util.Map;
  */
 @SideOnly(Side.CLIENT)
 public class TFModelHelper {
-	private static final Map<Entity, ModelOffset> offsets = new HashMap<Entity, ModelOffset>();
-	public static ModelBipedPartial modelBipedPartial = new ModelBipedPartial();
+	public static final ModelBipedPartial modelBipedPartial = new ModelBipedPartial();
+	private static final Map<Entity, ModelOffset> offsets = new HashMap<>();
 
 	/**
 	 * @returns the model offsets for the specified entity.
 	 */
 	public static ModelOffset getOffsets(Entity entity) {
-		ModelOffset modelOffset = offsets.get(entity);
-
-		if(modelOffset == null) {
-			modelOffset = new ModelOffset(false);
-			offsets.put(entity, modelOffset);
-		}
-
-		return modelOffset;
+		return offsets.computeIfAbsent(entity, k -> new ModelOffset(false));
 	}
 
 	/**

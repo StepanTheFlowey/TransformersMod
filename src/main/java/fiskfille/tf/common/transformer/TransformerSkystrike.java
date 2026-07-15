@@ -35,13 +35,8 @@ public class TransformerSkystrike extends TransformerJet {
 	}
 
 	@Override
-	public float getHeightOffset(EntityPlayer player, int altMode) {
+	public float getHeightOffset() {
 		return -0.1F;
-	}
-
-	@Override
-	public float getVehicleHeightOffset(EntityPlayer player, int altMode) {
-		return -1.25F;
 	}
 
 	@Override

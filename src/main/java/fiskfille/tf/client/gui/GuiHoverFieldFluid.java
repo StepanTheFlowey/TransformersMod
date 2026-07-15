@@ -13,7 +13,7 @@ public class GuiHoverFieldFluid extends GuiHoverField {
 	private FluidTankTF fluidTank;
 
 	public GuiHoverFieldFluid(int x, int y, int width, int height, FluidTankTF tank) {
-		super(x, y, width, height, new ArrayList<String>());
+		super(x, y, width, height, new ArrayList<>());
 		fluidTank = tank;
 	}
 

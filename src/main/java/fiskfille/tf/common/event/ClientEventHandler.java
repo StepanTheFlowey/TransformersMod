@@ -62,19 +62,16 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static fiskfille.tf.TransformersMod.mc;
 
 public class ClientEventHandler {
-	public RenderPlayerHand renderHandInstance;
+	public final RenderPlayerHand renderHandInstance;
+	private final Map<EntityPlayer, Item> prevHelm = new HashMap<>();
+	private final Map<EntityPlayer, Item> prevChest = new HashMap<>();
+	private final Map<EntityPlayer, Item> prevLegs = new HashMap<>();
+	private final Map<EntityPlayer, Item> prevBoots = new HashMap<>();
 	public boolean prevViewBobbing = mc.gameSettings.viewBobbing;
-
-	private final Map<EntityPlayer, Item> prevHelm = new HashMap<EntityPlayer, Item>();
-	private final Map<EntityPlayer, Item> prevChest = new HashMap<EntityPlayer, Item>();
-	private final Map<EntityPlayer, Item> prevLegs = new HashMap<EntityPlayer, Item>();
-	private final Map<EntityPlayer, Item> prevBoots = new HashMap<EntityPlayer, Item>();
-
 	private double lastX;
 	private double lastY;
 	private double lastZ;
@@ -112,7 +109,7 @@ public class ClientEventHandler {
 				}
 
 				if(TFKeyBinds.keyBindingStealthMode.getIsKeyPressed()) {
-					if(transformationTimer == 1 && transformer.hasStealthForce(player, altMode)) {
+					if(transformationTimer == 1 && transformer.hasStealthForce()) {
 						float stealthModeTimer = TFHelper.getStealthModeTimer(player);
 
 						if(TFData.STEALTH_FORCE.get(player) && stealthModeTimer == 1) {
@@ -143,7 +140,7 @@ public class ClientEventHandler {
 		if(player == mc.thePlayer) {
 			boolean isTransformed = event.altMode != -1;
 
-			if(transformer == null || transformer.disableViewBobbing(player, event.altMode)) {
+			if(transformer == null || transformer.disableViewBobbing()) {
 				if(isTransformed) {
 					GameSettings gameSettings = mc.gameSettings;
 					prevViewBobbing = gameSettings.viewBobbing;
@@ -166,7 +163,7 @@ public class ClientEventHandler {
 
 				int altMode = TFData.ALT_MODE.get(player);
 
-				if(transformer != null && transformer.disableStepSounds(player, altMode)) {
+				if(transformer != null && transformer.disableStepSounds()) {
 					event.setCanceled(true);
 				}
 			}
@@ -310,16 +307,9 @@ public class ClientEventHandler {
 						if(model != null) {
 							model.renderCape(player);
 
-							ModelRenderer backside = model.getBody();
-
+							MowzieModelRenderer backside = model.getBody();
 							if(backside != null) {
-								if(backside instanceof MowzieModelRenderer) {
-									MowzieModelRenderer backsideMowzie = (MowzieModelRenderer) backside;
-									backsideMowzie.postRenderParentChain(0.0625F);
-								}
-								else {
-									backside.postRender(0.0625F);
-								}
+								backside.postRenderParentChain(0.0625F);
 							}
 							else {
 								modelBipedMain.bipedBody.postRender(0.0625F);
@@ -373,16 +363,10 @@ public class ClientEventHandler {
 
 						if(model != null) {
 							model.renderItem(player, heldItemStack);
-							ModelRenderer lowerArm = model.getLowerArm();
+							MowzieModelRenderer lowerArm = model.getLowerArm();
 
 							if(lowerArm != null) {
-								if(lowerArm instanceof MowzieModelRenderer) {
-									MowzieModelRenderer arm = (MowzieModelRenderer) lowerArm;
-									arm.postRenderParentChain(0.0625F);
-								}
-								else {
-									lowerArm.postRender(0.0625F);
-								}
+								lowerArm.postRenderParentChain(0.0625F);
 							}
 							else {
 								modelBipedMain.bipedRightArm.postRender(0.0625F);
@@ -689,7 +673,7 @@ public class ClientEventHandler {
 		int altMode = TFData.ALT_MODE.get(player);
 
 		if(TFHelper.isFullyTransformed(player)) {
-			if((transformer == null || transformer.canUseNitro(player, altMode)) && nitro > 0 && moveForward && nitroPressed) {
+			if((transformer == null || transformer.canUseNitro(player)) && nitro > 0 && moveForward && nitroPressed) {
 				event.newfov = 1.3F;
 			}
 		}

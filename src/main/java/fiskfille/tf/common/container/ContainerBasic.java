@@ -116,7 +116,6 @@ public class ContainerBasic extends Container {
 					itemstack1.stackSize = Math.min(maxStackSize, itemstack1.stackSize);
 					slot.putStack(itemstack1);
 
-					maxStackSize = Math.min(slot.inventory.getInventoryStackLimit(), Math.min(slot.getStack().getMaxStackSize(), slot.getSlotStackLimit()));
 					stackToMove.stackSize = Math.max(stackToMove.stackSize - itemstack1.stackSize, 0);
 					slot.onSlotChanged();
 					success = true;

@@ -22,19 +22,19 @@ import java.util.Map;
 import static fiskfille.tf.common.data.TFPredicates.*;
 
 public class TFData<T> {
-	public static final TFData<Integer> ALT_MODE = new TFData<Integer>(-1, isTransformer());
-	public static final TFData<Float> TRANSFORM_PROGRESS = new TFData<Float>(0F, isTransformer());
-	public static final TFData<Double> FORWARD_VELOCITY = new TFData<Double>(0D, Predicates.alwaysTrue());
-	public static final TFData<Double> HORIZONTAL_VELOCITY = new TFData<Double>(0D, Predicates.alwaysTrue());
-	public static final TFData<Boolean> BOOSTING = new TFData<Boolean>(false, Predicates.alwaysTrue());
-	public static final TFData<Float> NITRO = new TFData<Float>(1F, Predicates.alwaysTrue());
+	public static final TFData<Integer> ALT_MODE = new TFData<>(-1, isTransformer());
+	public static final TFData<Float> TRANSFORM_PROGRESS = new TFData<>(0F, isTransformer());
+	public static final TFData<Double> FORWARD_VELOCITY = new TFData<>(0D, Predicates.alwaysTrue());
+	public static final TFData<Double> HORIZONTAL_VELOCITY = new TFData<>(0D, Predicates.alwaysTrue());
+	public static final TFData<Boolean> BOOSTING = new TFData<>(false, Predicates.alwaysTrue());
+	public static final TFData<Float> NITRO = new TFData<>(1F, Predicates.alwaysTrue());
 	public static final TFData<Integer> PREV_ALT_MODE = new TFDataPrev(ALT_MODE);
-	public static final TFData<Float> PREV_TRANSFORM_PROGRESS = new TFData<Float>(0F, isTransformer());
-	public static final TFData<Boolean> STEALTH_FORCE = new TFData<Boolean>(false, and(isInVehicleMode(), hasStealthForce()));
-	public static final TFData<Float> STEALTH_FORCE_PROGRESS = new TFData<Float>(0F, isInVehicleMode());
-	public static final TFData<Float> PREV_STEALTH_FORCE_PROGRESS = new TFData<Float>(0F, isInVehicleMode());
-	public static final TFData<Transformer> PREV_TRANSFORMER = new TFData<Transformer>(null, Predicates.alwaysTrue());
-	public static final TFData<Float> PREV_NITRO = new TFData<Float>(1F, Predicates.alwaysTrue());
+	public static final TFData<Float> PREV_TRANSFORM_PROGRESS = new TFData<>(0F, isTransformer());
+	public static final TFData<Boolean> STEALTH_FORCE = new TFData<>(false, and(isInVehicleMode(), hasStealthForce()));
+	public static final TFData<Float> STEALTH_FORCE_PROGRESS = new TFData<>(0F, isInVehicleMode());
+	public static final TFData<Float> PREV_STEALTH_FORCE_PROGRESS = new TFData<>(0F, isInVehicleMode());
+	public static final TFData<Transformer> PREV_TRANSFORMER = new TFData<>(null, Predicates.alwaysTrue());
+	public static final TFData<Float> PREV_NITRO = new TFData<>(1F, Predicates.alwaysTrue());
 
 	public static final List<TFData<?>> VALUES = Lists.newArrayList();
 
@@ -109,12 +109,7 @@ public class TFData<T> {
 	}
 
 	public Predicate<EntityPlayer> predicate(final TFData data, final T value) {
-		return new Predicate<EntityPlayer>() {
-			@Override
-			public boolean apply(EntityPlayer input) {
-				return value == null ? data.get(input) == value : data.get(input) == value || data.get(input).equals(value);
-			}
-		};
+		return input -> value == null ? data.get(input) == value : data.get(input) == value || data.get(input).equals(value);
 	}
 
 	public boolean set(EntityPlayer player, T value) {

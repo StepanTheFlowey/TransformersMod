@@ -5,25 +5,25 @@ import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 
 public class ModelCrystal extends MowzieModelBase {
-	public MowzieModelRenderer shape1;
-	public MowzieModelRenderer shape2;
-	public MowzieModelRenderer shape2_1;
-	public MowzieModelRenderer shape5;
-	public MowzieModelRenderer shape5_1;
-	public MowzieModelRenderer shape7;
-	public MowzieModelRenderer shape7_1;
-	public MowzieModelRenderer shape7_2;
-	public MowzieModelRenderer shape7_3;
-	public MowzieModelRenderer shape39;
-	public MowzieModelRenderer shape42;
-	public MowzieModelRenderer shape42_1;
-	public MowzieModelRenderer shape42_2;
-	public MowzieModelRenderer shape42_3;
-	public MowzieModelRenderer shape8;
-	public MowzieModelRenderer shape8_1;
-	public MowzieModelRenderer shape8_2;
-	public MowzieModelRenderer shape8_3;
-	public MowzieModelRenderer shape40;
+	public final MowzieModelRenderer shape1;
+	public final MowzieModelRenderer shape2;
+	public final MowzieModelRenderer shape2_1;
+	public final MowzieModelRenderer shape5;
+	public final MowzieModelRenderer shape5_1;
+	public final MowzieModelRenderer shape7;
+	public final MowzieModelRenderer shape7_1;
+	public final MowzieModelRenderer shape7_2;
+	public final MowzieModelRenderer shape7_3;
+	public final MowzieModelRenderer shape39;
+	public final MowzieModelRenderer shape42;
+	public final MowzieModelRenderer shape42_1;
+	public final MowzieModelRenderer shape42_2;
+	public final MowzieModelRenderer shape42_3;
+	public final MowzieModelRenderer shape8;
+	public final MowzieModelRenderer shape8_1;
+	public final MowzieModelRenderer shape8_2;
+	public final MowzieModelRenderer shape8_3;
+	public final MowzieModelRenderer shape40;
 
 	public ModelCrystal() {
 		textureWidth = 16;

@@ -40,12 +40,12 @@ public class TransformerCloudtrap extends TransformerJet {
 	}
 
 	@Override
-	public float getHeightOffset(EntityPlayer player, int altMode) {
+	public float getHeightOffset() {
 		return -0.1F;
 	}
 
 	@Override
-	public float getVehicleHeightOffset(EntityPlayer player, int altMode) {
+	public float getVehicleHeightOffset() {
 		return -1.5F;
 	}
 
@@ -72,12 +72,12 @@ public class TransformerCloudtrap extends TransformerJet {
 	}
 
 	@Override
-	public void updateMovement(EntityPlayer player, int altMode) {
+	public void updateMovement(EntityPlayer player) {
 		TFMotionManager.motionJet(player, 140, 200, 50);
 	}
 
 	@Override
-	public void doNitroParticles(EntityPlayer player, int altMode) {
+	public void doNitroParticles(EntityPlayer player) {
 		Random rand = new Random();
 
 		for(int i = 0; i < 4; ++i) {

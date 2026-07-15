@@ -12,17 +12,14 @@ public class TFParticles {
 		if(mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) {
 			if(mc.theWorld.isRemote) {
 				int particleSetting = mc.gameSettings.particleSetting;
-
 				if(particleSetting == 1 && mc.theWorld.rand.nextInt(3) == 0) {
 					particleSetting = 2;
 				}
 
-				double diffX = mc.renderViewEntity.posX - x;
-				double diffY = mc.renderViewEntity.posY - y;
-				double diffZ = mc.renderViewEntity.posZ - z;
-
-				EntityFX particle = null;
-				double maxRenderDistance = 16D;
+				final double diffX = mc.renderViewEntity.posX - x;
+				final double diffY = mc.renderViewEntity.posY - y;
+				final double diffZ = mc.renderViewEntity.posZ - z;
+				final double maxRenderDistance = 16D;
 
 				if(diffX * diffX + diffY * diffY + diffZ * diffZ > maxRenderDistance * maxRenderDistance) {
 					return null;
@@ -32,8 +29,8 @@ public class TFParticles {
 				}
 				else {
 					try {
-						Constructor c = particleType.particleClass.getConstructor(World.class, double.class, double.class, double.class, double.class, double.class, double.class);
-						particle = (EntityFX) c.newInstance(mc.theWorld, x, y, z, motionX, motionY, motionZ);
+						final Constructor<? extends EntityFX> c = particleType.particleClass.getConstructor(World.class, double.class, double.class, double.class, double.class, double.class, double.class);
+						final EntityFX particle = c.newInstance(mc.theWorld, x, y, z, motionX, motionY, motionZ);
 
 						mc.effectRenderer.addEffect(particle);
 

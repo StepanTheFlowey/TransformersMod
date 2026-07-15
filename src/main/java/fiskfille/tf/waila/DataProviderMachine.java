@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class DataProviderMachine implements IWailaDataProvider {
-	public String key;
-	public Class targetClass;
+	public final String key;
+	public final Class targetClass;
 
 	public DataProviderMachine(String s, Class c) {
 		key = s;

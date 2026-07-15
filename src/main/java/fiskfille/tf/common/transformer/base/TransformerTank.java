@@ -23,12 +23,12 @@ public abstract class TransformerTank extends Transformer {
 	}
 
 	@Override
-	public boolean canZoom(EntityPlayer player) {
+	public boolean canZoom() {
 		return true;
 	}
 
 	@Override
-	public String getShootSound(int altMode) {
+	public String getShootSound() {
 		return TransformersMod.modid + ":tankfire";
 	}
 
@@ -38,27 +38,27 @@ public abstract class TransformerTank extends Transformer {
 	}
 
 	@Override
-	public void updateMovement(EntityPlayer player, int altMode) {
+	public void updateMovement(EntityPlayer player) {
 		TFMotionManager.motion(player, 20, 30, 0, 20, false, true, false);
 	}
 
 	@Override
-	public boolean canShoot(EntityPlayer player, int altMode) {
+	public boolean canShoot(EntityPlayer player) {
 		return true;
 	}
 
 	@Override
-	public Item getShootItem(int altMode) {
+	public Item getShootItem() {
 		return TFItems.tankShell;
 	}
 
 	@Override
-	public Entity getShootEntity(EntityPlayer player, int altMode) {
+	public Entity getShootEntity(EntityPlayer player) {
 		return new EntityTankShell(player.worldObj, player, TFConfig.allowTankShellExplosions);
 	}
 
 	@Override
-	public void doNitroParticles(EntityPlayer player, int altMode) {
+	public void doNitroParticles(EntityPlayer player) {
 		Random rand = new Random();
 
 		for(int i = 0; i < 4; ++i) {

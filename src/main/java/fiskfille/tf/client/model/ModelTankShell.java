@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
 public class ModelTankShell extends ModelBase {
-	public ModelRenderer shell;
+	public final ModelRenderer shell;
 
 	public ModelTankShell() {
 		textureWidth = 16;

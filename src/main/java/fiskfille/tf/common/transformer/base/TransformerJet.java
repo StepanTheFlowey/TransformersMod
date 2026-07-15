@@ -27,32 +27,32 @@ public abstract class TransformerJet extends Transformer {
 	}
 
 	@Override
-	public float getThirdPersonDistance(EntityPlayer player, int altMode) {
+	public float getThirdPersonDistance(EntityPlayer player) {
 		return 4F;
 	}
 
 	@Override
-	public void updateMovement(EntityPlayer player, int altMode) {
+	public void updateMovement(EntityPlayer player) {
 		TFMotionManager.motionJet(player, 100, 140, 20);
 	}
 
 	@Override
-	public boolean canShoot(EntityPlayer player, int altMode) {
+	public boolean canShoot(EntityPlayer player) {
 		return true;
 	}
 
 	@Override
-	public Item getShootItem(int altMode) {
+	public Item getShootItem() {
 		return TFItems.missile;
 	}
 
 	@Override
-	public Entity getShootEntity(EntityPlayer player, int altMode) {
+	public Entity getShootEntity(EntityPlayer player) {
 		return new EntityMissile(player.worldObj, player, TFConfig.allowMissileExplosions, TFHelper.isInStealthMode(player));
 	}
 
 	@Override
-	public void doNitroParticles(EntityPlayer player, int altMode) {
+	public void doNitroParticles(EntityPlayer player) {
 		Random rand = new Random();
 
 		for(int i = 0; i < 4; ++i) {

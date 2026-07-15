@@ -19,9 +19,9 @@ import java.util.Map;
 public abstract class ShaderProgram {
 	private static final FloatBuffer MATRIX_BUFFER = BufferUtils.createFloatBuffer(16);
 
-	private static final List<ShaderProgram> PROGRAMS = new ArrayList<ShaderProgram>();
+	private static final List<ShaderProgram> PROGRAMS = new ArrayList<>();
 
-	private final Map<String, Integer> uniforms = new HashMap<String, Integer>();
+	private final Map<String, Integer> uniforms = new HashMap<>();
 
 	private final int programID;
 	private final int vertexShaderID;
@@ -86,13 +86,14 @@ public abstract class ShaderProgram {
 	public static int loadShader(String resource, int type) throws Exception {
 		BufferedReader in = new BufferedReader(new InputStreamReader(ShaderProgram.class.getResourceAsStream("/assets/transformers/shaders/" + resource)));
 
-		String line, source = "";
+		String line;
+		StringBuilder source = new StringBuilder();
 		while((line = in.readLine()) != null) {
-			source += line + "\n";
+			source.append(line).append("\n");
 		}
 
 		final int shaderID = OpenGlHelper.func_153195_b(type);
-		final byte[] bytes = source.getBytes();
+		final byte[] bytes = source.toString().getBytes();
 		final ByteBuffer buffer = BufferUtils.createByteBuffer(bytes.length).put(bytes);
 		buffer.flip();
 		OpenGlHelper.func_153169_a(shaderID, buffer);

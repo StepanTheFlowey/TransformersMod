@@ -6,18 +6,18 @@ import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class ModelTransformiumSeed extends ModelBase {
-	public ModelRenderer shape1;
-	public ModelRenderer shape2;
-	public ModelRenderer shape3;
-	public ModelRenderer shape4;
-	public ModelRenderer shape5;
-	public ModelRenderer shape6;
-	public ModelRenderer shape7;
-	public ModelRenderer wingA;
-	public ModelRenderer wingB;
-	public ModelRenderer wingC;
-	public ModelRenderer wingD;
-	public ModelRenderer antenna;
+	public final ModelRenderer shape1;
+	public final ModelRenderer shape2;
+	public final ModelRenderer shape3;
+	public final ModelRenderer shape4;
+	public final ModelRenderer shape5;
+	public final ModelRenderer shape6;
+	public final ModelRenderer shape7;
+	public final ModelRenderer wingA;
+	public final ModelRenderer wingB;
+	public final ModelRenderer wingC;
+	public final ModelRenderer wingD;
+	public final ModelRenderer antenna;
 
 	public ModelTransformiumSeed() {
 		textureWidth = 64;
@@ -96,7 +96,7 @@ public class ModelTransformiumSeed extends ModelBase {
 	public void setRotationAngles(EntityTransformiumSeed seed) {
 		super.setRotationAngles(0, 0, 0, 0, 0, 0, seed);
 
-		float t = (float) (seed.ticksExisted <= 50 ? seed.ticksExisted : 50) / 50;
+		float t = (float) (Math.min(seed.ticksExisted, 50)) / 50;
 		float i = 1F - t;
 
 		setRotation(wingA, 0.06981317007977318F * i + (float) Math.PI / 2 * t, 0F, 0F);

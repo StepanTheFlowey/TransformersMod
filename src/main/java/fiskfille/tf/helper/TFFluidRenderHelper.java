@@ -21,8 +21,8 @@ import static fiskfille.tf.TransformersMod.mc;
 public final class TFFluidRenderHelper {
 	public static final int DISPLAY_STAGES = 100;
 	private static final RenderInfo liquidBlock = new RenderInfo();
-	private static final Map<Fluid, int[]> flowingRenderCache = new HashMap<Fluid, int[]>();
-	private static final Map<Fluid, int[]> stillRenderCache = new HashMap<Fluid, int[]>();
+	private static final Map<Fluid, int[]> flowingRenderCache = new HashMap<>();
+	private static final Map<Fluid, int[]> stillRenderCache = new HashMap<>();
 
 	public static void onTextureStitch(TextureMap map) {
 		for(int[] aint : flowingRenderCache.values()) {

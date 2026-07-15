@@ -15,14 +15,14 @@ import org.lwjgl.opengl.GL11;
 public class RenderCrystal extends TileEntitySpecialRenderer {
 	private final ModelCrystal model = new ModelCrystal();
 
-	public void render(TileEntityCrystal tile, double x, double y, double z, float partialTicks) {
+	public void render(TileEntityCrystal tile, double x, double y, double z) {
 		BlockEnergonCrystal block = (BlockEnergonCrystal) tile.getBlockType();
 		Energon energon = block.getEnergonType();
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
 		GL11.glScalef(1, -1F, -1F);
-		adjustRotation(tile, x, y, z, partialTicks);
+		adjustRotation(tile);
 
 		final float[] rgb = TFRenderHelper.hexToRGB(energon.getColor());
 		GL11.glColor4f(rgb[0], rgb[1], rgb[2], 0.5F);
@@ -59,7 +59,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	public void adjustRotation(TileEntityCrystal tile, double x, double y, double z, float partialTicks) {
+	public void adjustRotation(TileEntityCrystal tile) {
 		final int metadata = tile.getBlockMetadata();
 		final ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
 
@@ -82,6 +82,6 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks) {
-		render((TileEntityCrystal) tile, x, y, z, partialTicks);
+		render((TileEntityCrystal) tile, x, y, z);
 	}
 }

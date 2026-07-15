@@ -65,10 +65,6 @@ public class AssemblyTableRecipe implements IRecipe {
 				ItemStack stackInSlot = inventory.getStackInRowAndColumn(row, column);
 
 				if(stackInSlot != null || recipeStack != null) {
-					if(stackInSlot == null && recipeStack != null || stackInSlot != null && recipeStack == null) {
-						return false;
-					}
-
 					if(recipeStack.getItem() != stackInSlot.getItem()) {
 						return false;
 					}

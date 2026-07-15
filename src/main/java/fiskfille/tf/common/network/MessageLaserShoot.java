@@ -65,7 +65,7 @@ public class MessageLaserShoot implements IMessage {
 
 					int altMode = TFData.ALT_MODE.get(from);
 
-					if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(from, altMode))) {
+					if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(from))) {
 						Item shootItem = Item.getItemFromBlock(TFBlocks.energonCube);
 						boolean isCreative = from.capabilities.isCreativeMode;
 						boolean consumeItems = !isCreative || from.inventory.hasItem(shootItem) && message.consume;

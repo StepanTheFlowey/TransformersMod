@@ -10,8 +10,8 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler {
-	public static RenderBlockEnergonOre instance = new RenderBlockEnergonOre();
-	public static int renderId = RenderingRegistry.getNextAvailableRenderId();
+	public static final RenderBlockEnergonOre instance = new RenderBlockEnergonOre();
+	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {

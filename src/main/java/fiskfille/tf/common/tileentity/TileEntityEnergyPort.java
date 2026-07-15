@@ -12,7 +12,7 @@ import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceiver, IReceiverRender {
-	public ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
 
 	public IEnergyContainer getReceiver() {
 		ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());

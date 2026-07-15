@@ -42,14 +42,12 @@ public class Dyes {
 	public static final int DARK_GRAY = 18;
 	public static final int PALE_GREEN = 19;
 	public static final int PALE_BROWN = 20;
-	public static LinkedList<Integer> dyes = Lists.newLinkedList();
+	public static final LinkedList<Integer> dyes = Lists.newLinkedList();
 	private static final Map<Integer, String> names = Maps.newHashMap();
 
 	static {
-		Lists.newArrayList();
-
 		for(Field field : Dyes.class.getFields()) {
-			String s = field.getType().getName();
+			final String s = field.getType().getName();
 
 			if(s.equals("int")) {
 				try {
@@ -91,7 +89,7 @@ public class Dyes {
 	}
 
 	public static ItemStack dye(Object obj, int id) {
-		ItemStack itemstack = null;
+		ItemStack itemstack;
 
 		if(obj instanceof Block) {
 			itemstack = new ItemStack((Block) obj);
@@ -150,9 +148,7 @@ public class Dyes {
 	}
 
 	public Dyes invert() {
-		for(int i = 0; i < itemstacks.size(); ++i) {
-			ItemStack itemstack = itemstacks.get(i);
-
+		for(ItemStack itemstack : itemstacks) {
 			if(itemstack.getItem() == Items.dye) {
 				itemstack.setItemDamage(15 - itemstack.getItemDamage());
 			}
@@ -162,6 +158,6 @@ public class Dyes {
 	}
 
 	public ItemStack[] compile() {
-		return itemstacks.toArray(new ItemStack[itemstacks.size()]);
+		return itemstacks.toArray(new ItemStack[0]);
 	}
 }

@@ -30,7 +30,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	private static final int[] slotsBottom = new int[]{3};
 	private static final int[] slotsSides = new int[]{0, 1, 2};
 
-	public ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
 	public TileDataEnergyContainer data = new TileDataEnergyContainer(32000);
 
 	public EnumSmeltingMode smeltingMode = EnumSmeltingMode.ALLOY;
@@ -191,7 +191,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 			alloyResult = false;
 		}
 
-		return list.toArray(new ItemStack[list.size()]);
+		return list.toArray(new ItemStack[0]);
 	}
 
 	public void smeltItem() {

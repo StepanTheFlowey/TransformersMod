@@ -22,7 +22,7 @@ public class AssemblyTableCraftingManager {
 	}
 
 	public AssemblyTableRecipe addRecipe(ItemStack result, ItemStack[] dyes, Object... ingredients) {
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		int i = 0;
 		int j = 0;
 		int k = 0;
@@ -33,7 +33,7 @@ public class AssemblyTableCraftingManager {
 			for(String s1 : astring) {
 				++k;
 				j = s1.length();
-				s = s + s1;
+				s.append(s1);
 			}
 		}
 		else {
@@ -41,12 +41,11 @@ public class AssemblyTableCraftingManager {
 				String s2 = (String) ingredients[i++];
 				++k;
 				j = s2.length();
-				s = s + s2;
+				s.append(s2);
 			}
 		}
 
 		HashMap hashmap;
-
 		for(hashmap = new HashMap(); i < ingredients.length; i += 2) {
 			Character character = (Character) ingredients[i];
 			ItemStack itemstack1 = null;
@@ -68,7 +67,6 @@ public class AssemblyTableCraftingManager {
 		}
 
 		ItemStack[] itemstacks = new ItemStack[j * k];
-
 		for(int i1 = 0; i1 < j * k; ++i1) {
 			char c = s.charAt(i1);
 

@@ -4,22 +4,22 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
 public class ModelBassBlaster extends ModelBase {
-	public ModelRenderer weaponbase;
-	public ModelRenderer wepbody1;
-	public ModelRenderer wepbody2;
-	public ModelRenderer wepbody3;
-	public ModelRenderer wepbody4;
-	public ModelRenderer wepbody5;
-	public ModelRenderer lowerflap1;
-	public ModelRenderer upperflap1;
-	public ModelRenderer vent1;
-	public ModelRenderer vent2;
-	public ModelRenderer vent3;
-	public ModelRenderer wepbody6;
-	public ModelRenderer cable1;
-	public ModelRenderer cable2;
-	public ModelRenderer lowerflap2;
-	public ModelRenderer upperflap2;
+	public final ModelRenderer weaponbase;
+	public final ModelRenderer wepbody1;
+	public final ModelRenderer wepbody2;
+	public final ModelRenderer wepbody3;
+	public final ModelRenderer wepbody4;
+	public final ModelRenderer wepbody5;
+	public final ModelRenderer lowerflap1;
+	public final ModelRenderer upperflap1;
+	public final ModelRenderer vent1;
+	public final ModelRenderer vent2;
+	public final ModelRenderer vent3;
+	public final ModelRenderer wepbody6;
+	public final ModelRenderer cable1;
+	public final ModelRenderer cable2;
+	public final ModelRenderer lowerflap2;
+	public final ModelRenderer upperflap2;
 
 	public ModelBassBlaster() {
 		textureWidth = 64;

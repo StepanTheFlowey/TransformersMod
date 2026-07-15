@@ -10,9 +10,9 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class TFItems {
-	public static ArmorMaterial TRANSFORMERMATERIAL = EnumHelper.addArmorMaterial("Transformer", 1250 / 16, new int[]{3, 9, 6, 3}, 2);
-	public static ArmorMaterial TANKMATERIAL = EnumHelper.addArmorMaterial("Transformer", 1550 / 16, new int[]{4, 9, 7, 3}, 2);
-	public static ArmorMaterial SUBWOOFERMATERIAL = EnumHelper.addArmorMaterial("Transformer", 1250 / 16, new int[]{3, 9, 7, 3}, 2);
+	public static final ArmorMaterial TRANSFORMERMATERIAL = EnumHelper.addArmorMaterial("Transformer", 1250 / 16, new int[]{3, 9, 6, 3}, 2);
+	public static final ArmorMaterial TANKMATERIAL = EnumHelper.addArmorMaterial("Transformer", 1550 / 16, new int[]{4, 9, 7, 3}, 2);
+	public static final ArmorMaterial SUBWOOFERMATERIAL = EnumHelper.addArmorMaterial("Transformer", 1250 / 16, new int[]{3, 9, 7, 3}, 2);
 
 	public static Item transformiumFragment;
 	public static Item transformiumAlloy;

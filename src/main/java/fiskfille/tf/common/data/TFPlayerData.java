@@ -51,8 +51,7 @@ public class TFPlayerData implements IExtendedEntityProperties {
 
 	@Override
 	public void init(Entity entity, World world) {
-		if(entity instanceof EntityPlayer) {
-		}
+
 	}
 
 	public void copy(TFPlayerData props) {

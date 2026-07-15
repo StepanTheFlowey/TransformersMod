@@ -21,12 +21,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmitter, IEnergyReceiver, IChunkLoaderTile, IMultiTile {
-	public ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final EnergyStorage storage = new EnergyStorageRelay(this);
+	public final Map<DimensionalCoords, Float> netEnergyTransfer = Maps.newHashMap();
 	public TileDataRelay data = new TileDataRelay();
-
-	public EnergyStorage storage = new EnergyStorageRelay(this);
-
-	public Map<DimensionalCoords, Float> netEnergyTransfer = Maps.newHashMap();
 	public float energyTransfer;
 	public float energyReceived;
 	public float energyExtracted;

@@ -31,16 +31,13 @@ import java.util.Set;
 
 @SideOnly(Side.CLIENT)
 public class GuiSelectReceivers extends GuiScreen {
-	public TileEntity owner;
-	public IEnergyTransmitter transmitter;
-
+	public final TileEntity owner;
+	public final IEnergyTransmitter transmitter;
+	public final List<Integer> layers = Lists.newArrayList();
+	public final int spacing = 1;
+	public final int size = 3;
 	public DimensionalCoords[] coordArray;
-	public List<Integer> layers = Lists.newArrayList();
-
 	public GuiVerticalHeightSlider heightSlider;
-
-	public int spacing = 1;
-	public int size = 3;
 
 	public GuiSelectReceivers(TileEntity tile) {
 		owner = tile;
@@ -57,12 +54,7 @@ public class GuiSelectReceivers extends GuiScreen {
 		int baseY = MathHelper.floor_double(height / 2 - (spacing + size) * boardWidth / 2);
 
 		buttonList.add(new GuiButton(0, width / 2 - 100, height - height / 7, I18n.format("gui.done")));
-		buttonList.add(heightSlider = new GuiVerticalHeightSlider(1, this, baseX + boardWidthFl * (spacing + size), baseY - 1, boardWidthFl * (spacing + size) + 1, new Runnable() {
-			@Override
-			public void run() {
-				updateBlocks();
-			}
-		}));
+		buttonList.add(heightSlider = new GuiVerticalHeightSlider(1, this, baseX + boardWidthFl * (spacing + size), baseY - 1, boardWidthFl * (spacing + size) + 1, () -> updateBlocks()));
 
 		coordArray = new DimensionalCoords[boardWidthFl * boardWidthFl];
 		layers.clear();
@@ -297,7 +289,7 @@ public class GuiSelectReceivers extends GuiScreen {
 				}
 			}
 
-			Set<DimensionalCoords> receiverCoords = new HashSet<DimensionalCoords>();
+			Set<DimensionalCoords> receiverCoords = new HashSet<>();
 
 			for(ReceiverEntry entry : transmitter.getTransmissionHandler().getReceivers()) {
 				receiverCoords.add(entry.getCoords());
@@ -337,8 +329,7 @@ public class GuiSelectReceivers extends GuiScreen {
 								if(index >= 0 && entry.getCoords().posY == getLayer()) {
 									int k = index;
 									int l = 0;
-
-									for(l = 0; k >= boardWidth; ++l) {
+									for(; k >= boardWidth; ++l) {
 										k -= boardWidth;
 									}
 
@@ -387,7 +378,7 @@ public class GuiSelectReceivers extends GuiScreen {
 					int k = index;
 					int l = 0;
 
-					for(l = 0; k >= boardWidth; ++l) {
+					for(; k >= boardWidth; ++l) {
 						k -= boardWidth;
 					}
 

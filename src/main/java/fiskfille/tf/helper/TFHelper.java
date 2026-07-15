@@ -86,14 +86,14 @@ public class TFHelper {
 	}
 
 	public static boolean isInStealthMode(EntityPlayer player) {
-		Transformer transformer = TFHelper.getTransformer(player);
+		final Transformer transformer = TFHelper.getTransformer(player);
 		int altMode = TFData.ALT_MODE.get(player);
 
 		if(altMode == -1) {
 			altMode = TFData.PREV_ALT_MODE.get(player);
 		}
 
-		return transformer != null && transformer.hasStealthForce(player, altMode) && altMode != -1 && getStealthModeTimer(player) > 0;
+		return transformer != null && transformer.hasStealthForce() && altMode != -1 && getStealthModeTimer(player) > 0;
 	}
 
 	public static float getTransformationTimer(EntityPlayer player) {
@@ -146,7 +146,7 @@ public class TFHelper {
 		if(transformer != null) {
 			int altMode = TFData.ALT_MODE.get(player);
 
-			return TFHelper.median(transformer.getVehicleHeightOffset(player, altMode), transformer.getHeightOffset(player, altMode), TFHelper.getTransformationTimer(player));
+			return TFHelper.median(transformer.getVehicleHeightOffset(), transformer.getHeightOffset(), TFHelper.getTransformationTimer(player));
 		}
 
 		return 0;

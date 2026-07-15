@@ -10,10 +10,10 @@ import net.minecraftforge.common.util.Constants.NBT;
 import java.util.List;
 
 public class SubTicket {
+	public final int xCoord;
+	public final int yCoord;
+	public final int zCoord;
 	public Ticket owner;
-	public int xCoord;
-	public int yCoord;
-	public int zCoord;
 	private NBTTagCompound nbtTag;
 
 	public SubTicket(int x, int y, int z) {

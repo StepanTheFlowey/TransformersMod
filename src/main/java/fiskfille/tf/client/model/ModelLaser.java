@@ -6,8 +6,8 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 public class ModelLaser extends ModelBase {
-	public ModelRenderer laserInner;
-	public ModelRenderer laserOuter;
+	public final ModelRenderer laserInner;
+	public final ModelRenderer laserOuter;
 
 	public ModelLaser() {
 		textureWidth = 64;

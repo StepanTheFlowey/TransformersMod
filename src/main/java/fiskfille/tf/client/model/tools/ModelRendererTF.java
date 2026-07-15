@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ModelRendererTF extends MowzieModelRenderer {
-	private List<ModelRenderer> hideUntil = Lists.newArrayList();
+	private List hideUntil = Lists.newArrayList();
 
 	public ModelRendererTF(ModelBase modelBase, String name) {
 		super(modelBase, name);
@@ -91,8 +91,8 @@ public class ModelRendererTF extends MowzieModelRenderer {
 
 	protected void renderChildren(float f) {
 		if(childModels != null) {
-			for(int i = 0; i < childModels.size(); ++i) {
-				ModelRendererTF model = (ModelRendererTF) childModels.get(i);
+			for(Object childModel : childModels) {
+				ModelRendererTF model = (ModelRendererTF) childModel;
 				List list = new ArrayList(hideUntil);
 
 				if(hideUntil.contains(model)) {
@@ -110,8 +110,8 @@ public class ModelRendererTF extends MowzieModelRenderer {
 			hideUntil.clear();
 
 			if(childModels != null) {
-				for(int i = 0; i < childModels.size(); ++i) {
-					ModelRendererTF model = (ModelRendererTF) childModels.get(i);
+				for(Object childModel : childModels) {
+					ModelRendererTF model = (ModelRendererTF) childModel;
 					model.hideUntil();
 				}
 			}

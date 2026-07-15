@@ -5,23 +5,23 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelFlamethrower extends ModelBase {
-	ModelRenderer box1;
-	ModelRenderer box2;
-	ModelRenderer box3;
-	ModelRenderer box4;
-	ModelRenderer box5;
-	ModelRenderer box6;
-	ModelRenderer box7;
-	ModelRenderer box8;
-	ModelRenderer box9;
-	ModelRenderer box10;
-	ModelRenderer box11;
-	ModelRenderer box12;
-	ModelRenderer box13;
-	ModelRenderer box14;
-	ModelRenderer box15;
-	ModelRenderer box16;
-	ModelRenderer box17;
+	final ModelRenderer box1;
+	final ModelRenderer box2;
+	final ModelRenderer box3;
+	final ModelRenderer box4;
+	final ModelRenderer box5;
+	final ModelRenderer box6;
+	final ModelRenderer box7;
+	final ModelRenderer box8;
+	final ModelRenderer box9;
+	final ModelRenderer box10;
+	final ModelRenderer box11;
+	final ModelRenderer box12;
+	final ModelRenderer box13;
+	final ModelRenderer box14;
+	final ModelRenderer box15;
+	final ModelRenderer box16;
+	final ModelRenderer box17;
 
 	public ModelFlamethrower() {
 		textureWidth = 64;

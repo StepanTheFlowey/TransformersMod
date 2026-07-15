@@ -118,7 +118,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		float offset = 0;
 
 		for(int i = 0; i < 3; ++i) {
-			float radius = 0;
+			float radius;
 			float innerRadius = 0;
 			float dent = 0;
 

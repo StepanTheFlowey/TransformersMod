@@ -129,12 +129,12 @@ public class AssemblyTableRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public class CachedAssemblyRecipe extends CachedRecipe {
-		public ArrayList<PositionedStack> ingredients;
-		public PositionedStack result;
+		public final ArrayList<PositionedStack> ingredients;
+		public final PositionedStack result;
 
 		public CachedAssemblyRecipe(int width, int height, Object[] items, Object[] dyes, ItemStack out) {
 			result = new PositionedStack(out, 131, 14);
-			ingredients = new ArrayList<PositionedStack>();
+			ingredients = new ArrayList<>();
 			setIngredients(width, height, items, dyes);
 		}
 

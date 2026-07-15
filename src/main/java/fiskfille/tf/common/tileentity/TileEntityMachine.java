@@ -16,6 +16,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class TileEntityMachine extends TileEntityTF implements ITileDataCallback {
@@ -25,10 +26,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 
 	public TileEntityMachine() {
 		io = new EnumIO[ForgeDirection.VALID_DIRECTIONS.length];
-
-		for(int i = 0; i < io.length; ++i) {
-			io[i] = EnumIO.NONE;
-		}
+		Arrays.fill(io, EnumIO.NONE);
 	}
 
 	@Override
@@ -115,8 +113,8 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	}
 
 	public boolean isConfigured() {
-		for(int i = 0; i < io.length; ++i) {
-			if(io[i].ordinal() > 0) {
+		for(EnumIO enumIO : io) {
+			if(enumIO.ordinal() > 0) {
 				return true;
 			}
 		}

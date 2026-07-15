@@ -33,7 +33,7 @@ public abstract class Transformer {
 	 * @param player The player trying to use nitro.
 	 * @returns whether the player can use nitro.
 	 */
-	public boolean canUseNitro(EntityPlayer player, int altMode) {
+	public boolean canUseNitro(EntityPlayer player) {
 		return true;
 	}
 
@@ -60,57 +60,57 @@ public abstract class Transformer {
 	public void tick(EntityPlayer player, float timer) {
 	}
 
-	public boolean canZoom(EntityPlayer player) {
+	public boolean canZoom() {
 		return false;
 	}
 
-	public float getZoomAmount(EntityPlayer player, int altMode) {
+	public float getZoomAmount() {
 		return 0.1F;
 	}
 
-	public float getHeightOffset(EntityPlayer player, int altMode) {
+	public float getHeightOffset() {
 		return 0;
 	}
 
-	public float getVehicleHeightOffset(EntityPlayer player, int altMode) {
+	public float getVehicleHeightOffset() {
 		return -1.25F;
 	}
 
-	public boolean canJumpAsVehicle(EntityPlayer player, int altMode) {
+	public boolean canJumpAsVehicle(EntityPlayer player) {
 		return false;
 	}
 
-	public boolean canTransform(EntityPlayer player) {
+	public boolean canTransform() {
 		return TFConfig.canTransform(this);
 	}
 
-	public boolean hasStealthForce(EntityPlayer player, int altMode) {
+	public boolean hasStealthForce() {
 		return false;
 	}
 
-	public abstract void updateMovement(EntityPlayer player, int altMode);
+	public abstract void updateMovement(EntityPlayer player);
 
-	public Item getShootItem(int altMode) {
+	public Item getShootItem() {
 		return null;
 	}
 
-	public Entity getShootEntity(EntityPlayer playe, int altModer) {
+	public Entity getShootEntity(EntityPlayer playe) {
 		return null;
 	}
 
-	public String getShootSound(int altMode) {
+	public String getShootSound() {
 		return null;
 	}
 
-	public float getShootVolume(int altMode) {
+	public float getShootVolume() {
 		return 1;
 	}
 
-	public int getShots(int altMode) {
+	public int getShots() {
 		return 4;
 	}
 
-	public boolean canShoot(EntityPlayer player, int altMode) {
+	public boolean canShoot(EntityPlayer player) {
 		return false;
 	}
 
@@ -118,7 +118,7 @@ public abstract class Transformer {
 		return true;
 	}
 
-	public float getThirdPersonDistance(EntityPlayer player, int altMode) {
+	public float getThirdPersonDistance(EntityPlayer player) {
 		return 4 - TFHelper.getTransformationTimer(player) * 2;
 	}
 
@@ -127,7 +127,7 @@ public abstract class Transformer {
 	 *
 	 * @param player The player making the particles
 	 */
-	public void doNitroParticles(EntityPlayer player, int altMode) {
+	public void doNitroParticles(EntityPlayer player) {
 	}
 
 	/**
@@ -141,31 +141,30 @@ public abstract class Transformer {
 		return distance;
 	}
 
-	public boolean hasRapidFire(int altMode) {
+	public boolean hasRapidFire() {
 		return false;
 	}
 
-	public boolean disableViewBobbing(EntityPlayer player, int altMode) {
+	public boolean disableViewBobbing() {
 		return true;
 	}
 
-	public boolean disableStepSounds(EntityPlayer player, int altMode) {
+	public boolean disableStepSounds() {
 		return true;
 	}
 
-	public boolean overrideFirstPerson(EntityPlayer player, int altMode) {
+	public boolean overrideFirstPerson() {
 		return true;
 	}
 
-	public boolean renderSpeedAndNitro(EntityPlayer player, int altMode) {
+	public boolean renderSpeedAndNitro() {
 		return true;
 	}
 
 	/**
-	 * @param player The player
 	 * @return Whether this Transformer can interact with the world while in vehicle mode, i.e. break blocks, damage entities, etc.
 	 */
-	public boolean canInteractInVehicleMode(EntityPlayer player, int altMode) {
+	public boolean canInteractInVehicleMode() {
 		return true;
 	}
 

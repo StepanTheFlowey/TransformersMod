@@ -12,7 +12,7 @@ import net.minecraft.item.ItemBlock;
 
 public class TFBlockRegistry {
 	public static void registerBlock(Block block, String name) {
-		String unlocalizedName = name.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
+		final String unlocalizedName = name.toLowerCase().replace(' ', '_').replace("'", "");
 
 		block.setBlockName(unlocalizedName);
 		block.setBlockTextureName(getMod() + ":" + unlocalizedName);
@@ -24,7 +24,7 @@ public class TFBlockRegistry {
 	}
 
 	public static void registerItemBlock(Block block, String name, Class clazz) {
-		String unlocalizedName = name.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
+		final String unlocalizedName = name.toLowerCase().replace(' ', '_').replace("'", "");
 
 		block.setBlockName(unlocalizedName);
 		block.setBlockTextureName(getMod() + ":" + unlocalizedName);

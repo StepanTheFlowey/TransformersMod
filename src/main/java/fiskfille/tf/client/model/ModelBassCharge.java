@@ -4,14 +4,14 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
 public class ModelBassCharge extends ModelBase {
-	public ModelRenderer shape1;
-	public ModelRenderer shape2;
-	public ModelRenderer shape3;
-	public ModelRenderer shape4;
-	public ModelRenderer shape5;
-	public ModelRenderer shape6;
-	public ModelRenderer shape7;
-	public ModelRenderer shape8;
+	public final ModelRenderer shape1;
+	public final ModelRenderer shape2;
+	public final ModelRenderer shape3;
+	public final ModelRenderer shape4;
+	public final ModelRenderer shape5;
+	public final ModelRenderer shape6;
+	public final ModelRenderer shape7;
+	public final ModelRenderer shape8;
 
 	public ModelBassCharge() {
 		textureWidth = 16;

@@ -30,7 +30,6 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.WeakHashMap;
@@ -40,7 +39,7 @@ import static fiskfille.tf.TransformersMod.mc;
 public class TFRenderHelper {
 	public static final int LIGHTING_LUMINOUS = 0xF0F0;
 	private static final RenderItem itemRender = new RenderItem();
-	private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<EntityPlayer, Double>();
+	private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<>();
 	private static float lastBrightnessX;
 	private static float lastBrightnessY;
 
@@ -198,10 +197,10 @@ public class TFRenderHelper {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		setLighting(LIGHTING_LUMINOUS);
 
-		IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
-		TransmissionHandler transmissionHandler = transmitter.getTransmissionHandler();
-		boolean renderBeams = false;
+		final IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
+		final TransmissionHandler transmissionHandler = transmitter.getTransmissionHandler();
 
+		boolean renderBeams;
 		if(transmitterTile instanceof TileEntityRelayTower) {
 			TileEntityRelayTower relay = (TileEntityRelayTower) transmitterTile;
 			renderBeams = relay.data.isPowered;
@@ -461,10 +460,8 @@ public class TFRenderHelper {
 		final Map damagedBlocks = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, "damagedBlocks", "field_72738_E", "O");
 
 		if(!damagedBlocks.isEmpty()) {
-			final Iterator iterator = damagedBlocks.values().iterator();
-
-			while(iterator.hasNext()) {
-				final DestroyBlockProgress progress = (DestroyBlockProgress) iterator.next();
+			for(Object o : damagedBlocks.values()) {
+				final DestroyBlockProgress progress = (DestroyBlockProgress) o;
 				final int metadata = world.getBlockMetadata(progress.getPartialBlockX(), progress.getPartialBlockY(), progress.getPartialBlockZ());
 				final int[] offsets = TFTileHelper.getTileBaseOffsets(world.getTileEntity(x, y, z), metadata);
 

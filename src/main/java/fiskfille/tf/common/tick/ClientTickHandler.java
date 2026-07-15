@@ -46,17 +46,17 @@ public class ClientTickHandler {
 		if(event.phase == TickEvent.Phase.END) {
 			if(transformer != null) {
 				if(transformationTimer >= 0.5F) {
-					transformer.updateMovement(player, altMode);
+					transformer.updateMovement(player);
 
 					if(TFData.BOOSTING.get(player) && TFData.NITRO.get(player) > 0) {
 						if(TFHelper.isFullyTransformed(player)) {
-							transformer.doNitroParticles(player, altMode);
+							transformer.doNitroParticles(player);
 						}
 					}
 				}
 
 				if(player == mc.thePlayer) {
-					if(transformer.overrideFirstPerson(player, altMode)) {
+					if(transformer.overrideFirstPerson()) {
 						GameSettings gameSettings = mc.gameSettings;
 
 						if(transformationTimer >= 0.5F) {
@@ -73,7 +73,7 @@ public class ClientTickHandler {
 
 						boolean useNitro = false;
 
-						if(transformationTimer >= 0.5F && transformer.canUseNitro(player, altMode)) {
+						if(transformationTimer >= 0.5F && transformer.canUseNitro(player)) {
 							useNitro = gameSettings.keyBindForward.getIsKeyPressed() && (gameSettings.keyBindSprint.getIsKeyPressed());
 						}
 
@@ -147,14 +147,14 @@ public class ClientTickHandler {
 
 				if(TFRenderHelper.shouldOverrideThirdPersonDistance(player)) {
 					if(transformer != null) {
-						float thirdPersonDistance = 4 - TFHelper.getTransformationTimer(player) * 2;
-						int altMode = TFData.ALT_MODE.get(player);
+						final int altMode = TFData.ALT_MODE.get(player);
+						float thirdPersonDistance;
 
-						if(transformer.canZoom(player) && TFHelper.isFullyTransformed(player) && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFKeyBinds.keyBindingViewFront.getIsKeyPressed()) {
-							thirdPersonDistance = transformer.getZoomAmount(player, altMode);
+						if(transformer.canZoom() && TFHelper.isFullyTransformed(player) && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFKeyBinds.keyBindingViewFront.getIsKeyPressed()) {
+							thirdPersonDistance = transformer.getZoomAmount();
 						}
 						else {
-							thirdPersonDistance = transformer.getThirdPersonDistance(player, altMode);
+							thirdPersonDistance = transformer.getThirdPersonDistance(player);
 						}
 
 						TFReflection.setField(TFReflection.thirdPersonDistanceField, mc.entityRenderer, thirdPersonDistance);

@@ -24,7 +24,7 @@ public abstract class MessageSyncBase implements IMessage {
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		playerData = TFData.readFromNBT(ByteBufUtils.readTag(buf), new HashMap<TFData, Object>());
+		playerData = TFData.readFromNBT(ByteBufUtils.readTag(buf), new HashMap<>());
 	}
 
 	@Override

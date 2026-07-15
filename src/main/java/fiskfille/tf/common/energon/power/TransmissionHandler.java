@@ -17,8 +17,8 @@ import java.util.*;
  * Handles all receivers this transmitter is transmitting to
  */
 public class TransmissionHandler {
-	private final Set<ReceiverEntry> receivers = new HashSet<ReceiverEntry>();
-	private final Queue<ReceiverEntry> queuedReceivers = new ArrayDeque<ReceiverEntry>();
+	private final Set<ReceiverEntry> receivers = new HashSet<>();
+	private final Queue<ReceiverEntry> queuedReceivers = new ArrayDeque<>();
 
 	private NetworkEntry owner;
 	private boolean needsUpdate = false;
@@ -74,7 +74,7 @@ public class TransmissionHandler {
 			needsUpdate = true;
 		}
 
-		while(queuedReceivers.size() > 0) {
+		while(!queuedReceivers.isEmpty()) {
 			ReceiverEntry receiver = queuedReceivers.poll();
 			needsUpdate |= processQueue(world, receiver);
 		}
@@ -106,11 +106,8 @@ public class TransmissionHandler {
 	}
 
 	public void kill() {
-		for(Iterator<ReceiverEntry> iterator = receivers.iterator(); iterator.hasNext(); ) {
-			ReceiverEntry entry = iterator.next();
-			IEnergyReceiver receiver = entry.getReceiver();
-
-			receiver.getReceiverHandler().remove(owner);
+		for(ReceiverEntry entry : receivers) {
+			entry.getReceiver().getReceiverHandler().remove(owner);
 		}
 	}
 

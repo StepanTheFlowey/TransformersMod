@@ -16,7 +16,7 @@ public class TFItemRegistry {
 	}
 
 	public static void registerItemNoTab(Item item, String name) {
-		String unlocalizedName = name.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
+		String unlocalizedName = name.toLowerCase().replace(' ', '_').replace("'", "");
 
 		item.setUnlocalizedName(unlocalizedName);
 		item.setTextureName(getMod() + ":" + unlocalizedName);

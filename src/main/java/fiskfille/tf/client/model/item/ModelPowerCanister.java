@@ -4,9 +4,9 @@ import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 
 public class ModelPowerCanister extends MowzieModelBase {
-	public MowzieModelRenderer canister1;
-	public MowzieModelRenderer canister2;
-	public MowzieModelRenderer canister3;
+	public final MowzieModelRenderer canister1;
+	public final MowzieModelRenderer canister2;
+	public final MowzieModelRenderer canister3;
 
 	public ModelPowerCanister() {
 		textureWidth = 32;

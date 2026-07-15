@@ -51,7 +51,7 @@ public class TFEnergyHelper {
 	}
 
 	public static List<DimensionalCoords> getDescendants(IEnergyTransmitter transmitter) {
-		return getDescendants(transmitter, new ArrayList<DimensionalCoords>());
+		return getDescendants(transmitter, new ArrayList<>());
 	}
 
 	private static List<DimensionalCoords> getDescendants(IEnergyTransmitter transmitter, List<DimensionalCoords> list) {

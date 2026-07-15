@@ -10,7 +10,7 @@ import java.util.Set;
  * Handles all transmitters transmitting energy to this tile
  */
 public class ReceiverHandler {
-	private final Set<NetworkEntry> transmitters = new HashSet<NetworkEntry>();
+	private final Set<NetworkEntry> transmitters = new HashSet<>();
 	private final NetworkEntry owner;
 
 	public ReceiverHandler(TileEntity tile) {

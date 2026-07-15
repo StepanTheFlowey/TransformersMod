@@ -18,7 +18,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -46,8 +45,7 @@ public class MessagePlayerJoin extends MessageSyncBase {
 		Integer[] ids = DimensionManager.getIDs();
 		dimensionNames = TFDimensionHelper.dimensionNames;
 
-		for(int i = 0; i < ids.length; ++i) {
-			int id = ids[i];
+		for(int id : ids) {
 			WorldServer world = MinecraftServer.getServer().worldServerForDimension(id);
 
 			if(world != null && world.provider != null) {
@@ -57,22 +55,15 @@ public class MessagePlayerJoin extends MessageSyncBase {
 
 		List<Integer> list = Lists.newArrayList();
 
-		for(int i = 0; i < ids.length; ++i) {
-			int id = ids[i];
-
+		for(int id : ids) {
 			if(DimensionManager.shouldLoadSpawn(id)) {
 				list.add(id);
 			}
 		}
 
-		Collections.sort(list, new Comparator<Integer>() {
-			@Override
-			public int compare(Integer arg0, Integer arg1) {
-				return Double.valueOf(arg0).compareTo(Double.valueOf(arg1));
-			}
-		});
+		list.sort(Comparator.comparing(Double::valueOf));
 
-		TFDimensionHelper.dimensionIDs = dimensionIDs = list.toArray(new Integer[list.size()]);
+		TFDimensionHelper.dimensionIDs = dimensionIDs = list.toArray(new Integer[0]);
 	}
 
 	@Override
@@ -114,8 +105,8 @@ public class MessagePlayerJoin extends MessageSyncBase {
 
 		buf.writeInt(dimensionIDs.length);
 
-		for(int i = 0; i < dimensionIDs.length; ++i) {
-			buf.writeInt(dimensionIDs[i]);
+		for(Integer dimensionID : dimensionIDs) {
+			buf.writeInt(dimensionID);
 		}
 	}
 

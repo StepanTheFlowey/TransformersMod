@@ -5,27 +5,27 @@ import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class ModelPurgesKatana extends ModelBase {
-	public ModelRenderer base;
-	public ModelRenderer blade1;
-	public ModelRenderer blade17;
-	public ModelRenderer blade19;
-	public ModelRenderer blade20;
-	public ModelRenderer blade2;
-	public ModelRenderer blade8;
-	public ModelRenderer blade9;
-	public ModelRenderer blade10;
-	public ModelRenderer blade11;
-	public ModelRenderer blade14;
-	public ModelRenderer blade3;
-	public ModelRenderer balde6;
-	public ModelRenderer blade7;
-	public ModelRenderer blade4;
-	public ModelRenderer blade5;
-	public ModelRenderer blade12;
-	public ModelRenderer blade13;
-	public ModelRenderer blade15;
-	public ModelRenderer blade16;
-	public ModelRenderer blade18;
+	public final ModelRenderer base;
+	public final ModelRenderer blade1;
+	public final ModelRenderer blade17;
+	public final ModelRenderer blade19;
+	public final ModelRenderer blade20;
+	public final ModelRenderer blade2;
+	public final ModelRenderer blade8;
+	public final ModelRenderer blade9;
+	public final ModelRenderer blade10;
+	public final ModelRenderer blade11;
+	public final ModelRenderer blade14;
+	public final ModelRenderer blade3;
+	public final ModelRenderer balde6;
+	public final ModelRenderer blade7;
+	public final ModelRenderer blade4;
+	public final ModelRenderer blade5;
+	public final ModelRenderer blade12;
+	public final ModelRenderer blade13;
+	public final ModelRenderer blade15;
+	public final ModelRenderer blade16;
+	public final ModelRenderer blade18;
 
 	public ModelPurgesKatana() {
 		this.textureWidth = 128;

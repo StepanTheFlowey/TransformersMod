@@ -7,7 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerGroundBridge extends ContainerBasic {
-	public InventoryGroundBridge inventory;
+	public final InventoryGroundBridge inventory;
 
 	public ContainerGroundBridge(InventoryPlayer inventoryPlayer, InventoryGroundBridge inventoryGroundBridge) {
 		super(null);

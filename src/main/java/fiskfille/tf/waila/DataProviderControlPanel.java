@@ -29,8 +29,7 @@ public class DataProviderControlPanel extends DataProviderMachine {
 			List<DataCore> upgrades = tile.getUpgrades();
 			LinkedHashMap<DataCore, Integer> map = Maps.newLinkedHashMap();
 
-			for(int i = 0; i < upgrades.size(); ++i) {
-				DataCore dataCore = upgrades.get(i);
+			for(DataCore dataCore : upgrades) {
 				map.put(dataCore, map.containsKey(dataCore) ? map.get(dataCore) + 1 : 1);
 			}
 

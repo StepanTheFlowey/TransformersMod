@@ -13,7 +13,7 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiColorSlider extends GuiSliderBase {
-	public int sliderId;
+	public final int sliderId;
 
 	public GuiColorSlider(int id, int x, int y, int sliderId, String s) {
 		super(id, x, y, 150, 20, s);

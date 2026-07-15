@@ -32,9 +32,7 @@ public class TFLoadingCallback implements ForgeChunkManager.OrderedLoadingCallba
 		for(Ticket ticket : tickets) {
 			List<SubTicket> subTickets = SubTicket.getChildren(ticket);
 
-			for(int i = 0; i < subTickets.size(); ++i) {
-				SubTicket subTicket = subTickets.get(i);
-
+			for(SubTicket subTicket : subTickets) {
 				if(world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord) instanceof IChunkLoaderTile) {
 					validTickets.add(ticket);
 					break;

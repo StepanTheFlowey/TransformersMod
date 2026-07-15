@@ -11,10 +11,10 @@ import net.minecraft.client.renderer.Tessellator;
 import org.lwjgl.opengl.GL11;
 
 public class ModelRendererBreakable extends ModelRendererTF {
+	protected final int[] displayLists = new int[2];
 	private final ModelBase baseModel;
 	public boolean breaking = false;
 	public boolean renderBreaking = true;
-	protected int[] displayLists = new int[2];
 	private int textureOffsetX;
 	private int textureOffsetY;
 

@@ -9,7 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerDisplayStationArmor extends ContainerBasic {
-	public InventoryDisplayStationArmor craftMatrix = new InventoryDisplayStationArmor(this);
+	public final InventoryDisplayStationArmor craftMatrix = new InventoryDisplayStationArmor(this);
 
 	public ContainerDisplayStationArmor(final InventoryPlayer inventoryPlayer, final TileEntityDisplayStation tile) {
 		super(tile);

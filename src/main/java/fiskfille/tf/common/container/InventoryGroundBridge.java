@@ -19,13 +19,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.WorldServer;
 
-import java.util.concurrent.Callable;
-
 public class InventoryGroundBridge implements IInventory {
-	public EntityPlayer player;
-	public ItemStack remoteItem;
+	public final EntityPlayer player;
+	public final ItemStack remoteItem;
 
-	public ItemStack[] inventory = new ItemStack[1];
+	public final ItemStack[] inventory = new ItemStack[1];
 
 	public InventoryGroundBridge(EntityPlayer player, ItemStack itemstack) {
 		this.player = player;
@@ -130,14 +128,9 @@ public class InventoryGroundBridge implements IInventory {
 			catch(Throwable throwable) {
 				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Adding item to inventory");
 				CrashReportCategory crashreportcategory = crashreport.makeCategory("Item being added");
-				crashreportcategory.addCrashSection("Item ID", Integer.valueOf(Item.getIdFromItem(itemstack.getItem())));
-				crashreportcategory.addCrashSection("Item data", Integer.valueOf(itemstack.getItemDamage()));
-				crashreportcategory.addCrashSectionCallable("Item name", new Callable() {
-					@Override
-					public String call() {
-						return itemstack.getDisplayName();
-					}
-				});
+				crashreportcategory.addCrashSection("Item ID", Item.getIdFromItem(itemstack.getItem()));
+				crashreportcategory.addCrashSection("Item data", itemstack.getItemDamage());
+				crashreportcategory.addCrashSectionCallable("Item name", itemstack::getDisplayName);
 				throw new ReportedException(crashreport);
 			}
 		}
@@ -194,11 +187,7 @@ public class InventoryGroundBridge implements IInventory {
 					}
 				}
 
-				int k = i;
-
-				if(i > inventory[j].getMaxStackSize() - inventory[j].stackSize) {
-					k = inventory[j].getMaxStackSize() - inventory[j].stackSize;
-				}
+				int k = Math.min(i, inventory[j].getMaxStackSize() - inventory[j].stackSize);
 
 				if(k > getInventoryStackLimit() - inventory[j].stackSize) {
 					k = getInventoryStackLimit() - inventory[j].stackSize;

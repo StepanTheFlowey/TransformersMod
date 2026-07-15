@@ -56,10 +56,10 @@ public class TFShootManager {
 							shootCooldown--;
 						}
 
-						Item ammo = transformer.getShootItem(altMode);
+						Item ammo = transformer.getShootItem();
 
 						if(ammo != null) {
-							int ammoCount = getShotsLeft(player, transformer, ammo, altMode);
+							int ammoCount = getShotsLeft(player, transformer, ammo);
 
 							if(isTransformed) {
 								if(reloading && shootCooldown <= 0) {
@@ -82,7 +82,7 @@ public class TFShootManager {
 
 				if(Mouse.isButtonDown(1)) {
 					if(transformer != null && isTransformed) {
-						if(transformer.canShoot(player, altMode) && transformer.hasRapidFire(altMode) && player.ticksExisted % 2 == 0) {
+						if(transformer.canShoot(player) && transformer.hasRapidFire() && player.ticksExisted % 2 == 0) {
 							stealthForceShoot(transformer, player, altMode);
 						}
 					}
@@ -91,8 +91,8 @@ public class TFShootManager {
 		}
 	}
 
-	private int getShotsLeft(EntityPlayer player, Transformer transformer, Item shootItem, int altMode) {
-		int maxAmmo = transformer.getShots(altMode);
+	private int getShotsLeft(EntityPlayer player, Transformer transformer, Item shootItem) {
+		int maxAmmo = transformer.getShots();
 		int ammoCount;
 
 		if(player.capabilities.isCreativeMode) {
@@ -139,7 +139,7 @@ public class TFShootManager {
 			boolean isTransformed = altMode != -1;
 
 			if(transformer != null && isTransformed) {
-				if(transformer.canShoot(player, altMode) && !transformer.hasRapidFire(altMode) && player.worldObj.isRemote) {
+				if(transformer.canShoot(player) && !transformer.hasRapidFire() && player.worldObj.isRemote) {
 					stealthForceShoot(transformer, player, altMode);
 					event.setCanceled(true);
 				}
@@ -150,14 +150,14 @@ public class TFShootManager {
 	private void stealthForceShoot(Transformer transformer, EntityPlayer player, int altMode) {
 		if(player == mc.thePlayer) {
 			if(transformer instanceof TransformerVurp) {
-				if(transformer.canShoot(player, altMode)) {
+				if(transformer.canShoot(player)) {
 					if(!laserFilling && laserCharge > 0) {
 						laserCharge -= 5;
 						player.playSound("random.fizz", 1, 2F);
 						TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, false));
 					}
 					else {
-						if(!laserFilling && (player.inventory.hasItem(transformer.getShootItem(altMode)) || player.capabilities.isCreativeMode)) {
+						if(!laserFilling && (player.inventory.hasItem(transformer.getShootItem()) || player.capabilities.isCreativeMode)) {
 							TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, true));
 							laserFilling = true;
 						}
@@ -167,8 +167,8 @@ public class TFShootManager {
 			else {
 				if(shotsLeft > 0) {
 					if(shootCooldown <= 0) {
-						if(transformer.canShoot(player, altMode)) {
-							Item shootItem = transformer.getShootItem(altMode);
+						if(transformer.canShoot(player)) {
+							Item shootItem = transformer.getShootItem();
 
 							boolean isCreative = player.capabilities.isCreativeMode;
 							boolean hasAmmo = isCreative || player.inventory.hasItem(shootItem);
@@ -182,8 +182,8 @@ public class TFShootManager {
 							}
 						}
 
-						if(shotsLeft > transformer.getShots(altMode)) {
-							shotsLeft = transformer.getShots(altMode);
+						if(shotsLeft > transformer.getShots()) {
+							shotsLeft = transformer.getShots();
 						}
 
 						shotsLeft--;

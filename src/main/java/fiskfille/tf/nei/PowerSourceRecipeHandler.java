@@ -162,7 +162,7 @@ public class PowerSourceRecipeHandler extends EnergonProcessorRecipeHandler {
 	}
 
 	public class CachedPowerSourceRecipe extends CachedRecipe {
-		public PowerSourcePair powerSource;
+		public final PowerSourcePair powerSource;
 
 		public CachedPowerSourceRecipe(PowerSourcePair powerSource) {
 			this.powerSource = powerSource;

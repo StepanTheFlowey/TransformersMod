@@ -99,9 +99,6 @@ public class RecipeDisplayItems implements IRecipe {
 					}
 				}
 			}
-			else {
-
-			}
 		}
 
 		if(head != null && chest != null && legs != null && feet != null) {

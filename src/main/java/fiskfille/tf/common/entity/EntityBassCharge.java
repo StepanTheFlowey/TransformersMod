@@ -61,9 +61,6 @@ public class EntityBassCharge extends EntityThrowable {
 				worldObj.playAuxSFX(2001, x, y + 1, z, Block.getIdFromBlock(worldObj.getBlock(x, y, z)) + (worldObj.getBlockMetadata(x, y, z) << 12));
 				worldObj.setBlockToAir(x, y, z);
 			}
-			else {
-
-			}
 		}
 
 		setThrowableHeading(motionX, motionY, motionZ, -0.001F, 0);

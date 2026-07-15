@@ -148,12 +148,12 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public class AlloyPair extends CachedRecipe {
-		public ArrayList<PositionedStack> ingredients;
-		public PositionedStack result;
+		public final ArrayList<PositionedStack> ingredients;
+		public final PositionedStack result;
 
 		public AlloyPair(AlloyIngredients alloy, ItemStack out) {
 			result = new PositionedStack(out, 107 - 5, 28 - 11);
-			ingredients = new ArrayList<PositionedStack>();
+			ingredients = new ArrayList<>();
 
 			for(int i = 0; i < alloy.getIngredients().length; ++i) {
 				LinkedList<ItemStack> ingredients = Lists.newLinkedList();

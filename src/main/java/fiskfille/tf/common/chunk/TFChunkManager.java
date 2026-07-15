@@ -42,7 +42,7 @@ public class TFChunkManager {
 			for(int j = 0; j < ticketsForWorld.get(e.getKey()).size(); ++j) {
 				Ticket ticket = ticketsForWorld.get(e.getKey()).get(j);
 
-				if(ticket.getChunkList().size() == 0) {
+				if(ticket.getChunkList().isEmpty()) {
 					try {
 						ForgeChunkManager.releaseTicket(ticket);
 					}
@@ -87,11 +87,9 @@ public class TFChunkManager {
 	}
 
 	public static Ticket getTicketForChunk(ForcedChunk chunk) {
-		World world = chunk.worldObj;
+		final World world = chunk.worldObj;
 
-		if(ticketsForWorld.get(world) == null) {
-			ticketsForWorld.put(world, new LinkedList<Ticket>());
-		}
+		ticketsForWorld.computeIfAbsent(world, k -> new LinkedList<>());
 
 		for(int i = 0; i < ticketsForWorld.get(world).size(); ++i) {
 			Ticket ticket = ticketsForWorld.get(world).get(i);
@@ -108,16 +106,13 @@ public class TFChunkManager {
 	}
 
 	public static Ticket requestTicket(World world) {
-		if(ticketsForWorld.get(world) == null) {
-			ticketsForWorld.put(world, new LinkedList<Ticket>());
-		}
-
+		ticketsForWorld.computeIfAbsent(world, k -> new LinkedList<>());
 		return getNextAvailableTicket(world);
 	}
 
 	private static void newTicket(World world) {
-		LinkedList<Ticket> list = ticketsForWorld.get(world);
-		Ticket ticket = ForgeChunkManager.requestTicket(TransformersMod.instance, world, Type.NORMAL);
+		final LinkedList<Ticket> list = ticketsForWorld.get(world);
+		final Ticket ticket = ForgeChunkManager.requestTicket(TransformersMod.instance, world, Type.NORMAL);
 
 		if(ticket != null) {
 			list.add(ticket);
@@ -126,7 +121,7 @@ public class TFChunkManager {
 	}
 
 	private static LinkedList<Ticket> getAvailableTickets(World world) {
-		LinkedList<Ticket> list = Lists.newLinkedList();
+		final LinkedList<Ticket> list = new LinkedList<>();
 
 		for(int i = 0; i < ticketsForWorld.get(world).size(); ++i) {
 			Ticket ticket = ticketsForWorld.get(world).get(i);

@@ -24,7 +24,7 @@ public class GuiHandlerTF implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		int dimension = id >> 8;
-		TFGui tfGui = TFGui.get(id ^= dimension << 8);
+		TFGui tfGui = TFGui.get(id ^ dimension << 8);
 
 		if(tfGui != null) {
 			if(tfGui.containerClass == null) {
@@ -94,7 +94,7 @@ public class GuiHandlerTF implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		int dimension = id >> 8;
-		TFGui tfGui = TFGui.get(id ^= dimension << 8);
+		TFGui tfGui = TFGui.get(id ^ dimension << 8);
 
 		if(tfGui != null) {
 			if(tfGui.guiPath == null) {

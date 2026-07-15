@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Vec3;
 
 public class TexturedQuadPartial {
+	public final int nVertices;
 	public PositionTextureVertex[] vertexPositions;
-	public int nVertices;
 	private boolean invertNormal;
 
 	public TexturedQuadPartial(PositionTextureVertex[] vertices) {

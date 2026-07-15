@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 import java.util.Arrays;
 
 public class RenderInfo {
+	public final boolean[] renderSide = new boolean[]{true, true, true, true, true, true};
+	public final int light = -1;
 	public double minX = 0F;
 	public double minY = 0F;
 	public double minZ = 0F;
@@ -21,8 +23,6 @@ public class RenderInfo {
 	public Block baseBlock = Blocks.sand;
 	public IIcon texture = null;
 	public IIcon[] textureArray = null;
-	public boolean[] renderSide = new boolean[]{true, true, true, true, true, true};
-	public int light = -1;
 	public int brightness = -1;
 
 	public RenderInfo() {

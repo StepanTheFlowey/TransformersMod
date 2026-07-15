@@ -26,7 +26,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class CommonProxy {
-	protected Queue<Runnable> tasks = new LinkedBlockingDeque<Runnable>();
+	protected final Queue<Runnable> tasks = new LinkedBlockingDeque<>();
 
 	public void preInit() {
 		TFReflection.common();

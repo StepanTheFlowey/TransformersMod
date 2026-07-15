@@ -20,7 +20,7 @@ import static fiskfille.tf.TransformersMod.mc;
  */
 @SideOnly(Side.CLIENT)
 public class MowzieModelBase extends ModelBiped {
-	public static float PI = (float) Math.PI;
+	public static final float PI = (float) Math.PI;
 
 	/**
 	 * Store every MowzieModelRenderer in this array
@@ -354,7 +354,7 @@ public class MowzieModelBase extends ModelBiped {
 
 	public void addPart(MowzieModelRenderer mowzieModelRenderer) {
 		if(parts == null) {
-			parts = new ArrayList<MowzieModelRenderer>();
+			parts = new ArrayList<>();
 		}
 
 		parts.add(mowzieModelRenderer);

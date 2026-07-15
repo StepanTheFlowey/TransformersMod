@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.List;
 
 public class GuiIconFlat extends GuiButtonFlat {
-	public IButtonRenderCallback callback;
+	public final IButtonRenderCallback callback;
 
 	public GuiIconFlat(int id, int x, int y, IButtonRenderCallback renderCallback) {
 		super(id, x, y, 20, "");

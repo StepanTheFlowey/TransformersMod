@@ -29,7 +29,7 @@ public enum GroundBridgeError {
 					list.add(buf.readInt());
 				}
 
-				return new ErrorContainer(error, list.toArray(new Integer[list.size()]));
+				return new ErrorContainer(error, list.toArray(new Integer[0]));
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -54,8 +54,8 @@ public enum GroundBridgeError {
 			buf.writeByte(error.ordinal() & 0xFF);
 			buf.writeByte(arguments.length & 0xFF);
 
-			for(int i = 0; i < arguments.length; ++i) {
-				buf.writeInt(arguments[i]);
+			for(Integer argument : arguments) {
+				buf.writeInt(argument);
 			}
 		}
 

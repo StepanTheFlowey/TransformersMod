@@ -7,18 +7,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class ModelSkystrikesCrossbow extends MowzieModelBase {
-	ModelRenderer handle;
-	ModelRenderer bottomEdge1;
-	ModelRenderer bottomEdge2;
-	ModelRenderer upperEdge1;
-	ModelRenderer upperEdge2;
-	ModelRenderer missile1;
-	ModelRenderer missile2;
-	ModelRenderer missile3;
-	ModelRenderer missile4;
-	ModelRenderer missile5;
-	ModelRenderer missile6;
-	ModelRenderer missile7;
+	final ModelRenderer handle;
+	final ModelRenderer bottomEdge1;
+	final ModelRenderer bottomEdge2;
+	final ModelRenderer upperEdge1;
+	final ModelRenderer upperEdge2;
+	final ModelRenderer missile1;
+	final ModelRenderer missile2;
+	final ModelRenderer missile3;
+	final ModelRenderer missile4;
+	final ModelRenderer missile5;
+	final ModelRenderer missile6;
+	final ModelRenderer missile7;
 
 	public ModelSkystrikesCrossbow() {
 		textureWidth = 64;

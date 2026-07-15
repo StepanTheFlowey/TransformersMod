@@ -20,7 +20,7 @@ public class GuiTFModConfig extends GuiConfig {
 	 * Compiles a list of config elements
 	 */
 	private static List<IConfigElement> getConfigElements() {
-		List<IConfigElement> elements = new ArrayList<IConfigElement>();
+		List<IConfigElement> elements = new ArrayList<>();
 
 		elements.add(categoryElement("Options", "General", "General Options"));
 		elements.add(categoryElement("Aesthetic", "Aesthetic", "Aesthetic Options"));

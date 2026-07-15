@@ -23,13 +23,13 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiColorPresets extends GuiScreen {
+	public static final float[][] tempLayerColors = {{1, 1, 1}, {1, 1, 1}};
 	public static int ticks;
-	public static float[][] tempLayerColors = {{1, 1, 1}, {1, 1, 1}};
+	public final int columnsPerPage = 5;
+	public final int rowsPerPage = 2;
 	private final TileEntityDisplayStation tileentity;
 	private final GuiColor parent;
 	public ColorPreset[] presets = {};
-	public int columnsPerPage = 5;
-	public int rowsPerPage = 2;
 	public int maxPages = 0;
 	public int page = 0;
 
@@ -281,9 +281,9 @@ public class GuiColorPresets extends GuiScreen {
 	}
 
 	public static class ColorPreset extends Gui {
-		public String name;
-		public int primaryColor;
-		public int secondaryColor;
+		public final String name;
+		public final int primaryColor;
+		public final int secondaryColor;
 		public int posX;
 		public int posY;
 

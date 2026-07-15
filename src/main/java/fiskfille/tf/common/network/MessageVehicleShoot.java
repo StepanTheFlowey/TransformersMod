@@ -52,10 +52,10 @@ public class MessageVehicleShoot implements IMessage {
 
 					if(transformer != null) {
 						int altMode = TFData.ALT_MODE.get(player);
-						String shootSound = transformer.getShootSound(altMode);
+						String shootSound = transformer.getShootSound();
 
 						if(shootSound != null) {
-							from.worldObj.playSound(from.posX, from.posY - from.yOffset, from.posZ, shootSound, transformer.getShootVolume(altMode), 1, false);
+							from.worldObj.playSound(from.posX, from.posY - from.yOffset, from.posZ, shootSound, transformer.getShootVolume(), 1, false);
 						}
 					}
 				}
@@ -77,19 +77,19 @@ public class MessageVehicleShoot implements IMessage {
 					if(transformer != null) {
 						int altMode = TFData.ALT_MODE.get(from);
 
-						if(transformer.canShoot(from, altMode) && TFHelper.isFullyTransformed(from)) {
-							Item shootItem = transformer.getShootItem(altMode);
+						if(transformer.canShoot(from) && TFHelper.isFullyTransformed(from)) {
+							Item shootItem = transformer.getShootItem();
 							boolean isCreative = from.capabilities.isCreativeMode;
 							boolean hasAmmo = isCreative || from.inventory.hasItem(shootItem);
 
 							if(hasAmmo) {
 								World world = from.worldObj;
 
-								if(transformer.getShootSound(altMode) != null) {
+								if(transformer.getShootSound() != null) {
 									TFNetworkManager.networkWrapper.sendToAllAround(new MessageVehicleShoot(from), new TargetPoint(from.dimension, from.posX, from.posY, from.posZ, 32));
 								}
 
-								Entity entity = transformer.getShootEntity(from, altMode);
+								Entity entity = transformer.getShootEntity(from);
 								world.spawnEntityInWorld(entity);
 
 								if(!isCreative) {

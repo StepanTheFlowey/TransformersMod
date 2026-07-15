@@ -13,7 +13,7 @@ public class GuiHoverFieldEnergy extends GuiHoverField {
 	private EnergyStorage energyStorage;
 
 	public GuiHoverFieldEnergy(int x, int y, int width, int height, EnergyStorage storage) {
-		super(x, y, width, height, new ArrayList<String>());
+		super(x, y, width, height, new ArrayList<>());
 		energyStorage = storage;
 	}
 

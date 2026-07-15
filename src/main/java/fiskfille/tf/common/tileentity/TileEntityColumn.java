@@ -12,8 +12,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 
 public class TileEntityColumn extends TileEntityMachineContainer implements IEnergyReceiver, IMultiTile {
-	public ReceiverHandler receiverHandler = new ReceiverHandler(this);
-	public EnergyStorage storage = new EnergyStorageInventory(this, this);
+	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final EnergyStorage storage = new EnergyStorageInventory(this, this);
 
 	@Override
 	public void updateEntity() {

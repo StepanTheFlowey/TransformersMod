@@ -12,7 +12,7 @@ import java.util.Map;
  * @author FiskFille, gegy1000
  */
 public class TFDataManager {
-	private static final Map<EntityPlayer, Integer> zoomTimerClient = new HashMap<EntityPlayer, Integer>();
+	private static final Map<EntityPlayer, Integer> zoomTimerClient = new HashMap<>();
 
 	public static int getAltForTransformAnimation(EntityPlayer player) {
 		int alt = TFData.ALT_MODE.get(player);

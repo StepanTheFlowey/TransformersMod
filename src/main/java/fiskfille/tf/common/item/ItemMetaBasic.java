@@ -23,7 +23,7 @@ public class ItemMetaBasic extends Item {
 	public static Map<String, Integer> subItems = Maps.newHashMap();
 	public static String[] iconNames;
 	public static String[] iconDomains;
-	public Map<String, IIcon> mappedIcons = Maps.newHashMap();
+	public final Map<String, IIcon> mappedIcons = Maps.newHashMap();
 
 	public ItemMetaBasic() {
 		setHasSubtypes(true);
@@ -39,8 +39,8 @@ public class ItemMetaBasic extends Item {
 
 		Collections.sort(list1);
 
-		for(int i = 0; i < list1.size(); ++i) {
-			list.add(new ItemStack(this, 1, list1.get(i).intValue()));
+		for(Double aDouble : list1) {
+			list.add(new ItemStack(this, 1, aDouble.intValue()));
 		}
 	}
 

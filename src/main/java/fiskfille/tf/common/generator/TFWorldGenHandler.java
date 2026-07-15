@@ -15,10 +15,10 @@ import java.util.Random;
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.CUSTOM;
 
 public class TFWorldGenHandler {
-	public WorldGenerator transformiumGen;
-	public WorldGenerator energonGen;
-	public WorldGenerator energonCrystalGen;
-	public WorldGenerator redEnergonCrystalGen;
+	public final WorldGenerator transformiumGen;
+	public final WorldGenerator energonGen;
+	public final WorldGenerator energonCrystalGen;
+	public final WorldGenerator redEnergonCrystalGen;
 	private World world;
 	private Random rand;
 	private int xCoord;

@@ -8,20 +8,19 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.AxisAlignedBB;
 
 public class ModelBoxPartial extends ModelBox {
+	public final ModelRendererPartial model;
+	protected final float scale;
+	protected final float textureX;
+	protected final float textureY;
 	public float posX1;
 	public float posY1;
 	public float posZ1;
 	public float posX2;
 	public float posY2;
 	public float posZ2;
-	public ModelRendererPartial model;
 	protected float width;
 	protected float height;
 	protected float depth;
-	protected float scale;
-	protected float textureX;
-	protected float textureY;
-	private PositionTextureVertex[] vertexPositions;
 	private TexturedQuadPartial[] quadList;
 
 	public ModelBoxPartial(ModelRendererPartial modelRenderer, int texX, int texY, float x, float y, float z, int w, int h, int d, float mcScale) {
@@ -61,7 +60,6 @@ public class ModelBoxPartial extends ModelBox {
 	}
 
 	public void calculateQuads() {
-		vertexPositions = new PositionTextureVertex[8];
 		quadList = new TexturedQuadPartial[6];
 		float x1 = posX1;
 		float y1 = posY1;
@@ -82,23 +80,15 @@ public class ModelBoxPartial extends ModelBox {
 			x1 = prevX2;
 		}
 
-		float offset = posY1 - super.posY1;
-		PositionTextureVertex vertex1 = new PositionTextureVertex(x1, y1, z1, 0, 0);
-		PositionTextureVertex vertex2 = new PositionTextureVertex(x2, y1, z1, 0, 8);
-		PositionTextureVertex vertex3 = new PositionTextureVertex(x2, y2, z1, 8, 8);
-		PositionTextureVertex vertex4 = new PositionTextureVertex(x1, y2, z1, 8, 0);
-		PositionTextureVertex vertex5 = new PositionTextureVertex(x1, y1, z2, 0, 0);
-		PositionTextureVertex vertex6 = new PositionTextureVertex(x2, y1, z2, 0, 8);
-		PositionTextureVertex vertex7 = new PositionTextureVertex(x2, y2, z2, 8, 8);
-		PositionTextureVertex vertex8 = new PositionTextureVertex(x1, y2, z2, 8, 0);
-		vertexPositions[0] = vertex1;
-		vertexPositions[1] = vertex2;
-		vertexPositions[2] = vertex3;
-		vertexPositions[3] = vertex4;
-		vertexPositions[4] = vertex5;
-		vertexPositions[5] = vertex6;
-		vertexPositions[6] = vertex7;
-		vertexPositions[7] = vertex8;
+		final float offset = posY1 - super.posY1;
+		final PositionTextureVertex vertex1 = new PositionTextureVertex(x1, y1, z1, 0, 0);
+		final PositionTextureVertex vertex2 = new PositionTextureVertex(x2, y1, z1, 0, 8);
+		final PositionTextureVertex vertex3 = new PositionTextureVertex(x2, y2, z1, 8, 8);
+		final PositionTextureVertex vertex4 = new PositionTextureVertex(x1, y2, z1, 8, 0);
+		final PositionTextureVertex vertex5 = new PositionTextureVertex(x1, y1, z2, 0, 0);
+		final PositionTextureVertex vertex6 = new PositionTextureVertex(x2, y1, z2, 0, 8);
+		final PositionTextureVertex vertex7 = new PositionTextureVertex(x2, y2, z2, 8, 8);
+		final PositionTextureVertex vertex8 = new PositionTextureVertex(x1, y2, z2, 8, 0);
 		quadList[0] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex6, vertex2, vertex3, vertex7}, textureX + depth + width, textureY + depth + offset, textureX + depth + width + depth, textureY + depth + offset + height, model.textureWidth, model.textureHeight);
 		quadList[1] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex1, vertex5, vertex8, vertex4}, textureX, textureY + depth + offset, textureX + depth, textureY + depth + offset + height, model.textureWidth, model.textureHeight);
 		quadList[2] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex6, vertex5, vertex1, vertex2}, textureX + depth, textureY, textureX + depth + width, textureY + depth, model.textureWidth, model.textureHeight);
@@ -107,8 +97,8 @@ public class ModelBoxPartial extends ModelBox {
 		quadList[5] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex5, vertex6, vertex7, vertex8}, textureX + depth + width + depth, textureY + depth + offset, textureX + depth + width + depth + width, textureY + depth + offset + height, model.textureWidth, model.textureHeight);
 
 		if(model.mirror) {
-			for(int i = 0; i < quadList.length; ++i) {
-				quadList[i].flipFace();
+			for(TexturedQuadPartial texturedQuadPartial : quadList) {
+				texturedQuadPartial.flipFace();
 			}
 		}
 	}
@@ -116,8 +106,8 @@ public class ModelBoxPartial extends ModelBox {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void render(Tessellator tessellator, float f) {
-		for(int i = 0; i < quadList.length; ++i) {
-			quadList[i].draw(tessellator, f);
+		for(TexturedQuadPartial texturedQuadPartial : quadList) {
+			texturedQuadPartial.draw(tessellator, f);
 		}
 	}
 }

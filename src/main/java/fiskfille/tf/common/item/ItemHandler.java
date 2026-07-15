@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ItemHandler {
-	public static boolean hasInit = false;
 	private static final Map<Class, String> itemHandlers = Maps.newHashMap();
+	public static boolean hasInit = false;
 
 	public static void init() {
 		List<String> names = Lists.newLinkedList();
@@ -35,8 +35,8 @@ public class ItemHandler {
 			}
 		}
 
-		ItemMetaBasic.iconNames = names.toArray(new String[names.size()]);
-		ItemMetaBasic.iconDomains = domains.toArray(new String[domains.size()]);
+		ItemMetaBasic.iconNames = names.toArray(new String[0]);
+		ItemMetaBasic.iconDomains = domains.toArray(new String[0]);
 	}
 
 	public static void load(World world) {

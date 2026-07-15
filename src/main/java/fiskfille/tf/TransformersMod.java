@@ -34,6 +34,7 @@ public class TransformersMod {
 	public static final Minecraft mc = Minecraft.getMinecraft();
 	public static final String modid = "transformers";
 	public static final String version = "0.6.5";
+	public static final CreativeTabs tabTransformers = new CreativeTabTransformers();
 
 	@Instance(TransformersMod.modid)
 	public static TransformersMod instance;
@@ -43,8 +44,6 @@ public class TransformersMod {
 					serverSide = "fiskfille.tf.common.proxy.CommonProxy"
 	)
 	public static CommonProxy proxy;
-
-	public static CreativeTabs tabTransformers = new CreativeTabTransformers();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

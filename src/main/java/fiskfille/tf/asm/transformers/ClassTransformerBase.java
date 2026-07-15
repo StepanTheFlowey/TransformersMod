@@ -26,20 +26,27 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 		mn.visitVarInsn(ALOAD, 0);
 		int opCode;
 
-		if(fieldType.equals("I") || fieldType.equals("Z")) {
-			opCode = ILOAD;
-		}
-		else if(fieldType.equals("L")) {
-			opCode = LLOAD;
-		}
-		else if(fieldType.equals("F")) {
-			opCode = FLOAD;
-		}
-		else if(fieldType.equals("D")) {
-			opCode = DLOAD;
-		}
-		else {
-			opCode = ALOAD;
+		switch(fieldType) {
+			case "I":
+			case "Z":
+				opCode = ILOAD;
+				break;
+
+			case "L":
+				opCode = LLOAD;
+				break;
+
+			case "F":
+				opCode = FLOAD;
+				break;
+
+			case "D":
+				opCode = DLOAD;
+				break;
+
+			default:
+				opCode = ALOAD;
+				break;
 		}
 
 		mn.visitVarInsn(opCode, 1);
@@ -57,20 +64,27 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 		mn.visitFieldInsn(GETFIELD, className, fieldName, fieldType);
 		int opCode;
 
-		if(fieldType.equals("I") || fieldType.equals("Z")) {
-			opCode = IRETURN;
-		}
-		else if(fieldType.equals("L")) {
-			opCode = LRETURN;
-		}
-		else if(fieldType.equals("F")) {
-			opCode = FRETURN;
-		}
-		else if(fieldType.equals("D")) {
-			opCode = DRETURN;
-		}
-		else {
-			opCode = ARETURN;
+		switch(fieldType) {
+			case "I":
+			case "Z":
+				opCode = IRETURN;
+				break;
+
+			case "L":
+				opCode = LRETURN;
+				break;
+
+			case "F":
+				opCode = FRETURN;
+				break;
+
+			case "D":
+				opCode = DRETURN;
+				break;
+
+			default:
+				opCode = ARETURN;
+				break;
 		}
 
 		mn.visitInsn(opCode);
@@ -91,7 +105,6 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 
 				setupMappings();
 				boolean success = processFields(cn.fields) && processMethods(cn.methods);
-				addInterface(cn.interfaces);
 
 				final ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 				cn.accept(cw);
@@ -113,17 +126,9 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 		return bytes;
 	}
 
-	public void addInterface(List<String> interfaces) {
-
-	}
-
 	public abstract boolean processMethods(List<MethodNode> methods);
 
 	public abstract boolean processFields(List<FieldNode> fields);
 
 	public abstract void setupMappings();
-
-	public void sendPatchLog(String method) {
-		TFLog.info("\tPatching method %s in %s", method, unobfClass);
-	}
 }

@@ -52,8 +52,8 @@ public class BlockAlloyCrucible extends BlockMachineBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int metadata) {
-		IIcon topIcon = topIcons[1];
-		IIcon frontIcon = frontIcons[1];
+		IIcon topIcon;
+		IIcon frontIcon;
 
 		if(renderPass == 1) {
 			topIcon = topIcons[getFlag(metadata, FLAG_TOP) ? 2 : 0];

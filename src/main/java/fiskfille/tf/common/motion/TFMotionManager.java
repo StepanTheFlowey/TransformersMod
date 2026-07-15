@@ -206,11 +206,11 @@ public class TFMotionManager {
 		}
 
 		if(driftAmount > 0.2F) {
-			player.rotationYaw += driftAmount * 2;
+			player.rotationYaw += (float) (driftAmount * 2D);
 		}
 
 		if(driftAmount < -0.2F) {
-			player.rotationYaw -= -driftAmount * 2;
+			player.rotationYaw -= (float) (-driftAmount * 2D);
 		}
 	}
 

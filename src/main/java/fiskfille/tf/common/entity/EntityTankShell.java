@@ -26,11 +26,6 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-	}
-
-	@Override
 	protected float getGravityVelocity() {
 		return 0.04F;
 	}

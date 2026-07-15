@@ -79,7 +79,7 @@ public class TFAchievements {
 		}
 
 		if(AchievementPage.getAchievementPage("Transformers") == null) {
-			AchievementPage.registerAchievementPage(new AchievementPage("Transformers", achievements.toArray(new Achievement[achievements.size()])));
+			AchievementPage.registerAchievementPage(new AchievementPage("Transformers", achievements.toArray(new Achievement[0])));
 		}
 	}
 

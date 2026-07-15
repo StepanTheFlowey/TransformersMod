@@ -144,9 +144,8 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 						ratios.put(e.getKey(), ratios.get(e.getKey()) / f);
 					}
 
-					for(int i = 0; i < tiles.size(); ++i) {
-						TileEntityEnergonTank tile = tiles.get(i);
-						FluidStack fluid = tile.getTank().getFluid();
+					for(TileEntityEnergonTank tile : tiles) {
+						final FluidStack fluid = tile.getTank().getFluid();
 
 						if(fluid != null) {
 							FluidEnergon.setRatios(fluid, ratios);

@@ -77,7 +77,7 @@ public class ItemDisplayVehicle extends Item {
 		Transformer transformer = TransformersAPI.getTransformers().get(stack.getItemDamage());
 
 		if(transformer != null) {
-			return StatCollector.translateToLocal("item.display_" + transformer.getName().toLowerCase().replaceAll(" ", "_") + ".name");
+			return StatCollector.translateToLocal("item.display_" + transformer.getName().toLowerCase().replace(" ", "_") + ".name");
 		}
 		else {
 			return super.getItemStackDisplayName(stack);

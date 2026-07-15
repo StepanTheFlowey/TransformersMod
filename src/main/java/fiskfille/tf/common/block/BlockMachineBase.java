@@ -166,7 +166,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	public void addBox(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int x, int y, int z, AxisAlignedBB aabb, List list) {
-		AxisAlignedBB aabb1 = AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ).offset(x, y, z);
+		final AxisAlignedBB aabb1 = AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ).offset(x, y, z);
 
 		if(aabb1.intersectsWith(aabb)) {
 			list.add(aabb1);
@@ -180,21 +180,21 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int metadata) {
-		TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+		final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 		if(tile instanceof IFluidHandler) {
-			IFluidHandler fluidHandler = (IFluidHandler) tile;
+			final IFluidHandler fluidHandler = (IFluidHandler) tile;
 			float amount = 0;
 			float capacity = 0;
 
 			for(ForgeDirection dir : ForgeDirection.values()) {
-				FluidTankInfo[] info = fluidHandler.getTankInfo(dir);
+				final FluidTankInfo[] info = fluidHandler.getTankInfo(dir);
 
-				for(int i = 0; i < info.length; ++i) {
-					capacity += info[i].capacity;
+				for(FluidTankInfo fluidTankInfo : info) {
+					capacity += fluidTankInfo.capacity;
 
-					if(info[i].fluid != null) {
-						amount += info[i].fluid.amount;
+					if(fluidTankInfo.fluid != null) {
+						amount += fluidTankInfo.fluid.amount;
 					}
 				}
 			}
@@ -210,18 +210,18 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+		final TileEntity tile = world.getTileEntity(x, y, z);
 
 		if(tile instanceof IInventory) {
-			IInventory inventory = (IInventory) tile;
+			final IInventory inventory = (IInventory) tile;
 
 			for(int i = 0; i < inventory.getSizeInventory(); ++i) {
-				ItemStack itemstack = inventory.getStackInSlot(i);
+				final ItemStack itemstack = inventory.getStackInSlot(i);
 
 				if(itemstack != null) {
-					float f = rand.nextFloat() * 0.8F + 0.1F;
-					float f1 = rand.nextFloat() * 0.8F + 0.1F;
-					float f2 = rand.nextFloat() * 0.8F + 0.1F;
+					final float f = rand.nextFloat() * 0.8F + 0.1F;
+					final float f1 = rand.nextFloat() * 0.8F + 0.1F;
+					final float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 					while(itemstack.stackSize > 0) {
 						int j = rand.nextInt(21) + 10;
@@ -231,13 +231,13 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 						}
 
 						itemstack.stackSize -= j;
-						EntityItem entity = new EntityItem(world, x + f, y + f1, z + f2, new ItemStack(itemstack.getItem(), j, itemstack.getItemDamage()));
+						final EntityItem entity = new EntityItem(world, x + f, y + f1, z + f2, new ItemStack(itemstack.getItem(), j, itemstack.getItemDamage()));
 
 						if(itemstack.hasTagCompound()) {
 							entity.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
 						}
 
-						float f3 = 0.05F;
+						final float f3 = 0.05F;
 						entity.motionX = (float) rand.nextGaussian() * f3;
 						entity.motionY = (float) rand.nextGaussian() * f3 + 0.2F;
 						entity.motionZ = (float) rand.nextGaussian() * f3;

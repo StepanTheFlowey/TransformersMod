@@ -39,16 +39,19 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TileEntityControlPanel extends TileEntityMachineContainer implements IEnergyReceiver, ITileDataCallback, IChunkLoaderTile, IMultiTile {
 	public static final int[][] directions = new int[][]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 
-	public ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final LinkedList<Ticket> chunkTickets = Lists.newLinkedList(Arrays.asList(null, null));
+	public final LinkedList<ForcedChunk> forcedChunks = Lists.newLinkedList(Arrays.asList(null, null));
 	public Integer[][] switches = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
-
 	public TileDataControlPanel data = new TileDataControlPanel();
-
 	public float animPortalDirection;
 	public float prevAnimPortalDirection;
 	public boolean activationLeverCoverState = false;
@@ -56,14 +59,10 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	public float prevActivationLeverTimer;
 	public float activationLeverCoverTimer;
 	public float prevActivationLeverCoverTimer;
-
 	public boolean hasSpace;
 	public float lastUsage;
 	public int destDimIndex = 1;
 	public int prevYCoord;
-
-	public LinkedList<Ticket> chunkTickets = Lists.newLinkedList(Arrays.asList(null, null));
-	public LinkedList<ForcedChunk> forcedChunks = Lists.newLinkedList(Arrays.asList(null, null));
 
 	@Override
 	public void updateEntity() {
@@ -74,12 +73,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 
 			if(!data.activationLeverState) {
 				List<TileEntity> list = new ArrayList<TileEntity>(worldObj.loadedTileEntityList);
-				Collections.sort(list, new Comparator<TileEntity>() {
-					@Override
-					public int compare(TileEntity tile1, TileEntity tile2) {
-						return Double.valueOf(Math.sqrt(getDistanceFrom(tile1.xCoord, tile1.zCoord, tile1.yCoord))).compareTo(Math.sqrt(getDistanceFrom(tile2.xCoord, tile2.zCoord, tile2.yCoord)));
-					}
-				});
+				list.sort((tile1, tile2) -> Double.compare(Math.sqrt(getDistanceFrom(tile1.xCoord, tile1.zCoord, tile1.yCoord)), Math.sqrt(getDistanceFrom(tile2.xCoord, tile2.zCoord, tile2.yCoord))));
 
 				for(TileEntity tile : list) {
 					if(Math.sqrt(getDistanceFrom(tile.xCoord, tile.yCoord, tile.zCoord)) <= TFConfig.controlPanelMaxRange) {

@@ -50,8 +50,6 @@ public class GuiConfigSides extends GuiContainerTF {
 	private final List<ChunkCoordinates> neighbors = Lists.newArrayList();
 	private final List<ChunkCoordinates> configurables = Lists.newArrayList();
 	private final Vector3d camera;
-	private final boolean renderNeighbours = true;
-	private GuiButton buttonDistribution;
 
 	public GuiConfigSides(InventoryPlayer inventoryPlayer, GuiScreen gui, TileEntityMachine tile) {
 		super(new ContainerEmpty(inventoryPlayer, 16));
@@ -71,8 +69,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 
-		buttonList.add(buttonDistribution = new GuiButtonDistribution(0, x + 111, y + 66, machine));
-
+		buttonList.add(new GuiButtonDistribution(0, x + 111, y + 66, machine));
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			int index = dir.ordinal();
 			buttonList.add(new GuiButtonIO(index + 1, x + 108 + index % 2 * 15, y + 18 + index / 2 * 15, machine, dir));
@@ -167,6 +164,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
+		boolean renderNeighbours = true;
 		for(int pass = 0; pass < 2; ++pass) {
 			setGlStateForPass(pass, false);
 			doTileEntityRenderPass(configurables, pass);
