@@ -18,6 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class BlockDisplayStation extends BlockMachineBase {
 	public BlockDisplayStation() {
 		super(TFMaterial.display);
@@ -83,9 +85,9 @@ public class BlockDisplayStation extends BlockMachineBase {
 					}
 
 					if(flag) {
-						ItemStack[] armor = ItemDisplayVehicle.getArmorFromNBT(heldItem);
+						final ItemStack[] armor = ItemDisplayVehicle.getArmorFromNBT(heldItem);
 
-						for(int i = 0; i < armor.length; ++i) {
+						for(int i = 0; i < Objects.requireNonNull(armor).length; ++i) {
 							tile.setInventorySlotContents(i, armor[i]);
 						}
 
@@ -114,7 +116,7 @@ public class BlockDisplayStation extends BlockMachineBase {
 		ItemStack playerArmor = player.inventory.armorInventory[armorType];
 		int tileArmorSlot = 3 - armorType;
 
-		if(tileArmorSlot != -1 && armorType >= 0 && armorType < 4) {
+		if(tileArmorSlot != -1 && armorType < 4) {
 			ItemStack tileArmor = tile.getStackInSlot(tileArmorSlot);
 			ItemStack itemstack1 = null;
 			ItemStack itemstack2 = null;
