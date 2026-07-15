@@ -46,7 +46,7 @@ public class TransformersMod {
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public static void preInit(FMLPreInitializationEvent event) {
 		if(!TFLoadingPlugin.loaded) {
 			System.out.println("TransformersMod coremod not added! -Dfml.coreMods.load=fiskfille.tf.asm.TFLoadingPlugin");
 			FMLCommonHandler.instance().exitJava(0, false);
@@ -66,7 +66,7 @@ public class TransformersMod {
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public static void init(FMLInitializationEvent event) {
 		proxy.init();
 
 		if(Loader.isModLoaded("Waila")) {
@@ -80,7 +80,7 @@ public class TransformersMod {
 	}
 
 	@EventHandler
-	public void missingMappings(FMLMissingMappingsEvent event) {
+	public static void missingMappings(FMLMissingMappingsEvent event) {
 		for(MissingMapping mapping : event.get()) {
 			remap(mapping, "transformium", TFItems.transformiumFragment);
 			remap(mapping, "energon_crystal_piece", TFItems.energonCrystalShard);
@@ -90,13 +90,13 @@ public class TransformersMod {
 		}
 	}
 
-	private void remap(MissingMapping mapping, String name, Item item) {
+	private static void remap(MissingMapping mapping, String name, Item item) {
 		if(mapping.type == GameRegistry.Type.ITEM && mapping.name.equals(modid + ":" + name)) {
 			mapping.remap(item);
 		}
 	}
 
-	private void remap(MissingMapping mapping, String name, Block block) {
+	private static void remap(MissingMapping mapping, String name, Block block) {
 		remap(mapping, name, Item.getItemFromBlock(block));
 
 		if(mapping.type == GameRegistry.Type.BLOCK && mapping.name.equals(modid + ":" + name)) {

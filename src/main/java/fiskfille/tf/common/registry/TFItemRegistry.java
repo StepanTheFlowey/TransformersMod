@@ -1,10 +1,10 @@
 package fiskfille.tf.common.registry;
 
+import net.minecraft.item.Item;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fiskfille.tf.TransformersMod;
-import net.minecraft.item.Item;
 
 public class TFItemRegistry {
 	public static void registerItem(Item item, String name) {
