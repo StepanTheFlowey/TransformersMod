@@ -14,6 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FluidEnergon extends Fluid {
@@ -82,12 +83,11 @@ public class FluidEnergon extends Fluid {
 		calculateLiquidColor(stack);
 	}
 
-	public static Map<String, Float> getRatios(FluidStack stack) {
+	public static HashMap<String, Float> getRatios(FluidStack stack) {
 		refreshNBT(stack);
-		Map<String, Float> map = Maps.newHashMap();
 
-		NBTTagCompound nbttagcompound = stack.tag.getCompoundTag("Ratio");
-
+		final NBTTagCompound nbttagcompound = stack.tag.getCompoundTag("Ratio");
+		final HashMap<String, Float> map = new HashMap<>();
 		for(Energon energon : TransformersAPI.getEnergonTypes()) {
 			map.put(energon.getId(), nbttagcompound.getFloat(energon.getId()));
 		}

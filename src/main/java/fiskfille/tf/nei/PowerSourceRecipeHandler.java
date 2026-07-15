@@ -4,7 +4,6 @@ import codechicken.nei.ItemList;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import com.google.common.collect.Lists;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.common.energon.IEnergon;
@@ -22,7 +21,7 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.HashMap;
 
 import static codechicken.nei.NEIClientUtils.translate;
 
@@ -44,7 +43,7 @@ public class PowerSourceRecipeHandler extends EnergonProcessorRecipeHandler {
 	}
 
 	private void findProcessorRecipes() {
-		processorRecipes = Lists.newArrayList();
+		processorRecipes = new ArrayList<>();
 
 		for(ItemStack item : ItemList.items) {
 			loadProcessorCraftingRecipes(item);
@@ -62,7 +61,7 @@ public class PowerSourceRecipeHandler extends EnergonProcessorRecipeHandler {
 			int amount = stack != null ? stack.amount : 0;
 
 			if(!ItemFuelCanister.isEmpty(result) && stack.getFluid() == TFFluids.energon) {
-				Map<String, Float> ratios = FluidEnergon.getRatios(stack);
+				HashMap<String, Float> ratios = FluidEnergon.getRatios(stack);
 
 				for(CrystalPair crystal : crystals) {
 					String id = crystal.energon.getEnergonType().getId();
@@ -73,7 +72,7 @@ public class PowerSourceRecipeHandler extends EnergonProcessorRecipeHandler {
 						CachedProcessorRecipe recipe = new CachedProcessorRecipe(crystal.stack, result);
 						FluidStack stack1 = new FluidStack(TFFluids.energon, 0);
 
-						for(Map.Entry<String, Float> e : ratios.entrySet()) {
+						for(HashMap.Entry<String, Float> e : ratios.entrySet()) {
 							Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
 							int amount1 = Math.round(e.getValue() * amount);
 

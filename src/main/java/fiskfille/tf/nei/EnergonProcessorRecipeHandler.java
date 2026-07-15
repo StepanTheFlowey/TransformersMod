@@ -6,7 +6,6 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import com.google.common.collect.Lists;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.TransformersMod;
@@ -63,7 +62,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	private void findPowerSources() {
-		powerSources = Lists.newArrayList();
+		powerSources = new ArrayList<>();
 
 		for(Map.Entry<ItemStack, Integer> e : PowerManager.powerSources.entrySet()) {
 			if(e.getValue() > 0) {
@@ -73,7 +72,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	private void findCrystals() {
-		crystals = Lists.newArrayList();
+		crystals = new ArrayList<>();
 
 		for(ItemStack itemstack : ItemList.items) {
 			final Item item = itemstack.getItem();
@@ -182,7 +181,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public List<CachedProcessorRecipe> getProcessorRecipes() {
-		List<CachedProcessorRecipe> list = Lists.newArrayList();
+		List<CachedProcessorRecipe> list = new ArrayList<>();
 
 		for(CachedRecipe recipe : arecipes) {
 			if(recipe instanceof CachedProcessorRecipe) {

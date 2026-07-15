@@ -1,6 +1,5 @@
 package fiskfille.tf.client.model.tools;
 
-import com.google.common.collect.Lists;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
@@ -9,10 +8,9 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ModelRendererTF extends MowzieModelRenderer {
-	private List hideUntil = Lists.newArrayList();
+	private ArrayList<ModelRenderer> hideUntil = new ArrayList<>();
 
 	public ModelRendererTF(ModelBase modelBase, String name) {
 		super(modelBase, name);
@@ -93,10 +91,10 @@ public class ModelRendererTF extends MowzieModelRenderer {
 		if(childModels != null) {
 			for(Object childModel : childModels) {
 				ModelRendererTF model = (ModelRendererTF) childModel;
-				List list = new ArrayList(hideUntil);
+				ArrayList<ModelRenderer> list = new ArrayList<>(hideUntil);
 
 				if(hideUntil.contains(model)) {
-					list = Lists.newArrayList();
+					list = new ArrayList<>();
 				}
 
 				model.hideUntil = list;

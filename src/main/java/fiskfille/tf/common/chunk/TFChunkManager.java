@@ -1,7 +1,5 @@
 package fiskfille.tf.common.chunk;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import fiskfille.tf.TFLog;
 import fiskfille.tf.TransformersMod;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -10,13 +8,14 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class TFChunkManager {
-	private static final Map<World, LinkedList<Ticket>> ticketsForWorld = Maps.newHashMap();
-	private static final Map<ForcedChunk, Integer> chunkForcers = Maps.newHashMap();
+	private static final HashMap<World, LinkedList<Ticket>> ticketsForWorld = new HashMap<>();
+	private static final HashMap<ForcedChunk, Integer> chunkForcers = new HashMap<>();
 
 	public static void forceChunk(Ticket ticket, ForcedChunk chunk) {
 		int i = chunkForcers.get(chunk) == null ? 0 : chunkForcers.get(chunk);

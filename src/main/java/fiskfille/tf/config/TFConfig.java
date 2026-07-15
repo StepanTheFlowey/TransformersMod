@@ -1,10 +1,10 @@
 package fiskfille.tf.config;
 
-import com.google.common.collect.Maps;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraftforge.common.config.Configuration;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TFConfig {
@@ -22,7 +22,7 @@ public class TFConfig {
 	public static boolean oldPortalRender;
 	public static int controlPanelMaxRange;
 
-	public static Map<Transformer, Boolean> canTransform = Maps.newHashMap();
+	public static Map<Transformer, Boolean> canTransform = new HashMap<>();
 
 	public static Configuration configFile;
 

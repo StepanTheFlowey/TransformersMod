@@ -1,7 +1,5 @@
 package fiskfille.tf;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import fiskfille.tf.client.displayable.Displayable;
@@ -9,17 +7,17 @@ import fiskfille.tf.common.energon.Energon;
 import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.item.Item;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author gegy1000, FiskFille
  */
 public class TransformersAPI {
-	private static final List<Transformer> transformers = Lists.newArrayList();
-	private static final List<Energon> energonTypes = Lists.newArrayList();
-	private static final Map<Item, Displayable> displayables = Maps.newHashMap();
-	private static final List<Item> displayablesServer = Lists.newArrayList();
+	private static final ArrayList<Transformer> transformers = new ArrayList<>();
+	private static final ArrayList<Energon> energonTypes = new ArrayList<>();
+	private static final ArrayList<Item> displayablesServer = new ArrayList<>();
+	private static final HashMap<Item, Displayable> displayables = new HashMap<>();
 
 	/**
 	 * Used to register the specified Transformer.
@@ -36,9 +34,9 @@ public class TransformersAPI {
 	}
 
 	/**
-	 * @returns a list of registered Transformers.
+	 * @return a list of registered Transformers.
 	 */
-	public static List<Transformer> getTransformers() {
+	public static ArrayList<Transformer> getTransformers() {
 		return transformers;
 	}
 
@@ -73,9 +71,9 @@ public class TransformersAPI {
 	}
 
 	/**
-	 * @returns a list of registered Energon Types.
+	 * @return a list of registered Energon Types.
 	 */
-	public static List<Energon> getEnergonTypes() {
+	public static ArrayList<Energon> getEnergonTypes() {
 		return energonTypes;
 	}
 
@@ -114,9 +112,9 @@ public class TransformersAPI {
 	}
 
 	/**
-	 * @returns a list of registered Displayables.
+	 * @return a map of registered Displayables.
 	 */
-	public static Map<Item, Displayable> getDisplayables() {
+	public static HashMap<Item, Displayable> getDisplayables() {
 		return displayables;
 	}
 
@@ -125,7 +123,7 @@ public class TransformersAPI {
 	 * @return the Displayable for the specific item.
 	 */
 	public static Displayable getDisplayableFor(Item item) {
-		for(Map.Entry<Item, Displayable> e : displayables.entrySet()) {
+		for(HashMap.Entry<Item, Displayable> e : displayables.entrySet()) {
 			if(e.getKey() == item) {
 				return e.getValue();
 			}
