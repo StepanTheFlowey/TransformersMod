@@ -6,18 +6,20 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 public class ModelLaser extends ModelBase {
-	public final ModelRenderer laserInner;
-	public final ModelRenderer laserOuter;
+	private final ModelRenderer laserInner;
+	private final ModelRenderer laserOuter;
 
 	public ModelLaser() {
 		textureWidth = 64;
 		textureHeight = 16;
-		laserInner = new ModelRenderer(this, 0, 0);
-		laserInner.setRotationPoint(0F, 0F, 0F);
-		laserInner.addBox(-0.5F, -0.5F, -3.5F, 1, 1, 7);
+
 		laserOuter = new ModelRenderer(this, 17, 0);
 		laserOuter.setRotationPoint(0F, 0F, 0F);
 		laserOuter.addBox(-1F, -1F, -4F, 2, 2, 8);
+
+		laserInner = new ModelRenderer(this, 0, 0);
+		laserInner.setRotationPoint(0F, 0F, 0F);
+		laserInner.addBox(-0.5F, -0.5F, -3.5F, 1, 1, 7);
 		laserInner.addChild(laserOuter);
 	}
 

@@ -609,17 +609,17 @@ public class ModelVurp extends ModelTransformerBase {
 		waist.rotationPointY -= 3F;
 
 		if(!isRiding) {
-			upperLegR.rotateAngleY += 0.2;
-			upperLegL.rotateAngleY -= 0.2;
+			upperLegR.rotateAngleY += 0.2F;
+			upperLegL.rotateAngleY -= 0.2F;
 		}
 
-		upperLegR.rotateAngleX -= 0.1;
-		upperLegL.rotateAngleX -= 0.1;
-		lowerLegL.rotateAngleX += 0.1;
-		lowerLegR.rotateAngleX += 0.1;
-		lowerArmL.rotateAngleX -= 0.1;
-		lowerArmR.rotateAngleX -= 0.1;
-		head.rotateAngleX += 0.1;
+		upperLegR.rotateAngleX -= 0.1F;
+		upperLegL.rotateAngleX -= 0.1F;
+		lowerLegL.rotateAngleX += 0.1F;
+		lowerLegR.rotateAngleX += 0.1F;
+		lowerArmL.rotateAngleX -= 0.1F;
+		lowerArmR.rotateAngleX -= 0.1F;
+		head.rotateAngleX += 0.1F;
 
 		bob(waist, globalSpeed, 1.7F * globalDegree, false, limbSwing, limbSwingAmount);
 		waist.rotationPointY += 1 * limbSwingAmount + 3;
@@ -630,7 +630,7 @@ public class ModelVurp extends ModelTransformerBase {
 		walk(head, globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 
 		swing(head, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
-		head.rotationPointX += 0.6 * globalDegree * limbSwingAmount * Math.cos(limbSwing * 0.5F * globalSpeed);
+		head.rotationPointX += 0.6F * globalDegree * limbSwingAmount * MathHelper.cos(limbSwing * 0.5F * globalSpeed);
 
 		swing(upperLegR, 0.5F * globalSpeed, 0.2F * globalDegree, true, 0, -0.2F, limbSwing, limbSwingAmount);
 		swing(upperLegL, 0.5F * globalSpeed, 0.2F * globalDegree, true, 0, 0.2F, limbSwing, limbSwingAmount);
@@ -688,41 +688,41 @@ public class ModelVurp extends ModelTransformerBase {
 		float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
 		float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
 
-		waist.rotateAngleX += 0.2 * limbSwingAmount * backwardInverter;
+		waist.rotateAngleX += 0.2F * limbSwingAmount * backwardInverter;
 
-		fronttorso1.rotateAngleX += 0.2 * upwardPose;
-		torsobase.rotateAngleX -= 0.4 * upwardPose;
-		head.rotateAngleX += 0.6 * upwardPose;
+		fronttorso1.rotateAngleX += 0.2F * upwardPose;
+		torsobase.rotateAngleX -= 0.4F * upwardPose;
+		head.rotateAngleX += 0.6F * upwardPose;
 
-		upperArmR.rotateAngleX += 0.1 * upwardPose;
-		upperArmL.rotateAngleX += 0.1 * upwardPose;
-		upperArmR.rotateAngleZ -= 0.1 * upwardPose;
-		upperArmL.rotateAngleZ += 0.1 * upwardPose;
-		lowerArmR.rotateAngleX += 0.2 * upwardPose;
-		lowerArmL.rotateAngleX += 0.2 * upwardPose;
+		upperArmR.rotateAngleX += 0.1F * upwardPose;
+		upperArmL.rotateAngleX += 0.1F * upwardPose;
+		upperArmR.rotateAngleZ -= 0.1F * upwardPose;
+		upperArmL.rotateAngleZ += 0.1F * upwardPose;
+		lowerArmR.rotateAngleX += 0.2F * upwardPose;
+		lowerArmL.rotateAngleX += 0.2F * upwardPose;
 
-		upperLegR.rotateAngleX += 0.2 * upwardPose;
-		upperLegL.rotateAngleX -= 1 * upwardPose;
-		lowerLegR.rotateAngleX += 0.3 * upwardPose;
-		lowerLegL.rotateAngleX += 1.5 * upwardPose;
+		upperLegR.rotateAngleX += 0.2F * upwardPose;
+		upperLegL.rotateAngleX -= 1F * upwardPose;
+		lowerLegR.rotateAngleX += 0.3F * upwardPose;
+		lowerLegL.rotateAngleX += 1.5F * upwardPose;
 
 		walk(upperLegR, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, 0, 0, limbSwing, limbSwingAmount);
 		walk(upperLegL, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, 0, 0, limbSwing, limbSwingAmount);
 		walk(lowerLegR, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 		walk(lowerLegL, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 
-		waist.rotateAngleX -= 0.2 * downwardPose;
-		fronttorso1.rotateAngleX += 0.3 * downwardPose;
-		torsobase.rotateAngleX += 0.3 * downwardPose;
-		head.rotateAngleX += 0.3 * downwardPose;
-		upperLegR.rotateAngleX -= 1.2 * downwardPose;
-		upperLegL.rotateAngleX -= 0.2 * downwardPose;
-		lowerLegR.rotateAngleX += 2 * downwardPose;
-		lowerLegL.rotateAngleX += 0.5 * downwardPose;
+		waist.rotateAngleX -= 0.2F * downwardPose;
+		fronttorso1.rotateAngleX += 0.3F * downwardPose;
+		torsobase.rotateAngleX += 0.3F * downwardPose;
+		head.rotateAngleX += 0.3F * downwardPose;
+		upperLegR.rotateAngleX -= 1.2F * downwardPose;
+		upperLegL.rotateAngleX -= 0.2F * downwardPose;
+		lowerLegR.rotateAngleX += 2F * downwardPose;
+		lowerLegL.rotateAngleX += 0.5F * downwardPose;
 		upperArmR.rotateAngleZ += 0.5F * downwardPose;
 		upperArmL.rotateAngleZ -= 0.5F * downwardPose;
-		lowerArmR.rotateAngleX -= 1 * downwardPose;
-		lowerArmL.rotateAngleX -= 1 * downwardPose;
+		lowerArmR.rotateAngleX -= downwardPose;
+		lowerArmL.rotateAngleX -= downwardPose;
 	}
 
 	@Override

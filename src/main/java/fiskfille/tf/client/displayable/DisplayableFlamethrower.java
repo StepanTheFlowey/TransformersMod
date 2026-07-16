@@ -11,14 +11,13 @@ import org.lwjgl.opengl.GL11;
 import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayableFlamethrower extends Displayable {
-	private static final ModelFlamethrower model = new ModelFlamethrower();
+	private final ModelFlamethrower model = new ModelFlamethrower();
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/flame_thrower.png");
 
 	@Override
 	public void render(ItemStack itemstack) {
-		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/flame_thrower.png"));
-
-		final float f = 0.7F;
-		GL11.glScalef(f, f, f);
+		bindTexture(texture);
+		GL11.glScalef(0.7F, 0.7F, 0.7F);
 		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
 		final float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.05F;
 		GL11.glTranslatef(-0.2F, 0.95F + f1, 0F);

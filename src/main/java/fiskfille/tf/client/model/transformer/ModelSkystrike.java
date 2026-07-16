@@ -1229,16 +1229,16 @@ public class ModelSkystrike extends ModelTransformerBase {
 		upperarmL1.rotateAngleZ -= 0.05F;
 		lowerarmR1.rotateAngleX -= 0.1F;
 		lowerarmL1.rotateAngleX -= 0.1F;
-		upperlegR1.rotateAngleY += 0.2;
-		upperlegL1.rotateAngleY -= 0.2;
-		upperlegR1.rotateAngleX -= 0.2;
-		upperlegL1.rotateAngleX -= 0.2;
-		lowerlegR1.rotateAngleX += 0.15;
-		lowerlegL1.rotateAngleX += 0.15;
+		upperlegR1.rotateAngleY += 0.2F;
+		upperlegL1.rotateAngleY -= 0.2F;
+		upperlegR1.rotateAngleX -= 0.2F;
+		upperlegL1.rotateAngleX -= 0.2F;
+		lowerlegR1.rotateAngleX += 0.15F;
+		lowerlegL1.rotateAngleX += 0.15F;
 		waistbase.rotateAngleX += 0.05F;
 
 		bob(waistbase, globalSpeed, 1.7F * globalDegree, false, limbSwing, limbSwingAmount);
-		waistbase.rotationPointY += 1.2 * limbSwingAmount;
+		waistbase.rotationPointY += 1.2F * limbSwingAmount;
 		walk(waistbase, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 		walk(torsobase1, globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 		swing(torsobase1, 0.5F * globalSpeed, 0.4F * globalDegree, true, 0, 0, limbSwing, limbSwingAmount);
@@ -1247,7 +1247,7 @@ public class ModelSkystrike extends ModelTransformerBase {
 		walk(headbase, globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 
 		swing(headbase, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
-		headbase.rotationPointX += 0.6 * globalDegree * limbSwingAmount * Math.cos(limbSwing * 0.5F * globalSpeed);
+		headbase.rotationPointX += 0.6F * globalDegree * limbSwingAmount * MathHelper.cos(limbSwing * 0.5F * globalSpeed);
 
 		swing(upperlegR1, 0.5F * globalSpeed, 0F * globalDegree, false, 0, -0.15F, limbSwing, limbSwingAmount);
 		swing(upperlegL1, 0.5F * globalSpeed, 0F * globalDegree, false, 0, 0.15F, limbSwing, limbSwingAmount);
@@ -1263,22 +1263,22 @@ public class ModelSkystrike extends ModelTransformerBase {
 		if(player.isSneaking()) {
 			waistbase.rotationPointY += 0.8F;
 			waistbase.rotateAngleX -= 0.1F;
-			torsoconnectorbase1.rotateAngleX += 0.5;
-			headbase.rotateAngleX -= 0.5;
-			upperlegR1.rotateAngleX -= 0.7;
-			upperlegL1.rotateAngleX -= 0.7;
-			upperlegR1.rotateAngleY += 0.2;
-			upperlegL1.rotateAngleY -= 0.2;
-			lowerlegR1.rotateAngleX += 1.1;
-			lowerlegL1.rotateAngleX += 1.1;
-			feetbaseR1.rotateAngleX -= 0.3;
-			feetbaseL1.rotateAngleX -= 0.3;
-			upperarmR1.rotateAngleX -= 0.5;
-			upperarmL1.rotateAngleX -= 0.5;
-			upperarmR1.rotateAngleZ += 0.5;
-			upperarmL1.rotateAngleZ -= 0.5;
-			lowerarmR1.rotateAngleZ -= 0.5;
-			lowerarmL1.rotateAngleZ += 0.5;
+			torsoconnectorbase1.rotateAngleX += 0.5F;
+			headbase.rotateAngleX -= 0.5F;
+			upperlegR1.rotateAngleX -= 0.7F;
+			upperlegL1.rotateAngleX -= 0.7F;
+			upperlegR1.rotateAngleY += 0.2F;
+			upperlegL1.rotateAngleY -= 0.2F;
+			lowerlegR1.rotateAngleX += 1.1F;
+			lowerlegL1.rotateAngleX += 1.1F;
+			feetbaseR1.rotateAngleX -= 0.3F;
+			feetbaseL1.rotateAngleX -= 0.3F;
+			upperarmR1.rotateAngleX -= 0.5F;
+			upperarmL1.rotateAngleX -= 0.5F;
+			upperarmR1.rotateAngleZ += 0.5F;
+			upperarmL1.rotateAngleZ -= 0.5F;
+			lowerarmR1.rotateAngleZ -= 0.5F;
+			lowerarmL1.rotateAngleZ += 0.5F;
 		}
 	}
 
@@ -1297,43 +1297,43 @@ public class ModelSkystrike extends ModelTransformerBase {
 
 	@Override
 	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		double motionY = TFRenderHelper.getMotionY(player);
-		float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
-		float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
+		final double motionY = TFRenderHelper.getMotionY(player);
+		final float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
+		final float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
 
-		waistbase.rotateAngleX += 0.2 * limbSwingAmount * backwardInverter;
+		waistbase.rotateAngleX += 0.2F * limbSwingAmount * backwardInverter;
 
-		torsoconnectorbase1.rotateAngleX += 0.2 * upwardPose;
-		headbase.rotateAngleX += 0.6 * upwardPose;
+		torsoconnectorbase1.rotateAngleX += 0.2F * upwardPose;
+		headbase.rotateAngleX += 0.6F * upwardPose;
 
-		upperarmR1.rotateAngleX += 0.1 * upwardPose;
-		upperarmL1.rotateAngleX += 0.1 * upwardPose;
-		upperarmR1.rotateAngleZ -= 0.1 * upwardPose;
-		upperarmL1.rotateAngleZ += 0.1 * upwardPose;
-		lowerarmR1.rotateAngleX += 0.2 * upwardPose;
-		lowerarmL1.rotateAngleX += 0.2 * upwardPose;
+		upperarmR1.rotateAngleX += 0.1F * upwardPose;
+		upperarmL1.rotateAngleX += 0.1F * upwardPose;
+		upperarmR1.rotateAngleZ -= 0.1F * upwardPose;
+		upperarmL1.rotateAngleZ += 0.1F * upwardPose;
+		lowerarmR1.rotateAngleX += 0.2F * upwardPose;
+		lowerarmL1.rotateAngleX += 0.2F * upwardPose;
 
-		upperlegR1.rotateAngleX += 0.2 * upwardPose;
-		upperlegL1.rotateAngleX -= 1 * upwardPose;
-		lowerlegR1.rotateAngleX += 0.3 * upwardPose;
-		lowerlegL1.rotateAngleX += 1.5 * upwardPose;
+		upperlegR1.rotateAngleX += 0.2F * upwardPose;
+		upperlegL1.rotateAngleX -= upwardPose;
+		lowerlegR1.rotateAngleX += 0.3F * upwardPose;
+		lowerlegL1.rotateAngleX += 1.5F * upwardPose;
 
 		walk(upperlegR1, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, 0, 0, limbSwing, limbSwingAmount);
 		walk(upperlegL1, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, 0, 0, limbSwing, limbSwingAmount);
 		walk(lowerlegR1, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 		walk(lowerlegL1, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 
-		waistbase.rotateAngleX -= 0.2 * downwardPose;
-		torsoconnectorbase1.rotateAngleX += 0.3 * downwardPose;
-		headbase.rotateAngleX += 0.3 * downwardPose;
-		upperlegR1.rotateAngleX -= 1.2 * downwardPose;
-		upperlegL1.rotateAngleX -= 0.2 * downwardPose;
-		lowerlegR1.rotateAngleX += 2 * downwardPose;
-		lowerlegL1.rotateAngleX += 0.5 * downwardPose;
-		upperarmR1.rotateAngleZ += 1 * downwardPose;
-		upperarmL1.rotateAngleZ -= 1 * downwardPose;
-		lowerarmR1.rotateAngleX -= 1 * downwardPose;
-		lowerarmL1.rotateAngleX -= 1 * downwardPose;
+		waistbase.rotateAngleX -= 0.2F * downwardPose;
+		torsoconnectorbase1.rotateAngleX += 0.3F * downwardPose;
+		headbase.rotateAngleX += 0.3F * downwardPose;
+		upperlegR1.rotateAngleX -= 1.2F * downwardPose;
+		upperlegL1.rotateAngleX -= 0.2F * downwardPose;
+		lowerlegR1.rotateAngleX += 2F * downwardPose;
+		lowerlegL1.rotateAngleX += 0.5F * downwardPose;
+		upperarmR1.rotateAngleZ += downwardPose;
+		upperarmL1.rotateAngleZ -= downwardPose;
+		lowerarmR1.rotateAngleX -= downwardPose;
+		lowerarmL1.rotateAngleX -= downwardPose;
 	}
 
 	@Override
@@ -1504,12 +1504,12 @@ public class ModelSkystrike extends ModelTransformerBase {
 		setToInitPose();
 
 		if(armorPiece == 0) {
-			GL11.glTranslatef(0, 0.0625F, -0.0625F);
-			GL11.glRotatef(4, 1, 0, 0);
+			GL11.glTranslatef(0F, 0.0625F, -0.0625F);
+			GL11.glRotatef(4F, 1F, 0F, 0F);
 			headbase.render(0.0625F);
 		}
 		else if(armorPiece == 1) {
-			GL11.glTranslatef(0, 0, 0.0625F);
+			GL11.glTranslatef(0F, 0F, 0.0625F);
 			upperlegL1.showModel = false;
 			upperlegR1.showModel = false;
 			headbase.showModel = false;

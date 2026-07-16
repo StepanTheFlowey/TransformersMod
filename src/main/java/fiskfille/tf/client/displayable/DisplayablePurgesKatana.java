@@ -11,16 +11,16 @@ import org.lwjgl.opengl.GL11;
 import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayablePurgesKatana extends Displayable {
-	private static final ModelPurgesKatana model = new ModelPurgesKatana();
+	private final ModelPurgesKatana model = new ModelPurgesKatana();
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png");
 
 	@Override
 	public void render(ItemStack itemstack) {
-		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png"));
-
+		bindTexture(texture);
 		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
 		final float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-		GL11.glTranslatef(0, 0.7F + f1, -0.55F);
-		GL11.glRotatef(-90, 1, 0, 0);
+		GL11.glTranslatef(0F, 0.7F + f1, -0.55F);
+		GL11.glRotatef(-90F, 1F, 0F, 0F);
 
 		model.render();
 	}

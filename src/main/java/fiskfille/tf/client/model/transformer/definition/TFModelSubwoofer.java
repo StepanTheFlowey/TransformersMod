@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+
 public class TFModelSubwoofer extends TransformerModel {
 	private final ModelSubwoofer model = new ModelSubwoofer();
 	private final ModelSubwoofer modelItem = new ModelSubwoofer();
@@ -24,6 +26,7 @@ public class TFModelSubwoofer extends TransformerModel {
 		return model;
 	}
 
+	@Nonnull
 	@Override
 	public ModelVehicleBase getVehicleModel() {
 		return vehicle;

@@ -1149,18 +1149,18 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		walk(lowerlegRbase, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 		walk(lowerlegLbase, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 
-		waist.rotateAngleX -= 0.2 * downwardPose;
-		upperBodyBase.rotateAngleX += 0.3 * downwardPose;
-		torsoConnector.rotateAngleX += 0.3 * downwardPose;
-		head.rotateAngleX += 0.3 * downwardPose;
-		upperLegR.rotateAngleX -= 0.6 * downwardPose;
-		upperLegL.rotateAngleX -= 0.2 * downwardPose;
+		waist.rotateAngleX -= 0.2F * downwardPose;
+		upperBodyBase.rotateAngleX += 0.3F * downwardPose;
+		torsoConnector.rotateAngleX += 0.3F * downwardPose;
+		head.rotateAngleX += 0.3F * downwardPose;
+		upperLegR.rotateAngleX -= 0.6F * downwardPose;
+		upperLegL.rotateAngleX -= 0.2F * downwardPose;
 		lowerlegRbase.rotateAngleX += 1.4F * downwardPose;
 		lowerlegLbase.rotateAngleX += 0.5F * downwardPose;
 		upperArmR.rotateAngleZ += 0.5F * downwardPose;
 		upperArmL.rotateAngleZ -= 0.5F * downwardPose;
-		lowerArmR.rotateAngleX -= 1 * downwardPose;
-		lowerArmL.rotateAngleX -= 1 * downwardPose;
+		lowerArmR.rotateAngleX -= downwardPose;
+		lowerArmL.rotateAngleX -= downwardPose;
 
 		wingbaseR.rotateAngleZ += 0.5F * downwardPose;
 		wingbaseL.rotateAngleZ -= 0.5F * downwardPose;
@@ -1337,10 +1337,10 @@ public class ModelCloudtrap extends ModelTransformerBase {
 
 		if(armorPiece == 0) {
 			GL11.glTranslatef(0F, 0F, -0.125F);
+
 			head.rotationPointX = 0F;
 			head.rotationPointY = 0F;
 			head.rotationPointZ = 0F;
-
 			head.render(0.0625F);
 		}
 		else if(armorPiece == 1) {
@@ -1367,14 +1367,15 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		}
 		else if(armorPiece == 3) {
 			GL11.glRotatef(5.5F, 1F, 0F, 0F);
+
 			feetbaseL.rotationPointX -= 3.5F;
-			feetbaseR.rotationPointX += 3.5F;
 			feetbaseL.rotateAngleX += 0.2F;
 			feetbaseL.rotateAngleY += 0.1F;
+			feetbaseL.render(0.0625F);
+
+			feetbaseR.rotationPointX += 3.5F;
 			feetbaseR.rotateAngleX += 0.2F;
 			feetbaseR.rotateAngleY -= 0.1F;
-
-			feetbaseL.render(0.0625F);
 			feetbaseR.render(0.0625F);
 		}
 	}

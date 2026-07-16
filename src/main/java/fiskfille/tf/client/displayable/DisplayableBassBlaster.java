@@ -11,17 +11,16 @@ import org.lwjgl.opengl.GL11;
 import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayableBassBlaster extends Displayable {
-	private static final ModelBassBlaster model = new ModelBassBlaster();
+	private final ModelBassBlaster model = new ModelBassBlaster();
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/bass_blaster.png");
 
 	@Override
 	public void render(ItemStack itemstack) {
-		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/bass_blaster.png"));
-
-		final float f = 0.75F;
-		GL11.glScalef(f, f, f);
+		bindTexture(texture);
+		GL11.glScalef(0.75F, 0.75F, 0.75F);
 		GL11.glRotatef(mc.thePlayer.ticksExisted * 0.75F, 0F, 1F, 0F);
 		final float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-		GL11.glTranslatef(0, 0.95F + f1, 0.1F);
+		GL11.glTranslatef(0F, 0.95F + f1, 0.1F);
 
 		model.render();
 	}

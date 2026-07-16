@@ -32,6 +32,5 @@ public class ModelVehicleBase extends MowzieModelBase {
 	 * @param player    The player for which this vehicle mode should be rendered, if any
 	 * @param itemstack The ItemStack containing the vehicle mode's data
 	 */
-	public void render(EntityPlayer player, ItemStack itemstack) {
-	}
+	public void render(EntityPlayer player, ItemStack itemstack) {}
 }

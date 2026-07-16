@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+
 public class TFModelPurge extends TransformerModel {
 	private final ModelPurge model = new ModelPurge();
 	private final ModelPurge modelItem = new ModelPurge();
@@ -22,6 +24,7 @@ public class TFModelPurge extends TransformerModel {
 		return model;
 	}
 
+	@Nonnull
 	@Override
 	public ModelVehicleBase getVehicleModel() {
 		return vehicle;

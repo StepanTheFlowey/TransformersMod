@@ -4,19 +4,22 @@ import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 
 public class ModelPowerCanister extends MowzieModelBase {
-	public final MowzieModelRenderer canister1;
-	public final MowzieModelRenderer canister2;
-	public final MowzieModelRenderer canister3;
+	final MowzieModelRenderer canister1;
+	final MowzieModelRenderer canister2;
+	final MowzieModelRenderer canister3;
 
 	public ModelPowerCanister() {
 		textureWidth = 32;
 		textureHeight = 16;
+
 		canister3 = new MowzieModelRenderer(this, 12, 5);
 		canister3.setRotationPoint(0F, -1.5F, 0F);
 		canister3.addBox(-2F, 0F, -2F, 4, 1, 4, 0F);
+
 		canister2 = new MowzieModelRenderer(this, 12, 0);
 		canister2.setRotationPoint(0F, -8.5F, 0F);
 		canister2.addBox(-2F, -1F, -2F, 4, 1, 4, 0F);
+
 		canister1 = new MowzieModelRenderer(this, 0, 0);
 		canister1.setRotationPoint(0F, 0F, 0F);
 		canister1.addBox(-1.5F, -10F, -1.5F, 3, 10, 3, 0F);

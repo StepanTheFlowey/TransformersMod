@@ -122,12 +122,11 @@ public class ModelSkystrikesCrossbow extends MowzieModelBase {
 
 	public void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		if(entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) entity;
-			ItemStack itemstack = player.getHeldItem();
+			final ItemStack itemstack = ((EntityPlayer) entity).getHeldItem();
 
 			if(itemstack != null) {
-				boolean flag = itemstack.hasTagCompound() && itemstack.getTagCompound().getBoolean("blueMode");
-				float pidb2 = PI / 2;
+				final boolean flag = itemstack.hasTagCompound() && itemstack.getTagCompound().getBoolean("blueMode");
+				final float pidb2 = PI / 2;
 				if(!flag && handle.rotateAngleZ > 0F) {
 					handle.rotateAngleZ -= pidb2 / 10;
 				}

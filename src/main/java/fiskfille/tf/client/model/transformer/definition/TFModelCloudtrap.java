@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+
 public class TFModelCloudtrap extends TransformerModel {
 	private final ModelCloudtrap model = new ModelCloudtrap();
 	private final ModelCloudtrap modelItem = new ModelCloudtrap();
@@ -22,6 +24,7 @@ public class TFModelCloudtrap extends TransformerModel {
 		return model;
 	}
 
+	@Nonnull
 	@Override
 	public ModelVehicleBase getVehicleModel() {
 		return vehicle;

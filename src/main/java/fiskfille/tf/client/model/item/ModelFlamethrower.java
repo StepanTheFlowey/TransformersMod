@@ -155,7 +155,7 @@ public class ModelFlamethrower extends ModelBase {
 	}
 
 	public void render() {
-		float f5 = 0.0625F;
+		final float f5 = 0.0625F;
 
 		box1.render(f5);
 		box2.render(f5);

@@ -40,19 +40,19 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		if(entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) entity;
-			ItemStack head = player.getCurrentArmor(3);
-			ItemStack chest = player.getCurrentArmor(2);
-			ItemStack legs = player.getCurrentArmor(1);
-			ItemStack feet = player.getCurrentArmor(0);
+			final EntityPlayer player = (EntityPlayer) entity;
+			final ItemStack head = player.getCurrentArmor(3);
+			final ItemStack chest = player.getCurrentArmor(2);
+			final ItemStack legs = player.getCurrentArmor(1);
+			final ItemStack feet = player.getCurrentArmor(0);
 
-			boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) == getTransformer();
-			boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) == getTransformer();
-			boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) == getTransformer();
-			boolean wearingFeet = TFHelper.getTransformerFromArmor(player, 0) == getTransformer();
+			final boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) == getTransformer();
+			final boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) == getTransformer();
+			final boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) == getTransformer();
+			final boolean wearingFeet = TFHelper.getTransformerFromArmor(player, 0) == getTransformer();
 
-			TransformerModel tfModel = getTransformerModel();
-			ModelVehicleBase vehicleModel = tfModel.getEffectiveVehicleModel(player);
+			final TransformerModel tfModel = getTransformerModel();
+			final ModelVehicleBase vehicleModel = tfModel.getEffectiveVehicleModel(player);
 
 			vehicleModel.setRotationAngles(f, f1, f2, f3, f4, f5, player);
 			setRotationAngles(f, f1, f2, f3, f4, f5, entity);

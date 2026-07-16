@@ -1,5 +1,7 @@
 package fiskfille.tf.client.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -8,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
+@SideOnly(Side.CLIENT)
 public class GuiButtonAlt extends GuiButton {
 	public GuiButtonAlt(int id, int x, int y, int width, int height, String s) {
 		super(id, x, y, width, height, s);

@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+
 public class TFModelVurp extends TransformerModel {
 	private final ModelVurp model = new ModelVurp();
 	private final ModelVurp modelItem = new ModelVurp();
@@ -24,6 +26,7 @@ public class TFModelVurp extends TransformerModel {
 		return model;
 	}
 
+	@Nonnull
 	@Override
 	public ModelVehicleBase getVehicleModel() {
 		return vehicle;

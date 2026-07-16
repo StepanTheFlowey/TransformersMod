@@ -110,7 +110,7 @@ public class ModelVurpsSniper extends ModelBase {
 	}
 
 	public void render() {
-		float f5 = 0.0625F;
+		final float f5 = 0.0625F;
 
 		backPiece2.render(f5);
 		bodypart2.render(f5);

@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+
 public class TFModelSkystrike extends TransformerModel {
 	private final ModelSkystrike model = new ModelSkystrike();
 	private final ModelSkystrike modelItem = new ModelSkystrike();
@@ -22,6 +24,7 @@ public class TFModelSkystrike extends TransformerModel {
 		return model;
 	}
 
+	@Nonnull
 	@Override
 	public ModelVehicleBase getVehicleModel() {
 		return vehicle;

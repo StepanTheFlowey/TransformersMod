@@ -11,10 +11,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public abstract class TransformerModel {
 	public abstract ModelTransformerBase getMainModel();
 
+	@Nonnull
 	public abstract ModelVehicleBase getVehicleModel();
 
 	public abstract ModelRendererTF[] getFeet();

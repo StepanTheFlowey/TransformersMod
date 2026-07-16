@@ -560,17 +560,17 @@ public class ModelSubwoofer extends ModelTransformerBase {
 
 	@Override
 	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		waist.rotationPointY -= 2;
+		waist.rotationPointY -= 2F;
 
-		upperLegR.rotateAngleY += 0.2;
-		upperLegL.rotateAngleY -= 0.2;
-		upperLegR.rotateAngleX -= 0.1;
-		upperLegL.rotateAngleX -= 0.1;
-		lowerlegR1.rotateAngleX += 0.1;
-		lowerlegL1.rotateAngleX += 0.1;
-		lowerArmL.rotateAngleX -= 0.1;
-		lowerArmR.rotateAngleX -= 0.1;
-		head.rotateAngleX += 0.1;
+		upperLegR.rotateAngleY += 0.2F;
+		upperLegL.rotateAngleY -= 0.2F;
+		upperLegR.rotateAngleX -= 0.1F;
+		upperLegL.rotateAngleX -= 0.1F;
+		lowerlegR1.rotateAngleX += 0.1F;
+		lowerlegL1.rotateAngleX += 0.1F;
+		lowerArmL.rotateAngleX -= 0.1F;
+		lowerArmR.rotateAngleX -= 0.1F;
+		head.rotateAngleX += 0.1F;
 
 		bob(waist, globalSpeed, 1.7F * globalDegree, false, limbSwing, limbSwingAmount);
 		waist.rotationPointY += 1 * limbSwingAmount + 3;
@@ -581,7 +581,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		walk(head, globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * limbSwingAmount * backwardInverter, limbSwing, limbSwingAmount);
 
 		swing(head, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, limbSwing, limbSwingAmount);
-		head.rotationPointX += 0.6 * globalDegree * limbSwingAmount * Math.cos(limbSwing * 0.5F * globalSpeed);
+		head.rotationPointX += 0.6F * globalDegree * limbSwingAmount * MathHelper.cos(limbSwing * 0.5F * globalSpeed);
 
 		swing(upperLegR, 0.5F * globalSpeed, 0.1F * globalDegree, true, 0, -0.2F, limbSwing, limbSwingAmount);
 		swing(upperLegL, 0.5F * globalSpeed, 0.1F * globalDegree, true, 0, 0.2F, limbSwing, limbSwingAmount);
@@ -600,17 +600,17 @@ public class ModelSubwoofer extends ModelTransformerBase {
 			waist.rotationPointZ -= 0F;
 			waist.rotationPointY += 0.5F;
 
-			head.rotateAngleX -= 0.3;
-			upperLegR.rotateAngleX -= 0.7;
-			upperLegL.rotateAngleX -= 0.7;
-			lowerlegR1.rotateAngleX += 0.7;
-			lowerlegL1.rotateAngleX += 0.7;
-			upperArmR.rotateAngleX -= 0.3;
-			upperArmL.rotateAngleX -= 0.3;
-			upperArmR.rotateAngleZ += 0.5;
-			upperArmL.rotateAngleZ -= 0.5;
-			lowerArmR.rotateAngleZ -= 0.5;
-			lowerArmL.rotateAngleZ += 0.5;
+			head.rotateAngleX -= 0.3F;
+			upperLegR.rotateAngleX -= 0.7F;
+			upperLegL.rotateAngleX -= 0.7F;
+			lowerlegR1.rotateAngleX += 0.7F;
+			lowerlegL1.rotateAngleX += 0.7F;
+			upperArmR.rotateAngleX -= 0.3F;
+			upperArmL.rotateAngleX -= 0.3F;
+			upperArmR.rotateAngleZ += 0.5F;
+			upperArmL.rotateAngleZ -= 0.5F;
+			lowerArmR.rotateAngleZ -= 0.5F;
+			lowerArmL.rotateAngleZ += 0.5F;
 		}
 	}
 
@@ -648,46 +648,46 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
 		float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
 
-		waist.rotateAngleX += 0.2 * limbSwingAmount * backwardInverter;
+		waist.rotateAngleX += 0.2F * limbSwingAmount * backwardInverter;
 
-		stomach.rotateAngleX += 0.2 * upwardPose;
-		chestmain1.rotateAngleX -= 0.4 * upwardPose;
-		head.rotateAngleX += 0.6 * upwardPose;
+		stomach.rotateAngleX += 0.2F * upwardPose;
+		chestmain1.rotateAngleX -= 0.4F * upwardPose;
+		head.rotateAngleX += 0.6F * upwardPose;
 
-		upperArmR.rotateAngleX += 0.1 * upwardPose;
-		upperArmL.rotateAngleX += 0.1 * upwardPose;
-		upperArmR.rotateAngleZ -= 0.1 * upwardPose;
-		upperArmL.rotateAngleZ += 0.1 * upwardPose;
-		lowerArmR.rotateAngleX += 0.2 * upwardPose;
-		lowerArmL.rotateAngleX += 0.2 * upwardPose;
+		upperArmR.rotateAngleX += 0.1F * upwardPose;
+		upperArmL.rotateAngleX += 0.1F * upwardPose;
+		upperArmR.rotateAngleZ -= 0.1F * upwardPose;
+		upperArmL.rotateAngleZ += 0.1F * upwardPose;
+		lowerArmR.rotateAngleX += 0.2F * upwardPose;
+		lowerArmL.rotateAngleX += 0.2F * upwardPose;
 
-		upperLegR.rotateAngleX += 0.2 * upwardPose;
-		upperLegL.rotateAngleX -= 1 * upwardPose;
-		lowerlegR1.rotateAngleX += 0.3 * upwardPose;
-		lowerlegL1.rotateAngleX += 1.5 * upwardPose;
+		upperLegR.rotateAngleX += 0.2F * upwardPose;
+		upperLegL.rotateAngleX -= upwardPose;
+		lowerlegR1.rotateAngleX += 0.3F * upwardPose;
+		lowerlegL1.rotateAngleX += 1.5F * upwardPose;
 
 		walk(upperLegR, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, 0, 0, limbSwing, limbSwingAmount);
 		walk(upperLegL, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, 0, 0, limbSwing, limbSwingAmount);
 		walk(lowerlegR1, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 		walk(lowerlegL1, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, -2.2F * backwardInverter, 0F, limbSwing, limbSwingAmount);
 
-		waist.rotateAngleX -= 0.2 * downwardPose;
-		stomach.rotateAngleX += 0.3 * downwardPose;
-		chestmain1.rotateAngleX += 0.3 * downwardPose;
-		head.rotateAngleX += 0.3 * downwardPose;
-		upperLegR.rotateAngleX -= 1.2 * downwardPose;
-		upperLegL.rotateAngleX -= 0.2 * downwardPose;
-		lowerlegR1.rotateAngleX += 2 * downwardPose;
-		lowerlegL1.rotateAngleX += 0.5 * downwardPose;
-		upperArmR.rotateAngleZ += 1 * downwardPose;
-		upperArmL.rotateAngleZ -= 1 * downwardPose;
-		lowerArmR.rotateAngleX -= 1 * downwardPose;
-		lowerArmL.rotateAngleX -= 1 * downwardPose;
+		waist.rotateAngleX -= 0.2F * downwardPose;
+		stomach.rotateAngleX += 0.3F * downwardPose;
+		chestmain1.rotateAngleX += 0.3F * downwardPose;
+		head.rotateAngleX += 0.3F * downwardPose;
+		upperLegR.rotateAngleX -= 1.2F * downwardPose;
+		upperLegL.rotateAngleX -= 0.2F * downwardPose;
+		lowerlegR1.rotateAngleX += 2F * downwardPose;
+		lowerlegL1.rotateAngleX += 0.5F * downwardPose;
+		upperArmR.rotateAngleZ += downwardPose;
+		upperArmL.rotateAngleZ -= downwardPose;
+		lowerArmR.rotateAngleX -= downwardPose;
+		lowerArmL.rotateAngleX -= downwardPose;
 	}
 
 	@Override
 	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		waist.rotationPointY += 1;
+		waist.rotationPointY += 1F;
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + PI) * 1.4F * limbSwingAmount;
 
@@ -699,7 +699,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		if(isSneak) {
 			waist.rotateAngleX += 0.4F;
 			waist.rotationPointZ += 4F;
-			waist.rotationPointY -= 1;
+			waist.rotationPointY -= 1F;
 			upperArmR.rotateAngleX -= 0.1F;
 			upperArmL.rotateAngleX -= 0.1F;
 			upperLegR.rotateAngleX -= 0.4F;
@@ -755,11 +755,11 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		setToInitPose();
 
 		if(armorPiece == 0) {
-			GL11.glTranslatef(0, 0.3F, -0.03125F);
+			GL11.glTranslatef(0F, 0.3F, -0.03125F);
 			head.render(0.0625F);
 		}
 		else if(armorPiece == 1) {
-			GL11.glTranslatef(0, 0, 0.0625F);
+			GL11.glTranslatef(0F, 0F, 0.0625F);
 			upperLegL.showModel = false;
 			upperLegR.showModel = false;
 			head.showModel = false;
@@ -769,8 +769,8 @@ public class ModelSubwoofer extends ModelTransformerBase {
 			head.showModel = true;
 		}
 		else if(armorPiece == 2) {
-			GL11.glRotatef(5, 1, 0, 0);
-			GL11.glTranslatef(0, 0.125F, 0);
+			GL11.glRotatef(5F, 1F, 0F, 0F);
+			GL11.glTranslatef(0F, 0.125F, 0F);
 			lowerlegL3.showModel = false;
 			lowerlegL4.showModel = false;
 			lowerlegR3.showModel = false;
@@ -787,10 +787,10 @@ public class ModelSubwoofer extends ModelTransformerBase {
 			legbaseR.showModel = true;
 		}
 		else if(armorPiece == 3) {
-			GL11.glTranslatef(0, 0, -0.0625F);
-			GL11.glRotatef(8, 1, 0, 0);
-			legbaseL.rotationPointX -= 3;
-			legbaseR.rotationPointX += 3;
+			GL11.glTranslatef(0F, 0F, -0.0625F);
+			GL11.glRotatef(8F, 1F, 0F, 0F);
+			legbaseL.rotationPointX -= 3F;
+			legbaseR.rotationPointX += 3F;
 			legbaseL.rotateAngleX += 0.2F;
 			legbaseL.rotateAngleY += 0.2F;
 			legbaseR.rotateAngleX += 0.2F;

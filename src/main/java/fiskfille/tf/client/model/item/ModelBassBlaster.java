@@ -4,22 +4,22 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
 public class ModelBassBlaster extends ModelBase {
-	public final ModelRenderer weaponbase;
-	public final ModelRenderer wepbody1;
-	public final ModelRenderer wepbody2;
-	public final ModelRenderer wepbody3;
-	public final ModelRenderer wepbody4;
-	public final ModelRenderer wepbody5;
-	public final ModelRenderer lowerflap1;
-	public final ModelRenderer upperflap1;
-	public final ModelRenderer vent1;
-	public final ModelRenderer vent2;
-	public final ModelRenderer vent3;
-	public final ModelRenderer wepbody6;
-	public final ModelRenderer cable1;
-	public final ModelRenderer cable2;
-	public final ModelRenderer lowerflap2;
-	public final ModelRenderer upperflap2;
+	final ModelRenderer weaponbase;
+	final ModelRenderer wepbody1;
+	final ModelRenderer wepbody2;
+	final ModelRenderer wepbody3;
+	final ModelRenderer wepbody4;
+	final ModelRenderer wepbody5;
+	final ModelRenderer lowerflap1;
+	final ModelRenderer upperflap1;
+	final ModelRenderer vent1;
+	final ModelRenderer vent2;
+	final ModelRenderer vent3;
+	final ModelRenderer wepbody6;
+	final ModelRenderer cable1;
+	final ModelRenderer cable2;
+	final ModelRenderer lowerflap2;
+	final ModelRenderer upperflap2;
 
 	public ModelBassBlaster() {
 		textureWidth = 64;
@@ -101,8 +101,7 @@ public class ModelBassBlaster extends ModelBase {
 	}
 
 	public void render() {
-		float f5 = 0.0625f;
-		weaponbase.render(f5);
+		weaponbase.render(0.0625F);
 	}
 
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
