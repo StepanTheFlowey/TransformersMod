@@ -33,7 +33,7 @@ import net.minecraftforge.common.config.Configuration;
 public class TransformersMod {
 	public static final Minecraft mc = Minecraft.getMinecraft();
 	public static final String modid = "transformers";
-	public static final String version = "0.7.0";
+	public static final String version = "0.7.1";
 	public static final CreativeTabs tabTransformers = new CreativeTabTransformers();
 
 	@Instance(TransformersMod.modid)
