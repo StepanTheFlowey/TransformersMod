@@ -16,9 +16,7 @@ public class EnergyStorageInventory extends EnergyStorage {
 
 	@Override
 	public EnergyStorageInventory copy() {
-		EnergyStorageInventory storage = new EnergyStorageInventory(tile, energyInventory);
-
-		return storage;
+		return new EnergyStorageInventory(tile, energyInventory);
 	}
 
 	@Override
@@ -116,9 +114,8 @@ public class EnergyStorageInventory extends EnergyStorage {
 	}
 
 	@Override
-	public float set(float amount) {
+	public void set(float amount) {
 		energy = Math.min(getMaxEnergy(), Math.max(0, amount));
-		return energy;
 	}
 
 	@Override

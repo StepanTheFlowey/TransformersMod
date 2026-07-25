@@ -702,7 +702,7 @@ public class ModelVurp extends ModelTransformerBase {
 		lowerArmL.rotateAngleX += 0.2F * upwardPose;
 
 		upperLegR.rotateAngleX += 0.2F * upwardPose;
-		upperLegL.rotateAngleX -= 1F * upwardPose;
+		upperLegL.rotateAngleX -= upwardPose;
 		lowerLegR.rotateAngleX += 0.3F * upwardPose;
 		lowerLegL.rotateAngleX += 1.5F * upwardPose;
 

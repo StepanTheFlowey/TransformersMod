@@ -96,12 +96,11 @@ public final class TFFluidRenderHelper {
 
 		if(fluid.getBlock() != null) {
 			liquidBlock.baseBlock = fluid.getBlock();
-			liquidBlock.texture = getFluidTexture(fluidStack, flowing);
 		}
 		else {
 			liquidBlock.baseBlock = Blocks.water;
-			liquidBlock.texture = getFluidTexture(fluidStack, flowing);
 		}
+		liquidBlock.texture = getFluidTexture(fluidStack, flowing);
 
 		cache.put(fluid, diplayLists);
 

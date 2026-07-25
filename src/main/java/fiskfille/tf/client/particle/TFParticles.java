@@ -8,7 +8,7 @@ import java.lang.reflect.Constructor;
 import static fiskfille.tf.TransformersMod.mc;
 
 public class TFParticles {
-	public static EntityFX spawnParticle(TFParticleType particleType, double x, double y, double z, float motionX, float motionY, float motionZ) {
+	public static void spawnParticle(TFParticleType particleType, double x, double y, double z, float motionX, float motionY, float motionZ) {
 		if(mc != null && mc.renderViewEntity != null && mc.effectRenderer != null) {
 			if(mc.theWorld.isRemote) {
 				int particleSetting = mc.gameSettings.particleSetting;
@@ -22,10 +22,10 @@ public class TFParticles {
 				final double maxRenderDistance = 16D;
 
 				if(diffX * diffX + diffY * diffY + diffZ * diffZ > maxRenderDistance * maxRenderDistance) {
-					return null;
+					return;
 				}
 				else if(particleSetting > 1) {
-					return null;
+					return;
 				}
 				else {
 					try {
@@ -33,18 +33,12 @@ public class TFParticles {
 						final EntityFX particle = c.newInstance(mc.theWorld, x, y, z, motionX, motionY, motionZ);
 
 						mc.effectRenderer.addEffect(particle);
-
-						return particle;
 					}
 					catch(Exception e) {
 						e.printStackTrace();
 					}
-
-					return null;
 				}
 			}
 		}
-
-		return null;
 	}
 }

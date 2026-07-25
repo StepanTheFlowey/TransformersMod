@@ -17,9 +17,7 @@ public class EnergyStorageRelay extends EnergyStorage {
 
 	@Override
 	public EnergyStorageRelay copy() {
-		EnergyStorageRelay storage = new EnergyStorageRelay(relay);
-
-		return storage;
+		return new EnergyStorageRelay(relay);
 	}
 
 	@Override
@@ -93,13 +91,7 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public float set(float amount) {
-		return 0;
-	}
-
-	@Override
-	public float getUsage() {
-		return energyUsage;
+	public void set(float amount) {
 	}
 
 	@Override

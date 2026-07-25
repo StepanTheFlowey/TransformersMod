@@ -11,13 +11,13 @@ public class TFFormatHelper {
 		String s = (long) f + "";
 
 		if(!s.contains("E")) {
-			String s1 = "";
+			final StringBuilder s1 = new StringBuilder();
 
 			for(int i = 0; i < s.length(); ++i) {
-				s1 += s.charAt(i);
+				s1.append(s.charAt(i));
 
 				if((s.length() - i) % 3 == 1) {
-					s1 += ",";
+					s1.append(",");
 				}
 			}
 

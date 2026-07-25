@@ -96,7 +96,7 @@ public class SubTicket {
 		return this;
 	}
 
-	public Ticket remove() {
+	public void remove() {
 		List<SubTicket> list = SubTicket.getChildren(owner);
 		List<SubTicket> list1 = Lists.newArrayList();
 
@@ -111,8 +111,6 @@ public class SubTicket {
 		for(SubTicket ignored : list1) {
 			assign(owner);
 		}
-
-		return owner;
 	}
 
 	public NBTTagCompound writeToNBT() {

@@ -89,9 +89,8 @@ public class EnergyStorage {
 		return maxEnergy;
 	}
 
-	public float set(float amount) {
+	public void set(float amount) {
 		energy = Math.min(getMaxEnergy(), Math.max(0F, amount));
-		return energy;
 	}
 
 	public float getUsage() {

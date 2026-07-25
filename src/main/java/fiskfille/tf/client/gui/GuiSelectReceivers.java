@@ -50,11 +50,11 @@ public class GuiSelectReceivers extends GuiScreen {
 		float range = transmitter.getRange();
 		float boardWidth = 1 + range * 2;
 		int boardWidthFl = MathHelper.floor_float(boardWidth);
-		int baseX = MathHelper.floor_double(width / 2 - (spacing + size) * boardWidth / 2);
-		int baseY = MathHelper.floor_double(height / 2 - (spacing + size) * boardWidth / 2);
+		int baseX = MathHelper.floor_double(width / 2F - (spacing + size) * boardWidth / 2);
+		int baseY = MathHelper.floor_double(height / 2F - (spacing + size) * boardWidth / 2);
 
 		buttonList.add(new GuiButton(0, width / 2 - 100, height - height / 7, I18n.format("gui.done")));
-		buttonList.add(heightSlider = new GuiVerticalHeightSlider(1, this, baseX + boardWidthFl * (spacing + size), baseY - 1, boardWidthFl * (spacing + size) + 1, () -> updateBlocks()));
+		buttonList.add(heightSlider = new GuiVerticalHeightSlider(1, this, baseX + boardWidthFl * (spacing + size), baseY - 1, boardWidthFl * (spacing + size) + 1, this::updateBlocks));
 
 		coordArray = new DimensionalCoords[boardWidthFl * boardWidthFl];
 		layers.clear();
@@ -93,8 +93,8 @@ public class GuiSelectReceivers extends GuiScreen {
 
 		for(int i = 0; i < boardWidthFl; ++i) {
 			for(int j = 0; j < boardWidthFl; ++j) {
-				int x = MathHelper.floor_double(owner.xCoord - boardWidthFl / 2 + i);
-				int z = MathHelper.floor_double(owner.zCoord - boardWidthFl / 2 + j);
+				int x = MathHelper.floor_double(owner.xCoord - boardWidthFl / 2F + i);
+				int z = MathHelper.floor_double(owner.zCoord - boardWidthFl / 2F + j);
 
 				DimensionalCoords coords = new DimensionalCoords(x, getLayer(), z, dimension);
 
@@ -158,8 +158,8 @@ public class GuiSelectReceivers extends GuiScreen {
 
 		if(button == 0) {
 			int boardWidth = 1 + getRange() * 2;
-			int baseX = MathHelper.floor_double(width / 2 - (spacing + size) * boardWidth / 2);
-			int baseY = MathHelper.floor_double(height / 2 - (spacing + size) * boardWidth / 2);
+			int baseX = MathHelper.floor_double(width / 2F - (spacing + size) * boardWidth / 2F);
+			int baseY = MathHelper.floor_double(height / 2F - (spacing + size) * boardWidth / 2F);
 
 			if(coordArray != null) {
 				for(int i = 0; i < boardWidth; ++i) {
@@ -236,9 +236,9 @@ public class GuiSelectReceivers extends GuiScreen {
 			updateBlocks();
 		}
 
-		int boardWidth = 1 + getRange() * 2;
-		int baseX = MathHelper.floor_double(width / 2 - (spacing + size) * boardWidth / 2);
-		int baseY = MathHelper.floor_double(height / 2 - (spacing + size) * boardWidth / 2);
+		final int boardWidth = 1 + getRange() * 2;
+		final int baseX = MathHelper.floor_double(width / 2F - (spacing + size) * boardWidth / 2F);
+		final int baseY = MathHelper.floor_double(height / 2F - (spacing + size) * boardWidth / 2F);
 
 		if(coordArray != null) {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -382,7 +382,7 @@ public class GuiSelectReceivers extends GuiScreen {
 						k -= boardWidth;
 					}
 
-					Vec3 vec3 = Vec3.createVectorHelper(baseX + (spacing + size) * boardWidth / 2 - 0.5F, baseY + (spacing + size) * boardWidth / 2 - 0.5F, 0);
+					Vec3 vec3 = Vec3.createVectorHelper(baseX + (spacing + size) * boardWidth / 2F - 0.5F, baseY + (spacing + size) * boardWidth / 2F - 0.5F, 0);
 					Vec3 vec31 = Vec3.createVectorHelper(baseX + (spacing + size) * k + (float) size / 2, baseY + (spacing + size) * l + (float) size / 2, 0);
 					Vec3 vec32 = vec31.subtract(vec3);
 					Vec3 vec33 = vec31.subtract(vec3);

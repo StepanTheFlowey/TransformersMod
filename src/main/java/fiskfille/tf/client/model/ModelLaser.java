@@ -7,13 +7,12 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelLaser extends ModelBase {
 	private final ModelRenderer laserInner;
-	private final ModelRenderer laserOuter;
 
 	public ModelLaser() {
 		textureWidth = 64;
 		textureHeight = 16;
 
-		laserOuter = new ModelRenderer(this, 17, 0);
+		final ModelRenderer laserOuter = new ModelRenderer(this, 17, 0);
 		laserOuter.setRotationPoint(0F, 0F, 0F);
 		laserOuter.addBox(-1F, -1F, -4F, 2, 2, 8);
 

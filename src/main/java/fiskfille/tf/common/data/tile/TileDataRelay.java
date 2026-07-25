@@ -9,11 +9,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class TileDataRelay extends TileData {
 	public TransmissionHandler transmissionHandler = new TransmissionHandler();
-	public List<DimensionalCoords> invertCurrent = Lists.newArrayList();
+	public ArrayList<DimensionalCoords> invertCurrent = new ArrayList<>();
 	public boolean isPowered;
 
 	public TileDataRelay() {
@@ -24,7 +24,7 @@ public class TileDataRelay extends TileData {
 		transmissionHandler = data.transmissionHandler;
 		transmissionHandler.setNeedsUpdate(false);
 		isPowered = data.isPowered;
-		invertCurrent = Lists.newArrayList(data.invertCurrent);
+		invertCurrent = new ArrayList<>(data.invertCurrent);
 	}
 
 	@Override

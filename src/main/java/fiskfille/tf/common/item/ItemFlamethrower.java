@@ -6,18 +6,12 @@ import fiskfille.tf.common.entity.EntityFlamethrowerFire;
 import fiskfille.tf.common.transformer.TransformerCloudtrap;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFVectorHelper;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.Random;
 
 public class ItemFlamethrower extends Item {
@@ -87,18 +81,8 @@ public class ItemFlamethrower extends Item {
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
-		return stack;
-	}
-
-	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		return 72000;
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.none;
 	}
 
 	@Override
@@ -108,9 +92,5 @@ public class ItemFlamethrower extends Item {
 		}
 
 		return stack;
-	}
-
-	public List<Entity> getEntitiesNear(World world, double x, double y, double z, float range) {
-		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range), IEntitySelector.selectAnything);
 	}
 }

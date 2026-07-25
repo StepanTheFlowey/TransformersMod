@@ -36,7 +36,7 @@ public class TFPredicates {
 	}
 
 	public static Predicate<EntityPlayer> isTransformer() {
-		return input -> TFHelper.isTransformer(input);
+		return TFHelper::isTransformer;
 	}
 
 	public static Predicate<EntityPlayer> isTransformer(final Transformer transformer) {

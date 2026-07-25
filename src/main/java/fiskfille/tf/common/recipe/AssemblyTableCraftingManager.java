@@ -21,7 +21,7 @@ public class AssemblyTableCraftingManager {
 		return instance;
 	}
 
-	public AssemblyTableRecipe addRecipe(ItemStack result, ItemStack[] dyes, Object... ingredients) {
+	public void addRecipe(ItemStack result, ItemStack[] dyes, Object... ingredients) {
 		StringBuilder s = new StringBuilder();
 		int i = 0;
 		int j = 0;
@@ -84,8 +84,6 @@ public class AssemblyTableCraftingManager {
 
 		AssemblyTableRecipe recipe = new AssemblyTableRecipe(j, k, itemstacks, aitemstack, result);
 		recipes.add(recipe);
-
-		return recipe;
 	}
 
 	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {

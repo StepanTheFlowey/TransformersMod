@@ -68,25 +68,4 @@ public class GuiColorSlider extends GuiSliderBase {
 			drawCenteredString(fontrenderer, I18n.format("gui.display_station.color.amount", displayString, (int) (percentage * 100)), xPosition + width / 2, yPosition + (height - 8) / 2, l);
 		}
 	}
-
-	@Override
-	protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
-		if(visible) {
-			if(dragging) {
-				percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
-
-				if(percentage < 0F) {
-					percentage = 0F;
-				}
-
-				if(percentage > 1F) {
-					percentage = 1F;
-				}
-			}
-
-			GL11.glColor3f(1F, 1F, 1F);
-			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)), yPosition, 0, 66, 4, 20);
-			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)) + 4, yPosition, 196, 66, 4, 20);
-		}
-	}
 }

@@ -57,7 +57,7 @@ public abstract class GuiContainerTF extends GuiContainer {
 					s1 = s1.substring(0, s1.indexOf('>'));
 
 					try {
-						color = Integer.valueOf(s1);
+						color = Integer.parseInt(s1);
 					}
 					catch(Exception e) {
 						e.printStackTrace();

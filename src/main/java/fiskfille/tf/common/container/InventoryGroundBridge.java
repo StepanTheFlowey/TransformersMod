@@ -193,15 +193,13 @@ public class InventoryGroundBridge implements IInventory {
 					k = getInventoryStackLimit() - inventory[j].stackSize;
 				}
 
-				if(k == 0) {
-					return i;
-				}
-				else {
+				if(k != 0) {
 					i -= k;
 					inventory[j].stackSize += k;
 					inventory[j].animationsToGo = 5;
-					return i;
 				}
+
+				return i;
 			}
 		}
 	}

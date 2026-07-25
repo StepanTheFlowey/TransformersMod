@@ -288,7 +288,7 @@ public class TFRecipes {
 				block = args[i + 1];
 			}
 
-			ItemStack result = null;
+			ItemStack result;
 
 			if(ingot instanceof String) {
 				if(!OreDictionary.doesOreNameExist((String) ingot)) {

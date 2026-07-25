@@ -40,16 +40,6 @@ public class InventoryAssembly extends InventoryCrafting {
 	}
 
 	@Override
-	public String getInventoryName() {
-		return "container.crafting";
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-
-	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		if(stackList[slot] != null) {
 			ItemStack itemstack = stackList[slot];
@@ -69,8 +59,6 @@ public class InventoryAssembly extends InventoryCrafting {
 			if(stackList[slot].stackSize <= amount) {
 				itemstack = stackList[slot];
 				stackList[slot] = null;
-				eventHandler.onCraftMatrixChanged(this);
-				return itemstack;
 			}
 			else {
 				itemstack = stackList[slot].splitStack(amount);
@@ -78,10 +66,10 @@ public class InventoryAssembly extends InventoryCrafting {
 				if(stackList[slot].stackSize == 0) {
 					stackList[slot] = null;
 				}
-
-				eventHandler.onCraftMatrixChanged(this);
-				return itemstack;
 			}
+
+			eventHandler.onCraftMatrixChanged(this);
+			return itemstack;
 		}
 		else {
 			return null;
@@ -92,32 +80,5 @@ public class InventoryAssembly extends InventoryCrafting {
 	public void setInventorySlotContents(int slot, ItemStack itemstack) {
 		stackList[slot] = itemstack;
 		eventHandler.onCraftMatrixChanged(this);
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
-
-	@Override
-	public void markDirty() {
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return true;
-	}
-
-	@Override
-	public void openInventory() {
-	}
-
-	@Override
-	public void closeInventory() {
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
-		return true;
 	}
 }

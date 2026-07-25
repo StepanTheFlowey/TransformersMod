@@ -5,30 +5,20 @@ import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.transformer.TransformerPurge;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFVectorHelper;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemPurgesKatana extends ItemSword {
 	public ItemPurgesKatana() {
 		super(ToolMaterial.EMERALD);
 		setMaxDamage(1500);
 		setCreativeTab(TransformersMod.tabTransformers);
-	}
-
-	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float range) {
-		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range), IEntitySelector.selectAnything);
 	}
 
 	@Override
@@ -49,16 +39,6 @@ public class ItemPurgesKatana extends ItemSword {
 			player.fallDistance = 0;
 			player.swingItem();
 		}
-	}
-
-	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
-		return stack;
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-		return 72000;
 	}
 
 	@Override

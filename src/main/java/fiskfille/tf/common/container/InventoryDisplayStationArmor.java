@@ -64,8 +64,6 @@ public class InventoryDisplayStationArmor implements IInventory {
 			if(this.stackList[slot].stackSize <= amount) {
 				itemstack = this.stackList[slot];
 				this.stackList[slot] = null;
-				this.eventHandler.onCraftMatrixChanged(this);
-				return itemstack;
 			}
 			else {
 				itemstack = this.stackList[slot].splitStack(amount);
@@ -73,10 +71,10 @@ public class InventoryDisplayStationArmor implements IInventory {
 				if(this.stackList[slot].stackSize == 0) {
 					this.stackList[slot] = null;
 				}
-
-				this.eventHandler.onCraftMatrixChanged(this);
-				return itemstack;
 			}
+
+			this.eventHandler.onCraftMatrixChanged(this);
+			return itemstack;
 		}
 		else {
 			return null;

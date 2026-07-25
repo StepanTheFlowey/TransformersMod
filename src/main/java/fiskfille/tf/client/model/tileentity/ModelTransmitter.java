@@ -4,6 +4,7 @@ import fiskfille.tf.client.model.tools.ModelRendererBreakable;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 import fiskfille.tf.common.tileentity.TileEntityTransmitter;
+import net.minecraft.util.MathHelper;
 
 public class ModelTransmitter extends MowzieModelBase {
 	public final MowzieModelRenderer towerbase1;
@@ -894,11 +895,11 @@ public class ModelTransmitter extends MowzieModelBase {
 	public void render(TileEntityTransmitter tile, float partialTicks) {
 		setToInitPose();
 
-		float f = tile.animationTimer + partialTicks;
+		final float f = tile.animationTimer + partialTicks;
 		towerrotatdiskbase1.rotateAngleY = f / 5;
-		towerenergyorbbase1.rotationPointY -= Math.cos(f / 10) * 2 + 2;
+		towerenergyorbbase1.rotationPointY -= MathHelper.cos(f / 10) * 2 + 2;
 		towerenergyorbbase1.rotateAngleX += f / 40;
-		towerenergyorbbase1.rotateAngleY += Math.sin(f / 40) * 2;
+		towerenergyorbbase1.rotateAngleY += MathHelper.sin(f / 40) * 2;
 		towerbase1.render(0.0625F);
 	}
 }

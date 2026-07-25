@@ -164,15 +164,12 @@ public class GuiConfigSides extends GuiContainerTF {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
-		boolean renderNeighbours = true;
 		for(int pass = 0; pass < 2; ++pass) {
 			setGlStateForPass(pass, false);
 			doTileEntityRenderPass(configurables, pass);
 
-			if(renderNeighbours) {
-				setGlStateForPass(pass, true);
-				doTileEntityRenderPass(neighbors, pass);
-			}
+			setGlStateForPass(pass, true);
+			doTileEntityRenderPass(neighbors, pass);
 		}
 
 		mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
@@ -182,10 +179,8 @@ public class GuiConfigSides extends GuiContainerTF {
 			setGlStateForPass(pass, false);
 			doWorldRenderPass(configurables, pass);
 
-			if(renderNeighbours) {
-				setGlStateForPass(pass, true);
-				doWorldRenderPass(neighbors, pass);
-			}
+			setGlStateForPass(pass, true);
+			doWorldRenderPass(neighbors, pass);
 		}
 
 		ForgeHooksClient.setRenderPass(-1);

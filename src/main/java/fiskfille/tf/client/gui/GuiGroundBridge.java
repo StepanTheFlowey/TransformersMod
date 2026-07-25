@@ -113,9 +113,9 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 			coordinateFields[i].updateCursorCounter();
 
 			try {
-				newDestination[i] = Integer.valueOf(coordinateFields[i].getText());
+				newDestination[i] = Integer.parseInt(coordinateFields[i].getText());
 			}
-			catch(Exception e) {
+			catch(Exception ignored) {
 			}
 		}
 
