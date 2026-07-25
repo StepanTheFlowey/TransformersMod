@@ -16,7 +16,7 @@ public class GuiButtonSwapColors extends GuiButton {
 
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-		if(visible) {
+		if(!visible) {
 			return;
 		}
 
