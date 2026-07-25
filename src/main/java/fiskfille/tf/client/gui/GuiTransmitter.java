@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiTransmitter extends GuiContainerTF {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/transmitter.png");
+	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/transmitter.png");
 	private final TileEntityTransmitter tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;

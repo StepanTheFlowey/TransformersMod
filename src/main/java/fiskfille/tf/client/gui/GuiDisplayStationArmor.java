@@ -27,7 +27,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiDisplayStationArmor extends GuiContainer {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/display_station_armor.png");
+	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/display_station_armor.png");
 	private final TileEntityDisplayStation tileentity;
 
 	public GuiDisplayStationArmor(InventoryPlayer inventoryPlayer, TileEntityDisplayStation tile) {

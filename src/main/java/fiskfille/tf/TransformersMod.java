@@ -26,16 +26,16 @@ import net.minecraftforge.common.config.Configuration;
 
 @Mod(
 				guiFactory = "fiskfille.tf.client.gui.TFGuiFactory",
-				modid = TransformersMod.modid,
+				modid = TransformersMod.MODID,
 				name = "Transformers Mod",
 				version = Tags.VERSION
 )
 public class TransformersMod {
 	public static final Minecraft mc = Minecraft.getMinecraft();
-	public static final String modid = "transformers";
 	public static final CreativeTabs tabTransformers = new CreativeTabTransformers();
+	public static final String MODID = "transformers";
 
-	@Instance(TransformersMod.modid)
+	@Instance(TransformersMod.MODID)
 	public static TransformersMod instance;
 
 	@SidedProxy(
@@ -90,7 +90,7 @@ public class TransformersMod {
 	}
 
 	private static void remap(MissingMapping mapping, String name, Item item) {
-		if(mapping.type == GameRegistry.Type.ITEM && mapping.name.equals(modid + ":" + name)) {
+		if(mapping.type == GameRegistry.Type.ITEM && mapping.name.equals(MODID + ":" + name)) {
 			mapping.remap(item);
 		}
 	}
@@ -98,7 +98,7 @@ public class TransformersMod {
 	private static void remap(MissingMapping mapping, String name, Block block) {
 		remap(mapping, name, Item.getItemFromBlock(block));
 
-		if(mapping.type == GameRegistry.Type.BLOCK && mapping.name.equals(modid + ":" + name)) {
+		if(mapping.type == GameRegistry.Type.BLOCK && mapping.name.equals(MODID + ":" + name)) {
 			mapping.remap(block);
 		}
 	}

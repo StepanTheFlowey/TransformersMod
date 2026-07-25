@@ -126,7 +126,7 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if(event.modID.equals(TransformersMod.modid)) {
+		if(event.modID.equals(TransformersMod.MODID)) {
 			TFConfig.load(TFConfig.configFile);
 			TFConfig.configFile.save();
 		}

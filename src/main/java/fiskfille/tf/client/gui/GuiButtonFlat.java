@@ -16,7 +16,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonFlat extends GuiButton {
-	public static final ResourceLocation tfButtonTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/widgets.png");
+	public static final ResourceLocation tfButtonTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/widgets.png");
 
 	public GuiButtonFlat(int id, int x, int y, int width, String s) {
 		super(id, x, y, width, 13, s);

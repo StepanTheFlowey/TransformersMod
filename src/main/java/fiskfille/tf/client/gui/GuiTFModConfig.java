@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GuiTFModConfig extends GuiConfig {
 	public GuiTFModConfig(GuiScreen parent) {
-		super(parent, getConfigElements(), TransformersMod.modid, false, false, "Transformers Mod Configuration");
+		super(parent, getConfigElements(), TransformersMod.MODID, false, false, "Transformers Mod Configuration");
 	}
 
 	/**

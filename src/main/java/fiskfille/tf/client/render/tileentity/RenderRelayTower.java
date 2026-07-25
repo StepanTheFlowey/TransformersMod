@@ -56,11 +56,11 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 				GL11.glTranslatef(0, -1, 0);
 			}
 
-			bindTexture(new ResourceLocation(TransformersMod.modid, String.format("textures/models/tiles/relay_%s.png", tower instanceof TileEntityRelayTorch ? "torch" : "tower")));
+			bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/relay_%s.png", tower instanceof TileEntityRelayTorch ? "torch" : "tower")));
 			model.setBreaking(false);
 			model.render(tower, partialTicks);
 
-			bindTexture(new ResourceLocation(TransformersMod.modid, String.format("textures/models/tiles/relay_%s_lights.png", tower instanceof TileEntityRelayTorch ? "torch" : "tower")));
+			bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/relay_%s_lights.png", tower instanceof TileEntityRelayTorch ? "torch" : "tower")));
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

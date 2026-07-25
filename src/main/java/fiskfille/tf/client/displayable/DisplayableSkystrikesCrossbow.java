@@ -12,7 +12,7 @@ import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayableSkystrikesCrossbow extends Displayable {
 	private final ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/skystrikes_crossbow.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/skystrikes_crossbow.png");
 
 	@Override
 	public void render(ItemStack itemstack) {

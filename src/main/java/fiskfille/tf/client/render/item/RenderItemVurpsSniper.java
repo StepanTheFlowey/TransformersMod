@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderItemVurpsSniper implements IItemRenderer {
 	private final ModelVurpsSniper model = new ModelVurpsSniper();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/sniper.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/sniper.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

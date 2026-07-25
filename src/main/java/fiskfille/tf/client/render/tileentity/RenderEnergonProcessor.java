@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 	private final ModelEnergonProcessor model = new ModelEnergonProcessor();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energon_processor.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energon_processor.png");
 
 	public void render(TileEntityEnergonProcessor tileentity, double x, double y, double z, float partialTicks) {
 		int metadata = 0;
@@ -30,7 +30,7 @@ public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 		model.setBreaking(false);
 		model.render(tileentity);
 
-		bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energon_processor_lights.png"));
+		bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energon_processor_lights.png"));
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

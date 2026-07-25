@@ -17,8 +17,8 @@ import java.util.Map;
 
 public class RenderIsoCondenser extends TileEntitySpecialRenderer {
 	private final ModelIsoCondenser model = new ModelIsoCondenser();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/isotopic_condenser.png");
-	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/isotopic_condenser_lights.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/isotopic_condenser.png");
+	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/isotopic_condenser_lights.png");
 
 	public void render(TileEntityIsoCondenser tile, double x, double y, double z, float partialTicks) {
 		GL11.glPushMatrix();

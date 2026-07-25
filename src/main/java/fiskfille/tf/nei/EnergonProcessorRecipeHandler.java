@@ -146,7 +146,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
-		return TransformersMod.modid + ":textures/gui/container/energon_processor.png";
+		return TransformersMod.MODID + ":textures/gui/container/energon_processor.png";
 	}
 
 	@Override

@@ -113,7 +113,7 @@ public class AssemblyTableRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
-		return TransformersMod.modid + ":textures/gui/container/assembly_table.png";
+		return TransformersMod.MODID + ":textures/gui/container/assembly_table.png";
 	}
 
 	@Override

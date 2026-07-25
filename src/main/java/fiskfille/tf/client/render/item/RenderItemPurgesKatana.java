@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderItemPurgesKatana implements IItemRenderer {
 	private final ModelPurgesKatana model = new ModelPurgesKatana();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/purge/purge.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

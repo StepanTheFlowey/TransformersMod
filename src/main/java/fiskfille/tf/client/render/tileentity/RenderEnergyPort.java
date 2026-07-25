@@ -13,9 +13,9 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderEnergyPort extends TileEntitySpecialRenderer {
 	private final ModelEnergyPort model = new ModelEnergyPort();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port.png");
-	private final ResourceLocation textureOff = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port_overlay_off.png");
-	private final ResourceLocation textureOn = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_port_overlay_on.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_port.png");
+	private final ResourceLocation textureOff = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_port_overlay_off.png");
+	private final ResourceLocation textureOn = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_port_overlay_on.png");
 
 	public void render(TileEntityEnergyPort tile, double x, double y, double z, float partialTicks) {
 		GL11.glPushMatrix();

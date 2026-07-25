@@ -47,7 +47,7 @@ public class ItemDataCore extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(TransformersMod.modid + ":data_core");
-		overlay = iconRegister.registerIcon(TransformersMod.modid + ":data_core_overlay");
+		itemIcon = iconRegister.registerIcon(TransformersMod.MODID + ":data_core");
+		overlay = iconRegister.registerIcon(TransformersMod.MODID + ":data_core_overlay");
 	}
 }

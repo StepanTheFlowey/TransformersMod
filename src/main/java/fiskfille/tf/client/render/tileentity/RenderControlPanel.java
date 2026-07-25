@@ -66,12 +66,12 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-			bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/ground_bridge_control_panel.png"));
+			bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel.png"));
 			model.setBreaking(false);
 			model.render(tile, partialTicks);
 
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
-			bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/ground_bridge_control_panel_lights.png"));
+			bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel_lights.png"));
 			model.setBreaking(false);
 			model.render(tile, partialTicks);
 			model.table1.postRender(0.0625F);
@@ -94,7 +94,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 
 					GL11.glPushMatrix();
 					GL11.glDisable(GL11.GL_LIGHTING);
-					bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_meter.png"));
+					bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_meter.png"));
 					GL11.glTranslatef(f * 40, -0.1251F, f * 7);
 					tessellator.draw();
 					GL11.glEnable(GL11.GL_LIGHTING);

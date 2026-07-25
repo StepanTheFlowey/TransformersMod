@@ -14,8 +14,8 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderDisplayStation extends TileEntitySpecialRenderer {
 	private final ModelDisplayStation model = new ModelDisplayStation();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/display_station.png");
-	private final ResourceLocation textureLamp = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/display_station_lamp.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/display_station.png");
+	private final ResourceLocation textureLamp = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/display_station_lamp.png");
 
 	public void render(TileEntityDisplayStation tile, double x, double y, double z, float partialTicks) {
 		int metadata = 0;

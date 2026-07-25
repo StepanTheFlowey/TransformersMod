@@ -14,8 +14,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderTransformiumSeedEntity extends Render {
 	private final ModelTransformiumSeed model = new ModelTransformiumSeed();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/transformium_seed.png");
-	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/transformium_seed_lights.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed.png");
+	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed_lights.png");
 
 	public RenderTransformiumSeedEntity() {
 		shadowSize = 0.5F;

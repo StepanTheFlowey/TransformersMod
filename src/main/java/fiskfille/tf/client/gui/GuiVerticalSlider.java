@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiVerticalSlider extends GuiSliderBase {
-	protected static final ResourceLocation buttonTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/widgets.png");
+	protected static final ResourceLocation buttonTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/widgets.png");
 
 	public GuiVerticalSlider(int id, int x, int y, int height) {
 		super(id, x, y, 20, height, "");

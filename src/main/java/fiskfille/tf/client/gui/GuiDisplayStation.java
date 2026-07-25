@@ -29,7 +29,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiDisplayStation extends GuiContainerTF {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/display_station.png");
+	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/display_station.png");
 	private final TileEntityDisplayStation tileentity;
 
 	public GuiDisplayStation(InventoryPlayer inventoryPlayer, TileEntityDisplayStation tile) {

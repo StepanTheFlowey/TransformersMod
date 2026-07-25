@@ -32,7 +32,7 @@ import org.lwjgl.opengl.GL12;
 import static fiskfille.tf.TransformersMod.mc;
 
 public class GuiOverlay extends Gui {
-	public static final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/gui/mod_icons.png");
+	public static final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/mod_icons.png");
 	public static double prevSpeed;
 	public static double speed;
 	private final RenderItem itemRenderer = new RenderItem();
@@ -233,7 +233,7 @@ public class GuiOverlay extends Gui {
 						OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 						GL11.glColor3f(1F, 1F, 1F);
 						GL11.glDisable(GL11.GL_ALPHA_TEST);
-						mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, "textures/misc/sniper_scope.png"));
+						mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/misc/sniper_scope.png"));
 						Tessellator tessellator = Tessellator.instance;
 						tessellator.startDrawingQuads();
 						tessellator.addVertexWithUV(0D, height, -90D, 0D, 1D);

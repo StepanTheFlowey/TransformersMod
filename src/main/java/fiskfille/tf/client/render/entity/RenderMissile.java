@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderMissile extends Render {
 	public final ModelMissile model = new ModelMissile();
-	public final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/missile.png");
+	public final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/missile.png");
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float par8, float par9) {

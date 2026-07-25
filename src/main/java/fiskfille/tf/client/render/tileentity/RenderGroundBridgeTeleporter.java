@@ -19,7 +19,7 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 
 public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
-	private final ResourceLocation PORTAL_EFFECT = new ResourceLocation(TransformersMod.modid, "textures/misc/portal_effect.png");
+	private final ResourceLocation PORTAL_EFFECT = new ResourceLocation(TransformersMod.MODID, "textures/misc/portal_effect.png");
 
 	private PortalShader shader;
 

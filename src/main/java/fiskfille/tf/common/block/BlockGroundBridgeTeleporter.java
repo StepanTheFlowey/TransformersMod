@@ -30,7 +30,7 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITileEntityProvider {
 	public BlockGroundBridgeTeleporter() {
-		super(TransformersMod.modid + ":ground_bridge_teleporter", Material.portal, false);
+		super(TransformersMod.MODID + ":ground_bridge_teleporter", Material.portal, false);
 		setTickRandomly(true);
 		// setLightLevel(1);
 	}

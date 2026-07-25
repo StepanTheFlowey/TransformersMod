@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderItemBassBlaster implements IItemRenderer {
 	private final ModelBassBlaster model = new ModelBassBlaster();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/bass_blaster.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/bass_blaster.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

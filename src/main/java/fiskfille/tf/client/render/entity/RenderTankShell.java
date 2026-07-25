@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderTankShell extends Render {
 	public final ModelTankShell model = new ModelTankShell();
-	public final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/tank_shell.png");
+	public final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/tank_shell.png");
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float par8, float par9) {

@@ -105,7 +105,7 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
-		return TransformersMod.modid + ":textures/gui/container/alloy_crucible.png";
+		return TransformersMod.MODID + ":textures/gui/container/alloy_crucible.png";
 	}
 
 	@Override

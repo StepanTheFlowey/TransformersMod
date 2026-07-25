@@ -29,7 +29,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 		}
 
 		GL11.glDisable(GL11.GL_CULL_FACE);
-		TransformersMod.mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.modid, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
+		TransformersMod.mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
 		modelCanister.render();
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}

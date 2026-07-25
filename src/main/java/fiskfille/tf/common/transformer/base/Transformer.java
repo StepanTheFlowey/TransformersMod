@@ -173,6 +173,6 @@ public abstract class Transformer {
 	}
 
 	public String getTransformationSound(int altMode) {
-		return TransformersMod.modid + ":transform_" + (altMode == -1 ? "robot" : "vehicle");
+		return TransformersMod.MODID + ":transform_" + (altMode == -1 ? "robot" : "vehicle");
 	}
 }

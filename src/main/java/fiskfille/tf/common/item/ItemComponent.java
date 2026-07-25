@@ -23,6 +23,6 @@ public class ItemComponent extends Item implements IComponent {
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 		super.registerIcons(iconRegister);
-		outline = iconRegister.registerIcon(TransformersMod.modid + ":component_outline");
+		outline = iconRegister.registerIcon(TransformersMod.MODID + ":component_outline");
 	}
 }

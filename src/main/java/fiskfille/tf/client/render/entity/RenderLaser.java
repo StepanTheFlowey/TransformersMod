@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderLaser extends Render {
 	public final ModelLaser model = new ModelLaser();
-	public final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/laser.png");
+	public final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/laser.png");
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float par8, float par9) {

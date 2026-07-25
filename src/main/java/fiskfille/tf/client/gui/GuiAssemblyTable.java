@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiAssemblyTable extends GuiContainerTF {
-	private static final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/gui/container/assembly_table.png");
+	private static final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/assembly_table.png");
 
 	public GuiAssemblyTable(InventoryPlayer inventoryPlayer, TileEntityAssemblyTable tile) {
 		super(new ContainerAssemblyTable(inventoryPlayer, tile));

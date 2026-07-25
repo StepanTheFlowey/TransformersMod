@@ -42,7 +42,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiConfigSides extends GuiContainerTF {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/configure.png");
+	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/configure.png");
 	private final TileEntityMachine machine;
 	private final GuiScreen parent;
 	private final RenderBlocks renderBlocks;

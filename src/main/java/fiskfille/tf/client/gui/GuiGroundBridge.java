@@ -42,7 +42,7 @@ import java.util.List;
 				modid = "NotEnoughItems"
 )
 public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/ground_bridge.png");
+	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/ground_bridge.png");
 	public final InventoryGroundBridge inventory;
 
 	public final GuiTextField[] coordinateFields = new GuiTextField[3];

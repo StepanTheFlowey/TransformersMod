@@ -28,11 +28,11 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 			GL11.glScalef(1, -1F, -1F);
 			GL11.glRotatef(metadata * 90, 0, 1, 0);
 
-			bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/transmitter.png"));
+			bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transmitter.png"));
 			model.setBreaking(false);
 			model.render(transmitter, partialTicks);
 
-			bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/tiles/transmitter_lights.png"));
+			bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transmitter_lights.png"));
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

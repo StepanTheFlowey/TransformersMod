@@ -51,7 +51,7 @@ public class ItemDyeTF extends Item {
 		icons = new IIcon[dyes.length];
 
 		for(int i = 0; i < dyes.length; ++i) {
-			icons[i] = iconRegister.registerIcon(TransformersMod.modid + ":" + dyes[i] + "_dye");
+			icons[i] = iconRegister.registerIcon(TransformersMod.MODID + ":" + dyes[i] + "_dye");
 		}
 	}
 }

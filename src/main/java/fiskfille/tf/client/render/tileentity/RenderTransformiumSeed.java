@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderTransformiumSeed extends TileEntitySpecialRenderer {
 	private final ModelTransformiumSeed model = new ModelTransformiumSeed();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/transformium_seed.png");
-	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/transformium_seed_lights.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed.png");
+	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed_lights.png");
 
 	public void renderModelAt(TileEntityTransformiumSeed seed, double x, double y, double z) {
 		final EntityTransformiumSeed entity = new EntityTransformiumSeed(seed.getWorldObj());

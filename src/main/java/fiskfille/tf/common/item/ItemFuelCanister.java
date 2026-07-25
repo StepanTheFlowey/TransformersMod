@@ -154,11 +154,11 @@ public class ItemFuelCanister extends ItemFluidContainer {
 		overlays = new IIcon[5];
 
 		for(int i = 0; i < icons.length; ++i) {
-			icons[i] = iconRegister.registerIcon(TransformersMod.modid + ":" + unlocalizedNames[i] + "fuel_canister");
+			icons[i] = iconRegister.registerIcon(TransformersMod.MODID + ":" + unlocalizedNames[i] + "fuel_canister");
 		}
 
 		for(int i = 0; i < overlays.length; ++i) {
-			overlays[i] = iconRegister.registerIcon(TransformersMod.modid + ":fuel_canister_overlay_" + i);
+			overlays[i] = iconRegister.registerIcon(TransformersMod.MODID + ":fuel_canister_overlay_" + i);
 		}
 	}
 }

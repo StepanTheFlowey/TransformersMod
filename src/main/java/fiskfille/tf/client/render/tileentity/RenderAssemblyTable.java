@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderAssemblyTable extends TileEntitySpecialRenderer {
 	private final ModelAssemblyTable model = new ModelAssemblyTable();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/assembly_table.png");
-	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/assembly_table_lights.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/assembly_table.png");
+	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/assembly_table_lights.png");
 
 	public void render(TileEntityAssemblyTable tileentity, double x, double y, double z, float partialTicks) {
 		GL11.glPushMatrix();

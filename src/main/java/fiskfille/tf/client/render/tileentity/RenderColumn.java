@@ -17,8 +17,8 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderColumn extends TileEntitySpecialRenderer {
 	private final ModelEnergyColumn model = new ModelEnergyColumn();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_column.png");
-	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.modid, "textures/models/tiles/energy_column_lights.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_column.png");
+	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_column_lights.png");
 
 	public void render(TileEntityColumn tile, double x, double y, double z, float partialTicks) {
 		final World world = tile.getWorldObj();

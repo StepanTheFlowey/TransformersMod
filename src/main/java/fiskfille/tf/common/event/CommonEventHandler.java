@@ -192,7 +192,7 @@ public class CommonEventHandler {
 
 	@SubscribeEvent
 	public void onItemHandlerInit(ItemHandlerEvent.Init event) {
-		event.registerItemHandler(TransformersMod.modid, TFSubItems.class);
+		event.registerItemHandler(TransformersMod.MODID, TFSubItems.class);
 	}
 
 	@SubscribeEvent

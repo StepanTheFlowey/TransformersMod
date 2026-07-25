@@ -20,14 +20,14 @@ public class TFTextureHelper {
 	public static IIcon[] ioIcons;
 
 	public static void onTextureStitch(TextureMap map) {
-		energonFlowingIcon = map.registerIcon(TransformersMod.modid + ":energon_flow");
-		energonStillIcon = map.registerIcon(TransformersMod.modid + ":energon_still");
+		energonFlowingIcon = map.registerIcon(TransformersMod.MODID + ":energon_flow");
+		energonStillIcon = map.registerIcon(TransformersMod.MODID + ":energon_still");
 
 		ioIcons = new IIcon[EnumIO.values().length];
 
 		for(EnumIO io : EnumIO.values()) {
 			if(io.ordinal() > 0) {
-				ioIcons[io.ordinal()] = map.registerIcon(TransformersMod.modid + ":io_" + io.name().toLowerCase(Locale.ENGLISH));
+				ioIcons[io.ordinal()] = map.registerIcon(TransformersMod.MODID + ":io_" + io.name().toLowerCase(Locale.ENGLISH));
 			}
 		}
 	}

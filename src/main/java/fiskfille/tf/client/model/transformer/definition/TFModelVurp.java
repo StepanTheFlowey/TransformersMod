@@ -90,7 +90,7 @@ public class TFModelVurp extends TransformerModel {
 
 	@Override
 	public ResourceLocation getTexture(Entity entity, String suffix) {
-		return new ResourceLocation(TransformersMod.modid, String.format("textures/models/vurp/vurp%s.png", suffix));
+		return new ResourceLocation(TransformersMod.MODID, String.format("textures/models/vurp/vurp%s.png", suffix));
 	}
 
 	@Override

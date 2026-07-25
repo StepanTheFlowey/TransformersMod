@@ -12,7 +12,7 @@ import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayableFlamethrower extends Displayable {
 	private final ModelFlamethrower model = new ModelFlamethrower();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/flame_thrower.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/flame_thrower.png");
 
 	@Override
 	public void render(ItemStack itemstack) {

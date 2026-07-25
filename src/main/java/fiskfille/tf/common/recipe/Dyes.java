@@ -102,7 +102,7 @@ public class Dyes {
 		}
 
 		if(itemstack != null && getName(itemstack) != null) {
-			if(itemstack.getItem() instanceof ItemBlock && !itemstack.getItem().delegate.name().startsWith(TransformersMod.modid + ":")) {
+			if(itemstack.getItem() instanceof ItemBlock && !itemstack.getItem().delegate.name().startsWith(TransformersMod.MODID + ":")) {
 				itemstack.setItemDamage(MathHelper.clamp_int(15 - id, 0, 15));
 			}
 			else {

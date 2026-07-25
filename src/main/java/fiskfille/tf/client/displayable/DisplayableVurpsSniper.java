@@ -12,7 +12,7 @@ import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayableVurpsSniper extends Displayable {
 	private final ModelVurpsSniper model = new ModelVurpsSniper();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/sniper.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/sniper.png");
 
 	@Override
 	public void render(ItemStack itemstack) {

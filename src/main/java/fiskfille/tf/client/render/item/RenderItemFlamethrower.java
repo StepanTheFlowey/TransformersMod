@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderItemFlamethrower implements IItemRenderer {
 	private final ModelFlamethrower model = new ModelFlamethrower();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/flame_thrower.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/flame_thrower.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

@@ -27,7 +27,7 @@ import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class GuiIsoCondenser extends GuiContainerTF {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/isotopic_condenser.png");
+	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/isotopic_condenser.png");
 	private final TileEntityIsoCondenser tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;

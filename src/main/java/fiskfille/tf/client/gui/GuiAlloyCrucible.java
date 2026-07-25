@@ -28,7 +28,7 @@ import java.util.Locale;
 
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCallback {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.modid, "textures/gui/container/alloy_crucible.png");
+	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/alloy_crucible.png");
 	private final TileEntityAlloyCrucible tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;

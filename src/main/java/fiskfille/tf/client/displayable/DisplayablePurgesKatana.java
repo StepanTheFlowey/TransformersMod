@@ -12,7 +12,7 @@ import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayablePurgesKatana extends Displayable {
 	private final ModelPurgesKatana model = new ModelPurgesKatana();
-	private final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/purge/purge.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/purge/purge.png");
 
 	@Override
 	public void render(ItemStack itemstack) {

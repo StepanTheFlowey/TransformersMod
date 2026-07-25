@@ -29,7 +29,7 @@ public abstract class TransformerTank extends Transformer {
 
 	@Override
 	public String getShootSound() {
-		return TransformersMod.modid + ":tankfire";
+		return TransformersMod.MODID + ":tankfire";
 	}
 
 	@Override
