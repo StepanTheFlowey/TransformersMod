@@ -1,6 +1,6 @@
 package fiskfille.tf.asm.transformers;
 
-import fiskfille.tf.TFLog;
+import fiskfille.tf.TransformersMod;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -97,7 +97,7 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 	public byte[] transform(String name, String transformedName, byte[] bytes) {
 		try {
 			if(transformedName.equals(classPath)) {
-				TFLog.info("Patching class %s (%s)...", unobfClass, name);
+				TransformersMod.log.info("Patching class {} ({})...", unobfClass, name);
 
 				final ClassReader cr = new ClassReader(bytes);
 				final ClassNode cn = new ClassNode();
@@ -110,10 +110,10 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 				cn.accept(cw);
 
 				if(success) {
-					TFLog.info("Patching class %s done.", unobfClass);
+					TransformersMod.log.info("Patching class {} done.", unobfClass);
 				}
 				else {
-					TFLog.error("Patching class %s failed!", unobfClass);
+					TransformersMod.log.error("Patching class {} failed!", unobfClass);
 				}
 
 				return cw.toByteArray();

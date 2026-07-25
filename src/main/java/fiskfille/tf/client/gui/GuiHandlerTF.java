@@ -2,7 +2,6 @@ package fiskfille.tf.client.gui;
 
 import com.google.common.collect.Lists;
 import cpw.mods.fml.common.network.IGuiHandler;
-import fiskfille.tf.TFLog;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.block.TFBlocks;
 import fiskfille.tf.common.container.*;
@@ -80,7 +79,7 @@ public class GuiHandlerTF implements IGuiHandler {
 					return c.newInstance(args);
 				}
 				catch(Exception e) {
-					TFLog.error("Unable to load class for gui element %s", tfGui);
+					TransformersMod.log.error("Unable to load class for gui element {}!", tfGui);
 					e.printStackTrace();
 				}
 
@@ -150,7 +149,7 @@ public class GuiHandlerTF implements IGuiHandler {
 					return c.newInstance(args);
 				}
 				catch(Exception e) {
-					TFLog.error("Unable to load class for gui element '%s'", tfGui);
+					TransformersMod.log.error("Unable to load class for gui element '{}'", tfGui);
 					e.printStackTrace();
 				}
 

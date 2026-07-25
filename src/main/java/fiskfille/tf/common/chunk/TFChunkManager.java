@@ -1,6 +1,5 @@
 package fiskfille.tf.common.chunk;
 
-import fiskfille.tf.TFLog;
 import fiskfille.tf.TransformersMod;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
@@ -82,7 +81,7 @@ public class TFChunkManager {
 			}
 		}
 
-		TFLog.info("%s entries / %s chunks / %s tickets", entries, chunks, tickets);
+		TransformersMod.log.info("{} entries / {} chunks / {} tickets", entries, chunks, tickets);
 	}
 
 	public static Ticket getTicketForChunk(ForcedChunk chunk) {

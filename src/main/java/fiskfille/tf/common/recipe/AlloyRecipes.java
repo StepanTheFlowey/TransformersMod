@@ -1,7 +1,7 @@
 package fiskfille.tf.common.recipe;
 
 import cpw.mods.fml.common.Loader;
-import fiskfille.tf.TFLog;
+import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.block.TFBlocks;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.item.TFSubItems;
@@ -70,7 +70,7 @@ public class AlloyRecipes {
 
 	public void addRecipe(AlloyIngredients alloy, ItemStack result, int duration, float xp) {
 		if(alloy == null || alloy.getIngredients()[0] == null) {
-			TFLog.warn("Mod '%s' attempted to register unknown or empty AlloyIngredients for item %s!", Loader.instance().activeModContainer().getModId(), Item.itemRegistry.getNameForObject(result.getItem()));
+			TransformersMod.log.warn("Mod '{}' attempted to register unknown or empty AlloyIngredients for item {}!", Loader.instance().activeModContainer().getModId(), Item.itemRegistry.getNameForObject(result.getItem()));
 			return;
 		}
 

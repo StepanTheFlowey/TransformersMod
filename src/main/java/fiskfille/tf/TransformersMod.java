@@ -23,6 +23,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(
 				guiFactory = "fiskfille.tf.client.gui.TFGuiFactory",
@@ -33,6 +35,7 @@ import net.minecraftforge.common.config.Configuration;
 public class TransformersMod {
 	public static final Minecraft mc = Minecraft.getMinecraft();
 	public static final CreativeTabs tabTransformers = new CreativeTabTransformers();
+	public static final Logger log = LogManager.getLogger("Transformers Mod");
 	public static final String MODID = "transformers";
 
 	@Instance(TransformersMod.MODID)

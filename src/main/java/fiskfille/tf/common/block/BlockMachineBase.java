@@ -2,7 +2,7 @@ package fiskfille.tf.common.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TFLog;
+import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.fluid.FluidEnergon;
 import fiskfille.tf.common.fluid.IFluidHandlerTF;
 import fiskfille.tf.common.fluid.TFFluids;
@@ -366,7 +366,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 				return tileClass.newInstance();
 			}
 			catch(Exception e) {
-				TFLog.error("Could not create tile entity for block '%s' from class %s", delegate.name(), tileClass);
+				TransformersMod.log.error("Could not create tile entity for block '{}' from class {}", delegate.name(), tileClass);
 			}
 		}
 
