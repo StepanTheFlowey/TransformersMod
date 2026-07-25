@@ -3,6 +3,7 @@ package fiskfille.tf.common.item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.common.block.TFBlocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,8 +14,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class ItemTransformiumDetector extends Item {
 	// TODO-TF improve it for 0.6.0
@@ -86,7 +85,7 @@ public class ItemTransformiumDetector extends Item {
 					}
 
 					if(player.worldObj.isRemote) {
-						if(mc.thePlayer == player) {
+						if(Minecraft.getMinecraft().thePlayer == player) {
 							int d = tagCompound.getInteger("d");
 
 							if(d > 0) {

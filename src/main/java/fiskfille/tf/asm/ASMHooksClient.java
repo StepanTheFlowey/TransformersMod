@@ -1,6 +1,7 @@
 package fiskfille.tf.asm;
 
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -10,8 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class ASMHooksClient {
 	public static int getBrightnessForRender(Entity entity) {
@@ -26,7 +25,7 @@ public class ASMHooksClient {
 	}
 
 	public static void applyPlayerRenderTranslation(RenderPlayer render, AbstractClientPlayer player, double x, double y, double z) {
-		if(player == mc.thePlayer) {
+		if(player == Minecraft.getMinecraft().thePlayer) {
 			GL11.glTranslatef(0F, player.yOffset - 1.62F, 0F);
 		}
 

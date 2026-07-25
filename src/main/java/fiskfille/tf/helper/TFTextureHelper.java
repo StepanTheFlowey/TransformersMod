@@ -2,6 +2,7 @@ package fiskfille.tf.helper;
 
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.tileentity.TileEntityMachine.EnumIO;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -10,8 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Locale;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class TFTextureHelper {
 	public static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
@@ -44,7 +43,7 @@ public class TFTextureHelper {
 	}
 
 	public static boolean isBoundTexture(ResourceLocation resourceLocation) {
-		ITextureObject texture = mc.getTextureManager().getTexture(resourceLocation);
+		ITextureObject texture = Minecraft.getMinecraft().getTextureManager().getTexture(resourceLocation);
 
 		return texture != null && texture.getGlTextureId() == GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
 	}

@@ -13,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-import static fiskfille.tf.TransformersMod.mc;
-
 public class RenderItemArmor implements IItemRenderer {
 	private final Transformer transformer;
 	private final int armorPiece;
@@ -60,32 +58,32 @@ public class RenderItemArmor implements IItemRenderer {
 			final float[] secondaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(item));
 
 			GL11.glColor3f(primaryColor[0], primaryColor[1], primaryColor[2]);
-			mc.getTextureManager().bindTexture(tfModel.getTexture(null, "_primary"));
+			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_primary"));
 			renderArmor(type, model);
 
 			GL11.glColor3f(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-			mc.getTextureManager().bindTexture(tfModel.getTexture(null, "_secondary"));
+			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_secondary"));
 			renderArmor(type, model);
 
 			GL11.glColor3f(1F, 1F, 1F);
-			mc.getTextureManager().bindTexture(tfModel.getTexture(null, "_base"));
+			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_base"));
 			renderArmor(type, model);
 		}
 		else {
-			mc.getTextureManager().bindTexture(tfModel.getTexture(null, ""));
+			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, ""));
 		}
 
 		renderArmor(type, model);
 
 		if(tfModel.hasLightsLayer()) {
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
-			mc.getTextureManager().bindTexture(tfModel.getTexture(null, "_lights"));
+			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_lights"));
 			renderArmor(type, model);
 			TFRenderHelper.resetLighting();
 		}
 
 		if(item.hasEffect(0)) {
-			mc.getTextureManager().bindTexture(TFTextureHelper.RES_ITEM_GLINT);
+			Minecraft.getMinecraft().getTextureManager().bindTexture(TFTextureHelper.RES_ITEM_GLINT);
 			GL11.glColor3f(0.5F, 0.5F, 0.5F);
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDepthMask(false);

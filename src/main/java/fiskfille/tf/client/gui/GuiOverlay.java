@@ -14,6 +14,7 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFShootManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -29,8 +30,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import static fiskfille.tf.TransformersMod.mc;
-
 public class GuiOverlay extends Gui {
 	public static final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/mod_icons.png");
 	public static double prevSpeed;
@@ -44,7 +43,7 @@ public class GuiOverlay extends Gui {
 			return;
 		}
 
-		final EntityPlayer player = mc.thePlayer;
+		final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		final int width = event.resolution.getScaledWidth();
 		final int height = event.resolution.getScaledHeight();
 
@@ -106,14 +105,14 @@ public class GuiOverlay extends Gui {
 			drawTexturedModalRect(x, y + 1, 0, 0, 14, 14);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-			drawCenteredString(mc.fontRenderer, I18n.format("stats.laser_charge.name"), x + 50 + 18, y + 2, 0xffffff);
+			drawCenteredString(Minecraft.getMinecraft().fontRenderer, I18n.format("stats.laser_charge.name"), x + 50 + 18, y + 2, 0xffffff);
 
 			RenderHelper.enableGUIStandardItemLighting();
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 			GL11.glEnable(GL11.GL_LIGHTING);
-			itemRenderer.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1, y);
+			itemRenderer.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1, y);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glDepthMask(true);
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -121,7 +120,7 @@ public class GuiOverlay extends Gui {
 			float scale = 0.5F;
 			GL11.glPushMatrix();
 			GL11.glScalef(scale, scale, scale);
-			drawString(mc.fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), (int) ((x - 1) / scale), (int) ((y + 17) / scale), 0xffffff);
+			drawString(Minecraft.getMinecraft().fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), (int) ((x - 1) / scale), (int) ((y + 17) / scale), 0xffffff);
 			GL11.glPopMatrix();
 		}
 	}
@@ -154,8 +153,8 @@ public class GuiOverlay extends Gui {
 			drawTexturedModalRect(6 - offset, 17, 0, 0, speed > 200 ? 200 : (int) speed, 10);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-			drawCenteredString(mc.fontRenderer, I18n.format("stats.nitro.name"), 106 - offset, 5, 0xffffff);
-			drawCenteredString(mc.fontRenderer, (int) (TFConfig.useMiles ? speed * 0.621371192 : speed) + (TFConfig.useMiles ? " mph" : " km/h"), 106 - offset, 18, 0xffffff);
+			drawCenteredString(Minecraft.getMinecraft().fontRenderer, I18n.format("stats.nitro.name"), 106 - offset, 5, 0xffffff);
+			drawCenteredString(Minecraft.getMinecraft().fontRenderer, (int) (TFConfig.useMiles ? speed * 0.621371192 : speed) + (TFConfig.useMiles ? " mph" : " km/h"), 106 - offset, 18, 0xffffff);
 		}
 	}
 
@@ -185,7 +184,7 @@ public class GuiOverlay extends Gui {
 					shotsLeft = EnumChatFormatting.RED + shotsLeft;
 				}
 
-				drawString(mc.fontRenderer, I18n.format("stats.shots_left.name") + ": " + shotsLeft, x + 19 - offset, 32, 0xffffff);
+				drawString(Minecraft.getMinecraft().fontRenderer, I18n.format("stats.shots_left.name") + ": " + shotsLeft, x + 19 - offset, 32, 0xffffff);
 
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glEnable(GL11.GL_BLEND);
@@ -203,7 +202,7 @@ public class GuiOverlay extends Gui {
 				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 				GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 				GL11.glEnable(GL11.GL_LIGHTING);
-				itemRenderer.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1 - offset, y - 1);
+				itemRenderer.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1 - offset, y - 1);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glDepthMask(true);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -212,7 +211,7 @@ public class GuiOverlay extends Gui {
 				GL11.glPushMatrix();
 				GL11.glTranslatef(x - 1 - offset, y + 16, 0);
 				GL11.glScalef(scale, scale, scale);
-				drawString(mc.fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), 0, 0, 0xffffff);
+				drawString(Minecraft.getMinecraft().fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), 0, 0, 0xffffff);
 				GL11.glPopMatrix();
 			}
 		}
@@ -227,13 +226,13 @@ public class GuiOverlay extends Gui {
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GL11.glColor4f(0F, 0F, 0F, 0.15F);
 
-					if(mc.gameSettings.thirdPersonView == 0 && heldItem.getItem() == TFItems.vurpsSniper && TFDataManager.getZoomTimer(player) > 7) {
+					if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && heldItem.getItem() == TFItems.vurpsSniper && TFDataManager.getZoomTimer(player) > 7) {
 						GL11.glDisable(GL11.GL_DEPTH_TEST);
 						GL11.glDepthMask(false);
 						OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 						GL11.glColor3f(1F, 1F, 1F);
 						GL11.glDisable(GL11.GL_ALPHA_TEST);
-						mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/misc/sniper_scope.png"));
+						Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/misc/sniper_scope.png"));
 						Tessellator tessellator = Tessellator.instance;
 						tessellator.startDrawingQuads();
 						tessellator.addVertexWithUV(0D, height, -90D, 0D, 1D);

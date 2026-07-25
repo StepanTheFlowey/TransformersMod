@@ -2,6 +2,7 @@ package fiskfille.tf.client.render.item;
 
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.item.ModelPurgesKatana;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -23,7 +24,7 @@ public class RenderItemPurgesKatana implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		TransformersMod.mc.renderEngine.bindTexture(texture);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP) {
 			GL11.glRotatef(210, 0F, 0F, 1F);

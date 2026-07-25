@@ -2,6 +2,7 @@ package fiskfille.tf.client.model.tools;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -11,8 +12,6 @@ import net.minecraft.util.MathHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 /**
  * @author BobMowzie, gegy1000
@@ -303,7 +302,7 @@ public class MowzieModelBase extends ModelBiped {
 	public boolean onGround(Entity entity) {
 		boolean onGround = entity.onGround;
 
-		if(entity != mc.thePlayer) {
+		if(entity != Minecraft.getMinecraft().thePlayer) {
 			double moveY = -0.2;
 			double actualMoveY = moveY;
 

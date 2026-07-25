@@ -17,6 +17,7 @@ import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTileHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.settings.GameSettings;
@@ -27,8 +28,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Map;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class ClientTickHandler {
 	public static float renderTick;
@@ -55,12 +54,12 @@ public class ClientTickHandler {
 					}
 				}
 
-				if(player == mc.thePlayer) {
+				if(player == Minecraft.getMinecraft().thePlayer) {
 					if(transformer.overrideFirstPerson()) {
-						GameSettings gameSettings = mc.gameSettings;
+						GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
 
 						if(transformationTimer >= 0.5F) {
-							if(TFKeyBinds.keyBindingViewFront.getIsKeyPressed() && mc.currentScreen == null) {
+							if(TFKeyBinds.keyBindingViewFront.getIsKeyPressed() && Minecraft.getMinecraft().currentScreen == null) {
 								gameSettings.thirdPersonView = 2;
 							}
 							else if(TFKeyBinds.keyBindingVehicleFirstPerson.getIsKeyPressed()) {
@@ -93,21 +92,21 @@ public class ClientTickHandler {
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
 		if(event.phase == TickEvent.Phase.START) {
-			if(mc.theWorld != null) {
-				for(EntityPlayer player : (List<EntityPlayer>) mc.theWorld.playerEntities) {
+			if(Minecraft.getMinecraft().theWorld != null) {
+				for(EntityPlayer player : (List<EntityPlayer>) Minecraft.getMinecraft().theWorld.playerEntities) {
 					TFRenderHelper.updateMotionY(player);
 				}
 
-				if(mc.theWorld.isRemote && !mc.isGamePaused()) {
+				if(Minecraft.getMinecraft().theWorld.isRemote && !Minecraft.getMinecraft().isGamePaused()) {
 					for(Map.Entry<DimensionalCoords, TileData> e : TFTileHelper.getTileData().entrySet()) {
 						e.getValue().clientTick();
 					}
 				}
 
-				if(ClientProxy.fakePlayer == null || ClientProxy.fakePlayer.worldObj != mc.theWorld) {
-					if(mc.playerController != null) {
-						ClientProxy.fakePlayer = mc.playerController.func_147493_a(mc.theWorld, new StatFileWriter());
-						ClientProxy.fakePlayer.movementInput = new MovementInputFromOptions(mc.gameSettings);
+				if(ClientProxy.fakePlayer == null || ClientProxy.fakePlayer.worldObj != Minecraft.getMinecraft().theWorld) {
+					if(Minecraft.getMinecraft().playerController != null) {
+						ClientProxy.fakePlayer = Minecraft.getMinecraft().playerController.func_147493_a(Minecraft.getMinecraft().theWorld, new StatFileWriter());
+						ClientProxy.fakePlayer.movementInput = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
 					}
 				}
 				else {
@@ -119,30 +118,30 @@ public class ClientTickHandler {
 
 	@SubscribeEvent
 	public void onRenderTick(RenderTickEvent event) {
-		World world = mc.theWorld;
+		World world = Minecraft.getMinecraft().theWorld;
 		renderTick = event.renderTickTime;
 
 		if(world != null) {
 			if(event.phase == TickEvent.Phase.START) {
-				EntityClientPlayerMP player = mc.thePlayer;
+				EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 
 				if(TFRenderHelper.shouldOverrideView(player)) {
 					if(renderer == null) {
-						renderer = new EntityRendererTF(mc);
+						renderer = new EntityRendererTF(Minecraft.getMinecraft());
 					}
 
-					if(mc.entityRenderer != renderer) {
-						prevRenderer = mc.entityRenderer;
-						mc.entityRenderer = renderer;
+					if(Minecraft.getMinecraft().entityRenderer != renderer) {
+						prevRenderer = Minecraft.getMinecraft().entityRenderer;
+						Minecraft.getMinecraft().entityRenderer = renderer;
 					}
 				}
-				else if(prevRenderer != null && mc.entityRenderer == renderer) {
-					mc.entityRenderer = prevRenderer;
+				else if(prevRenderer != null && Minecraft.getMinecraft().entityRenderer == renderer) {
+					Minecraft.getMinecraft().entityRenderer = prevRenderer;
 				}
 			}
 
-			if(mc.thePlayer != null) {
-				EntityPlayer player = mc.thePlayer;
+			if(Minecraft.getMinecraft().thePlayer != null) {
+				EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 				Transformer transformer = TFHelper.getTransformer(player);
 
 				if(TFRenderHelper.shouldOverrideThirdPersonDistance(player)) {
@@ -157,7 +156,7 @@ public class ClientTickHandler {
 							thirdPersonDistance = transformer.getThirdPersonDistance(player);
 						}
 
-						TFReflection.setField(TFReflection.thirdPersonDistanceField, mc.entityRenderer, thirdPersonDistance);
+						TFReflection.setField(TFReflection.thirdPersonDistanceField, Minecraft.getMinecraft().entityRenderer, thirdPersonDistance);
 					}
 				}
 			}

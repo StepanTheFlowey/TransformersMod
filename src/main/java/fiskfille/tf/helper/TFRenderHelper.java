@@ -11,6 +11,7 @@ import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.common.tileentity.TileEntityMachine;
 import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelRenderer;
@@ -32,8 +33,6 @@ import org.lwjgl.opengl.GL12;
 import java.util.Map;
 import java.util.Random;
 import java.util.WeakHashMap;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class TFRenderHelper {
 	public static final int LIGHTING_LUMINOUS = 0xF0F0;
@@ -75,25 +74,25 @@ public class TFRenderHelper {
 					final float[] secondaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(itemstack));
 
 					GL11.glColor3f(primaryColor[0], primaryColor[1], primaryColor[2]);
-					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_primary"));
+					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_primary"));
 					model.render(0.0625F);
 
 					GL11.glColor3f(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_secondary"));
+					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_secondary"));
 					model.render(0.0625F);
 
 					GL11.glColor3f(1F, 1F, 1F);
-					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_base"));
+					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_base"));
 				}
 				else {
-					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, ""));
+					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, ""));
 				}
 
 				model.render(0.0625F);
 
 				if(tfModel.hasLightsLayer()) {
 					setLighting(LIGHTING_LUMINOUS);
-					mc.getTextureManager().bindTexture(tfModel.getTexture(entity, "_lights"));
+					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_lights"));
 					model.render(0.0625F);
 					resetLighting();
 				}
@@ -104,9 +103,9 @@ public class TFRenderHelper {
 	}
 
 	public static void startGlScissor(int x, int y, int width, int height) {
-		final ScaledResolution reso = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-		final double scaleW = mc.displayWidth / reso.getScaledWidth_double();
-		final double scaleH = mc.displayHeight / reso.getScaledHeight_double();
+		final ScaledResolution reso = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+		final double scaleW = Minecraft.getMinecraft().displayWidth / reso.getScaledWidth_double();
+		final double scaleH = Minecraft.getMinecraft().displayHeight / reso.getScaledHeight_double();
 
 		if(width <= 0 || height <= 0) {
 			return;
@@ -121,9 +120,9 @@ public class TFRenderHelper {
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
 		GL11.glScissor(
 						MathHelper.floor_double(x * scaleW),
-						MathHelper.floor_double(mc.displayHeight - (y + height) * scaleH),
+						MathHelper.floor_double(Minecraft.getMinecraft().displayHeight - (y + height) * scaleH),
 						MathHelper.floor_double((x + width) * scaleW) - MathHelper.floor_double(x * scaleW),
-						MathHelper.floor_double(mc.displayHeight - y * scaleH) - MathHelper.floor_double(mc.displayHeight - (y + height) * scaleH)
+						MathHelper.floor_double(Minecraft.getMinecraft().displayHeight - y * scaleH) - MathHelper.floor_double(Minecraft.getMinecraft().displayHeight - (y + height) * scaleH)
 		);
 	}
 
@@ -132,14 +131,14 @@ public class TFRenderHelper {
 	}
 
 	public static double getMotionY(EntityPlayer player) {
-		final double current = player == mc.thePlayer ? player.motionY : player.posY - player.prevPosY;
+		final double current = player == Minecraft.getMinecraft().thePlayer ? player.motionY : player.posY - player.prevPosY;
 		final double previous = previousMotionY.getOrDefault(player, 0D);
 
 		return TFHelper.median(current, previous, ClientTickHandler.renderTick);
 	}
 
 	public static void updateMotionY(EntityPlayer player) {
-		previousMotionY.put(player, player == mc.thePlayer ? player.motionY : player.posY - player.prevPosY);
+		previousMotionY.put(player, player == Minecraft.getMinecraft().thePlayer ? player.motionY : player.posY - player.prevPosY);
 	}
 
 	public static void renderTag(String s, float x, float y, float z) {
@@ -148,8 +147,8 @@ public class TFRenderHelper {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glNormal3f(0F, 1F, 0F);
-		GL11.glRotatef(mc.thePlayer.rotationYaw + 180F, 0F, 1F, 0F);
-		GL11.glRotatef(-mc.thePlayer.rotationPitch, 1F, 0F, 0F);
+		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw + 180F, 0F, 1F, 0F);
+		GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1F, 0F, 0F);
 		GL11.glScalef(0.02F, 0.02F, -0.02F);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDepthMask(false);
@@ -329,7 +328,7 @@ public class TFRenderHelper {
 			final double segmentLength = length / segments;
 			final double start = i * segmentLength;
 			final double end = (i + 1) * segmentLength;
-			final float f = (float) Math.cos(i / (segments * 0.15625F) - (mc.thePlayer.ticksExisted + partialTicks) / 5);
+			final float f = (float) Math.cos(i / (segments * 0.15625F) - (Minecraft.getMinecraft().thePlayer.ticksExisted + partialTicks) / 5);
 			final float f1 = 1 - f;
 			final float f2 = Math.min((float) i / segments * 3, 1);
 			final float f3 = 1 - f2;
@@ -389,8 +388,8 @@ public class TFRenderHelper {
 		final float[] secondary = hexToRGB(0x7BF2F8);
 		final double length = src.distanceTo(dst);
 
-		Random rand = new Random(seed + mc.thePlayer.ticksExisted * 10L);
-		Random randPrev = new Random(seed + (mc.thePlayer.ticksExisted - 1) * 10L);
+		Random rand = new Random(seed + Minecraft.getMinecraft().thePlayer.ticksExisted * 10L);
+		Random randPrev = new Random(seed + (Minecraft.getMinecraft().thePlayer.ticksExisted - 1) * 10L);
 
 		src = Vec3.createVectorHelper(0, 0, 0);
 
@@ -459,7 +458,7 @@ public class TFRenderHelper {
 	}
 
 	public static int getBlockDestroyProgress(World world, int x, int y, int z) {
-		final Map damagedBlocks = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, "damagedBlocks", "field_72738_E", "O");
+		final Map damagedBlocks = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, Minecraft.getMinecraft().renderGlobal, "damagedBlocks", "field_72738_E", "O");
 
 		if(!damagedBlocks.isEmpty()) {
 			for(Object o : damagedBlocks.values()) {
@@ -568,12 +567,12 @@ public class TFRenderHelper {
 
 		FontRenderer font = itemstack.getItem().getFontRenderer(itemstack);
 		if(font == null) {
-			font = mc.fontRenderer;
+			font = Minecraft.getMinecraft().fontRenderer;
 		}
 
-		itemRender.renderItemAndEffectIntoGUI(font, mc.getTextureManager(), itemstack, x, y);
+		itemRender.renderItemAndEffectIntoGUI(font, Minecraft.getMinecraft().getTextureManager(), itemstack, x, y);
 		if(itemstack.stackSize > 1) {
-			itemRender.renderItemOverlayIntoGUI(font, mc.getTextureManager(), itemstack, x, y, itemstack.stackSize + "");
+			itemRender.renderItemOverlayIntoGUI(font, Minecraft.getMinecraft().getTextureManager(), itemstack, x, y, itemstack.stackSize + "");
 		}
 	}
 

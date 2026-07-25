@@ -12,6 +12,7 @@ import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.network.MessageTileTrigger.ITileDataCallback;
 import fiskfille.tf.helper.TFArmorDyeHelper;
 import fiskfille.tf.helper.TFHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,8 +25,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class TileEntityDisplayStation extends TileEntityContainer implements IMultiTile, ITileDataCallback {
 	public final GameProfile username;
@@ -60,15 +59,15 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 	@SideOnly(Side.CLIENT)
 	public void clientTick() {
 		if(fakePlayer == null) {
-			if(mc != null && mc.playerController != null && getWorldObj() != null) {
-				EntityClientPlayerMP player = new EntityClientPlayerMP(mc, getWorldObj(), mc.getSession(), mc.getNetHandler(), new StatFileWriter()) {
+			if(Minecraft.getMinecraft() != null && Minecraft.getMinecraft().playerController != null && getWorldObj() != null) {
+				EntityClientPlayerMP player = new EntityClientPlayerMP(Minecraft.getMinecraft(), getWorldObj(), Minecraft.getMinecraft().getSession(), Minecraft.getMinecraft().getNetHandler(), new StatFileWriter()) {
 					@Override
 					public boolean isInvisibleToPlayer(EntityPlayer player) {
 						return true;
 					}
 				};
 
-				player.movementInput = new MovementInputFromOptions(mc.gameSettings);
+				player.movementInput = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
 				fakePlayer = player;
 			}
 		}

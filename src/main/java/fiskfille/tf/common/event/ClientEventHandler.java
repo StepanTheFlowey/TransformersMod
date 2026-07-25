@@ -28,6 +28,7 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.*;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -63,15 +64,13 @@ import org.lwjgl.opengl.GL11;
 import java.util.HashMap;
 import java.util.Map;
 
-import static fiskfille.tf.TransformersMod.mc;
-
 public class ClientEventHandler {
 	public final RenderPlayerHand renderHandInstance;
 	private final Map<EntityPlayer, Item> prevHelm = new HashMap<>();
 	private final Map<EntityPlayer, Item> prevChest = new HashMap<>();
 	private final Map<EntityPlayer, Item> prevLegs = new HashMap<>();
 	private final Map<EntityPlayer, Item> prevBoots = new HashMap<>();
-	public boolean prevViewBobbing = mc.gameSettings.viewBobbing;
+	public boolean prevViewBobbing = Minecraft.getMinecraft().gameSettings.viewBobbing;
 	private double lastX;
 	private double lastY;
 	private double lastZ;
@@ -83,13 +82,13 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {
-		EntityPlayer player = mc.thePlayer;
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		Transformer transformer = TFHelper.getTransformer(player);
 
 		int altMode = TFData.ALT_MODE.get(player);
 		float transformationTimer = TFHelper.getTransformationTimer(player);
 
-		if(mc.currentScreen == null && player.ridingEntity == null) {
+		if(Minecraft.getMinecraft().currentScreen == null && player.ridingEntity == null) {
 			if(TFHelper.isTransformer(player)) {
 				KeyBinding[] keys = new KeyBinding[]{TFKeyBinds.keyBindingTransform1};
 
@@ -137,17 +136,17 @@ public class ClientEventHandler {
 		EntityPlayer player = event.entityPlayer;
 		Transformer transformer = event.transformer;
 
-		if(player == mc.thePlayer) {
+		if(player == Minecraft.getMinecraft().thePlayer) {
 			boolean isTransformed = event.altMode != -1;
 
 			if(transformer == null || transformer.disableViewBobbing()) {
 				if(isTransformed) {
-					GameSettings gameSettings = mc.gameSettings;
+					GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
 					prevViewBobbing = gameSettings.viewBobbing;
 					gameSettings.viewBobbing = false;
 				}
 				else {
-					mc.gameSettings.viewBobbing = prevViewBobbing;
+					Minecraft.getMinecraft().gameSettings.viewBobbing = prevViewBobbing;
 				}
 			}
 		}
@@ -184,7 +183,7 @@ public class ClientEventHandler {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onRenderHand(RenderHandEvent event) {
-		EntityClientPlayerMP player = mc.thePlayer;
+		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		Object renderObj = RenderManager.instance.entityRenderMap.get(player.getClass());
 
 		if(renderObj != null && TFHelper.getTransformerFromArmor(player, 2) != null) {
@@ -196,7 +195,7 @@ public class ClientEventHandler {
 			renderHandInstance.setParent(render);
 
 			RenderManager.instance.entityRenderMap.put(player.getClass(), renderHandInstance);
-			TFReflection.renderHand(mc.entityRenderer, event.partialTicks, 0);
+			TFReflection.renderHand(Minecraft.getMinecraft().entityRenderer, event.partialTicks, 0);
 			RenderManager.instance.entityRenderMap.put(player.getClass(), render);
 			GL11.glPopMatrix();
 		}
@@ -481,7 +480,7 @@ public class ClientEventHandler {
 				}
 			}
 
-			if(!player.isInvisibleToPlayer(mc.thePlayer) && (TFHelper.getTransformerFromArmor(player, 0) == null && TFHelper.getTransformerFromArmor(player, 1) != null || TFHelper.getTransformerFromArmor(player, 1) == null && TFHelper.getTransformerFromArmor(player, 0) != null)) {
+			if(!player.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) && (TFHelper.getTransformerFromArmor(player, 0) == null && TFHelper.getTransformerFromArmor(player, 1) != null || TFHelper.getTransformerFromArmor(player, 1) == null && TFHelper.getTransformerFromArmor(player, 0) != null)) {
 				ModelBipedPartial model = TFModelHelper.modelBipedPartial;
 				ModelRenderer[] bipedLegs = {model.bipedLeftLeg, model.bipedRightLeg};
 				ModelRenderer[] bipedLegs2 = {event.renderer.modelBipedMain.bipedLeftLeg, event.renderer.modelBipedMain.bipedRightLeg};
@@ -490,7 +489,7 @@ public class ClientEventHandler {
 					TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, 1));
 
 					if(tfModel != null) {
-						mc.getTextureManager().bindTexture(TFTextureHelper.getSkin(player.getCommandSenderName()));
+						Minecraft.getMinecraft().getTextureManager().bindTexture(TFTextureHelper.getSkin(player.getCommandSenderName()));
 
 						for(int i = 0; i < bipedLegs.length; ++i) {
 							ModelRendererPartial modelRenderer = (ModelRendererPartial) bipedLegs[i];
@@ -513,7 +512,7 @@ public class ClientEventHandler {
 					TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, 0));
 
 					if(tfModel != null) {
-						mc.getTextureManager().bindTexture(TFTextureHelper.getSkin(player.getCommandSenderName()));
+						Minecraft.getMinecraft().getTextureManager().bindTexture(TFTextureHelper.getSkin(player.getCommandSenderName()));
 
 						for(int i = 0; i < bipedLegs.length; ++i) {
 							ModelRendererPartial modelRenderer = (ModelRendererPartial) bipedLegs[i];
@@ -644,7 +643,7 @@ public class ClientEventHandler {
 		if(event.phase == Phase.END) {
 			EntityPlayer player = event.player;
 
-			if(mc.thePlayer == player) {
+			if(Minecraft.getMinecraft().thePlayer == player) {
 				double diffX = player.posX - lastX;
 				double diffY = player.posY - lastY;
 				double diffZ = player.posZ - lastZ;
@@ -667,8 +666,8 @@ public class ClientEventHandler {
 		Transformer transformer = TFHelper.getTransformer(player);
 
 		float nitro = TFData.NITRO.get(player);
-		boolean moveForward = mc.gameSettings.keyBindForward.getIsKeyPressed();
-		boolean nitroPressed = mc.gameSettings.keyBindSprint.getIsKeyPressed();
+		boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.getIsKeyPressed();
+		boolean nitroPressed = Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed();
 
 		int altMode = TFData.ALT_MODE.get(player);
 
@@ -680,7 +679,7 @@ public class ClientEventHandler {
 		else {
 			ItemStack itemstack = player.getHeldItem();
 
-			if(TFDataManager.getZoomTimer(player) > 0 && TFHelper.getTransformer(player) instanceof TransformerVurp && itemstack != null && itemstack.getItem() == TFItems.vurpsSniper && mc.gameSettings.thirdPersonView == 0) {
+			if(TFDataManager.getZoomTimer(player) > 0 && TFHelper.getTransformer(player) instanceof TransformerVurp && itemstack != null && itemstack.getItem() == TFItems.vurpsSniper && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
 				event.newfov = 1F - (float) TFDataManager.getZoomTimer(player) / 10;
 			}
 		}

@@ -17,13 +17,12 @@ import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.common.tileentity.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class ClientProxy extends CommonProxy {
 	public static final GuiOverlay guiOverlay = new GuiOverlay();
@@ -109,12 +108,12 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public World getWorld() {
-		return mc.theWorld;
+		return Minecraft.getMinecraft().theWorld;
 	}
 
 	@Override
 	public EntityPlayer getPlayer() {
-		return mc.thePlayer;
+		return Minecraft.getMinecraft().thePlayer;
 	}
 
 	@Override
@@ -124,7 +123,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void runTasks() {
-		if(mc.thePlayer != null) {
+		if(Minecraft.getMinecraft().thePlayer != null) {
 			super.runTasks();
 		}
 	}

@@ -7,6 +7,7 @@ import fiskfille.tf.common.network.MessageVehicleShoot;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.transformer.TransformerVurp;
 import fiskfille.tf.common.transformer.base.Transformer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
@@ -15,8 +16,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import org.lwjgl.input.Mouse;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class TFShootManager {
 	public static int shootCooldown = 0;
@@ -36,7 +35,7 @@ public class TFShootManager {
 				int altMode = TFData.ALT_MODE.get(player);
 				boolean isTransformed = altMode != -1;
 
-				if(player == mc.thePlayer) {
+				if(player == Minecraft.getMinecraft().thePlayer) {
 					Transformer transformer = TFHelper.getTransformer(player);
 
 					if(laserFilling) {
@@ -148,7 +147,7 @@ public class TFShootManager {
 	}
 
 	private void stealthForceShoot(Transformer transformer, EntityPlayer player, int altMode) {
-		if(player == mc.thePlayer) {
+		if(player == Minecraft.getMinecraft().thePlayer) {
 			if(transformer instanceof TransformerVurp) {
 				if(transformer.canShoot(player)) {
 					if(!laserFilling && laserCharge > 0) {

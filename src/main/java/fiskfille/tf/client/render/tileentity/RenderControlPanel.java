@@ -8,6 +8,7 @@ import fiskfille.tf.common.groundbridge.DataCore;
 import fiskfille.tf.common.tileentity.TileEntityControlPanel;
 import fiskfille.tf.helper.TFDimensionHelper;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -18,11 +19,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-import static fiskfille.tf.TransformersMod.mc;
-
 public class RenderControlPanel extends TileEntitySpecialRenderer {
 	private final ModelControlPanel model = new ModelControlPanel();
-	private final ItemRenderer itemRenderer = new ItemRenderer(mc);
+	private final ItemRenderer itemRenderer = new ItemRenderer(Minecraft.getMinecraft());
 
 	public void render(TileEntityControlPanel tile, double x, double y, double z, float partialTicks) {
 		int metadata = 0;
@@ -56,7 +55,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 				GL11.glScalef(-0.155F, -0.155F, 0.155F);
 				GL11.glColor3f(1F, 1F, 1F);
 
-				itemRenderer.renderItem(mc.thePlayer, itemstack, 0);
+				itemRenderer.renderItem(Minecraft.getMinecraft().thePlayer, itemstack, 0);
 
 				GL11.glColor3f(1F, 1F, 1F);
 				GL11.glEnable(GL11.GL_LIGHTING);
@@ -225,7 +224,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		GL11.glScalef(scale, scale, -scale);
 		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		mc.fontRenderer.drawSplitString(s, 0, 0, 200, color);
+		Minecraft.getMinecraft().fontRenderer.drawSplitString(s, 0, 0, 200, color);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
@@ -238,7 +237,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		GL11.glScalef(scale, scale, -scale);
 		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		mc.fontRenderer.drawString(s, -mc.fontRenderer.getStringWidth(s) / 2, 0, color);
+		Minecraft.getMinecraft().fontRenderer.drawString(s, -Minecraft.getMinecraft().fontRenderer.getStringWidth(s) / 2, 0, color);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}

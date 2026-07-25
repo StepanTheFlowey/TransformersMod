@@ -6,6 +6,7 @@ import fiskfille.tf.client.particle.TFParticles;
 import fiskfille.tf.common.network.MessageCloudtrapJetpack;
 import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.helper.TFVectorHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 
@@ -23,7 +24,7 @@ public class CloudtrapJetpackManager {
 
 	public static void cloudtrapTick(EntityPlayer player) {
 		boolean isClientPlayer = TransformersMod.proxy.getPlayer() == player;
-		boolean jetpacking = TransformersMod.mc.gameSettings.keyBindJump.getIsKeyPressed() && !player.capabilities.isFlying;
+		boolean jetpacking = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed() && !player.capabilities.isFlying;
 
 		if(isClientPlayer) {
 			if(prevJetpacking != jetpacking) {

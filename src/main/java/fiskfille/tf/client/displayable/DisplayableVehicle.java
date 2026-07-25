@@ -4,10 +4,9 @@ import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.common.transformer.base.Transformer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayableVehicle extends Displayable {
 	@Override
@@ -17,7 +16,7 @@ public class DisplayableVehicle extends Displayable {
 			return;
 		}
 
-		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.5F, 0F, 1F, 0F);
+		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.5F, 0F, 1F, 0F);
 		GL11.glTranslatef(0F, -0.2F, 0F);
 		GL11.glScalef(0.75F, 0.75F, 0.75F);
 

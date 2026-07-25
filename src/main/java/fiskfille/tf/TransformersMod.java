@@ -18,7 +18,6 @@ import fiskfille.tf.common.proxy.CommonProxy;
 import fiskfille.tf.common.tab.CreativeTabTransformers;
 import fiskfille.tf.config.TFConfig;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeChunkManager;
@@ -33,7 +32,6 @@ import org.apache.logging.log4j.Logger;
 				version = Tags.VERSION
 )
 public class TransformersMod {
-	public static final Minecraft mc = Minecraft.getMinecraft();
 	public static final CreativeTabs tabTransformers = new CreativeTabTransformers();
 	public static final Logger log = LogManager.getLogger("Transformers Mod");
 	public static final String MODID = "transformers";

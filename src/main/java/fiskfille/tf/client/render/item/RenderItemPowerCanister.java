@@ -6,6 +6,7 @@ import fiskfille.tf.common.energon.power.IEnergyContainerItem;
 import fiskfille.tf.common.item.ItemPowerCanister;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.helper.TFRenderHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 		}
 
 		GL11.glDisable(GL11.GL_CULL_FACE);
-		TransformersMod.mc.getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
+		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
 		modelCanister.render();
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
@@ -47,7 +48,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data) {
 		if(type == ItemRenderType.INVENTORY) {
-			renderItem.renderItemIntoGUI(TransformersMod.mc.fontRenderer, TransformersMod.mc.getTextureManager(), itemstack, 0, 0, true);
+			renderItem.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), itemstack, 0, 0, true);
 
 			if(itemstack.getItem() instanceof IEnergyContainerItem) {
 				IEnergyContainerItem container = (IEnergyContainerItem) itemstack.getItem();

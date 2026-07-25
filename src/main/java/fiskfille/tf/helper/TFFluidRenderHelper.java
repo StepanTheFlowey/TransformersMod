@@ -1,6 +1,7 @@
 package fiskfille.tf.helper;
 
 import fiskfille.tf.common.fluid.FluidTankTF;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -15,8 +16,6 @@ import org.lwjgl.opengl.GL11;
 import javax.vecmath.Vector4d;
 import java.util.HashMap;
 import java.util.Map;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public final class TFFluidRenderHelper {
 	public static final int DISPLAY_STAGES = 100;
@@ -58,7 +57,7 @@ public final class TFFluidRenderHelper {
 		IIcon icon = flowing ? fluid.getFlowingIcon() : fluid.getStillIcon();
 
 		if(icon == null) {
-			icon = ((TextureMap) mc.getTextureManager().getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
+			icon = ((TextureMap) Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
 		}
 
 		return icon;
@@ -146,7 +145,7 @@ public final class TFFluidRenderHelper {
 			pos.z += pos.x;
 			pos.w += pos.y;
 
-			mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
+			Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 			TFFluidRenderHelper.setColorForFluidStack(stack);
 			tessellator.startDrawingQuads();
 			tessellator.setTranslation(0, 0, zLevel);

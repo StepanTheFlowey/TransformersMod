@@ -1,6 +1,5 @@
 package fiskfille.tf.client.render.entity;
 
-import fiskfille.tf.TransformersMod;
 import fiskfille.tf.helper.TFHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -13,7 +12,7 @@ public class EntityRendererTF extends EntityRenderer {
 
 	@Override
 	public void updateCameraAndRender(float partialTick) {
-		final EntityPlayer player = TransformersMod.mc.thePlayer;
+		final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		if(player == null || player.isPlayerSleeping()) {
 			super.updateCameraAndRender(partialTick);
 			return;

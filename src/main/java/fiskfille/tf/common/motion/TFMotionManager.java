@@ -6,12 +6,12 @@ import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFVectorHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 
 import java.util.Random;
 
-import static fiskfille.tf.TransformersMod.mc;
 import static net.minecraft.block.material.Material.*;
 
 /**
@@ -34,14 +34,14 @@ public class TFMotionManager {
 		Random rand = new Random();
 
 		// Controls
-		boolean moveForward = mc.gameSettings.keyBindForward.getIsKeyPressed();
-		boolean moveBack = mc.gameSettings.keyBindBack.getIsKeyPressed();
-		boolean moveRight = mc.gameSettings.keyBindRight.getIsKeyPressed();
-		boolean moveLeft = mc.gameSettings.keyBindLeft.getIsKeyPressed();
+		boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.getIsKeyPressed();
+		boolean moveBack = Minecraft.getMinecraft().gameSettings.keyBindBack.getIsKeyPressed();
+		boolean moveRight = Minecraft.getMinecraft().gameSettings.keyBindRight.getIsKeyPressed();
+		boolean moveLeft = Minecraft.getMinecraft().gameSettings.keyBindLeft.getIsKeyPressed();
 
 		// Variables
 		boolean inStealthMode = TFHelper.isInStealthMode(player);
-		boolean nitroPressed = mc.gameSettings.keyBindSprint.getIsKeyPressed();
+		boolean nitroPressed = Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed();
 		boolean driftPressed = TFKeyBinds.keyBindingBrake.getIsKeyPressed();
 
 		double forwardVelocity = TFData.FORWARD_VELOCITY.get(player);
@@ -159,11 +159,11 @@ public class TFMotionManager {
 	 * @param idlingSpeedLimit How many km/h the jet goes while idling
 	 */
 	public static void motionJet(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double idlingSpeedLimit) {
-		boolean clientPlayer = player == mc.thePlayer;
+		boolean clientPlayer = player == Minecraft.getMinecraft().thePlayer;
 
 		// Controls
-		boolean moveForward = mc.gameSettings.keyBindForward.getIsKeyPressed();
-		boolean nitroPressed = mc.gameSettings.keyBindSprint.getIsKeyPressed();
+		boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.getIsKeyPressed();
+		boolean nitroPressed = Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed();
 
 		double forwardVelocity = TFData.FORWARD_VELOCITY.get(player);
 		double currentSpeedLimit = nitroPressed && TFData.NITRO.get(player) > 0 ? nitroSpeedLimit : speedLimit;

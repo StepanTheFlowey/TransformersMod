@@ -5,12 +5,11 @@ import fiskfille.tf.common.block.BlockEnergonCrystal;
 import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
-
-import static fiskfille.tf.TransformersMod.mc;
 
 public class DisplayableEnergonCrystal extends Displayable {
 	private final ModelCrystal model = new ModelCrystal();
@@ -19,8 +18,8 @@ public class DisplayableEnergonCrystal extends Displayable {
 	public void render(ItemStack itemstack) {
 		TFRenderHelper.renderTag(StatCollector.translateToLocalFormatted("tile.display_pedestal.amount", itemstack.stackSize), 0F, 0.1F, 0F);
 
-		GL11.glRotatef((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
-		final float f1 = MathHelper.sin((mc.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.07F;
+		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+		final float f1 = MathHelper.sin((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.07F;
 		GL11.glTranslatef(0F, -0.3F + f1, 0F);
 		GL11.glScalef(0.75F, 0.75F, 0.75F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
