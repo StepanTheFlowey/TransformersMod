@@ -1,7 +1,5 @@
 package fiskfille.tf.common.recipe;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import cpw.mods.fml.common.Loader;
 import fiskfille.tf.TFLog;
 import fiskfille.tf.common.block.TFBlocks;
@@ -20,9 +18,9 @@ import java.util.Map.Entry;
 public class AlloyRecipes {
 	private static final AlloyRecipes instance = new AlloyRecipes();
 
-	private final Map<AlloyIngredients, ItemStack> smeltingMap = Maps.newHashMap();
-	private final Map<ItemStack, Integer> durationMap = Maps.newHashMap();
-	private final Map<ItemStack, Float> experienceMap = Maps.newHashMap();
+	private final HashMap<AlloyIngredients, ItemStack> smeltingMap = new HashMap<>();
+	private final HashMap<ItemStack, Integer> durationMap = new HashMap<>();
+	private final HashMap<ItemStack, Float> experienceMap = new HashMap<>();
 
 	public static AlloyRecipes getInstance() {
 		return instance;
@@ -78,7 +76,7 @@ public class AlloyRecipes {
 
 		smeltingMap.put(alloy, result);
 		durationMap.put(result, duration);
-		experienceMap.put(result, Float.valueOf(xp));
+		experienceMap.put(result, xp);
 	}
 
 	public ItemStack getSmeltingResult(AlloyIngredients ingredients) {
@@ -102,24 +100,24 @@ public class AlloyRecipes {
 		return entry.getValue();
 	}
 
-	public Map getSmeltingList() {
+	public HashMap<AlloyIngredients, ItemStack> getSmeltingList() {
 		return smeltingMap;
 	}
 
 	public int getSmeltTime(ItemStack itemstack) {
-		Iterator iterator = durationMap.entrySet().iterator();
-		Entry entry;
+		Iterator<Entry<ItemStack, Integer>> iterator = durationMap.entrySet().iterator();
+		Entry<ItemStack, Integer> entry;
 
 		do {
 			if(!iterator.hasNext()) {
 				return 200;
 			}
 
-			entry = (Entry) iterator.next();
+			entry = iterator.next();
 		}
-		while(!matches(itemstack, (ItemStack) entry.getKey()));
+		while(!matches(itemstack, entry.getKey()));
 
-		return (Integer) entry.getValue();
+		return entry.getValue();
 	}
 
 	public float getXpYield(ItemStack itemstack) {
@@ -129,27 +127,27 @@ public class AlloyRecipes {
 			return xp;
 		}
 
-		Iterator iterator = experienceMap.entrySet().iterator();
-		Entry entry;
+		Iterator<Entry<ItemStack, Float>> iterator = experienceMap.entrySet().iterator();
+		Entry<ItemStack, Float> entry;
 
 		do {
 			if(!iterator.hasNext()) {
 				return 0F;
 			}
 
-			entry = (Entry) iterator.next();
+			entry = iterator.next();
 		}
-		while(!matches(itemstack, (ItemStack) entry.getKey()));
+		while(!matches(itemstack, entry.getKey()));
 
-		return (Float) entry.getValue();
+		return entry.getValue();
 	}
 
 	public static class AlloyIngredients {
-		private final Map<Integer, List<String>> oreDictNames = Maps.newHashMap();
+		private final HashMap<Integer, List<String>> oreDictNames = new HashMap<>();
 		private final ItemStack[] ingredients;
 
 		public AlloyIngredients(Object... objects) {
-			LinkedList<ItemStack> list = Lists.newLinkedList();
+			LinkedList<ItemStack> list = new LinkedList<>();
 
 			for(int i = 0; i < objects.length; ++i) {
 				final Object obj = objects[i];

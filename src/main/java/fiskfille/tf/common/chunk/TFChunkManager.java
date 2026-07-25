@@ -45,7 +45,7 @@ public class TFChunkManager {
 					try {
 						ForgeChunkManager.releaseTicket(ticket);
 					}
-					catch(Exception e1) {
+					catch(Exception ignored) {
 					}
 
 					ticketsForWorld.get(e.getKey()).remove(j);
@@ -59,7 +59,7 @@ public class TFChunkManager {
 		chunkForcers.clear();
 	}
 
-	public static void debug() {
+	private static void debug() {
 		int entries = 0;
 		int chunks = 0;
 		int tickets = 0;

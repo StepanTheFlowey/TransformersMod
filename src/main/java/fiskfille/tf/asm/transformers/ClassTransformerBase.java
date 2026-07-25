@@ -104,7 +104,7 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 				cr.accept(cn, 0);
 
 				setupMappings();
-				boolean success = processFields(cn.fields) && processMethods(cn.methods);
+				final boolean success = processFields(cn.fields) && processMethods(cn.methods);
 
 				final ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 				cn.accept(cw);
