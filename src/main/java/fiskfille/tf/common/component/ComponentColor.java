@@ -5,19 +5,14 @@ import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 
 public class ComponentColor extends Component {
 	@Override
 	public boolean canLoad(TileEntityDisplayStation tile, int slot) {
-		ItemStack head = tile.getStackInSlot(0);
-		ItemStack chest = tile.getStackInSlot(1);
-		ItemStack legs = tile.getStackInSlot(2);
-		ItemStack feet = tile.getStackInSlot(3);
-		Transformer helmetTransformer = TFHelper.getTransformerFromArmor(head);
-		Transformer chestTransformer = TFHelper.getTransformerFromArmor(chest);
-		Transformer legsTransformer = TFHelper.getTransformerFromArmor(legs);
-		Transformer feetTransformer = TFHelper.getTransformerFromArmor(feet);
+		final Transformer helmetTransformer = TFHelper.getTransformerFromArmor(tile.getStackInSlot(0));
+		final Transformer chestTransformer = TFHelper.getTransformerFromArmor(tile.getStackInSlot(1));
+		final Transformer legsTransformer = TFHelper.getTransformerFromArmor(tile.getStackInSlot(2));
+		final Transformer feetTransformer = TFHelper.getTransformerFromArmor(tile.getStackInSlot(3));
 
 		return helmetTransformer != null && helmetTransformer == chestTransformer && chestTransformer == legsTransformer && legsTransformer == feetTransformer && super.canLoad(tile, slot);
 	}

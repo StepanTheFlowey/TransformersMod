@@ -67,7 +67,7 @@ public class TFHelper {
 
 	public static Transformer getTransformerFromArmor(ItemStack itemstack) {
 		if(itemstack != null) {
-			Item item = itemstack.getItem();
+			final Item item = itemstack.getItem();
 
 			if(item instanceof ItemTransformerArmor) {
 				return ((ItemTransformerArmor) item).getTransformer();
@@ -105,11 +105,10 @@ public class TFHelper {
 	}
 
 	public static void applyFluidUsage(FluidTankTF tank) {
-		FluidStack fluidStack = tank.getFluid();
-		int usage = tank.getUsage();
+		final FluidStack fluidStack = tank.getFluid();
 
 		if(fluidStack != null) {
-			fluidStack.amount += usage;
+			fluidStack.amount += tank.getUsage();
 
 			if(fluidStack.amount < 0) {
 				fluidStack.amount = 0;

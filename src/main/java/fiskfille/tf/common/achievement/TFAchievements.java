@@ -1,7 +1,5 @@
 package fiskfille.tf.common.achievement;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import fiskfille.tf.asm.TFTranslator;
 import fiskfille.tf.common.block.TFBlocks;
 import fiskfille.tf.common.item.TFItems;
@@ -15,8 +13,8 @@ import net.minecraftforge.common.AchievementPage;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TFAchievements {
 	public static final Achievement transformersMod = new TFAchievement("transformers_mod", 0, 0, null).initIndependentStat().registerStat();
@@ -31,22 +29,24 @@ public class TFAchievements {
 	public static final Achievement purge = new TFAchievement("purge", -7, -4, tracks).setSpecial().registerStat();
 	public static final Achievement vurp = new TFAchievement("vurp", -7, -3, null).setSpecial().registerStat();
 	public static final Achievement subwoofer = new TFAchievement("subwoofer", -7, -2, null).setSpecial().registerStat();
-	public static final List<Achievement> achievements = Lists.newArrayList();
-	private static final Map<Achievement, ItemStack> displayItems = Maps.newHashMap();
+	public static final ArrayList<Achievement> achievements = new ArrayList<>();
+	private static final HashMap<Achievement, ItemStack> displayItems = new HashMap<>();
 	private static boolean init = false;
 
 	public static void register() {
-		if(!init) {
-			init = true;
+		if(init) {
+			return;
+		}
 
-			for(Field field : TFAchievements.class.getFields()) {
-				if(field.getType().getName().equals(Achievement.class.getName())) {
-					try {
-						achievements.add((Achievement) field.get(null));
-					}
-					catch(Exception e) {
-						e.printStackTrace();
-					}
+		init = true;
+
+		for(Field field : TFAchievements.class.getFields()) {
+			if(field.getType().getName().equals(Achievement.class.getName())) {
+				try {
+					achievements.add((Achievement) field.get(null));
+				}
+				catch(Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
