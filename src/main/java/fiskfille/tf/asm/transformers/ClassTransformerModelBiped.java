@@ -1,5 +1,7 @@
 package fiskfille.tf.asm.transformers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.asm.TFTranslator;
 import fiskfille.tf.helper.TFModelHelper;
 import org.objectweb.asm.Type;
@@ -7,6 +9,7 @@ import org.objectweb.asm.tree.*;
 
 import java.util.List;
 
+@SideOnly(Side.CLIENT)
 public class ClassTransformerModelBiped extends ClassTransformerBase {
 	public ClassTransformerModelBiped() {
 		super("net.minecraft.client.model.ModelBiped");

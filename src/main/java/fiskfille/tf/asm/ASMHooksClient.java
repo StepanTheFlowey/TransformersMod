@@ -1,5 +1,7 @@
 package fiskfille.tf.asm;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.helper.TFHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -12,6 +14,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public class ASMHooksClient {
 	public static int getBrightnessForRender(Entity entity) {
 		if(entity instanceof EntityPlayer) {

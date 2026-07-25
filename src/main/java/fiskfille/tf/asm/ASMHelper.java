@@ -1,10 +1,13 @@
 package fiskfille.tf.asm;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.TypeInsnNode;
 
+@SideOnly(Side.CLIENT)
 public class ASMHelper {
 	public static MethodInsnNode divide(String type) {
 		return new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHelper.class), "divide", "(" + type.toUpperCase() + type.toUpperCase() + ")" + type.toUpperCase(), false);

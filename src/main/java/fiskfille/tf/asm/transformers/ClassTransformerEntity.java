@@ -1,5 +1,7 @@
 package fiskfille.tf.asm.transformers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.asm.ASMHooksClient;
 import fiskfille.tf.asm.TFTranslator;
 import org.objectweb.asm.Type;
@@ -7,6 +9,7 @@ import org.objectweb.asm.tree.*;
 
 import java.util.List;
 
+@SideOnly(Side.CLIENT)
 public class ClassTransformerEntity extends ClassTransformerBase {
 	public String varEntity;
 

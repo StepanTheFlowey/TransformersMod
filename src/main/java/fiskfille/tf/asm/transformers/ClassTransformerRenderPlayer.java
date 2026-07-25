@@ -1,5 +1,7 @@
 package fiskfille.tf.asm.transformers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.asm.ASMHooks;
 import fiskfille.tf.asm.ASMHooksClient;
 import fiskfille.tf.asm.TFTranslator;
@@ -8,6 +10,7 @@ import org.objectweb.asm.tree.*;
 
 import java.util.List;
 
+@SideOnly(Side.CLIENT)
 public class ClassTransformerRenderPlayer extends ClassTransformerBase {
 	public static String varPlayer;
 

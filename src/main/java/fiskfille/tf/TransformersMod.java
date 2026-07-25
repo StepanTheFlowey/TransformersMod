@@ -9,6 +9,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import fiskfille.tf.asm.TFLoadingPlugin;
 import fiskfille.tf.common.block.TFBlocks;
 import fiskfille.tf.common.chunk.TFLoadingCallback;
@@ -47,7 +48,7 @@ public class TransformersMod {
 
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-		if(!TFLoadingPlugin.loaded) {
+		if(FMLLaunchHandler.side().isClient() && !TFLoadingPlugin.loaded) {
 			System.out.println("TransformersMod coremod not added! -Dfml.coreMods.load=fiskfille.tf.asm.TFLoadingPlugin");
 			FMLCommonHandler.instance().exitJava(0, false);
 		}

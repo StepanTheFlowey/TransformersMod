@@ -1,5 +1,7 @@
 package fiskfille.tf.asm.transformers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
@@ -11,6 +13,7 @@ import org.objectweb.asm.tree.MethodNode;
 
 import java.util.List;
 
+@SideOnly(Side.CLIENT)
 public abstract class ClassTransformerBase implements IClassTransformer, Opcodes {
 	protected final String classPath;
 	protected final String unobfClass;

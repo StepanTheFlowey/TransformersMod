@@ -1,10 +1,13 @@
 package fiskfille.tf.asm.transformers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.asm.ASMHooksClient;
 import fiskfille.tf.asm.TFTranslator;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.*;
 
+@SideOnly(Side.CLIENT)
 public class ClassTransformerGuiContainer extends ClassTransformerMethodProcess {
 	public ClassTransformerGuiContainer() {
 		super("net.minecraft.client.gui.inventory.GuiContainer", "a", "func_146977_a", "(Laay;)V", "(Lnet/minecraft/inventory/Slot;)V");
