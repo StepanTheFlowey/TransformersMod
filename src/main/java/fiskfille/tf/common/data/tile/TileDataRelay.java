@@ -1,6 +1,5 @@
 package fiskfille.tf.common.data.tile;
 
-import com.google.common.collect.Lists;
 import fiskfille.tf.common.energon.power.TransmissionHandler;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.helper.TFTileHelper;

@@ -33,7 +33,7 @@ public class TFDataManager {
 	}
 
 	/**
-	 * @returns the current frame of the zoom animation for the specified player.
+	 * @return the current frame of the zoom animation for the specified player.
 	 */
 	public static int getZoomTimer(EntityPlayer player) {
 		Integer timer = zoomTimerClient.get(player);

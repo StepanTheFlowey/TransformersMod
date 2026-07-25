@@ -1,7 +1,5 @@
 package fiskfille.tf.common.recipe;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.common.block.BlockDisplayPedestal;
@@ -23,18 +21,15 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static fiskfille.tf.common.recipe.Dyes.*;
 
 public class TFRecipes {
-	public static List<IRecipe> prevRecipes = Lists.newArrayList();
-	public static List<ItemStack> prevFurnaceRecipes = Lists.newArrayList();
-
-	public static final List<IRecipe> tempRecipes = Lists.newArrayList();
-	public static final List<ItemStack> tempFurnaceRecipes = Lists.newArrayList();
+	public static final ArrayList<IRecipe> tempRecipes = new ArrayList<>();
+	public static final ArrayList<ItemStack> tempFurnaceRecipes = new ArrayList<>();
+	public static ArrayList<IRecipe> prevRecipes = new ArrayList<>();
+	public static ArrayList<ItemStack> prevFurnaceRecipes = new ArrayList<>();
 
 	public static void register() {
 		AssemblyTableCraftingManager.getInstance().getRecipeList().clear();
@@ -108,7 +103,7 @@ public class TFRecipes {
 	}
 
 	public static void restore() {
-		Map<ItemStack, ItemStack> map = Maps.newHashMap();
+		HashMap<ItemStack, ItemStack> map = new HashMap<>();
 
 		for(Map.Entry<ItemStack, ItemStack> e : ((Map<ItemStack, ItemStack>) FurnaceRecipes.smelting().getSmeltingList()).entrySet()) {
 			if(!tempFurnaceRecipes.contains(e.getKey())) {
@@ -123,8 +118,8 @@ public class TFRecipes {
 		tempRecipes.clear();
 		tempFurnaceRecipes.clear();
 
-		prevRecipes = Lists.newArrayList(CraftingManager.getInstance().getRecipeList());
-		prevFurnaceRecipes = Lists.newArrayList(FurnaceRecipes.smelting().getSmeltingList().keySet());
+		prevRecipes = new ArrayList<>(CraftingManager.getInstance().getRecipeList());
+		prevFurnaceRecipes = new ArrayList<>(FurnaceRecipes.smelting().getSmeltingList().keySet());
 	}
 
 	private static void addSmelting() {
