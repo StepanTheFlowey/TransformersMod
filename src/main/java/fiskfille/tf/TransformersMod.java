@@ -25,15 +25,14 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.config.Configuration;
 
 @Mod(
+				guiFactory = "fiskfille.tf.client.gui.TFGuiFactory",
 				modid = TransformersMod.modid,
 				name = "Transformers Mod",
-				version = TransformersMod.version,
-				guiFactory = "fiskfille.tf.client.gui.TFGuiFactory"
+				version = Tags.VERSION
 )
 public class TransformersMod {
 	public static final Minecraft mc = Minecraft.getMinecraft();
 	public static final String modid = "transformers";
-	public static final String version = "0.7.1";
 	public static final CreativeTabs tabTransformers = new CreativeTabTransformers();
 
 	@Instance(TransformersMod.modid)

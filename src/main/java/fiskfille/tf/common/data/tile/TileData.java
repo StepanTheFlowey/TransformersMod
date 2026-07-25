@@ -1,6 +1,5 @@
 package fiskfille.tf.common.data.tile;
 
-import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.network.MessageSetTileData;
 import fiskfille.tf.common.network.base.TFNetworkManager;
@@ -50,11 +49,6 @@ public abstract class TileData {
 	public void serverTick() {
 		if(!equals(TFTileHelper.getTileData(coords))) {
 			TFNetworkManager.networkWrapper.sendToAll(new MessageSetTileData(this));
-
-			if(TransformersMod.version.equals("${" + "version}")) // Debug: detect if build.gradle has been run
-			{
-				System.out.println("Syncing " + getClass().getSimpleName() + " at " + coords);
-			}
 		}
 
 		TFTileHelper.putServerData(this);
