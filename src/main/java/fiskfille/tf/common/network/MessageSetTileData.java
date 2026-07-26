@@ -14,9 +14,7 @@ public class MessageSetTileData implements IMessage {
 	private TileData tileData;
 	private DimensionalCoords tileCoords;
 
-	public MessageSetTileData() {
-
-	}
+	public MessageSetTileData() {}
 
 	public MessageSetTileData(DimensionalCoords coords, TileData data) {
 		tileData = data;
@@ -59,8 +57,8 @@ public class MessageSetTileData implements IMessage {
 	public static class Handler implements IMessageHandler<MessageSetTileData, IMessage> {
 		@Override
 		public IMessage onMessage(MessageSetTileData message, MessageContext ctx) {
-			TileData data = message.tileData;
-			DimensionalCoords coords = data != null ? data.getCoords() : message.tileCoords;
+			final TileData data = message.tileData;
+			final DimensionalCoords coords = data != null ? data.getCoords() : message.tileCoords;
 
 			TFTileHelper.putServerData(coords, data);
 

@@ -17,9 +17,7 @@ public class MessageTileTrigger implements IMessage {
 	private int action;
 	private int playerDimension;
 
-	public MessageTileTrigger() {
-
-	}
+	public MessageTileTrigger() {}
 
 	public MessageTileTrigger(DimensionalCoords coords, EntityPlayer player, int action) {
 		this.coordinates = coords;
@@ -60,8 +58,7 @@ public class MessageTileTrigger implements IMessage {
 	public static class Handler implements IMessageHandler<MessageTileTrigger, IMessage> {
 		@Override
 		public IMessage onMessage(MessageTileTrigger message, MessageContext ctx) {
-			EntityPlayer clientPlayer = ctx.side.isClient() ? TransformersMod.proxy.getPlayer() : ctx.getServerHandler().playerEntity;
-			EntityPlayer player = null;
+			final EntityPlayer clientPlayer = ctx.side.isClient() ? TransformersMod.proxy.getPlayer() : ctx.getServerHandler().playerEntity;
 			World world = clientPlayer.worldObj;
 
 			if(world.provider.dimensionId != message.playerDimension) {
@@ -72,6 +69,7 @@ public class MessageTileTrigger implements IMessage {
 				world = MinecraftServer.getServer().worldServerForDimension(message.playerDimension);
 			}
 
+			EntityPlayer player = null;
 			if(world.getEntityByID(message.id) instanceof EntityPlayer) {
 				player = (EntityPlayer) world.getEntityByID(message.id);
 			}

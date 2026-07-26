@@ -6,7 +6,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.common.tileentity.TileEntityGroundBridgeTeleporter;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
 public class MessageClosePortal implements IMessage {
@@ -14,8 +13,7 @@ public class MessageClosePortal implements IMessage {
 	private int y;
 	private int z;
 
-	public MessageClosePortal() {
-	}
+	public MessageClosePortal() {}
 
 	public MessageClosePortal(int x, int y, int z) {
 		this.x = x;
@@ -41,8 +39,7 @@ public class MessageClosePortal implements IMessage {
 		@Override
 		public IMessage onMessage(MessageClosePortal message, MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				TileEntity tile = player.worldObj.getTileEntity(message.x, message.y, message.z);
+				final TileEntity tile = TransformersMod.proxy.getPlayer().worldObj.getTileEntity(message.x, message.y, message.z);
 
 				if(tile instanceof TileEntityGroundBridgeTeleporter) {
 					((TileEntityGroundBridgeTeleporter) tile).clientClosing = true;

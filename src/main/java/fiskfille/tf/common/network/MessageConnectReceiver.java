@@ -42,17 +42,17 @@ public class MessageConnectReceiver implements IMessage {
 		@Override
 		public IMessage onMessage(MessageConnectReceiver message, MessageContext ctx) {
 			if(ctx.side.isServer()) {
-				DimensionalCoords coords = message.transmitterCoords;
-				DimensionalCoords coords1 = message.receiverCoords;
-				World world = MinecraftServer.getServer().worldServerForDimension(coords.dimension);
+				final DimensionalCoords coords = message.transmitterCoords;
+				final DimensionalCoords coords1 = message.receiverCoords;
+				final World world = MinecraftServer.getServer().worldServerForDimension(coords.dimension);
 
 				if(world != null) {
-					TileEntity transmitterTile = world.getTileEntity(coords.posX, coords.posY, coords.posZ);
-					TileEntity receiverTile = world.getTileEntity(coords1.posX, coords1.posY, coords1.posZ);
+					final TileEntity transmitterTile = world.getTileEntity(coords.posX, coords.posY, coords.posZ);
+					final TileEntity receiverTile = world.getTileEntity(coords1.posX, coords1.posY, coords1.posZ);
 
 					if(transmitterTile instanceof IEnergyTransmitter && receiverTile instanceof IEnergyReceiver) {
-						IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
-						TransmissionHandler handler = transmitter.getTransmissionHandler();
+						final IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
+						final TransmissionHandler handler = transmitter.getTransmissionHandler();
 
 						if(handler.getReceiver(coords1) != null) {
 							handler.remove(new ReceiverEntry(receiverTile));

@@ -14,9 +14,7 @@ import java.util.Map;
 public abstract class MessageSyncBase implements IMessage {
 	public Map<TFData, Object> playerData;
 
-	public MessageSyncBase() {
-
-	}
+	public MessageSyncBase() {}
 
 	public MessageSyncBase(EntityPlayer player) {
 		playerData = TFPlayerData.getData(player).data;
@@ -29,8 +27,7 @@ public abstract class MessageSyncBase implements IMessage {
 
 	@Override
 	public void toBytes(ByteBuf buf) {
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
-
+		final NBTTagCompound nbttagcompound = new NBTTagCompound();
 		TFData.writeToNBT(nbttagcompound, playerData);
 		ByteBufUtils.writeTag(buf, nbttagcompound);
 	}

@@ -17,16 +17,12 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 	private RenderBlocks renderBlocks = RenderBlocks.getInstance();
 
 	public void render(TileEntityEnergonTank tile, double x, double y, double z, float partialTicks) {
-		World world = tile.getWorldObj();
-		FluidStack stack = tile.data.getFluid();
-
+		final FluidStack stack = tile.data.getFluid();
 		if(stack == null || stack.getFluid() == null || stack.amount <= 0) {
 			return;
 		}
 
-		int color = stack.getFluid().getColor(stack);
-		int[] displayList = TFFluidRenderHelper.getFluidDisplayLists(renderBlocks, stack, tile.getWorldObj(), false);
-
+		final int[] displayList = TFFluidRenderHelper.getFluidDisplayLists(renderBlocks, stack, tile.getWorldObj(), false);
 		if(displayList == null) {
 			return;
 		}
@@ -39,13 +35,13 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 		bindTexture(TextureMap.locationBlocksTexture);
-		float[] afloat = TFRenderHelper.hexToRGB(color);
+		final float[] afloat = TFRenderHelper.hexToRGB(stack.getFluid().getColor(stack));
 		GL11.glColor4f(afloat[0], afloat[1], afloat[2], 1);
 
-		float scale = 0.99F;
+		final float scale = 0.99F;
 		float scaleY = scale;
 		float scaleOffset = 0;
-
+		final World world = tile.getWorldObj();
 		if(world != null) {
 			TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(tile);
 			boolean connectAbove = false;
@@ -74,12 +70,12 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 			}
 		}
 
-		GL11.glTranslatef((float) x, (float) y, (float) z);
+		GL11.glTranslated(x, y, z);
 		GL11.glTranslatef(0.5F, 0.5F + scaleOffset, 0.5F);
 		GL11.glScalef(scale, scaleY, scale);
 		GL11.glTranslatef(-0.5F, -0.5F - scaleOffset, -0.5F);
 
-		int dl = (int) ((float) stack.amount / tile.data.getCapacity() * (TFFluidRenderHelper.DISPLAY_STAGES - 1));
+		final int dl = (int) ((float) stack.amount / tile.data.getCapacity() * (TFFluidRenderHelper.DISPLAY_STAGES - 1));
 		GL11.glCallList(displayList[MathHelper.clamp_int(dl, 0, TFFluidRenderHelper.DISPLAY_STAGES - 1)]);
 		GL11.glPopAttrib();
 		GL11.glPopMatrix();

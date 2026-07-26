@@ -15,9 +15,7 @@ public class MessageOpenGui implements IMessage {
 	private int y;
 	private int z;
 
-	public MessageOpenGui() {
-
-	}
+	public MessageOpenGui() {}
 
 	public MessageOpenGui(EntityPlayer player, int modGuiId, int x, int y, int z) {
 		this.id = player.getEntityId();
@@ -49,18 +47,18 @@ public class MessageOpenGui implements IMessage {
 		@Override
 		public IMessage onMessage(MessageOpenGui message, MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				Entity entity = player.worldObj.getEntityByID(message.id);
+				final EntityPlayer player = TransformersMod.proxy.getPlayer();
+				final Entity entity = player.worldObj.getEntityByID(message.id);
 
 				if(entity instanceof EntityPlayer) {
 					((EntityPlayer) entity).openGui(TransformersMod.instance, message.modGuiId, entity.worldObj, message.x, message.y, message.z);
 				}
 			}
 			else {
-				EntityPlayer player = ctx.getServerHandler().playerEntity;
+				final EntityPlayer player = ctx.getServerHandler().playerEntity;
 
 				if(player != null) {
-					Entity entity = player.worldObj.getEntityByID(message.id);
+					final Entity entity = player.worldObj.getEntityByID(message.id);
 
 					if(entity instanceof EntityPlayer) {
 						((EntityPlayer) entity).openGui(TransformersMod.instance, message.modGuiId, entity.worldObj, message.x, message.y, message.z);

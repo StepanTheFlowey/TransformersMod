@@ -40,8 +40,7 @@ public class BlockCosmicRust extends Block {
 
 	@Override
 	public int tickRate(World world) {
-		float f = 1F;
-		return (int) (1000000000F * f);
+		return 1000000000;
 	}
 
 	@Override
@@ -59,8 +58,6 @@ public class BlockCosmicRust extends Block {
 	}
 
 	private void tryRust(World world, int x, int y, int z) {
-		new Random();
-
 		if(world.getBlock(x, y, z) == TFBlocks.transformiumStone) {
 			world.setBlock(x, y, z, this);
 		}

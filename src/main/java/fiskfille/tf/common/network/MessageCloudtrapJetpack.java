@@ -14,9 +14,7 @@ public class MessageCloudtrapJetpack implements IMessage {
 	private int id;
 	private boolean jetpacking;
 
-	public MessageCloudtrapJetpack() {
-
-	}
+	public MessageCloudtrapJetpack() {}
 
 	public MessageCloudtrapJetpack(EntityPlayer player, boolean j) {
 		id = player.getEntityId();
@@ -39,21 +37,18 @@ public class MessageCloudtrapJetpack implements IMessage {
 		@Override
 		public IMessage onMessage(MessageCloudtrapJetpack message, MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				EntityPlayer from = null;
-				Entity entity = player.worldObj.getEntityByID(message.id);
+				final EntityPlayer player = TransformersMod.proxy.getPlayer();
+				final Entity entity = player.worldObj.getEntityByID(message.id);
 
 				if(entity instanceof EntityPlayer) {
-					from = (EntityPlayer) entity;
-				}
-
-				if(from != null && from != player) {
-					CloudtrapJetpackManager.cloudtrapJetpacking.put(from, message.jetpacking);
+					final EntityPlayer from = (EntityPlayer) entity;
+					if(from != player) {
+						CloudtrapJetpackManager.cloudtrapJetpacking.put(from, message.jetpacking);
+					}
 				}
 			}
 			else {
-				EntityPlayer player = ctx.getServerHandler().playerEntity;
-
+				final EntityPlayer player = ctx.getServerHandler().playerEntity;
 				TFNetworkManager.networkWrapper.sendToDimension(new MessageCloudtrapJetpack(player, message.jetpacking), player.dimension);
 			}
 

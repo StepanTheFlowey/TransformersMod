@@ -16,9 +16,7 @@ import java.util.Map;
 public class MessageSetPlayerData extends MessageSyncBase {
 	public int id;
 
-	public MessageSetPlayerData() {
-
-	}
+	public MessageSetPlayerData() {}
 
 	public MessageSetPlayerData(EntityPlayer player, Map<TFData, Object> data) {
 		super(player);
@@ -44,18 +42,17 @@ public class MessageSetPlayerData extends MessageSyncBase {
 			Map<TFData, Object> playerData = message.playerData;
 
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				Entity entity = player.worldObj.getEntityByID(message.id);
+				final Entity entity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);
 
 				if(entity instanceof EntityPlayer) {
 					TFPlayerData.getData((EntityPlayer) entity).data = playerData;
 				}
 			}
 			else {
-				EntityPlayer player = ctx.getServerHandler().playerEntity;
+				final EntityPlayer player = ctx.getServerHandler().playerEntity;
 
 				if(player != null) {
-					Entity entity = player.worldObj.getEntityByID(message.id);
+					final Entity entity = player.worldObj.getEntityByID(message.id);
 
 					if(entity instanceof EntityPlayer) {
 						TFPlayerData.getData((EntityPlayer) entity).data = playerData;

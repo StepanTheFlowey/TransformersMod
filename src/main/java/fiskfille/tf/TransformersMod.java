@@ -27,6 +27,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(
+				acceptedMinecraftVersions = "[1.7.10]",
 				guiFactory = "fiskfille.tf.client.gui.TFGuiFactory",
 				modid = TransformersMod.MODID,
 				name = "Transformers Mod",

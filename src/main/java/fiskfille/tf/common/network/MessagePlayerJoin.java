@@ -1,6 +1,5 @@
 package fiskfille.tf.common.network;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -18,8 +17,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 
 public class MessagePlayerJoin extends MessageSyncBase {
@@ -27,8 +26,7 @@ public class MessagePlayerJoin extends MessageSyncBase {
 	private Map<Integer, String> dimensionNames = Maps.newHashMap();
 	private Integer[] dimensionIDs;
 
-	public MessagePlayerJoin() {
-	}
+	public MessagePlayerJoin() {}
 
 	public MessagePlayerJoin(EntityPlayer player) {
 		super(player);
@@ -42,19 +40,18 @@ public class MessagePlayerJoin extends MessageSyncBase {
 			}
 		}
 
-		Integer[] ids = DimensionManager.getIDs();
 		dimensionNames = TFDimensionHelper.dimensionNames;
 
+		final Integer[] ids = DimensionManager.getIDs();
 		for(int id : ids) {
-			WorldServer world = MinecraftServer.getServer().worldServerForDimension(id);
+			final WorldServer world = MinecraftServer.getServer().worldServerForDimension(id);
 
 			if(world != null && world.provider != null) {
 				dimensionNames.put(id, world.provider.getDimensionName());
 			}
 		}
 
-		List<Integer> list = Lists.newArrayList();
-
+		final ArrayList<Integer> list = new ArrayList<>();
 		for(int id : ids) {
 			if(DimensionManager.shouldLoadSpawn(id)) {
 				list.add(id);
@@ -75,14 +72,12 @@ public class MessagePlayerJoin extends MessageSyncBase {
 			canTransform.put(transformer, buf.readBoolean());
 		}
 
-		int length = buf.readInt();
-
+		final int length = buf.readInt();
 		for(int i = 0; i < length; ++i) {
 			dimensionNames.put(buf.readInt(), ByteBufUtils.readUTF8String(buf));
 		}
 
 		dimensionIDs = new Integer[buf.readInt()];
-
 		for(int i = 0; i < dimensionIDs.length; ++i) {
 			dimensionIDs[i] = buf.readInt();
 		}
@@ -97,14 +92,12 @@ public class MessagePlayerJoin extends MessageSyncBase {
 		}
 
 		buf.writeInt(dimensionNames.size());
-
 		for(Map.Entry<Integer, String> e : dimensionNames.entrySet()) {
 			buf.writeInt(e.getKey());
 			ByteBufUtils.writeUTF8String(buf, e.getValue());
 		}
 
 		buf.writeInt(dimensionIDs.length);
-
 		for(Integer dimensionID : dimensionIDs) {
 			buf.writeInt(dimensionID);
 		}
@@ -114,7 +107,7 @@ public class MessagePlayerJoin extends MessageSyncBase {
 		@Override
 		public IMessage onMessage(MessagePlayerJoin message, MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
+				final EntityPlayer player = TransformersMod.proxy.getPlayer();
 
 				for(Map.Entry<TFData, Object> e : message.playerData.entrySet()) {
 					e.getKey().setWithoutNotify(player, e.getValue());

@@ -17,9 +17,7 @@ public class MessageColorArmor implements IMessage {
 	private int primaryColor;
 	private int secondaryColor;
 
-	public MessageColorArmor() {
-
-	}
+	public MessageColorArmor() {}
 
 	public MessageColorArmor(int x, int y, int z, int primaryColor, int secondaryColor) {
 		this.x = x;
@@ -50,10 +48,9 @@ public class MessageColorArmor implements IMessage {
 	public static class Handler implements IMessageHandler<MessageColorArmor, IMessage> {
 		@Override
 		public IMessage onMessage(MessageColorArmor message, MessageContext ctx) {
-			EntityPlayer player = ctx.side.isClient() ? TransformersMod.proxy.getPlayer() : ctx.getServerHandler().playerEntity;
-			World world = player.worldObj;
-
-			TileEntityDisplayStation tileentity = (TileEntityDisplayStation) world.getTileEntity(message.x, message.y, message.z);
+			final EntityPlayer player = ctx.side.isClient() ? TransformersMod.proxy.getPlayer() : ctx.getServerHandler().playerEntity;
+			final World world = player.worldObj;
+			final TileEntityDisplayStation tileentity = (TileEntityDisplayStation) world.getTileEntity(message.x, message.y, message.z);
 
 			if(tileentity != null) {
 				if(tileentity.setColor(message.primaryColor, message.secondaryColor)) {

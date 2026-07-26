@@ -15,9 +15,7 @@ public class MessageUpdateArmor implements IMessage {
 	private ItemStack armor;
 	private int armorSlot;
 
-	public MessageUpdateArmor() {
-
-	}
+	public MessageUpdateArmor() {}
 
 	public MessageUpdateArmor(EntityPlayer player, ItemStack itemstack, int slot) {
 		id = player.getEntityId();
@@ -42,16 +40,11 @@ public class MessageUpdateArmor implements IMessage {
 	public static class Handler implements IMessageHandler<MessageUpdateArmor, IMessage> {
 		@Override
 		public IMessage onMessage(MessageUpdateArmor message, MessageContext ctx) {
-			ItemStack itemstack = message.armor;
-			int slot = message.armorSlot;
-
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				Entity entity = player.worldObj.getEntityByID(message.id);
+				final Entity entity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);
 
 				if(entity instanceof EntityPlayer) {
-					EntityPlayer player1 = (EntityPlayer) entity;
-					player.inventory.armorInventory[slot] = itemstack;
+					((EntityPlayer) entity).inventory.armorInventory[message.armorSlot] = message.armor;
 				}
 			}
 

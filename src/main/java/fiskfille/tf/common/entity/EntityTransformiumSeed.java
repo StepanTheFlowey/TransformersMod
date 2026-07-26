@@ -37,7 +37,7 @@ public class EntityTransformiumSeed extends Entity {
 		prevPosZ = z;
 	}
 
-	public static List getEntitiesNear(World world, double x, double y, double z, float radius) {
+	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float radius) {
 		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius), IEntitySelector.selectAnything);
 	}
 
@@ -93,14 +93,13 @@ public class EntityTransformiumSeed extends Entity {
 					}
 				}
 
-				Vec3 position = Vec3.createVectorHelper(posX, posY, posZ);
-
+				final Vec3 position = Vec3.createVectorHelper(posX, posY, posZ);
 				for(float angle = 0; angle < 360; ++angle) {
-					double range = fuse * 0.9;
-					Vec3 blockPosition = position.addVector(MathHelper.sin(-angle * 0.017453292F - (float) Math.PI) * range, range, MathHelper.cos(-angle * 0.017453292F - (float) Math.PI) * range);
+					final double range = fuse * 0.9;
+					final Vec3 blockPosition = position.addVector(MathHelper.sin(-angle * 0.017453292F - (float) Math.PI) * range, range, MathHelper.cos(-angle * 0.017453292F - (float) Math.PI) * range);
 
-					double x = (int) blockPosition.xCoord;
-					double z = (int) blockPosition.zCoord;
+					final double x = (int) blockPosition.xCoord;
+					final double z = (int) blockPosition.zCoord;
 					y = worldObj.getHeightValue((int) posX, (int) posZ);
 
 					for(int depth = 0; depth < 3; ++depth) {
@@ -152,6 +151,5 @@ public class EntityTransformiumSeed extends Entity {
 	}
 
 	@Override
-	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int steps) {
-	}
+	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int steps) {}
 }

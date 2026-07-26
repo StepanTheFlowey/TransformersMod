@@ -18,9 +18,7 @@ public class MessagePlayerData implements IMessage {
 	private TFData<?> type;
 	private Object value;
 
-	public MessagePlayerData() {
-
-	}
+	public MessagePlayerData() {}
 
 	public MessagePlayerData(EntityPlayer player, TFData<?> data, Object obj) {
 		id = player.getEntityId();
@@ -57,14 +55,13 @@ public class MessagePlayerData implements IMessage {
 			Object value = message.value;
 
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				Entity entity = player.worldObj.getEntityByID(message.id);
+				final Entity entity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);
 
 				if(entity instanceof EntityPlayer) {
 					type.setWithoutNotify((EntityPlayer) entity, value);
 
 					if(type == TFData.ALT_MODE) {
-						Transformer transformer = TFHelper.getTransformer((EntityPlayer) entity);
+						final Transformer transformer = TFHelper.getTransformer((EntityPlayer) entity);
 
 						if(transformer != null) {
 							entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, transformer.getTransformationSound((Integer) value), 0.5F, 1F, false);
@@ -76,10 +73,10 @@ public class MessagePlayerData implements IMessage {
 				}
 			}
 			else {
-				EntityPlayer player = ctx.getServerHandler().playerEntity;
+				final EntityPlayer player = ctx.getServerHandler().playerEntity;
 
 				if(player != null) {
-					Entity entity = player.worldObj.getEntityByID(message.id);
+					final Entity entity = player.worldObj.getEntityByID(message.id);
 
 					if(entity instanceof EntityPlayer) {
 						type.set((EntityPlayer) entity, value);

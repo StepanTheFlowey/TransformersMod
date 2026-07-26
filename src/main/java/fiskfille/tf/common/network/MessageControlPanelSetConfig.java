@@ -13,9 +13,7 @@ public class MessageControlPanelSetConfig implements IMessage {
 	private DimensionalCoords coordinates;
 	private DimensionalCoords configuration;
 
-	public MessageControlPanelSetConfig() {
-
-	}
+	public MessageControlPanelSetConfig() {}
 
 	public MessageControlPanelSetConfig(DimensionalCoords coords, DimensionalCoords dest) {
 		this.coordinates = coords;
@@ -38,11 +36,11 @@ public class MessageControlPanelSetConfig implements IMessage {
 		@Override
 		public IMessage onMessage(MessageControlPanelSetConfig message, MessageContext ctx) {
 			if(ctx.side.isServer()) {
-				DimensionalCoords coords = message.coordinates;
-				World world = MinecraftServer.getServer().worldServerForDimension(coords.dimension);
+				final DimensionalCoords coords = message.coordinates;
+				final World world = MinecraftServer.getServer().worldServerForDimension(coords.dimension);
 
 				if(world != null) {
-					TileEntityControlPanel tile = (TileEntityControlPanel) world.getTileEntity(coords.posX, coords.posY, coords.posZ);
+					final TileEntityControlPanel tile = (TileEntityControlPanel) world.getTileEntity(coords.posX, coords.posY, coords.posZ);
 
 					if(tile != null) {
 						tile.setSwitchesTo(message.configuration);

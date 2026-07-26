@@ -26,7 +26,7 @@ public abstract class TileEntityTF extends TileEntity {
 
 	@Override
 	public Packet getDescriptionPacket() {
-		NBTTagCompound tag = new NBTTagCompound();
+		final NBTTagCompound tag = new NBTTagCompound();
 		writeCustomNBT(tag);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
 	}
@@ -39,8 +39,8 @@ public abstract class TileEntityTF extends TileEntity {
 	@Override
 	public void markDirty() {
 		super.markDirty();
-		TileEntity tile = TFTileHelper.getTileBase(this);
 
+		final TileEntity tile = TFTileHelper.getTileBase(this);
 		if(tile != null) {
 			worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
 		}

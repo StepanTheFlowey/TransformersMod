@@ -20,9 +20,7 @@ import net.minecraft.world.World;
 public class MessageVehicleShoot implements IMessage {
 	public int id;
 
-	public MessageVehicleShoot() {
-
-	}
+	public MessageVehicleShoot() {}
 
 	public MessageVehicleShoot(EntityPlayer player) {
 		id = player.getEntityId();
@@ -42,17 +40,14 @@ public class MessageVehicleShoot implements IMessage {
 		@Override
 		public IMessage onMessage(MessageVehicleShoot message, MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				Entity fromEntity = player.worldObj.getEntityByID(message.id);
+				final Entity fromEntity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);
 
 				if(fromEntity instanceof EntityPlayer) {
-					EntityPlayer from = (EntityPlayer) fromEntity;
-
-					Transformer transformer = TFHelper.getTransformer(from);
+					final EntityPlayer from = (EntityPlayer) fromEntity;
+					final Transformer transformer = TFHelper.getTransformer(from);
 
 					if(transformer != null) {
-						int altMode = TFData.ALT_MODE.get(player);
-						String shootSound = transformer.getShootSound();
+						final String shootSound = transformer.getShootSound();
 
 						if(shootSound != null) {
 							from.worldObj.playSound(from.posX, from.posY - from.yOffset, from.posZ, shootSound, transformer.getShootVolume(), 1, false);
@@ -75,22 +70,17 @@ public class MessageVehicleShoot implements IMessage {
 					Transformer transformer = TFHelper.getTransformer(from);
 
 					if(transformer != null) {
-						int altMode = TFData.ALT_MODE.get(from);
-
 						if(transformer.canShoot(from) && TFHelper.isFullyTransformed(from)) {
 							Item shootItem = transformer.getShootItem();
 							boolean isCreative = from.capabilities.isCreativeMode;
 							boolean hasAmmo = isCreative || from.inventory.hasItem(shootItem);
 
 							if(hasAmmo) {
-								World world = from.worldObj;
-
 								if(transformer.getShootSound() != null) {
 									TFNetworkManager.networkWrapper.sendToAllAround(new MessageVehicleShoot(from), new TargetPoint(from.dimension, from.posX, from.posY, from.posZ, 32));
 								}
 
-								Entity entity = transformer.getShootEntity(from);
-								world.spawnEntityInWorld(entity);
+								from.worldObj.spawnEntityInWorld(transformer.getShootEntity(from));
 
 								if(!isCreative) {
 									from.inventory.consumeInventoryItem(shootItem);

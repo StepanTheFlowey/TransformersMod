@@ -22,9 +22,7 @@ public class MessageLaserShoot implements IMessage {
 	public int id;
 	public boolean consume;
 
-	public MessageLaserShoot() {
-
-	}
+	public MessageLaserShoot() {}
 
 	public MessageLaserShoot(EntityPlayer player, boolean consumeItems) {
 		id = player.getEntityId();
@@ -50,7 +48,7 @@ public class MessageLaserShoot implements IMessage {
 				EntityPlayer from = null;
 
 				for(World world : MinecraftServer.getServer().worldServers) {
-					Entity entity = world.getEntityByID(message.id);
+					final Entity entity = world.getEntityByID(message.id);
 
 					if(entity instanceof EntityPlayer) {
 						from = (EntityPlayer) entity;
@@ -59,21 +57,18 @@ public class MessageLaserShoot implements IMessage {
 				}
 
 				if(from != null) {
-					Transformer transformer = TFHelper.getTransformer(from);
-					ItemStack heldItem = from.getHeldItem();
-					boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.getTransformationTimer(from) == 0;
-
-					int altMode = TFData.ALT_MODE.get(from);
+					final Transformer transformer = TFHelper.getTransformer(from);
+					final ItemStack heldItem = from.getHeldItem();
+					final boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.getTransformationTimer(from) == 0;
 
 					if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(from))) {
-						Item shootItem = Item.getItemFromBlock(TFBlocks.energonCube);
-						boolean isCreative = from.capabilities.isCreativeMode;
-						boolean consumeItems = !isCreative || from.inventory.hasItem(shootItem) && message.consume;
+						final Item shootItem = Item.getItemFromBlock(TFBlocks.energonCube);
+						final boolean isCreative = from.capabilities.isCreativeMode;
+						final boolean consumeItems = !isCreative || from.inventory.hasItem(shootItem) && message.consume;
 
 						if(!message.consume) {
-							World world = from.worldObj;
-							Entity entity = new EntityLaser(world, from);
-							world.spawnEntityInWorld(entity);
+							final World world = from.worldObj;
+							world.spawnEntityInWorld(new EntityLaser(world, from));
 						}
 						else if(consumeItems && !isCreative) {
 							from.inventory.consumeInventoryItem(shootItem);

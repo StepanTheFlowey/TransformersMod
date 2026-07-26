@@ -37,7 +37,7 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
 
 	public void ignite(World world, int x, int y, int z, int metadata, EntityLivingBase entity) {
 		if(!world.isRemote) {
-			EntityTransformiumSeed seed = new EntityTransformiumSeed(world, x + 0.5F, y, z + 0.5F);
+			final EntityTransformiumSeed seed = new EntityTransformiumSeed(world, x + 0.5F, y, z + 0.5F);
 			world.spawnEntityInWorld(seed);
 			world.playSoundAtEntity(seed, "note.pling", 1F, 0.5F);
 		}
@@ -56,9 +56,8 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
 
 	@Override
 	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 src, Vec3 dst) {
-		float f = 0.2F;
+		final float f = 0.2F;
 		setBlockBounds(0.5F - f, 0F, 0.5F - f, 0.5F + f, 1F, 0.5F + f);
-
 		return super.collisionRayTrace(world, x, y, z, src, dst);
 	}
 

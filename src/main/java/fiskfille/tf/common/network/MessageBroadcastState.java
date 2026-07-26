@@ -15,9 +15,7 @@ import java.util.Map.Entry;
 public class MessageBroadcastState extends MessageSyncBase {
 	private int id;
 
-	public MessageBroadcastState() {
-
-	}
+	public MessageBroadcastState() {}
 
 	public MessageBroadcastState(EntityPlayer player) {
 		super(player);
@@ -40,11 +38,11 @@ public class MessageBroadcastState extends MessageSyncBase {
 		@Override
 		public IMessage onMessage(MessageBroadcastState message, MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
-				Entity lookupEntity = player.worldObj.getEntityByID(message.id);
+				final EntityPlayer player = TransformersMod.proxy.getPlayer();
+				final Entity lookupEntity = player.worldObj.getEntityByID(message.id);
 
 				if(lookupEntity instanceof EntityPlayer && player != lookupEntity) {
-					EntityPlayer lookupPlayer = (EntityPlayer) lookupEntity;
+					final EntityPlayer lookupPlayer = (EntityPlayer) lookupEntity;
 
 					for(Entry<TFData, Object> e : message.playerData.entrySet()) {
 						e.getKey().setWithoutNotify(lookupPlayer, e.getValue());
@@ -52,7 +50,7 @@ public class MessageBroadcastState extends MessageSyncBase {
 				}
 			}
 			else {
-				EntityPlayer player = ctx.getServerHandler().playerEntity;
+				final EntityPlayer player = ctx.getServerHandler().playerEntity;
 
 				for(Entry<TFData, Object> e : message.playerData.entrySet()) {
 					e.getKey().setWithoutNotify(player, e.getValue());
