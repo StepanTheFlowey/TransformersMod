@@ -8,6 +8,7 @@ import fiskfille.tf.helper.TFHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * @author gegy1000, FiskFille
@@ -172,7 +173,7 @@ public abstract class Transformer {
 		return 1;
 	}
 
-	public String getTransformationSound(int altMode) {
-		return TransformersMod.MODID + ":transform_" + (altMode == -1 ? "robot" : "vehicle");
+	public ResourceLocation getTransformationSound(int altMode) {
+		return new ResourceLocation(TransformersMod.MODID, "transform_" + (altMode == -1 ? "robot" : "vehicle"));
 	}
 }

@@ -5,13 +5,16 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.audio.MovingSoundTransformer;
 import fiskfille.tf.common.data.TFData;
 import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.TFHelper;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 
 public class MessagePlayerData implements IMessage {
 	public int id;
@@ -64,11 +67,15 @@ public class MessagePlayerData implements IMessage {
 						final Transformer transformer = TFHelper.getTransformer((EntityPlayer) entity);
 
 						if(transformer != null) {
-							entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, transformer.getTransformationSound((Integer) value), 0.5F, 1F, false);
+							Minecraft.getMinecraft().getSoundHandler().playSound(
+											new MovingSoundTransformer(entity, transformer.getTransformationSound((Integer) value))
+							);
 						}
 					}
 					else if(type == TFData.STEALTH_FORCE) {
-						entity.worldObj.playSound(entity.posX, entity.posY - entity.yOffset, entity.posZ, TransformersMod.MODID + ":transform_stealth" + ((Boolean) value ? "" : "_in"), 0.5F, 1.25F, false);
+						Minecraft.getMinecraft().getSoundHandler().playSound(
+										new MovingSoundTransformer(entity, new ResourceLocation(TransformersMod.MODID, "transform_stealth" + ((Boolean) value ? "" : "_in")))
+						);
 					}
 				}
 			}
