@@ -3,7 +3,6 @@ package fiskfille.tf.client.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.opengl.GL11;
@@ -22,7 +21,6 @@ public class GuiButtonAlt extends GuiButton {
 			return;
 		}
 
-		final FontRenderer fontrenderer = mc.fontRenderer;
 		mc.getTextureManager().bindTexture(buttonTextures);
 
 		GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
@@ -49,7 +47,7 @@ public class GuiButtonAlt extends GuiButton {
 			l = 16777120;
 		}
 
-		drawCenteredString(fontrenderer, displayString, xPosition + width / 2, yPosition + (height - 8) / 2, l);
+		drawCenteredString(mc.fontRenderer, displayString, xPosition + width / 2, yPosition + (height - 8) / 2, l);
 		GL11.glPopAttrib();
 	}
 }

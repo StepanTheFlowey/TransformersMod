@@ -92,16 +92,15 @@ public class GuiHandlerTF implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-		int dimension = id >> 8;
-		TFGui tfGui = TFGui.get(id ^ dimension << 8);
+		final int dimension = id >> 8;
+		final TFGui tfGui = TFGui.get(id ^ dimension << 8);
 
 		if(tfGui != null) {
 			if(tfGui.guiPath == null) {
 				return null;
 			}
 
-			DimensionalCoords coords = new DimensionalCoords(x, y, z, dimension);
-
+			final DimensionalCoords coords = new DimensionalCoords(x, y, z, dimension);
 			if(tfGui == TFGui.GROUND_BRIDGE_REMOTE || tfGui.containerBlock == null || world.getBlock(x, y, z) == tfGui.containerBlock) {
 				int[] aint = coords.toArray();
 				int integer = 0;

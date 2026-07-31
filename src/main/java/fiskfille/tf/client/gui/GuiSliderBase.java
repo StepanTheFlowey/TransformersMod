@@ -23,23 +23,25 @@ public class GuiSliderBase extends GuiButton {
 
 	@Override
 	protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
-		if(visible) {
-			if(dragging) {
-				percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
+		if(!visible) {
+			return;
+		}
 
-				if(percentage < 0F) {
-					percentage = 0F;
-				}
+		if(dragging) {
+			percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
 
-				if(percentage > 1F) {
-					percentage = 1F;
-				}
+			if(percentage < 0) {
+				percentage = 0;
 			}
 
-			GL11.glColor3f(1F, 1F, 1F);
-			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)), yPosition, 0, 66, 4, 20);
-			drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)) + 4, yPosition, 196, 66, 4, 20);
+			if(percentage > 1) {
+				percentage = 1;
+			}
 		}
+
+		GL11.glColor3f(1F, 1F, 1F);
+		drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)), yPosition, 0, 66, 4, 20);
+		drawTexturedModalRect(xPosition + (int) (percentage * (width - 8)) + 4, yPosition, 196, 66, 4, 20);
 	}
 
 	@Override
@@ -47,20 +49,19 @@ public class GuiSliderBase extends GuiButton {
 		if(super.mousePressed(mc, mouseX, mouseY)) {
 			percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
 
-			if(percentage < 0F) {
-				percentage = 0F;
+			if(percentage < 0) {
+				percentage = 0;
 			}
 
-			if(percentage > 1F) {
-				percentage = 1F;
+			if(percentage > 1) {
+				percentage = 1;
 			}
 
 			dragging = true;
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	@Override

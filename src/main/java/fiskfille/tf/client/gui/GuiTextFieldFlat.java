@@ -66,9 +66,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 
 	@Override
 	public String getSelectedText() {
-		int start = Math.min(cursorPosition, selectionEnd);
-		int end = Math.max(cursorPosition, selectionEnd);
-		return text.substring(start, end);
+		return text.substring(Math.min(cursorPosition, selectionEnd), Math.max(cursorPosition, selectionEnd));
 	}
 
 	@Override
@@ -103,41 +101,45 @@ public class GuiTextFieldFlat extends GuiTextField {
 
 	@Override
 	public void deleteWords(int num) {
-		if(!text.isEmpty()) {
-			if(selectionEnd != cursorPosition) {
-				writeText("");
-			}
-			else {
-				deleteFromCursor(getNthWordFromCursor(num) - cursorPosition);
-			}
+		if(text.isEmpty()) {
+			return;
+		}
+
+		if(selectionEnd != cursorPosition) {
+			writeText("");
+		}
+		else {
+			deleteFromCursor(getNthWordFromCursor(num) - cursorPosition);
 		}
 	}
 
 	@Override
 	public void deleteFromCursor(int num) {
-		if(!text.isEmpty()) {
-			if(selectionEnd != cursorPosition) {
-				writeText("");
+		if(text.isEmpty()) {
+			return;
+		}
+
+		if(selectionEnd != cursorPosition) {
+			writeText("");
+		}
+		else {
+			final boolean flag = num < 0;
+			final int j = flag ? cursorPosition + num : cursorPosition;
+			final int k = flag ? cursorPosition : cursorPosition + num;
+			String s = "";
+
+			if(j >= 0) {
+				s = text.substring(0, j);
 			}
-			else {
-				boolean flag = num < 0;
-				int j = flag ? cursorPosition + num : cursorPosition;
-				int k = flag ? cursorPosition : cursorPosition + num;
-				String s = "";
 
-				if(j >= 0) {
-					s = text.substring(0, j);
-				}
+			if(k < text.length()) {
+				s = s + text.substring(k);
+			}
 
-				if(k < text.length()) {
-					s = s + text.substring(k);
-				}
+			text = s;
 
-				text = s;
-
-				if(flag) {
-					moveCursorBy(num);
-				}
+			if(flag) {
+				moveCursorBy(num);
 			}
 		}
 	}
@@ -155,8 +157,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 	@Override
 	public int func_146197_a(int i, int j, boolean flag) {
 		int k = j;
-		boolean flag1 = i < 0;
-		int l = Math.abs(i);
+		final boolean flag1 = i < 0;
+		final int l = Math.abs(i);
 
 		for(int i1 = 0; i1 < l; ++i1) {
 			if(flag1) {
@@ -169,7 +171,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 				}
 			}
 			else {
-				int j1 = text.length();
+				final int j1 = text.length();
 				k = text.indexOf(32, k);
 
 				if(k == -1) {

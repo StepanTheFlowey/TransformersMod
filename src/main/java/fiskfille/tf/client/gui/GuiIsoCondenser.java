@@ -1,7 +1,5 @@
 package fiskfille.tf.client.gui;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
@@ -22,12 +20,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class GuiIsoCondenser extends GuiContainerTF {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/isotopic_condenser.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/isotopic_condenser.png");
 	private final TileEntityIsoCondenser tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;
@@ -40,9 +39,8 @@ public class GuiIsoCondenser extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
 
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		buttonList.add(fieldEnergy = new GuiHoverFieldEnergy(x + 17, y + 17, 16, 52, tileentity.data.storage));
 		buttonList.add(new GuiButtonConfigSides(0, x + xSize - 18, y + 5));
 		buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 20, tileentity));
@@ -56,29 +54,26 @@ public class GuiIsoCondenser extends GuiContainerTF {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
+		switch(button.id) {
+			case 0:
+				mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 1));
+				break;
 
-		if(id == 0) {
-			mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 1));
-		}
-		else if(id == 1) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
+			case 1:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
+				break;
 		}
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-		int[][] aint = {{37, 35}, {37, 53}, {88, 35}, {88, 53}};
-
-		String s = I18n.format("gui.isotopic_condenser");
+		final String s = I18n.format("gui.isotopic_condenser");
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 
-		Map<Block, Integer> map = Maps.newHashMap();
-		List<Block> blocks = Lists.newArrayList();
+		HashMap<Block, Integer> map = new HashMap<>();
+		ArrayList<Block> blocks = new ArrayList<>();
 
 		for(Map.Entry<ForgeDirection, Block> e : tileentity.providers.entrySet()) {
 			if(!map.containsKey(e.getValue())) {
@@ -93,10 +88,11 @@ public class GuiIsoCondenser extends GuiContainerTF {
 		int totalMass = 0;
 		TFRenderHelper.setupRenderItemIntoGUI();
 
+		final int[][] aint = {{37, 35}, {37, 53}, {88, 35}, {88, 53}};
 		for(int i = 0; i < Math.min(aint.length, blocks.size()); ++i) {
-			Block block = blocks.get(i);
-			int[] pos = aint[i];
-			int amount = map.get(block);
+			final Block block = blocks.get(i);
+			final int[] pos = aint[i];
+			final int amount = map.get(block);
 
 			TFRenderHelper.renderItemIntoGUI(pos[0], pos[1], new ItemStack(block, amount));
 			totalMass += ((IEnergon) block).getMass() * amount;
@@ -105,9 +101,9 @@ public class GuiIsoCondenser extends GuiContainerTF {
 		TFRenderHelper.finishRenderItemIntoGUI();
 
 		for(int i = 0; i < Math.min(aint.length, blocks.size()); ++i) {
-			Block block = blocks.get(i);
-			int[] pos = aint[i];
-			int percent = Math.round((float) ((IEnergon) block).getMass() * map.get(block) / totalMass * 100);
+			final Block block = blocks.get(i);
+			final int[] pos = aint[i];
+			final int percent = Math.round((float) ((IEnergon) block).getMass() * map.get(block) / totalMass * 100);
 
 			drawString(fontRendererObj, I18n.format("gui.tf.percent", percent), pos[0] + 21, pos[1] + 4, -1);
 		}
@@ -117,14 +113,13 @@ public class GuiIsoCondenser extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor3f(1F, 1F, 1F);
-		mc.getTextureManager().bindTexture(guiTextures);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		mc.getTextureManager().bindTexture(texture);
+		GL11.glColor3f(1, 1, 1);
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		if(tileentity.getEnergy() > 0) {
-			float f = tileentity.getEnergy() / tileentity.getMaxEnergy();
+			final float f = tileentity.getEnergy() / tileentity.getMaxEnergy();
 			drawTexturedModalRect(x + 17, y + 17 + Math.round(52 * (1 - f)), 176, Math.round(52 * (1 - f)), 16, Math.round(52 * f));
 		}
 	}

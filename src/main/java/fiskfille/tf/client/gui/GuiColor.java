@@ -185,8 +185,7 @@ public class GuiColor extends GuiScreen {
 		drawTexturedModalRect(width / 2 - 128, height / 6, 0, 0, 100, 150);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-		EntityPlayer entity = ClientProxy.fakePlayer;
-
+		final EntityPlayer entity = ClientProxy.fakePlayer;
 		if(entity != null) {
 			Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
 			Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
@@ -207,11 +206,9 @@ public class GuiColor extends GuiScreen {
 			entity.rotationYawHead = 0;
 			entity.setInvisible(true);
 
-			int k = width / 2 - 128 + 50;
-			int l = height / 6 + 132;
 			GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 			GL11.glPushMatrix();
-			GL11.glTranslatef(k, l, 50F);
+			GL11.glTranslatef(width / 2F - 128 + 50, height / 6F + 132, 50F);
 			GL11.glScalef(-60, 60, 60);
 			GL11.glRotatef(180F, 0F, 0F, 1F);
 			GL11.glRotatef(135F, 0F, 1F, 0F);

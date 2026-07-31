@@ -31,9 +31,10 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class GuiOverlay extends Gui {
-	public static final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/mod_icons.png");
 	public static double prevSpeed;
 	public static double speed;
+
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/misc/sniper_scope.png");
 	private final RenderItem itemRenderer = new RenderItem();
 
 	@SubscribeEvent
@@ -49,22 +50,21 @@ public class GuiOverlay extends Gui {
 
 		if(event.type == ElementType.HOTBAR) {
 			final Transformer transformer = TFHelper.getTransformer(player);
-			final boolean flag = transformer == null || transformer.renderSpeedAndNitro();
 
-			if(flag) {
-				renderNitroAndSpeed(event, width, height, player);
+			if(transformer == null || transformer.renderSpeedAndNitro()) {
+				renderNitroAndSpeed(event, player);
 			}
 
-			renderKatanaDash(event, width, height, player);
-			renderShotsLeft(event, width, height, player);
-			renderLaserCharge(event, width, height, player);
+			renderKatanaDash(width, height, player);
+			renderShotsLeft(width, height, player);
+			renderLaserCharge(player);
 		}
 	}
 
-	public void renderLaserCharge(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
-		ItemStack heldItem = player.getHeldItem();
-		Transformer transformer = TFHelper.getTransformer(player);
-		boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.isInRobotMode(player);
+	public void renderLaserCharge(EntityPlayer player) {
+		final ItemStack heldItem = player.getHeldItem();
+		final Transformer transformer = TFHelper.getTransformer(player);
+		final boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.isInRobotMode(player);
 
 		if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(player))) {
 			float stealthModeTimer = TFHelper.getStealthModeTimer(player);
@@ -125,13 +125,13 @@ public class GuiOverlay extends Gui {
 		}
 	}
 
-	public void renderNitroAndSpeed(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
-		float transformationTimer = TFHelper.getTransformationTimer(player);
+	public void renderNitroAndSpeed(RenderGameOverlayEvent.Pre event, EntityPlayer player) {
+		final float transformationTimer = TFHelper.getTransformationTimer(player);
 
 		if(transformationTimer > 0) {
-			float nitro = TFHelper.median(TFData.NITRO.get(player), TFData.PREV_NITRO.get(player), event.partialTicks);
-			double speed = TFHelper.median(GuiOverlay.speed, GuiOverlay.prevSpeed, event.partialTicks);
-			int offset = Math.round((1 - transformationTimer) * 210);
+			final float nitro = TFHelper.median(TFData.NITRO.get(player), TFData.PREV_NITRO.get(player), event.partialTicks);
+			final double speed = TFHelper.median(GuiOverlay.speed, GuiOverlay.prevSpeed, event.partialTicks);
+			final int offset = Math.round((1 - transformationTimer) * 210);
 
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glEnable(GL11.GL_BLEND);
@@ -158,9 +158,8 @@ public class GuiOverlay extends Gui {
 		}
 	}
 
-	public void renderShotsLeft(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
-		Transformer transformer = TFHelper.getTransformer(player);
-		int altMode = TFData.ALT_MODE.get(player);
+	public void renderShotsLeft(int width, int height, EntityPlayer player) {
+		final Transformer transformer = TFHelper.getTransformer(player);
 
 		if(transformer != null && !(transformer instanceof TransformerVurp)) {
 			float transformationTimer = TFHelper.getTransformationTimer(player);
@@ -173,13 +172,10 @@ public class GuiOverlay extends Gui {
 					f = stealthModeTimer;
 				}
 
-				int offset = Math.round((1 - Math.min(transformationTimer, f)) * 210);
-				int y = 30;
-				int x = 6;
-				int j = 20 - TFShootManager.shootCooldown;
-				double d = j * 2.5;
-				String shotsLeft = "" + TFShootManager.shotsLeft;
+				final int offset = Math.round((1 - Math.min(transformationTimer, f)) * 210);
+				final int x = 6, y = 30;
 
+				String shotsLeft = "" + TFShootManager.shotsLeft;
 				if(TFShootManager.shotsLeft <= 0) {
 					shotsLeft = EnumChatFormatting.RED + shotsLeft;
 				}
@@ -195,7 +191,7 @@ public class GuiOverlay extends Gui {
 				drawTexturedModalRect(x - 1 - offset, y - 1, 0, 0, 16, 16);
 				drawTexturedModalRect(x - offset, y, 0, 0, 14, 14);
 				GL11.glColor4f(1F, 0F, 0F, 0.25F);
-				drawTexturedModalRect(x + 95 - offset, y + 1, 0, 0, (int) d, 10);
+				drawTexturedModalRect(x + 95 - offset, y + 1, 0, 0, (int) ((20 - TFShootManager.shootCooldown) * 2.5), 10);
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 				GL11.glDisable(GL11.GL_LIGHTING);
@@ -207,19 +203,18 @@ public class GuiOverlay extends Gui {
 				GL11.glDepthMask(true);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
 
-				float scale = 0.5F;
 				GL11.glPushMatrix();
 				GL11.glTranslatef(x - 1 - offset, y + 16, 0);
-				GL11.glScalef(scale, scale, scale);
+				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				drawString(Minecraft.getMinecraft().fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), 0, 0, 0xffffff);
 				GL11.glPopMatrix();
 			}
 		}
 		else if(transformer instanceof TransformerVurp) {
-			ItemStack heldItem = player.getHeldItem();
+			final ItemStack heldItem = player.getHeldItem();
 
 			if(heldItem != null) {
-				float transformationTimer = TFHelper.getTransformationTimer(player);
+				final float transformationTimer = TFHelper.getTransformationTimer(player);
 
 				if(transformationTimer == 0 && heldItem.getItem() == TFItems.vurpsSniper) {
 					GL11.glEnable(GL11.GL_BLEND);
@@ -232,14 +227,16 @@ public class GuiOverlay extends Gui {
 						OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 						GL11.glColor3f(1F, 1F, 1F);
 						GL11.glDisable(GL11.GL_ALPHA_TEST);
-						Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/misc/sniper_scope.png"));
-						Tessellator tessellator = Tessellator.instance;
+						Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+
+						final Tessellator tessellator = Tessellator.instance;
 						tessellator.startDrawingQuads();
 						tessellator.addVertexWithUV(0D, height, -90D, 0D, 1D);
 						tessellator.addVertexWithUV(width, height, -90D, 1D, 1D);
 						tessellator.addVertexWithUV(width, 0D, -90D, 1D, 0D);
 						tessellator.addVertexWithUV(0D, 0D, -90D, 0D, 0D);
 						tessellator.draw();
+
 						GL11.glDepthMask(true);
 						GL11.glEnable(GL11.GL_DEPTH_TEST);
 						GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -250,36 +247,26 @@ public class GuiOverlay extends Gui {
 		}
 	}
 
-	public void renderKatanaDash(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
-		if(player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.purgesKatana && !TFHelper.isFullyTransformed(player) && TFHelper.getTransformer(player) instanceof TransformerPurge) {
-			if(player.isUsingItem()) {
-				int x = width / 2 - 26;
-				int j = TFItems.purgesKatana.getMaxItemUseDuration(player.getHeldItem()) - player.getItemInUseCount();
-				double d = (double) j / 10;
+	public void renderKatanaDash(int width, int height, EntityPlayer player) {
+		if(player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.purgesKatana && !TFHelper.isFullyTransformed(player) && TFHelper.getTransformer(player) instanceof TransformerPurge && player.isUsingItem()) {
+			final int j = TFItems.purgesKatana.getMaxItemUseDuration(player.getHeldItem()) - player.getItemInUseCount();
+			double d = (double) j / 10;
 
-				if(d > 2D) {
-					d = 2D;
-				}
-
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(0F, 0F, 0F, 0.15F);
-
-				int y;
-				if(TFConfig.purgeDashTop) {
-					y = 5;
-				}
-				else {
-					y = height / 2 + 9;
-				}
-
-				drawTexturedModalRect(x, y, 0, 0, 52, 12);
-				GL11.glColor4f(1F, 0F, 0F, 0.25F);
-				drawTexturedModalRect(x + 1, y + 1, 0, 0, (int) (d * 25), 10);
-
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
+			if(d > 2D) {
+				d = 2D;
 			}
+
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glColor4f(0F, 0F, 0F, 0.15F);
+
+			final int x = width / 2 - 26, y = TFConfig.purgeDashTop ? 5 : height / 2 + 9;
+			drawTexturedModalRect(x, y, 0, 0, 52, 12);
+			GL11.glColor4f(1F, 0F, 0F, 0.25F);
+			drawTexturedModalRect(x + 1, y + 1, 0, 0, (int) (d * 25), 10);
+
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
 		}
 	}
 }

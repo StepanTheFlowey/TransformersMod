@@ -28,7 +28,6 @@ public class GuiButtonFlat extends GuiButton {
 			return;
 		}
 
-		final FontRenderer fontrenderer = mc.fontRenderer;
 		mc.getTextureManager().bindTexture(tfButtonTextures);
 
 		GL11.glColor3f(1F, 1F, 1F);
@@ -40,6 +39,7 @@ public class GuiButtonFlat extends GuiButton {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		mouseDragged(mc, mouseX, mouseY);
 
+		final FontRenderer fontrenderer = mc.fontRenderer;
 		final int color = enabled ? 0x373737 : 0x7F7F7F;
 		if(width % 2 == 0) {
 			drawTexturedModalRect(xPosition, yPosition, 60, hoverState * 13, width / 2, height);

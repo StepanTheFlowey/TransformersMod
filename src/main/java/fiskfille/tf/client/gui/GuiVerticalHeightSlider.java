@@ -31,10 +31,8 @@ public class GuiVerticalHeightSlider extends GuiVerticalSlider {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 
 			for(int i = 0; i < parent.layers.size(); ++i) {
-				float f = 1 - (float) parent.layers.indexOf(parent.layers.get(i)) / (parent.layers.size() - 1);
-				float shade = 0.1F;
-
-				GL11.glColor3f(shade, shade, shade);
+				GL11.glColor3f(0.1F, 0.1F, 0.1F);
+				final float f = 1 - (float) parent.layers.indexOf(parent.layers.get(i)) / (parent.layers.size() - 1);
 				drawTexturedModalRect(xPosition + 1, yPosition + (int) (f * (height - 8)) + 3, 0, 0, width / 2 - 2, 2);
 			}
 

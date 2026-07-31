@@ -30,9 +30,8 @@ public class GuiEnergonProcessor extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
 
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		buttonList.add(fieldFluid = new GuiHoverFieldFluid(x + 77, y + 17, 52, 52, tileentity.data.tank));
 		buttonList.add(new GuiButtonConfigRedstone(1, x + xSize - 18, y + 5, tileentity));
 	}
@@ -45,43 +44,35 @@ public class GuiEnergonProcessor extends GuiContainerTF {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
-
-		if(id == 1) {
+		if(button.id == 1) {
 			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
 		}
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-
-		String s = I18n.format(tileentity.getInventoryName());
+		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		GL11.glColor3f(1, 1, 1);
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		if(tileentity.burnTime > 0) {
-			int i = (int) (tileentity.burnTime * 0.12F);
-			drawTexturedModalRect(x + 47, y + 35, 176, 14, i, 17);
+			drawTexturedModalRect(x + 47, y + 35, 176, 14, (int) (tileentity.burnTime * 0.12F), 17);
 		}
 
 		if(tileentity.fillTime > 0) {
-			int i = (int) (tileentity.fillTime * 0.13F);
-			drawTexturedModalRect(x + 135, y + 36, 176, 31, i, 12);
+			drawTexturedModalRect(x + 135, y + 36, 176, 31, (int) (tileentity.fillTime * 0.13F), 12);
 		}
 
 		if(tileentity.powerTime > 0) {
-			int i = tileentity.powerTime * 13 / tileentity.currentMaxPowerTime;
+			final int i = tileentity.powerTime * 13 / tileentity.currentMaxPowerTime;
 			drawTexturedModalRect(x + 25, y + 48 - i, 176, 12 - i, 14, i + 2);
 		}
 

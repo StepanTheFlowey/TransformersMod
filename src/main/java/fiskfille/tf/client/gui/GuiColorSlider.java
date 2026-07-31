@@ -3,7 +3,6 @@ package fiskfille.tf.client.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
@@ -23,19 +22,18 @@ public class GuiColorSlider extends GuiSliderBase {
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 		if(visible) {
-			FontRenderer fontrenderer = mc.fontRenderer;
 			mc.getTextureManager().bindTexture(buttonTextures);
 			GL11.glColor3f(1F, 1F, 1F);
 			field_146123_n = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
-			int k = getHoverState(field_146123_n);
 			GL11.glEnable(GL11.GL_BLEND);
 			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			final int k = getHoverState(field_146123_n);
 			drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height);
 			drawTexturedModalRect(xPosition + width / 2, yPosition, 200 - width / 2, 46 + k * 20, width / 2, height);
 
-			Color color = sliderId == 1 ? Color.GREEN : sliderId == 2 ? Color.BLUE : Color.RED;
-			Tessellator tessellator = Tessellator.instance;
+			final Color color = sliderId == 1 ? Color.GREEN : sliderId == 2 ? Color.BLUE : Color.RED;
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
 			tessellator.setColorOpaque_I(0);
 			tessellator.addVertex(0, height - 2, zLevel);
@@ -44,17 +42,20 @@ public class GuiColorSlider extends GuiSliderBase {
 			tessellator.addVertex(width - 2, 0, zLevel);
 			tessellator.setColorOpaque_I(0);
 			tessellator.addVertex(0, 0, zLevel);
+
+			GL11.glPushMatrix();
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glShadeModel(GL11.GL_SMOOTH);
-			GL11.glPushMatrix();
 			GL11.glTranslatef(xPosition + 1, yPosition + 1, 0);
+
 			tessellator.draw();
-			GL11.glPopMatrix();
+
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glPopMatrix();
 
 			mouseDragged(mc, mouseX, mouseY);
-			int l = 14737632;
 
+			int l = 14737632;
 			if(packedFGColour != 0) {
 				l = packedFGColour;
 			}
@@ -65,7 +66,7 @@ public class GuiColorSlider extends GuiSliderBase {
 				l = 16777120;
 			}
 
-			drawCenteredString(fontrenderer, I18n.format("gui.display_station.color.amount", displayString, (int) (percentage * 100)), xPosition + width / 2, yPosition + (height - 8) / 2, l);
+			drawCenteredString(mc.fontRenderer, I18n.format("gui.display_station.color.amount", displayString, (int) (percentage * 100)), xPosition + width / 2, yPosition + (height - 8) / 2, l);
 		}
 	}
 }

@@ -66,13 +66,12 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
 
 		if(data == null) {
 			return;
 		}
 
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		buttonList.add(fieldEnergy = new GuiHoverFieldEnergy(x + xSize + 2, y + 2, 16, 86, data.storage));
 		buttonList.add(buttonDeactivate = new GuiButtonFlat(0, x + 37, y + 66, 64, I18n.format("ground_bridge_remote.ui.deactivate")));
 		buttonList.add(buttonActivate = new GuiButtonFlat(1, x + 105, y + 66, 64, I18n.format("ground_bridge_remote.ui.activate")));
@@ -81,8 +80,8 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		buttonList.add(buttonDirection = new GuiButtonFlat(4, x + 156, y + 49, 13, ""));
 
 		Keyboard.enableRepeatEvents(true);
-		int[] destination = data.destination.toArray();
 
+		final int[] destination = data.destination.toArray();
 		for(int i = 0; i < coordinateFields.length; ++i) {
 			coordinateFields[i] = new GuiTextFieldFlat(fontRendererObj, x + 7 + 55 * i, y + 7, 52);
 			coordinateFields[i].setMaxStringLength(20);
@@ -97,8 +96,8 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-		TileData newData = TFTileHelper.getTileData(tileCoords);
 
+		final TileData newData = TFTileHelper.getTileData(tileCoords);
 		if(newData instanceof TileDataControlPanel) {
 			data = (TileDataControlPanel) newData;
 		}
@@ -107,27 +106,24 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 			return;
 		}
 
-		int[] newDestination = data.destination.toArray();
-
+		final int[] newDestination = data.destination.toArray();
 		for(int i = 0; i < coordinateFields.length; ++i) {
 			coordinateFields[i].updateCursorCounter();
 
 			try {
 				newDestination[i] = Integer.parseInt(coordinateFields[i].getText());
 			}
-			catch(Exception ignored) {
-			}
+			catch(Exception ignored) {}
 		}
 
 		if(inventory.getStackInSlot(0) != null) {
-			int[] originalDestination = data.destination.toArray();
-
+			final int[] originalDestination = data.destination.toArray();
 			for(int i = 0; i < coordinateFields.length; ++i) {
 				coordinateFields[i].setText(originalDestination[i] + "");
 			}
 		}
 		else if(!data.activationLeverState) {
-			DimensionalCoords coords = DimensionalCoords.fromArray(newDestination);
+			final DimensionalCoords coords = DimensionalCoords.fromArray(newDestination);
 
 			if(!data.destination.equals(coords)) {
 				coords.set(newDestination[0], newDestination[1], newDestination[2], newDestination[3]);
@@ -146,8 +142,8 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	public void updateButtons() {
-		boolean activationLeverState = data.activationLeverState;
-		boolean canEditCoords = data != null && !activationLeverState && inventory.getStackInSlot(0) == null;
+		final boolean activationLeverState = data.activationLeverState;
+		final boolean canEditCoords = data != null && !activationLeverState && inventory.getStackInSlot(0) == null;
 
 		for(GuiTextField coordinateField : coordinateFields) {
 			coordinateField.setEnabled(canEditCoords);
@@ -160,7 +156,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		dimensionField.setEnabled(canEditCoords && data.hasUpgrade(DataCore.spaceBridge));
 
 		if(data != null) {
-			String[] directions = {"north", "east", "south", "west"};
+			final String[] directions = {"north", "east", "south", "west"};
 			buttonDirection.displayString = I18n.format("direction." + directions[data.direction % directions.length] + ".short");
 
 			dimensionField.setText(TFDimensionHelper.getDimensionName(data.destination.dimension));
@@ -170,16 +166,20 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
+		switch(button.id) {
+			case 0:
+			case 1:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(tileCoords, mc.thePlayer, 14));
+				break;
 
-		if(id == 0 || id == 1) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(tileCoords, mc.thePlayer, 14));
-		}
-		else if(id == 2 || id == 3) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(tileCoords, mc.thePlayer, 16 + id));
-		}
-		else if(id == 4) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(tileCoords, mc.thePlayer, 13));
+			case 2:
+			case 3:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(tileCoords, mc.thePlayer, 16 + button.id));
+				break;
+
+			case 4:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(tileCoords, mc.thePlayer, 13));
+				break;
 		}
 
 		updateButtons();
@@ -191,10 +191,10 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 
 		for(GuiTextField coordinateField : coordinateFields) {
 			coordinateField.textboxKeyTyped(c, key);
-			StringBuilder s = new StringBuilder();
 
+			final StringBuilder s = new StringBuilder();
 			for(int k = 0; k < coordinateField.getText().length(); ++k) {
-				char c1 = coordinateField.getText().charAt(k);
+				final char c1 = coordinateField.getText().charAt(k);
 
 				if(Character.isDigit(c1) || k == 0 && c1 == '-') {
 					s.append(c1);
@@ -218,14 +218,12 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-
 		if(data == null) {
 			return;
 		}
 
-		String destDimension = String.valueOf(data.destination.dimension);
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
+		final String destDimension = String.valueOf(data.destination.dimension);
 		fontRendererObj.drawString(destDimension, (buttonDimLeft.xPosition + buttonDimRight.xPosition + buttonDimRight.width - fontRendererObj.getStringWidth(destDimension)) / 2 - x, (buttonDimLeft.yPosition + buttonDimLeft.height / 2 + buttonDimRight.yPosition + buttonDimRight.height / 2 - fontRendererObj.FONT_HEIGHT + 1) / 2 + 1 - y, -1);
 
 		if(data.hasUpgrade(DataCore.leveler)) {
@@ -236,7 +234,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		TFRenderHelper.setupRenderItemIntoGUI();
 
 		for(int i = 0; i < data.upgrades.size(); ++i) {
-			DataCore core = data.upgrades.get(i);
+			final DataCore core = data.upgrades.get(i);
 
 			if(core != null) {
 				TFRenderHelper.renderItemIntoGUI(116 + i * 18, 28, new ItemStack(TFItems.dataCore, 1, core.index));
@@ -248,8 +246,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
 		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
@@ -259,12 +256,12 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		float energy = data.getEnergy();
 
 		if(energy > 0) {
-			float f = energy / data.getMaxEnergy();
+			final float f = energy / data.getMaxEnergy();
 			drawTexturedModalRect(x + xSize + 6, y + 6 + Math.round(78 * (1 - f)), 208, Math.round(78 * (1 - f)), 8, Math.round(78 * f));
 		}
 
 		for(int i = 0; i < data.errors.size(); ++i) {
-			boolean flag = new Rectangle(x + xSize + 20, y + 10 + i * 17, 16, 16).contains(mouseX, mouseY);
+			final boolean flag = new Rectangle(x + xSize + 20, y + 10 + i * 17, 16, 16).contains(mouseX, mouseY);
 			drawTexturedModalRect(x + xSize + 20, y + 10 + i * 17, 176, flag ? 16 : 0, 16, 16);
 		}
 
@@ -278,9 +275,8 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
 
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		for(int i = 0; i < data.upgrades.size(); ++i) {
 			final DataCore core = data.upgrades.get(i);
 
@@ -293,10 +289,8 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 			final ErrorContainer container = data.errors.get(i);
 
 			if(new Rectangle(x + xSize + 20, y + 10 + i * 17, 16, 16).contains(mouseX, mouseY)) {
-				List<String> list = fontRendererObj.listFormattedStringToWidth(container.translate(), 200);
-
+				final List<String> list = fontRendererObj.listFormattedStringToWidth(container.translate(), 200);
 				list.replaceAll(s -> EnumChatFormatting.RED + s);
-
 				drawHoveringText(list, mouseX, mouseY, fontRendererObj);
 			}
 		}

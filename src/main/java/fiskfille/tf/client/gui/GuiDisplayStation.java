@@ -65,17 +65,18 @@ public class GuiDisplayStation extends GuiContainerTF {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		final int id = button.id;
+		switch(button.id) {
+			case 0:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, 0));
+				break;
 
-		if(id == 0) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, 0));
-		}
-		else if(id == 1 || id == 2) {
-			Component component = getComponent(id - 1);
-
-			if(component != null) {
-				component.load(tileentity, id - 1, mc.thePlayer);
-			}
+			case 1:
+			case 2:
+				final Component component = getComponent(button.id - 1);
+				if(component != null) {
+					component.load(tileentity, button.id - 1, mc.thePlayer);
+				}
+				break;
 		}
 	}
 
@@ -99,8 +100,8 @@ public class GuiDisplayStation extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
+		GL11.glColor3f(1, 1, 1);
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		GuiInventory.func_147046_a(x + 63, y + 85, 30, x + 63 - mouseX, y + 85 - 50 - mouseY, mc.thePlayer);

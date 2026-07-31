@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiVerticalSlider extends GuiSliderBase {
-	protected static final ResourceLocation buttonTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/widgets.png");
+	private final ResourceLocation buttonTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/widgets.png");
 
 	public GuiVerticalSlider(int id, int x, int y, int height) {
 		super(id, x, y, 20, height, "");
@@ -21,14 +21,15 @@ public class GuiVerticalSlider extends GuiSliderBase {
 		if(!visible) {
 			return;
 		}
+
 		mc.getTextureManager().bindTexture(buttonTextures);
 		GL11.glColor3f(1F, 1F, 1F);
 		field_146123_n = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
-		int k = getHoverState(field_146123_n);
 		GL11.glEnable(GL11.GL_BLEND);
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
+		final int k = getHoverState(field_146123_n);
 		drawTexturedModalRect(xPosition, yPosition, k * 20, 0, width, height / 2);
 		drawTexturedModalRect(xPosition, yPosition + height / 2, k * 20, 200 - height / 2, width, height / 2);
 		mouseDragged(mc, mouseX, mouseY);
@@ -39,12 +40,12 @@ public class GuiVerticalSlider extends GuiSliderBase {
 		if(enabled && visible && mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height) {
 			percentage = (float) (mouseY - (yPosition + 4)) / (float) (height - 8);
 
-			if(percentage < 0F) {
-				percentage = 0F;
+			if(percentage < 0) {
+				percentage = 0;
 			}
 
-			if(percentage > 1F) {
-				percentage = 1F;
+			if(percentage > 1) {
+				percentage = 1;
 			}
 
 			dragging = true;
@@ -56,22 +57,24 @@ public class GuiVerticalSlider extends GuiSliderBase {
 
 	@Override
 	protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
-		if(visible) {
-			if(dragging) {
-				percentage = (float) (mouseY - (yPosition + 4)) / (float) (height - 8);
+		if(!visible) {
+			return;
+		}
 
-				if(percentage < 0F) {
-					percentage = 0F;
-				}
+		if(dragging) {
+			percentage = (float) (mouseY - (yPosition + 4)) / (float) (height - 8);
 
-				if(percentage > 1F) {
-					percentage = 1F;
-				}
+			if(percentage < 0) {
+				percentage = 0;
 			}
 
-			GL11.glColor3f(1F, 1F, 1F);
-			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)), 20, 0, 20, 4);
-			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)) + 4, 20, 196, 20, 4);
+			if(percentage > 1) {
+				percentage = 1;
+			}
 		}
+
+		GL11.glColor3f(1F, 1F, 1F);
+		drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)), 20, 0, 20, 4);
+		drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)) + 4, 20, 196, 20, 4);
 	}
 }

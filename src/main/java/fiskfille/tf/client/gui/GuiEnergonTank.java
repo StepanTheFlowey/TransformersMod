@@ -61,8 +61,8 @@ public class GuiEnergonTank extends GuiContainerTF {
 		int capacity = 0;
 
 		while(y < tileentity.getWorldObj().getHeight() && TFTileHelper.getTileBase(tileentity.getWorldObj().getTileEntity(tileentity.xCoord, y, tileentity.zCoord)) == tileBase) {
-			TileEntityEnergonTank tile = (TileEntityEnergonTank) tileentity.getWorldObj().getTileEntity(tileentity.xCoord, y, tileentity.zCoord);
-			FluidTank tank = tile.getTank();
+			final TileEntityEnergonTank tile = (TileEntityEnergonTank) tileentity.getWorldObj().getTileEntity(tileentity.xCoord, y, tileentity.zCoord);
+			final FluidTank tank = tile.getTank();
 
 			if(stack == null && tank.getFluid() != null) {
 				stack = tank.getFluid().copy();
@@ -83,7 +83,6 @@ public class GuiEnergonTank extends GuiContainerTF {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		final String s = I18n.format(tileentity.getInventoryName());
-		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
 
@@ -96,13 +95,12 @@ public class GuiEnergonTank extends GuiContainerTF {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
-		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
+		GL11.glColor3f(1, 1, 1);
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		if(tileentity.fillTime > 0) {
-			int i = (int) (tileentity.fillTime * 0.13F);
-			drawTexturedModalRect(x + 120, y + 36, 176, 0, i, 12);
+			drawTexturedModalRect(x + 120, y + 36, 176, 0, (int) (tileentity.fillTime * 0.13F), 12);
 		}
 
 		if(fluidTank == null) {

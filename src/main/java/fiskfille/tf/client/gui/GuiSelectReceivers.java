@@ -47,11 +47,11 @@ public class GuiSelectReceivers extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
-		float range = transmitter.getRange();
-		float boardWidth = 1 + range * 2;
-		int boardWidthFl = MathHelper.floor_float(boardWidth);
-		int baseX = MathHelper.floor_double(width / 2F - (spacing + size) * boardWidth / 2);
-		int baseY = MathHelper.floor_double(height / 2F - (spacing + size) * boardWidth / 2);
+
+		final float boardWidth = 1 + transmitter.getRange() * 2;
+		final int boardWidthFl = MathHelper.floor_float(boardWidth);
+		final int baseX = MathHelper.floor_double(width / 2F - (spacing + size) * boardWidth / 2);
+		final int baseY = MathHelper.floor_double(height / 2F - (spacing + size) * boardWidth / 2);
 
 		buttonList.add(new GuiButton(0, width / 2 - 100, height - height / 7, I18n.format("gui.done")));
 		buttonList.add(heightSlider = new GuiVerticalHeightSlider(1, this, baseX + boardWidthFl * (spacing + size), baseY - 1, boardWidthFl * (spacing + size) + 1, this::updateBlocks));
@@ -60,8 +60,7 @@ public class GuiSelectReceivers extends GuiScreen {
 		layers.clear();
 		layers.add(owner.yCoord);
 
-		List<TileEntity> tiles = mc.theWorld.loadedTileEntityList;
-
+		final List<TileEntity> tiles = mc.theWorld.loadedTileEntityList;
 		for(TileEntity loadedTile : tiles) {
 			if(loadedTile instanceof IEnergyReceiver && ((IEnergyReceiver) loadedTile).canReceiveEnergy(owner) && TFEnergyHelper.isInRange(owner, loadedTile)) {
 				if(!layers.contains(loadedTile.yCoord)) {
@@ -84,20 +83,17 @@ public class GuiSelectReceivers extends GuiScreen {
 	}
 
 	protected void updateBlocks() {
-		float range = transmitter.getRange();
-		float boardWidth = 1 + range * 2;
-		int boardWidthFl = MathHelper.floor_float(boardWidth);
-		int dimension = owner.getWorldObj().provider.dimensionId;
+		final int boardWidthFl = MathHelper.floor_float(1 + transmitter.getRange() * 2);
+		final int dimension = owner.getWorldObj().provider.dimensionId;
 
 		coordArray = new DimensionalCoords[boardWidthFl * boardWidthFl];
 
 		for(int i = 0; i < boardWidthFl; ++i) {
 			for(int j = 0; j < boardWidthFl; ++j) {
-				int x = MathHelper.floor_double(owner.xCoord - boardWidthFl / 2F + i);
-				int z = MathHelper.floor_double(owner.zCoord - boardWidthFl / 2F + j);
+				final int x = MathHelper.floor_double(owner.xCoord - boardWidthFl / 2F + i);
+				final int z = MathHelper.floor_double(owner.zCoord - boardWidthFl / 2F + j);
 
-				DimensionalCoords coords = new DimensionalCoords(x, getLayer(), z, dimension);
-
+				final DimensionalCoords coords = new DimensionalCoords(x, getLayer(), z, dimension);
 				if(TFEnergyHelper.isInRange(owner, coords)) {
 					coordArray[i + j * boardWidthFl] = coords;
 				}
@@ -107,20 +103,24 @@ public class GuiSelectReceivers extends GuiScreen {
 		int direction = MathHelper.floor_double(mc.thePlayer.rotationYaw * 4F / 360F + 2.5D) & 3;
 
 		if(direction > 0) {
-			DimensionalCoords[] coordArray1 = coordArray.clone();
+			final DimensionalCoords[] coordArray1 = coordArray.clone();
 
 			for(int i = 0; i < boardWidthFl; ++i) {
 				for(int j = 0; j < boardWidthFl; ++j) {
 					DimensionalCoords coords = coordArray[i + j * boardWidthFl];
 
-					if(direction == 1) {
-						coords = coordArray[boardWidthFl - 1 - j + i * boardWidthFl];
-					}
-					else if(direction == 2) {
-						coords = coordArray[boardWidthFl - 1 - i + (boardWidthFl - 1 - j) * boardWidthFl];
-					}
-					else if(direction == 3) {
-						coords = coordArray[j + (boardWidthFl - 1 - i) * boardWidthFl];
+					switch(direction) {
+						case 1:
+							coords = coordArray[boardWidthFl - 1 - j + i * boardWidthFl];
+							break;
+
+						case 2:
+							coords = coordArray[boardWidthFl - 1 - i + (boardWidthFl - 1 - j) * boardWidthFl];
+							break;
+
+						case 3:
+							coords = coordArray[j + (boardWidthFl - 1 - i) * boardWidthFl];
+							break;
 					}
 
 					coordArray1[i + j * boardWidthFl] = coords;

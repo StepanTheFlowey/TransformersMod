@@ -82,7 +82,7 @@ public class GuiConfigSides extends GuiContainerTF {
 
 		for(GuiButton button : (List<GuiButton>) buttonList) {
 			if(button instanceof GuiButtonIO) {
-				GuiButtonIO iobutton = (GuiButtonIO) button;
+				final GuiButtonIO iobutton = (GuiButtonIO) button;
 				button.enabled = iobutton.machine.canTransfer(iobutton.side);
 			}
 		}
@@ -102,7 +102,7 @@ public class GuiConfigSides extends GuiContainerTF {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
+		final int id = button.id;
 
 		if(id == 0) {
 			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(machine), mc.thePlayer, -machine.io.length - 3));
@@ -121,15 +121,14 @@ public class GuiConfigSides extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
-		String s = I18n.format("gui.tf.io");
+		final String s = I18n.format("gui.tf.io");
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 
-		float height = machine.getBlockType().getBlockHeight();
-		float scale = 30 - (height - 1) * 5;
+		final float height = machine.getBlockType().getBlockHeight();
+		final float scale = 30 - (height - 1) * 5;
 		GL11.glPushMatrix();
 		GL11.glTranslatef(73, 51, 100);
 		GL11.glRotatef(-TFHelper.median(mc.thePlayer.rotationPitch, mc.thePlayer.prevRotationPitch, ClientTickHandler.renderTick), 1, 0, 0);
@@ -146,9 +145,7 @@ public class GuiConfigSides extends GuiContainerTF {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		drawTexturedModalRect((width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize);
 	}
 
 	private void renderScene() {
@@ -186,7 +183,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 
-		final int x = machine.xCoord,	y = machine.yCoord, z = machine.zCoord;
+		final int x = machine.xCoord, y = machine.yCoord, z = machine.zCoord;
 		final Tessellator tessellator = Tessellator.instance;
 		tessellator.setTranslation(-x - 0.5F, -y - 0.5F, -z - 0.5F);
 		renderBlocks.setRenderAllFaces(true);

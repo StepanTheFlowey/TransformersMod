@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiAssemblyTable extends GuiContainerTF {
-	private static final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/assembly_table.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/assembly_table.png");
 
 	public GuiAssemblyTable(InventoryPlayer inventoryPlayer, TileEntityAssemblyTable tile) {
 		super(new ContainerAssemblyTable(inventoryPlayer, tile));
@@ -28,9 +28,8 @@ public class GuiAssemblyTable extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		mc.getTextureManager().bindTexture(texture);
-		final int k = (width - xSize) / 2, l = (height - ySize) / 2;
-		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		drawTexturedModalRect((width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize);
 	}
 }

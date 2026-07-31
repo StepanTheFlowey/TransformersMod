@@ -24,14 +24,13 @@ public class GuiIconFlat extends GuiButtonFlat {
 
 			GL11.glColor3f(1F, 1F, 1F);
 			field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
-			int hoverState = getHoverState(field_146123_n);
 
 			GL11.glEnable(GL11.GL_BLEND);
 			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			mouseDragged(mc, mouseX, mouseY);
 
-			drawTexturedModalRect(xPosition, yPosition, 210, hoverState * height, width, height);
+			drawTexturedModalRect(xPosition, yPosition, 210, getHoverState(field_146123_n) * height, width, height);
 
 			GL11.glPushMatrix();
 			GL11.glTranslatef(xPosition, yPosition, 0);

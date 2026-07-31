@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiTransmitter extends GuiContainerTF {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/transmitter.png");
+	private final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/transmitter.png");
 	private final TileEntityTransmitter tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;
@@ -62,25 +62,21 @@ public class GuiTransmitter extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-
-		String s = I18n.format(tileentity.getInventoryName());
+		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
-		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
+		GL11.glColor3f(1F, 1F, 1F);
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		if(tileentity.getEnergy() > 0) {
-			float f = tileentity.getEnergy() / tileentity.getMaxEnergy();
+			final float f = tileentity.getEnergy() / tileentity.getMaxEnergy();
 			drawTexturedModalRect(x + 107, y + 17 + Math.round(52 * (1 - f)), 196, Math.round(52 * (1 - f)), 16, Math.round(52 * f));
 		}
 

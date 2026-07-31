@@ -38,8 +38,8 @@ public class GuiButtonIO extends GuiButtonFlat {
 
 		final int hoverState = getHoverState(field_146123_n);
 		drawTexturedModalRect(xPosition, yPosition, 60 + side.ordinal() * width, 65 + hoverState * height, width, height);
-		EnumIO mode = machine.io[side.ordinal()];
 
+		final EnumIO mode = machine.io[side.ordinal()];
 		if(mode.ordinal() > 0) {
 			drawTexturedModalRect(xPosition, yPosition, 138 + (mode.ordinal() - 1) * width, 65, width, height);
 		}

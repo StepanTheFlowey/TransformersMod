@@ -28,7 +28,7 @@ import java.util.Locale;
 
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCallback {
-	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/alloy_crucible.png");
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/alloy_crucible.png");
 	private final TileEntityAlloyCrucible tileentity;
 
 	private GuiHoverFieldEnergy fieldEnergy;
@@ -42,8 +42,8 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2;
+		final int y = (height - ySize) / 2;
 
 		buttonList.add(fieldEnergy = new GuiHoverFieldEnergy(x + 49, y + 19, 16, 52, tileentity.data.storage));
 		buttonList.add(new GuiIconFlat(0, x + 151, y + 5, this));
@@ -59,28 +59,28 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
+		switch(button.id) {
+			case 0:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, 0));
+				break;
 
-		if(id == 0) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, 0));
-		}
-		else if(id == 1) {
-			mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 1));
-		}
-		else if(id == 2) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
+			case 1:
+				mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 1));
+				break;
+
+			case 2:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
+				break;
 		}
 	}
 
 	@Override
 	public void render(GuiButton button, int mouseX, int mouseY) {
-		int id = button.id;
-
-		if(id == 0) {
-			EnumSmeltingMode mode = tileentity.smeltingMode;
-			IIcon alloyIcon = TFBlocks.alloyCrucible.getIcon(2, 2);
-			IIcon furnaceIcon = Blocks.furnace.getIcon(2, 2);
+		if(button.id == 0) {
+			final EnumSmeltingMode mode = tileentity.smeltingMode;
+			final IIcon alloyIcon = TFBlocks.alloyCrucible.getIcon(2, 2);
+			final IIcon furnaceIcon = Blocks.furnace.getIcon(2, 2);
 
 			mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 
@@ -88,23 +88,27 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 				case ALLOY:
 					drawTexturedModelRectFromIcon(2, 2, alloyIcon, 16, 16);
 					break;
+
 				case FURNACE:
 					drawTexturedModelRectFromIcon(2, 2, furnaceIcon, 16, 16);
 					break;
-				default:
-					Tessellator tessellator = Tessellator.instance;
-					IIcon icon = alloyIcon;
 
+				default:
+					final Tessellator tessellator = Tessellator.instance;
+
+					IIcon icon = alloyIcon;
 					tessellator.startDrawingQuads();
 					tessellator.addVertexWithUV(2, 18, zLevel, icon.getMinU(), icon.getMaxV());
 					tessellator.addVertexWithUV(10, 18, zLevel, icon.getInterpolatedU(8), icon.getMaxV());
 					tessellator.addVertexWithUV(10, 2, zLevel, icon.getInterpolatedU(8), icon.getMinV());
 					tessellator.addVertexWithUV(2, 2, zLevel, icon.getMinU(), icon.getMinV());
+
 					icon = furnaceIcon;
 					tessellator.addVertexWithUV(10, 18, zLevel, icon.getInterpolatedU(8), icon.getMaxV());
 					tessellator.addVertexWithUV(18, 18, zLevel, icon.getMaxU(), icon.getMaxV());
 					tessellator.addVertexWithUV(18, 2, zLevel, icon.getMaxU(), icon.getMinV());
 					tessellator.addVertexWithUV(10, 2, zLevel, icon.getInterpolatedU(8), icon.getMinV());
+
 					tessellator.draw();
 					break;
 			}
@@ -118,10 +122,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-
-		String s = I18n.format(tileentity.getInventoryName());
+		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 	}
@@ -129,18 +130,18 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		GL11.glColor3f(1F, 1F, 1F);
-		mc.getTextureManager().bindTexture(guiTextures);
+		mc.getTextureManager().bindTexture(texture);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		if(tileentity.getEnergy() > 0) {
-			float f = tileentity.getEnergy() / tileentity.getMaxEnergy();
+			final float f = tileentity.getEnergy() / tileentity.getMaxEnergy();
 			drawTexturedModalRect(x + 49, y + 19 + Math.round(52 * (1 - f)), 176, Math.round(52 * (1 - f)), 16, Math.round(52 * f));
 		}
 
 		if(tileentity.smeltTime > 0) {
-			int progress = tileentity.getSmeltProgressScaled(14);
+			final int progress = tileentity.getSmeltProgressScaled(14);
 			drawTexturedModalRect(x + 107, y + 49 - progress + 15, 192, 12 - progress, 14, progress);
 		}
 	}

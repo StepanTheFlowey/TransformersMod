@@ -9,6 +9,7 @@ import net.minecraft.inventory.Container;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,11 +43,11 @@ public abstract class GuiContainerTF extends GuiContainer {
 			RenderHelper.disableStandardItemLighting();
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
-			int k = 0;
-			Iterator iterator = text.iterator();
 
-			List<String> list = Lists.newArrayList();
-			List<Integer> colors = Lists.newArrayList();
+			int k = 0;
+			final Iterator iterator = text.iterator();
+			List<String> list = new ArrayList<>();
+			List<Integer> colors = new ArrayList<>();
 
 			while(iterator.hasNext()) {
 				String s = (String) iterator.next();
