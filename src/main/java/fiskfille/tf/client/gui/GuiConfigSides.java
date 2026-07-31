@@ -66,12 +66,12 @@ public class GuiConfigSides extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2;
+		final int y = (height - ySize) / 2;
 
 		buttonList.add(new GuiButtonDistribution(0, x + 111, y + 66, machine));
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			int index = dir.ordinal();
+			final int index = dir.ordinal();
 			buttonList.add(new GuiButtonIO(index + 1, x + 108 + index % 2 * 15, y + 18 + index / 2 * 15, machine, dir));
 		}
 	}
@@ -90,9 +90,9 @@ public class GuiConfigSides extends GuiContainerTF {
 		neighbors.clear();
 
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			int x = machine.xCoord + dir.offsetX;
-			int y = machine.yCoord + dir.offsetY + (dir.offsetY > 0 ? machine.getBlockType().getBlockHeight() - 1 : 0);
-			int z = machine.zCoord + dir.offsetZ;
+			final int x = machine.xCoord + dir.offsetX;
+			final int y = machine.yCoord + dir.offsetY + (dir.offsetY > 0 ? machine.getBlockType().getBlockHeight() - 1 : 0);
+			final int z = machine.zCoord + dir.offsetZ;
 
 			if(!world.isAirBlock(x, y, z)) {
 				neighbors.add(new ChunkCoordinates(x, y, z));
@@ -152,12 +152,6 @@ public class GuiConfigSides extends GuiContainerTF {
 	}
 
 	private void renderScene() {
-		Tessellator tessellator = Tessellator.instance;
-		BlockMachineBase block = machine.getBlockType();
-		int x = machine.xCoord;
-		int y = machine.yCoord;
-		int z = machine.zCoord;
-
 		mc.entityRenderer.disableLightmap(0);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -191,17 +185,18 @@ public class GuiConfigSides extends GuiContainerTF {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
+
+		final int x = machine.xCoord,	y = machine.yCoord, z = machine.zCoord;
+		final Tessellator tessellator = Tessellator.instance;
 		tessellator.setTranslation(-x - 0.5F, -y - 0.5F, -z - 0.5F);
 		renderBlocks.setRenderAllFaces(true);
 
+		final BlockMachineBase block = machine.getBlockType();
 		for(GuiButton button : (List<GuiButton>) buttonList) {
 			if(button instanceof GuiButtonIO) {
-				GuiButtonIO iobutton = (GuiButtonIO) button;
+				final GuiButtonIO iobutton = (GuiButtonIO) button;
 
 				if(iobutton.func_146115_a()) {
-					ForgeDirection dir = iobutton.side;
-					IIcon icon = renderBlocks.getBlockIcon(Blocks.wool);
-
 					if(iobutton.enabled) {
 						GL11.glColor4f(0.2F, 1, 0.2F, 0.5F);
 					}
@@ -212,6 +207,8 @@ public class GuiConfigSides extends GuiContainerTF {
 					block.setBlockBoundsBasedOnState(world, x, y, z);
 					renderBlocks.setRenderBoundsFromBlock(block);
 
+					final ForgeDirection dir = iobutton.side;
+					IIcon icon = renderBlocks.getBlockIcon(Blocks.wool);
 					for(int i = 0; i < 2; ++i) {
 						if(i == 1) {
 							EnumIO io = machine.getInOutMode(dir);
@@ -296,12 +293,13 @@ public class GuiConfigSides extends GuiContainerTF {
 	private void doWorldRenderPass(List<ChunkCoordinates> blocks, int pass) {
 		ForgeHooksClient.setRenderPass(pass);
 
-		Tessellator.instance.startDrawingQuads();
-		Tessellator.instance.setTranslation(camera.x, camera.y, camera.z);
-		Tessellator.instance.setBrightness(15 << 20 | 15 << 4);
+		final Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.setTranslation(camera.x, camera.y, camera.z);
+		tessellator.setBrightness(15 << 20 | 15 << 4);
 
 		for(ChunkCoordinates coords : blocks) {
-			Block block = world.getBlock(coords.posX, coords.posY, coords.posZ);
+			final Block block = world.getBlock(coords.posX, coords.posY, coords.posZ);
 
 			if(block != null) {
 				if(block.canRenderInPass(pass)) {
@@ -313,8 +311,8 @@ public class GuiConfigSides extends GuiContainerTF {
 			}
 		}
 
-		Tessellator.instance.draw();
-		Tessellator.instance.setTranslation(0, 0, 0);
+		tessellator.draw();
+		tessellator.setTranslation(0, 0, 0);
 	}
 
 	private void setGlStateForPass(int pass, boolean isNeighbour) {

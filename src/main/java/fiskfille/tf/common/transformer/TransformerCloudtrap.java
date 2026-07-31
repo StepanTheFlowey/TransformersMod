@@ -78,10 +78,10 @@ public class TransformerCloudtrap extends TransformerJet {
 
 	@Override
 	public void doNitroParticles(EntityPlayer player) {
-		Random rand = new Random();
+		final Random rand = new Random();
 
 		for(int i = 0; i < 4; ++i) {
-			Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.135F, i < 2, -2.5, true);
+			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.135F, i < 2, -2.5, true);
 			player.worldObj.spawnParticle("flame", side.xCoord, side.yCoord + 0.25F, side.zCoord, (rand.nextFloat() - 0.5F) / 20, (rand.nextFloat() - 0.5F) / 20, (rand.nextFloat() - 0.5F) / 20);
 		}
 	}

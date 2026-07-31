@@ -65,7 +65,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 				worldObj.createExplosion(null, mop.entityHit.posX, mop.entityHit.posY, mop.entityHit.posZ, 4, allowExplosions);
 
 				if(mop.entityHit instanceof EntityBat && getThrower() instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer) getThrower();
+					final EntityPlayer player = (EntityPlayer) getThrower();
 
 					if(player.getDistanceSqToEntity(mop.entityHit) >= 25D) {
 						player.addStat(TFAchievements.sharpshooter, 1);
@@ -78,23 +78,30 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 	}
 
 	public void explode(int x, int y, int z, int sideHit) {
-		if(sideHit == 0) {
-			--y;
-		}
-		else if(sideHit == 1) {
-			++y;
-		}
-		else if(sideHit == 2) {
-			--z;
-		}
-		else if(sideHit == 3) {
-			++z;
-		}
-		else if(sideHit == 4) {
-			--x;
-		}
-		else if(sideHit == 5) {
-			++x;
+		switch(sideHit) {
+			case 0:
+				--y;
+				break;
+
+			case 1:
+				++y;
+				break;
+
+			case 2:
+				--z;
+				break;
+
+			case 3:
+				++z;
+				break;
+
+			case 4:
+				--x;
+				break;
+
+			case 5:
+				++x;
+				break;
 		}
 
 		worldObj.createExplosion(null, x + 0.5F, y + 0.5F, z + 0.5F, 4, allowExplosions);

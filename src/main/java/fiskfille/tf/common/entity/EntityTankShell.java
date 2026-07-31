@@ -50,23 +50,30 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
 	}
 
 	public void explode(int x, int y, int z, int sideHit) {
-		if(sideHit == 0) {
-			--y;
-		}
-		else if(sideHit == 1) {
-			++y;
-		}
-		else if(sideHit == 2) {
-			--z;
-		}
-		else if(sideHit == 3) {
-			++z;
-		}
-		else if(sideHit == 4) {
-			--x;
-		}
-		else if(sideHit == 5) {
-			++x;
+		switch(sideHit) {
+			case 0:
+				--y;
+				break;
+
+			case 1:
+				++y;
+				break;
+
+			case 2:
+				--z;
+				break;
+
+			case 3:
+				++z;
+				break;
+
+			case 4:
+				--x;
+				break;
+
+			case 5:
+				++x;
+				break;
 		}
 
 		worldObj.createExplosion(null, x + 0.5F, y + 0.5F, z + 0.5F, 1F, allowExplosions);

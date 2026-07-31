@@ -134,12 +134,10 @@ public final class TFFluidRenderHelper {
 		FluidStack stack = tank.getFluid();
 
 		if(stack != null && stack.amount > 0) {
-			Tessellator tessellator = Tessellator.instance;
-			IIcon icon = stack.getFluid().getStillIcon();
-			float f = (float) stack.amount / tank.getCapacity();
-
-			Vector4d pos = new Vector4d(x, y, width, height);
-			Vector4d tex = new Vector4d(icon.getMinU(), icon.getInterpolatedV(16 * (1 - f)), icon.getInterpolatedU(16 * (float) width / height), icon.getMaxV());
+			final IIcon icon = stack.getFluid().getStillIcon();
+			final float f = (float) stack.amount / tank.getCapacity();
+			final Vector4d tex = new Vector4d(icon.getMinU(), icon.getInterpolatedV(16 * (1 - f)), icon.getInterpolatedU(16 * (float) width / height), icon.getMaxV());
+			final Vector4d pos = new Vector4d(x, y, width, height);
 			pos.y += pos.w * (1 - f);
 			pos.w *= f;
 			pos.z += pos.x;
@@ -147,6 +145,8 @@ public final class TFFluidRenderHelper {
 
 			Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 			TFFluidRenderHelper.setColorForFluidStack(stack);
+
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
 			tessellator.setTranslation(0, 0, zLevel);
 			tessellator.addVertexWithUV(pos.x, pos.w, 0, tex.x, tex.w);
@@ -155,7 +155,9 @@ public final class TFFluidRenderHelper {
 			tessellator.addVertexWithUV(pos.x, pos.y, 0, tex.x, tex.y);
 			tessellator.setTranslation(0, 0, 0);
 			GL11.glEnable(GL11.GL_BLEND);
+
 			tessellator.draw();
+
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glColor3f(1F, 1F, 1F);
 		}

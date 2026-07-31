@@ -47,17 +47,12 @@ public class EntityBassCharge extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 		if(mop.entityHit != null) {
-			float f = 2F * (1F - (float) ticksExisted / 20);
-			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), f);
+			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 2F * (1F - ticksExisted / 20F));
 			mop.entityHit.hurtResistantTime = 0;
 		}
 		else if(mop.typeOfHit == MovingObjectType.BLOCK) {
-			int x = mop.blockX;
-			int y = mop.blockY;
-			int z = mop.blockZ;
-			Block block = worldObj.getBlock(x, y, z);
-
-			if(block.getMaterial().equals(Material.glass)) {
+			final int x = mop.blockX, y = mop.blockY, z = mop.blockZ;
+			if(worldObj.getBlock(x, y, z).getMaterial().equals(Material.glass)) {
 				worldObj.playAuxSFX(2001, x, y + 1, z, Block.getIdFromBlock(worldObj.getBlock(x, y, z)) + (worldObj.getBlockMetadata(x, y, z) << 12));
 				worldObj.setBlockToAir(x, y, z);
 			}

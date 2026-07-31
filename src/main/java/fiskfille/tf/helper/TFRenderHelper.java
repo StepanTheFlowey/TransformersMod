@@ -44,7 +44,7 @@ public class TFRenderHelper {
 	public static void setLighting(int lighting) {
 		lastBrightnessX = OpenGlHelper.lastBrightnessX;
 		lastBrightnessY = OpenGlHelper.lastBrightnessY;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lighting % 65536 / 255F, lighting / 65536 / 255F);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lighting % 65536 / 255F, lighting / 65536F / 255F);
 	}
 
 	public static void resetLighting() {

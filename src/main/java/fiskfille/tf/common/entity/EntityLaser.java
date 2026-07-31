@@ -25,7 +25,7 @@ public class EntityLaser extends EntityThrowable {
 
 	@Override
 	public void setThrowableHeading(double p_70186_1_, double p_70186_3_, double p_70186_5_, float p_70186_7_, float p_70186_8_) {
-		float f2 = MathHelper.sqrt_double(p_70186_1_ * p_70186_1_ + p_70186_3_ * p_70186_3_ + p_70186_5_ * p_70186_5_);
+		final float f2 = MathHelper.sqrt_double(p_70186_1_ * p_70186_1_ + p_70186_3_ * p_70186_3_ + p_70186_5_ * p_70186_5_);
 		p_70186_1_ /= f2;
 		p_70186_3_ /= f2;
 		p_70186_5_ /= f2;
@@ -35,7 +35,7 @@ public class EntityLaser extends EntityThrowable {
 		motionX = p_70186_1_;
 		motionY = p_70186_3_;
 		motionZ = p_70186_5_;
-		float f3 = MathHelper.sqrt_double(p_70186_1_ * p_70186_1_ + p_70186_5_ * p_70186_5_);
+		final float f3 = MathHelper.sqrt_double(p_70186_1_ * p_70186_1_ + p_70186_5_ * p_70186_5_);
 		prevRotationYaw = rotationYaw = (float) (Math.atan2(p_70186_1_, p_70186_5_) * 180D / Math.PI);
 		prevRotationPitch = rotationPitch = (float) (Math.atan2(p_70186_3_, f3) * 180D / Math.PI);
 	}
@@ -58,8 +58,7 @@ public class EntityLaser extends EntityThrowable {
 				setDead();
 			}
 			else if(mop.typeOfHit == MovingObjectType.ENTITY) {
-				Entity entityHit = mop.entityHit;
-
+				final Entity entityHit = mop.entityHit;
 				entityHit.setFire(10);
 				entityHit.attackEntityFrom(DamageSource.inFire, 2.5F);
 				entityHit.hurtResistantTime = 0;
@@ -69,23 +68,30 @@ public class EntityLaser extends EntityThrowable {
 	}
 
 	public void setFire(int x, int y, int z, int sideHit) {
-		if(sideHit == 0) {
-			--y;
-		}
-		else if(sideHit == 1) {
-			++y;
-		}
-		else if(sideHit == 2) {
-			--z;
-		}
-		else if(sideHit == 3) {
-			++z;
-		}
-		else if(sideHit == 4) {
-			--x;
-		}
-		else if(sideHit == 5) {
-			++x;
+		switch(sideHit) {
+			case 0:
+				--y;
+				break;
+
+			case 1:
+				++y;
+				break;
+
+			case 2:
+				--z;
+				break;
+
+			case 3:
+				++z;
+				break;
+
+			case 4:
+				--x;
+				break;
+
+			case 5:
+				++x;
+				break;
 		}
 
 		if(worldObj.isAirBlock(x, y, z)) {

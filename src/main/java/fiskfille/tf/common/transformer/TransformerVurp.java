@@ -88,13 +88,11 @@ public class TransformerVurp extends TransformerCar {
 	public void tick(EntityPlayer player, float timer) {
 		super.tick(player, timer);
 
-		ItemStack heldItem = player.getHeldItem();
+		final ItemStack heldItem = player.getHeldItem();
+		final int zoomTimer = TFDataManager.getZoomTimer(player);
+		final boolean holdingSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper;
 
-		boolean holdingSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper;
-
-		int zoomTimer = TFDataManager.getZoomTimer(player);
-
-		PotionEffect activePotionEffect = player.getActivePotionEffect(Potion.nightVision);
+		final PotionEffect activePotionEffect = player.getActivePotionEffect(Potion.nightVision);
 		if(activePotionEffect == null || activePotionEffect.getDuration() == 0) {
 			if(holdingSniper && zoomTimer > 7) {
 				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1, 0));

@@ -3,7 +3,6 @@ package fiskfille.tf.common.transformer.base;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
 import fiskfille.tf.client.model.transformer.definition.TransformerModel;
-import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,21 +31,21 @@ public abstract class Transformer {
 	 * Override to specify whether this Transformer can use nitro.
 	 *
 	 * @param player The player trying to use nitro.
-	 * @returns whether the player can use nitro.
+	 * @return whether the player can use nitro.
 	 */
 	public boolean canUseNitro(EntityPlayer player) {
 		return true;
 	}
 
 	/**
-	 * @returns the model to use for this Transformer.
+	 * @return the model to use for this Transformer.
 	 */
 	public TransformerModel getModel() {
 		return TFModelRegistry.getModel(this);
 	}
 
 	/**
-	 * @returns the name of this Transformer.
+	 * @return the name of this Transformer.
 	 */
 	public String getName() {
 		return name;
@@ -79,10 +78,6 @@ public abstract class Transformer {
 
 	public boolean canJumpAsVehicle(EntityPlayer player) {
 		return false;
-	}
-
-	public boolean canTransform() {
-		return TFConfig.canTransform(this);
 	}
 
 	public boolean hasStealthForce() {

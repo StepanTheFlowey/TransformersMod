@@ -59,10 +59,10 @@ public abstract class TransformerTank extends Transformer {
 
 	@Override
 	public void doNitroParticles(EntityPlayer player) {
-		Random rand = new Random();
+		final Random rand = new Random();
 
 		for(int i = 0; i < 4; ++i) {
-			Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -0.6, false);
+			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -0.6, false);
 			player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);
 		}
 	}

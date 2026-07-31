@@ -42,8 +42,7 @@ public class EntityTransformiumSeed extends Entity {
 	}
 
 	@Override
-	protected void entityInit() {
-	}
+	protected void entityInit() {}
 
 	@Override
 	protected boolean canTriggerWalking() {

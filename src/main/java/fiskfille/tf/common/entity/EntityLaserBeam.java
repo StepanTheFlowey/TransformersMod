@@ -60,10 +60,10 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
-		Entity entityHit = mop.entityHit;
+		final Entity entityHit = mop.entityHit;
 
 		if(entityHit != null) {
-			EntityLivingBase thrower = getThrower();
+			final EntityLivingBase thrower = getThrower();
 
 			if(entityHit instanceof EntityLivingBase && thrower instanceof EntityPlayer && thrower != entityHit) {
 				entityHit.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) thrower), 10F);

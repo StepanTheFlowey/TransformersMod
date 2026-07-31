@@ -34,7 +34,7 @@ public class CloudtrapJetpackManager {
 		}
 		else {
 			boolean playerJetpacking = false;
-			Boolean playerJetpackingObj = cloudtrapJetpacking.get(player);
+			final Boolean playerJetpackingObj = cloudtrapJetpacking.get(player);
 
 			if(playerJetpackingObj != null) {
 				playerJetpacking = playerJetpackingObj;
@@ -54,8 +54,8 @@ public class CloudtrapJetpackManager {
 			}
 
 			for(int i = 0; i < 20; ++i) {
-				Random rand = new Random();
-				Vec3 coords = TFVectorHelper.getSideCoords(player, 0.15, i > 10, false);
+				final Random rand = new Random();
+				final Vec3 coords = TFVectorHelper.getSideCoords(player, 0.15, i > 10, false);
 				TFParticles.spawnParticle(TFParticleType.FLAMETHROWER_FLAME, coords.xCoord, coords.yCoord + rand.nextFloat() / 4 - 0.125F, coords.zCoord, rand.nextFloat() / 4 - 0.125F, -0.8F, rand.nextFloat() / 4 - 0.125F);
 			}
 		}
