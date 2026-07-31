@@ -12,216 +12,248 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class ModelVurpVehicle extends ModelVehicleBase {
-	public final ModelRendererTF vehicleBase;
-	public final ModelRendererTF vehicleWaist1;
-	public final ModelRendererTF vehicleWaist2;
-	public final ModelRendererTF vehicleWaistConnector1;
-	public final ModelRendererTF vehicleTorsoconnector1;
-	public final ModelRendererTF vehicleUpperlegR1;
-	public final ModelRendererTF vehicleUpperlegL1;
-	public final ModelRendererTF vehicleRplate1;
-	public final ModelRendererTF vehicleLplate1;
-	public final ModelRendererTF vehicleRearplate;
-	public final ModelRendererTF vehicleUpperlegR2;
-	public final ModelRendererTF vehicleKneeR1;
-	public final ModelRendererTF vehicleLowerlegR1;
-	public final ModelRendererTF vehiclelowerlegR7;
-	public final ModelRendererTF vehicleLowerlegR4;
-	public final ModelRendererTF vehicleLowerlegR5;
-	public final ModelRendererTF vehicleWheelBackR;
-	public final ModelRendererTF vehicleupperlegL2;
-	public final ModelRendererTF vehiclekneeL2;
-	public final ModelRendererTF vehiclelowerlegL1;
-	public final ModelRendererTF vehiclelowerlegL7;
-	public final ModelRendererTF vehiclelowerlegL4;
-	public final ModelRendererTF vehiclelowerlegL5;
-	public final ModelRendererTF vehicleWheelBackL;
-	public final ModelRendererTF vehicletorsobase;
-	public final ModelRendererTF vehiclehood1;
-	public final ModelRendererTF vehiclefrontR1;
-	public final ModelRendererTF vehiclefrontL1;
+	public final ModelRendererTF vehiclearmbaseL1;
+	public final ModelRendererTF vehiclearmbaseR1;
 	public final ModelRendererTF vehiclebackplate1;
 	public final ModelRendererTF vehiclebackplate2;
-	public final ModelRendererTF vehicleWheelR;
-	public final ModelRendererTF vehicleWheelL;
-	public final ModelRendererTF vehiclearmbaseR1;
-	public final ModelRendererTF vehiclearmbaseL1;
-	public final ModelRendererTF vehiclewindow1;
+	public final ModelRendererTF vehicleBase;
 	public final ModelRendererTF vehiclebaseplate;
+	public final ModelRendererTF vehiclefrontL1;
+	public final ModelRendererTF vehiclefrontL2;
+	public final ModelRendererTF vehiclefrontR1;
+	public final ModelRendererTF vehiclefrontR2;
+	public final ModelRendererTF vehiclehood1;
 	public final ModelRendererTF vehiclehood2;
 	public final ModelRendererTF vehiclehood3;
 	public final ModelRendererTF vehiclehood4;
-	public final ModelRendererTF vehiclefrontR2;
-	public final ModelRendererTF vehiclefrontL2;
-	public final ModelRendererTF vehicleupperarmR1;
-	public final ModelRendererTF vehicleshoulderL1;
-	public final ModelRendererTF vehiclelowerarmR1;
-	public final ModelRendererTF vehiclelowerarmR2;
-	public final ModelRendererTF vehicleUpperarmL1;
-	public final ModelRendererTF vehicleshoulderL1_1;
+	public final ModelRendererTF vehiclekneeL2;
+	public final ModelRendererTF vehicleKneeR1;
 	public final ModelRendererTF vehicleLowerarmL1;
 	public final ModelRendererTF vehicleLowerarmL2;
-	public final ModelRendererTF vehicleWindow2;
+	public final ModelRendererTF vehiclelowerarmR1;
+	public final ModelRendererTF vehiclelowerarmR2;
+	public final ModelRendererTF vehiclelowerlegL1;
+	public final ModelRendererTF vehiclelowerlegL4;
+	public final ModelRendererTF vehiclelowerlegL5;
+	public final ModelRendererTF vehiclelowerlegL7;
+	public final ModelRendererTF vehicleLowerlegR1;
+	public final ModelRendererTF vehicleLowerlegR4;
+	public final ModelRendererTF vehicleLowerlegR5;
+	public final ModelRendererTF vehiclelowerlegR7;
+	public final ModelRendererTF vehicleLplate1;
 	public final ModelRendererTF vehiclerear1;
 	public final ModelRendererTF vehicleRear2;
+	public final ModelRendererTF vehicleRearplate;
+	public final ModelRendererTF vehicleRplate1;
+	public final ModelRendererTF vehicleshoulderL1;
+	public final ModelRendererTF vehicleshoulderL1_1;
+	public final ModelRendererTF vehicletorsobase;
+	public final ModelRendererTF vehicleTorsoconnector1;
+	public final ModelRendererTF vehicleUpperarmL1;
+	public final ModelRendererTF vehicleupperarmR1;
+	public final ModelRendererTF vehicleUpperlegL1;
+	public final ModelRendererTF vehicleupperlegL2;
+	public final ModelRendererTF vehicleUpperlegR1;
+	public final ModelRendererTF vehicleUpperlegR2;
+	public final ModelRendererTF vehicleWaist1;
+	public final ModelRendererTF vehicleWaist2;
+	public final ModelRendererTF vehicleWaistConnector1;
+	public final ModelRendererTF vehicleWheelBackL;
+	public final ModelRendererTF vehicleWheelBackR;
+	public final ModelRendererTF vehicleWheelL;
+	public final ModelRendererTF vehicleWheelR;
+	public final ModelRendererTF vehiclewindow1;
+	public final ModelRendererTF vehicleWindow2;
 
 	public ModelVurpVehicle() {
-		textureWidth = 128;
-		textureHeight = 128;
+		textureWidth = textureHeight = 128;
 
 		vehiclebackplate2 = new ModelRendererTF(this, 51, 74);
 		vehiclebackplate2.mirror = true;
 		vehiclebackplate2.setRotationPoint(-2.3F, -1.8F, 1.8F);
 		vehiclebackplate2.addBox(-3, -2, 0, 3, 5, 1);
 		setRotateAngle(vehiclebackplate2, 1.5882496193148399F, 0.017453292519943295F, -1.5707963267948966F);
+
 		vehicleWaistConnector1 = new ModelRendererTF(this, 4, 64);
 		vehicleWaistConnector1.setRotationPoint(0, 2, -1);
 		vehicleWaistConnector1.addBox(-1, -0.1F, -2.3F, 2, 3, 4);
 		setRotateAngle(vehicleWaistConnector1, 1.5707963267948966F, 0, 0);
+
 		vehiclewindow1 = new ModelRendererTF(this, 0, 7);
 		vehiclewindow1.setRotationPoint(0, -1.9F, -1.2F);
 		vehiclewindow1.addBox(-2.5F, -0.2F, 0, 5, 2, 3);
 		setRotateAngle(vehiclewindow1, 0.33161255787892263F, 0, 0);
+
 		vehicleLowerlegR1 = new ModelRendererTF(this, 0, 77);
 		vehicleLowerlegR1.setRotationPoint(-0.8F, 2, 1.5F);
 		vehicleLowerlegR1.addBox(-1.5F, 0, 0, 3, 6, 2);
 		setRotateAngle(vehicleLowerlegR1, 3.141592653589793F, 0, -0.017453292519943295F);
+
 		vehiclelowerlegL1 = new ModelRendererTF(this, 0, 77);
 		vehiclelowerlegL1.mirror = true;
 		vehiclelowerlegL1.setRotationPoint(0.8F, 2, 1.5F);
 		vehiclelowerlegL1.addBox(-1.5F, 0, 0, 3, 6, 2);
 		setRotateAngle(vehiclelowerlegL1, 3.141592653589793F, 0, 0.017453292519943295F);
+
 		vehicleLowerarmL1 = new ModelRendererTF(this, 64, 65);
 		vehicleLowerarmL1.setRotationPoint(0, 3.3F, 0.4F);
 		vehicleLowerarmL1.addBox(-1.1F, -0.2F, -1.6F, 2, 4, 3);
 		setRotateAngle(vehicleLowerarmL1, -3.141592653589793F, 0, 0);
+
 		vehiclefrontL2 = new ModelRendererTF(this, 48, 70);
 		vehiclefrontL2.mirror = true;
-		vehiclefrontL2.setRotationPoint(0, 0, 0);
 		vehiclefrontL2.addBox(-0.5F, -2, -3.7F, 2, 1, 3);
 		setRotateAngle(vehiclefrontL2, 0.24434609527920614F, 0, 0.017453292519943295F);
+
 		vehicleWaist2 = new ModelRendererTF(this, 0, 64);
 		vehicleWaist2.setRotationPoint(0, 7, 1.5F);
 		vehicleWaist2.addBox(-3, 0, 0, 3, 2, 1);
 		setRotateAngle(vehicleWaist2, -1.5707963267948966F, 0, -3.211405823669566F);
+
 		vehicleupperarmR1 = new ModelRendererTF(this, 74, 60);
 		vehicleupperarmR1.setRotationPoint(-1.5F, 0, 1);
 		vehicleupperarmR1.addBox(0, 0.8F, -0.5F, 1, 3, 1);
 		setRotateAngle(vehicleupperarmR1, 1.5707963267948966F, 0, 0);
+
 		vehiclehood3 = new ModelRendererTF(this, 47, 65);
-		vehiclehood3.setRotationPoint(0, 0, 0);
 		vehiclehood3.addBox(-1.8F, -3.3F, -1, 1, 4, 1);
 		setRotateAngle(vehiclehood3, -0.005235987755982988F, 0.003490658503988659F, -0.22165681500327983F);
+
 		vehicleTorsoconnector1 = new ModelRendererTF(this, 35, 60);
 		vehicleTorsoconnector1.setRotationPoint(0, 0.1F, -0.4F);
 		vehicleTorsoconnector1.addBox(-1.2F, -4, -0.8F, 2, 4, 2);
 		setRotateAngle(vehicleTorsoconnector1, 0, 0.7853981633974483F, 0);
+
 		vehiclelowerlegL5 = new ModelRendererTF(this, 16, 75);
 		vehiclelowerlegL5.mirror = true;
 		vehiclelowerlegL5.setRotationPoint(1.4F, 0, 0);
 		vehiclelowerlegL5.addBox(-1, 0, 0, 1, 6, 1);
 		setRotateAngle(vehiclelowerlegL5, -0.15707963267948966F, 0.06981317007977318F, 0.05235987755982988F);
+
 		vehiclehood2 = new ModelRendererTF(this, 47, 65);
-		vehiclehood2.setRotationPoint(0, 0, 0);
 		vehiclehood2.addBox(0.8F, -3.3F, -1, 1, 4, 1);
 		setRotateAngle(vehiclehood2, -0.005235987755982988F, 0.003490658503988659F, 0.22165681500327983F);
+
 		vehicleLowerlegR5 = new ModelRendererTF(this, 16, 75);
 		vehicleLowerlegR5.setRotationPoint(-1.4F, 0, 0);
 		vehicleLowerlegR5.addBox(0, 0, 0, 1, 6, 1);
 		setRotateAngle(vehicleLowerlegR5, -0.15707963267948966F, -0.06981317007977318F, -0.05235987755982988F);
+
 		vehiclelowerlegL4 = new ModelRendererTF(this, 8, 83);
 		vehiclelowerlegL4.setRotationPoint(-0.3F, 2.5F, 0.9F);
 		vehiclelowerlegL4.addBox(-0.5F, -2, -2, 1, 3, 2);
 		setRotateAngle(vehiclelowerlegL4, 0.15707963267948966F, -0.10471975511965977F, 0.08726646259971647F);
+
 		vehiclehood4 = new ModelRendererTF(this, 51, 65);
 		vehiclehood4.setRotationPoint(0, -0.2F, 0);
 		vehiclehood4.addBox(-1.5F, -0.7F, -1.4F, 3, 2, 1);
 		setRotateAngle(vehiclehood4, 1.3526301702956054F, 0, 0);
+
 		vehicleWindow2 = new ModelRendererTF(this, 0, 24);
 		vehicleWindow2.setRotationPoint(0, -0.2F, 3);
 		vehicleWindow2.addBox(-2.5F, 0, 0, 5, 1, 2);
 		setRotateAngle(vehicleWindow2, -0.20943951023931953F, 0, 0);
+
 		vehiclelowerlegR7 = new ModelRendererTF(this, 14, 85);
 		vehiclelowerlegR7.setRotationPoint(0.5F, 1, 1.6F);
 		vehiclelowerlegR7.addBox(-2.4F, -0.5F, -1, 3, 2, 1);
 		setRotateAngle(vehiclelowerlegR7, 0.6108652381980153F, -0.05235987755982988F, 0);
+
 		vehiclelowerarmR2 = new ModelRendererTF(this, 74, 68);
 		vehiclelowerarmR2.setRotationPoint(-1.5F, 3.5F, 0);
 		vehiclelowerarmR2.addBox(0, -3, -1.9F, 1, 3, 2);
 		setRotateAngle(vehiclelowerarmR2, 0.03490658503988659F, -0.2617993877991494F, -0.10122909661567112F);
+
 		vehicleRplate1 = new ModelRendererTF(this, 0, 17);
 		vehicleRplate1.setRotationPoint(0, 0.4F, 0.3F);
 		vehicleRplate1.addBox(-3.4F, -0.9F, -5.2F, 3, 1, 6);
 		setRotateAngle(vehicleRplate1, 0.061086523819801536F, 0.05235987755982988F, -0.017453292519943295F);
+
 		vehiclefrontL1 = new ModelRendererTF(this, 35, 77);
 		vehiclefrontL1.mirror = true;
 		vehiclefrontL1.setRotationPoint(1.8F, -0.1F, -0.9F);
 		vehiclefrontL1.addBox(-0.5F, -1, -4, 2, 2, 3);
+
 		vehiclebaseplate = new ModelRendererTF(this, 13, 0);
 		vehiclebaseplate.setRotationPoint(-2.5F, 0.1F, -4.5F);
 		vehiclebaseplate.addBox(0, 0, 0, 5, 1, 13);
+
 		vehiclebackplate1 = new ModelRendererTF(this, 51, 74);
 		vehiclebackplate1.setRotationPoint(2.3F, -1.8F, 1.8F);
 		vehiclebackplate1.addBox(0, -2, 0, 3, 5, 1);
 		setRotateAngle(vehiclebackplate1, 1.5882496193148399F, -0.017453292519943295F, 1.5707963267948966F);
+
 		vehicleLplate1 = new ModelRendererTF(this, 0, 17);
 		vehicleLplate1.mirror = true;
 		vehicleLplate1.setRotationPoint(0, 0.4F, 0.3F);
 		vehicleLplate1.addBox(0.4F, -0.9F, -5.2F, 3, 1, 6);
 		setRotateAngle(vehicleLplate1, 0.061086523819801536F, -0.05235987755982988F, 0.017453292519943295F);
+
 		vehiclelowerarmR1 = new ModelRendererTF(this, 64, 65);
 		vehiclelowerarmR1.mirror = true;
 		vehiclelowerarmR1.setRotationPoint(1, 3.3F, 0.4F);
 		vehiclelowerarmR1.addBox(-0.9F, -0.2F, -1.6F, 2, 4, 3);
 		setRotateAngle(vehiclelowerarmR1, -3.141592653589793F, 0, 0);
+
 		vehiclerear1 = new ModelRendererTF(this, 0, 0);
 		vehiclerear1.setRotationPoint(0, 0.3F, 4);
 		vehiclerear1.addBox(-2.5F, 0.1F, 0, 5, 2, 5);
 		setRotateAngle(vehiclerear1, -0.3141592653589793F, 0, 0);
+
 		vehiclearmbaseR1 = new ModelRendererTF(this, 64, 60);
 		vehiclearmbaseR1.setRotationPoint(-1, -0.4F, 1);
 		vehiclearmbaseR1.addBox(-2, -1, -1, 2, 2, 3);
+
 		vehicleWaist1 = new ModelRendererTF(this, 0, 64);
 		vehicleWaist1.mirror = true;
 		vehicleWaist1.setRotationPoint(0, 7, 1.5F);
 		vehicleWaist1.addBox(0, 0, 0, 3, 2, 1);
 		setRotateAngle(vehicleWaist1, -1.5707963267948966F, 0, 3.211405823669566F);
+
 		vehiclelowerlegL7 = new ModelRendererTF(this, 14, 85);
 		vehiclelowerlegL7.mirror = true;
 		vehiclelowerlegL7.setRotationPoint(-0.5F, 1, 1.6F);
 		vehiclelowerlegL7.addBox(-0.6F, -0.5F, -1, 3, 2, 1);
 		setRotateAngle(vehiclelowerlegL7, 0.6108652381980153F, 0.05235987755982988F, 0);
+
 		vehicleshoulderL1_1 = new ModelRendererTF(this, 78, 60);
 		vehicleshoulderL1_1.mirror = true;
 		vehicleshoulderL1_1.setRotationPoint(2.3F, 0, -1.6F);
 		vehicleshoulderL1_1.addBox(-1, -1.4F, -1.5F, 1, 3, 3);
 		setRotateAngle(vehicleshoulderL1_1, -0.019198621771937624F, 0, 0);
+
 		vehicleshoulderL1 = new ModelRendererTF(this, 78, 60);
 		vehicleshoulderL1.setRotationPoint(-2.3F, 0, -1.6F);
 		vehicleshoulderL1.addBox(0, -1.4F, -1.5F, 1, 3, 3);
 		setRotateAngle(vehicleshoulderL1, -0.019198621771937624F, 0, 0);
+
 		vehiclefrontR1 = new ModelRendererTF(this, 35, 77);
 		vehiclefrontR1.setRotationPoint(-1.8F, -0.1F, -0.9F);
 		vehiclefrontR1.addBox(-1.5F, -1, -4, 2, 2, 3);
+
 		vehicleUpperlegR2 = new ModelRendererTF(this, 6, 72);
 		vehicleUpperlegR2.setRotationPoint(-2, -0.5F, -0.5F);
 		vehicleUpperlegR2.addBox(0, 0, 0, 1, 4, 1);
 		setRotateAngle(vehicleUpperlegR2, 0, 0.05235987755982988F, -0.03490658503988659F);
+
 		vehicleupperlegL2 = new ModelRendererTF(this, 6, 72);
 		vehicleupperlegL2.setRotationPoint(2, -0.5F, -0.5F);
 		vehicleupperlegL2.addBox(-1, 0, 0, 1, 4, 1);
 		setRotateAngle(vehicleupperlegL2, 0, -0.05235987755982988F, 0.03490658503988659F);
+
 		vehiclekneeL2 = new ModelRendererTF(this, 10, 71);
 		vehiclekneeL2.setRotationPoint(0, 2.7F, 0);
 		vehiclekneeL2.addBox(0, 0, -1, 2, 2, 2);
+
 		vehicleUpperlegR1 = new ModelRendererTF(this, 0, 71);
 		vehicleUpperlegR1.setRotationPoint(-1, 1, 0);
 		vehicleUpperlegR1.addBox(-1, -1, -1, 1, 4, 2);
 		setRotateAngle(vehicleUpperlegR1, -1.5707963267948966F, 0, 0);
+
 		vehiclefrontR2 = new ModelRendererTF(this, 48, 70);
-		vehiclefrontR2.setRotationPoint(0, 0, 0);
 		vehiclefrontR2.addBox(-1.5F, -2, -3.7F, 2, 1, 3);
 		setRotateAngle(vehiclefrontR2, 0.24434609527920614F, 0, -0.017453292519943295F);
+
 		vehicleKneeR1 = new ModelRendererTF(this, 10, 71);
 		vehicleKneeR1.setRotationPoint(0, 2.7F, 0);
 		vehicleKneeR1.addBox(-2, 0, -1, 2, 2, 2);

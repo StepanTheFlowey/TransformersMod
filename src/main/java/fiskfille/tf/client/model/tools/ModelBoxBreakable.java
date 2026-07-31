@@ -14,10 +14,9 @@ public class ModelBoxBreakable extends ModelBox {
 	public ModelBoxBreakable(ModelRendererBreakable modelRenderer, int textureX, int textureY, float x, float y, float z, int width, int height, int depth, float mcScale) {
 		super(modelRenderer, textureX, textureY, x, y, z, width, height, depth, mcScale);
 		model = modelRenderer;
-		quadList = new TexturedQuad[6];
 
-		int textureWidth = 16;
-		int textureHeight = 16;
+		final int textureWidth = 16;
+		final int textureHeight = 16;
 		float x2 = x + width;
 		float y2 = y + height;
 		float z2 = z + depth;
@@ -36,6 +35,7 @@ public class ModelBoxBreakable extends ModelBox {
 		final PositionTextureVertex positiontexturevertex5 = new PositionTextureVertex(x2, y2, z2, 8, 8);
 		final PositionTextureVertex positiontexturevertex6 = new PositionTextureVertex(x, y2, z2, 8, 0);
 		final PositionTextureVertex positiontexturevertex7 = new PositionTextureVertex(x, y, z, 0, 0);
+		quadList = new TexturedQuad[6];
 		quadList[0] = new TexturedQuad(new PositionTextureVertex[]{positiontexturevertex4, positiontexturevertex, positiontexturevertex1, positiontexturevertex5}, textureX + depth + width, textureY + depth, textureX + depth + width + depth, textureY + depth + height, textureWidth, textureHeight);
 		quadList[1] = new TexturedQuad(new PositionTextureVertex[]{positiontexturevertex7, positiontexturevertex3, positiontexturevertex6, positiontexturevertex2}, textureX, textureY + depth, textureX + depth, textureY + depth + height, textureWidth, textureHeight);
 		quadList[2] = new TexturedQuad(new PositionTextureVertex[]{positiontexturevertex4, positiontexturevertex3, positiontexturevertex7, positiontexturevertex}, textureX + depth, textureY, textureX + depth + width, textureY + depth, textureWidth, textureHeight);

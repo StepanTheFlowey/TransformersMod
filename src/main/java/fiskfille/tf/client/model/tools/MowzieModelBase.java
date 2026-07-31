@@ -71,12 +71,12 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param parent is the parent box.
 	 */
 	protected void addChildTo(ModelRenderer child, ModelRenderer parent) {
-		float distance = (float) Math.sqrt(Math.pow(child.rotationPointZ - parent.rotationPointZ, 2) + Math.pow(child.rotationPointY - parent.rotationPointY, 2));
-		float oldRotateAngleX = parent.rotateAngleX;
-		float parentToChildAngle = (float) Math.atan((child.rotationPointZ - parent.rotationPointZ) / (child.rotationPointY - parent.rotationPointY));
-		float childRelativeRotation = parentToChildAngle - parent.rotateAngleX;
-		float newRotationPointY = (float) (distance * Math.cos(childRelativeRotation));
-		float newRotationPointZ = (float) (distance * Math.sin(childRelativeRotation));
+		final float distance = (float) Math.sqrt(Math.pow(child.rotationPointZ - parent.rotationPointZ, 2) + Math.pow(child.rotationPointY - parent.rotationPointY, 2));
+		final float oldRotateAngleX = parent.rotateAngleX;
+		final float parentToChildAngle = (float) Math.atan((child.rotationPointZ - parent.rotationPointZ) / (child.rotationPointY - parent.rotationPointY));
+		final float childRelativeRotation = parentToChildAngle - parent.rotateAngleX;
+		final float newRotationPointY = (float) (distance * Math.cos(childRelativeRotation));
+		final float newRotationPointZ = (float) (distance * Math.sin(childRelativeRotation));
 		parent.rotateAngleX = 0F;
 		child.setRotationPoint(child.rotationPointX - parent.rotationPointX, newRotationPointY, newRotationPointZ);
 		parent.addChild(child);

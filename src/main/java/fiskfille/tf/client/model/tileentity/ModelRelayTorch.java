@@ -6,47 +6,49 @@ import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 
 public class ModelRelayTorch extends ModelRelayTower {
 	public final MowzieModelRenderer shape1;
-	public final MowzieModelRenderer shape2;
-	public final MowzieModelRenderer shape4;
-	public final MowzieModelRenderer shape6;
-	public final MowzieModelRenderer shape8;
-	public final MowzieModelRenderer shape9;
 	public final MowzieModelRenderer shape10;
 	public final MowzieModelRenderer shape11;
-	public final MowzieModelRenderer shape13;
-	public final MowzieModelRenderer shape30;
-	public final MowzieModelRenderer shape3;
-	public final MowzieModelRenderer shape5;
-	public final MowzieModelRenderer shape7;
 	public final MowzieModelRenderer shape12;
+	public final MowzieModelRenderer shape13;
 	public final MowzieModelRenderer shape14;
-	public final MowzieModelRenderer shape18;
-	public final MowzieModelRenderer shape22;
-	public final MowzieModelRenderer shape26;
 	public final MowzieModelRenderer shape15;
 	public final MowzieModelRenderer shape16;
 	public final MowzieModelRenderer shape17;
+	public final MowzieModelRenderer shape18;
 	public final MowzieModelRenderer shape19;
+	public final MowzieModelRenderer shape2;
 	public final MowzieModelRenderer shape20;
 	public final MowzieModelRenderer shape21;
+	public final MowzieModelRenderer shape22;
 	public final MowzieModelRenderer shape23;
 	public final MowzieModelRenderer shape24;
 	public final MowzieModelRenderer shape25;
+	public final MowzieModelRenderer shape26;
 	public final MowzieModelRenderer shape27;
 	public final MowzieModelRenderer shape28;
 	public final MowzieModelRenderer shape29;
+	public final MowzieModelRenderer shape3;
+	public final MowzieModelRenderer shape30;
+	public final MowzieModelRenderer shape4;
+	public final MowzieModelRenderer shape5;
+	public final MowzieModelRenderer shape6;
+	public final MowzieModelRenderer shape7;
+	public final MowzieModelRenderer shape8;
+	public final MowzieModelRenderer shape9;
 
 	public ModelRelayTorch() {
-		textureWidth = 32;
-		textureHeight = 32;
+		textureWidth = textureHeight = 32;
+
 		shape26 = new ModelRendererBreakable(this, 0, 22);
 		shape26.setRotationPoint(0F, 0F, -1F);
 		shape26.addBox(-1.5F, -0.1F, 2F, 3, 1, 1, 0F);
 		setRotateAngle(shape26, 0F, 3.141592653589793F, 0F);
+
 		shape11 = new ModelRendererBreakable(this, 0, 8);
 		shape11.setRotationPoint(0F, 0F, 0F);
 		shape11.addBox(-0.5F, 1F, 0.2F, 1, 2, 2, 0F);
 		setRotateAngle(shape11, 0F, 0.7853981633974483F, 0F);
+
 		shape18 = new ModelRendererBreakable(this, 0, 22);
 		shape18.setRotationPoint(1F, 0F, 0F);
 		shape18.addBox(-1.5F, -0.1F, 2F, 3, 1, 1, 0F);

@@ -225,11 +225,11 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		globalDegree = baseDegree;
 
 		if(entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) entity;
-			boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) == getTransformer();
-			boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) == getTransformer();
-			boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) == getTransformer();
-			boolean wearingFeet = TFHelper.getTransformerFromArmor(player, 0) == getTransformer();
+			final EntityPlayer player = (EntityPlayer) entity;
+			final boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) == getTransformer();
+			final boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) == getTransformer();
+			final boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) == getTransformer();
+			final boolean wearingFeet = TFHelper.getTransformerFromArmor(player, 0) == getTransformer();
 			float progress = TFHelper.getTransformationTimer(player);
 
 			setupOffsets(player, progress, limbSwing, limbSwingAmount, ticks, rotationYaw, rotationPitch, wearingHead, wearingChest, wearingLegs, wearingFeet);
@@ -240,6 +240,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 						case SPEED:
 							globalSpeed *= modifier.factor;
 							break;
+
 						case DEGREE:
 							globalDegree *= modifier.factor;
 							break;
@@ -293,11 +294,11 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 			hitAnimation *= hitAnimation;
 			hitAnimation *= hitAnimation;
 			hitAnimation = 1F - hitAnimation;
-			float f7 = MathHelper.sin(hitAnimation * PI);
-			float f8 = MathHelper.sin(onGround * PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+			final float f7 = MathHelper.sin(hitAnimation * PI);
+			final float f8 = MathHelper.sin(onGround * PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
 
-			float armRXChange = (float) (upperArmR.rotateAngleX - (f7 * 1.2D + f8)) * 0.5F;
-			float armRZChange = MathHelper.sin(onGround * PI) * -0.4F * 0.5F;
+			final float armRXChange = (upperArmR.rotateAngleX - (f7 * 1.2F + f8)) * 0.5F;
+			final float armRZChange = MathHelper.sin(onGround * PI) * -0.4F * 0.5F;
 
 			upperArmR.rotateAngleX += armRXChange;
 			upperArmR.rotateAngleY += change;

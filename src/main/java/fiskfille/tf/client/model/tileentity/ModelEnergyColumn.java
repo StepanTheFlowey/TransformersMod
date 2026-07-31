@@ -2,162 +2,166 @@ package fiskfille.tf.client.model.tileentity;
 
 import fiskfille.tf.client.model.tools.ModelRendererBreakable;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
-import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.tileentity.TileEntityColumn;
 import org.lwjgl.opengl.GL11;
 
 public class ModelEnergyColumn extends MowzieModelBase {
-	public final MowzieModelRenderer columnBase1;
-	public final MowzieModelRenderer top1;
-	public final MowzieModelRenderer bottom1;
-	public final MowzieModelRenderer connector1;
-	public final MowzieModelRenderer columnBase2;
-	public final MowzieModelRenderer columnBase3;
-	public final MowzieModelRenderer columnBase4;
-	public final MowzieModelRenderer columnBase5;
-	public final MowzieModelRenderer columnBase6;
-	public final MowzieModelRenderer panel;
-	public final MowzieModelRenderer columnBase7;
-	public final MowzieModelRenderer columnBase8;
-	public final MowzieModelRenderer top2;
-	public final MowzieModelRenderer top3;
-	public final MowzieModelRenderer top4;
-	public final MowzieModelRenderer top5;
-	public final MowzieModelRenderer top6;
-	public final MowzieModelRenderer top7;
-	public final MowzieModelRenderer top8;
-	public final MowzieModelRenderer bottom2;
-	public final MowzieModelRenderer bottom3;
-	public final MowzieModelRenderer bottom4;
-	public final MowzieModelRenderer bottom5;
-	public final MowzieModelRenderer bottom6;
-	public final MowzieModelRenderer bottom7;
-	public final MowzieModelRenderer bottom8;
-	public final MowzieModelRenderer connector2;
-	public final MowzieModelRenderer connector3;
-	public final MowzieModelRenderer connector4;
-	public final MowzieModelRenderer connector5;
+	private final ModelRendererBreakable bottom1;
+	private final ModelRendererBreakable columnBase1;
+	private final ModelRendererBreakable connector1;
+	private final ModelRendererBreakable top1;
 
 	public ModelEnergyColumn() {
 		textureWidth = 128;
 		textureHeight = 64;
+
 		top1 = new ModelRendererBreakable(this, 0, 36);
 		top1.setRotationPoint(0F, -8F, 0F);
 		top1.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
-		top7 = new ModelRendererBreakable(this, 0, 36);
+
+		final ModelRendererBreakable top7 = new ModelRendererBreakable(this, 0, 36);
 		top7.setRotationPoint(0F, 0F, 0F);
 		top7.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top7, 0F, 0.7853981633974483F, 0F);
-		connector5 = new ModelRendererBreakable(this, 18, 41);
+
+		final ModelRendererBreakable connector5 = new ModelRendererBreakable(this, 18, 41);
 		connector5.setRotationPoint(0F, -3F, 0F);
 		connector5.addBox(-1F, -3F, 0F, 2, 3, 2, 0F);
 		setRotateAngle(connector5, -0.3490658503988659F, 0F, 0F);
-		connector4 = new ModelRendererBreakable(this, 22, 36);
+
+		final ModelRendererBreakable connector4 = new ModelRendererBreakable(this, 22, 36);
 		connector4.setRotationPoint(0F, -3F, 0F);
 		connector4.addBox(-1F, -3F, 0F, 2, 3, 2, 0F);
 		setRotateAngle(connector4, -0.3490658503988659F, 0F, 0F);
-		bottom3 = new ModelRendererBreakable(this, 0, 31);
+
+		final ModelRendererBreakable bottom3 = new ModelRendererBreakable(this, 0, 31);
 		bottom3.setRotationPoint(0F, 0F, 0F);
 		bottom3.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom3, 0F, 0.7853981633974483F, 0F);
-		bottom2 = new ModelRendererBreakable(this, 0, 31);
+
+		final ModelRendererBreakable bottom2 = new ModelRendererBreakable(this, 0, 31);
 		bottom2.setRotationPoint(0F, 0F, 0F);
 		bottom2.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom2, 0F, 0.7853981633974483F, 0F);
+
 		connector1 = new ModelRendererBreakable(this, 0, 41);
 		connector1.setRotationPoint(0F, 16F, 0F);
 		connector1.addBox(-1F, -4F, -8F, 2, 4, 2, 0F);
 		setRotateAngle(connector1, 0F, 0.5235987755982988F, 0F);
-		columnBase5 = new ModelRendererBreakable(this, 40, 0);
+
+		final ModelRendererBreakable columnBase5 = new ModelRendererBreakable(this, 40, 0);
 		columnBase5.setRotationPoint(0F, 0F, 0F);
 		columnBase5.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase5, 0F, 0.7853981633974483F, 0F);
-		top5 = new ModelRendererBreakable(this, 0, 36);
+
+		final ModelRendererBreakable top5 = new ModelRendererBreakable(this, 0, 36);
 		top5.setRotationPoint(0F, 0F, 0F);
 		top5.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top5, 0F, 0.7853981633974483F, 0F);
-		bottom6 = new ModelRendererBreakable(this, 0, 31);
+
+		final ModelRendererBreakable bottom6 = new ModelRendererBreakable(this, 0, 31);
 		bottom6.setRotationPoint(0F, 0F, 0F);
 		bottom6.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom6, 0F, 0.7853981633974483F, 0F);
-		top3 = new ModelRendererBreakable(this, 0, 36);
+
+		final ModelRendererBreakable top3 = new ModelRendererBreakable(this, 0, 36);
 		top3.setRotationPoint(0F, 0F, 0F);
 		top3.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top3, 0F, 0.7853981633974483F, 0F);
-		connector3 = new ModelRendererBreakable(this, 22, 31);
+
+		final ModelRendererBreakable connector3 = new ModelRendererBreakable(this, 22, 31);
 		connector3.setRotationPoint(0F, -14F, -8F);
 		connector3.addBox(-1F, -3F, 0F, 2, 3, 2, 0F);
 		setRotateAngle(connector3, -0.17453292519943295F, 0F, 0F);
-		connector2 = new ModelRendererBreakable(this, 14, 31);
+
+		final ModelRendererBreakable connector2 = new ModelRendererBreakable(this, 14, 31);
 		connector2.setRotationPoint(0F, 0F, -8F);
 		connector2.addBox(-1F, 0F, 0F, 2, 7, 2, 0F);
 		setRotateAngle(connector2, 0.6632251157578453F, 0F, 0F);
-		top8 = new ModelRendererBreakable(this, 0, 36);
+
+		final ModelRendererBreakable top8 = new ModelRendererBreakable(this, 0, 36);
 		top8.setRotationPoint(0F, 0F, 0F);
 		top8.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top8, 0F, 0.7853981633974483F, 0F);
-		top4 = new ModelRendererBreakable(this, 0, 36);
+
+		final ModelRendererBreakable top4 = new ModelRendererBreakable(this, 0, 36);
 		top4.setRotationPoint(0F, 0F, 0F);
 		top4.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top4, 0F, 0.7853981633974483F, 0F);
-		bottom7 = new ModelRendererBreakable(this, 0, 31);
+
+		final ModelRendererBreakable bottom7 = new ModelRendererBreakable(this, 0, 31);
 		bottom7.setRotationPoint(0F, 0F, 0F);
 		bottom7.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom7, 0F, 0.7853981633974483F, 0F);
-		columnBase3 = new ModelRendererBreakable(this, 20, 0);
+
+		final ModelRendererBreakable columnBase3 = new ModelRendererBreakable(this, 20, 0);
 		columnBase3.setRotationPoint(0F, 0F, 0F);
 		columnBase3.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase3, 0F, 0.7853981633974483F, 0F);
-		columnBase6 = new ModelRendererBreakable(this, 50, 0);
+
+		final ModelRendererBreakable columnBase6 = new ModelRendererBreakable(this, 50, 0);
 		columnBase6.setRotationPoint(0F, 0F, 0F);
 		columnBase6.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase6, 0F, 0.7853981633974483F, 0F);
-		columnBase8 = new ModelRendererBreakable(this, 70, 0);
+
+		final ModelRendererBreakable columnBase8 = new ModelRendererBreakable(this, 70, 0);
 		columnBase8.setRotationPoint(0F, 0F, 0F);
 		columnBase8.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase8, 0F, 0.7853981633974483F, 0F);
-		top6 = new ModelRendererBreakable(this, 0, 36);
+
+		final ModelRendererBreakable top6 = new ModelRendererBreakable(this, 0, 36);
 		top6.setRotationPoint(0F, 0F, 0F);
 		top6.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top6, 0F, 0.7853981633974483F, 0F);
-		bottom5 = new ModelRendererBreakable(this, 0, 31);
+
+		final ModelRendererBreakable bottom5 = new ModelRendererBreakable(this, 0, 31);
 		bottom5.setRotationPoint(0F, 0F, 0F);
 		bottom5.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom5, 0F, 0.7853981633974483F, 0F);
+
 		columnBase1 = new ModelRendererBreakable(this, 0, 0);
 		columnBase1.setRotationPoint(0F, 24F, 0F);
 		columnBase1.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
-		columnBase7 = new ModelRendererBreakable(this, 60, 0);
+
+		final ModelRendererBreakable columnBase7 = new ModelRendererBreakable(this, 60, 0);
 		columnBase7.setRotationPoint(0F, 0F, 0F);
 		columnBase7.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase7, 0F, 0.7853981633974483F, 0F);
-		top2 = new ModelRendererBreakable(this, 0, 36);
+
+		final ModelRendererBreakable top2 = new ModelRendererBreakable(this, 0, 36);
 		top2.setRotationPoint(0F, 0F, 0F);
 		top2.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top2, 0F, 0.7853981633974483F, 0F);
+
 		bottom1 = new ModelRendererBreakable(this, 0, 31);
 		bottom1.setRotationPoint(0F, 24F, 0F);
 		bottom1.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
-		columnBase2 = new ModelRendererBreakable(this, 10, 0);
+
+		final ModelRendererBreakable columnBase2 = new ModelRendererBreakable(this, 10, 0);
 		columnBase2.setRotationPoint(0F, 0F, 0F);
 		columnBase2.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase2, 0F, 0.7853981633974483F, 0F);
-		panel = new ModelRendererBreakable(this, 8, 41);
+
+		final ModelRendererBreakable panel = new ModelRendererBreakable(this, 8, 41);
 		panel.setRotationPoint(0F, -17F, 4.3F);
 		panel.addBox(-2F, -3F, 0F, 4, 6, 1, 0F);
-		bottom8 = new ModelRendererBreakable(this, 0, 31);
+
+		final ModelRendererBreakable bottom8 = new ModelRendererBreakable(this, 0, 31);
 		bottom8.setRotationPoint(0F, 0F, 0F);
 		bottom8.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom8, 0F, 0.7853981633974483F, 0F);
-		bottom4 = new ModelRendererBreakable(this, 0, 31);
+
+		final ModelRendererBreakable bottom4 = new ModelRendererBreakable(this, 0, 31);
 		bottom4.setRotationPoint(0F, 0F, 0F);
 		bottom4.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom4, 0F, 0.7853981633974483F, 0F);
-		columnBase4 = new ModelRendererBreakable(this, 30, 0);
+
+		final ModelRendererBreakable columnBase4 = new ModelRendererBreakable(this, 30, 0);
 		columnBase4.setRotationPoint(0F, 0F, 0F);
 		columnBase4.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase4, 0F, 0.7853981633974483F, 0F);
+
 		top6.addChild(top7);
 		connector4.addChild(connector5);
 		connector3.addChild(connector4);
@@ -194,16 +198,18 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(top1.offsetX, top1.offsetY, top1.offsetZ);
 		GL11.glTranslatef(top1.rotationPointX * 0.0625F, top1.rotationPointY * 0.0625F, top1.rotationPointZ * 0.0625F);
-		GL11.glScaled(1.2D, 1.2D, 1.2D);
+		GL11.glScalef(1.2F, 1.2F, 1.2F);
 		GL11.glTranslatef(-top1.offsetX, -top1.offsetY, -top1.offsetZ);
 		GL11.glTranslatef(-top1.rotationPointX * 0.0625F, -top1.rotationPointY * 0.0625F, -top1.rotationPointZ * 0.0625F);
 		top1.render(0.0625F);
 		GL11.glPopMatrix();
+
 		columnBase1.render(0.0625F);
+
 		GL11.glPushMatrix();
 		GL11.glTranslatef(bottom1.offsetX, bottom1.offsetY, bottom1.offsetZ);
 		GL11.glTranslatef(bottom1.rotationPointX * 0.0625F, bottom1.rotationPointY * 0.0625F, bottom1.rotationPointZ * 0.0625F);
-		GL11.glScaled(1.2D, 1.2D, 1.2D);
+		GL11.glScalef(1.2F, 1.2F, 1.2F);
 		GL11.glTranslatef(-bottom1.offsetX, -bottom1.offsetY, -bottom1.offsetZ);
 		GL11.glTranslatef(-bottom1.rotationPointX * 0.0625F, -bottom1.rotationPointY * 0.0625F, -bottom1.rotationPointZ * 0.0625F);
 		bottom1.render(0.0625F);

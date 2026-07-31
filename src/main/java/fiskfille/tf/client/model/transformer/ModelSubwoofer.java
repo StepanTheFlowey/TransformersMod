@@ -20,87 +20,86 @@ import org.lwjgl.opengl.GL11;
 import static fiskfille.tf.common.data.TFPredicates.isBacking;
 
 public class ModelSubwoofer extends ModelTransformerBase {
-	public final ModelRendererTF waist;
-	public final ModelRendererTF stomach;
-	public final ModelRendererTF crotch1;
-	public final ModelRendererTF sideflapL;
-	public final ModelRendererTF crotchbuttonR;
-	public final ModelRendererTF crotchbuttonL;
-	public final ModelRendererTF sideflapL_1;
-	public final ModelRendererTF chestmain1;
-	public final ModelRendererTF chestwheel1;
-	public final ModelRendererTF chestwheel2;
-	public final ModelRendererTF frontchestR;
-	public final ModelRendererTF frontchestL;
-	public final ModelRendererTF chestmain2;
-	public final ModelRendererTF chestmain3;
-	public final ModelRendererTF chestmain4;
-	public final ModelRendererTF chestmain5;
-	public final ModelRendererTF chestmain6;
-	public final ModelRendererTF head;
-	public final ModelRendererTF dish1;
-	public final ModelRendererTF shoulderbaseL;
-	public final ModelRendererTF shoulderbaseR;
 	public final ModelRendererTF antenna1;
 	public final ModelRendererTF antenna2;
-	public final ModelRendererTF head1;
-	public final ModelRendererTF head2;
-	public final ModelRendererTF headplate1;
-	public final ModelRendererTF head3;
-	public final ModelRendererTF head4;
-	public final ModelRendererTF head5;
-	public final ModelRendererTF head6;
-	public final ModelRendererTF head7;
-	public final ModelRendererTF headplate2;
-	public final ModelRendererTF headplate2_1;
-	public final ModelRendererTF dish2;
-	public final ModelRendererTF shoulderplateL1;
-	public final ModelRendererTF upperArmL;
-	public final ModelRendererTF shoulderplate2;
-	public final ModelRendererTF shoulderplate3;
-	public final ModelRendererTF lowerArmL;
-	public final ModelRendererTF lowerarmL2;
-	public final ModelRendererTF lowerarmL3;
-	public final ModelRendererTF fistL;
-	public final ModelRendererTF clawL1;
-	public final ModelRendererTF clawL2;
-	public final ModelRendererTF upperArmR;
-	public final ModelRendererTF shoulderplateR1;
-	public final ModelRendererTF lowerArmR;
-	public final ModelRendererTF fistR;
 	public final ModelRendererTF bass1;
 	public final ModelRendererTF bass2;
 	public final ModelRendererTF bass3;
 	public final ModelRendererTF bass4;
 	public final ModelRendererTF bass5;
 	public final ModelRendererTF bass6;
-	public final ModelRendererTF shoulderplateR3;
-	public final ModelRendererTF shoulderplateR2;
-	public final ModelRendererTF upperLegL;
+	public final ModelRendererTF chestmain1;
+	public final ModelRendererTF chestmain2;
+	public final ModelRendererTF chestmain3;
+	public final ModelRendererTF chestmain4;
+	public final ModelRendererTF chestmain5;
+	public final ModelRendererTF chestmain6;
+	public final ModelRendererTF chestwheel1;
+	public final ModelRendererTF chestwheel2;
+	public final ModelRendererTF clawL1;
+	public final ModelRendererTF clawL2;
+	public final ModelRendererTF crotch1;
 	public final ModelRendererTF crotch2;
-	public final ModelRendererTF upperLegR;
-	public final ModelRendererTF lowerlegL1;
-	public final ModelRendererTF lowerlegL4;
-	public final ModelRendererTF legbaseL;
-	public final ModelRendererTF lowerlegL2;
-	public final ModelRendererTF lowerlegL3;
+	public final ModelRendererTF crotchbuttonL;
+	public final ModelRendererTF crotchbuttonR;
+	public final ModelRendererTF dish1;
+	public final ModelRendererTF dish2;
+	public final ModelRendererTF fistL;
+	public final ModelRendererTF fistR;
+	public final ModelRendererTF frontchestL;
+	public final ModelRendererTF frontchestR;
+	public final ModelRendererTF head;
+	public final ModelRendererTF head1;
+	public final ModelRendererTF head2;
+	public final ModelRendererTF head3;
+	public final ModelRendererTF head4;
+	public final ModelRendererTF head5;
+	public final ModelRendererTF head6;
+	public final ModelRendererTF head7;
+	public final ModelRendererTF headplate1;
+	public final ModelRendererTF headplate2;
+	public final ModelRendererTF headplate2_1;
 	public final ModelRendererTF leg1;
+	public final ModelRendererTF legbaseL;
+	public final ModelRendererTF legbaseR;
 	public final ModelRendererTF legL2;
 	public final ModelRendererTF legL3;
-	public final ModelRendererTF lowerlegR1;
-	public final ModelRendererTF lowerlegR2;
-	public final ModelRendererTF lowerlegR3;
-	public final ModelRendererTF legbaseR;
-	public final ModelRendererTF lowerlegR4;
 	public final ModelRendererTF legR1;
 	public final ModelRendererTF legR2;
 	public final ModelRendererTF legR3;
+	public final ModelRendererTF lowerArmL;
+	public final ModelRendererTF lowerarmL2;
+	public final ModelRendererTF lowerarmL3;
+	public final ModelRendererTF lowerArmR;
+	public final ModelRendererTF lowerlegL1;
+	public final ModelRendererTF lowerlegL2;
+	public final ModelRendererTF lowerlegL3;
+	public final ModelRendererTF lowerlegL4;
+	public final ModelRendererTF lowerlegR1;
+	public final ModelRendererTF lowerlegR2;
+	public final ModelRendererTF lowerlegR3;
+	public final ModelRendererTF lowerlegR4;
+	public final ModelRendererTF shoulderbaseL;
+	public final ModelRendererTF shoulderbaseR;
+	public final ModelRendererTF shoulderplate2;
+	public final ModelRendererTF shoulderplate3;
+	public final ModelRendererTF shoulderplateL1;
+	public final ModelRendererTF shoulderplateR1;
+	public final ModelRendererTF shoulderplateR2;
+	public final ModelRendererTF shoulderplateR3;
+	public final ModelRendererTF sideflapL;
+	public final ModelRendererTF sideflapL_1;
+	public final ModelRendererTF stomach;
+	public final ModelRendererTF upperArmL;
+	public final ModelRendererTF upperArmR;
+	public final ModelRendererTF upperLegL;
+	public final ModelRendererTF upperLegR;
+	public final ModelRendererTF waist;
 
 	public ModelSubwoofer() {
 		super(1, 0.8F, new AnimationModifier(Type.DEGREE, isBacking(), 0.5F));
+		textureWidth = textureHeight = 128;
 
-		textureWidth = 128;
-		textureHeight = 128;
 		crotchbuttonR = new ModelRendererTF(this, 5, 112);
 		crotchbuttonR.setRotationPoint(-3, 0.5F, -2.7F);
 		crotchbuttonR.addBox(0, 0, 0, 2, 1, 1, 0);
@@ -154,27 +153,34 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		shoulderplateL1.setRotationPoint(0, -1, 0);
 		shoulderplateL1.addBox(0.5F, -1, -2, 4, 2, 5, 0);
 		setRotateAngle(shoulderplateL1, 0.08726646259971647F, 0, 0.03490658503988659F);
+
 		leg1 = new ModelRendererTF(this, 86, 64);
-		leg1.setRotationPoint(0, 0, 0);
 		leg1.addBox(0.1F, 0, -1.5F, 1, 3, 3, 0);
+
 		sideflapL = new ModelRendererTF(this, 0, 112);
 		sideflapL.setRotationPoint(3.5F, 0, 2);
 		sideflapL.addBox(-0.3F, 0, -2, 1, 4, 3, 0);
 		setRotateAngle(sideflapL, 0, -0.06981317007977318F, -0.06981317007977318F);
+
 		shoulderbaseL = new ModelRendererTF(this, 48, 78);
 		shoulderbaseL.setRotationPoint(4, -2.9F, 0);
 		shoulderbaseL.addBox(-0.1F, -1, -1.4F, 3, 2, 3, 0);
 		setRotateAngle(shoulderbaseL, 0, 0, -0.05235987755982988F);
+
 		lowerlegR4 = new ModelRendererTF(this, 76, 76);
 		lowerlegR4.mirror = true;
+
 		lowerlegR4.setRotationPoint(-1, 4.5F, -1);
 		lowerlegR4.addBox(-0.7F, -0.3F, -0.5F, 1, 2, 4, 0);
 		setRotateAngle(lowerlegR4, 0, 0, 0.19198621771937624F);
+
 		legR3 = new ModelRendererTF(this, 83, 79);
 		legR3.mirror = true;
+
 		legR3.setRotationPoint(-0.4F, 2.2F, 0);
 		legR3.addBox(-1.1F, -2.7F, -3.2F, 2, 1, 3, 0);
 		setRotateAngle(legR3, 0.4468042885105484F, -0.012217304763960306F, 0.041887902047863905F);
+
 		waist = new ModelRendererTF(this, 0, 98);
 		waist.setRotationPoint(0, 9, -0.5F);
 		waist.addBox(-3.5F, 0, -2.5F, 7, 2, 5, 0);
@@ -372,27 +378,32 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		upperArmR.setRotationPoint(-1.7F, 1, 0);
 		upperArmR.addBox(-1, -0.2F, -1, 2, 4, 2, 0);
 		setRotateAngle(upperArmR, 0.03490658503988659F, 0, 0.10471975511965977F);
+
 		legR1 = new ModelRendererTF(this, 86, 64);
 		legR1.mirror = true;
-		legR1.setRotationPoint(0, 0, 0);
 		legR1.addBox(-1.9F, 0, -1.5F, 1, 3, 3, 0);
+
 		chestmain5 = new ModelRendererTF(this, 0, 89);
 		chestmain5.setRotationPoint(3, -4, 0);
 		chestmain5.addBox(-1, -2, 0, 2, 3, 4, 0);
 		setRotateAngle(chestmain5, -0.05235987755982988F, 0.12217304763960307F, 0.12217304763960307F);
+
 		dish2 = new ModelRendererTF(this, 22, 67);
 		dish2.setRotationPoint(0, -3, 1);
 		dish2.addBox(-2, -2, -1, 2, 2, 1, 0);
 		setRotateAngle(dish2, 0.5235987755982988F, 0, 0);
+
 		bass6 = new ModelRendererTF(this, 60, 92);
 		bass6.mirror = true;
 		bass6.setRotationPoint(-2, 1.5F, 1.5F);
 		bass6.addBox(0, 0, 0, 1, 2, 3, 0);
 		setRotateAngle(bass6, 1.5707963267948966F, 1.2217304763960306F, 0);
+
 		shoulderplateR2 = new ModelRendererTF(this, 48, 90);
 		shoulderplateR2.setRotationPoint(0, 0, 3);
 		shoulderplateR2.addBox(-5, 0, 0, 4, 1, 3, 0);
 		setRotateAngle(shoulderplateR2, -1.2915436464758039F, 0, 0);
+
 		clawL2 = new ModelRendererTF(this, 48, 102);
 		clawL2.mirror = true;
 		clawL2.setRotationPoint(1, 0, -1.3F);

@@ -17,106 +17,29 @@ import static fiskfille.tf.common.data.TFPredicates.isBacking;
 import static fiskfille.tf.common.data.TFPredicates.isSneaking;
 
 public class ModelSkystrike extends ModelTransformerBase {
-	public final ModelRendererTF waistbase;
-	public final ModelRendererTF upperlegL1;
-	public final ModelRendererTF crotchL1;
-	public final ModelRendererTF crotchR1;
-	public final ModelRendererTF torsoconnectorbase1;
-	public final ModelRendererTF crotch1;
-	public final ModelRendererTF tail1;
-	public final ModelRendererTF torsoconenctor6;
-	public final ModelRendererTF torsoconnector7;
-	public final ModelRendererTF upperlegR1;
-	public final ModelRendererTF lowerlegL1;
-	public final ModelRendererTF upperlegL2;
-	public final ModelRendererTF upperlegL3;
-	public final ModelRendererTF upperlegL4;
-	public final ModelRendererTF upperlegL5;
-	public final ModelRendererTF feetbaseL1;
-	public final ModelRendererTF lowerlegL2;
-	public final ModelRendererTF lowerlegL3;
-	public final ModelRendererTF lowerlegL5;
-	public final ModelRendererTF lowerlegL7;
-	public final ModelRendererTF lowerlegL9;
-	public final ModelRendererTF kneepadL1;
-	public final ModelRendererTF lowerlegL10;
-	public final ModelRendererTF lowerlegL11;
-	public final ModelRendererTF lowerlegL16;
-	public final ModelRendererTF feetL1;
-	public final ModelRendererTF feetL2;
-	public final ModelRendererTF feetL4;
-	public final ModelRendererTF feetL5;
-	public final ModelRendererTF feetL6;
-	public final ModelRendererTF feetL8;
-	public final ModelRendererTF feetL3;
-	public final ModelRendererTF feetL7;
-	public final ModelRendererTF lowerlegL4;
-	public final ModelRendererTF lowerlegL6;
-	public final ModelRendererTF lowerlegL8;
-	public final ModelRendererTF kneepadL2;
-	public final ModelRendererTF lowerlegL12;
-	public final ModelRendererTF lowerlegL13;
-	public final ModelRendererTF lowerlegL14;
-	public final ModelRendererTF lowerlegL15;
-	public final ModelRendererTF lowerlegL17;
-	public final ModelRendererTF crotchL2;
-	public final ModelRendererTF crotchL3;
-	public final ModelRendererTF buttflapL1;
-	public final ModelRendererTF crotchR2;
-	public final ModelRendererTF crotchR3;
-	public final ModelRendererTF buttflapR1;
-	public final ModelRendererTF torsobase1;
-	public final ModelRendererTF torsoconnector2;
-	public final ModelRendererTF torsoconnector3;
-	public final ModelRendererTF torsoconnector4;
-	public final ModelRendererTF torsoconnector5;
-	public final ModelRendererTF torsoconnector3_1;
-	public final ModelRendererTF shoulderLbase;
-	public final ModelRendererTF neck1;
-	public final ModelRendererTF chestL1;
-	public final ModelRendererTF chestR1;
-	public final ModelRendererTF chestnose1;
-	public final ModelRendererTF backpackbase1;
-	public final ModelRendererTF auxFinR1;
 	public final ModelRendererTF auxFinL1;
-	public final ModelRendererTF shoulderRbase;
-	public final ModelRendererTF upperarmL1;
-	public final ModelRendererTF shoulderL2;
-	public final ModelRendererTF shoulderL3;
-	public final ModelRendererTF shoulderL4;
-	public final ModelRendererTF shoulderL5;
-	public final ModelRendererTF wingL1;
-	public final ModelRendererTF lowerarmL1;
-	public final ModelRendererTF upperarmL2;
-	public final ModelRendererTF upperarmL3;
-	public final ModelRendererTF fistL1;
-	public final ModelRendererTF lowerarmL2;
-	public final ModelRendererTF lowerarmL3;
-	public final ModelRendererTF lowerarmL4;
-	public final ModelRendererTF lowerarmL5;
-	public final ModelRendererTF lowerarmL6;
-	public final ModelRendererTF fistL2;
-	public final ModelRendererTF fistL3;
-	public final ModelRendererTF shoulderL6;
-	public final ModelRendererTF wingL2;
-	public final ModelRendererTF wingL3;
-	public final ModelRendererTF wingL4;
-	public final ModelRendererTF wingL5;
-	public final ModelRendererTF headbase;
-	public final ModelRendererTF head2;
-	public final ModelRendererTF head5;
-	public final ModelRendererTF head6;
-	public final ModelRendererTF head7;
-	public final ModelRendererTF head9;
-	public final ModelRendererTF head10;
-	public final ModelRendererTF head11;
-	public final ModelRendererTF head12;
-	public final ModelRendererTF head13;
-	public final ModelRendererTF head3;
-	public final ModelRendererTF head4;
-	public final ModelRendererTF head8;
+	public final ModelRendererTF auxFinL2;
+	public final ModelRendererTF auxFinL3;
+	public final ModelRendererTF auxFinL4;
+	public final ModelRendererTF auxFinR1;
+	public final ModelRendererTF auxFinR2;
+	public final ModelRendererTF auxFinR3;
+	public final ModelRendererTF auxFinR4;
+	public final ModelRendererTF backfinL1;
+	public final ModelRendererTF backfinL2;
+	public final ModelRendererTF backfinR1;
+	public final ModelRendererTF backfinR2;
+	public final ModelRendererTF backpack2;
+	public final ModelRendererTF backpack3;
+	public final ModelRendererTF backpack4;
+	public final ModelRendererTF backpack5;
+	public final ModelRendererTF backpack6;
+	public final ModelRendererTF backpackbase1;
+	public final ModelRendererTF buttflapL1;
+	public final ModelRendererTF buttflapR1;
+	public final ModelRendererTF chestL1;
 	public final ModelRendererTF chestL2;
-	public final ModelRendererTF chestR2;
+	public final ModelRendererTF chestnose1;
 	public final ModelRendererTF chestnose2;
 	public final ModelRendererTF chestnose3;
 	public final ModelRendererTF chestnose4;
@@ -124,671 +47,866 @@ public class ModelSkystrike extends ModelTransformerBase {
 	public final ModelRendererTF chestnose6;
 	public final ModelRendererTF chestnose7;
 	public final ModelRendererTF chestnose8;
-	public final ModelRendererTF chestnoseemblem1;
 	public final ModelRendererTF chestnose9;
-	public final ModelRendererTF backpack2;
-	public final ModelRendererTF backpack4;
-	public final ModelRendererTF backpack5;
-	public final ModelRendererTF backpack6;
-	public final ModelRendererTF backpack3;
-	public final ModelRendererTF backfinL1;
-	public final ModelRendererTF backfinR1;
-	public final ModelRendererTF backfinL2;
-	public final ModelRendererTF backfinR2;
-	public final ModelRendererTF auxFinR2;
-	public final ModelRendererTF auxFinR3;
-	public final ModelRendererTF auxFinR4;
-	public final ModelRendererTF auxFinL2;
-	public final ModelRendererTF auxFinL3;
-	public final ModelRendererTF auxFinL4;
-	public final ModelRendererTF upperarmR1;
-	public final ModelRendererTF shoulderR2;
-	public final ModelRendererTF shoulderR3;
-	public final ModelRendererTF shoulderR4;
-	public final ModelRendererTF shoulderR5;
-	public final ModelRendererTF wingR1;
-	public final ModelRendererTF lowerarmR1;
-	public final ModelRendererTF upperarmR2;
-	public final ModelRendererTF upperarmR3;
+	public final ModelRendererTF chestnoseemblem1;
+	public final ModelRendererTF chestR1;
+	public final ModelRendererTF chestR2;
+	public final ModelRendererTF crotch1;
+	public final ModelRendererTF crotch2;
+	public final ModelRendererTF crotchL1;
+	public final ModelRendererTF crotchL2;
+	public final ModelRendererTF crotchL3;
+	public final ModelRendererTF crotchR1;
+	public final ModelRendererTF crotchR2;
+	public final ModelRendererTF crotchR3;
+	public final ModelRendererTF feetbaseL1;
+	public final ModelRendererTF feetbaseR1;
+	public final ModelRendererTF feetL1;
+	public final ModelRendererTF feetL2;
+	public final ModelRendererTF feetL3;
+	public final ModelRendererTF feetL4;
+	public final ModelRendererTF feetL5;
+	public final ModelRendererTF feetL6;
+	public final ModelRendererTF feetL7;
+	public final ModelRendererTF feetL8;
+	public final ModelRendererTF feetR1;
+	public final ModelRendererTF feetR2;
+	public final ModelRendererTF feetR3;
+	public final ModelRendererTF feetR4;
+	public final ModelRendererTF feetR5;
+	public final ModelRendererTF feetR6;
+	public final ModelRendererTF feetR7;
+	public final ModelRendererTF feetR8;
+	public final ModelRendererTF fistL1;
+	public final ModelRendererTF fistL2;
+	public final ModelRendererTF fistL3;
 	public final ModelRendererTF fistR1;
+	public final ModelRendererTF fistR2;
+	public final ModelRendererTF fistR3;
+	public final ModelRendererTF head10;
+	public final ModelRendererTF head11;
+	public final ModelRendererTF head12;
+	public final ModelRendererTF head13;
+	public final ModelRendererTF head2;
+	public final ModelRendererTF head3;
+	public final ModelRendererTF head4;
+	public final ModelRendererTF head5;
+	public final ModelRendererTF head6;
+	public final ModelRendererTF head7;
+	public final ModelRendererTF head8;
+	public final ModelRendererTF head9;
+	public final ModelRendererTF headbase;
+	public final ModelRendererTF kneepadL1;
+	public final ModelRendererTF kneepadL2;
+	public final ModelRendererTF kneepadR1;
+	public final ModelRendererTF kneepadR2;
+	public final ModelRendererTF lowerarmL1;
+	public final ModelRendererTF lowerarmL2;
+	public final ModelRendererTF lowerarmL3;
+	public final ModelRendererTF lowerarmL4;
+	public final ModelRendererTF lowerarmL5;
+	public final ModelRendererTF lowerarmL6;
+	public final ModelRendererTF lowerarmR1;
 	public final ModelRendererTF lowerarmR2;
 	public final ModelRendererTF lowerarmR3;
 	public final ModelRendererTF lowerarmR4;
 	public final ModelRendererTF lowerarmR5;
 	public final ModelRendererTF lowerarmR6;
-	public final ModelRendererTF fistR2;
-	public final ModelRendererTF fistR3;
-	public final ModelRendererTF shoulderR6;
-	public final ModelRendererTF wingR2;
-	public final ModelRendererTF wingR3;
-	public final ModelRendererTF wingR4;
-	public final ModelRendererTF wingR5;
-	public final ModelRendererTF crotch2;
-	public final ModelRendererTF tail2;
-	public final ModelRendererTF tail3;
-	public final ModelRendererTF tail4;
-	public final ModelRendererTF tail5;
+	public final ModelRendererTF lowerlegL1;
+	public final ModelRendererTF lowerlegL10;
+	public final ModelRendererTF lowerlegL11;
+	public final ModelRendererTF lowerlegL12;
+	public final ModelRendererTF lowerlegL13;
+	public final ModelRendererTF lowerlegL14;
+	public final ModelRendererTF lowerlegL15;
+	public final ModelRendererTF lowerlegL16;
+	public final ModelRendererTF lowerlegL17;
+	public final ModelRendererTF lowerlegL2;
+	public final ModelRendererTF lowerlegL3;
+	public final ModelRendererTF lowerlegL4;
+	public final ModelRendererTF lowerlegL5;
+	public final ModelRendererTF lowerlegL6;
+	public final ModelRendererTF lowerlegL7;
+	public final ModelRendererTF lowerlegL8;
+	public final ModelRendererTF lowerlegL9;
 	public final ModelRendererTF lowerlegR1;
-	public final ModelRendererTF upperlegR2;
-	public final ModelRendererTF upperlegR3;
-	public final ModelRendererTF upperlegR4;
-	public final ModelRendererTF upperlegR5;
-	public final ModelRendererTF feetbaseR1;
-	public final ModelRendererTF lowerlegR2;
-	public final ModelRendererTF lowerlegR3;
-	public final ModelRendererTF lowerlegR5;
-	public final ModelRendererTF lowerlegR7;
-	public final ModelRendererTF lowerlegR9;
-	public final ModelRendererTF kneepadR1;
 	public final ModelRendererTF lowerlegR10;
 	public final ModelRendererTF lowerlegR11;
-	public final ModelRendererTF lowerlegR16;
-	public final ModelRendererTF feetR1;
-	public final ModelRendererTF feetR2;
-	public final ModelRendererTF feetR4;
-	public final ModelRendererTF feetR5;
-	public final ModelRendererTF feetR6;
-	public final ModelRendererTF feetR8;
-	public final ModelRendererTF feetR3;
-	public final ModelRendererTF feetR7;
-	public final ModelRendererTF lowerlegR4;
-	public final ModelRendererTF lowerlegR6;
-	public final ModelRendererTF lowerlegR8;
-	public final ModelRendererTF kneepadR2;
 	public final ModelRendererTF lowerlegR12;
 	public final ModelRendererTF lowerlegR13;
 	public final ModelRendererTF lowerlegR14;
 	public final ModelRendererTF lowerlegR15;
+	public final ModelRendererTF lowerlegR16;
 	public final ModelRendererTF lowerlegR17;
+	public final ModelRendererTF lowerlegR2;
+	public final ModelRendererTF lowerlegR3;
+	public final ModelRendererTF lowerlegR4;
+	public final ModelRendererTF lowerlegR5;
+	public final ModelRendererTF lowerlegR6;
+	public final ModelRendererTF lowerlegR7;
+	public final ModelRendererTF lowerlegR8;
+	public final ModelRendererTF lowerlegR9;
+	public final ModelRendererTF neck1;
+	public final ModelRendererTF shoulderL2;
+	public final ModelRendererTF shoulderL3;
+	public final ModelRendererTF shoulderL4;
+	public final ModelRendererTF shoulderL5;
+	public final ModelRendererTF shoulderL6;
+	public final ModelRendererTF shoulderLbase;
+	public final ModelRendererTF shoulderR2;
+	public final ModelRendererTF shoulderR3;
+	public final ModelRendererTF shoulderR4;
+	public final ModelRendererTF shoulderR5;
+	public final ModelRendererTF shoulderR6;
+	public final ModelRendererTF shoulderRbase;
+	public final ModelRendererTF tail1;
+	public final ModelRendererTF tail2;
+	public final ModelRendererTF tail3;
+	public final ModelRendererTF tail4;
+	public final ModelRendererTF tail5;
+	public final ModelRendererTF torsobase1;
+	public final ModelRendererTF torsoconenctor6;
+	public final ModelRendererTF torsoconnector2;
+	public final ModelRendererTF torsoconnector3;
+	public final ModelRendererTF torsoconnector3_1;
+	public final ModelRendererTF torsoconnector4;
+	public final ModelRendererTF torsoconnector5;
+	public final ModelRendererTF torsoconnector7;
+	public final ModelRendererTF torsoconnectorbase1;
+	public final ModelRendererTF upperarmL1;
+	public final ModelRendererTF upperarmL2;
+	public final ModelRendererTF upperarmL3;
+	public final ModelRendererTF upperarmR1;
+	public final ModelRendererTF upperarmR2;
+	public final ModelRendererTF upperarmR3;
+	public final ModelRendererTF upperlegL1;
+	public final ModelRendererTF upperlegL2;
+	public final ModelRendererTF upperlegL3;
+	public final ModelRendererTF upperlegL4;
+	public final ModelRendererTF upperlegL5;
+	public final ModelRendererTF upperlegR1;
+	public final ModelRendererTF upperlegR2;
+	public final ModelRendererTF upperlegR3;
+	public final ModelRendererTF upperlegR4;
+	public final ModelRendererTF upperlegR5;
+	public final ModelRendererTF waistbase;
+	public final ModelRendererTF wingL1;
+	public final ModelRendererTF wingL2;
+	public final ModelRendererTF wingL3;
+	public final ModelRendererTF wingL4;
+	public final ModelRendererTF wingL5;
+	public final ModelRendererTF wingR1;
+	public final ModelRendererTF wingR2;
+	public final ModelRendererTF wingR3;
+	public final ModelRendererTF wingR4;
+	public final ModelRendererTF wingR5;
 
 	public ModelSkystrike() {
 		super(1, 0.8F, new AnimationModifier(Type.DEGREE, isBacking(), 0.5F), new AnimationModifier(Type.SPEED, isSneaking(), 1.5F));
+		textureWidth = textureHeight = 128;
 
-		textureWidth = 128;
-		textureHeight = 128;
 		feetL4 = new ModelRendererTF(this, 39, 36);
 		feetL4.setRotationPoint(-1, -1.5F, -2);
 		feetL4.addBox(0, 0, 0, 2, 2, 1, 0);
 		setRotateAngle(feetL4, -0.3839724354387525F, 0, 0);
+
 		feetR7 = new ModelRendererTF(this, 41, 40);
-		feetR7.setRotationPoint(0, 0, 0);
 		feetR7.addBox(0, -1, -3, 1, 1, 3, 0);
 		setRotateAngle(feetR7, 0.296705972839036F, 0, 0);
+
 		lowerlegL3 = new ModelRendererTF(this, 29, 58);
 		lowerlegL3.setRotationPoint(-0.9F, 6.5F, -2.4F);
 		lowerlegL3.addBox(0, -2, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegL3, -0.08726646259971647F, -0.017453292519943295F, 0);
+
 		feetL6 = new ModelRendererTF(this, 41, 44);
 		feetL6.mirror = true;
 		feetL6.setRotationPoint(-0.5F, 0, -1);
 		feetL6.addBox(-1, 0, -3, 1, 1, 3, 0);
 		setRotateAngle(feetL6, 0, 0.08726646259971647F, 0);
+
 		torsoconnector2 = new ModelRendererTF(this, 11, 80);
 		torsoconnector2.setRotationPoint(0, 0, -1);
 		torsoconnector2.addBox(-0.8F, -4, -0.8F, 2, 4, 2, 0);
 		setRotateAngle(torsoconnector2, 0, -0.7853981633974483F, 0);
+
 		lowerlegR9 = new ModelRendererTF(this, 38, 60);
 		lowerlegR9.mirror = true;
 		lowerlegR9.setRotationPoint(1, 0.1F, -1.5F);
 		lowerlegR9.addBox(-3, 0, 0, 3, 1, 1, 0);
+
 		lowerlegL10 = new ModelRendererTF(this, 49, 54);
 		lowerlegL10.setRotationPoint(1, 0.1F, 1.5F);
 		lowerlegL10.addBox(0, 0, 0, 1, 7, 1, 0);
+
 		feetL2 = new ModelRendererTF(this, 41, 44);
 		feetL2.setRotationPoint(0.5F, 0, -1);
 		feetL2.addBox(0, 0, -3, 1, 1, 3, 0);
 		setRotateAngle(feetL2, 0, -0.08726646259971647F, 0);
+
 		wingR3 = new ModelRendererTF(this, 51, 15);
 		wingR3.mirror = true;
 		wingR3.setRotationPoint(0, -2, 0);
 		wingR3.addBox(-0.5F, -7, -1.5F, 1, 9, 4, 0);
+
 		crotchL3 = new ModelRendererTF(this, 0, 36);
 		crotchL3.setRotationPoint(2, 0.5F, 0);
 		crotchL3.addBox(-0.5F, -0.5F, -1, 1, 1, 3, 0);
 		setRotateAngle(crotchL3, 0, 0, 0.7853981633974483F);
+
 		wingR5 = new ModelRendererTF(this, 59, 28);
 		wingR5.mirror = true;
 		wingR5.setRotationPoint(0.5F, -7, -1.5F);
 		wingR5.addBox(-1, 0, 0, 1, 9, 1, 0);
 		setRotateAngle(wingR5, -0.10471975511965977F, -0.04363323129985824F, 0.0017453292519943296F);
+
 		headbase = new ModelRendererTF(this, 1, 57);
 		headbase.setRotationPoint(0, -0.5F, -0.1F);
 		headbase.addBox(-1.5F, -3, -1.5F, 3, 3, 2, 0);
 		setRotateAngle(headbase, -0.08726646259971647F, 0, 0);
+
 		upperlegR4 = new ModelRendererTF(this, 53, 29);
 		upperlegR4.mirror = true;
 		upperlegR4.setRotationPoint(0, -0.8F, 0.4F);
 		upperlegR4.addBox(-1, 0, 0, 1, 6, 1, 0);
+
 		tail3 = new ModelRendererTF(this, 16, 35);
 		tail3.mirror = true;
 		tail3.setRotationPoint(-1, 0, 1.5F);
 		tail3.addBox(0, 0, -2, 1, 2, 2, 0);
 		setRotateAngle(tail3, 0, 0.22689280275926282F, 0);
+
 		wingL5 = new ModelRendererTF(this, 59, 28);
 		wingL5.setRotationPoint(-0.5F, -7, -1.5F);
 		wingL5.addBox(0, 0, 0, 1, 9, 1, 0);
 		setRotateAngle(wingL5, -0.10471975511965977F, 0.04363323129985824F, -0.0017453292519943296F);
+
 		lowerarmL1 = new ModelRendererTF(this, 7, 21);
 		lowerarmL1.setRotationPoint(0, 5, 0);
 		lowerarmL1.addBox(0.3F, -0.3F, -1.3F, 1, 4, 3, 0);
 		setRotateAngle(lowerarmL1, -0.17453292519943295F, 0, 0.15707963267948966F);
+
 		crotch2 = new ModelRendererTF(this, 5, 42);
 		crotch2.setRotationPoint(0.5F, 1, 0.5F);
 		crotch2.addBox(0, 0, 0, 2, 2, 2, 0);
+
 		chestnose5 = new ModelRendererTF(this, 16, 103);
 		chestnose5.setRotationPoint(0, -2, -2);
 		chestnose5.addBox(-0.5F, -1.6F, -0.5F, 1, 2, 1, 0);
 		setRotateAngle(chestnose5, 0, -0.7853981633974483F, 0);
+
 		auxFinL3 = new ModelRendererTF(this, 36, 93);
 		auxFinL3.mirror = true;
-		auxFinL3.setRotationPoint(0, 0, 0);
 		auxFinL3.addBox(-1, 2, -1, 1, 4, 1, 0);
 		setRotateAngle(auxFinL3, 0.15707963267948966F, -0.03490658503988659F, 0.0017453292519943296F);
+
 		shoulderL3 = new ModelRendererTF(this, 39, 20);
 		shoulderL3.setRotationPoint(0.2F, 0, -1.2F);
 		shoulderL3.addBox(-0.2F, -1, -0.5F, 4, 2, 1, 0);
 		setRotateAngle(shoulderL3, -0.7853981633974483F, 0, 0);
+
 		upperlegL2 = new ModelRendererTF(this, 46, 29);
 		upperlegL2.setRotationPoint(1, -0.3F, 0);
 		upperlegL2.addBox(0, 0, -0.2F, 1, 4, 2, 0);
+
 		backfinL2 = new ModelRendererTF(this, 0, 100);
 		backfinL2.setRotationPoint(0.5F, 0, -0.8F);
 		backfinL2.addBox(0.5F, -3.5F, 0, 1, 4, 3, 0);
 		setRotateAngle(backfinL2, 0.03490658503988659F, -0.22689280275926282F, 0.08726646259971647F);
+
 		upperlegR2 = new ModelRendererTF(this, 46, 29);
 		upperlegR2.mirror = true;
 		upperlegR2.setRotationPoint(-1, -0.3F, 0);
 		upperlegR2.addBox(-1, 0, -0.2F, 1, 4, 2, 0);
+
 		auxFinL2 = new ModelRendererTF(this, 32, 83);
 		auxFinL2.mirror = true;
 		auxFinL2.setRotationPoint(2, -0.2F, -0.6F);
 		auxFinL2.addBox(-1, 0, 0, 1, 6, 3, 0);
 		setRotateAngle(auxFinL2, 0.05235987755982988F, 0, -0.19198621771937624F);
+
 		tail4 = new ModelRendererTF(this, 12, 47);
 		tail4.setRotationPoint(0, 2, 1.5F);
 		tail4.addBox(-1, -1, -3, 2, 1, 3, 0);
 		setRotateAngle(tail4, 0.24434609527920614F, 0, 0.0017453292519943296F);
+
 		wingL4 = new ModelRendererTF(this, 62, 18);
 		wingL4.setRotationPoint(0, -6.9F, 2.3F);
 		wingL4.addBox(-0.5F, 0, 0, 1, 8, 2, 0);
 		setRotateAngle(wingL4, 0, 0.3839724354387525F, 0);
+
 		crotchR1 = new ModelRendererTF(this, 14, 42);
 		crotchR1.mirror = true;
 		crotchR1.setRotationPoint(-1.5F, 0, 0);
 		crotchR1.addBox(-2, 0, -1.5F, 2, 1, 3, 0);
+
 		chestnose9 = new ModelRendererTF(this, 14, 110);
-		chestnose9.setRotationPoint(0, 0, 0);
 		chestnose9.addBox(-0.5F, 0, -3, 1, 1, 1, 0);
+
 		feetL5 = new ModelRendererTF(this, 40, 54);
 		feetL5.setRotationPoint(1.1F, 0, -0.7F);
 		feetL5.addBox(-0.3F, -1, -1, 1, 2, 3, 0);
 		setRotateAngle(feetL5, 0, 0, -0.17453292519943295F);
+
 		wingL3 = new ModelRendererTF(this, 51, 15);
 		wingL3.setRotationPoint(0, -2, 0);
 		wingL3.addBox(-0.5F, -7, -1.5F, 1, 9, 4, 0);
+
 		lowerlegR15 = new ModelRendererTF(this, 40, 34);
 		lowerlegR15.mirror = true;
 		lowerlegR15.setRotationPoint(0.1F, 5.5F, 0.2F);
 		lowerlegR15.addBox(-2, 0, 0, 2, 1, 1, 0);
+
 		lowerlegL12 = new ModelRendererTF(this, 40, 34);
 		lowerlegL12.setRotationPoint(-0.1F, 0.2F, 0.2F);
 		lowerlegL12.addBox(0, 0, 0, 2, 1, 1, 0);
+
 		chestnoseemblem1 = new ModelRendererTF(this, 18, 110);
 		chestnoseemblem1.setRotationPoint(0, -4.4F, 0.9F);
 		chestnoseemblem1.addBox(-1, 0, -2, 2, 1, 2, 0);
 		setRotateAngle(chestnoseemblem1, 0.2792526803190927F, 0, 0);
+
 		shoulderR4 = new ModelRendererTF(this, 41, 24);
-		shoulderR4.setRotationPoint(0, 0, 0);
 		shoulderR4.addBox(-1, -1, -0.8F, 1, 1, 3, 0);
 		setRotateAngle(shoulderR4, 0, -0.017453292519943295F, 0);
+
 		lowerlegR5 = new ModelRendererTF(this, 29, 58);
 		lowerlegR5.mirror = true;
 		lowerlegR5.setRotationPoint(0.8F, 4.6F, -2.1F);
 		lowerlegR5.addBox(-2, -2, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegR5, -0.17453292519943295F, 0, 0);
+
 		fistR2 = new ModelRendererTF(this, 13, 21);
 		fistR2.mirror = true;
-		fistR2.setRotationPoint(0, 0, 0);
 		fistR2.addBox(-1.2F, 0.2F, -1.1F, 1, 1, 2, 0);
+
 		lowerlegL17 = new ModelRendererTF(this, 37, 65);
-		lowerlegL17.setRotationPoint(0, 0, 0);
 		lowerlegL17.addBox(-0.5F, -0.6F, -2.5F, 1, 2, 4, 0);
 		setRotateAngle(lowerlegL17, -0.4363323129985824F, 0, 0);
+
 		torsoconenctor6 = new ModelRendererTF(this, 0, 41);
 		torsoconenctor6.setRotationPoint(-1.8F, -2.4F, 1);
 		torsoconenctor6.addBox(0, -1, 0, 1, 4, 1, 0);
 		setRotateAngle(torsoconenctor6, -0.3490658503988659F, 0, 0.5235987755982988F);
+
 		wingL1 = new ModelRendererTF(this, 50, 14);
 		wingL1.setRotationPoint(1.5F, 0.2F, 1);
 		wingL1.addBox(-0.5F, -2.5F, -0.5F, 1, 3, 1, 0);
 		setRotateAngle(wingL1, 0.08726646259971647F, 0, 0.17453292519943295F);
+
 		head8 = new ModelRendererTF(this, 7, 71);
 		head8.setRotationPoint(0, 0, 3);
 		head8.addBox(-0.5F, 0, 0, 1, 1, 2, 0);
 		setRotateAngle(head8, -0.24434609527920614F, 0, 0);
+
 		chestnose1 = new ModelRendererTF(this, 0, 108);
 		chestnose1.setRotationPoint(0, 0, -2);
 		chestnose1.addBox(-1.5F, -0.3F, -0.9F, 3, 2, 2, 0);
 		setRotateAngle(chestnose1, 0.4363323129985824F, 0, 0);
+
 		lowerlegR14 = new ModelRendererTF(this, 40, 34);
 		lowerlegR14.mirror = true;
 		lowerlegR14.setRotationPoint(0.1F, 4, 0.2F);
 		lowerlegR14.addBox(-2, 0, 0, 2, 1, 1, 0);
+
 		feetR8 = new ModelRendererTF(this, 40, 54);
 		feetR8.setRotationPoint(1.1F, 0, -0.7F);
 		feetR8.addBox(-0.3F, -1, -1, 1, 2, 3, 0);
-		setRotateAngle(feetR8, 0, 0, -0.17453292519943295F);
+		feetR8.rotateAngleZ = -0.17453292519943295F;
+
 		lowerlegR12 = new ModelRendererTF(this, 40, 34);
 		lowerlegR12.mirror = true;
 		lowerlegR12.setRotationPoint(0.1F, 0.2F, 0.2F);
 		lowerlegR12.addBox(-2, 0, 0, 2, 1, 1, 0);
+
 		lowerlegL1 = new ModelRendererTF(this, 30, 39);
 		lowerlegL1.setRotationPoint(0.2F, 5, 0);
 		lowerlegL1.addBox(-1, 0.1F, -0.5F, 3, 7, 2, 0);
 		setRotateAngle(lowerlegL1, 0.10471975511965977F, 0, 0.017453292519943295F);
+
 		backpack3 = new ModelRendererTF(this, 28, 102);
 		backpack3.setRotationPoint(0, 1.4F, -1.3F);
 		backpack3.addBox(-1, 0, -1, 2, 4, 2, 0);
 		setRotateAngle(backpack3, -0.4886921905584123F, 0, 0);
+
 		backpack4 = new ModelRendererTF(this, 26, 110);
 		backpack4.setRotationPoint(1.5F, 0, 1);
 		backpack4.addBox(0, 0, -2, 3, 1, 2, 0);
 		setRotateAngle(backpack4, -0.008726646259971648F, 0.9250245035569946F, 0);
+
 		lowerlegR4 = new ModelRendererTF(this, 29, 62);
 		lowerlegR4.mirror = true;
 		lowerlegR4.setRotationPoint(-1.8F, 0, 0);
 		lowerlegR4.addBox(-1, -2, 0, 1, 2, 2, 0);
 		setRotateAngle(lowerlegR4, 0, -0.03490658503988659F, 0);
+
 		chestL1 = new ModelRendererTF(this, 25, 80);
 		chestL1.setRotationPoint(1.5F, -2.6F, -2.4F);
 		chestL1.addBox(0, 0, 0, 2, 3, 1, 0);
 		setRotateAngle(chestL1, -0.2617993877991494F, -0.3490658503988659F, 0);
+
 		chestR1 = new ModelRendererTF(this, 25, 80);
 		chestR1.mirror = true;
 		chestR1.setRotationPoint(-1.5F, -2.6F, -2.4F);
 		chestR1.addBox(-2, 0, 0, 2, 3, 1, 0);
 		setRotateAngle(chestR1, -0.2617993877991494F, 0.3490658503988659F, 0);
+
 		chestnose3 = new ModelRendererTF(this, 0, 113);
 		chestnose3.setRotationPoint(0.5F, -3.6F, -1);
 		chestnose3.addBox(0, -0.6F, -1, 2, 1, 3, 0);
 		setRotateAngle(chestnose3, 0.4363323129985824F, 0, 1.3439035240356336F);
+
 		feetL7 = new ModelRendererTF(this, 41, 40);
 		feetL7.mirror = true;
-		feetL7.setRotationPoint(0, 0, 0);
 		feetL7.addBox(-1, -1, -3, 1, 1, 3, 0);
-		setRotateAngle(feetL7, 0.296705972839036F, 0, 0);
+		feetL7.rotateAngleX = 0.296705972839036F;
+
 		shoulderL6 = new ModelRendererTF(this, 30, 14);
 		shoulderL6.setRotationPoint(0, -1, 2.2F);
 		shoulderL6.addBox(0, 0, 0, 4, 1, 3, 0);
 		setRotateAngle(shoulderL6, -0.9250245035569946F, -0.017453292519943295F, 0);
+
 		lowerarmL4 = new ModelRendererTF(this, 17, 18);
 		lowerarmL4.setRotationPoint(-1.1F, 1, -1.3F);
 		lowerarmL4.addBox(0, 0, 0, 2, 1, 3, 0);
-		setRotateAngle(lowerarmL4, 0, -0.017453292519943295F, 0);
+		lowerarmL4.rotateAngleY = -0.017453292519943295F;
+
 		fistL2 = new ModelRendererTF(this, 13, 21);
-		fistL2.setRotationPoint(0, 0, 0);
 		fistL2.addBox(0.2F, 0.2F, -1.1F, 1, 1, 2, 0);
+
 		feetbaseL1 = new ModelRendererTF(this, 30, 49);
 		feetbaseL1.setRotationPoint(0.5F, 6, 0);
 		feetbaseL1.addBox(-1, 0, -1, 2, 2, 2, 0);
 		setRotateAngle(feetbaseL1, -0.05235987755982988F, 0, 0.03490658503988659F);
+
 		head3 = new ModelRendererTF(this, 10, 67);
 		head3.setRotationPoint(0.2F, -1.5F, 0.2F);
 		head3.addBox(0, 0, 0, 2, 2, 2, 0);
+
 		feetL3 = new ModelRendererTF(this, 41, 40);
-		feetL3.setRotationPoint(0, 0, 0);
 		feetL3.addBox(0, -1, -3, 1, 1, 3, 0);
 		setRotateAngle(feetL3, 0.296705972839036F, 0, 0);
+
 		lowerarmR5 = new ModelRendererTF(this, 17, 18);
 		lowerarmR5.mirror = true;
 		lowerarmR5.setRotationPoint(1.1F, 2.2F, -1.3F);
 		lowerarmR5.addBox(-2, 0, 0, 2, 1, 3, 0);
 		setRotateAngle(lowerarmR5, 0, 0.017453292519943295F, 0);
+
 		upperlegL4 = new ModelRendererTF(this, 53, 29);
 		upperlegL4.setRotationPoint(0, -0.8F, 0.4F);
 		upperlegL4.addBox(0, 0, 0, 1, 6, 1, 0);
+
 		fistR3 = new ModelRendererTF(this, 20, 22);
 		fistR3.mirror = true;
-		fistR3.setRotationPoint(0, 0, 0);
 		fistR3.addBox(-1.2F, 0.2F, 0.1F, 1, 1, 1, 0);
+
 		torsoconnector3_1 = new ModelRendererTF(this, 8, 88);
 		torsoconnector3_1.setRotationPoint(0, 0.7F, -1);
 		torsoconnector3_1.addBox(-1.3F, -1.8F, -1.3F, 3, 1, 3, 0);
 		setRotateAngle(torsoconnector3_1, 0, -0.7853981633974483F, 0);
+
 		backpack2 = new ModelRendererTF(this, 26, 96);
 		backpack2.setRotationPoint(0, 3, 1);
 		backpack2.addBox(-1.5F, 0, -3, 3, 2, 3, 0);
 		setRotateAngle(backpack2, -0.12217304763960307F, 0, 0);
+
 		auxFinL4 = new ModelRendererTF(this, 37, 101);
 		auxFinL4.mirror = true;
 		auxFinL4.setRotationPoint(-0.5F, 0, 2.8F);
 		auxFinL4.addBox(-0.5F, 0.1F, 0, 1, 5, 1, 0);
 		setRotateAngle(auxFinL4, -0.03490658503988659F, 0.4886921905584123F, -0.017453292519943295F);
+
 		lowerlegL7 = new ModelRendererTF(this, 29, 58);
 		lowerlegL7.setRotationPoint(-0.7F, 2.9F, -1.7F);
 		lowerlegL7.addBox(0, -2, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegL7, 0.03490658503988659F, 0, 0);
+
 		upperarmR1 = new ModelRendererTF(this, 0, 21);
 		upperarmR1.mirror = true;
 		upperarmR1.setRotationPoint(-1.5F, 0.7F, 0.5F);
 		upperarmR1.addBox(-1, 0, -1, 1, 4, 2, 0);
 		setRotateAngle(upperarmR1, 0.08726646259971647F, 0, 0.17453292519943295F);
+
 		head11 = new ModelRendererTF(this, 18, 61);
 		head11.mirror = true;
 		head11.setRotationPoint(-0.9F, -2.9F, -1);
 		head11.addBox(-1, 0, 0, 1, 3, 2, 0);
+
 		feetbaseR1 = new ModelRendererTF(this, 30, 49);
 		feetbaseR1.mirror = true;
 		feetbaseR1.setRotationPoint(-0.5F, 6, 0);
 		feetbaseR1.addBox(-1, 0, -1, 2, 2, 2, 0);
 		setRotateAngle(feetbaseR1, -0.05235987755982988F, 0, -0.03490658503988659F);
+
 		torsoconnector4 = new ModelRendererTF(this, 20, 80);
 		torsoconnector4.setRotationPoint(-2, 0, 0);
 		torsoconnector4.addBox(0, -7, -0.5F, 1, 7, 1, 0);
 		setRotateAngle(torsoconnector4, -0.17453292519943295F, 0, -0.08726646259971647F);
+
 		lowerlegL15 = new ModelRendererTF(this, 40, 34);
 		lowerlegL15.setRotationPoint(-0.1F, 5.5F, 0.2F);
 		lowerlegL15.addBox(0, 0, 0, 2, 1, 1, 0);
+
 		lowerlegR1 = new ModelRendererTF(this, 30, 39);
 		lowerlegR1.mirror = true;
 		lowerlegR1.setRotationPoint(-0.2F, 5, 0);
 		lowerlegR1.addBox(-2, 0.1F, -0.5F, 3, 7, 2, 0);
 		setRotateAngle(lowerlegR1, 0.10471975511965977F, 0, -0.017453292519943295F);
+
 		lowerlegR7 = new ModelRendererTF(this, 29, 58);
 		lowerlegR7.mirror = true;
 		lowerlegR7.setRotationPoint(0.7F, 2.9F, -1.7F);
 		lowerlegR7.addBox(-2, -2, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegR7, 0.03490658503988659F, 0, 0);
+
 		shoulderR5 = new ModelRendererTF(this, 41, 24);
 		shoulderR5.mirror = true;
-		shoulderR5.setRotationPoint(0, 0, 0);
 		shoulderR5.addBox(-4, -1, -0.8F, 1, 1, 3, 0);
 		setRotateAngle(shoulderR5, 0, -0.017453292519943295F, 0);
+
 		lowerlegL5 = new ModelRendererTF(this, 29, 58);
 		lowerlegL5.setRotationPoint(-0.8F, 4.6F, -2.1F);
 		lowerlegL5.addBox(0, -2, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegL5, -0.17453292519943295F, 0, 0);
+
 		shoulderR3 = new ModelRendererTF(this, 39, 20);
 		shoulderR3.mirror = true;
 		shoulderR3.setRotationPoint(-0.2F, 0, -1.2F);
 		shoulderR3.addBox(-3.8F, -1, -0.5F, 4, 2, 1, 0);
 		setRotateAngle(shoulderR3, -0.7853981633974483F, 0, 0);
+
 		chestnose6 = new ModelRendererTF(this, 8, 109);
 		chestnose6.setRotationPoint(0.2F, -2.3F, -1.5F);
 		chestnose6.addBox(-0.1F, 0, 0, 1, 2, 4, 0);
 		setRotateAngle(chestnose6, -0.08726646259971647F, 0.5235987755982988F, 0.17453292519943295F);
+
 		chestnose8 = new ModelRendererTF(this, 17, 103);
 		chestnose8.setRotationPoint(0, -2, -1.9F);
 		chestnose8.addBox(-0.5F, 0, 0, 1, 2, 4, 0);
 		setRotateAngle(chestnose8, -0.22689280275926282F, 0, 0);
+
 		lowerlegR11 = new ModelRendererTF(this, 47, 35);
 		lowerlegR11.mirror = true;
 		lowerlegR11.setRotationPoint(0.8F, 0.4F, 1.1F);
 		lowerlegR11.addBox(-2, 0, 0, 2, 6, 1, 0);
+
 		chestnose4 = new ModelRendererTF(this, 0, 113);
 		chestnose4.mirror = true;
 		chestnose4.setRotationPoint(-0.5F, -3.6F, -1);
 		chestnose4.addBox(-2, -0.6F, -1, 2, 1, 3, 0);
 		setRotateAngle(chestnose4, 0.4363323129985824F, 0, -1.3439035240356336F);
+
 		head13 = new ModelRendererTF(this, 18, 66);
 		head13.mirror = true;
 		head13.setRotationPoint(-0.9F, -2.9F, 1);
 		head13.addBox(-1, 0, 0, 1, 2, 1, 0);
 		setRotateAngle(head13, 0, 0.2617993877991494F, 0);
+
 		lowerlegR3 = new ModelRendererTF(this, 29, 58);
 		lowerlegR3.mirror = true;
 		lowerlegR3.setRotationPoint(0.9F, 6.5F, -2.4F);
 		lowerlegR3.addBox(-2, -2, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegR3, -0.08726646259971647F, 0.017453292519943295F, 0);
+
 		head2 = new ModelRendererTF(this, 1, 68);
 		head2.setRotationPoint(0, -0.9F, -2.9F);
 		head2.addBox(0, 0, 0, 2, 1, 2, 0);
 		setRotateAngle(head2, 0, -0.7853981633974483F, 0);
+
 		upperlegL5 = new ModelRendererTF(this, 53, 36);
 		upperlegL5.setRotationPoint(1, 4, 0);
 		upperlegL5.addBox(-0.3F, 0.2F, -1.4F, 1, 1, 2, 0);
 		setRotateAngle(upperlegL5, 0.08726646259971647F, 0, 0);
+
 		lowerlegR2 = new ModelRendererTF(this, 29, 54);
 		lowerlegR2.mirror = true;
 		lowerlegR2.setRotationPoint(1, 6.5F, -2.5F);
 		lowerlegR2.addBox(-3, 0, 0, 3, 1, 2, 0);
+
 		lowerlegR16 = new ModelRendererTF(this, 48, 47);
 		lowerlegR16.mirror = true;
 		lowerlegR16.setRotationPoint(-0.5F, 5.1F, 2.6F);
 		lowerlegR16.addBox(-1, 0, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegR16, -0.7504915783575618F, 0, 0);
+
 		auxFinR4 = new ModelRendererTF(this, 37, 101);
 		auxFinR4.setRotationPoint(0.5F, 0, 2.8F);
 		auxFinR4.addBox(-0.5F, 0.1F, 0, 1, 5, 1, 0);
 		setRotateAngle(auxFinR4, -0.03490658503988659F, -0.4886921905584123F, 0.017453292519943295F);
+
 		backpack6 = new ModelRendererTF(this, 0, 118);
-		backpack6.setRotationPoint(0, 0, 0);
 		backpack6.addBox(-1.5F, -1.5F, -0.7F, 3, 2, 1, 0);
 		setRotateAngle(backpack6, -0.08726646259971647F, 0, 0);
+
 		feetR3 = new ModelRendererTF(this, 41, 40);
 		feetR3.mirror = true;
-		feetR3.setRotationPoint(0, 0, 0);
 		feetR3.addBox(-1, -1, -3, 1, 1, 3, 0);
 		setRotateAngle(feetR3, 0.296705972839036F, 0, 0);
+
 		torsoconnector7 = new ModelRendererTF(this, 0, 41);
 		torsoconnector7.mirror = true;
 		torsoconnector7.setRotationPoint(1.8F, -2.4F, 1);
 		torsoconnector7.addBox(-1, -1, 0, 1, 4, 1, 0);
 		setRotateAngle(torsoconnector7, -0.3490658503988659F, 0, -0.5235987755982988F);
+
 		head6 = new ModelRendererTF(this, 11, 60);
 		head6.mirror = true;
 		head6.setRotationPoint(1.5F, -3, -1.5F);
 		head6.addBox(-1, 0, -2, 1, 1, 2, 0);
 		setRotateAngle(head6, 0.017453292519943295F, 0.3490658503988659F, 0);
+
 		feetR6 = new ModelRendererTF(this, 41, 44);
 		feetR6.setRotationPoint(0.5F, 0, -1);
 		feetR6.addBox(0, 0, -3, 1, 1, 3, 0);
 		setRotateAngle(feetR6, 0, -0.08726646259971647F, 0);
+
 		lowerarmR1 = new ModelRendererTF(this, 7, 21);
 		lowerarmR1.mirror = true;
 		lowerarmR1.setRotationPoint(0, 5, 0);
 		lowerarmR1.addBox(-1.3F, -0.3F, -1.3F, 1, 4, 3, 0);
 		setRotateAngle(lowerarmR1, -0.17453292519943295F, 0, -0.15707963267948966F);
+
 		lowerlegR17 = new ModelRendererTF(this, 37, 65);
 		lowerlegR17.mirror = true;
-		lowerlegR17.setRotationPoint(0, 0, 0);
 		lowerlegR17.addBox(-0.5F, -0.6F, -2.5F, 1, 2, 4, 0);
 		setRotateAngle(lowerlegR17, -0.4363323129985824F, 0, 0);
+
 		feetR5 = new ModelRendererTF(this, 40, 54);
 		feetR5.mirror = true;
 		feetR5.setRotationPoint(-1.1F, 0, -0.7F);
 		feetR5.addBox(-0.7F, -1, -1, 1, 2, 3, 0);
 		setRotateAngle(feetR5, 0, 0, 0.17453292519943295F);
+
 		backpackbase1 = new ModelRendererTF(this, 22, 89);
 		backpackbase1.setRotationPoint(0, -2, 4);
 		backpackbase1.addBox(-1.5F, 0, -2, 3, 3, 3, 0);
 		setRotateAngle(backpackbase1, -0.06981317007977318F, 0, 0);
+
 		auxFinR1 = new ModelRendererTF(this, 32, 80);
 		auxFinR1.setRotationPoint(-2.1F, -1.7F, 3.5F);
 		auxFinR1.addBox(-1.6F, 0, -0.6F, 2, 1, 2, 0);
 		setRotateAngle(auxFinR1, -0.24434609527920614F, 0.6981317007977318F, -0.08726646259971647F);
+
 		lowerlegL13 = new ModelRendererTF(this, 40, 34);
 		lowerlegL13.setRotationPoint(-0.1F, 2, 0.2F);
 		lowerlegL13.addBox(0, 0, 0, 2, 1, 1, 0);
+
 		crotchL2 = new ModelRendererTF(this, 0, 31);
 		crotchL2.mirror = true;
 		crotchL2.setRotationPoint(2.1F, 0.5F, -2);
 		crotchL2.addBox(-2, 0, 0, 2, 1, 1, 0);
 		setRotateAngle(crotchL2, 0.7853981633974483F, -0.17453292519943295F, 0);
+
 		head12 = new ModelRendererTF(this, 18, 66);
 		head12.setRotationPoint(0.9F, -2.9F, 1);
 		head12.addBox(0, 0, 0, 1, 2, 1, 0);
 		setRotateAngle(head12, 0, -0.2617993877991494F, 0);
+
 		crotchR3 = new ModelRendererTF(this, 0, 36);
 		crotchR3.mirror = true;
 		crotchR3.setRotationPoint(-2, 0.5F, 0);
 		crotchR3.addBox(-0.5F, -0.5F, -1, 1, 1, 3, 0);
 		setRotateAngle(crotchR3, 0, 0, -0.7853981633974483F);
+
 		wingR1 = new ModelRendererTF(this, 50, 14);
 		wingR1.mirror = true;
 		wingR1.setRotationPoint(-1.5F, 0.2F, 1);
 		wingR1.addBox(-0.5F, -2.5F, -0.5F, 1, 3, 1, 0);
 		setRotateAngle(wingR1, 0.08726646259971647F, 0, -0.17453292519943295F);
+
 		auxFinR2 = new ModelRendererTF(this, 32, 83);
 		auxFinR2.setRotationPoint(-2, -0.2F, -0.6F);
 		auxFinR2.addBox(0, 0, 0, 1, 6, 3, 0);
 		setRotateAngle(auxFinR2, 0.05235987755982988F, 0, 0.19198621771937624F);
+
 		lowerarmR6 = new ModelRendererTF(this, 34, 24);
 		lowerarmR6.mirror = true;
 		lowerarmR6.setRotationPoint(-0.3F, -2.3F, 0.7F);
 		lowerarmR6.addBox(-1, 0, -1, 1, 2, 2, 0);
+
 		feetL8 = new ModelRendererTF(this, 40, 54);
 		feetL8.mirror = true;
 		feetL8.setRotationPoint(-1.1F, 0, -0.7F);
 		feetL8.addBox(-0.7F, -1, -1, 1, 2, 3, 0);
 		setRotateAngle(feetL8, 0, 0, 0.17453292519943295F);
+
 		upperarmL3 = new ModelRendererTF(this, 25, 18);
 		upperarmL3.setRotationPoint(0.3F, 0, -0.5F);
 		upperarmL3.addBox(0, 0, 0, 1, 2, 1, 0);
 		setRotateAngle(upperarmL3, 0, 0, 0.10471975511965977F);
+
 		lowerarmL2 = new ModelRendererTF(this, 25, 21);
-		lowerarmL2.setRotationPoint(0, 0, 0);
 		lowerarmL2.addBox(-1, -1.2F, -1.2F, 2, 5, 2, 0);
+
 		lowerarmR2 = new ModelRendererTF(this, 25, 21);
 		lowerarmR2.mirror = true;
-		lowerarmR2.setRotationPoint(0, 0, 0);
 		lowerarmR2.addBox(-1, -1.2F, -1.2F, 2, 5, 2, 0);
+
 		head10 = new ModelRendererTF(this, 18, 61);
 		head10.setRotationPoint(0.9F, -2.9F, -1);
 		head10.addBox(0, 0, 0, 1, 3, 2, 0);
+
 		upperlegR3 = new ModelRendererTF(this, 49, 42);
 		upperlegR3.mirror = true;
 		upperlegR3.setRotationPoint(-1, -0.3F, 0);
 		upperlegR3.addBox(-1, 0, -1.2F, 2, 4, 1, 0);
+
 		torsoconnectorbase1 = new ModelRendererTF(this, 2, 80);
 		torsoconnectorbase1.setRotationPoint(0, 0.5F, 0.3F);
 		torsoconnectorbase1.addBox(-1, -7.7F, -1, 2, 8, 2, 0);
 		setRotateAngle(torsoconnectorbase1, 0.08726646259971647F, 0, 0);
+
 		head7 = new ModelRendererTF(this, 2, 72);
 		head7.setRotationPoint(0, -3, -3);
 		head7.addBox(-0.5F, 0, 0, 1, 1, 3, 0);
 		setRotateAngle(head7, 0.13962634015954636F, 0, 0);
+
 		kneepadR2 = new ModelRendererTF(this, 45, 62);
 		kneepadR2.mirror = true;
 		kneepadR2.setRotationPoint(0, -1.1F, -0.5F);
 		kneepadR2.addBox(-3, -2, 0, 3, 2, 1, 0);
 		setRotateAngle(kneepadR2, -0.6108652381980153F, 0, 0);
+
 		lowerlegR13 = new ModelRendererTF(this, 40, 34);
 		lowerlegR13.mirror = true;
 		lowerlegR13.setRotationPoint(0.1F, 2, 0.2F);
 		lowerlegR13.addBox(-2, 0, 0, 2, 1, 1, 0);
+
 		kneepadR1 = new ModelRendererTF(this, 36, 63);
 		kneepadR1.mirror = true;
 		kneepadR1.setRotationPoint(1, 1.2F, -1.5F);
 		kneepadR1.addBox(-3, -1.1F, -0.5F, 3, 1, 1, 0);
 		setRotateAngle(kneepadR1, 0.3490658503988659F, 0.05235987755982988F, -0.10471975511965977F);
+
 		upperarmR3 = new ModelRendererTF(this, 25, 18);
 		upperarmR3.mirror = true;
 		upperarmR3.setRotationPoint(-0.3F, 0, -0.5F);
 		upperarmR3.addBox(-1, 0, 0, 1, 2, 1, 0);
 		setRotateAngle(upperarmR3, 0, 0, -0.10471975511965977F);
+
 		crotchR2 = new ModelRendererTF(this, 0, 31);
 		crotchR2.mirror = true;
 		crotchR2.setRotationPoint(-2.1F, 0.5F, -2);
 		crotchR2.addBox(0, 0, 0, 2, 1, 1, 0);
 		setRotateAngle(crotchR2, 0.7853981633974483F, 0.17453292519943295F, 0);
+
 		shoulderL5 = new ModelRendererTF(this, 41, 24);
-		shoulderL5.setRotationPoint(0, 0, 0);
 		shoulderL5.addBox(3, -1, -0.8F, 1, 1, 3, 0);
 		setRotateAngle(shoulderL5, 0, 0.017453292519943295F, 0);
+
 		feetR2 = new ModelRendererTF(this, 41, 44);
 		feetR2.mirror = true;
 		feetR2.setRotationPoint(-0.5F, 0, -1);
 		feetR2.addBox(-1, 0, -3, 1, 1, 3, 0);
 		setRotateAngle(feetR2, 0, 0.08726646259971647F, 0);
+
 		lowerlegR6 = new ModelRendererTF(this, 29, 62);
 		lowerlegR6.mirror = true;
 		lowerlegR6.setRotationPoint(-1.6F, 0, 0);
 		lowerlegR6.addBox(-1, -2, 0, 1, 2, 2, 0);
-		setRotateAngle(lowerlegR6, 0, -0.03490658503988659F, 0);
+		lowerlegR6.rotateAngleY = -0.03490658503988659F;
+
 		shoulderR6 = new ModelRendererTF(this, 30, 14);
 		shoulderR6.mirror = true;
 		shoulderR6.setRotationPoint(0, -1, 2.2F);
 		shoulderR6.addBox(-4, 0, 0, 4, 1, 3, 0);
 		setRotateAngle(shoulderR6, -0.9250245035569946F, 0.017453292519943295F, 0);
+
 		feetL1 = new ModelRendererTF(this, 39, 49);
 		feetL1.setRotationPoint(0, 1.6F, 0);
 		feetL1.addBox(-1.5F, 0, -1, 3, 1, 3, 0);
+
 		feetR4 = new ModelRendererTF(this, 39, 36);
 		feetR4.mirror = true;
 		feetR4.setRotationPoint(1, -1.5F, -2);
 		feetR4.addBox(-2, 0, 0, 2, 2, 1, 0);
-		setRotateAngle(feetR4, -0.3839724354387525F, 0, 0);
+		feetR4.rotateAngleX = -0.3839724354387525F;
+
 		auxFinL1 = new ModelRendererTF(this, 32, 80);
 		auxFinL1.mirror = true;
 		auxFinL1.setRotationPoint(2.1F, -1.7F, 3.5F);
 		auxFinL1.addBox(-0.4F, 0, -0.6F, 2, 1, 2, 0);
 		setRotateAngle(auxFinL1, -0.24434609527920614F, -0.6981317007977318F, 0.08726646259971647F);
+
 		upperlegR1 = new ModelRendererTF(this, 30, 30);
 		upperlegR1.mirror = true;
 		upperlegR1.setRotationPoint(-1.8F, 1.5F, -0.2F);
 		upperlegR1.addBox(-1.5F, -0.7F, -1, 2, 6, 2, 0);
 		setRotateAngle(upperlegR1, -0.05235987755982988F, 0, 0.05235987755982988F);
+
 		chestnose2 = new ModelRendererTF(this, 9, 103);
 		chestnose2.setRotationPoint(0, 1.7F, -1);
 		chestnose2.addBox(-1, -2, -0.9F, 2, 2, 1, 0);
-		setRotateAngle(chestnose2, -0.5061454830783556F, 0, 0);
+		chestnose2.rotateAngleX = -0.5061454830783556F;
+
 		head4 = new ModelRendererTF(this, 10, 63);
 		head4.setRotationPoint(-0.1F, 0, -0.1F);
 		head4.addBox(0, 0, 0, 2, 1, 2, 0);
 		setRotateAngle(head4, 0.08726646259971647F, 0, -0.08726646259971647F);
+
 		fistL1 = new ModelRendererTF(this, 16, 24);
 		fistL1.setRotationPoint(0, 3.6F, -0.1F);
 		fistL1.addBox(-1, 0, -1, 2, 2, 2, 0);
-		setRotateAngle(fistL1, 0, 0, 0.08726646259971647F);
+		fistL1.rotateAngleZ = 0.08726646259971647F;
+
 		buttflapL1 = new ModelRendererTF(this, 5, 47);
 		buttflapL1.mirror = true;
 		buttflapL1.setRotationPoint(1.7F, 0, 1.2F);
 		buttflapL1.addBox(-2, 0, 0, 2, 3, 1, 0);
 		setRotateAngle(buttflapL1, 0.08726646259971647F, 0.10471975511965977F, -0.08726646259971647F);
+
 		crotch1 = new ModelRendererTF(this, 5, 37);
 		crotch1.setRotationPoint(0, 0, -3.6F);
 		crotch1.addBox(0.2F, 0, 0.2F, 3, 1, 3, 0);
 		setRotateAngle(crotch1, 0, -0.7853981633974483F, 0);
+
 		upperlegL1 = new ModelRendererTF(this, 30, 30);
 		upperlegL1.setRotationPoint(1.8F, 1.5F, -0.2F);
 		upperlegL1.addBox(-0.5F, -0.7F, -1, 2, 6, 2, 0);
 		setRotateAngle(upperlegL1, -0.05235987755982988F, 0, -0.05235987755982988F);
+
 		buttflapR1 = new ModelRendererTF(this, 5, 47);
 		buttflapR1.setRotationPoint(-1.7F, 0, 1.2F);
 		buttflapR1.addBox(0, 0, 0, 2, 3, 1, 0);
 		setRotateAngle(buttflapR1, 0.08726646259971647F, -0.10471975511965977F, 0.08726646259971647F);
+
 		lowerarmL5 = new ModelRendererTF(this, 17, 18);
 		lowerarmL5.setRotationPoint(-1.1F, 2.2F, -1.3F);
 		lowerarmL5.addBox(0, 0, 0, 2, 1, 3, 0);
-		setRotateAngle(lowerarmL5, 0, -0.017453292519943295F, 0);
+		lowerarmL5.rotateAngleY = -0.017453292519943295F;
+
 		torsoconnector3 = new ModelRendererTF(this, 8, 88);
 		torsoconnector3.setRotationPoint(0, 0.7F, -1);
 		torsoconnector3.addBox(-1.1F, -7, -1.1F, 3, 3, 3, 0);
 		setRotateAngle(torsoconnector3, 0, -0.7853981633974483F, 0);
+
 		shoulderL4 = new ModelRendererTF(this, 41, 24);
 		shoulderL4.mirror = true;
-		shoulderL4.setRotationPoint(0, 0, 0);
 		shoulderL4.addBox(0, -1, -0.8F, 1, 1, 3, 0);
-		setRotateAngle(shoulderL4, 0, 0.017453292519943295F, 0);
+		shoulderL4.rotateAngleY = 0.017453292519943295F;
+
 		upperarmL1 = new ModelRendererTF(this, 0, 21);
 		upperarmL1.setRotationPoint(1.5F, 0.7F, 0.5F);
 		upperarmL1.addBox(0, 0, -1, 1, 4, 2, 0);
 		setRotateAngle(upperarmL1, 0.08726646259971647F, 0, -0.17453292519943295F);
+
 		upperlegL3 = new ModelRendererTF(this, 49, 42);
 		upperlegL3.setRotationPoint(1, -0.3F, 0);
 		upperlegL3.addBox(-1, 0, -1.2F, 2, 4, 1, 0);
+
 		upperlegR5 = new ModelRendererTF(this, 53, 36);
 		upperlegR5.mirror = true;
 		upperlegR5.setRotationPoint(-1, 4, 0);
 		upperlegR5.addBox(-0.7F, 0.2F, -1.4F, 1, 1, 2, 0);
-		setRotateAngle(upperlegR5, 0.08726646259971647F, 0, 0);
+		upperlegR5.rotateAngleX = 0.08726646259971647F;
+
 		tail2 = new ModelRendererTF(this, 16, 35);
 		tail2.setRotationPoint(1, 0, 1.5F);
 		tail2.addBox(-1, 0, -2, 1, 2, 2, 0);
-		setRotateAngle(tail2, 0, -0.22689280275926282F, 0);
+		tail2.rotateAngleY = -0.22689280275926282F;
+
 		upperarmL2 = new ModelRendererTF(this, 34, 18);
-		upperarmL2.setRotationPoint(0, 0, 0);
 		upperarmL2.addBox(-1, -0.4F, -0.5F, 1, 5, 1, 0);
 		lowerlegL9 = new ModelRendererTF(this, 38, 60);
 		lowerlegL9.setRotationPoint(-1, 0.1F, -1.5F);
@@ -846,21 +964,23 @@ public class ModelSkystrike extends ModelTransformerBase {
 		lowerarmR3.setRotationPoint(1.1F, -0.2F, -1.3F);
 		lowerarmR3.addBox(-2, 0, 0, 2, 1, 3, 0);
 		setRotateAngle(lowerarmR3, 0, 0.017453292519943295F, 0);
+
 		shoulderR2 = new ModelRendererTF(this, 41, 15);
 		shoulderR2.mirror = true;
 		shoulderR2.setRotationPoint(0.3F, 1.5F, 0);
 		shoulderR2.addBox(-2, -0.6F, -1, 2, 1, 3, 0);
 		setRotateAngle(shoulderR2, 0.05235987755982988F, 0, 0.47123889803846897F);
+
 		lowerlegL8 = new ModelRendererTF(this, 29, 62);
 		lowerlegL8.setRotationPoint(1.4F, 0, 0);
 		lowerlegL8.addBox(0, -2, 0, 1, 2, 2, 0);
 		setRotateAngle(lowerlegL8, 0, 0.03490658503988659F, 0);
+
 		tail1 = new ModelRendererTF(this, 18, 30);
 		tail1.setRotationPoint(0, 0, 1.5F);
 		tail1.addBox(-1, 0, -0.5F, 2, 2, 2, 0);
 		setRotateAngle(tail1, 0.22689280275926282F, 0, 0);
 		auxFinR3 = new ModelRendererTF(this, 36, 93);
-		auxFinR3.setRotationPoint(0, 0, 0);
 		auxFinR3.addBox(0, 2, -1, 1, 4, 1, 0);
 		setRotateAngle(auxFinR3, 0.15707963267948966F, 0.03490658503988659F, -0.0017453292519943296F);
 		shoulderL2 = new ModelRendererTF(this, 41, 15);
@@ -913,11 +1033,9 @@ public class ModelSkystrike extends ModelTransformerBase {
 		wingR2.addBox(-1, -1.7F, -1, 2, 2, 2, 0);
 		setRotateAngle(wingR2, -0.22689280275926282F, -0.17453292519943295F, -0.08726646259971647F);
 		fistL3 = new ModelRendererTF(this, 20, 22);
-		fistL3.setRotationPoint(0, 0, 0);
 		fistL3.addBox(0.2F, 0.2F, 0.1F, 1, 1, 1, 0);
 		upperarmR2 = new ModelRendererTF(this, 34, 18);
 		upperarmR2.mirror = true;
-		upperarmR2.setRotationPoint(0, 0, 0);
 		upperarmR2.addBox(0, -0.4F, -0.5F, 1, 5, 1, 0);
 		kneepadL2 = new ModelRendererTF(this, 45, 62);
 		kneepadL2.setRotationPoint(0, -1.1F, -0.5F);

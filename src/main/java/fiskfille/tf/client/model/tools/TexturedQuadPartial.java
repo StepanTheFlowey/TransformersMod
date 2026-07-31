@@ -25,7 +25,7 @@ public class TexturedQuadPartial {
 	}
 
 	public void flipFace() {
-		PositionTextureVertex[] vertex = new PositionTextureVertex[vertexPositions.length];
+		final PositionTextureVertex[] vertex = new PositionTextureVertex[vertexPositions.length];
 
 		for(int i = 0; i < vertexPositions.length; ++i) {
 			vertex[i] = vertexPositions[vertexPositions.length - i - 1];
@@ -35,9 +35,9 @@ public class TexturedQuadPartial {
 	}
 
 	public void draw(Tessellator tessellator, double f) {
-		Vec3 vec3 = vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D);
-		Vec3 vec31 = vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D);
-		Vec3 vec32 = vec31.crossProduct(vec3).normalize();
+		final Vec3 vec3 = vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D);
+		final Vec3 vec31 = vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D);
+		final Vec3 vec32 = vec31.crossProduct(vec3).normalize();
 		tessellator.startDrawingQuads();
 
 		if(invertNormal) {
@@ -48,7 +48,7 @@ public class TexturedQuadPartial {
 		}
 
 		for(int i = 0; i < 4; ++i) {
-			PositionTextureVertex vertex = vertexPositions[i];
+			final PositionTextureVertex vertex = vertexPositions[i];
 			tessellator.addVertexWithUV(vertex.vector3D.xCoord * f, vertex.vector3D.yCoord * f, vertex.vector3D.zCoord * f, vertex.texturePositionX, vertex.texturePositionY);
 		}
 

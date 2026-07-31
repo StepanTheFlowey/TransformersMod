@@ -355,8 +355,8 @@ public class MowzieModelRenderer extends ModelRenderer {
 	protected void compileDisplayList(float f) {
 		displayList = GLAllocation.generateDisplayLists(1);
 		GL11.glNewList(displayList, GL11.GL_COMPILE);
-		Tessellator tessellator = Tessellator.instance;
 
+		final Tessellator tessellator = Tessellator.instance;
 		for(Object cube : cubeList) {
 			((ModelBox) cube).render(tessellator, f);
 		}
@@ -366,9 +366,9 @@ public class MowzieModelRenderer extends ModelRenderer {
 	}
 
 	public void renderWithParentRotations(float partialTicks) {
-		float x = getParentRotX();
-		float y = getParentRotY();
-		float z = getParentRotZ();
+		final float x = getParentRotX();
+		final float y = getParentRotY();
+		final float z = getParentRotZ();
 
 		rotateAngleX -= x;
 		rotateAngleY -= y;

@@ -13,21 +13,15 @@ public class ModelLaser extends ModelBase {
 		textureHeight = 16;
 
 		final ModelRenderer laserOuter = new ModelRenderer(this, 17, 0);
-		laserOuter.setRotationPoint(0F, 0F, 0F);
 		laserOuter.addBox(-1F, -1F, -4F, 2, 2, 8);
 
 		laserInner = new ModelRenderer(this, 0, 0);
-		laserInner.setRotationPoint(0F, 0F, 0F);
 		laserInner.addBox(-0.5F, -0.5F, -3.5F, 1, 1, 7);
 		laserInner.addChild(laserOuter);
 	}
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		GL11.glPushMatrix();
-
 		laserInner.render(f5);
-
-		GL11.glPopMatrix();
 	}
 }

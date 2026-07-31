@@ -79,8 +79,7 @@ public class TFModelCloudtrap extends TransformerModel {
 
 	@Override
 	public void renderFirstPersonArm(EntityPlayer player) {
-		float scale = 1.3F;
-		GL11.glScalef(scale, scale, scale);
+		GL11.glScalef(1.3F, 1.3F, 1.3F);
 		GL11.glTranslatef(0.2F, -0.1F, 0.2F);
 	}
 

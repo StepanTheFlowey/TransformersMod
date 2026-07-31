@@ -42,12 +42,12 @@ public class ModelRendererTF extends MowzieModelRenderer {
 
 				if(rotateAngleX == 0F && rotateAngleY == 0F && rotateAngleZ == 0F) {
 					if(rotationPointX == 0F && rotationPointY == 0F && rotationPointZ == 0F) {
-						renderThis(f);
+						renderThis();
 						renderChildren(f);
 					}
 					else {
 						GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
-						renderThis(f);
+						renderThis();
 						renderChildren(f);
 						GL11.glTranslatef(-rotationPointX * f, -rotationPointY * f, -rotationPointZ * f);
 					}
@@ -68,7 +68,7 @@ public class ModelRendererTF extends MowzieModelRenderer {
 						GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1F, 0F, 0F);
 					}
 
-					renderThis(f);
+					renderThis();
 					renderChildren(f);
 					GL11.glPopMatrix();
 				}
@@ -81,7 +81,7 @@ public class ModelRendererTF extends MowzieModelRenderer {
 		GL11.glPopMatrix();
 	}
 
-	protected void renderThis(float f) {
+	protected void renderThis() {
 		if(hideUntil.isEmpty()) {
 			GL11.glCallList(displayList);
 		}
@@ -109,8 +109,7 @@ public class ModelRendererTF extends MowzieModelRenderer {
 
 			if(childModels != null) {
 				for(Object childModel : childModels) {
-					ModelRendererTF model = (ModelRendererTF) childModel;
-					model.hideUntil();
+					((ModelRendererTF) childModel).hideUntil();
 				}
 			}
 
