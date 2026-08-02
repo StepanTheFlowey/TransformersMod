@@ -1,6 +1,5 @@
 package fiskfille.tf.common.energon.power;
 
-import com.google.common.collect.Lists;
 import fiskfille.tf.helper.TFFormatHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +8,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.IChatComponent;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static net.minecraft.util.EnumChatFormatting.*;
@@ -24,11 +24,10 @@ public class EnergyStorage {
 	}
 
 	public EnergyStorage copy() {
-		EnergyStorage storage = new EnergyStorage(getMaxEnergy());
+		final EnergyStorage storage = new EnergyStorage(getMaxEnergy());
 		storage.energy = energy;
 		storage.energyUsage = energyUsage;
 		storage.lastEnergy = lastEnergy;
-
 		return storage;
 	}
 
@@ -44,21 +43,21 @@ public class EnergyStorage {
 	}
 
 	public void readFromNBT(NBTTagCompound nbt) {
-		NBTTagCompound storage = nbt.getCompoundTag("EmB");
+		final NBTTagCompound storage = nbt.getCompoundTag("EmB");
 		energy = storage.getFloat("Energy");
 		energyUsage = storage.getFloat("Usage");
 		lastEnergy = energy - energyUsage;
 	}
 
 	public void writeToNBT(NBTTagCompound nbt) {
-		NBTTagCompound storage = nbt.getCompoundTag("EmB");
+		final NBTTagCompound storage = nbt.getCompoundTag("EmB");
 		storage.setFloat("Energy", energy);
 		storage.setFloat("Usage", energyUsage);
 		nbt.setTag("EmB", storage);
 	}
 
 	public float remove(float amount, boolean simulate) {
-		float actual = Math.min(amount, getEnergy());
+		final float actual = Math.min(amount, getEnergy());
 
 		if(!simulate) {
 			energy -= actual;
@@ -68,7 +67,7 @@ public class EnergyStorage {
 	}
 
 	public float add(float amount, boolean simulate) {
-		float actual = Math.max(Math.min(amount, getMaxEnergy() - getEnergy()), 0);
+		final float actual = Math.max(Math.min(amount, getMaxEnergy() - getEnergy()), 0);
 
 		if(!simulate) {
 			energy += actual;
@@ -108,8 +107,7 @@ public class EnergyStorage {
 	}
 
 	public List<IChatComponent> format() {
-		List<IChatComponent> list = Lists.newArrayList();
-		float usage = getUsage();
+		final float usage = getUsage();
 
 		IChatComponent gain = new ChatComponentText("+").setChatStyle(new ChatStyle().setColor(GREEN));
 		IChatComponent loss = new ChatComponentText("-").setChatStyle(new ChatStyle().setColor(RED));
@@ -117,9 +115,9 @@ public class EnergyStorage {
 		IChatComponent prefix = new ChatComponentText("").setChatStyle(new ChatStyle().setColor(GRAY));
 		prefix = usage > 0 ? gain : usage < 0 ? loss : prefix;
 
-		list.add(new ChatComponentTranslation("gui.emb.storage", TFFormatHelper.formatNumber(getEnergy()), TFFormatHelper.formatNumber(getMaxEnergy())));
-		list.add(new ChatComponentTranslation("gui.emb.rate", prefix.appendSibling(rate)).setChatStyle(new ChatStyle().setColor(GRAY)));
-
-		return list;
+		return Arrays.asList(
+						new ChatComponentTranslation("gui.emb.storage", TFFormatHelper.formatNumber(getEnergy()), TFFormatHelper.formatNumber(getMaxEnergy())),
+						new ChatComponentTranslation("gui.emb.rate", prefix.appendSibling(rate)).setChatStyle(new ChatStyle().setColor(GRAY))
+		);
 	}
 }

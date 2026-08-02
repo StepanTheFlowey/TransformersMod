@@ -31,7 +31,7 @@ public class ItemMetaBasic extends Item {
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		List<Double> list1 = Lists.newArrayList();
+		final List<Double> list1 = Lists.newArrayList();
 
 		for(Map.Entry<String, Integer> e : subItems.entrySet()) {
 			list1.add(e.getValue().doubleValue());
@@ -48,7 +48,7 @@ public class ItemMetaBasic extends Item {
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int slot, boolean isHeld) {
 		if(StringUtils.isNullOrEmpty(getNameFromId(itemstack.getItemDamage()))) {
 			if(entity instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) entity;
+				final EntityPlayer player = (EntityPlayer) entity;
 				player.inventory.mainInventory[slot] = null;
 			}
 		}

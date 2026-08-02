@@ -52,7 +52,7 @@ public class TFModelSkystrike extends TransformerModel {
 
 	@Override
 	public ModelRendererTF getBody() {
-		return model.torsobase1;
+		return model.torsobase;
 	}
 
 	@Override

@@ -85,7 +85,7 @@ public class EntityTransformiumSeed extends Entity {
 				int y = worldObj.getHeightValue((int) posX, (int) posZ);
 
 				for(int depth = 0; depth < 3; ++depth) {
-					Block block = worldObj.getBlock((int) posX, y - depth, (int) posZ);
+					final Block block = worldObj.getBlock((int) posX, y - depth, (int) posZ);
 
 					if(block != TFBlocks.transformiumStone && block != Blocks.air && block != Blocks.bedrock) {
 						worldObj.setBlock((int) posX, y - depth, (int) posZ, TFBlocks.transformiumStone);
@@ -109,7 +109,7 @@ public class EntityTransformiumSeed extends Entity {
 							worldObj.setBlock((int) x, y - depth, (int) z, TFBlocks.transformiumStone);
 						}
 
-						List<Entity> entities = getEntitiesNear(worldObj, x, y - depth, z, 5F);
+						final List<Entity> entities = getEntitiesNear(worldObj, x, y - depth, z, 5F);
 
 						for(Entity entity : entities) {
 							if(!entity.getUniqueID().equals(getUniqueID())) {

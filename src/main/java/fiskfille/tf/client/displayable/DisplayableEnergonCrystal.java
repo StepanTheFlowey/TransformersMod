@@ -20,7 +20,7 @@ public class DisplayableEnergonCrystal extends Displayable {
 
 		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
 		final float f1 = MathHelper.sin((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.07F;
-		GL11.glTranslatef(0F, -0.3F + f1, 0F);
+		GL11.glTranslatef(0, -0.3F + f1, 0);
 		GL11.glScalef(0.75F, 0.75F, 0.75F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);

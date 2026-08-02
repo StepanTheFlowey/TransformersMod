@@ -40,7 +40,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 		}
 
 		for(int i = 0; i < 20; ++i) {
-			float spread = (rand.nextFloat() - 0.5F) / 4;
+			final float spread = (rand.nextFloat() - 0.5F) / 4;
 			worldObj.spawnParticle("smoke", posX + spread, posY + spread, posZ + spread, 0, 0, 0);
 		}
 	}
@@ -52,7 +52,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 
 	@Override
 	protected float func_70182_d() {
-		return isInStealthMode ? 2F : 4F;
+		return isInStealthMode ? 2 : 4;
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.Vec3;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author gegy1000
@@ -53,11 +53,11 @@ public abstract class TransformerJet extends Transformer {
 
 	@Override
 	public void doNitroParticles(EntityPlayer player) {
-		final Random rand = new Random();
+		final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		for(int i = 0; i < 4; ++i) {
 			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -2, true);
-			player.worldObj.spawnParticle("flame", side.xCoord, side.yCoord + 0.3F, side.zCoord, rand.nextFloat() / 20, -0.2F + rand.nextFloat() / 20, rand.nextFloat() / 20);
+			player.worldObj.spawnParticle("flame", side.xCoord, side.yCoord + 0.3F, side.zCoord, random.nextFloat() / 20, -0.2F + random.nextFloat() / 20, random.nextFloat() / 20);
 		}
 	}
 }

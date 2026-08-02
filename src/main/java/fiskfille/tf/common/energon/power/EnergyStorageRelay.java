@@ -21,20 +21,16 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
-	}
+	public void toBytes(ByteBuf buf) {}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
-	}
+	public void fromBytes(ByteBuf buf) {}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-	}
+	public void readFromNBT(NBTTagCompound nbt) {}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-	}
+	public void writeToNBT(NBTTagCompound nbt) {}
 
 	@Override
 	public float remove(float amount, boolean simulate) {

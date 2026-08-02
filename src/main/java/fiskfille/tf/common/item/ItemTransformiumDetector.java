@@ -33,7 +33,7 @@ public class ItemTransformiumDetector extends Item {
 			int energonFuel = tagCompound.getInteger("fuel");
 
 			if(entity instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) entity;
+				final EntityPlayer player = (EntityPlayer) entity;
 
 				if(energonFuel > 0) {
 					if(time % 500 == 0) {
@@ -45,16 +45,16 @@ public class ItemTransformiumDetector extends Item {
 					}
 
 					if(time % 5 == 0) {
-						int posX = (int) entity.posX;
-						int posY = (int) entity.posY;
-						int posZ = (int) entity.posZ;
-						int startX = posX - 10;
-						int startY = posY - 10;
-						int startZ = posZ - 10;
+						final int posX = (int) entity.posX;
+						final int posY = (int) entity.posY;
+						final int posZ = (int) entity.posZ;
+						final int startX = posX - 10;
+						final int startY = posY - 10;
+						final int startZ = posZ - 10;
 
-						int endX = posX + 10;
-						int endY = posY + 10;
-						int endZ = posZ + 10;
+						final int endX = posX + 10;
+						final int endY = posY + 10;
+						final int endZ = posZ + 10;
 
 						int smallestDist = 1000;
 
@@ -62,11 +62,11 @@ public class ItemTransformiumDetector extends Item {
 							for(int y = startY; y < endY; y++) {
 								for(int z = startZ; z < endZ; z++) {
 									if(world.getBlock(x, y, z) == TFBlocks.transformiumOre) {
-										int xDiff = x - posX;
-										int yDiff = y - posY;
-										int zDiff = z - posZ;
+										final int xDiff = x - posX;
+										final int yDiff = y - posY;
+										final int zDiff = z - posZ;
 
-										int distance = (int) Math.sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
+										final int distance = (int) Math.sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
 
 										if(distance < smallestDist) {
 											smallestDist = distance;
@@ -111,7 +111,7 @@ public class ItemTransformiumDetector extends Item {
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
-		int fuel = stack.getTagCompound().getInteger("fuel");
+		final int fuel = stack.getTagCompound().getInteger("fuel");
 
 		if(player.isSneaking()) {
 			if(player.inventory.getFirstEmptyStack() != -1) {
@@ -147,7 +147,7 @@ public class ItemTransformiumDetector extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List informationList, boolean p_77624_4_) {
-		NBTTagCompound tagCompound = stack.getTagCompound();
+		final NBTTagCompound tagCompound = stack.getTagCompound();
 
 		if(tagCompound != null) {
 			informationList.add(StatCollector.translateToLocal("stats.fuel.name") + ": " + tagCompound.getInteger("fuel"));

@@ -31,7 +31,7 @@ public class SlotDisplayStationArmor extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack itemstack) {
-		boolean flag = itemstack.getItem() instanceof ItemTransformerArmor;
+		final boolean flag = itemstack.getItem() instanceof ItemTransformerArmor;
 		return type ? flag : !flag && tile.getStackInSlot(slotNumber % 4) != null;
 	}
 
@@ -44,33 +44,31 @@ public class SlotDisplayStationArmor extends Slot {
 	@Override
 	public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack) {
 		super.onPickupFromSlot(player, itemstack);
-		int piece = slotNumber % 4;
-		ItemStack transformer = tile.getStackInSlot(piece);
+
+		final int piece = slotNumber % 4;
+		final ItemStack transformer = tile.getStackInSlot(piece);
 		parent.craftMatrix.getStackInSlot(piece);
 
 		if(type) {
 			parent.craftMatrix.setInventorySlotContents(piece, null);
 		}
-		else {
-			if(transformer != null) {
-				TFArmorHelper.setArmorShell(transformer, null);
-			}
+		else if(transformer != null) {
+			TFArmorHelper.setArmorShell(transformer, null);
 		}
 	}
 
 	@Override
 	public void putStack(ItemStack itemstack) {
 		super.putStack(itemstack);
-		int piece = slotNumber % 4;
-		ItemStack transformer = tile.getStackInSlot(piece);
-		ItemStack shell = parent.craftMatrix.getStackInSlot(piece);
 
+		final int piece = slotNumber % 4;
+		final ItemStack transformer = tile.getStackInSlot(piece);
 		if(transformer != null) {
 			if(type) {
 				parent.craftMatrix.setInventorySlotContents(piece, TFArmorHelper.getArmorShell(transformer));
 			}
 			else {
-				TFArmorHelper.setArmorShell(transformer, shell);
+				TFArmorHelper.setArmorShell(transformer, parent.craftMatrix.getStackInSlot(piece));
 			}
 		}
 	}

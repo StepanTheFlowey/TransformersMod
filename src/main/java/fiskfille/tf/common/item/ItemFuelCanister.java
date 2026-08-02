@@ -82,7 +82,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 
 	@Override
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean p_77624_4_) {
-		FluidTankTF tank = new FluidTankTF(getCapacity(itemstack));
+		final FluidTankTF tank = new FluidTankTF(getCapacity(itemstack));
 		tank.setFluid(getFluid(itemstack));
 
 		list.addAll(TFFormatHelper.toString(tank.format()));
@@ -100,7 +100,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 			list.add(new ItemStack(item, 1, i));
 
 			for(Energon energon : TransformersAPI.getEnergonTypes()) {
-				ItemStack itemstack = new ItemStack(item, 1, i);
+				final ItemStack itemstack = new ItemStack(item, 1, i);
 				fill(itemstack, FluidEnergon.create(energon, capacity), true);
 				list.add(itemstack);
 			}
@@ -110,10 +110,10 @@ public class ItemFuelCanister extends ItemFluidContainer {
 	@Override
 	public IIcon getIcon(ItemStack itemstack, int pass) {
 		if(pass > 0) {
-			FluidStack fluidStack = getFluid(itemstack);
+			final FluidStack fluidStack = getFluid(itemstack);
 
 			if(fluidStack != null && fluidStack.amount > 0) {
-				int i = Math.round((float) fluidStack.amount / capacity * 4);
+				final int i = Math.round((float) fluidStack.amount / capacity * 4);
 				return overlays[i % overlays.length];
 			}
 		}
@@ -123,7 +123,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 
 	@Override
 	public IIcon getIconFromDamage(int damage) {
-		int i = MathHelper.clamp_int(damage, 0, unlocalizedNames.length - 1);
+		final int i = MathHelper.clamp_int(damage, 0, unlocalizedNames.length - 1);
 		return icons[i];
 	}
 
@@ -131,7 +131,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack itemstack, int pass) {
 		if(pass == 1) {
-			FluidStack fluidStack = getFluid(itemstack);
+			final FluidStack fluidStack = getFluid(itemstack);
 
 			if(fluidStack != null && fluidStack.amount > 0) {
 				return FluidEnergon.getLiquidColor(fluidStack);

@@ -44,7 +44,7 @@ public class NetworkEntry {
 	}
 
 	public void load(World world) {
-		TileEntity tile = world.getTileEntity(coords.posX, coords.posY, coords.posZ);
+		final TileEntity tile = world.getTileEntity(coords.posX, coords.posY, coords.posZ);
 
 		if(tile instanceof IEnergyTransmitter || tile instanceof IEnergyReceiver) {
 			owner = tile;

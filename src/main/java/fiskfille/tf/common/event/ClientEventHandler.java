@@ -62,14 +62,13 @@ import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class ClientEventHandler {
 	public final RenderPlayerHand renderHandInstance;
-	private final Map<EntityPlayer, Item> prevHelm = new HashMap<>();
-	private final Map<EntityPlayer, Item> prevChest = new HashMap<>();
-	private final Map<EntityPlayer, Item> prevLegs = new HashMap<>();
-	private final Map<EntityPlayer, Item> prevBoots = new HashMap<>();
+	private final HashMap<EntityPlayer, Item> prevHelm = new HashMap<>();
+	private final HashMap<EntityPlayer, Item> prevChest = new HashMap<>();
+	private final HashMap<EntityPlayer, Item> prevLegs = new HashMap<>();
+	private final HashMap<EntityPlayer, Item> prevBoots = new HashMap<>();
 	public boolean prevViewBobbing = Minecraft.getMinecraft().gameSettings.viewBobbing;
 	private double lastX;
 	private double lastY;
@@ -82,42 +81,38 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		Transformer transformer = TFHelper.getTransformer(player);
+		final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
-		int altMode = TFData.ALT_MODE.get(player);
-		float transformationTimer = TFHelper.getTransformationTimer(player);
+		final int altMode = TFData.ALT_MODE.get(player);
+		final float transformationTimer = TFHelper.getTransformationTimer(player);
 
-		if(Minecraft.getMinecraft().currentScreen == null && player.ridingEntity == null) {
-			if(TFHelper.isTransformer(player)) {
-				KeyBinding[] keys = new KeyBinding[]{TFKeyBinds.keyBindingTransform1};
+		if(Minecraft.getMinecraft().currentScreen == null && player.ridingEntity == null && TFHelper.isTransformer(player)) {
+			final Transformer transformer = TFHelper.getTransformer(player);
+			final KeyBinding[] keys = new KeyBinding[]{TFKeyBinds.keyBindingTransform1};
 
-				for(int keyAlt = 0; keyAlt < keys.length; ++keyAlt) {
-					if(keyAlt < transformer.getAltModeCount()) {
-						KeyBinding key = keys[keyAlt];
+			for(int keyAlt = 0; keyAlt < keys.length; ++keyAlt) {
+				if(keyAlt < transformer.getAltModeCount()) {
+					final KeyBinding key = keys[keyAlt];
 
-						if(key.getIsKeyPressed()) {
-							if(keyAlt == altMode && transformationTimer == 1) {
-								TFData.ALT_MODE.set(player, -1);
-							}
-							else if(altMode == -1 && transformationTimer == 0) {
-								TFData.ALT_MODE.set(player, keyAlt);
-							}
+					if(key.getIsKeyPressed()) {
+						if(keyAlt == altMode && transformationTimer == 1) {
+							TFData.ALT_MODE.set(player, -1);
+						}
+						else if(altMode == -1 && transformationTimer == 0) {
+							TFData.ALT_MODE.set(player, keyAlt);
 						}
 					}
 				}
+			}
 
-				if(TFKeyBinds.keyBindingStealthMode.getIsKeyPressed()) {
-					if(transformationTimer == 1 && transformer.hasStealthForce()) {
-						float stealthModeTimer = TFHelper.getStealthModeTimer(player);
+			if(TFKeyBinds.keyBindingStealthMode.getIsKeyPressed() && transformationTimer == 1 && transformer.hasStealthForce()) {
+				final float stealthModeTimer = TFHelper.getStealthModeTimer(player);
 
-						if(TFData.STEALTH_FORCE.get(player) && stealthModeTimer == 1) {
-							TFData.STEALTH_FORCE.set(player, false);
-						}
-						else if(!TFData.STEALTH_FORCE.get(player) && stealthModeTimer == 0) {
-							TFData.STEALTH_FORCE.set(player, true);
-						}
-					}
+				if(TFData.STEALTH_FORCE.get(player) && stealthModeTimer == 1) {
+					TFData.STEALTH_FORCE.set(player, false);
+				}
+				else if(!TFData.STEALTH_FORCE.get(player) && stealthModeTimer == 0) {
+					TFData.STEALTH_FORCE.set(player, true);
 				}
 			}
 		}
@@ -133,21 +128,17 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onTransform(PlayerTransformEvent event) {
-		EntityPlayer player = event.entityPlayer;
-		Transformer transformer = event.transformer;
+		final EntityPlayer player = event.entityPlayer;
+		final Transformer transformer = event.transformer;
 
-		if(player == Minecraft.getMinecraft().thePlayer) {
-			boolean isTransformed = event.altMode != -1;
-
-			if(transformer == null || transformer.disableViewBobbing()) {
-				if(isTransformed) {
-					GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
-					prevViewBobbing = gameSettings.viewBobbing;
-					gameSettings.viewBobbing = false;
-				}
-				else {
-					Minecraft.getMinecraft().gameSettings.viewBobbing = prevViewBobbing;
-				}
+		if(player == Minecraft.getMinecraft().thePlayer && (transformer == null || transformer.disableViewBobbing())) {
+			if(event.altMode != -1) {
+				final GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
+				prevViewBobbing = gameSettings.viewBobbing;
+				gameSettings.viewBobbing = false;
+			}
+			else {
+				Minecraft.getMinecraft().gameSettings.viewBobbing = prevViewBobbing;
 			}
 		}
 	}
@@ -155,12 +146,10 @@ public class ClientEventHandler {
 	@SubscribeEvent
 	public void onPlaySound(PlaySoundAtEntityEvent event) {
 		if(event.entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) event.entity;
+			final EntityPlayer player = (EntityPlayer) event.entity;
 
 			if(event.name.startsWith("step.") && TFHelper.isFullyTransformed(player)) {
-				Transformer transformer = TFHelper.getTransformer(player);
-
-				int altMode = TFData.ALT_MODE.get(player);
+				final Transformer transformer = TFHelper.getTransformer(player);
 
 				if(transformer != null && transformer.disableStepSounds()) {
 					event.setCanceled(true);
@@ -183,19 +172,20 @@ public class ClientEventHandler {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onRenderHand(RenderHandEvent event) {
-		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		Object renderObj = RenderManager.instance.entityRenderMap.get(player.getClass());
+		final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		final Object renderObj = RenderManager.instance.entityRenderMap.get(player.getClass());
 
 		if(renderObj != null && TFHelper.getTransformerFromArmor(player, 2) != null) {
 			event.setCanceled(true);
-			Render render = RenderManager.instance.getEntityRenderObject(player);
+			final Render render = RenderManager.instance.getEntityRenderObject(player);
 
 			GL11.glPushMatrix();
 			GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
 			renderHandInstance.setParent(render);
-
 			RenderManager.instance.entityRenderMap.put(player.getClass(), renderHandInstance);
+
 			TFReflection.renderHand(Minecraft.getMinecraft().entityRenderer, event.partialTicks, 0);
+
 			RenderManager.instance.entityRenderMap.put(player.getClass(), render);
 			GL11.glPopMatrix();
 		}
@@ -218,22 +208,20 @@ public class ClientEventHandler {
 				if(modelBipedMain != null) {
 					float partialTicks = event.partialRenderTick;
 
-					Transformer transformer = TFHelper.getTransformerFromArmor(player, 2);
-					RenderManager renderManager = RenderManager.instance;
+					final Transformer transformer = TFHelper.getTransformerFromArmor(player, 2);
+					final RenderManager renderManager = RenderManager.instance;
 
 					GL11.glColor3f(1F, 1F, 1F);
 
 					// renderArrowsStuckInEntity(player, partialTicks); TODO
 
-					ItemStack helmetStack = player.inventory.armorItemInSlot(3);
-
+					final ItemStack helmetStack = player.inventory.armorItemInSlot(3);
 					if(helmetStack != null && event.renderHelmet) {
 						GL11.glPushMatrix();
 						modelBipedMain.bipedHead.postRender(0.0625F);
 						float scale;
 
-						Item helmet = helmetStack.getItem();
-
+						final Item helmet = helmetStack.getItem();
 						if(helmet instanceof ItemBlock) {
 							IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(helmetStack, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
 							boolean is3D = customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, helmetStack, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D);
@@ -253,7 +241,7 @@ public class ClientEventHandler {
 							GameProfile gameprofile = null;
 
 							if(helmetStack.hasTagCompound()) {
-								NBTTagCompound itemTag = helmetStack.getTagCompound();
+								final NBTTagCompound itemTag = helmetStack.getTagCompound();
 
 								if(itemTag.hasKey("SkullOwner", 10)) {
 									gameprofile = NBTUtil.func_152459_a(itemTag.getCompoundTag("SkullOwner"));
@@ -271,8 +259,7 @@ public class ClientEventHandler {
 
 					float f2;
 
-					boolean hasSkin = player.func_152123_o();
-
+					final boolean hasSkin = player.func_152123_o();
 					if(player.getCommandSenderName().equals("deadmau5") && hasSkin) {
 						renderManager.renderEngine.bindTexture(player.getLocationSkin());
 
@@ -301,12 +288,11 @@ public class ClientEventHandler {
 						renderManager.renderEngine.bindTexture(player.getLocationCape());
 						GL11.glPushMatrix();
 
-						TransformerModel model = TFModelRegistry.getModel(transformer);
-
+						final TransformerModel model = TFModelRegistry.getModel(transformer);
 						if(model != null) {
 							model.renderCape(player);
 
-							MowzieModelRenderer backside = model.getBody();
+							final MowzieModelRenderer backside = model.getBody();
 							if(backside != null) {
 								backside.postRenderParentChain(0.0625F);
 							}
@@ -318,21 +304,21 @@ public class ClientEventHandler {
 							modelBipedMain.bipedBody.postRender(0.0625F);
 						}
 
-						GL11.glTranslatef(0F, 0F, 0.125F);
-						double d3 = player.field_71091_bM + (player.field_71094_bP - player.field_71091_bM) * partialTicks - (player.prevPosX + (player.posX - player.prevPosX) * partialTicks);
-						double d4 = player.field_71096_bN + (player.field_71095_bQ - player.field_71096_bN) * partialTicks - (player.prevPosY + (player.posY - player.prevPosY) * partialTicks);
-						double d0 = player.field_71097_bO + (player.field_71085_bR - player.field_71097_bO) * partialTicks - (player.prevPosZ + (player.posZ - player.prevPosZ) * partialTicks);
+						GL11.glTranslatef(0, 0, 0.125F);
+						final double d3 = player.field_71091_bM + (player.field_71094_bP - player.field_71091_bM) * partialTicks - (player.prevPosX + (player.posX - player.prevPosX) * partialTicks);
+						final double d4 = player.field_71096_bN + (player.field_71095_bQ - player.field_71096_bN) * partialTicks - (player.prevPosY + (player.posY - player.prevPosY) * partialTicks);
+						final double d0 = player.field_71097_bO + (player.field_71085_bR - player.field_71097_bO) * partialTicks - (player.prevPosZ + (player.posZ - player.prevPosZ) * partialTicks);
 						f4 = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * partialTicks;
-						double d1 = MathHelper.sin(f4 * (float) Math.PI / 180F);
-						double d2 = -MathHelper.cos(f4 * (float) Math.PI / 180F);
+						final double d1 = MathHelper.sin(f4 * (float) Math.PI / 180F);
+						final double d2 = -MathHelper.cos(f4 * (float) Math.PI / 180F);
 						float f5 = (float) d4 * 10F;
 
-						if(f5 < -6F) {
-							f5 = -6F;
+						if(f5 < -6) {
+							f5 = -6;
 						}
 
-						if(f5 > 32F) {
-							f5 = 32F;
+						if(f5 > 32) {
+							f5 = 32;
 						}
 
 						float f6 = (float) (d3 * d1 + d0 * d2) * 100F;
@@ -358,12 +344,11 @@ public class ClientEventHandler {
 					if(heldItemStack != null && event.renderItem) {
 						GL11.glPushMatrix();
 
-						TransformerModel model = TFModelRegistry.getModel(transformer);
-
+						final TransformerModel model = TFModelRegistry.getModel(transformer);
 						if(model != null) {
 							model.renderItem(player, heldItemStack);
-							MowzieModelRenderer lowerArm = model.getLowerArm();
 
+							final MowzieModelRenderer lowerArm = model.getLowerArm();
 							if(lowerArm != null) {
 								lowerArm.postRenderParentChain(0.0625F);
 							}
@@ -389,10 +374,10 @@ public class ClientEventHandler {
 							action = heldItemStack.getItemUseAction();
 						}
 
-						IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(heldItemStack, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
-						boolean is3D = customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, heldItemStack, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D);
+						final IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(heldItemStack, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
+						final boolean is3D = customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, heldItemStack, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D);
 
-						Item heldItem = heldItemStack.getItem();
+						final Item heldItem = heldItemStack.getItem();
 
 						if(is3D || heldItem instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(heldItem).getRenderType())) {
 							f2 = 0.5F;
@@ -481,20 +466,20 @@ public class ClientEventHandler {
 			}
 
 			if(!player.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) && (TFHelper.getTransformerFromArmor(player, 0) == null && TFHelper.getTransformerFromArmor(player, 1) != null || TFHelper.getTransformerFromArmor(player, 1) == null && TFHelper.getTransformerFromArmor(player, 0) != null)) {
-				ModelBipedPartial model = TFModelHelper.modelBipedPartial;
-				ModelRenderer[] bipedLegs = {model.bipedLeftLeg, model.bipedRightLeg};
-				ModelRenderer[] bipedLegs2 = {event.renderer.modelBipedMain.bipedLeftLeg, event.renderer.modelBipedMain.bipedRightLeg};
+				final ModelBipedPartial model = TFModelHelper.modelBipedPartial;
+				final ModelRenderer[] bipedLegs = {model.bipedLeftLeg, model.bipedRightLeg};
+				final ModelRenderer[] bipedLegs2 = {event.renderer.modelBipedMain.bipedLeftLeg, event.renderer.modelBipedMain.bipedRightLeg};
 
 				if(TFHelper.getTransformerFromArmor(player, 1) != null) {
-					TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, 1));
+					final TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, 1));
 
 					if(tfModel != null) {
 						Minecraft.getMinecraft().getTextureManager().bindTexture(TFTextureHelper.getSkin(player.getCommandSenderName()));
 
 						for(int i = 0; i < bipedLegs.length; ++i) {
-							ModelRendererPartial modelRenderer = (ModelRendererPartial) bipedLegs[i];
-							ModelBoxPartial modelBox = modelRenderer.getBox();
-							AxisAlignedBB aabb = modelBox.getBounds();
+							final ModelRendererPartial modelRenderer = (ModelRendererPartial) bipedLegs[i];
+							final ModelBoxPartial modelBox = modelRenderer.getBox();
+							final AxisAlignedBB aabb = modelBox.getBounds();
 
 							aabb.maxY = 12;
 							aabb.minY = aabb.maxY - tfModel.getFootHeight();
@@ -503,21 +488,23 @@ public class ClientEventHandler {
 							GL11.glPushMatrix();
 							modelRenderer.setRotationPoint(bipedLegs2[i].rotationPointX, bipedLegs2[i].rotationPointY, bipedLegs2[i].rotationPointZ);
 							modelRenderer.setRotationAngles(bipedLegs2[i].rotateAngleX, bipedLegs2[i].rotateAngleY, bipedLegs2[i].rotateAngleZ);
+
 							modelRenderer.render(0.0625F);
+
 							GL11.glPopMatrix();
 						}
 					}
 				}
 				else if(TFHelper.getTransformerFromArmor(player, 0) != null) {
-					TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, 0));
+					final TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, 0));
 
 					if(tfModel != null) {
 						Minecraft.getMinecraft().getTextureManager().bindTexture(TFTextureHelper.getSkin(player.getCommandSenderName()));
 
 						for(int i = 0; i < bipedLegs.length; ++i) {
-							ModelRendererPartial modelRenderer = (ModelRendererPartial) bipedLegs[i];
-							ModelBoxPartial modelBox = modelRenderer.getBox();
-							AxisAlignedBB aabb = modelBox.getBounds();
+							final ModelRendererPartial modelRenderer = (ModelRendererPartial) bipedLegs[i];
+							final ModelBoxPartial modelBox = modelRenderer.getBox();
+							final AxisAlignedBB aabb = modelBox.getBounds();
 
 							aabb.minY = 0;
 							aabb.maxY = 12 - tfModel.getFootHeight();
@@ -526,7 +513,9 @@ public class ClientEventHandler {
 							GL11.glPushMatrix();
 							modelRenderer.setRotationPoint(bipedLegs2[i].rotationPointX, bipedLegs2[i].rotationPointY, bipedLegs2[i].rotationPointZ);
 							modelRenderer.setRotationAngles(bipedLegs2[i].rotateAngleX, bipedLegs2[i].rotateAngleY, bipedLegs2[i].rotateAngleZ);
+
 							modelRenderer.render(0.0625F);
+
 							GL11.glPopMatrix();
 						}
 					}
@@ -537,41 +526,39 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onRenderPlayerSpecialsPost(RenderPlayerEvent.Specials.Post event) {
-		EntityPlayer player = event.entityPlayer;
-		ModelOffset offsets = TFModelHelper.getOffsets(player);
-
-		ItemStack bootsStack = player.getCurrentArmor(0);
-		ItemStack legsStack = player.getCurrentArmor(1);
-		ItemStack chestStack = player.getCurrentArmor(2);
-		ItemStack helmStack = player.getCurrentArmor(3);
-
-		Item boots = bootsStack != null ? bootsStack.getItem() : null;
-		Item legs = legsStack != null ? legsStack.getItem() : null;
-		Item chest = chestStack != null ? chestStack.getItem() : null;
-		Item helm = helmStack != null ? helmStack.getItem() : null;
+		final EntityPlayer player = event.entityPlayer;
 		boolean armorChanged = false;
 
-		if(boots != prevBoots.get(player)) {
-			prevBoots.put(player, boots);
-			armorChanged = true;
-		}
-
-		if(chest != prevChest.get(player)) {
-			prevChest.put(player, chest);
-			armorChanged = true;
-		}
-
-		if(legs != prevLegs.get(player)) {
-			prevLegs.put(player, legs);
-			armorChanged = true;
-		}
-
+		final ItemStack helmStack = player.getCurrentArmor(3);
+		final Item helm = helmStack != null ? helmStack.getItem() : null;
 		if(helm != prevHelm.get(player)) {
 			prevHelm.put(player, helm);
 			armorChanged = true;
 		}
 
+		final ItemStack chestStack = player.getCurrentArmor(2);
+		final Item chest = chestStack != null ? chestStack.getItem() : null;
+		if(chest != prevChest.get(player)) {
+			prevChest.put(player, chest);
+			armorChanged = true;
+		}
+
+		final ItemStack legsStack = player.getCurrentArmor(1);
+		final Item legs = legsStack != null ? legsStack.getItem() : null;
+		if(legs != prevLegs.get(player)) {
+			prevLegs.put(player, legs);
+			armorChanged = true;
+		}
+
+		final ItemStack bootsStack = player.getCurrentArmor(0);
+		final Item boots = bootsStack != null ? bootsStack.getItem() : null;
+		if(boots != prevBoots.get(player)) {
+			prevBoots.put(player, boots);
+			armorChanged = true;
+		}
+
 		if(armorChanged) {
+			final ModelOffset offsets = TFModelHelper.getOffsets(player);
 			offsets.headOffsetX = 0;
 			offsets.headOffsetY = 0;
 			offsets.headOffsetZ = 0;
@@ -580,29 +567,29 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
-		EntityPlayer player = event.entityPlayer;
-		ModelBiped biped = event.renderer.modelBipedMain;
+		final ModelBiped biped = event.renderer.modelBipedMain;
 
 		if(biped != null) {
-			boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) != null;
-			boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) != null;
-			boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) != null;
-			boolean wearingFeet = TFHelper.getTransformerFromArmor(player, 0) != null;
+			final EntityPlayer player = event.entityPlayer;
 
+			final boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) != null;
 			biped.bipedHead.showModel = !wearingHead;
 			biped.bipedHeadwear.showModel = !wearingHead;
 			biped.bipedEars.showModel = !wearingHead;
 
+			final boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) != null;
 			biped.bipedBody.showModel = !wearingChest;
 			biped.bipedRightArm.showModel = !wearingChest;
 			biped.bipedLeftArm.showModel = !wearingChest;
 
+			final boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) != null;
+			final boolean wearingFeet = TFHelper.getTransformerFromArmor(player, 0) != null;
 			biped.bipedLeftLeg.showModel = !wearingLegs && !wearingFeet;
 			biped.bipedRightLeg.showModel = !wearingLegs && !wearingFeet;
 
 			for(int i = 0; i < 4; ++i) {
 				if(TFHelper.getTransformerFromArmor(player, i) != null) {
-					TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, i));
+					final TransformerModel tfModel = TFModelRegistry.getModel(TFHelper.getTransformerFromArmor(player, i));
 
 					if(tfModel != null) {
 						tfModel.getHead().showModel = !biped.bipedHead.showModel;
@@ -622,7 +609,7 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onRenderPlayerPost(RenderPlayerEvent.Post event) {
-		ModelBiped modelBipedMain = event.renderer.modelBipedMain;
+		final ModelBiped modelBipedMain = event.renderer.modelBipedMain;
 
 		if(modelBipedMain != null) {
 			modelBipedMain.bipedHead.showModel = true;
@@ -641,14 +628,14 @@ public class ClientEventHandler {
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent event) {
 		if(event.phase == Phase.END) {
-			EntityPlayer player = event.player;
+			final EntityPlayer player = event.player;
 
 			if(Minecraft.getMinecraft().thePlayer == player) {
-				double diffX = player.posX - lastX;
-				double diffY = player.posY - lastY;
-				double diffZ = player.posZ - lastZ;
+				final double diffX = player.posX - lastX;
+				final double diffY = player.posY - lastY;
+				final double diffZ = player.posZ - lastZ;
 
-				double blocksMoved = Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
+				final double blocksMoved = Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
 
 				GuiOverlay.prevSpeed = GuiOverlay.speed;
 				GuiOverlay.speed = blocksMoved * 20D * 60D * 60D / 1000D;
@@ -662,16 +649,13 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onFOVUpdate(FOVUpdateEvent event) {
-		EntityPlayerSP player = event.entity;
-		Transformer transformer = TFHelper.getTransformer(player);
-
-		float nitro = TFData.NITRO.get(player);
-		boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.getIsKeyPressed();
-		boolean nitroPressed = Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed();
-
-		int altMode = TFData.ALT_MODE.get(player);
+		final EntityPlayerSP player = event.entity;
+		final float nitro = TFData.NITRO.get(player);
+		final boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.getIsKeyPressed();
+		final boolean nitroPressed = Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed();
 
 		if(TFHelper.isFullyTransformed(player)) {
+			final Transformer transformer = TFHelper.getTransformer(player);
 			if((transformer == null || transformer.canUseNitro(player)) && nitro > 0 && moveForward && nitroPressed) {
 				event.newfov = 1.3F;
 			}

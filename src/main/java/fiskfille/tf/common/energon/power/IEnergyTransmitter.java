@@ -5,9 +5,9 @@ import net.minecraft.util.Vec3;
 public interface IEnergyTransmitter extends IEnergyContainer {
 	TransmissionHandler getTransmissionHandler();
 
-	float getTransmissionRate();
+	int getTransmissionRate();
 
-	float getRange();
+	int getRange();
 
 	Vec3 getEnergyOutputOffset();
 }

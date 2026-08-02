@@ -3,13 +3,10 @@ package fiskfille.tf.common.energon;
 import fiskfille.tf.TransformersAPI;
 
 public class TFEnergonManager {
-	public static Energon energon;
-	public static Energon redEnergon;
+	public static final Energon energon = new DefaultEnergon();
+	public static final Energon redEnergon = new RedEnergon();
 
 	public static void registerEnergonTypes() {
-		energon = new DefaultEnergon();
-		redEnergon = new RedEnergon();
-
 		TransformersAPI.registerEnergonType(energon);
 		TransformersAPI.registerEnergonType(redEnergon);
 	}

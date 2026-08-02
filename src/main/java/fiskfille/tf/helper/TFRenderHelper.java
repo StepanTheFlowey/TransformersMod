@@ -12,6 +12,7 @@ import fiskfille.tf.common.tileentity.TileEntityMachine;
 import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelRenderer;
@@ -142,13 +143,12 @@ public class TFRenderHelper {
 	}
 
 	public static void renderTag(String s, float x, float y, float z) {
-		final FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
-
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
-		GL11.glNormal3f(0F, 1F, 0F);
-		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw + 180F, 0F, 1F, 0F);
-		GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1F, 0F, 0F);
+		GL11.glNormal3f(0, 1, 0);
+		final EntityClientPlayerMP thePlayer = Minecraft.getMinecraft().thePlayer;
+		GL11.glRotatef(thePlayer.rotationYaw + 180, 0, 1, 0);
+		GL11.glRotatef(-thePlayer.rotationPitch, 1, 0, 0);
 		GL11.glScalef(0.02F, 0.02F, -0.02F);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDepthMask(false);
@@ -156,14 +156,15 @@ public class TFRenderHelper {
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 
-		final int i = fontrenderer.getStringWidth(s) / 2;
+		final FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
+		final double i = fontrenderer.getStringWidth(s) / 2D;
 		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.setColorRGBA_F(0F, 0F, 0F, 0.25F);
-		tessellator.addVertex(-i - 1, -1D, 0D);
-		tessellator.addVertex(-i - 1, 8D, 0D);
-		tessellator.addVertex(i + 1, 8D, 0D);
-		tessellator.addVertex(i + 1, -1D, 0D);
+		tessellator.setColorRGBA(0, 0, 0, 64);
+		tessellator.addVertex(-i - 1, -1, 0);
+		tessellator.addVertex(-i - 1, 8, 0);
+		tessellator.addVertex(i + 1, 8, 0);
+		tessellator.addVertex(i + 1, -1, 0);
 		tessellator.draw();
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -173,7 +174,7 @@ public class TFRenderHelper {
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		GL11.glPopMatrix();
 	}
 
@@ -181,12 +182,10 @@ public class TFRenderHelper {
 		final double d0 = dst.xCoord - src.xCoord;
 		final double d1 = dst.yCoord - src.yCoord;
 		final double d2 = dst.zCoord - src.zCoord;
-		final double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		final double d3 = Math.hypot(d0, d2);
 
-		final double yaw = Math.atan2(d2, d0) * 180D / Math.PI - 90D;
-		final double pitch = Math.atan2(d1, d3) * 180D / Math.PI;
-		GL11.glRotated(-yaw, 0D, 1D, 0D);
-		GL11.glRotated(-pitch, 1D, 0D, 0D);
+		GL11.glRotated(Math.toDegrees(Math.atan2(d2, d0)) - 90D, 0, -1, 0);
+		GL11.glRotated(Math.toDegrees(Math.atan2(d1, d3)), -1, 0, 0);
 	}
 
 	public static void renderEnergyTransmissions(TileEntity transmitterTile, double x, double y, double z) {
@@ -202,22 +201,20 @@ public class TFRenderHelper {
 
 		boolean renderBeams;
 		if(transmitterTile instanceof TileEntityRelayTower) {
-			TileEntityRelayTower relay = (TileEntityRelayTower) transmitterTile;
-			renderBeams = relay.data.isPowered;
+			renderBeams = ((TileEntityRelayTower) transmitterTile).data.isPowered;
 		}
 		else {
 			renderBeams = transmitter.getEnergy() > 0;
 		}
 
 		if(transmitterTile instanceof TileEntityMachine) {
-			TileEntityMachine machine = (TileEntityMachine) transmitterTile;
-			renderBeams &= machine.canActivate();
+			renderBeams &= ((TileEntityMachine) transmitterTile).canActivate();
 		}
 
 		if(renderBeams) {
 			for(ReceiverEntry entry : transmissionHandler.getReceivers()) {
-				boolean invertCurrent = transmitterTile instanceof TileEntityRelayTower && ((TileEntityRelayTower) transmitterTile).data.invertCurrent.contains(entry.getCoords());
-				boolean canReach = entry.canReach();
+				final boolean invertCurrent = transmitterTile instanceof TileEntityRelayTower && ((TileEntityRelayTower) transmitterTile).data.invertCurrent.contains(entry.getCoords());
+				final boolean canReach = entry.canReach();
 
 				if(entry.getTile() == null) {
 					continue;
@@ -371,8 +368,6 @@ public class TFRenderHelper {
 	}
 
 	public static void renderEnergyStatic(Vec3 src, Vec3 dst, double width, float intensity, int segments, long seed) {
-		final Tessellator tessellator = Tessellator.instance;
-
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
@@ -388,8 +383,8 @@ public class TFRenderHelper {
 		final float[] secondary = hexToRGB(0x7BF2F8);
 		final double length = src.distanceTo(dst);
 
-		Random rand = new Random(seed + Minecraft.getMinecraft().thePlayer.ticksExisted * 10L);
-		Random randPrev = new Random(seed + (Minecraft.getMinecraft().thePlayer.ticksExisted - 1) * 10L);
+		final Random rand = new Random(seed + Minecraft.getMinecraft().thePlayer.ticksExisted * 10L);
+		final Random randPrev = new Random(seed + (Minecraft.getMinecraft().thePlayer.ticksExisted - 1) * 10L);
 
 		src = Vec3.createVectorHelper(0, 0, 0);
 
@@ -411,10 +406,11 @@ public class TFRenderHelper {
 			dst.zCoord = MathHelper.clamp_double(dst.zCoord, -0.0625F * 1.25F, 0.0625F * 1.25F);
 			dst.yCoord = MathHelper.clamp_double(dst.yCoord, 0, length);
 
-			double segmentLength = src.distanceTo(dst);
-			float f1 = (float) Math.cos(i / (segments * 0.15625F));
-			float f2 = 1 - f1;
+			final double segmentLength = src.distanceTo(dst);
+			final float f1 = (float) Math.cos(i / (segments * 0.15625F));
+			final float f2 = 1 - f1;
 
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
 			tessellator.setColorRGBA_F(primary[0] * f1 + secondary[0] * f2, primary[1] * f1 + secondary[1] * f2, primary[2] * f1 + secondary[2] * f2, 1);
 			tessellator.addVertex(width, width, segmentLength);
@@ -586,7 +582,7 @@ public class TFRenderHelper {
 	}
 
 	public static void finishRenderItemIntoGUI() {
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		GL11.glPopAttrib();
 	}
 }

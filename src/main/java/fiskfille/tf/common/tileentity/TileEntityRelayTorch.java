@@ -14,10 +14,10 @@ public class TileEntityRelayTorch extends TileEntityRelayTower {
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 
 		if(isValid(getBlockMetadata())) {
-			Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
+			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
 			for(ReceiverEntry entry : receivers) {
-				TileEntity tile = entry.getTile();
+				final TileEntity tile = entry.getTile();
 
 				if(tile != null) {
 					bounds = bounds.func_111270_a(tile.getRenderBoundingBox());
@@ -29,33 +29,33 @@ public class TileEntityRelayTorch extends TileEntityRelayTower {
 	}
 
 	@Override
-	public float getTransmissionRate() {
+	public int getTransmissionRate() {
 		return 40;
 	}
 
 	@Override
-	public float getRange() {
+	public int getRange() {
 		return 10;
 	}
 
 	@Override
 	public Vec3 getEnergyInputOffset() {
-		ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
-		float f = 0.0625F * 3.5F;
+		final ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
+		final float f = 0.0625F * 3.5F;
 
-		if(dir == ForgeDirection.UP) {
-			return Vec3.createVectorHelper(0, -f, 0);
+		switch(dir) {
+			case UP:
+				return Vec3.createVectorHelper(0, -f, 0);
+
+			case DOWN:
+				return Vec3.createVectorHelper(0, f, 0);
 		}
-		else if(dir == ForgeDirection.DOWN) {
-			return Vec3.createVectorHelper(0, f, 0);
-		}
 
-		int[] rotations = {2, 0, 1, 3};
-		float yaw = rotations[dir.ordinal() - 2] * 90;
+		final int[] rotations = {2, 0, 1, 3};
+		final float yaw = rotations[dir.ordinal() - 2] * 90;
 
-		Vec3 vec3 = Vec3.createVectorHelper(0, 0, -f);
+		final Vec3 vec3 = Vec3.createVectorHelper(0, 0, -f);
 		vec3.rotateAroundY(-yaw * (float) Math.PI / 180F);
-
 		return vec3;
 	}
 

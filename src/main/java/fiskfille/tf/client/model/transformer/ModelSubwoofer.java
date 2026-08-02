@@ -104,51 +104,63 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		crotchbuttonR.setRotationPoint(-3, 0.5F, -2.7F);
 		crotchbuttonR.addBox(0, 0, 0, 2, 1, 1, 0);
 		setRotateAngle(crotchbuttonR, 0, 0.08726646259971647F, 0);
+
 		shoulderbaseR = new ModelRendererTF(this, 48, 78);
 		shoulderbaseR.setRotationPoint(-4, -2.9F, 0);
 		shoulderbaseR.addBox(-2.9F, -1, -1.4F, 3, 2, 3, 0);
 		setRotateAngle(shoulderbaseR, 0, 0, 0.05235987755982988F);
+
 		shoulderplate2 = new ModelRendererTF(this, 48, 90);
 		shoulderplate2.setRotationPoint(0, 0, 3);
 		shoulderplate2.addBox(1, 0, 0, 4, 1, 3, 0);
 		setRotateAngle(shoulderplate2, -1.2915436464758039F, 0, 0);
+
 		fistL = new ModelRendererTF(this, 52, 102);
 		fistL.setRotationPoint(0, 4.2F, 0);
 		fistL.addBox(-1, 0, -1, 2, 2, 2, 0);
 		setRotateAngle(fistL, -0.03490658503988659F, 0.06981317007977318F, 0.24434609527920614F);
+
 		lowerArmL = new ModelRendererTF(this, 48, 94);
 		lowerArmL.setRotationPoint(0, 4, 0);
 		lowerArmL.addBox(-1.3F, -0.6F, -1.5F, 3, 5, 3, 0);
 		setRotateAngle(lowerArmL, -0.19198621771937624F, 0.06981317007977318F, 0.10471975511965977F);
+
 		lowerlegL3 = new ModelRendererTF(this, 79, 82);
 		lowerlegL3.setRotationPoint(-2, -1, -0.2F);
 		lowerlegL3.addBox(0, 0, 0, 1, 7, 2, 0);
 		setRotateAngle(lowerlegL3, -0.03490658503988659F, 0, 0);
+
 		chestmain1 = new ModelRendererTF(this, 0, 67);
 		chestmain1.setRotationPoint(0, -6, 0);
 		chestmain1.addBox(-4, -4, -3, 8, 4, 6, 0);
+
 		fistR = new ModelRendererTF(this, 52, 102);
 		fistR.mirror = true;
 		fistR.setRotationPoint(0, 4.2F, 0);
 		fistR.addBox(-1, 0, -1, 2, 2, 2, 0);
 		setRotateAngle(fistR, -0.03490658503988659F, -0.06981317007977318F, -0.24434609527920614F);
+
 		lowerlegR3 = new ModelRendererTF(this, 79, 82);
 		lowerlegR3.mirror = true;
 		lowerlegR3.setRotationPoint(2, -1, -0.2F);
 		lowerlegR3.addBox(-1, 0, 0, 1, 7, 2, 0);
 		setRotateAngle(lowerlegR3, -0.03490658503988659F, 0, 0);
+
 		head4 = new ModelRendererTF(this, 48, 69);
 		head4.setRotationPoint(0.9F, 0, -0.9F);
 		head4.addBox(0, -1, 0, 1, 1, 2, 0);
 		setRotateAngle(head4, 0.03490658503988659F, -0.03490658503988659F, 0);
+
 		shoulderplate3 = new ModelRendererTF(this, 61, 85);
 		shoulderplate3.setRotationPoint(4.5F, -1, -2);
 		shoulderplate3.addBox(-1, 0, -0.1F, 1, 2, 5, 0);
 		setRotateAngle(shoulderplate3, 0, 0.19896753472735357F, -0.017453292519943295F);
+
 		bass5 = new ModelRendererTF(this, 60, 92);
 		bass5.setRotationPoint(-2, 1.5F, -0.5F);
 		bass5.addBox(0, 0, 0, 1, 2, 3, 0);
 		setRotateAngle(bass5, 1.5707963267948966F, 1.9198621771937625F, 0);
+
 		shoulderplateL1 = new ModelRendererTF(this, 48, 83);
 		shoulderplateL1.setRotationPoint(0, -1, 0);
 		shoulderplateL1.addBox(0.5F, -1, -2, 4, 2, 5, 0);
@@ -169,14 +181,12 @@ public class ModelSubwoofer extends ModelTransformerBase {
 
 		lowerlegR4 = new ModelRendererTF(this, 76, 76);
 		lowerlegR4.mirror = true;
-
 		lowerlegR4.setRotationPoint(-1, 4.5F, -1);
 		lowerlegR4.addBox(-0.7F, -0.3F, -0.5F, 1, 2, 4, 0);
 		setRotateAngle(lowerlegR4, 0, 0, 0.19198621771937624F);
 
 		legR3 = new ModelRendererTF(this, 83, 79);
 		legR3.mirror = true;
-
 		legR3.setRotationPoint(-0.4F, 2.2F, 0);
 		legR3.addBox(-1.1F, -2.7F, -3.2F, 2, 1, 3, 0);
 		setRotateAngle(legR3, 0.4468042885105484F, -0.012217304763960306F, 0.041887902047863905F);
@@ -184,43 +194,53 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		waist = new ModelRendererTF(this, 0, 98);
 		waist.setRotationPoint(0, 9, -0.5F);
 		waist.addBox(-3.5F, 0, -2.5F, 7, 2, 5, 0);
+
 		antenna1 = new ModelRendererTF(this, 30, 67);
 		antenna1.setRotationPoint(1, 0.1F, 1);
 		antenna1.addBox(-0.5F, -6, -0.5F, 1, 6, 1, 0);
 		setRotateAngle(antenna1, -0.05235987755982988F, 0, -0.05235987755982988F);
+
 		dish1 = new ModelRendererTF(this, 0, 67);
 		dish1.setRotationPoint(0, -4, 2);
 		dish1.addBox(-2, -3, 0, 2, 3, 1, 0);
 		setRotateAngle(dish1, -0.17453292519943295F, -0.05235987755982988F, -0.05235987755982988F);
+
 		lowerlegR1 = new ModelRendererTF(this, 76, 66);
 		lowerlegR1.mirror = true;
 		lowerlegR1.setRotationPoint(-1, 5, -1);
 		lowerlegR1.addBox(-1.7F, -1.5F, -1.5F, 3, 6, 4, 0);
 		setRotateAngle(lowerlegR1, 0.17453292519943295F, 0.017453292519943295F, -0.06981317007977318F);
+
 		bass2 = new ModelRendererTF(this, 0, 112);
 		bass2.setRotationPoint(-2.5F, 2, -1.5F);
 		bass2.addBox(-0.2F, 0, 0, 1, 4, 3, 0);
+
 		frontchestR = new ModelRendererTF(this, 10, 77);
 		frontchestR.setRotationPoint(-4, -4, -3);
 		frontchestR.addBox(0, 0, -0.6F, 4, 4, 1, 0);
 		setRotateAngle(frontchestR, -0.07330382858376185F, 0.03839724354387525F, -0.005235987755982988F);
+
 		shoulderplateR3 = new ModelRendererTF(this, 61, 85);
 		shoulderplateR3.setRotationPoint(-4.5F, -1, -2);
 		shoulderplateR3.addBox(0, 0, -0.1F, 1, 2, 5, 0);
 		setRotateAngle(shoulderplateR3, 0, -0.19896753472735357F, 0.017453292519943295F);
+
 		lowerlegL1 = new ModelRendererTF(this, 76, 66);
 		lowerlegL1.setRotationPoint(1, 5, -1);
 		lowerlegL1.addBox(-1.3F, -1.5F, -1.5F, 3, 6, 4, 0);
 		setRotateAngle(lowerlegL1, 0.17453292519943295F, -0.017453292519943295F, 0.06981317007977318F);
+
 		legR2 = new ModelRendererTF(this, 83, 70);
 		legR2.mirror = true;
 		legR2.setRotationPoint(-0.2F, 2.2F, 0);
 		legR2.addBox(-1.3F, -1.2F, -4.1F, 2, 2, 7, 0);
 		setRotateAngle(legR2, 0.027925268031909273F, -0.012217304763960306F, 0.041887902047863905F);
+
 		crotch1 = new ModelRendererTF(this, 0, 105);
 		crotch1.setRotationPoint(0, 2, 0);
 		crotch1.addBox(-1, -0.7F, -2.4F, 2, 3, 4, 0);
 		setRotateAngle(crotch1, 0.2617993877991494F, 0, 0);
+
 		stomach = new ModelRendererTF(this, 0, 58);
 		stomach.setRotationPoint(0, 1, 0);
 		stomach.addBox(-2.5F, -5.5F, -2, 5, 5, 4, 0);
@@ -409,21 +429,26 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		clawL2.setRotationPoint(1, 0, -1.3F);
 		clawL2.addBox(0, -0.5F, 0, 1, 5, 1, 0);
 		setRotateAngle(clawL2, 0, 0, 0.08726646259971647F);
+
 		chestwheel2 = new ModelRendererTF(this, 0, 77);
 		chestwheel2.mirror = true;
 		chestwheel2.setRotationPoint(2.5F, 1, -0.5F);
 		chestwheel2.addBox(-1, -1.5F, -1.5F, 2, 3, 3, 0);
 		setRotateAngle(chestwheel2, -0.08726646259971647F, 0, -0.14608405839192537F);
+
 		headplate1 = new ModelRendererTF(this, 53, 65);
 		headplate1.setRotationPoint(0, -1, -1);
 		headplate1.addBox(-1, 0, -0.3F, 2, 1, 1, 0);
+
 		lowerarmL2 = new ModelRendererTF(this, 60, 92);
 		lowerarmL2.setRotationPoint(0, 4, 0);
 		lowerarmL2.addBox(0.7F, -6.6F, -1.5F, 1, 2, 3, 0);
+
 		legL3 = new ModelRendererTF(this, 83, 79);
 		legL3.setRotationPoint(-0.2F, 2.2F, 0);
 		legL3.addBox(-1.1F, -2.7F, -3.2F, 2, 1, 3, 0);
 		setRotateAngle(legL3, 0.4468042885105484F, 0.012217304763960306F, -0.041887902047863905F);
+
 		waist.addChild(crotchbuttonR);
 		chestmain1.addChild(shoulderbaseR);
 		shoulderplateL1.addChild(shoulderplate2);
@@ -514,7 +539,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 
 	@Override
 	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		ModelOffset offsets = TFModelHelper.getOffsets(player);
+		final ModelOffset offsets = TFModelHelper.getOffsets(player);
 		head.rotationPointX += offsets.headOffsetX;
 		head.rotationPointY += offsets.headOffsetY;
 		head.rotationPointZ += offsets.headOffsetZ;
@@ -540,32 +565,31 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		applyDefaultHittingAnimation(upperArmR, upperArmL, head, chestmain1, lowerArmR, lowerArmL);
 
 		if(isRiding) {
-			upperArmR.rotateAngleX -= PI / 5F;
-			upperArmL.rotateAngleX -= PI / 5F;
-			upperLegR.rotateAngleX -= PI * 2F / 5F;
-			upperLegL.rotateAngleX -= PI * 2F / 5F;
+			upperArmR.rotateAngleX -= (float) Math.PI / 5F;
+			upperArmL.rotateAngleX -= (float) Math.PI / 5F;
+			upperLegR.rotateAngleX -= (float) Math.PI * 2F / 5F;
+			upperLegL.rotateAngleX -= (float) Math.PI * 2F / 5F;
 
-			upperLegR.rotateAngleY += PI / 10F;
-			upperLegL.rotateAngleY -= PI / 10F;
+			upperLegR.rotateAngleY += (float) Math.PI / 10F;
+			upperLegL.rotateAngleY -= (float) Math.PI / 10F;
 		}
 
 		if(aimedBow) {
 			upperArmR.rotateAngleY += -0.1F + head.rotateAngleY;
 			upperArmL.rotateAngleY += 0.1F + head.rotateAngleY + 0.4F;
-			upperArmR.rotateAngleX += -(PI / 2F) + head.rotateAngleX;
-			upperArmL.rotateAngleX += -(PI / 2F) + head.rotateAngleX;
+			upperArmR.rotateAngleX += -((float) Math.PI / 2F) + head.rotateAngleX;
+			upperArmL.rotateAngleX += -((float) Math.PI / 2F) + head.rotateAngleX;
 			upperArmR.rotateAngleZ += MathHelper.cos(ticks * 0.09F) * 0.05F + 0.05F;
 			upperArmL.rotateAngleZ -= MathHelper.cos(ticks * 0.09F) * 0.05F + 0.05F;
 			upperArmR.rotateAngleX += MathHelper.sin(ticks * 0.067F) * 0.05F;
 			upperArmL.rotateAngleX -= MathHelper.sin(ticks * 0.067F) * 0.05F;
 		}
 
-		ItemStack heldItem = player.getHeldItem();
-
+		final ItemStack heldItem = player.getHeldItem();
 		if(heldItem != null && heldItem.getItem() == TFItems.subwoofersBassBlaster && TFHelper.isInRobotMode(player)) {
 			setRotateAngle(shoulderbaseR, 0, 0, 0);
 			setRotateAngle(upperArmR, 0, 0, 0.2F);
-			setRotateAngle(lowerArmR, bipedHead.rotateAngleX - PI / 2, bipedHead.rotateAngleY, 0);
+			setRotateAngle(lowerArmR, bipedHead.rotateAngleX - (float) Math.PI / 2, bipedHead.rotateAngleY, 0);
 		}
 	}
 
@@ -638,7 +662,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 		walk(lowerArmR, 0.08F, 0.1F, true, 1, 0, ticks, 1F);
 		walk(lowerArmL, 0.08F, 0.1F, true, 1, 0, ticks, 1F);
 
-		float idleSpeed = 0.15F;
+		final float idleSpeed = 0.15F;
 
 		walk(antenna1, idleSpeed * 1, 0.1F, false, 0, 0, ticks, 1);
 		walk(antenna2, idleSpeed * 1, 0.1F, true, 0, 0, ticks, 1);
@@ -654,10 +678,10 @@ public class ModelSubwoofer extends ModelTransformerBase {
 
 	@Override
 	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		double motionY = TFRenderHelper.getMotionY(player);
+		final double motionY = TFRenderHelper.getMotionY(player);
 
-		float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
-		float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
+		final float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
+		final float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
 
 		waist.rotateAngleX += 0.2F * limbSwingAmount * backwardInverter;
 
@@ -700,10 +724,10 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
 		waist.rotationPointY += 1F;
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + PI) * 1.4F * limbSwingAmount;
+		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 		upperLegR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		upperLegL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + PI) * 1.4F * limbSwingAmount;
+		upperLegL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 		waist.rotationPointY -= 0.8F;
 
@@ -724,7 +748,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 
 	@Override
 	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		ModelSubwooferVehicle vehicle = (ModelSubwooferVehicle) getTransformerModel().getVehicleModel();
+		final ModelSubwooferVehicle vehicle = (ModelSubwooferVehicle) getTransformerModel().getVehicleModel();
 
 		rotateTo(waist, vehicle.vehicleBase, progress);
 		rotateTo(upperArmR, vehicle.vehicleUpperArmR, progress);
@@ -765,49 +789,54 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	public void renderArmorPiece(int armorPiece) {
 		setToInitPose();
 
-		if(armorPiece == 0) {
-			GL11.glTranslatef(0F, 0.3F, -0.03125F);
-			head.render(0.0625F);
-		}
-		else if(armorPiece == 1) {
-			GL11.glTranslatef(0F, 0F, 0.0625F);
-			upperLegL.showModel = false;
-			upperLegR.showModel = false;
-			head.showModel = false;
-			waist.render(0.0625F);
-			upperLegL.showModel = true;
-			upperLegR.showModel = true;
-			head.showModel = true;
-		}
-		else if(armorPiece == 2) {
-			GL11.glRotatef(5F, 1F, 0F, 0F);
-			GL11.glTranslatef(0F, 0.125F, 0F);
-			lowerlegL3.showModel = false;
-			lowerlegL4.showModel = false;
-			lowerlegR3.showModel = false;
-			lowerlegR4.showModel = false;
-			legbaseL.showModel = false;
-			legbaseR.showModel = false;
-			upperLegL.render(0.0625F);
-			upperLegR.render(0.0625F);
-			lowerlegL3.showModel = true;
-			lowerlegL4.showModel = true;
-			lowerlegR3.showModel = true;
-			lowerlegR4.showModel = true;
-			legbaseL.showModel = true;
-			legbaseR.showModel = true;
-		}
-		else if(armorPiece == 3) {
-			GL11.glTranslatef(0F, 0F, -0.0625F);
-			GL11.glRotatef(8F, 1F, 0F, 0F);
-			legbaseL.rotationPointX -= 3F;
-			legbaseR.rotationPointX += 3F;
-			legbaseL.rotateAngleX += 0.2F;
-			legbaseL.rotateAngleY += 0.2F;
-			legbaseR.rotateAngleX += 0.2F;
-			legbaseR.rotateAngleY -= 0.2F;
-			legbaseL.render(0.0625F);
-			legbaseR.render(0.0625F);
+		switch(armorPiece) {
+			case 0:
+				GL11.glTranslatef(0F, 0.3F, -0.03125F);
+				head.render(0.0625F);
+				break;
+
+			case 1:
+				GL11.glTranslatef(0F, 0F, 0.0625F);
+				upperLegL.showModel = false;
+				upperLegR.showModel = false;
+				head.showModel = false;
+				waist.render(0.0625F);
+				upperLegL.showModel = true;
+				upperLegR.showModel = true;
+				head.showModel = true;
+				break;
+
+			case 2:
+				GL11.glRotatef(5F, 1F, 0F, 0F);
+				GL11.glTranslatef(0F, 0.125F, 0F);
+				lowerlegL3.showModel = false;
+				lowerlegL4.showModel = false;
+				lowerlegR3.showModel = false;
+				lowerlegR4.showModel = false;
+				legbaseL.showModel = false;
+				legbaseR.showModel = false;
+				upperLegL.render(0.0625F);
+				upperLegR.render(0.0625F);
+				lowerlegL3.showModel = true;
+				lowerlegL4.showModel = true;
+				lowerlegR3.showModel = true;
+				lowerlegR4.showModel = true;
+				legbaseL.showModel = true;
+				legbaseR.showModel = true;
+				break;
+
+			case 3:
+				GL11.glTranslatef(0F, 0F, -0.0625F);
+				GL11.glRotatef(8F, 1F, 0F, 0F);
+				legbaseL.rotationPointX -= 3F;
+				legbaseR.rotationPointX += 3F;
+				legbaseL.rotateAngleX += 0.2F;
+				legbaseL.rotateAngleY += 0.2F;
+				legbaseR.rotateAngleX += 0.2F;
+				legbaseR.rotateAngleY -= 0.2F;
+				legbaseL.render(0.0625F);
+				legbaseR.render(0.0625F);
+				break;
 		}
 	}
 }

@@ -20,17 +20,17 @@ public class RenderItemPowerCanister implements IItemRenderer {
 	private static final RenderItem renderItem = new RenderItem();
 
 	public static void renderCanister(ItemStack itemstack) {
-		ItemPowerCanister container = (ItemPowerCanister) itemstack.getItem();
-		float energy = container.getEnergyStored(itemstack);
-		float max = container.getEnergyCapacity(itemstack);
+		final ItemPowerCanister container = (ItemPowerCanister) itemstack.getItem();
+		final float energy = container.getEnergyStored(itemstack);
+		final float max = container.getEnergyCapacity(itemstack);
 
 		if(energy > 0) {
-			Vec3 vec3 = Vec3.createVectorHelper(0, 0.0625F * 8.5F, 0);
+			final Vec3 vec3 = Vec3.createVectorHelper(0, 0.0625F * 8.5F, 0);
 			TFRenderHelper.renderEnergyStatic(vec3, vec3.addVector(0, -0.0625F * 7, 0), 1F / (128 + 256 * (1 - energy / max)), energy / max, 16, itemstack.hashCode());
 		}
 
-		GL11.glDisable(GL11.GL_CULL_FACE);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
+		GL11.glDisable(GL11.GL_CULL_FACE);
 		modelCanister.render();
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
@@ -51,20 +51,22 @@ public class RenderItemPowerCanister implements IItemRenderer {
 			renderItem.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), itemstack, 0, 0, true);
 
 			if(itemstack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem container = (IEnergyContainerItem) itemstack.getItem();
-				float energy = container.getEnergyStored(itemstack);
-				float max = container.getEnergyCapacity(itemstack);
-				float filled = energy / max;
+				final IEnergyContainerItem container = (IEnergyContainerItem) itemstack.getItem();
+				final float energy = container.getEnergyStored(itemstack);
+				final float max = container.getEnergyCapacity(itemstack);
+				final float filled = energy / max;
 
 				if(energy > 0) {
-					boolean flag = renderItem.renderWithColor;
 					TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 					GL11.glDisable(GL11.GL_LIGHTING);
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GL11.glColor4f(1, 1, 1, filled);
+					final boolean flag = renderItem.renderWithColor;
 					renderItem.renderWithColor = false;
+
 					renderItem.renderIcon(0, 0, TFItems.powerCanister.getIconFromDamageForRenderPass(0, 1), 16, 16);
+
 					renderItem.renderWithColor = flag;
 					GL11.glDisable(GL11.GL_BLEND);
 					GL11.glEnable(GL11.GL_LIGHTING);

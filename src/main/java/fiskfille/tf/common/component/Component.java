@@ -8,7 +8,5 @@ public class Component {
 		return tile.getStackInSlot(4 + slot) != null;
 	}
 
-	public void load(TileEntityDisplayStation tile, int slot, EntityPlayer player) {
-
-	}
+	public void load(TileEntityDisplayStation tile, int slot, EntityPlayer player) {}
 }

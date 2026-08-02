@@ -16,10 +16,10 @@ public class DisplayablePurgesKatana extends Displayable {
 	@Override
 	public void render(ItemStack itemstack) {
 		bindTexture(texture);
-		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0, 1, 0);
 		final float f1 = MathHelper.sin((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-		GL11.glTranslatef(0F, 0.7F + f1, -0.55F);
-		GL11.glRotatef(-90F, 1F, 0F, 0F);
+		GL11.glTranslatef(0, 0.7F + f1, -0.55F);
+		GL11.glRotatef(-90, 1, 0, 0);
 
 		model.render();
 	}

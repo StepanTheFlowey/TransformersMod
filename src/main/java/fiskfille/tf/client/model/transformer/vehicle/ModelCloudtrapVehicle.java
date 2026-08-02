@@ -144,39 +144,42 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 	public final MowzieModelRenderer vehiclewingTipR;
 
 	public ModelCloudtrapVehicle() {
-		textureWidth = 128;
-		textureHeight = 128;
+		textureWidth = textureHeight = 128;
 
 		vehiclewingFrontR = new MowzieModelRenderer(this, 26, 85);
 		vehiclewingFrontR.setRotationPoint(0, 8, 0);
 		vehiclewingFrontR.addBox(0, 0, -1, 1, 2, 9, 0);
 		setRotateAngle(vehiclewingFrontR, 0.5061454830783556F, 0, -0.017453292519943295F);
+
 		vehiclerearSlantR = new MowzieModelRenderer(this, 43, 69);
 		vehiclerearSlantR.setRotationPoint(3, 5, 0);
 		vehiclerearSlantR.addBox(-1, 0, 0, 1, 4, 1, 0);
 		setRotateAngle(vehiclerearSlantR, 0.20943951023931953F, 0, -0.017453292519943295F);
+
 		vehicletailLFront = new MowzieModelRenderer(this, 53, 98);
 		vehicletailLFront.setRotationPoint(0.5F, -2, 0);
 		vehicletailLFront.addBox(-5, 0, 0, 5, 2, 1, 0);
 		setRotateAngle(vehicletailLFront, -0.008726646259971648F, -0.005235987755982988F, -0.41887902047863906F);
+
 		vehicletailWingFlapR = new MowzieModelRenderer(this, 58, 74);
 		vehicletailWingFlapR.setRotationPoint(-0.5F, -3.5F, 2);
 		vehicletailWingFlapR.addBox(0, 0, -2, 1, 3, 2, 0);
 		setRotateAngle(vehicletailWingFlapR, 0.5235987755982988F, 0.017453292519943295F, 0);
+
 		vehiclecockpitR = new MowzieModelRenderer(this, 43, 69);
-		vehiclecockpitR.setRotationPoint(0, 0, 0);
 		vehiclecockpitR.addBox(0, 0, -6, 1, 2, 6, 0);
 		setRotateAngle(vehiclecockpitR, 0.2792526803190927F, -0.06981317007977318F, -0.017453292519943295F);
+
 		vehiclelowerlegLbase = new MowzieModelRenderer(this, 0, 81);
 		vehiclelowerlegLbase.setRotationPoint(0.5F, 4, 0);
 		vehiclelowerlegLbase.addBox(-1, 0, -1.5F, 2, 6, 2, 0);
+
 		vehiclelowerarmL3 = new MowzieModelRenderer(this, 35, 35);
 		vehiclelowerarmL3.mirror = true;
 		vehiclelowerarmL3.setRotationPoint(-1, 4, 1.2F);
 		vehiclelowerarmL3.addBox(0, -4, -1, 1, 4, 1, 0);
 		setRotateAngle(vehiclelowerarmL3, -0.08726646259971647F, 0, -0.10471975511965977F);
 		vehiclewingFlapR = new MowzieModelRenderer(this, 39, 88);
-		vehiclewingFlapR.setRotationPoint(0, 0, 0);
 		vehiclewingFlapR.addBox(0, -2, -1, 1, 2, 8, 0);
 		setRotateAngle(vehiclewingFlapR, -0.23561944901923448F, -0.017453292519943295F, 0);
 		vehiclelowerlegL3 = new MowzieModelRenderer(this, 14, 80);
@@ -204,7 +207,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		setRotateAngle(vehicleTorsoConnector, 1.5707963267948966F, 0, 0);
 		vehiclewingFlapL = new MowzieModelRenderer(this, 39, 88);
 		vehiclewingFlapL.mirror = true;
-		vehiclewingFlapL.setRotationPoint(0, 0, 0);
 		vehiclewingFlapL.addBox(0, -2, -1, 1, 2, 8, 0);
 		setRotateAngle(vehiclewingFlapL, -0.23561944901923448F, 0.017453292519943295F, 0);
 		vehiclewingR3 = new MowzieModelRenderer(this, 43, 23);
@@ -235,7 +237,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		setRotateAngle(vehiclelowerCockpitRearR, 0.07853981633974483F, -0.15707963267948966F, 0);
 		vehiclelowerlegL4 = new MowzieModelRenderer(this, 18, 80);
 		vehiclelowerlegL4.mirror = true;
-		vehiclelowerlegL4.setRotationPoint(0, 0, 0);
 		vehiclelowerlegL4.addBox(0, -2, 0, 3, 2, 1, 0);
 		setRotateAngle(vehiclelowerlegL4, -0.3665191429188092F, 0, 0);
 		vehiclecockpitL = new MowzieModelRenderer(this, 43, 69);
@@ -328,7 +329,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		vehiclelowerlegRbase.setRotationPoint(-0.5F, 4, 0);
 		vehiclelowerlegRbase.addBox(-1, 0, -1.5F, 2, 6, 2, 0);
 		vehiclelowerarmR1 = new MowzieModelRenderer(this, 43, 31);
-		vehiclelowerarmR1.setRotationPoint(0, 0, 0);
 		vehiclelowerarmR1.addBox(-0.9F, -1.1F, 0.5F, 2, 2, 1, 0);
 		setRotateAngle(vehiclelowerarmR1, -0.08726646259971647F, -0.08726646259971647F, -0.7853981633974483F);
 		vehiclewingL4 = new MowzieModelRenderer(this, 43, 23);
@@ -380,7 +380,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		vehiclewingstrutR3.addBox(-0.5F, 0, -0.5F, 1, 2, 1, 0);
 		setRotateAngle(vehiclewingstrutR3, 1.5707963267948966F, 0, 0);
 		vehiclecockpit1_1 = new MowzieModelRenderer(this, 21, 48);
-		vehiclecockpit1_1.setRotationPoint(0, 0, 0);
 		vehiclecockpit1_1.addBox(0, 0, 0, 2, 1, 3, 0);
 		setRotateAngle(vehiclecockpit1_1, -0.5811946409141118F, 0, 0);
 		vehiclewingconnectorR = new MowzieModelRenderer(this, 44, 20);
@@ -404,7 +403,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		vehicleupperlegL3_2.addBox(0, 0, -2, 1, 5, 2, 0);
 		setRotateAngle(vehicleupperlegL3_2, -0.13439035240356337F, 0, 0.05235987755982988F);
 		vehiclelowerarmL1 = new MowzieModelRenderer(this, 43, 31);
-		vehiclelowerarmL1.setRotationPoint(0, 0, 0);
 		vehiclelowerarmL1.addBox(-0.9F, -1.1F, 0.5F, 2, 2, 1, 0);
 		setRotateAngle(vehiclelowerarmL1, -0.08726646259971647F, -0.08726646259971647F, -0.7853981633974483F);
 		vehicleleftshoulder4 = new MowzieModelRenderer(this, 6, 56);
@@ -497,7 +495,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		setRotateAngle(vehicleupperlegR3, 0, -0.2234021442552742F, 0);
 		vehicletailWingL = new MowzieModelRenderer(this, 55, 67);
 		vehicletailWingL.mirror = true;
-		vehicletailWingL.setRotationPoint(0, 0, 0);
 		vehicletailWingL.addBox(-0.5F, -3.5F, -1, 1, 4, 3, 0);
 		setRotateAngle(vehicletailWingL, -0.5235987755982988F, 0, 0);
 		vehiclewaist2 = new MowzieModelRenderer(this, 10, 17);
@@ -509,7 +506,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		vehicleengineL4.addBox(-1, 0, -1, 1, 2, 2, 0);
 		setRotateAngle(vehicleengineL4, 0, 0, 0.19198621771937624F);
 		vehiclenoseLift = new MowzieModelRenderer(this, 52, 77);
-		vehiclenoseLift.setRotationPoint(0, 0, 0);
 		vehiclenoseLift.addBox(0, -8, 0, 2, 8, 1, 0);
 		setRotateAngle(vehiclenoseLift, -0.06981317007977318F, 0, 0);
 		vehiclewingstrutR2 = new MowzieModelRenderer(this, 40, 22);
@@ -611,7 +607,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		vehiclecockpit2.addBox(0, 0.2F, -1.6F, 1, 2, 2, 0);
 		setRotateAngle(vehiclecockpit2, 0.2617993877991494F, 0, 0);
 		vehiclelowerlegR2 = new MowzieModelRenderer(this, 18, 80);
-		vehiclelowerlegR2.setRotationPoint(0, 0, 0);
 		vehiclelowerlegR2.addBox(-3, -2, 0, 3, 2, 1, 0);
 		setRotateAngle(vehiclelowerlegR2, -0.3665191429188092F, 0, 0);
 		vehiclenoseSideL1 = new MowzieModelRenderer(this, 51, 67);
@@ -654,7 +649,6 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		vehiclewingRBase.setRotationPoint(-0.5F, -6, -1.5F);
 		vehiclewingRBase.addBox(0, 0, 0, 1, 5, 7, 0);
 		vehicletailWingR = new MowzieModelRenderer(this, 55, 67);
-		vehicletailWingR.setRotationPoint(0, 0, 0);
 		vehicletailWingR.addBox(-0.5F, -3.5F, -1, 1, 4, 3, 0);
 		setRotateAngle(vehicletailWingR, -0.5235987755982988F, 0, 0);
 		vehicleUpperBodyBase = new MowzieModelRenderer(this, 0, 33);
@@ -711,6 +705,7 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		vehicleleftshoulderbase.setRotationPoint(2.5F, -0.05F, 1.4F);
 		vehicleleftshoulderbase.addBox(-1, -1, -2.9F, 3, 1, 4, 0);
 		setRotateAngle(vehicleleftshoulderbase, 0, 0, 0.20943951023931953F);
+
 		vehiclewingRBase.addChild(vehiclewingFrontR);
 		vehiclelowerRear.addChild(vehiclerearSlantR);
 		vehiclelowerlegR3.addChild(vehicletailLFront);
@@ -860,7 +855,7 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		setToInitPose();
 
 		if(entity instanceof EntityPlayer) {
-			vehicleBody.rotateAngleX = rotationPitch / (180F / PI);
+			vehicleBody.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
 			vehicleBody.rotateAngleZ = -bipedHead.rotateAngleY;
 		}
 	}

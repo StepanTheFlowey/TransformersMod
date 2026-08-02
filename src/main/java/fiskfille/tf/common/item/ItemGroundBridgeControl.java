@@ -19,49 +19,53 @@ public class ItemGroundBridgeControl extends ItemMachine {
 			return true;
 		}
 		else {
-			if(side == 0) {
-				--y;
+			switch(side) {
+				case 0:
+					--y;
+					break;
+
+				case 1:
+					++y;
+					break;
+
+				case 2:
+					--z;
+					break;
+
+				case 3:
+					++z;
+					break;
+
+				case 4:
+					--x;
+					break;
+
+				case 5:
+					++x;
+					break;
 			}
 
-			if(side == 1) {
-				++y;
-			}
-
-			if(side == 2) {
-				--z;
-			}
-
-			if(side == 3) {
-				++z;
-			}
-
-			if(side == 4) {
-				--x;
-			}
-
-			if(side == 5) {
-				++x;
-			}
-
-			BlockControlPanel block = (BlockControlPanel) TFBlocks.groundBridgeControlPanel;
-			int direction = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
+			final BlockControlPanel block = (BlockControlPanel) TFBlocks.groundBridgeControlPanel;
+			final int direction = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
 			byte x1 = 0;
 			byte z1 = 0;
 
-			if(direction == 0) {
-				x1 = -1;
-			}
+			switch(direction) {
+				case 0:
+					x1 = -1;
+					break;
 
-			if(direction == 1) {
-				z1 = -1;
-			}
+				case 1:
+					z1 = -1;
+					break;
 
-			if(direction == 2) {
-				x1 = 1;
-			}
+				case 2:
+					x1 = 1;
+					break;
 
-			if(direction == 3) {
-				z1 = 1;
+				case 3:
+					z1 = 1;
+					break;
 			}
 
 			if(player.canPlayerEdit(x, y, z, side, itemstack) && player.canPlayerEdit(x + x1, y, z + z1, side, itemstack) && player.canPlayerEdit(x + x1, y + 1, z + z1, side, itemstack)) {

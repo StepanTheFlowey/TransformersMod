@@ -42,9 +42,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 		super(modelBase, x, y);
 
 		if(modelBase instanceof MowzieModelBase) {
-			MowzieModelBase mowzieModelBase = (MowzieModelBase) modelBase;
-
-			mowzieModelBase.addPart(this);
+			((MowzieModelBase) modelBase).addPart(this);
 		}
 	}
 

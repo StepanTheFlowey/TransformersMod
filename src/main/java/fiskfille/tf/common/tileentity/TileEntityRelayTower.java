@@ -89,10 +89,10 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).addCoord(0, 1.25F, 0);
 
 		if(isValid(getBlockMetadata())) {
-			Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
+			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
 			for(ReceiverEntry entry : receivers) {
-				TileEntity tile = entry.getTile();
+				final TileEntity tile = entry.getTile();
 
 				if(tile != null) {
 					bounds = bounds.func_111270_a(tile.getRenderBoundingBox());
@@ -115,15 +115,13 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 
 	@Override
 	public void writeCustomNBT(NBTTagCompound nbt) {
-		boolean base = isValid(getBlockMetadata());
+		final boolean base = isValid(getBlockMetadata());
 		nbt.setBoolean("Base", base);
 
-		if(base) {
-			if(!data.transmissionHandler.getReceivers().isEmpty()) {
-				NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
-				data.transmissionHandler.writeToNBT(config);
-				nbt.setTag("ConfigDataTF", config);
-			}
+		if(base && !data.transmissionHandler.getReceivers().isEmpty()) {
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			data.transmissionHandler.writeToNBT(config);
+			nbt.setTag("ConfigDataTF", config);
 		}
 	}
 
@@ -138,12 +136,12 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public float getTransmissionRate() {
+	public int getTransmissionRate() {
 		return 50;
 	}
 
 	@Override
-	public float getRange() {
+	public int getRange() {
 		return 15;
 	}
 
@@ -175,8 +173,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 			return 0;
 		}
 
-		float f = storage.add(amount, simulate);
-
+		final float f = storage.add(amount, simulate);
 		if(!simulate) {
 			energyTransfer += f;
 			energyReceived += f;
@@ -193,7 +190,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 			return 0;
 		}
 
-		float f = storage.remove(amount, simulate);
+		final float f = storage.remove(amount, simulate);
 
 		if(!simulate) {
 			energyTransfer += f;

@@ -99,7 +99,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 		super.readCustomNBT(nbt);
 
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.storage.readFromNBT(config);
 		}
 	}
@@ -109,7 +109,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 		super.writeCustomNBT(nbt);
 
 		if(data.storage.getEnergy() > 0) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.storage.writeToNBT(config);
 			nbt.setTag("ConfigDataTF", config);
 		}

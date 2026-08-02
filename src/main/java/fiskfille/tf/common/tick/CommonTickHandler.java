@@ -22,7 +22,6 @@ public class CommonTickHandler {
 	public void onPlayerTick(PlayerTickEvent event) {
 		final EntityPlayer player = event.player;
 		final Transformer transformer = TFHelper.getTransformer(player);
-		final int altMode = TFData.ALT_MODE.get(player);
 		final float transformationTimer = TFHelper.getTransformationTimer(player);
 		TFHelper.getStealthModeTimer(player);
 
@@ -31,9 +30,9 @@ public class CommonTickHandler {
 			TFData.PREV_STEALTH_FORCE_PROGRESS.setWithoutNotify(player, TFData.STEALTH_FORCE_PROGRESS.get(player));
 			TFData.PREV_NITRO.setWithoutNotify(player, TFData.NITRO.get(player));
 
-			UUID speedModifierUUID = UUID.fromString("FAD34EEA-6DF0-4C93-A0CB-0D4C654209CF");
-			IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
-			AttributeModifier speedModifier = new AttributeModifier(speedModifierUUID, "TF Speed modifier", -1, 1).setSaved(false);
+			final UUID speedModifierUUID = UUID.fromString("FAD34EEA-6DF0-4C93-A0CB-0D4C654209CF");
+			final IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+			final AttributeModifier speedModifier = new AttributeModifier(speedModifierUUID, "TF Speed modifier", -1, 1).setSaved(false);
 
 			if(speedAttribute.getModifier(speedModifierUUID) != null) {
 				speedAttribute.removeModifier(speedModifier);
@@ -48,10 +47,10 @@ public class CommonTickHandler {
 			Transformer prevArmor = null;
 
 			for(int i = 0; i < 4; ++i) {
-				ItemStack armor = player.getEquipmentInSlot(1 + i);
+				final ItemStack armor = player.getEquipmentInSlot(1 + i);
 
 				if(armor != null && armor.getItem() instanceof ItemTransformerArmor) {
-					ItemTransformerArmor tfArmor = (ItemTransformerArmor) armor.getItem();
+					final ItemTransformerArmor tfArmor = (ItemTransformerArmor) armor.getItem();
 
 					if(prevArmor == null) {
 						prevArmor = tfArmor.getTransformer();
@@ -99,8 +98,8 @@ public class CommonTickHandler {
 			}
 
 			float stealthTicks = 5F;
-			int transformTicks = 10;
-			int nitroTicks = 200;
+			final int transformTicks = 10;
+			final int nitroTicks = 200;
 
 			if(TFData.ALT_MODE.get(player) == -1 && TFHelper.isInStealthMode(player)) {
 				stealthTicks *= 0.75F;

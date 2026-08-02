@@ -32,7 +32,7 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
 
 	@Override
 	protected float func_70182_d() {
-		return 4F;
+		return 4;
 	}
 
 	@Override

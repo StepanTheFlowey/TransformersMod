@@ -9,12 +9,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class MessageSendFlying implements IMessage {
-	private int id;
 	private boolean flying;
+	private int id;
 
-	public MessageSendFlying() {
-
-	}
+	public MessageSendFlying() {}
 
 	public MessageSendFlying(EntityPlayer player, boolean f) {
 		id = player.getEntityId();

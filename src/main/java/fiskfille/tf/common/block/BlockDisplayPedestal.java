@@ -19,9 +19,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlockDisplayPedestal extends BlockMachineBase {
+	private static ArrayList<BlockIcon[]> textures = null;
+
 	public BlockDisplayPedestal() {
 		super(TFMaterial.display);
 		setHardness(2F);
@@ -29,20 +32,24 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 		setHarvestLevel("pickaxe", 0);
 	}
 
-	public static List<BlockIcon[]> getTextures() {
-		List<BlockIcon[]> list = Lists.newArrayList();
-		list.add(new BlockIcon[]{new BlockIcon(Blocks.cobblestone, 0, 0), new BlockIcon(Blocks.stonebrick, 0, 0), new BlockIcon(Blocks.stone, 0, 0)});
-		list.add(new BlockIcon[]{new BlockIcon(Blocks.stonebrick, 0, 3), new BlockIcon(Blocks.stonebrick, 0, 1), new BlockIcon(Blocks.stonebrick, 0, 2)});
-		list.add(new BlockIcon[]{new BlockIcon(Blocks.sandstone, 2, 0), new BlockIcon(Blocks.sandstone, 2, 1), new BlockIcon(Blocks.sandstone, 1, 0)});
-		list.add(new BlockIcon[]{new BlockIcon(Blocks.quartz_block, 1, 1), new BlockIcon(Blocks.quartz_block, 2, 2), new BlockIcon(Blocks.quartz_block, 1, 2)});
-		list.add(new BlockIcon[]{new BlockIcon(Blocks.nether_brick, 0, 0), new BlockIcon(Blocks.netherrack, 0, 0), new BlockIcon(Blocks.nether_brick, 0, 0)});
+	public static ArrayList<BlockIcon[]> getTextures() {
+	if(textures != null){
+		return textures;
+	}
+
+		textures = new ArrayList<>();
+		textures.add(new BlockIcon[]{new BlockIcon(Blocks.cobblestone, 0, 0), new BlockIcon(Blocks.stonebrick, 0, 0), new BlockIcon(Blocks.stone, 0, 0)});
+		textures.add(new BlockIcon[]{new BlockIcon(Blocks.stonebrick, 0, 3), new BlockIcon(Blocks.stonebrick, 0, 1), new BlockIcon(Blocks.stonebrick, 0, 2)});
+		textures.add(new BlockIcon[]{new BlockIcon(Blocks.sandstone, 2, 0), new BlockIcon(Blocks.sandstone, 2, 1), new BlockIcon(Blocks.sandstone, 1, 0)});
+		textures.add(new BlockIcon[]{new BlockIcon(Blocks.quartz_block, 1, 1), new BlockIcon(Blocks.quartz_block, 2, 2), new BlockIcon(Blocks.quartz_block, 1, 2)});
+		textures.add(new BlockIcon[]{new BlockIcon(Blocks.nether_brick, 0, 0), new BlockIcon(Blocks.netherrack, 0, 0), new BlockIcon(Blocks.nether_brick, 0, 0)});
 
 		for(int i = 0; i < 6; ++i) {
-			Block log = i < 4 ? Blocks.log : Blocks.log2;
-			list.add(new BlockIcon[]{new BlockIcon(Blocks.planks, 0, i), new BlockIcon(log, 2, i % 4), new BlockIcon(Blocks.planks, 0, i)});
+			final Block log = i < 4 ? Blocks.log : Blocks.log2;
+			textures.add(new BlockIcon[]{new BlockIcon(Blocks.planks, 0, i), new BlockIcon(log, 2, i % 4), new BlockIcon(Blocks.planks, 0, i)});
 		}
 
-		return list;
+		return textures;
 	}
 
 	public static BlockIcon[] getTexture(int metadata) {
@@ -50,7 +57,7 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 	}
 
 	public static AxisAlignedBB[] getBounds() {
-		float f = 0.0625F;
+		final float f = 0.0625F;
 		return new AxisAlignedBB[]{AxisAlignedBB.getBoundingBox(f * 2, 0, f * 2, f * 14, f * 2, f * 14), AxisAlignedBB.getBoundingBox(f * 5, f * 2, f * 5, 1 - f * 5, f * 7, 1 - f * 5), AxisAlignedBB.getBoundingBox(f * 4, f * 7, f * 4, 1 - f * 4, f * 9, 1 - f * 4)};
 	}
 
@@ -63,13 +70,13 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 
 	@Override
 	public String getHarvestTool(int metadata) {
-		BlockIcon icon = getTexture(metadata)[0];
+		final BlockIcon icon = getTexture(metadata)[0];
 		return icon.block.getHarvestTool(icon.metadata);
 	}
 
 	@Override
 	public boolean isToolEffective(String type, int metadata) {
-		BlockIcon icon = getTexture(metadata)[0];
+		final BlockIcon icon = getTexture(metadata)[0];
 		return icon.block.isToolEffective(type, icon.metadata);
 	}
 
@@ -87,7 +94,7 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 
 	@Override
 	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
-		BlockIcon[] icons = getTexture(world.getBlockMetadata(x, y, z));
+		final BlockIcon[] icons = getTexture(world.getBlockMetadata(x, y, z));
 		int fire = 0;
 
 		for(BlockIcon icon : icons) {
@@ -120,18 +127,17 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 			return true;
 		}
 
-		TileEntityDisplayPedestal tile = (TileEntityDisplayPedestal) world.getTileEntity(x, y, z);
-
+		final TileEntityDisplayPedestal tile = (TileEntityDisplayPedestal) world.getTileEntity(x, y, z);
 		if(tile != null) {
-			ItemStack heldItem = player.getHeldItem();
-			ItemStack displayItem = tile.getDisplayItem();
+			final ItemStack heldItem = player.getHeldItem();
+			final ItemStack displayItem = tile.getDisplayItem();
 
 			if(heldItem != null) {
 				if(tile.isItemValidForSlot(0, heldItem)) {
 					if(displayItem != null) {
 						if(displayItem.isStackable() && heldItem.getItem() == displayItem.getItem() && heldItem.getItemDamage() == displayItem.getItemDamage() && ItemStack.areItemStackTagsEqual(heldItem, displayItem)) {
 							if(displayItem.stackSize < displayItem.getMaxStackSize()) {
-								int amount = Math.min(heldItem.stackSize, displayItem.getMaxStackSize() - displayItem.stackSize);
+								final int amount = Math.min(heldItem.stackSize, displayItem.getMaxStackSize() - displayItem.stackSize);
 								displayItem.stackSize += amount;
 
 								if((heldItem.stackSize -= amount) <= 0) {
@@ -200,7 +206,7 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 
 	@Override
 	public IIcon getIcon(int side, int metadata) {
-		BlockIcon icon = getTexture(metadata)[side % getTexture(metadata).length];
+		final BlockIcon icon = getTexture(metadata)[side % getTexture(metadata).length];
 		return icon.block.getIcon(icon.side, icon.metadata);
 	}
 

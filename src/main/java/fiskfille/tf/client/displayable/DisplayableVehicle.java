@@ -16,8 +16,8 @@ public class DisplayableVehicle extends Displayable {
 			return;
 		}
 
-		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.5F, 0F, 1F, 0F);
-		GL11.glTranslatef(0F, -0.2F, 0F);
+		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.5F, 0, 1, 0);
+		GL11.glTranslatef(0, -0.2F, 0);
 		GL11.glScalef(0.75F, 0.75F, 0.75F);
 
 		TFModelRegistry.getModel(transformer).getVehicleModel().renderDisplayVehicle(itemstack);

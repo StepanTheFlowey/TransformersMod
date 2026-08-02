@@ -58,24 +58,22 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 
 	@SideOnly(Side.CLIENT)
 	public void clientTick() {
-		if(fakePlayer == null) {
-			if(Minecraft.getMinecraft() != null && Minecraft.getMinecraft().playerController != null && getWorldObj() != null) {
-				EntityClientPlayerMP player = new EntityClientPlayerMP(Minecraft.getMinecraft(), getWorldObj(), Minecraft.getMinecraft().getSession(), Minecraft.getMinecraft().getNetHandler(), new StatFileWriter()) {
-					@Override
-					public boolean isInvisibleToPlayer(EntityPlayer player) {
-						return true;
-					}
-				};
+		final Minecraft minecraft = Minecraft.getMinecraft();
 
-				player.movementInput = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
-				fakePlayer = player;
-			}
+		if(fakePlayer == null && minecraft != null && minecraft.playerController != null && getWorldObj() != null) {
+			final EntityClientPlayerMP player = new EntityClientPlayerMP(minecraft, getWorldObj(), minecraft.getSession(), minecraft.getNetHandler(), new StatFileWriter()) {
+				@Override
+				public boolean isInvisibleToPlayer(EntityPlayer player) {
+					return true;
+				}
+			};
+
+			player.movementInput = new MovementInputFromOptions(minecraft.gameSettings);
+			fakePlayer = player;
 		}
 	}
 
 	public boolean canTransform() {
-		ItemStack vehicle = getStackInSlot(6);
-
 		if(getStackInSlot(6) != null) {
 			for(int i = 0; i < 4; ++i) {
 				if(getStackInSlot(i) != null) {

@@ -775,8 +775,8 @@ public class ModelPurgeVehicle extends ModelVehicleBase {
 		setToInitPose();
 
 		if(entity instanceof EntityPlayer) {
-			vehicleturretbase_rotatehere.rotateAngleZ = -(rotationYaw + 180) / (180F / PI);
-			vehiclebarrelbase1_rotatehere.rotateAngleX = -MathHelper.clamp_float(rotationPitch, -60, 0) / (180F / PI);
+			vehicleturretbase_rotatehere.rotateAngleZ = -(rotationYaw + 180) / (180F / (float) Math.PI);
+			vehiclebarrelbase1_rotatehere.rotateAngleX = -MathHelper.clamp_float(rotationPitch, -60, 0) / (180F / (float) Math.PI);
 			//            vehiclebase.rotateAngleY = -(float) Math.toRadians(TFRenderHelper.median(player.renderYawOffset - player.rotationYaw, player.prevRenderYawOffset - player.prevRotationYaw, ClientEventHandler.renderTick)) * limbSwingAmount;
 		}
 	}

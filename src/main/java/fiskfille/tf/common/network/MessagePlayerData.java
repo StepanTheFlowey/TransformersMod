@@ -67,15 +67,11 @@ public class MessagePlayerData implements IMessage {
 						final Transformer transformer = TFHelper.getTransformer((EntityPlayer) entity);
 
 						if(transformer != null) {
-							Minecraft.getMinecraft().getSoundHandler().playSound(
-											new MovingSoundTransformer(entity, transformer.getTransformationSound((Integer) value))
-							);
+							Minecraft.getMinecraft().getSoundHandler().playSound(new MovingSoundTransformer(entity, transformer.getTransformationSound((Integer) value)));
 						}
 					}
 					else if(type == TFData.STEALTH_FORCE) {
-						Minecraft.getMinecraft().getSoundHandler().playSound(
-										new MovingSoundTransformer(entity, new ResourceLocation(TransformersMod.MODID, "transform_stealth" + ((Boolean) value ? "" : "_in")))
-						);
+						Minecraft.getMinecraft().getSoundHandler().playSound(new MovingSoundTransformer(entity, new ResourceLocation(TransformersMod.MODID, "transform_stealth" + ((Boolean) value ? "" : "_in"))));
 					}
 				}
 			}

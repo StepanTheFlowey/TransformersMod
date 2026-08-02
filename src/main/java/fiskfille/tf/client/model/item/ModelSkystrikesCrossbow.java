@@ -125,7 +125,7 @@ public class ModelSkystrikesCrossbow extends MowzieModelBase {
 
 			if(itemstack != null) {
 				final boolean flag = itemstack.hasTagCompound() && itemstack.getTagCompound().getBoolean("blueMode");
-				final float pidb2 = PI / 2;
+				final float pidb2 = (float) Math.PI / 2;
 				if(!flag && handle.rotateAngleZ > 0F) {
 					handle.rotateAngleZ -= pidb2 / 10;
 				}

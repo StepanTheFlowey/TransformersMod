@@ -31,11 +31,11 @@ public class ContainerColumn extends ContainerBasic {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
+		final Slot slot = (Slot) inventorySlots.get(slotId);
 		int MAX = getTile().getSizeInventory() - 1;
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if(slotId > MAX) {

@@ -32,7 +32,7 @@ public class ItemSkystrikesCrossbow extends Item {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
 		if(TFHelper.getTransformer(player) instanceof TransformerSkystrike && !world.isRemote && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
-			boolean blue = isBlue(stack);
+			final boolean blue = isBlue(stack);
 			stack.getTagCompound().setBoolean("blueMode", !blue);
 
 			stack.damageItem(1, player);
@@ -49,15 +49,14 @@ public class ItemSkystrikesCrossbow extends Item {
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		int duration = getMaxItemUseDuration(stack) - count;
+		final int duration = getMaxItemUseDuration(stack) - count;
 
 		if(stack.hasTagCompound() && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
-			World world = player.worldObj;
+			final World world = player.worldObj;
 
 			if(!world.isRemote) {
 				if(duration > 1 && duration < 80) {
-					boolean blue = isBlue(stack);
-					EntityLaserBeam entity = new EntityLaserBeam(world, player, blue);
+					final EntityLaserBeam entity = new EntityLaserBeam(world, player, isBlue(stack));
 					world.spawnEntityInWorld(entity);
 				}
 			}

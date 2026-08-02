@@ -17,9 +17,9 @@ public class DisplayableSkystrikesCrossbow extends Displayable {
 	public void render(ItemStack itemstack) {
 		bindTexture(texture);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
+		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0, 1, 0);
 		final float f1 = MathHelper.sin((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
-		GL11.glTranslatef(0F, 1F + f1, -0.0625F);
+		GL11.glTranslatef(0, 1 + f1, -0.0625F);
 
 		model.render();
 	}

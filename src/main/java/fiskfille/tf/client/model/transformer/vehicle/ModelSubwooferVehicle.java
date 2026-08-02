@@ -6,7 +6,6 @@ import fiskfille.tf.common.tick.ClientTickHandler;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -329,11 +328,9 @@ public class ModelSubwooferVehicle extends ModelVehicleBase {
 
 		if(entity instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) entity;
-			float wheelSpinSpeed = (TFData.FORWARD_VELOCITY.get(player) < 0 ? -limbSwing : limbSwing) * 0.8F;
+			final float wheelSpinSpeed = (TFData.FORWARD_VELOCITY.get(player) < 0 ? -limbSwing : limbSwing) * 0.8F;
 
-			for(ModelRenderer modelRenderer : new ModelRenderer[]{vehicleFrontWheel1, vehicleFrontWheel2, vehicleRearWheel1, vehicleRearWheel2}) {
-				modelRenderer.rotateAngleX = wheelSpinSpeed;
-			}
+			vehicleFrontWheel1.rotateAngleX = vehicleFrontWheel2.rotateAngleX = vehicleRearWheel1.rotateAngleX = vehicleRearWheel2.rotateAngleX = wheelSpinSpeed;
 
 			vehicleBase.rotateAngleX = -(float) (TFRenderHelper.getMotionY(player) + (player == Minecraft.getMinecraft().thePlayer && player.onGround ? 0.0784000015258789 : 0));
 			vehicleBase.rotateAngleY = -(float) Math.toRadians(TFHelper.median(player.renderYawOffset - player.rotationYaw, player.prevRenderYawOffset - player.prevRotationYaw, ClientTickHandler.renderTick));

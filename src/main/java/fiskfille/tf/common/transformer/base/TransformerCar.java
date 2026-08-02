@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.Vec3;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author gegy1000
@@ -68,16 +68,16 @@ public abstract class TransformerCar extends Transformer {
 
 	@Override
 	public void doNitroParticles(EntityPlayer player) {
-		final Random rand = new Random();
+		final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		for(int i = 0; i < 4; ++i) {
 			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -1.4, false);
-			player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);
+			player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, random.nextFloat() / 20, random.nextFloat() / 20, random.nextFloat() / 20);
 		}
 
 		for(int i = 0; i < 10; ++i) {
 			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 2, -1.4, false);
-			player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, rand.nextFloat() / 10, rand.nextFloat() / 10 + 0.05F, rand.nextFloat() / 10);
+			player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord, side.zCoord, random.nextFloat() / 10, random.nextFloat() / 10 + 0.05F, random.nextFloat() / 10);
 		}
 	}
 }

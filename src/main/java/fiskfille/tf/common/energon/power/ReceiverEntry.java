@@ -17,16 +17,14 @@ public class ReceiverEntry extends NetworkEntry {
 	}
 
 	public static ReceiverEntry readFromNBT(NBTTagCompound compound) {
-		ReceiverEntry entry = new ReceiverEntry(new DimensionalCoords(compound.getInteger("X"), compound.getInteger("Y"), compound.getInteger("Z"), compound.getInteger("Dim")));
+		final ReceiverEntry entry = new ReceiverEntry(new DimensionalCoords(compound.getInteger("X"), compound.getInteger("Y"), compound.getInteger("Z"), compound.getInteger("Dim")));
 		entry.setCanReach(compound.getBoolean("CanReach"));
-
 		return entry;
 	}
 
 	public static ReceiverEntry fromBytes(ByteBuf buf) {
-		ReceiverEntry entry = new ReceiverEntry(new DimensionalCoords().fromBytes(buf));
+		final ReceiverEntry entry = new ReceiverEntry(new DimensionalCoords().fromBytes(buf));
 		entry.setCanReach(buf.readBoolean());
-
 		return entry;
 	}
 

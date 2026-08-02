@@ -85,11 +85,11 @@ public class AssemblyTableRecipe implements IRecipe {
 
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-		ItemStack itemstack = getRecipeOutput().copy();
+		final ItemStack itemstack = getRecipeOutput().copy();
 
 		if(field_92101_f) {
 			for(int i = 0; i < inventory.getSizeInventory(); ++i) {
-				ItemStack itemstack1 = inventory.getStackInSlot(i);
+				final ItemStack itemstack1 = inventory.getStackInSlot(i);
 
 				if(itemstack1 != null && itemstack1.hasTagCompound()) {
 					itemstack.setTagCompound((NBTTagCompound) itemstack1.getTagCompound().copy());

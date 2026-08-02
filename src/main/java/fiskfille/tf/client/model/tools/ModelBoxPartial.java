@@ -53,7 +53,6 @@ public class ModelBoxPartial extends ModelBox {
 	}
 
 	public void calculateQuads() {
-		quadList = new TexturedQuadPartial[6];
 		float x1 = posX1;
 		float y1 = posY1;
 		float z1 = posZ1;
@@ -68,7 +67,7 @@ public class ModelBoxPartial extends ModelBox {
 		z2 += scale;
 
 		if(model.mirror) {
-			float prevX2 = x2;
+			final float prevX2 = x2;
 			x2 = x1;
 			x1 = prevX2;
 		}
@@ -82,6 +81,7 @@ public class ModelBoxPartial extends ModelBox {
 		final PositionTextureVertex vertex6 = new PositionTextureVertex(x2, y1, z2, 0, 8);
 		final PositionTextureVertex vertex7 = new PositionTextureVertex(x2, y2, z2, 8, 8);
 		final PositionTextureVertex vertex8 = new PositionTextureVertex(x1, y2, z2, 8, 0);
+		quadList = new TexturedQuadPartial[6];
 		quadList[0] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex6, vertex2, vertex3, vertex7}, textureX + depth + width, textureY + depth + offset, textureX + depth + width + depth, textureY + depth + offset + height, model.textureWidth, model.textureHeight);
 		quadList[1] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex1, vertex5, vertex8, vertex4}, textureX, textureY + depth + offset, textureX + depth, textureY + depth + offset + height, model.textureWidth, model.textureHeight);
 		quadList[2] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex6, vertex5, vertex1, vertex2}, textureX + depth, textureY, textureX + depth + width, textureY + depth, model.textureWidth, model.textureHeight);

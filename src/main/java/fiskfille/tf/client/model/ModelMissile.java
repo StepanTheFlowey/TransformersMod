@@ -12,20 +12,20 @@ public class ModelMissile extends ModelBase {
 	public final ModelRenderer body6;
 	public final ModelRenderer body7;
 	public final ModelRenderer body8;
-	public final ModelRenderer bodyleft;
-	public final ModelRenderer bodylower;
-	public final ModelRenderer bodyright;
-	public final ModelRenderer bodyupper;
+	public final ModelRenderer bodyLeft;
+	public final ModelRenderer bodyLower;
+	public final ModelRenderer bodyRight;
+	public final ModelRenderer bodyUpper;
 	public final ModelRenderer engine;
-	public final ModelRenderer finleft;
-	public final ModelRenderer finlow;
-	public final ModelRenderer finright;
-	public final ModelRenderer finup;
+	public final ModelRenderer finLeft;
+	public final ModelRenderer finLow;
+	public final ModelRenderer finRight;
+	public final ModelRenderer finUp;
 	public final ModelRenderer missileBase;
-	public final ModelRenderer noseleft;
-	public final ModelRenderer noselower;
-	public final ModelRenderer noseright;
-	public final ModelRenderer noseupper;
+	public final ModelRenderer noseLeft;
+	public final ModelRenderer noseLower;
+	public final ModelRenderer noseRight;
+	public final ModelRenderer noseUpper;
 	public final ModelRenderer rearfin1;
 	public final ModelRenderer rearfin2;
 	public final ModelRenderer rearfin3;
@@ -38,145 +38,167 @@ public class ModelMissile extends ModelBase {
 	public ModelMissile() {
 		textureWidth = 64;
 		textureHeight = 32;
-		noseupper = new ModelRenderer(this, 0, 23);
-		noseupper.setRotationPoint(0F, -2F, 0F);
-		noseupper.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
-		setRotateAngle(noseupper, 0.15707963267948966F, 0F);
+
+		noseUpper = new ModelRenderer(this, 0, 23);
+		noseUpper.setRotationPoint(0F, -2F, 0F);
+		noseUpper.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
+		noseUpper.rotateAngleX = 0.15707963267948966F;
+
 		rearfin7 = new ModelRenderer(this, 17, 0);
 		rearfin7.setRotationPoint(0F, 0F, 4F);
 		rearfin7.addBox(-0.5F, -2F, 2F, 1, 3, 4, 0F);
-		setRotateAngle(rearfin7, 0.6981317007977318F, 4.71238898038469F);
+		rearfin7.rotateAngleX = 0.6981317007977318F;
+		rearfin7.rotateAngleZ = 4.71238898038469F;
+
 		rearfin8 = new ModelRenderer(this, 35, 0);
-		rearfin8.setRotationPoint(0F, 0F, 0F);
 		rearfin8.addBox(-0.5F, -2.8F, -5.8F, 1, 1, 7, 0F);
-		setRotateAngle(rearfin8, -0.5585053606381855F, 0F);
-		bodylower = new ModelRenderer(this, 21, 18);
-		bodylower.setRotationPoint(0F, 0F, 0F);
-		bodylower.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
-		setRotateAngle(bodylower, 0F, 3.141592653589793F);
-		bodyright = new ModelRenderer(this, 21, 18);
-		bodyright.setRotationPoint(0F, 0F, 0F);
-		bodyright.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
-		setRotateAngle(bodyright, 0F, -1.5707963267948966F);
-		noselower = new ModelRenderer(this, 0, 23);
-		noselower.setRotationPoint(0F, -2F, 0F);
-		noselower.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
-		setRotateAngle(noselower, 0.15707963267948966F, 0F);
+		rearfin8.rotateAngleX = -0.5585053606381855F;
+
+		bodyLower = new ModelRenderer(this, 21, 18);
+		bodyLower.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
+		bodyLower.rotateAngleZ = 3.141592653589793F;
+
+		bodyRight = new ModelRenderer(this, 21, 18);
+		bodyRight.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
+		bodyRight.rotateAngleZ = -1.5707963267948966F;
+
+		noseLower = new ModelRenderer(this, 0, 23);
+		noseLower.setRotationPoint(0F, -2F, 0F);
+		noseLower.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
+		noseLower.rotateAngleX = 0.15707963267948966F;
+
 		body6 = new ModelRenderer(this, 36, 23);
 		body6.setRotationPoint(0F, -1.9F, 0F);
 		body6.addBox(-0.5F, 0F, -5F, 1, 1, 5, 0F);
-		setRotateAngle(body6, 0.15707963267948966F, 0F);
+		body6.rotateAngleX = 0.15707963267948966F;
+
 		rearfin5 = new ModelRenderer(this, 17, 0);
 		rearfin5.setRotationPoint(0F, 0F, 4F);
 		rearfin5.addBox(-0.5F, -2F, 2F, 1, 3, 4, 0F);
-		setRotateAngle(rearfin5, 0.6981317007977318F, 3.141592653589793F);
+		rearfin5.rotateAngleX = 0.6981317007977318F;
+		rearfin5.rotateAngleZ = 3.141592653589793F;
+
 		body7 = new ModelRenderer(this, 21, 6);
-		body7.setRotationPoint(0F, 0F, 0F);
 		body7.addBox(0.9F, -0.5F, 0F, 1, 1, 11, 0F);
-		setRotateAngle(body7, 0F, -2.356194490192345F);
+		body7.rotateAngleZ = -2.356194490192345F;
+
 		body3 = new ModelRenderer(this, 21, 6);
-		body3.setRotationPoint(0F, 0F, 0F);
 		body3.addBox(0.9F, -0.5F, 0F, 1, 1, 11, 0F);
-		setRotateAngle(body3, 0F, -0.7853981633974483F);
+		body3.rotateAngleZ = -0.7853981633974483F;
+
 		rearfin2 = new ModelRenderer(this, 35, 0);
-		rearfin2.setRotationPoint(0F, 0F, 0F);
 		rearfin2.addBox(-0.5F, -2.8F, -5.8F, 1, 1, 7, 0F);
-		setRotateAngle(rearfin2, -0.5585053606381855F, 0F);
-		finright = new ModelRenderer(this, 0, 17);
-		finright.setRotationPoint(0F, -2F, 0F);
-		finright.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
-		setRotateAngle(finright, 0.45378560551852565F, 0F);
+		rearfin2.rotateAngleX = -0.5585053606381855F;
+
+		finRight = new ModelRenderer(this, 0, 17);
+		finRight.setRotationPoint(0F, -2F, 0F);
+		finRight.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
+		finRight.rotateAngleX = 0.45378560551852565F;
+
 		rearfin6 = new ModelRenderer(this, 35, 0);
-		rearfin6.setRotationPoint(0F, 0F, 0F);
 		rearfin6.addBox(-0.5F, -2.8F, -5.8F, 1, 1, 7, 0F);
-		setRotateAngle(rearfin6, -0.5585053606381855F, 0F);
-		noseright = new ModelRenderer(this, 0, 23);
-		noseright.setRotationPoint(0F, -2F, 0F);
-		noseright.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
-		setRotateAngle(noseright, 0.15707963267948966F, 0F);
-		finup = new ModelRenderer(this, 0, 17);
-		finup.setRotationPoint(0F, -2F, 0F);
-		finup.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
-		setRotateAngle(finup, 0.45378560551852565F, 0F);
-		noseleft = new ModelRenderer(this, 0, 23);
-		noseleft.setRotationPoint(0F, -2F, 0F);
-		noseleft.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
-		setRotateAngle(noseleft, 0.15707963267948966F, 0F);
-		bodyupper = new ModelRenderer(this, 21, 18);
-		bodyupper.setRotationPoint(0F, 0F, 0F);
-		bodyupper.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
-		finlow = new ModelRenderer(this, 0, 17);
-		finlow.setRotationPoint(0F, -2F, 0F);
-		finlow.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
-		setRotateAngle(finlow, 0.45378560551852565F, 0F);
+		rearfin6.rotateAngleX = -0.5585053606381855F;
+
+		noseRight = new ModelRenderer(this, 0, 23);
+		noseRight.setRotationPoint(0F, -2F, 0F);
+		noseRight.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
+		noseRight.rotateAngleX = 0.15707963267948966F;
+
+		finUp = new ModelRenderer(this, 0, 17);
+		finUp.setRotationPoint(0F, -2F, 0F);
+		finUp.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
+		finUp.rotateAngleX = 0.45378560551852565F;
+
+		noseLeft = new ModelRenderer(this, 0, 23);
+		noseLeft.setRotationPoint(0F, -2F, 0F);
+		noseLeft.addBox(-1F, 0F, -6F, 2, 1, 6, 0F);
+		noseLeft.rotateAngleX = 0.15707963267948966F;
+
+		bodyUpper = new ModelRenderer(this, 21, 18);
+		bodyUpper.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
+
+		finLow = new ModelRenderer(this, 0, 17);
+		finLow.setRotationPoint(0F, -2F, 0F);
+		finLow.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
+		finLow.rotateAngleX = 0.45378560551852565F;
+
 		body8 = new ModelRenderer(this, 36, 23);
 		body8.setRotationPoint(0F, -1.9F, 0F);
 		body8.addBox(-0.5F, 0F, -5F, 1, 1, 5, 0F);
-		setRotateAngle(body8, 0.15707963267948966F, 0F);
+		body8.rotateAngleX = 0.15707963267948966F;
+
 		missileBase = new ModelRenderer(this, 0, 13);
 		missileBase.setRotationPoint(0F, 0F, -9F);
 		missileBase.addBox(-1F, -1F, -5.9F, 2, 2, 17, 0F);
+
 		rearfin4 = new ModelRenderer(this, 35, 0);
-		rearfin4.setRotationPoint(0F, 0F, 0F);
 		rearfin4.addBox(-0.5F, -2.8F, -5.8F, 1, 1, 7, 0F);
-		setRotateAngle(rearfin4, -0.5585053606381855F, 0F);
-		finleft = new ModelRenderer(this, 0, 17);
-		finleft.setRotationPoint(0F, -2F, 0F);
-		finleft.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
-		setRotateAngle(finleft, 0.45378560551852565F, 0F);
-		bodyleft = new ModelRenderer(this, 21, 18);
-		bodyleft.setRotationPoint(0F, 0F, 0F);
-		bodyleft.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
-		setRotateAngle(bodyleft, 0F, 1.5707963267948966F);
+		rearfin4.rotateAngleX = -0.5585053606381855F;
+
+		finLeft = new ModelRenderer(this, 0, 17);
+		finLeft.setRotationPoint(0F, -2F, 0F);
+		finLeft.addBox(-0.5F, 0F, 0F, 1, 2, 4, 0F);
+		finLeft.rotateAngleX = 0.45378560551852565F;
+
+		bodyLeft = new ModelRenderer(this, 21, 18);
+		bodyLeft.addBox(-1F, -2F, 0F, 2, 1, 11, 0F);
+		bodyLeft.rotateAngleZ = 1.5707963267948966F;
+
 		body5 = new ModelRenderer(this, 21, 6);
-		body5.setRotationPoint(0F, 0F, 0F);
 		body5.addBox(0.9F, -0.5F, 0F, 1, 1, 11, 0F);
-		setRotateAngle(body5, 0F, 2.356194490192345F);
+		body5.rotateAngleZ = 2.356194490192345F;
+
 		body2 = new ModelRenderer(this, 36, 23);
 		body2.setRotationPoint(0F, -1.9F, 0F);
 		body2.addBox(-0.5F, 0F, -5F, 1, 1, 5, 0F);
-		setRotateAngle(body2, 0.15707963267948966F, 0F);
+		body2.rotateAngleX = 0.15707963267948966F;
+
 		rearfin1 = new ModelRenderer(this, 17, 0);
 		rearfin1.setRotationPoint(0F, 0F, 4F);
 		rearfin1.addBox(-0.5F, -2F, 2F, 1, 3, 4, 0F);
-		setRotateAngle(rearfin1, 0.6981317007977318F, 0F);
+		rearfin1.rotateAngleX = 0.6981317007977318F;
+
 		body1 = new ModelRenderer(this, 21, 6);
-		body1.setRotationPoint(0F, 0F, 0F);
 		body1.addBox(0.9F, -0.5F, 0F, 1, 1, 11, 0F);
-		setRotateAngle(body1, 0F, 0.7853981633974483F);
+		body1.rotateAngleZ = 0.7853981633974483F;
+
 		body4 = new ModelRenderer(this, 36, 23);
 		body4.setRotationPoint(0F, -1.9F, 0F);
 		body4.addBox(-0.5F, 0F, -5F, 1, 1, 5, 0F);
-		setRotateAngle(body4, 0.15707963267948966F, 0F);
+		body4.rotateAngleX = 0.15707963267948966F;
+
 		rearfin3 = new ModelRenderer(this, 17, 0);
 		rearfin3.setRotationPoint(0F, 0F, 4F);
 		rearfin3.addBox(-0.5F, -2F, 2F, 1, 3, 4, 0F);
-		setRotateAngle(rearfin3, 0.6981317007977318F, 1.5707963267948966F);
+		rearfin3.rotateAngleX = 0.6981317007977318F;
+		rearfin3.rotateAngleZ = 1.5707963267948966F;
+
 		engine = new ModelRenderer(this, 0, 0);
-		engine.setRotationPoint(0F, 0F, 11F);
+		engine.rotationPointZ = 11F;
 		engine.addBox(-2F, -2F, 0F, 4, 4, 8, 0F);
-		bodyupper.addChild(noseupper);
+
+		bodyUpper.addChild(noseUpper);
 		engine.addChild(rearfin7);
 		rearfin7.addChild(rearfin8);
-		missileBase.addChild(bodylower);
-		missileBase.addChild(bodyright);
-		bodylower.addChild(noselower);
+		missileBase.addChild(bodyLower);
+		missileBase.addChild(bodyRight);
+		bodyLower.addChild(noseLower);
 		body5.addChild(body6);
 		engine.addChild(rearfin5);
 		missileBase.addChild(body7);
 		missileBase.addChild(body3);
 		rearfin1.addChild(rearfin2);
-		bodyright.addChild(finright);
+		bodyRight.addChild(finRight);
 		rearfin5.addChild(rearfin6);
-		bodyright.addChild(noseright);
-		bodyupper.addChild(finup);
-		bodyleft.addChild(noseleft);
-		missileBase.addChild(bodyupper);
-		bodylower.addChild(finlow);
+		bodyRight.addChild(noseRight);
+		bodyUpper.addChild(finUp);
+		bodyLeft.addChild(noseLeft);
+		missileBase.addChild(bodyUpper);
+		bodyLower.addChild(finLow);
 		body7.addChild(body8);
 		rearfin3.addChild(rearfin4);
-		bodyleft.addChild(finleft);
-		missileBase.addChild(bodyleft);
+		bodyLeft.addChild(finLeft);
+		missileBase.addChild(bodyLeft);
 		missileBase.addChild(body5);
 		body1.addChild(body2);
 		engine.addChild(rearfin1);
@@ -184,12 +206,6 @@ public class ModelMissile extends ModelBase {
 		body3.addChild(body4);
 		engine.addChild(rearfin3);
 		missileBase.addChild(engine);
-	}
-
-	private static void setRotateAngle(ModelRenderer modelRenderer, float x, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = 0;
-		modelRenderer.rotateAngleZ = z;
 	}
 
 	public void render() {

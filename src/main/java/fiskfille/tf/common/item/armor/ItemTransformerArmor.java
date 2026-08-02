@@ -29,10 +29,10 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 	@Override
 	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
 		if(entity instanceof EntityLivingBase) {
-			EntityLivingBase livingBase = (EntityLivingBase) entity;
+			final EntityLivingBase livingBase = (EntityLivingBase) entity;
 
 			for(int i = 0; i < 4; ++i) {
-				ItemStack armor = livingBase.getEquipmentInSlot(1 + i);
+				final ItemStack armor = livingBase.getEquipmentInSlot(1 + i);
 
 				if(armor != null && armor.getItem() instanceof ItemTransformerArmor) {
 					if(getTransformer() != ((ItemTransformerArmor) armor.getItem()).getTransformer()) {
@@ -48,10 +48,10 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
 		if(!source.isUnblockable()) {
-			ItemStack itemstack = TFArmorHelper.getArmorShell(armor);
+			final ItemStack itemstack = TFArmorHelper.getArmorShell(armor);
 
 			if(itemstack != null) {
-				ItemArmor item = (ItemArmor) itemstack.getItem();
+				final ItemArmor item = (ItemArmor) itemstack.getItem();
 				return new ArmorProperties(0, item.damageReduceAmount / 25D, armor.getMaxDamage() + 1 - armor.getItemDamage());
 			}
 			else {
@@ -64,7 +64,7 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		ItemStack itemstack = TFArmorHelper.getArmorShell(armor);
+		final ItemStack itemstack = TFArmorHelper.getArmorShell(armor);
 
 		if(itemstack != null) {
 			return TFArmorHelper.getArmorValue(player, itemstack, slot);
@@ -85,7 +85,7 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 
 	@Override
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean p_77624_4_) {
-		ItemStack itemstack1 = TFArmorHelper.getArmorShell(itemstack);
+		final ItemStack itemstack1 = TFArmorHelper.getArmorShell(itemstack);
 
 		if(itemstack1 != null) {
 			info.add(itemstack1.getDisplayName());
@@ -97,7 +97,7 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack itemstack, int armorSlot) {
-		ModelTransformerBase model = getTransformer().getModel().getMainModel();
+		final ModelTransformerBase model = getTransformer().getModel().getMainModel();
 
 		if(itemstack != null && model != null) {
 			model.layerToRender = armorSlot + 1;
@@ -116,7 +116,7 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 			model.heldItemRight = entity.getEquipmentInSlot(0) != null ? 1 : 0;
 
 			if(entity instanceof EntityPlayer) {
-				ItemStack heldItem = entity.getHeldItem();
+				final ItemStack heldItem = entity.getHeldItem();
 				model.aimedBow = ((EntityPlayer) entity).getItemInUseDuration() > 0 && heldItem != null && heldItem.getItemUseAction() == EnumAction.bow;
 				model.heldItemRight = ((EntityPlayer) entity).getItemInUseDuration() > 0 && heldItem != null && heldItem.getItemUseAction() == EnumAction.block ? 3 : entity.getEquipmentInSlot(0) != null ? 1 : 0;
 			}

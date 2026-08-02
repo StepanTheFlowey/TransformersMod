@@ -6,20 +6,20 @@ import net.minecraft.entity.Entity;
 
 public class TFEntities {
 	public static void register() {
-		registerEntity(EntityTankShell.class, "tank_shell", 20, 10, true);
-		registerEntity(EntityMissile.class, "missile", 20, 10, true);
-		registerEntity(EntityLaser.class, "laser", 20, 10, true);
-		registerEntity(EntityTransformiumSeed.class, "transformium_seed", 20, 10, true);
-		registerEntity(EntityFlamethrowerFire.class, "flamethrower_fire", 20, 10, true);
-		registerEntity(EntityBassCharge.class, "bass_charge", 20, 10, true);
-		registerEntity(EntityLaserBeam.class, "laser_beam", 20, 10, true);
+		registerEntity(EntityTankShell.class, "tank_shell");
+		registerEntity(EntityMissile.class, "missile");
+		registerEntity(EntityLaser.class, "laser");
+		registerEntity(EntityTransformiumSeed.class, "transformium_seed");
+		registerEntity(EntityFlamethrowerFire.class, "flamethrower_fire");
+		registerEntity(EntityBassCharge.class, "bass_charge");
+		registerEntity(EntityLaserBeam.class, "laser_beam");
 	}
 
-	private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates) {
+	private static void registerEntity(Class<? extends Entity> entityClass, String name) {
 		name = "tf_" + name;
 
 		final int id = EntityRegistry.findGlobalUniqueEntityId();
 		EntityRegistry.registerGlobalEntityID(entityClass, name, id);
-		EntityRegistry.registerModEntity(entityClass, name, id, TransformersMod.instance, trackingRange, updateFrequency, sendVelocityUpdates);
+		EntityRegistry.registerModEntity(entityClass, name, id, TransformersMod.instance, 20, 10, true);
 	}
 }

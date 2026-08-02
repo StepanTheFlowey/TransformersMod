@@ -31,7 +31,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 
 	@Override
 	protected float getGravityVelocity() {
-		return 0F;
+		return 0;
 	}
 
 	@Override

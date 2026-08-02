@@ -31,8 +31,8 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 
 	@Override
 	public void updateEntity() {
-		ItemStack input = getStackInSlot(0);
-		ItemStack output = getStackInSlot(1);
+		final ItemStack input = getStackInSlot(0);
+		final ItemStack output = getStackInSlot(1);
 
 		if(!data.isInitialized()) {
 			data.initialize(this);

@@ -7,10 +7,12 @@ import fiskfille.tf.helper.TFVectorHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static net.minecraft.block.material.Material.*;
 
@@ -18,6 +20,8 @@ import static net.minecraft.block.material.Material.*;
  * @author FiskFille
  */
 public class TFMotionManager {
+	private static final Material[] OFFROAD_MATERIALS = new Material[]{cactus, cake, clay, coral, craftedSnow, gourd, ground, ice, leaves, packedIce, plants, sand, snow, sponge, vine, web};
+
 	/**
 	 * Method used to apply realistic vehicle motion to the player.
 	 *
@@ -31,19 +35,17 @@ public class TFMotionManager {
 	 * @param canMoveSideways     If the vehicle can move to the left or to the right
 	 */
 	public static void motion(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double sidewaysSpeedLimit, double reversingSpeedLimit, boolean canDrift, boolean canDriveOffroad, boolean canMoveSideways) {
-		Random rand = new Random();
-
 		// Controls
-		boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.getIsKeyPressed();
-		boolean moveBack = Minecraft.getMinecraft().gameSettings.keyBindBack.getIsKeyPressed();
-		boolean moveRight = Minecraft.getMinecraft().gameSettings.keyBindRight.getIsKeyPressed();
-		boolean moveLeft = Minecraft.getMinecraft().gameSettings.keyBindLeft.getIsKeyPressed();
+		final GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
+		final boolean moveForward = gameSettings.keyBindForward.getIsKeyPressed();
+		final boolean moveBack = gameSettings.keyBindBack.getIsKeyPressed();
+		final boolean moveRight = gameSettings.keyBindRight.getIsKeyPressed();
+		final boolean moveLeft = gameSettings.keyBindLeft.getIsKeyPressed();
+		final boolean nitroPressed = gameSettings.keyBindSprint.getIsKeyPressed();
+		final boolean driftPressed = TFKeyBinds.keyBindingBrake.getIsKeyPressed();
+		final boolean inStealthMode = TFHelper.isInStealthMode(player);
 
 		// Variables
-		boolean inStealthMode = TFHelper.isInStealthMode(player);
-		boolean nitroPressed = Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed();
-		boolean driftPressed = TFKeyBinds.keyBindingBrake.getIsKeyPressed();
-
 		double forwardVelocity = TFData.FORWARD_VELOCITY.get(player);
 		double horizontalVelocity = TFData.HORIZONTAL_VELOCITY.get(player);
 		double currentSpeedLimit = canMoveSideways ? sidewaysSpeedLimit : nitroPressed && TFData.NITRO.get(player) > 0 ? nitroSpeedLimit : speedLimit;
@@ -120,11 +122,10 @@ public class TFMotionManager {
 		}
 
 		if(!canDriveOffroad) {
-			Material[] offroadMaterials = {cactus, cake, clay, coral, craftedSnow, gourd, ground, ice, leaves, packedIce, plants, sand, snow, sponge, vine, web};
-			Block block = player.worldObj.getBlock((int) player.posX, (int) player.posY - 2, (int) player.posZ - 1);
+			final Block block = player.worldObj.getBlock((int) player.posX, (int) player.posY - 2, (int) player.posZ - 1);
 			boolean isDrivingOffroad = false;
 
-			for(Material mat : offroadMaterials) {
+			for(Material mat : OFFROAD_MATERIALS) {
 				if(block.getMaterial().equals(mat)) {
 					isDrivingOffroad = true;
 					break;
@@ -132,8 +133,8 @@ public class TFMotionManager {
 			}
 
 			if(isDrivingOffroad && (forwardVelocity > 5 || forwardVelocity < -5 || horizontalVelocity > 5 || horizontalVelocity < -5)) {
-				double multiplier = forwardVelocity / 20;
-				drift(player, forwardVelocity, (rand.nextDouble() - 0.5D) * multiplier, false);
+				final double multiplier = forwardVelocity / 20;
+				drift(player, forwardVelocity, (ThreadLocalRandom.current().nextDouble() - 0.5D) * multiplier, false);
 				forwardVelocity *= 0.95D;
 			}
 		}
@@ -159,11 +160,11 @@ public class TFMotionManager {
 	 * @param idlingSpeedLimit How many km/h the jet goes while idling
 	 */
 	public static void motionJet(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double idlingSpeedLimit) {
-		boolean clientPlayer = player == Minecraft.getMinecraft().thePlayer;
-
 		// Controls
-		boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.getIsKeyPressed();
-		boolean nitroPressed = Minecraft.getMinecraft().gameSettings.keyBindSprint.getIsKeyPressed();
+		final Minecraft minecraft = Minecraft.getMinecraft();
+		final boolean moveForward = minecraft.gameSettings.keyBindForward.getIsKeyPressed();
+		final boolean nitroPressed = minecraft.gameSettings.keyBindSprint.getIsKeyPressed();
+		final boolean clientPlayer = player == minecraft.thePlayer;
 
 		double forwardVelocity = TFData.FORWARD_VELOCITY.get(player);
 		double currentSpeedLimit = nitroPressed && TFData.NITRO.get(player) > 0 ? nitroSpeedLimit : speedLimit;
@@ -200,28 +201,28 @@ public class TFMotionManager {
 
 		if(tireParticles) {
 			for(int i = 0; i < 10; ++i) {
-				Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 5, -0.5F, false);
+				final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.15F, i < 5, -0.5F, false);
 				player.worldObj.spawnParticle("reddust", side.xCoord, player.boundingBox.minY, side.zCoord, -1, 0, 0);
 			}
 		}
 
 		if(driftAmount > 0.2F) {
-			player.rotationYaw += (float) (driftAmount * 2D);
+			player.rotationYaw += (float) (driftAmount * 2);
 		}
 
 		if(driftAmount < -0.2F) {
-			player.rotationYaw -= (float) (-driftAmount * 2D);
+			player.rotationYaw -= (float) (-driftAmount * 2);
 		}
 	}
 
 	public static void moveWithVelocity(EntityPlayer player, double forwardVel, double horizontalVel) {
-		Vec3 frontCoords = TFVectorHelper.getBackSideCoords(player, fromKMPH(horizontalVel), false, fromKMPH(forwardVel), false);
+		final Vec3 frontCoords = TFVectorHelper.getBackSideCoords(player, fromKMPH(horizontalVel), false, fromKMPH(forwardVel), false);
 		player.motionX = frontCoords.xCoord - player.posX;
 		player.motionZ = frontCoords.zCoord - player.posZ;
 	}
 
 	public static void moveForward(EntityPlayer player, double vel, boolean pitch) {
-		Vec3 frontCoords = TFVectorHelper.getFrontCoords(player, fromKMPH(vel), pitch);
+		final Vec3 frontCoords = TFVectorHelper.getFrontCoords(player, fromKMPH(vel), pitch);
 		player.motionX = frontCoords.xCoord - player.posX;
 
 		if(pitch) {

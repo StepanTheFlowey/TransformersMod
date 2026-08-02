@@ -40,11 +40,9 @@ public class BlockColumn extends BlockMachineBase {
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		float f = 0.0625F;
-		float width = f * 3.125F;
+		final float width = 0.0625F * 3.125F;
 
-		if(metadata < 4) {
+		if(world.getBlockMetadata(x, y, z) < 4) {
 			setBlockBounds(width, 0, width, 1 - width, 2, 1 - width);
 		}
 		else {
@@ -59,7 +57,7 @@ public class BlockColumn extends BlockMachineBase {
 		}
 
 		if(!player.isSneaking()) {
-			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 			if(tile instanceof TileEntityColumn) {
 				TFGui.ENERGY_COLUMN.open(player, tile);

@@ -8,8 +8,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class EntityFlamethrowerFire extends EntityThrowable {
-	protected final int particleMaxAge = (int) (8D / (Math.random() * 0.8D + 0.2D)) + 2;
+	protected final int particleMaxAge = (int) (8D / (ThreadLocalRandom.current().nextDouble() * 0.8D + 0.2D)) + 2;
 
 	public EntityFlamethrowerFire(World world) {
 		super(world);
@@ -28,12 +30,12 @@ public class EntityFlamethrowerFire extends EntityThrowable {
 
 	@Override
 	protected float getGravityVelocity() {
-		return 0F;
+		return 0;
 	}
 
 	@Override
 	protected float func_70182_d() {
-		return 1F;
+		return 1;
 	}
 
 	@Override
@@ -50,7 +52,7 @@ public class EntityFlamethrowerFire extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 		if(mop.entityHit != null) {
-			float multiplier = (float) (particleMaxAge - ticksExisted) / particleMaxAge;
+			final float multiplier = (float) (particleMaxAge - ticksExisted) / particleMaxAge;
 
 			mop.entityHit.setFire((int) (20F * multiplier));
 
@@ -63,44 +65,44 @@ public class EntityFlamethrowerFire extends EntityThrowable {
 		if(rand.nextInt(10) == 0) {
 			if(!worldObj.isRemote) {
 				if(!setFire(worldObj, mop.blockX, mop.blockY, mop.blockZ, mop.sideHit)) {
-					float f = 0.25F;
-					motionX *= f;
-					motionY *= f;
-					motionZ *= f;
+					motionX *= 0.25D;
+					motionY *= 0.25D;
+					motionZ *= 0.25D;
 				}
 			}
 		}
 		else {
-			float f = 0.25F;
-			motionX *= f;
-			motionY *= f;
-			motionZ *= f;
+			motionX *= 0.25D;
+			motionY *= 0.25D;
+			motionZ *= 0.25D;
 		}
 	}
 
 	public boolean setFire(World world, int x, int y, int z, int sideHit) {
-		if(sideHit == 0) {
-			--y;
-		}
+		switch(sideHit) {
+			case 0:
+				--y;
+				break;
 
-		if(sideHit == 1) {
-			++y;
-		}
+			case 1:
+				++y;
+				break;
 
-		if(sideHit == 2) {
-			--z;
-		}
+			case 2:
+				--z;
+				break;
 
-		if(sideHit == 3) {
-			++z;
-		}
+			case 3:
+				++z;
+				break;
 
-		if(sideHit == 4) {
-			--x;
-		}
+			case 4:
+				--x;
+				break;
 
-		if(sideHit == 5) {
-			++x;
+			case 5:
+				++x;
+				break;
 		}
 
 		if(world.isAirBlock(x, y, z)) {

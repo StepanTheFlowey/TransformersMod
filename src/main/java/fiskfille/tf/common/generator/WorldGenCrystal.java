@@ -21,13 +21,13 @@ public class WorldGenCrystal extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		boolean flag = false;
-		int range = 3;
 
+		final int range = 3;
 		for(int i = -range; i <= range && !flag; ++i) {
 			for(int j = -range; j <= range; ++j) {
-				int xPosition = x >> 4 + i;
-				int zPosition = z >> 4 + j;
-				Random random = new Random(world.getSeed() + ((long) xPosition * xPosition * 0x4c1906) + (xPosition * 0x5ac0dbL) + (long) zPosition * zPosition * 0x4307a7L + (zPosition * 0x5f24fL) ^ 0x3ad8025f);
+				final int xPosition = x >> 4 + i;
+				final int zPosition = z >> 4 + j;
+				final Random random = new Random(world.getSeed() + ((long) xPosition * xPosition * 0x4c1906) + (xPosition * 0x5ac0dbL) + (long) zPosition * zPosition * 0x4307a7L + (zPosition * 0x5f24fL) ^ 0x3ad8025f);
 
 				if(random.nextInt(300) == 0) {
 					flag = true;

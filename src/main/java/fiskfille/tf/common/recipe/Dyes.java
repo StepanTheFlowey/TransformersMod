@@ -121,7 +121,7 @@ public class Dyes {
 
 	public static String getName(ItemStack itemstack) {
 		if(itemstack != null) {
-			Item item = itemstack.getItem();
+			final Item item = itemstack.getItem();
 			int id = itemstack.getItemDamage();
 
 			if(item == Items.dye || item == TFItems.dye) {

@@ -13,6 +13,7 @@ import net.minecraft.util.Vec3;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author gegy1000
@@ -53,10 +54,10 @@ public class CloudtrapJetpackManager {
 				player.motionY = 0.6F;
 			}
 
+			final ThreadLocalRandom random = ThreadLocalRandom.current();
 			for(int i = 0; i < 20; ++i) {
-				final Random rand = new Random();
 				final Vec3 coords = TFVectorHelper.getSideCoords(player, 0.15, i > 10, false);
-				TFParticles.spawnParticle(TFParticleType.FLAMETHROWER_FLAME, coords.xCoord, coords.yCoord + rand.nextFloat() / 4 - 0.125F, coords.zCoord, rand.nextFloat() / 4 - 0.125F, -0.8F, rand.nextFloat() / 4 - 0.125F);
+				TFParticles.spawnParticle(TFParticleType.FLAMETHROWER_FLAME, coords.xCoord, coords.yCoord + random.nextFloat() / 4 - 0.125F, coords.zCoord, random.nextFloat() / 4 - 0.125F, -0.8F, random.nextFloat() / 4 - 0.125F);
 			}
 		}
 	}

@@ -1,6 +1,5 @@
 package fiskfille.tf.common.tileentity;
 
-import com.google.common.collect.Lists;
 import fiskfille.tf.common.block.BlockMachineBase;
 import fiskfille.tf.common.container.ContainerEmpty;
 import fiskfille.tf.common.energon.power.IEnergyContainer;
@@ -16,8 +15,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public abstract class TileEntityMachine extends TileEntityTF implements ITileDataCallback {
 	public final EnumIO[] io;
@@ -33,14 +32,14 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	public void updateEntity() {
 		if(!worldObj.isRemote) {
 			if(this instanceof IEnergyContainer && TFTileHelper.getTileBase(this) == this) {
-				IEnergyContainer container = (IEnergyContainer) this;
-				List<ForgeDirection> list = Lists.newArrayList();
+				final IEnergyContainer container = (IEnergyContainer) this;
+				final ArrayList<ForgeDirection> list = new ArrayList<>();
 
 				for(int i = 0; i < io.length; ++i) {
-					ForgeDirection dir = ForgeDirection.getOrientation(i);
+					final ForgeDirection dir = ForgeDirection.getOrientation(i);
 
 					if(io[i].ordinal() > 0 && container.getMaxEnergy() > 0 && (io[i] != EnumIO.PUSH || container.getEnergy() > 0) && canTransfer(dir)) {
-						TileEntity tile = TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0), zCoord + dir.offsetZ));
+						final TileEntity tile = TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0), zCoord + dir.offsetZ));
 
 						if(tile instanceof IEnergyContainer) {
 							list.add(dir);
@@ -79,11 +78,11 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	@Override
 	public void readCustomNBT(NBTTagCompound nbt) {
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
-			NBTTagList nbttaglist = config.getTagList("IO", NBT.TAG_COMPOUND);
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagList nbttaglist = config.getTagList("IO", NBT.TAG_COMPOUND);
 
 			for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-				NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+				final NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
 				io[nbttagcompound.getByte("side") % io.length] = EnumIO.values()[nbttagcompound.getByte("mode") % EnumIO.values().length];
 			}
 
@@ -95,11 +94,11 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	@Override
 	public void writeCustomNBT(NBTTagCompound nbt) {
 		if(isConfigured()) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
-			NBTTagList nbttaglist = new NBTTagList();
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagList nbttaglist = new NBTTagList();
 
 			for(int i = 0; i < io.length; ++i) {
-				NBTTagCompound nbttagcompound = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound = new NBTTagCompound();
 				nbttagcompound.setByte("side", (byte) i);
 				nbttagcompound.setByte("mode", (byte) io[i].ordinal());
 				nbttaglist.appendTag(nbttagcompound);
@@ -153,14 +152,14 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	}
 
 	public boolean canTransfer(ForgeDirection dir) {
-		int x = xCoord + dir.offsetX;
-		int y = yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0);
-		int z = zCoord + dir.offsetZ;
-		float f = 0.001F;
+		final int x = xCoord + dir.offsetX;
+		final int y = yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0);
+		final int z = zCoord + dir.offsetZ;
+		final float f = 0.001F;
 
-		Block block = worldObj.getBlock(x, y, z);
-		AxisAlignedBB aabb = block.getCollisionBoundingBoxFromPool(worldObj, x, y, z);
-		AxisAlignedBB aabb1 = getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
+		final Block block = worldObj.getBlock(x, y, z);
+		final AxisAlignedBB aabb = block.getCollisionBoundingBoxFromPool(worldObj, x, y, z);
+		final AxisAlignedBB aabb1 = getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
 
 		if(aabb == null || aabb1 == null) {
 			return false;
@@ -173,7 +172,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	public void receive(EntityPlayer player, int action) {
 		if(action < 0) {
 			if(action >= -io.length) {
-				int id = -action - 1;
+				final int id = -action - 1;
 				io[id] = EnumIO.values()[(io[id].ordinal() + 1) % EnumIO.values().length];
 			}
 			else if(action == -io.length - 1) {

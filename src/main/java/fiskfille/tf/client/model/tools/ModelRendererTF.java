@@ -40,8 +40,8 @@ public class ModelRendererTF extends MowzieModelRenderer {
 				GL11.glScalef(scaleX, scaleY, scaleZ);
 				GL11.glTranslatef(-rotationPointX * f, -rotationPointY * f, -rotationPointZ * f);
 
-				if(rotateAngleX == 0F && rotateAngleY == 0F && rotateAngleZ == 0F) {
-					if(rotationPointX == 0F && rotationPointY == 0F && rotationPointZ == 0F) {
+				if(rotateAngleX == 0 && rotateAngleY == 0 && rotateAngleZ == 0) {
+					if(rotationPointX == 0 && rotationPointY == 0 && rotationPointZ == 0) {
 						renderThis();
 						renderChildren(f);
 					}
@@ -56,16 +56,16 @@ public class ModelRendererTF extends MowzieModelRenderer {
 					GL11.glPushMatrix();
 					GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
 
-					if(rotateAngleZ != 0F) {
-						GL11.glRotatef(rotateAngleZ * (180F / (float) Math.PI), 0F, 0F, 1F);
+					if(rotateAngleZ != 0) {
+						GL11.glRotatef(rotateAngleZ * (180F / (float) Math.PI), 0, 0, 1);
 					}
 
-					if(rotateAngleY != 0F) {
-						GL11.glRotatef(rotateAngleY * (180F / (float) Math.PI), 0F, 1F, 0F);
+					if(rotateAngleY != 0) {
+						GL11.glRotatef(rotateAngleY * (180F / (float) Math.PI), 0, 1, 0);
 					}
 
-					if(rotateAngleX != 0F) {
-						GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1F, 0F, 0F);
+					if(rotateAngleX != 0) {
+						GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1, 0, 0);
 					}
 
 					renderThis();
@@ -74,7 +74,7 @@ public class ModelRendererTF extends MowzieModelRenderer {
 				}
 
 				GL11.glTranslatef(-offsetX, -offsetY, -offsetZ);
-				GL11.glScalef(1F / scaleX, 1F / scaleY, 1F / scaleZ);
+				GL11.glScalef(1 / scaleX, 1 / scaleY, 1 / scaleZ);
 			}
 		}
 
@@ -90,7 +90,7 @@ public class ModelRendererTF extends MowzieModelRenderer {
 	protected void renderChildren(float f) {
 		if(childModels != null) {
 			for(Object childModel : childModels) {
-				ModelRendererTF model = (ModelRendererTF) childModel;
+				final ModelRendererTF model = (ModelRendererTF) childModel;
 				ArrayList<ModelRenderer> list = new ArrayList<>(hideUntil);
 
 				if(hideUntil.contains(model)) {

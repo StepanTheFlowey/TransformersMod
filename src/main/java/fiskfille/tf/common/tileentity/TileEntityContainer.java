@@ -12,7 +12,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 
 	public ItemStack[] getItemStacks() {
 		if(hasWorldObj()) {
-			TileEntityContainer base = TFTileHelper.getTileBase(this);
+			final TileEntityContainer base = TFTileHelper.getTileBase(this);
 
 			if(base != this) {
 				if(base != null) {
@@ -28,7 +28,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 
 	public void setItemStacks(ItemStack[] itemstacks) {
 		if(hasWorldObj()) {
-			TileEntityContainer base = TFTileHelper.getTileBase(this);
+			final TileEntityContainer base = TFTileHelper.getTileBase(this);
 
 			if(base != this) {
 				if(base != null) {
@@ -75,7 +75,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		if(getItemStacks()[slot] != null) {
-			ItemStack itemstack = getItemStacks()[slot];
+			final ItemStack itemstack = getItemStacks()[slot];
 			getItemStacks()[slot] = null;
 			return itemstack;
 		}
@@ -101,12 +101,12 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	@Override
 	public void readCustomNBT(NBTTagCompound nbt) {
 		if(nbt.hasKey("LoadInventory")) {
-			NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+			final NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 			setItemStacks(new ItemStack[getSizeInventory()]);
 
 			for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-				byte slot = nbttagcompound1.getByte("Slot");
+				final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+				final byte slot = nbttagcompound1.getByte("Slot");
 
 				if(slot >= 0 && slot < getItemStacks().length) {
 					getItemStacks()[slot] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -122,11 +122,11 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 		}
 
 		nbt.setBoolean("LoadInventory", true);
-		NBTTagList nbttaglist = new NBTTagList();
+		final NBTTagList nbttaglist = new NBTTagList();
 
 		for(int i = 0; i < getItemStacks().length; ++i) {
 			if(getItemStacks()[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				getItemStacks()[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);

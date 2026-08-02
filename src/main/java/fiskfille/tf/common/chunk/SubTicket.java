@@ -23,18 +23,17 @@ public class SubTicket {
 	}
 
 	public static SubTicket readFromNBT(NBTTagCompound nbttagcompound) {
-		SubTicket subTicket = new SubTicket(nbttagcompound.getInteger("xCoord"), nbttagcompound.getInteger("yCoord"), nbttagcompound.getInteger("zCoord"));
+		final SubTicket subTicket = new SubTicket(nbttagcompound.getInteger("xCoord"), nbttagcompound.getInteger("yCoord"), nbttagcompound.getInteger("zCoord"));
 		subTicket.nbtTag = nbttagcompound.getCompoundTag("Tag");
-
 		return subTicket;
 	}
 
 	public static List<SubTicket> getChildren(Ticket ticket) {
-		List<SubTicket> list = Lists.newArrayList();
-		NBTTagList nbttaglist = ticket.getModData().getTagList("SubTickets", NBT.TAG_COMPOUND);
+		final List<SubTicket> list = Lists.newArrayList();
+		final NBTTagList nbttaglist = ticket.getModData().getTagList("SubTickets", NBT.TAG_COMPOUND);
 
 		for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-			SubTicket subTicket = readFromNBT(nbttaglist.getCompoundTagAt(i));
+			final SubTicket subTicket = readFromNBT(nbttaglist.getCompoundTagAt(i));
 			subTicket.owner = ticket;
 			list.add(subTicket);
 		}
@@ -43,7 +42,7 @@ public class SubTicket {
 	}
 
 	public static SubTicket get(Ticket ticket, TileEntity tile) {
-		List<SubTicket> list = getChildren(ticket);
+		final List<SubTicket> list = getChildren(ticket);
 
 		for(SubTicket subTicket : list) {
 			if(subTicket.xCoord == tile.xCoord && subTicket.yCoord == tile.yCoord && subTicket.zCoord == tile.zCoord) {
@@ -59,9 +58,8 @@ public class SubTicket {
 	}
 
 	public static SubTicket fromTile(Ticket ticket, TileEntity tile) {
-		SubTicket subTicket = new SubTicket(tile.xCoord, tile.yCoord, tile.zCoord);
+		final SubTicket subTicket = new SubTicket(tile.xCoord, tile.yCoord, tile.zCoord);
 		subTicket.owner = ticket;
-
 		return subTicket;
 	}
 
@@ -73,7 +71,7 @@ public class SubTicket {
 			return false;
 		}
 		else {
-			SubTicket subTicket = (SubTicket) obj;
+			final SubTicket subTicket = (SubTicket) obj;
 			return xCoord == subTicket.xCoord && yCoord == subTicket.yCoord && zCoord == subTicket.zCoord;
 		}
 	}
@@ -87,7 +85,7 @@ public class SubTicket {
 	}
 
 	public SubTicket assign(Ticket ticket) {
-		NBTTagList nbttaglist = ticket.getModData().getTagList("SubTickets", NBT.TAG_COMPOUND);
+		final NBTTagList nbttaglist = ticket.getModData().getTagList("SubTickets", NBT.TAG_COMPOUND);
 		nbttaglist.appendTag(writeToNBT());
 
 		ticket.getModData().setTag("SubTickets", nbttaglist);
@@ -97,8 +95,8 @@ public class SubTicket {
 	}
 
 	public void remove() {
-		List<SubTicket> list = SubTicket.getChildren(owner);
-		List<SubTicket> list1 = Lists.newArrayList();
+		final List<SubTicket> list = SubTicket.getChildren(owner);
+		final List<SubTicket> list1 = Lists.newArrayList();
 
 		for(SubTicket subTicket : list) {
 			if(!matches(subTicket)) {
@@ -114,12 +112,11 @@ public class SubTicket {
 	}
 
 	public NBTTagCompound writeToNBT() {
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
+		final NBTTagCompound nbttagcompound = new NBTTagCompound();
 		nbttagcompound.setInteger("xCoord", xCoord);
 		nbttagcompound.setInteger("yCoord", yCoord);
 		nbttagcompound.setInteger("zCoord", zCoord);
 		nbttagcompound.setTag("Tag", getTag());
-
 		return nbttagcompound;
 	}
 }

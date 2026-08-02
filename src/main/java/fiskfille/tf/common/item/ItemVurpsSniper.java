@@ -20,20 +20,16 @@ public class ItemVurpsSniper extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if(TFHelper.getTransformer(player) instanceof TransformerVurp && !TFHelper.isFullyTransformed(player)) {
-			if(world.isRemote) {
-				if(!TFShootManager.laserFilling && TFShootManager.laserCharge > 0) {
-					TFShootManager.laserCharge -= 5;
-					player.playSound("random.fizz", 1, 2F);
-					TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, false));
-				}
-				else {
-					if(!TFShootManager.laserFilling && (player.inventory.hasItem(Item.getItemFromBlock(TFBlocks.energonCube)) || player.capabilities.isCreativeMode)) {
-						stack.damageItem(1, player);
-						TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, true));
-						TFShootManager.laserFilling = true;
-					}
-				}
+		if(TFHelper.getTransformer(player) instanceof TransformerVurp && !TFHelper.isFullyTransformed(player) && world.isRemote) {
+			if(!TFShootManager.laserFilling && TFShootManager.laserCharge > 0) {
+				TFShootManager.laserCharge -= 5;
+				player.playSound("random.fizz", 1, 2F);
+				TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, false));
+			}
+			else if(!TFShootManager.laserFilling && (player.inventory.hasItem(Item.getItemFromBlock(TFBlocks.energonCube)) || player.capabilities.isCreativeMode)) {
+				stack.damageItem(1, player);
+				TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, true));
+				TFShootManager.laserFilling = true;
 			}
 		}
 

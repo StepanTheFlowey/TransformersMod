@@ -13,15 +13,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvider, IEnergon {
-	private final Random rand = new Random();
 	private final Energon energonType;
 
 	public BlockEnergonCrystal(Energon type) {
@@ -72,7 +71,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 
 	@Override
 	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
-		return MathHelper.getRandomIntegerInRange(rand, 0, 2);
+		return ThreadLocalRandom.current().nextInt(0, 3);
 	}
 
 	@Override
@@ -89,28 +88,33 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		final ForgeDirection dir = ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).getOpposite();
 		float f = 0.21F;
+		switch(ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).getOpposite()) {
+			case UP:
+				f = 0.2F;
+				setBlockBounds(0.5F - f, f * 2, 0.5F - f, 0.5F + f, 1, 0.5F + f);
+				break;
 
-		if(dir == ForgeDirection.UP) {
-			f = 0.2F;
-			setBlockBounds(0.5F - f, f * 2, 0.5F - f, 0.5F + f, 1, 0.5F + f);
-		}
-		else if(dir == ForgeDirection.DOWN) {
-			f = 0.2F;
-			setBlockBounds(0.5F - f, 0, 0.5F - f, 0.5F + f, 0.6F, 0.5F + f);
-		}
-		else if(dir == ForgeDirection.WEST) {
-			setBlockBounds(0, 0.2F, 0.5F - f, f * 2, 0.8F, 0.5F + f);
-		}
-		else if(dir == ForgeDirection.EAST) {
-			setBlockBounds(1 - f * 2, 0.2F, 0.5F - f, 1, 0.8F, 0.5F + f);
-		}
-		else if(dir == ForgeDirection.NORTH) {
-			setBlockBounds(0.5F - f, 0.2F, 0, 0.5F + f, 0.8F, f * 2);
-		}
-		else if(dir == ForgeDirection.SOUTH) {
-			setBlockBounds(0.5F - f, 0.2F, 1 - f * 2, 0.5F + f, 0.8F, 1);
+			case DOWN:
+				f = 0.2F;
+				setBlockBounds(0.5F - f, 0, 0.5F - f, 0.5F + f, 0.6F, 0.5F + f);
+				break;
+
+			case WEST:
+				setBlockBounds(0, 0.2F, 0.5F - f, f * 2, 0.8F, 0.5F + f);
+				break;
+
+			case EAST:
+				setBlockBounds(1 - f * 2, 0.2F, 0.5F - f, 1, 0.8F, 0.5F + f);
+				break;
+
+			case NORTH:
+				setBlockBounds(0.5F - f, 0.2F, 0, 0.5F + f, 0.8F, f * 2);
+				break;
+
+			case SOUTH:
+				setBlockBounds(0.5F - f, 0.2F, 1 - f * 2, 0.5F + f, 0.8F, 1);
+				break;
 		}
 	}
 
@@ -162,13 +166,15 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 		final ForgeDirection dir = ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).getOpposite();
 
 		if(!world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false)) {
-			if(rand.nextInt(9) == 0) {
-				if(!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops") && !world.restoringBlockSnapshots) // do not drop items while restoring blockstates, prevents item dupe
-				{
+			final ThreadLocalRandom random = ThreadLocalRandom.current();
+
+			if(random.nextInt(9) == 0) {
+				// do not drop items while restoring blockstates, prevents item dupe
+				if(!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops") && !world.restoringBlockSnapshots) {
 					final float f = 0.7F;
-					final double motionX = world.rand.nextFloat() * f + (1 - f) * 0.5D;
-					final double motionY = world.rand.nextFloat() * f + (1 - f) * 0.5D;
-					final double motionZ = world.rand.nextFloat() * f + (1 - f) * 0.5D;
+					final double motionX = random.nextFloat() * f + (1 - f) * 0.5D;
+					final double motionY = random.nextFloat() * f + (1 - f) * 0.5D;
+					final double motionZ = random.nextFloat() * f + (1 - f) * 0.5D;
 					final EntityItem entityitem = new EntityItem(world, x + motionX, y + motionY, z + motionZ, new ItemStack(energonType.getCrystal()));
 					entityitem.delayBeforeCanPickup = 10;
 					world.spawnEntityInWorld(entityitem);

@@ -13,6 +13,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ItemFlamethrower extends Item {
 	public ItemFlamethrower() {
@@ -38,37 +39,37 @@ public class ItemFlamethrower extends Item {
 
 		if(duration < 40) {
 			if(player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode) {
-				World world = player.worldObj;
-				Random rand = new Random();
+				final World world = player.worldObj;
 
 				if(duration % 4 == 0) {
-					Vec3 backCoords = TFVectorHelper.getFrontCoords(player, -0.075F, true);
+					final Vec3 backCoords = TFVectorHelper.getFrontCoords(player, -0.075F, true);
 					player.motionX = backCoords.xCoord - player.posX;
 					player.motionZ = backCoords.zCoord - player.posZ;
 
 					world.playAuxSFX(1009, (int) player.posX, (int) player.posY, (int) player.posZ, 0);
 				}
 
-				Vec3 sideCoords = TFVectorHelper.getBackSideCoords(player, 0.3F, false, 0.6F, true);
-				Vec3 backCoords = TFVectorHelper.getFrontCoords(player, 0.5F, true);
-				float divider = 3;
+				final Random rand = ThreadLocalRandom.current();
+				final Vec3 sideCoords = TFVectorHelper.getBackSideCoords(player, 0.3F, false, 0.6F, true);
+				final Vec3 backCoords = TFVectorHelper.getFrontCoords(player, 0.5F, true);
+				final float divider = 3;
 
 				if(world.isRemote) {
 					for(int i = 0; i < 50; ++i) {
-						float motionX = (float) (backCoords.xCoord - player.posX) + (rand.nextFloat() - 0.5F) / divider;
-						float motionY = (float) (backCoords.yCoord - player.boundingBox.minY) + (rand.nextFloat() - 0.5F) / divider;
-						float motionZ = (float) (backCoords.zCoord - player.posZ) + (rand.nextFloat() - 0.5F) / divider;
+						final float motionX = (float) (backCoords.xCoord - player.posX) + (rand.nextFloat() - 0.5F) / divider;
+						final float motionY = (float) (backCoords.yCoord - player.boundingBox.minY) + (rand.nextFloat() - 0.5F) / divider;
+						final float motionZ = (float) (backCoords.zCoord - player.posZ) + (rand.nextFloat() - 0.5F) / divider;
 
 						TFParticles.spawnParticle(TFParticleType.FLAMETHROWER_FLAME, sideCoords.xCoord, sideCoords.yCoord + player.yOffset, sideCoords.zCoord, motionX, motionY, motionZ);
 					}
 				}
 				else {
 					for(int i = 0; i < 5; ++i) {
-						float motionX = (float) (backCoords.xCoord - player.posX) + (rand.nextFloat() - 0.5F) / divider;
-						float motionY = (float) (backCoords.yCoord - player.boundingBox.minY) + (rand.nextFloat() - 0.5F) / divider;
-						float motionZ = (float) (backCoords.zCoord - player.posZ) + (rand.nextFloat() - 0.5F) / divider;
+						final float motionX = (float) (backCoords.xCoord - player.posX) + (rand.nextFloat() - 0.5F) / divider;
+						final float motionY = (float) (backCoords.yCoord - player.boundingBox.minY) + (rand.nextFloat() - 0.5F) / divider;
+						final float motionZ = (float) (backCoords.zCoord - player.posZ) + (rand.nextFloat() - 0.5F) / divider;
 
-						EntityFlamethrowerFire entity = new EntityFlamethrowerFire(world, player);
+						final EntityFlamethrowerFire entity = new EntityFlamethrowerFire(world, player);
 						entity.motionX = motionX;
 						entity.motionY = motionY;
 						entity.motionZ = motionZ;

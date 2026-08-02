@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class RecipeDisplayItems implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting inventoryCrafting, World world) {
-		ItemStack[] stacks = new ItemStack[9];
+		final ItemStack[] stacks = new ItemStack[9];
 
 		for(int i = 0; i < stacks.length; i++) {
 			stacks[i] = inventoryCrafting.getStackInSlot(i);
@@ -34,19 +34,24 @@ public class RecipeDisplayItems implements IRecipe {
 				Item item = itemStack.getItem();
 
 				if(item instanceof ItemTransformerArmor) {
-					ItemArmor armorItem = (ItemArmor) item;
+					final ItemArmor armorItem = (ItemArmor) item;
 
-					if(armorItem.armorType == 0) {
-						head = itemStack;
-					}
-					else if(armorItem.armorType == 1) {
-						chest = itemStack;
-					}
-					else if(armorItem.armorType == 2) {
-						legs = itemStack;
-					}
-					else if(armorItem.armorType == 3) {
-						boots = itemStack;
+					switch(armorItem.armorType) {
+						case 0:
+							head = itemStack;
+							break;
+
+						case 1:
+							chest = itemStack;
+							break;
+
+						case 2:
+							legs = itemStack;
+							break;
+
+						case 3:
+							boots = itemStack;
+							break;
 					}
 				}
 			}
@@ -80,42 +85,47 @@ public class RecipeDisplayItems implements IRecipe {
 
 		for(ItemStack itemStack : stacks) {
 			if(itemStack != null) {
-				Item item = itemStack.getItem();
+				final Item item = itemStack.getItem();
 
 				if(item instanceof ItemTransformerArmor) {
-					ItemArmor armorItem = (ItemArmor) item;
+					final ItemArmor armorItem = (ItemArmor) item;
 
-					if(armorItem.armorType == 0) {
-						head = itemStack;
-					}
-					else if(armorItem.armorType == 1) {
-						chest = itemStack;
-					}
-					else if(armorItem.armorType == 2) {
-						legs = itemStack;
-					}
-					else if(armorItem.armorType == 3) {
-						feet = itemStack;
+					switch(armorItem.armorType) {
+						case 0:
+							head = itemStack;
+							break;
+
+						case 1:
+							chest = itemStack;
+							break;
+
+						case 2:
+							legs = itemStack;
+							break;
+
+						case 3:
+							feet = itemStack;
+							break;
 					}
 				}
 			}
 		}
 
 		if(head != null && chest != null && legs != null && feet != null) {
-			Item headItem = head.getItem();
-			Item chestItem = chest.getItem();
-			Item legsItem = legs.getItem();
-			Item feetItem = feet.getItem();
+			final Item headItem = head.getItem();
+			final Item chestItem = chest.getItem();
+			final Item legsItem = legs.getItem();
+			final Item feetItem = feet.getItem();
 
 			int i = 0;
 
 			boolean found = false;
 
 			for(Transformer transformer : TransformersAPI.getTransformers()) {
-				Item helmet = transformer.getHelmet();
-				Item chestplate = transformer.getChestplate();
-				Item leggings = transformer.getLeggings();
-				Item boots = transformer.getBoots();
+				final Item helmet = transformer.getHelmet();
+				final Item chestplate = transformer.getChestplate();
+				final Item leggings = transformer.getLeggings();
+				final Item boots = transformer.getBoots();
 
 				if(headItem == helmet && chestItem == chestplate && legsItem == leggings && feetItem == boots) {
 					itemstack.setItemDamage(i);
@@ -135,12 +145,12 @@ public class RecipeDisplayItems implements IRecipe {
 	}
 
 	public void setNBTData(ItemStack head, ItemStack chest, ItemStack legs, ItemStack feet, ItemStack itemstack) {
-		ItemStack[] itemstacks = {head, chest, legs, feet};
-		NBTTagList itemsList = new NBTTagList();
+		final ItemStack[] itemstacks = {head, chest, legs, feet};
+		final NBTTagList itemsList = new NBTTagList();
 
 		for(int i = 0; i < itemstacks.length; ++i) {
 			if(itemstacks[i] != null) {
-				NBTTagCompound itemTag = new NBTTagCompound();
+				final NBTTagCompound itemTag = new NBTTagCompound();
 				itemTag.setByte("Slot", (byte) i);
 				itemstacks[i].writeToNBT(itemTag);
 				itemsList.appendTag(itemTag);

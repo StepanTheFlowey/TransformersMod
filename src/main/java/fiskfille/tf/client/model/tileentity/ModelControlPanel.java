@@ -8,6 +8,21 @@ import fiskfille.tf.common.tileentity.TileEntityControlPanel;
 import fiskfille.tf.helper.TFHelper;
 
 public class ModelControlPanel extends MowzieModelBase {
+	public final MowzieModelRenderer compass1;
+	public final MowzieModelRenderer compass2;
+	public final MowzieModelRenderer compass3;
+	public final MowzieModelRenderer compass4;
+	public final MowzieModelRenderer dimPanel1;
+	public final MowzieModelRenderer dimPanel2;
+	public final MowzieModelRenderer dimPanel3;
+	public final MowzieModelRenderer dimPanel4;
+	public final MowzieModelRenderer dimPanel6;
+	public final MowzieModelRenderer dimPanel7;
+	public final MowzieModelRenderer screen1;
+	public final MowzieModelRenderer screen2;
+	public final MowzieModelRenderer table1;
+	public final MowzieModelRenderer table2;
+	public final MowzieModelRenderer table6;
 	private final MowzieModelRenderer lever;
 	private final MowzieModelRenderer leverCover1;
 	private final MowzieModelRenderer leverCover2;
@@ -24,21 +39,6 @@ public class ModelControlPanel extends MowzieModelBase {
 	private final MowzieModelRenderer switchTop2;
 	private final MowzieModelRenderer switchTop3;
 	private final MowzieModelRenderer switchTop4;
-	public final MowzieModelRenderer compass1;
-	public final MowzieModelRenderer compass2;
-	public final MowzieModelRenderer compass3;
-	public final MowzieModelRenderer compass4;
-	public final MowzieModelRenderer dimPanel1;
-	public final MowzieModelRenderer dimPanel2;
-	public final MowzieModelRenderer dimPanel3;
-	public final MowzieModelRenderer dimPanel4;
-	public final MowzieModelRenderer dimPanel6;
-	public final MowzieModelRenderer dimPanel7;
-	public final MowzieModelRenderer screen1;
-	public final MowzieModelRenderer screen2;
-	public final MowzieModelRenderer table1;
-	public final MowzieModelRenderer table2;
-	public final MowzieModelRenderer table6;
 
 	public ModelControlPanel() {
 		textureWidth = textureHeight = 128;
@@ -418,7 +418,7 @@ public class ModelControlPanel extends MowzieModelBase {
 				}
 			}
 
-			needle.rotateAngleY = PI / 2 * TFHelper.median(tile.animPortalDirection, tile.prevAnimPortalDirection, partialTicks);
+			needle.rotateAngleY = (float) Math.PI / 2 * TFHelper.median(tile.animPortalDirection, tile.prevAnimPortalDirection, partialTicks);
 			leverCover1.rotateAngleX = 0.45378560551852565F - 1.9F * TFHelper.median(tile.activationLeverCoverTimer, tile.prevActivationLeverCoverTimer, partialTicks);
 			leverCover2.rotateAngleX = 1.4311699866353502F - 0.5F * TFHelper.median(tile.activationLeverCoverTimer, tile.prevActivationLeverCoverTimer, partialTicks);
 			lever.rotateAngleX = 0.17453292519943295F + 2.5F * TFHelper.median(tile.activationLeverTimer, tile.prevActivationLeverTimer, partialTicks);

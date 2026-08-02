@@ -29,10 +29,10 @@ public class EnergyStorageInventory extends EnergyStorage {
 		float removed = 0;
 
 		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			ItemStack stack = energyInventory.getStackInSlot(i);
+			final ItemStack stack = energyInventory.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
+				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
 				float extracted = container.extractEnergy(stack, max, true);
 
 				extracted = Math.min(extracted, max);
@@ -60,10 +60,10 @@ public class EnergyStorageInventory extends EnergyStorage {
 		float added = 0;
 
 		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			ItemStack stack = energyInventory.getStackInSlot(i);
+			final ItemStack stack = energyInventory.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
+				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
 				float extracted = container.receiveEnergy(stack, max, true);
 
 				extracted = Math.min(extracted, max);
@@ -86,7 +86,7 @@ public class EnergyStorageInventory extends EnergyStorage {
 		energy = 0;
 
 		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			ItemStack stack = energyInventory.getStackInSlot(i);
+			final ItemStack stack = energyInventory.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 				IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
@@ -102,10 +102,10 @@ public class EnergyStorageInventory extends EnergyStorage {
 		int max = 0;
 
 		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			ItemStack stack = energyInventory.getStackInSlot(i);
+			final ItemStack stack = energyInventory.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
+				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
 				max += (int) container.getEnergyCapacity(stack);
 			}
 		}

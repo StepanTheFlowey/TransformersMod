@@ -21,10 +21,10 @@ public class ItemCSD extends Item {
 	}
 
 	public static DimensionalCoords getCoords(ItemStack itemstack) {
-		DimensionalCoords coords = new DimensionalCoords();
+		final DimensionalCoords coords = new DimensionalCoords();
 
 		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Coordinates", NBT.TAG_COMPOUND)) {
-			NBTTagCompound nbttagcompound = itemstack.getTagCompound().getCompoundTag("Coordinates");
+			final NBTTagCompound nbttagcompound = itemstack.getTagCompound().getCompoundTag("Coordinates");
 			coords.set(nbttagcompound.getInteger("x"), nbttagcompound.getInteger("y"), nbttagcompound.getInteger("z"), nbttagcompound.getInteger("dim"));
 		}
 
@@ -36,7 +36,7 @@ public class ItemCSD extends Item {
 			itemstack.setTagCompound(new NBTTagCompound());
 		}
 
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
+		final NBTTagCompound nbttagcompound = new NBTTagCompound();
 		nbttagcompound.setInteger("x", coords.posX);
 		nbttagcompound.setInteger("y", coords.posY);
 		nbttagcompound.setInteger("z", coords.posZ);
@@ -47,7 +47,7 @@ public class ItemCSD extends Item {
 
 	@Override
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
-		DimensionalCoords coords = getCoords(itemstack);
+		final DimensionalCoords coords = getCoords(itemstack);
 		list.add(coords.getFormatted().getFormattedText());
 	}
 
@@ -56,8 +56,8 @@ public class ItemCSD extends Item {
 		world.getBlockMetadata(x, y, z);
 
 		if(player.isSneaking()) {
-			DimensionalCoords coords = new DimensionalCoords(x, y + 1, z, world.provider.dimensionId);
-			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+			final DimensionalCoords coords = new DimensionalCoords(x, y + 1, z, world.provider.dimensionId);
+			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 			if(tile instanceof TileEntityControlPanel) {
 				coords.set(((TileEntityControlPanel) tile).data.destination);
@@ -73,10 +73,10 @@ public class ItemCSD extends Item {
 		}
 		else {
 			if(world.getTileEntity(x, y, z) instanceof TileEntityControlPanel) {
-				TileEntityControlPanel tile = TFTileHelper.getTileBase((TileEntityControlPanel) world.getTileEntity(x, y, z));
+				final TileEntityControlPanel tile = TFTileHelper.getTileBase((TileEntityControlPanel) world.getTileEntity(x, y, z));
 
 				if(!tile.data.activationLeverState) {
-					DimensionalCoords coords = getCoords(itemstack);
+					final DimensionalCoords coords = getCoords(itemstack);
 					tile.setSwitchesTo(coords);
 					tile.markBlockForUpdate();
 
@@ -126,7 +126,7 @@ public class ItemCSD extends Item {
 		}
 
 		public static DimensionalCoords fromArray(int[] aint) {
-			int[] aint1 = new int[4];
+			final int[] aint1 = new int[4];
 
 			System.arraycopy(aint, 0, aint1, 0, Math.min(aint.length, aint1.length));
 
@@ -155,7 +155,7 @@ public class ItemCSD extends Item {
 		}
 
 		public DimensionalCoords set(int... args) {
-			int[] aint = toArray();
+			final int[] aint = toArray();
 
 			System.arraycopy(args, 0, aint, 0, Math.min(args.length, aint.length));
 
@@ -163,7 +163,7 @@ public class ItemCSD extends Item {
 		}
 
 		public IChatComponent getFormatted() {
-			ChatStyle green = new ChatStyle().setColor(EnumChatFormatting.GREEN);
+			final ChatStyle green = new ChatStyle().setColor(EnumChatFormatting.GREEN);
 			return new ChatComponentTranslation("csd.format", new ChatComponentText(TFDimensionHelper.getDimensionName(dimension)).setChatStyle(green), new ChatComponentText(posX + "").setChatStyle(green), new ChatComponentText(posY + "").setChatStyle(green), new ChatComponentText(posZ + "").setChatStyle(green));
 		}
 
@@ -190,7 +190,7 @@ public class ItemCSD extends Item {
 				return false;
 			}
 			else {
-				DimensionalCoords coords = (DimensionalCoords) obj;
+				final DimensionalCoords coords = (DimensionalCoords) obj;
 				return posX == coords.posX && posY == coords.posY && posZ == coords.posZ && dimension == coords.dimension;
 			}
 		}

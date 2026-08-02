@@ -4,13 +4,12 @@ import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import net.minecraft.tileentity.TileEntity;
 
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Handles all transmitters transmitting energy to this tile
  */
 public class ReceiverHandler {
-	private final Set<NetworkEntry> transmitters = new HashSet<>();
+	private final HashSet<NetworkEntry> transmitters = new HashSet<>();
 	private final NetworkEntry owner;
 
 	public ReceiverHandler(TileEntity tile) {
@@ -21,7 +20,7 @@ public class ReceiverHandler {
 		transmitters.add(transmitter);
 	}
 
-	public Set<NetworkEntry> getTransmitters() {
+	public HashSet<NetworkEntry> getTransmitters() {
 		return transmitters;
 	}
 

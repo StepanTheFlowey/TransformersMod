@@ -37,7 +37,7 @@ public class ItemPowerCanister extends ItemEnergyContainer {
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
 		for(int i = 0; i < tiers.length; ++i) {
-			ItemStack itemstack = new ItemStack(this, 1, i);
+			final ItemStack itemstack = new ItemStack(this, 1, i);
 			subItems.add(itemstack.copy());
 
 			receiveEnergy(itemstack, getEnergyCapacity(itemstack), false);
@@ -47,7 +47,7 @@ public class ItemPowerCanister extends ItemEnergyContainer {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack itemstack) {
-		int tier = Math.min(itemstack.getItemDamage(), tiers.length - 1);
+		final int tier = Math.min(itemstack.getItemDamage(), tiers.length - 1);
 		return StatCollector.translateToLocal("item.power_canister_" + tiers[tier] + ".name");
 	}
 

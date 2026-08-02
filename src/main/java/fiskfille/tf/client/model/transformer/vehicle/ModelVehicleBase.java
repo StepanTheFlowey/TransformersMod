@@ -20,6 +20,10 @@ public class ModelVehicleBase extends MowzieModelBase {
 			armorFromNBT = ItemDisplayVehicle.getArmorFromNBT(itemstack);
 		}
 
+		if(armorFromNBT == null) {
+			return;
+		}
+
 		if(TFArmorDyeHelper.areColorsIdentical(armorFromNBT[0], armorFromNBT[1], armorFromNBT[2], armorFromNBT[3])) {
 			setToInitPose();
 			render(null, armorFromNBT[0]);

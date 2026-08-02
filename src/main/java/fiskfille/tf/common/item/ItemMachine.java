@@ -32,10 +32,10 @@ public class ItemMachine extends ItemBlock {
 
 	@Override
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
-		TileEntity tile = getTileEntity(player.worldObj);
+		final TileEntity tile = getTileEntity(player.worldObj);
 
 		if(tile instanceof IEnergyTransmitter) {
-			IEnergyTransmitter transmitter = (IEnergyTransmitter) tile;
+			final IEnergyTransmitter transmitter = (IEnergyTransmitter) tile;
 			list.add(StatCollector.translateToLocalFormatted("gui.emb.rate", TFFormatHelper.formatNumber(transmitter.getTransmissionRate())));
 		}
 	}

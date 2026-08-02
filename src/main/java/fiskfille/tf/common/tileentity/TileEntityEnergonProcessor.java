@@ -54,22 +54,20 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 			animationTimer *= 0.95F;
 		}
 
-		if(animationTimer > 1F) {
-			animationTimer = 1F;
+		if(animationTimer > 1) {
+			animationTimer = 1;
 		}
 
 		if(!data.isInitialized()) {
 			data.initialize(this);
 		}
 
-		ItemStack power = getStackInSlot(0);
-		ItemStack crystal = getStackInSlot(1);
-		ItemStack canister = getStackInSlot(2);
-
 		if(powerTime > 0) {
 			--powerTime;
 		}
 
+		final ItemStack power = getStackInSlot(0);
+		final ItemStack crystal = getStackInSlot(1);
 		if(powerTime <= 0 && power != null && isItemValidForSlot(0, power) && canProcessCrystal(crystal)) {
 			currentMaxPowerTime = powerTime = PowerManager.getPowerSourceAmount(power) + 2;
 			decrStackSize(0, 1);
@@ -92,6 +90,7 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 			burnTime = 0;
 		}
 
+		final ItemStack canister = getStackInSlot(2);
 		if(data.getFluidAmount() > 0 && canister != null && canister.getItem() instanceof IFluidContainerItem && (ItemFuelCanister.isEmpty(canister) || ItemFuelCanister.getContainerFluid(canister).getFluid() == TFFluids.energon && !ItemFuelCanister.isFull(canister))) {
 			if(fillTime < 100) {
 				++fillTime;
@@ -125,8 +124,8 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 
 	public void fillCanister(ItemStack fluidContainer) {
 		if(fluidContainer.getItem() instanceof IFluidContainerItem) {
-			IFluidContainerItem item = (IFluidContainerItem) fluidContainer.getItem();
-			int amount = Math.min(data.getFluidAmount(), item.getCapacity(fluidContainer) - ItemFuelCanister.getFluidAmount(fluidContainer));
+			final IFluidContainerItem item = (IFluidContainerItem) fluidContainer.getItem();
+			final int amount = Math.min(data.getFluidAmount(), item.getCapacity(fluidContainer) - ItemFuelCanister.getFluidAmount(fluidContainer));
 
 			FluidStack stack = item.getFluid(fluidContainer);
 
@@ -134,12 +133,12 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 				stack = new FluidStack(TFFluids.energon, 0);
 			}
 
-			FluidStack stack1 = new FluidStack(TFFluids.energon, amount);
+			final FluidStack stack1 = new FluidStack(TFFluids.energon, amount);
 			FluidEnergon.setRatios(stack1, FluidEnergon.getRatios(data.getFluid()));
 			NBTTagCompound prevNBT = stack1.tag;
 
 			stack1.tag = stack.tag;
-			int i = item.fill(fluidContainer, stack1, true);
+			final int i = item.fill(fluidContainer, stack1, true);
 			drain(ForgeDirection.UNKNOWN, amount, true);
 			stack.amount += i;
 			stack1.tag = prevNBT;

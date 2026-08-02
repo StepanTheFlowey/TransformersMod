@@ -15,12 +15,13 @@ public class DisplayableTransformiumSeed extends Displayable {
 
 	@Override
 	public void render(ItemStack itemstack) {
-		TFRenderHelper.renderTag(StatCollector.translateToLocalFormatted("tile.display_pedestal.amount", itemstack.stackSize), 0F, 0.05F, 0F);
+		TFRenderHelper.renderTag(StatCollector.translateToLocalFormatted("tile.display_pedestal.amount", itemstack.stackSize), 0, 0.05F, 0);
 
-		final float f1 = MathHelper.sin((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.07F;
-		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);
-		GL11.glTranslatef(0F, 0.6F + f1, 0F);
-		GL11.glRotatef(180F, 1F, 0F, 0F);
+		final Minecraft minecraft = Minecraft.getMinecraft();
+		GL11.glRotatef((minecraft.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0, 1, 0);
+		final float f1 = MathHelper.sin((minecraft.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.07F;
+		GL11.glTranslatef(0, 0.6F + f1, 0);
+		GL11.glRotatef(180F, 1, 0, 0);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
 
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(tileentity, -0.5F, -0.5F, -0.5F, 0F);

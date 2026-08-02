@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.Vec3;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author gegy1000
@@ -78,11 +78,11 @@ public class TransformerCloudtrap extends TransformerJet {
 
 	@Override
 	public void doNitroParticles(EntityPlayer player) {
-		final Random rand = new Random();
+		final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		for(int i = 0; i < 4; ++i) {
 			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.135F, i < 2, -2.5, true);
-			player.worldObj.spawnParticle("flame", side.xCoord, side.yCoord + 0.25F, side.zCoord, (rand.nextFloat() - 0.5F) / 20, (rand.nextFloat() - 0.5F) / 20, (rand.nextFloat() - 0.5F) / 20);
+			player.worldObj.spawnParticle("flame", side.xCoord, side.yCoord + 0.25F, side.zCoord, (random.nextFloat() - 0.5F) / 20, (random.nextFloat() - 0.5F) / 20, (random.nextFloat() - 0.5F) / 20);
 		}
 	}
 }

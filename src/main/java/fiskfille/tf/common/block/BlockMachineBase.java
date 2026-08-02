@@ -31,10 +31,9 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class BlockMachineBase extends Block implements ITileEntityProvider {
-	protected final Random rand = new Random();
-
 	public Class<? extends TileEntity> tileClass;
 
 	protected BlockMachineBase(Material material) {
@@ -51,23 +50,21 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
-		ItemStack heldItem = player.getHeldItem();
+		final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+		final ItemStack heldItem = player.getHeldItem();
 
 		if(tile instanceof IFluidHandlerTF && heldItem != null && heldItem.getItem() instanceof IFluidContainerItem) {
-			IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tile;
-			IFluidContainerItem item = (IFluidContainerItem) heldItem.getItem();
+			final IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tile;
+			final IFluidContainerItem item = (IFluidContainerItem) heldItem.getItem();
 
-			boolean empty = ItemFuelCanister.isEmpty(heldItem);
-
-			if(!empty) {
-				FluidStack stack = item.getFluid(heldItem);
+			if(!ItemFuelCanister.isEmpty(heldItem)) {
+				final FluidStack stack = item.getFluid(heldItem);
 
 				if(stack != null && fluidHandler.canFill(ForgeDirection.UNKNOWN, stack.getFluid())) {
-					int amount = fluidHandler.fill(ForgeDirection.UNKNOWN, item.drain(heldItem, stack.amount, false), true);
+					final int amount = fluidHandler.fill(ForgeDirection.UNKNOWN, item.drain(heldItem, stack.amount, false), true);
 
 					if(amount > 0) {
-						ItemStack newItem = new ItemStack(heldItem.getItem(), 1, heldItem.getItemDamage());
+						final ItemStack newItem = new ItemStack(heldItem.getItem(), 1, heldItem.getItemDamage());
 						item.fill(newItem, stack, true);
 						item.drain(newItem, amount, true);
 
@@ -78,28 +75,28 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 				}
 			}
 
-			FluidStack stack = fluidHandler.getTank().getFluid();
+			final FluidStack stack = fluidHandler.getTank().getFluid();
 
 			if(stack != null && fluidHandler.canDrain(ForgeDirection.UNKNOWN, item.getFluid(heldItem) == null ? stack.getFluid() : item.getFluid(heldItem).getFluid())) {
-				FluidStack drained = fluidHandler.drain(ForgeDirection.UNKNOWN, item.getCapacity(heldItem) - ItemFuelCanister.getFluidAmount(heldItem), false);
+				final FluidStack drained = fluidHandler.drain(ForgeDirection.UNKNOWN, item.getCapacity(heldItem) - ItemFuelCanister.getFluidAmount(heldItem), false);
 
 				if(drained != null && drained.amount > 0) {
-					ItemStack newItem = new ItemStack(heldItem.getItem(), 1, heldItem.getItemDamage());
+					final ItemStack newItem = new ItemStack(heldItem.getItem(), 1, heldItem.getItemDamage());
 					item.fill(newItem, item.getFluid(heldItem), true);
 
-					int amount = drained.amount;
+					final int amount = drained.amount;
 					FluidStack stack1 = item.getFluid(newItem);
 
 					if(stack1 == null) {
 						stack1 = new FluidStack(TFFluids.energon, 0);
 					}
 
-					FluidStack stack2 = new FluidStack(TFFluids.energon, amount);
+					final FluidStack stack2 = new FluidStack(TFFluids.energon, amount);
 					FluidEnergon.setRatios(stack2, FluidEnergon.getRatios(stack));
-					NBTTagCompound prevNBT = stack2.tag;
+					final NBTTagCompound prevNBT = stack2.tag;
 
 					stack2.tag = stack1.tag;
-					int i = item.fill(newItem, stack2, true);
+					final int i = item.fill(newItem, stack2, true);
 					fluidHandler.drain(ForgeDirection.UNKNOWN, amount, true);
 					stack1.amount += i;
 					stack2.tag = prevNBT;
@@ -143,8 +140,8 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		boolean flag = super.canPlaceBlockAt(world, x, y, z);
-		int height = getBlockHeight();
 
+		final int height = getBlockHeight();
 		for(int i = 1; i < height; ++i) {
 			flag &= super.canPlaceBlockAt(world, x, y + i, z);
 		}
@@ -219,6 +216,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 				final ItemStack itemstack = inventory.getStackInSlot(i);
 
 				if(itemstack != null) {
+					final ThreadLocalRandom rand = ThreadLocalRandom.current();
 					final float f = rand.nextFloat() * 0.8F + 0.1F;
 					final float f1 = rand.nextFloat() * 0.8F + 0.1F;
 					final float f2 = rand.nextFloat() * 0.8F + 0.1F;
@@ -261,15 +259,15 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	@Override
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
 		if(!world.isRemote && (player == null || !player.capabilities.isCreativeMode)) {
-			ItemStack itemstack = new ItemStack(this, 1, damageDropped(world.getBlockMetadata(x, y, z)));
-			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+			final ItemStack itemstack = new ItemStack(this, 1, damageDropped(world.getBlockMetadata(x, y, z)));
+			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 			if(tile != null) {
-				NBTTagCompound nbttagcompound = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound = new NBTTagCompound();
 				tile.writeToNBT(nbttagcompound);
 
 				if(nbttagcompound.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-					NBTTagCompound config = nbttagcompound.getCompoundTag("ConfigDataTF");
+					final NBTTagCompound config = nbttagcompound.getCompoundTag("ConfigDataTF");
 
 					if(!itemstack.hasTagCompound()) {
 						itemstack.setTagCompound(new NBTTagCompound());
@@ -279,11 +277,11 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 				}
 			}
 
-			float f = 0.7F;
-			double d0 = world.rand.nextFloat() * f + (1F - f) * 0.5D;
-			double d1 = world.rand.nextFloat() * f + (1F - f) * 0.5D;
-			double d2 = world.rand.nextFloat() * f + (1F - f) * 0.5D;
-			EntityItem entityitem = new EntityItem(world, x + d0, y + d1, z + d2, itemstack);
+			final double f = 0.7D;
+			final double d0 = world.rand.nextFloat() * f + (1 - f) * 0.5D;
+			final double d1 = world.rand.nextFloat() * f + (1 - f) * 0.5D;
+			final double d2 = world.rand.nextFloat() * f + (1 - f) * 0.5D;
+			final EntityItem entityitem = new EntityItem(world, x + d0, y + d1, z + d2, itemstack);
 
 			entityitem.delayBeforeCanPickup = 10;
 			world.spawnEntityInWorld(entityitem);
@@ -300,15 +298,15 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemstack) {
 		super.onBlockPlacedBy(world, x, y, z, entity, itemstack);
-		TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+		final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 		if(tile != null) {
-			NBTTagCompound nbttagcompound = new NBTTagCompound();
+			final NBTTagCompound nbttagcompound = new NBTTagCompound();
 			tile.writeToNBT(nbttagcompound);
 
 			if(itemstack != null && itemstack.hasTagCompound()) {
 				if(itemstack.getTagCompound().hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-					NBTTagCompound config = itemstack.getTagCompound().getCompoundTag("ConfigDataTF");
+					final NBTTagCompound config = itemstack.getTagCompound().getCompoundTag("ConfigDataTF");
 					nbttagcompound.setTag("ConfigDataTF", config);
 
 					tile.readFromNBT(nbttagcompound);
@@ -317,7 +315,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 		}
 
 		for(int i = 0; i < getBlockHeight(); ++i) {
-			int metadata = getPlacedRotation(entity) + i * 4;
+			final int metadata = getPlacedRotation(entity) + i * 4;
 
 			if(metadata > 0) {
 				if(i == 0) {
@@ -342,8 +340,8 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		TileEntity tile = world.getTileEntity(x, y, z);
-		int metadata = world.getBlockMetadata(x, y, z);
+		final TileEntity tile = world.getTileEntity(x, y, z);
+		final int metadata = world.getBlockMetadata(x, y, z);
 
 		if(tile != null && getBlockHeight() > 0) {
 			int[] offsets = TFTileHelper.getTileBaseOffsets(tile, metadata);

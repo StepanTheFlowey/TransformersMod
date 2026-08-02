@@ -69,7 +69,7 @@ public class TFData<T> {
 	}
 
 	public static void writeToNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
+		final NBTTagCompound nbttagcompound = new NBTTagCompound();
 
 		for(Map.Entry<TFData, Object> e : data.entrySet()) {
 			if(e.getKey().save) {
@@ -87,7 +87,7 @@ public class TFData<T> {
 	}
 
 	public static Map<TFData, Object> readFromNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
-		NBTTagCompound nbttagcompound = nbt.getCompoundTag("DataArray");
+		final NBTTagCompound nbttagcompound = nbt.getCompoundTag("DataArray");
 
 		for(TFData<?> type : TFData.VALUES) {
 			if(type.save) {

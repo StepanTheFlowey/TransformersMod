@@ -18,15 +18,15 @@ public class ItemHandler {
 	public static boolean hasInit = false;
 
 	public static void init() {
-		List<String> names = Lists.newLinkedList();
-		List<String> domains = Lists.newLinkedList();
+		final List<String> names = Lists.newLinkedList();
+		final List<String> domains = Lists.newLinkedList();
 
 		MinecraftForge.EVENT_BUS.post(new ItemHandlerEvent.Init(itemHandlers));
 		hasInit = true;
 
 		for(Map.Entry<Class, String> e : itemHandlers.entrySet()) {
 			for(Field field : e.getKey().getFields()) {
-				String s = field.getType().getName();
+				final String s = field.getType().getName();
 
 				if(s.equals(ItemStack[].class.getName())) {
 					names.add(field.getName());
@@ -45,12 +45,12 @@ public class ItemHandler {
 
 		for(Map.Entry<Class, String> e : itemHandlers.entrySet()) {
 			for(Field field : e.getKey().getFields()) {
-				String s = field.getType().getName();
+				final String s = field.getType().getName();
 
 				if(s.equals(ItemStack[].class.getName())) {
 					try {
-						ItemStack[] itemstacks = new ItemStack[65];
-						String name = field.getName();
+						final ItemStack[] itemstacks = new ItemStack[65];
+						final String name = field.getName();
 						int id = data.getNextAvailableId();
 
 						if(data.subItems.containsKey(name)) {

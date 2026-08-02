@@ -12,7 +12,7 @@ public class RecipeClearConfig implements IRecipe {
 		boolean flag = false;
 
 		for(int i = 0; i < inventory.getSizeInventory(); ++i) {
-			ItemStack itemstack = inventory.getStackInSlot(i);
+			final ItemStack itemstack = inventory.getStackInSlot(i);
 
 			if(itemstack != null) {
 				if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {

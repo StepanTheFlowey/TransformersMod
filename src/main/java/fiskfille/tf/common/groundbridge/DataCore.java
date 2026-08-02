@@ -5,13 +5,15 @@ import net.minecraft.util.StatCollector;
 import java.util.ArrayList;
 
 public class DataCore {
-	public static final ArrayList<DataCore> dataCores = new ArrayList<>();
+	public static final ArrayList<DataCore> dataCores = new ArrayList<>(3);
 	public static final DataCore spaceBridge = new DataCore("space_bridge", 0x5FEEEE);
 	public static final DataCore leveler = new DataCore("leveler", 0x61C37B);
 	public static final DataCore range = new DataCore("range", 0x7C65EA);
-	public final int index;
+
 	private final String id;
 	private final int color;
+
+	public final int index;
 
 	public DataCore(String s, int i) {
 		id = s;

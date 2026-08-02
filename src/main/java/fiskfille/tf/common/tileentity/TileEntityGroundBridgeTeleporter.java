@@ -49,15 +49,20 @@ public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 	@Override
 	public void readCustomNBT(NBTTagCompound nbt) {
 		if(nbt.hasKey("ControlPanel", NBT.TAG_COMPOUND)) {
-			NBTTagCompound nbttagcompound = nbt.getCompoundTag("ControlPanel");
-			controlPanel = new DimensionalCoords(nbttagcompound.getInteger("x"), nbttagcompound.getInteger("y"), nbttagcompound.getInteger("z"), nbttagcompound.getInteger("dim"));
+			final NBTTagCompound nbttagcompound = nbt.getCompoundTag("ControlPanel");
+			controlPanel = new DimensionalCoords(
+							nbttagcompound.getInteger("x"),
+							nbttagcompound.getInteger("y"),
+							nbttagcompound.getInteger("z"),
+							nbttagcompound.getInteger("dim")
+			);
 		}
 	}
 
 	@Override
 	public void writeCustomNBT(NBTTagCompound nbt) {
 		if(controlPanel != null) {
-			NBTTagCompound nbttagcompound = new NBTTagCompound();
+			final NBTTagCompound nbttagcompound = new NBTTagCompound();
 			nbttagcompound.setInteger("x", controlPanel.posX);
 			nbttagcompound.setInteger("y", controlPanel.posY);
 			nbttagcompound.setInteger("z", controlPanel.posZ);

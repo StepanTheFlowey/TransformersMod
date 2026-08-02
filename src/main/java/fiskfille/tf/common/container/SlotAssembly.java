@@ -97,14 +97,14 @@ public class SlotAssembly extends Slot {
 		onCrafting(itemstack);
 
 		for(int i = 0; i < craftMatrix.getSizeInventory(); ++i) {
-			ItemStack itemstack1 = craftMatrix.getStackInSlot(i);
+			final ItemStack itemstack1 = craftMatrix.getStackInSlot(i);
 
 			if(itemstack1 != null) {
-				Map<Integer, Integer> map = AssemblyTableCraftingManager.getInstance().getDecrMap(itemstack);
+				final Map<Integer, Integer> map = AssemblyTableCraftingManager.getInstance().getDecrMap(itemstack);
 				craftMatrix.decrStackSize(i, map.get(i) == null ? 0 : map.get(i));
 
 				if(itemstack1.getItem().hasContainerItem(itemstack1)) {
-					ItemStack itemstack2 = itemstack1.getItem().getContainerItem(itemstack1);
+					final ItemStack itemstack2 = itemstack1.getItem().getContainerItem(itemstack1);
 
 					if(itemstack2 != null && itemstack2.isItemStackDamageable() && itemstack2.getItemDamage() > itemstack2.getMaxDamage()) {
 						MinecraftForge.EVENT_BUS.post(new PlayerDestroyItemEvent(thePlayer, itemstack2));

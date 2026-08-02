@@ -10,50 +10,43 @@ public class ModelBassCharge extends ModelBase {
 		textureWidth = 16;
 		textureHeight = 8;
 
-		final ModelRenderer shape5 = new ModelRenderer(this, 0, 0);
-		shape5.setRotationPoint(0F, 0F, 0F);
-		shape5.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		setRotateAngle(shape5, 0F, 0F, 3.141592653589793F);
+		final ModelRenderer shape8 = new ModelRenderer(this);
+		shape8.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+		shape8.rotateAngleZ = (float) (Math.PI * 1.75D);
 
-		final ModelRenderer shape4 = new ModelRenderer(this, 0, 0);
-		shape4.setRotationPoint(0F, 0F, 0F);
-		shape4.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		setRotateAngle(shape4, 0F, 0F, 2.356194490192345F);
+		final ModelRenderer shape7 = new ModelRenderer(this);
+		shape7.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+		shape7.rotateAngleZ = (float) (Math.PI * 1.5D);
 
-		final ModelRenderer shape2 = new ModelRenderer(this, 0, 0);
-		shape2.setRotationPoint(0F, 0F, 0F);
-		shape2.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		setRotateAngle(shape2, 0F, 0F, 0.7853981633974483F);
+		final ModelRenderer shape6 = new ModelRenderer(this);
+		shape6.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+		shape6.rotateAngleZ = (float) (Math.PI * 1.25D);
 
-		final ModelRenderer shape7 = new ModelRenderer(this, 0, 0);
-		shape7.setRotationPoint(0F, 0F, 0F);
-		shape7.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		setRotateAngle(shape7, 0F, 0F, 4.71238898038469F);
+		final ModelRenderer shape5 = new ModelRenderer(this);
+		shape5.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+		shape5.rotateAngleZ = (float) Math.PI;
 
-		final ModelRenderer shape6 = new ModelRenderer(this, 0, 0);
-		shape6.setRotationPoint(0F, 0F, 0F);
-		shape6.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		setRotateAngle(shape6, 0F, 0F, 3.9269908169872414F);
+		final ModelRenderer shape4 = new ModelRenderer(this);
+		shape4.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+		shape4.rotateAngleZ = (float) (Math.PI * 0.75D);
 
-		final ModelRenderer shape3 = new ModelRenderer(this, 0, 0);
-		shape3.setRotationPoint(0F, 0F, 0F);
-		shape3.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		setRotateAngle(shape3, 0F, 0F, 1.5707963267948966F);
+		final ModelRenderer shape3 = new ModelRenderer(this);
+		shape3.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+		shape3.rotateAngleZ = (float) (Math.PI * 0.5D);
 
-		final ModelRenderer shape8 = new ModelRenderer(this, 0, 0);
-		shape8.setRotationPoint(0F, 0F, 0F);
-		shape8.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		setRotateAngle(shape8, 0F, 0F, 5.497787143782138F);
+		final ModelRenderer shape2 = new ModelRenderer(this);
+		shape2.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+		shape2.rotateAngleZ = (float) (Math.PI * 0.25D);
 
-		shape1 = new ModelRenderer(this, 0, 0);
-		shape1.setRotationPoint(0F, 0F, 0F);
-		shape1.addBox(-2.5F, -6F, -0.5F, 5, 1, 1, 0F);
-		shape1.addChild(shape5);
-		shape1.addChild(shape4);
+		shape1 = new ModelRenderer(this);
+		shape1.addBox(-2.5F, -6, -0.5F, 5, 1, 1, 0);
+
 		shape1.addChild(shape2);
-		shape1.addChild(shape7);
-		shape1.addChild(shape6);
 		shape1.addChild(shape3);
+		shape1.addChild(shape4);
+		shape1.addChild(shape5);
+		shape1.addChild(shape6);
+		shape1.addChild(shape7);
 		shape1.addChild(shape8);
 	}
 

@@ -12,7 +12,7 @@ public class ModelPurgesKatana extends ModelBase {
 
 		base = new ModelRenderer(this, 20, 93);
 		base.addBox(-1.5F, 0F, -0.5F, 3, 1, 1, 0F);
-		setRotateAngle(base, 0F, 1.5707963267948966F, 0F);
+		base.rotateAngleY = 1.5707963267948966F;
 
 		final ModelRenderer blade18 = new ModelRenderer(this, 5, 23);
 		blade18.setRotationPoint(0F, 4.5F, 0F);

@@ -47,7 +47,7 @@ public class EntityLaser extends EntityThrowable {
 
 	@Override
 	protected float func_70182_d() {
-		return 4F;
+		return 4;
 	}
 
 	@Override

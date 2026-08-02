@@ -54,10 +54,10 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 		if(getBlockMetadata() < 4) {
 			if(!worldObj.isRemote) {
 				if(chunkTicket == null) {
-					Ticket ticket = TFChunkManager.getTicketForChunk(ForcedChunk.fromTile(this));
+					final Ticket ticket = TFChunkManager.getTicketForChunk(ForcedChunk.fromTile(this));
 
 					if(ticket != null) {
-						SubTicket subTicket = SubTicket.fromTile(this);
+						final SubTicket subTicket = SubTicket.fromTile(this);
 						forceChunks(subTicket.assign(ticket));
 					}
 				}
@@ -65,11 +65,11 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 				data.serverTickPre();
 
 				if(getEnergy() > 0 && canActivate()) {
-					List<ReceiverEntry> receiversToPower = TFEnergyHelper.getReceiversToPower(this);
-					float f = Math.min(getEnergy(), getTransmissionRate()) / receiversToPower.size();
+					final List<ReceiverEntry> receiversToPower = TFEnergyHelper.getReceiversToPower(this);
+					final float f = Math.min(getEnergy(), getTransmissionRate()) / receiversToPower.size();
 
 					for(ReceiverEntry entry : receiversToPower) {
-						IEnergyReceiver receiver = entry.getReceiver();
+						final IEnergyReceiver receiver = entry.getReceiver();
 
 						if(receiver.canReceiveEnergy(this)) {
 							TFEnergyHelper.transferEnergy(receiver, this, f, false);
@@ -77,31 +77,31 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 					}
 				}
 
-				ItemStack fluidContainer = getStackInSlot(0);
-				FluidStack fluidStack = data.tank.getFluid();
+				final ItemStack fluidContainer = getStackInSlot(0);
+				final FluidStack fluidStack = data.tank.getFluid();
 
 				if(fluidStack != null && fluidStack.amount > 0) {
-					Map<String, Float> ratios = FluidEnergon.getRatios(fluidStack);
-					int max = Math.min(10, fluidStack.amount);
+					final Map<String, Float> ratios = FluidEnergon.getRatios(fluidStack);
+					final int max = Math.min(10, fluidStack.amount);
 
 					for(Map.Entry<String, Float> e : ratios.entrySet()) {
-						Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
+						final Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
 
 						if(energon != null) {
-							float factor = energon.getEnergyValue();
-							float receivedEnergy = receiveEnergy(e.getValue() * factor * max, false);
+							final float factor = energon.getEnergyValue();
+							final float receivedEnergy = receiveEnergy(e.getValue() * factor * max, false);
 							drain(ForgeDirection.UNKNOWN, Math.round(receivedEnergy / factor), true);
 						}
 					}
 				}
 
 				if(fluidContainer != null && fluidContainer.getItem() instanceof IFluidContainerItem) {
-					IFluidContainerItem container = (IFluidContainerItem) fluidContainer.getItem();
-					FluidStack fluid = container.getFluid(fluidContainer);
+					final IFluidContainerItem container = (IFluidContainerItem) fluidContainer.getItem();
+					final FluidStack fluid = container.getFluid(fluidContainer);
 
 					if(fluid != null && fluid.amount > 0 && fluid.getFluid() == TFFluids.energon) {
-						int amount = Math.min(100, Math.min(ItemFuelCanister.getFluidAmount(fluidContainer), data.getCapacity() - data.getFluidAmount()));
-						int success = fill(ForgeDirection.UNKNOWN, container.drain(fluidContainer, amount, false), true);
+						final int amount = Math.min(100, Math.min(ItemFuelCanister.getFluidAmount(fluidContainer), data.getCapacity() - data.getFluidAmount()));
+						final int success = fill(ForgeDirection.UNKNOWN, container.drain(fluidContainer, amount, false), true);
 
 						if(success > 0) {
 							container.drain(fluidContainer, success, true);
@@ -112,8 +112,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 				data.serverTick();
 			}
 
-			TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
-
+			final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
 			if(prevData instanceof TileDataTransmitter) {
 				data = new TileDataTransmitter((TileDataTransmitter) prevData);
 			}
@@ -135,10 +134,10 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(0.35D, 0, 0.35D).addCoord(0, 2, 0);
 
 		if(getBlockMetadata() < 4) {
-			Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
+			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
 			for(ReceiverEntry entry : receivers) {
-				TileEntity tile = entry.getTile();
+				final TileEntity tile = entry.getTile();
 
 				if(tile != null) {
 					bounds = bounds.func_111270_a(tile.getRenderBoundingBox());
@@ -155,7 +154,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 
 		if(nbt.getBoolean("Base")) {
 			if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-				NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+				final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 				data.transmissionHandler.readFromNBT(config);
 				data.storage.readFromNBT(config);
 				data.tank.readFromNBT(config);
@@ -167,12 +166,11 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	public void writeCustomNBT(NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 
-		boolean base = getBlockMetadata() < 4;
+		final boolean base = getBlockMetadata() < 4;
 		nbt.setBoolean("Base", base);
-
 		if(base) {
 			if(data.getEnergy() > 0 || data.getFluidAmount() > 0 || !data.transmissionHandler.getReceivers().isEmpty()) {
-				NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+				final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 				data.transmissionHandler.writeToNBT(config);
 				data.storage.writeToNBT(config);
 				data.tank.writeToNBT(config);
@@ -187,12 +185,12 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public float getTransmissionRate() {
+	public int getTransmissionRate() {
 		return 350;
 	}
 
 	@Override
-	public float getRange() {
+	public int getRange() {
 		return 20;
 	}
 
@@ -234,16 +232,16 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		FluidStack stack = data.tank.getFluid();
+		final FluidStack stack = data.tank.getFluid();
 
 		if(stack == null || stack.amount <= 0 || FluidStack.areFluidStackTagsEqual(stack, resource)) {
 			return data.tank.fill(resource, doFill);
 		}
 		else if(stack.getFluid() == TFFluids.energon) {
-			NBTTagCompound prevNBT = resource.tag;
+			final NBTTagCompound prevNBT = resource.tag;
 
 			resource.tag = stack.tag;
-			int amount = data.tank.fill(resource, doFill);
+			final int amount = data.tank.fill(resource, doFill);
 			resource.tag = prevNBT;
 
 			FluidEnergon.merge(stack, resource, amount);

@@ -20,6 +20,14 @@ import org.lwjgl.opengl.GL11;
 import static fiskfille.tf.common.data.TFPredicates.*;
 
 public class ModelCloudtrap extends ModelTransformerBase {
+	public final ModelRendererTF back1;
+	public final ModelRendererTF feetbaseL;
+	public final ModelRendererTF feetbaseR;
+	public final ModelRendererTF head;
+	public final ModelRendererTF lowerArmR;
+	public final ModelRendererTF upperArmR;
+	public final ModelRendererTF upperLegL;
+	public final ModelRendererTF upperLegR;
 	private final ModelRendererTF chestcockpitbase;
 	private final ModelRendererTF cockpit1;
 	private final ModelRendererTF cockpit2;
@@ -109,14 +117,6 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	private final ModelRendererTF wingstrutR1;
 	private final ModelRendererTF wingstrutR2;
 	private final ModelRendererTF wingstrutR3;
-	public final ModelRendererTF back1;
-	public final ModelRendererTF feetbaseL;
-	public final ModelRendererTF feetbaseR;
-	public final ModelRendererTF head;
-	public final ModelRendererTF lowerArmR;
-	public final ModelRendererTF upperArmR;
-	public final ModelRendererTF upperLegL;
-	public final ModelRendererTF upperLegR;
 
 	public ModelCloudtrap() {
 		super(1, 0.8F, new AnimationModifier(Type.DEGREE, isSneaking(), 1.5F), new AnimationModifier(Type.SPEED, isSneaking(), 1.3F), new AnimationModifier(Type.DEGREE, and(isSneaking(), isFlying()), 0.4F), new AnimationModifier(Type.SPEED, and(isSneaking(), isFlying()), 0.6923076923076923F));
@@ -351,94 +351,118 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		buttflapR.setRotationPoint(-1, 0.2F, 1);
 		buttflapR.addBox(-1, 0, 0, 3, 3, 1, 0);
 		setRotateAngle(buttflapR, 0.13962634015954636F, 0.08726646259971647F, -0.10471975511965977F);
+
 		ModelRendererTF head5 = new ModelRendererTF(this, 14, 26);
 		head5.setRotationPoint(0, 0, -1);
 		head5.addBox(-1.9F, -0.8F, -1, 2, 1, 3, 0);
 		setRotateAngle(head5, 0.24434609527920614F, 0.33161255787892263F, 0);
+
 		wingL1 = new ModelRendererTF(this, 35, 22);
 		wingL1.mirror = true;
 		wingL1.setRotationPoint(0, -1.2F, -1.1F);
 		wingL1.addBox(-0.3F, 0, 0, 1, 4, 3, 0);
 		setRotateAngle(wingL1, 0.9773843811168246F, -0.0017453292519943296F, 0);
+
 		upperlegL3 = new ModelRendererTF(this, 8, 100);
 		upperlegL3.setRotationPoint(0.3F, 1.6F, 0);
 		upperlegL3.addBox(-1, 0, -1, 1, 4, 2, 0);
+
 		lowerlegR5 = new ModelRendererTF(this, 18, 83);
 		lowerlegR5.setRotationPoint(-2, 5, 0);
 		lowerlegR5.addBox(-1, 0, 0, 1, 2, 2, 0);
+
 		wingstrutL2 = new ModelRendererTF(this, 40, 22);
 		wingstrutL2.setRotationPoint(0.1F, -0.5F, 2);
 		wingstrutL2.addBox(-0.5F, 0, -0.5F, 1, 2, 1, 0);
 		setRotateAngle(wingstrutL2, 0.05235987755982988F, 0.017453292519943295F, -0.017453292519943295F);
+
 		wingL4 = new ModelRendererTF(this, 43, 23);
 		wingL4.setRotationPoint(0, 2, 0);
 		wingL4.addBox(-0.4F, -0.3F, -1, 1, 6, 2, 0);
 		setRotateAngle(wingL4, -0.3665191429188092F, -0.08726646259971647F, 0.15707963267948966F);
+
 		cockpit4 = new ModelRendererTF(this, 14, 47);
 		cockpit4.setRotationPoint(0, 1, -2);
 		cockpit4.addBox(0, 0, -3, 1, 1, 5, 0);
 		setRotateAngle(cockpit4, 0.2792526803190927F, -0.17453292519943295F, 0.15707963267948966F);
+
 		lowerarmR2 = new ModelRendererTF(this, 35, 35);
 		lowerarmR2.mirror = true;
 		lowerarmR2.setRotationPoint(-1, 4, 1.2F);
 		lowerarmR2.addBox(0, -4, -1, 1, 4, 1, 0);
 		setRotateAngle(lowerarmR2, -0.08726646259971647F, 0, -0.10471975511965977F);
+
 		fistLbase = new ModelRendererTF(this, 39, 37);
 		fistLbase.setRotationPoint(0, 4.1F, 0.3F);
 		fistLbase.addBox(-1.5F, -0.2F, -1, 3, 1, 2, 0);
 		setRotateAngle(fistLbase, 0.08726646259971647F, -1.3962634015954636F, 0);
+
 		ModelRendererTF head8 = new ModelRendererTF(this, 14, 30);
 		head8.setRotationPoint(0, -2, 2.7F);
 		head8.addBox(-2, -0.3F, -1.4F, 4, 2, 1, 0);
 		setRotateAngle(head8, -0.33161255787892263F, 0, 0);
+
 		ModelRendererTF engineR7 = new ModelRendererTF(this, 4, 73);
 		engineR7.setRotationPoint(0, -1.2F, 0.5F);
 		engineR7.addBox(-1.5F, 0, -1.5F, 3, 1, 3, 0);
+
 		back1 = new ModelRendererTF(this, 33, 49);
 		back1.setRotationPoint(0, -6.9F, 1);
 		back1.addBox(-2, -2, -0.1F, 4, 5, 2, 0);
 		setRotateAngle(back1, -0.22514747350726852F, 0, 0);
+
 		lowerarmR1 = new ModelRendererTF(this, 43, 31);
 		lowerarmR1.addBox(-0.9F, -1.1F, 0.5F, 2, 2, 1, 0);
 		setRotateAngle(lowerarmR1, -0.08726646259971647F, -0.08726646259971647F, -0.7853981633974483F);
+
 		ModelRendererTF feetR6 = new ModelRendererTF(this, 0, 98);
 		feetR6.setRotationPoint(-1, 1.6F, -3.3F);
 		feetR6.addBox(0, 0, 0, 2, 1, 3, 0);
 		setRotateAngle(feetR6, 0.47123889803846897F, 0, 0);
+
 		torsoConnector = new ModelRendererTF(this, 0, 25);
 		torsoConnector.addBox(-1, -6, -1, 2, 6, 2, 0);
+
 		lowerlegL1 = new ModelRendererTF(this, 16, 73);
 		lowerlegL1.mirror = true;
 		lowerlegL1.setRotationPoint(-1, 0, -2);
 		lowerlegL1.addBox(0, 0, 0, 3, 5, 2, 0);
 		setRotateAngle(lowerlegL1, -0.06981317007977318F, -0.3839724354387525F, 0);
+
 		engineR2 = new ModelRendererTF(this, 10, 77);
 		engineR2.setRotationPoint(0, 1, 3);
 		engineR2.addBox(-1, 0, -1, 2, 2, 1, 0);
 		setRotateAngle(engineR2, -0.19198621771937624F, 0, 0);
+
 		fistRbase = new ModelRendererTF(this, 35, 42);
 		fistRbase.setRotationPoint(0, 4, 0.3F);
 		fistRbase.addBox(-0.8F, -0.2F, -1, 1, 2, 2, 0);
 		setRotateAngle(fistRbase, -0.05235987755982988F, 0.017453292519943295F, -0.12217304763960307F);
+
 		upperlegR2 = new ModelRendererTF(this, 8, 100);
 		upperlegR2.mirror = true;
 		upperlegR2.setRotationPoint(-0.3F, 1.6F, 0);
 		upperlegR2.addBox(0, 0, -1, 1, 4, 2, 0);
+
 		feetL1 = new ModelRendererTF(this, 3, 92);
 		feetL1.setRotationPoint(0, 1.5F, 0);
 		feetL1.addBox(-1.5F, 0, -3.4F, 3, 1, 5, 0);
+
 		upperLegR = new ModelRendererTF(this, 0, 73);
 		upperLegR.setRotationPoint(-1.5F, 1, 0);
 		upperLegR.addBox(-1, -0.5F, -0.5F, 1, 7, 1, 0);
 		setRotateAngle(upperLegR, -0.10471975511965977F, 0, 0.03490658503988659F);
+
 		ModelRendererTF head7 = new ModelRendererTF(this, 21, 26);
 		head7.setRotationPoint(0, 0.05F, -1.75F);
 		head7.addBox(-1, -1.65F, -0.7F, 2, 2, 1, 0);
 		setRotateAngle(head7, -0.9948376736367678F, 0, 0);
+
 		final ModelRendererTF finger1_2 = new ModelRendererTF(this, 46, 35);
 		finger1_2.setRotationPoint(0, 1.7F, -0.2F);
 		finger1_2.addBox(0, 0, 0, 1, 1, 1, 0);
 		setRotateAngle(finger1_2, 0.8377580409572781F, 0, 0);
+
 		wingR2 = new ModelRendererTF(this, 43, 23);
 		wingR2.mirror = true;
 		wingR2.setRotationPoint(0, 2, 0);
@@ -1046,13 +1070,13 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		applyDefaultHittingAnimation(upperArmR, upperArmL, head, torsoConnector, lowerArmR, lowerArmL);
 
 		if(isRiding) {
-			upperArmR.rotateAngleX -= PI / 5F;
-			upperArmL.rotateAngleX -= PI / 5F;
-			upperLegR.rotateAngleX -= PI * 2F / 5F;
-			upperLegL.rotateAngleX -= PI * 2F / 5F;
+			upperArmR.rotateAngleX -= (float) Math.PI / 5F;
+			upperArmL.rotateAngleX -= (float) Math.PI / 5F;
+			upperLegR.rotateAngleX -= (float) Math.PI * 2F / 5F;
+			upperLegL.rotateAngleX -= (float) Math.PI * 2F / 5F;
 
-			upperLegR.rotateAngleY += PI / 10F;
-			upperLegL.rotateAngleY -= PI / 10F;
+			upperLegR.rotateAngleY += (float) Math.PI / 10F;
+			upperLegL.rotateAngleY -= (float) Math.PI / 10F;
 
 			if(!wearingChest) {
 				upperLegL.rotationPointY += 3;
@@ -1063,8 +1087,8 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		if(aimedBow) {
 			upperArmR.rotateAngleY += -0.1F + head.rotateAngleY;
 			upperArmL.rotateAngleY += 0.1F + head.rotateAngleY + 0.4F;
-			upperArmR.rotateAngleX += -(PI / 2F) + head.rotateAngleX;
-			upperArmL.rotateAngleX += -(PI / 2F) + head.rotateAngleX;
+			upperArmR.rotateAngleX += -((float) Math.PI / 2F) + head.rotateAngleX;
+			upperArmL.rotateAngleX += -((float) Math.PI / 2F) + head.rotateAngleX;
 			upperArmR.rotateAngleZ += MathHelper.cos(ticks * 0.09F) * 0.05F + 0.05F;
 			upperArmL.rotateAngleZ -= MathHelper.cos(ticks * 0.09F) * 0.05F + 0.05F;
 			upperArmR.rotateAngleX += MathHelper.sin(ticks * 0.067F) * 0.05F;
@@ -1076,7 +1100,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 
 		final ItemStack heldItem = player.getHeldItem();
 		if(heldItem != null && heldItem.getItem() == TFItems.cloudtrapsFlamethrower && TFHelper.isFullyTransformed(player) && player.isUsingItem()) {
-			setRotateAngle(upperArmR, bipedHead.rotateAngleX - PI / 2 + 0.2F, bipedHead.rotateAngleY, 0.1F);
+			setRotateAngle(upperArmR, bipedHead.rotateAngleX - (float) Math.PI / 2 + 0.2F, bipedHead.rotateAngleY, 0.1F);
 			setRotateAngle(lowerArmR, -0.2F, 0, 0);
 		}
 	}
@@ -1240,10 +1264,10 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	@Override
 	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + PI) * 1.4F * limbSwingAmount;
+		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 		upperLegR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		upperLegL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + PI) * 1.4F * limbSwingAmount;
+		upperLegL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 		if(isSneak) {
 			waist.rotateAngleX += 0.4F;

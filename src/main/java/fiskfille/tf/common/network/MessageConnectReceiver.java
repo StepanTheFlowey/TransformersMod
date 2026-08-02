@@ -17,9 +17,7 @@ public class MessageConnectReceiver implements IMessage {
 	private DimensionalCoords transmitterCoords;
 	private DimensionalCoords receiverCoords;
 
-	public MessageConnectReceiver() {
-
-	}
+	public MessageConnectReceiver() {}
 
 	public MessageConnectReceiver(DimensionalCoords coords, DimensionalCoords coords1) {
 		transmitterCoords = coords;

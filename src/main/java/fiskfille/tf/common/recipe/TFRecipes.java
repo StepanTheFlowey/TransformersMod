@@ -69,8 +69,7 @@ public class TFRecipes {
 		AssemblyTable.addRecipe(new ItemStack(TFItems.dataCore, 1, DataCore.range.index), new Dyes(), "     ", " F2F ", " EOE ", " F2F ", "     ", 'F', TFBlocks.groundBridgeFrame, '2', TFSubItems.improved_circuit, 'E', TFItems.energonDust, 'O', Items.ender_pearl);
 		AssemblyTable.addRecipe(new ItemStack(TFItems.groundBridgeRemote, 1), new Dyes(), " PPP ", " QRQ ", " 3W3 ", " III ", "     ", 'P', TFSubItems.lcd_panel, 'Q', Items.quartz, 'R', Items.redstone, '3', TFSubItems.advanced_circuit, 'W', TFSubItems.refined_alloy_wire, 'I', Items.iron_ingot);
 
-		String[] materials = {"ingotGold", "gemDiamond", "gemEmerald"};
-
+		final String[] materials = {"ingotGold", "gemDiamond", "gemEmerald"};
 		for(int i = 0; i < materials.length; ++i) {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFItems.powerCanister, 1, i + 1), "**", "##", "**", '*', materials[i], '#', new ItemStack(TFItems.powerCanister, 1, i)));
 		}
@@ -87,9 +86,7 @@ public class TFRecipes {
 	}
 
 	public static void save() {
-		List<IRecipe> recipes = (List<IRecipe>) CraftingManager.getInstance().getRecipeList();
-
-		for(IRecipe recipe : recipes) {
+		for(IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList()) {
 			if(!prevRecipes.contains(recipe)) {
 				tempRecipes.add(recipe);
 			}
@@ -103,8 +100,7 @@ public class TFRecipes {
 	}
 
 	public static void restore() {
-		HashMap<ItemStack, ItemStack> map = new HashMap<>();
-
+		final HashMap<ItemStack, ItemStack> map = new HashMap<>();
 		for(Map.Entry<ItemStack, ItemStack> e : ((Map<ItemStack, ItemStack>) FurnaceRecipes.smelting().getSmeltingList()).entrySet()) {
 			if(!tempFurnaceRecipes.contains(e.getKey())) {
 				map.put(e.getKey(), e.getValue());
@@ -216,7 +212,7 @@ public class TFRecipes {
 
 	private static void addDyeRecipes() {
 		for(int index = 16; index < Dyes.dyes.size(); ++index) {
-			int id = Dyes.dyes.get(index);
+			final int id = Dyes.dyes.get(index);
 			GameRegistry.addShapelessRecipe(Dyes.dye(TFBlocks.wool, id), Dyes.get(id, 1), Dyes.dye(Blocks.wool, WHITE));
 			GameRegistry.addRecipe(new ItemStack(TFBlocks.stainedHardenedClay, 8, id - 16), "###", "#X#", "###", '#', Blocks.hardened_clay, 'X', Dyes.get(id));
 			GameRegistry.addRecipe(new ItemStack(TFBlocks.stainedGlass, 8, id - 16), "###", "#X#", "###", '#', Blocks.glass, 'X', Dyes.get(id));
@@ -232,7 +228,7 @@ public class TFRecipes {
 		GameRegistry.addShapelessRecipe(Dyes.get(PALE_BROWN, 3), Dyes.get(BROWN), Dyes.get(WHITE), Dyes.get(GRAY));
 
 		for(int index = 16; index < Dyes.dyes.size(); ++index) {
-			int id = Dyes.dyes.get(index);
+			final int id = Dyes.dyes.get(index);
 			GameRegistry.addRecipe(new ItemStack(TFBlocks.carpet, 3, id - 16), "##", '#', Dyes.dye(TFBlocks.wool, id));
 		}
 	}
@@ -271,20 +267,19 @@ public class TFRecipes {
 
 	private static void addMaterialCompression(Object... args) {
 		for(int i = 0; i < args.length; ++i) {
-			Object nugget = null;
-			Object ingot = args[i];
-			Object block = null;
 
+			Object nugget = null;
 			if(i > 0) {
 				nugget = args[i - 1];
 			}
 
+			Object block = null;
 			if(i + 1 < args.length) {
 				block = args[i + 1];
 			}
 
 			ItemStack result;
-
+			Object ingot = args[i];
 			if(ingot instanceof String) {
 				if(!OreDictionary.doesOreNameExist((String) ingot)) {
 					continue;
@@ -300,13 +295,13 @@ public class TFRecipes {
 				result = new ItemStack(ingot instanceof Item ? (Item) ingot : Item.getItemFromBlock((Block) ingot));
 			}
 
-			if(nugget != null) // 9 Nuggets -> Ingot
-			{
+			// 9 Nuggets -> Ingot
+			if(nugget != null) {
 				GameRegistry.addRecipe(new ShapedOreRecipe(result, "###", "###", "###", '#', nugget));
 			}
 
-			if(block != null) // Block -> 9 Ingots
-			{
+			// Block -> 9 Ingots
+			if(block != null) {
 				result = result.copy();
 				result.stackSize = 9;
 

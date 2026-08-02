@@ -202,517 +202,643 @@ public class ModelPurge extends ModelTransformerBase {
 
 	public ModelPurge() {
 		super(1, 0.8F, new AnimationModifier(Type.DEGREE, isBacking(), 0.5F));
+		textureWidth = 	textureHeight = 128;
 
-		textureWidth = 128;
-		textureHeight = 128;
 		upperarmR2 = new ModelRendererTF(this, 27, 119);
 		upperarmR2.mirror = true;
 		upperarmR2.setRotationPoint(0, -1, -0.5F);
 		upperarmR2.addBox(-1, 0, 0, 1, 5, 1, 0);
+
 		wheelR2 = new ModelRendererTF(this, 11, 96);
 		wheelR2.mirror = true;
 		wheelR2.setRotationPoint(0.5F, -1.5F, 0);
 		wheelR2.addBox(-1, -1, -1.5F, 2, 2, 2, 0);
+
 		lowerArmL = new ModelRendererTF(this, 9, 114);
 		lowerArmL.setRotationPoint(-0.1F, 4.6F, -0.2F);
 		lowerArmL.addBox(-0.9F, -1, -1, 2, 5, 3, 0);
 		setRotateAngle(lowerArmL, -0.2617993877991494F, 0.08726646259971647F, 0.08726646259971647F);
+
 		lowerlegL1 = new ModelRendererTF(this, 87, 60);
 		lowerlegL1.mirror = true;
 		lowerlegL1.setRotationPoint(0, 4.6F, -0.8F);
 		lowerlegL1.addBox(-1, -0.3F, 0, 2, 6, 3, 0);
 		setRotateAngle(lowerlegL1, 0.17453292519943295F, 0, 0.08726646259971647F);
+
 		feetbaseL1 = new ModelRendererTF(this, 89, 70);
 		feetbaseL1.mirror = true;
 		feetbaseL1.setRotationPoint(0.2F, 6, 1);
 		feetbaseL1.addBox(-1, -1, -1.5F, 2, 2, 3, 0);
 		setRotateAngle(feetbaseL1, -0.08726646259971647F, -0.08726646259971647F, 0);
+
 		trackL4 = new ModelRendererTF(this, 8, 109);
 		trackL4.setRotationPoint(-2.25F, -3.25F, 0);
 		trackL4.addBox(0, 0, 0, 3, 1, 3, 0);
 		setRotateAngle(trackL4, 0, 0.017453292519943295F, 0);
+
 		skirtL1 = new ModelRendererTF(this, 80, 50);
 		skirtL1.setRotationPoint(1.5F, 0.2F, -0.5F);
 		skirtL1.addBox(0, 0, 0, 1, 6, 3, 0);
 		setRotateAngle(skirtL1, 0, -0.05235987755982988F, -0.10471975511965977F);
+
 		skirtL2 = new ModelRendererTF(this, 90, 55);
 		skirtL2.setRotationPoint(0, 3, 3);
 		skirtL2.addBox(0, 0, 0, 1, 3, 1, 0);
+
 		trackR7 = new ModelRendererTF(this, 9, 100);
 		trackR7.setRotationPoint(-1, 0, 0);
 		trackR7.addBox(0, -3, 0, 1, 3, 3, 0);
 		setRotateAngle(trackR7, 0, 0, 0.5235987755982988F);
+
 		turretbase = new ModelRendererTF(this, 16, 77);
 		turretbase.setRotationPoint(0, 1, 1);
 		turretbase.addBox(-3, -1, 0, 6, 3, 3, 0);
+
 		feetR2 = new ModelRendererTF(this, 87, 76);
 		feetR2.setRotationPoint(-1.5F, 0, -2.5F);
 		feetR2.addBox(0, 0, 3, 3, 2, 2, 0);
+
 		crotch3 = new ModelRendererTF(this, 71, 78);
 		crotch3.addBox(0, -2, 0, 2, 2, 1, 0);
 		setRotateAngle(crotch3, -0.17453292519943295F, 0, 0);
+
 		shoulderL7 = new ModelRendererTF(this, 24, 64);
 		shoulderL7.setRotationPoint(0.5F, 0, 0);
 		shoulderL7.addBox(0, 0, -1, 2, 1, 1, 0);
 		setRotateAngle(shoulderL7, 0.3490658503988659F, 0, 0);
+
 		barrel1 = new ModelRendererTF(this, 40, 87);
 		barrel1.setRotationPoint(0, -3.4F, 0);
 		barrel1.addBox(-0.5F, 0, -0.5F, 1, 8, 1, 0);
+
 		shoulderR4 = new ModelRendererTF(this, 34, 53);
 		shoulderR4.mirror = true;
 		shoulderR4.setRotationPoint(-2, 1, 0);
 		shoulderR4.addBox(-1, 0, 0, 1, 4, 5, 0);
+
 		turret10 = new ModelRendererTF(this, 27, 104);
 		turret10.setRotationPoint(-2, 0, 0);
 		turret10.addBox(-1, 0, 0, 1, 2, 2, 0);
 		setRotateAngle(turret10, 0, 0.017453292519943295F, -0.2617993877991494F);
+
 		headbase = new ModelRendererTF(this, 3, 52);
 		headbase.setRotationPoint(0, -0.5F, 0);
 		headbase.addBox(-1.5F, -3, -1.5F, 3, 3, 3, 0);
+
 		lowerlegR7 = new ModelRendererTF(this, 94, 85);
 		lowerlegR7.setRotationPoint(0, 2, -0.4F);
 		lowerlegR7.addBox(-2, 0, -2, 2, 2, 2, 0);
 		setRotateAngle(lowerlegR7, -0.17453292519943295F, -0.017453292519943295F, 0);
+
 		headchin1 = new ModelRendererTF(this, 10, 77);
 		headchin1.setRotationPoint(-1, -0.9F, -1.6F);
 		headchin1.addBox(0, 0, 0, 2, 1, 1, 0);
 		setRotateAngle(headchin1, -0.17453292519943295F, 0, 0);
+
 		boxR2 = new ModelRendererTF(this, 2, 82);
 		boxR2.setRotationPoint(0, -0.9F, 0.2F);
 		boxR2.addBox(-3, 0, 0, 3, 1, 2, 0);
 		setRotateAngle(boxR2, -0.32637657012293964F, 0, 0);
+
 		trackL6 = new ModelRendererTF(this, 9, 100);
 		trackL6.mirror = true;
 		trackL6.setRotationPoint(1, 0, 0);
 		trackL6.addBox(-1, -3, 0, 1, 3, 3, 0);
 		setRotateAngle(trackL6, 0, 0, -0.5235987755982988F);
+
 		torsobaseL = new ModelRendererTF(this, 52, 58);
 		torsobaseL.setRotationPoint(2.5F, -1, 0);
 		torsobaseL.addBox(0, -3, -1.5F, 1, 3, 3, 0);
+
 		trackconnectorR5 = new ModelRendererTF(this, 20, 96);
 		trackconnectorR5.mirror = true;
 		trackconnectorR5.setRotationPoint(1, -3, 0);
 		trackconnectorR5.addBox(-1, -2, 0, 1, 2, 1, 0);
 		setRotateAngle(trackconnectorR5, -0.017453292519943295F, 0, -0.5235987755982988F);
+
 		chestplate1 = new ModelRendererTF(this, 54, 65);
 		chestplate1.setRotationPoint(-1, -2.3F, -3);
 		chestplate1.addBox(0, 0, 0, 2, 2, 2, 0);
 		setRotateAngle(chestplate1, 0.3141592653589793F, 0, 0);
+
 		lowerlegR11 = new ModelRendererTF(this, 69, 82);
 		lowerlegR11.setRotationPoint(-0.5F, 2.5F, -0.5F);
 		lowerlegR11.addBox(-2, 0, 0, 2, 3, 1, 0);
+
 		feetL3 = new ModelRendererTF(this, 90, 81);
 		feetL3.mirror = true;
 		feetL3.setRotationPoint(0.5F, 1.1F, -1.4F);
 		feetL3.addBox(0, 0, 0, 2, 1, 3, 0);
 		setRotateAngle(feetL3, 0.41887902047863906F, 0, 0.017453292519943295F);
+
 		skirtR2 = new ModelRendererTF(this, 90, 55);
 		skirtR2.mirror = true;
 		skirtR2.setRotationPoint(0, 3, 3);
 		skirtR2.addBox(-1, 0, 0, 1, 3, 1, 0);
+
 		torsobaseR = new ModelRendererTF(this, 52, 58);
 		torsobaseR.mirror = true;
 		torsobaseR.setRotationPoint(-2.5F, -1, 0);
 		torsobaseR.addBox(-1, -3, -1.5F, 1, 3, 3, 0);
+
 		feetbaseR1 = new ModelRendererTF(this, 89, 70);
 		feetbaseR1.setRotationPoint(-0.2F, 6, 1);
 		feetbaseR1.addBox(-1, -1, -1.5F, 2, 2, 3, 0);
 		setRotateAngle(feetbaseR1, -0.08726646259971647F, 0.08726646259971647F, 0);
+
 		lowerlegL3 = new ModelRendererTF(this, 80, 88);
 		lowerlegL3.mirror = true;
 		lowerlegL3.setRotationPoint(2, 1, 1);
 		lowerlegL3.addBox(0, 0, 0, 1, 6, 3, 0);
 		setRotateAngle(lowerlegL3, -0.19198621771937624F, 0.017453292519943295F, 0);
+
 		upperLegR = new ModelRendererTF(this, 80, 68);
 		upperLegR.setRotationPoint(-2, 2, 0);
 		upperLegR.addBox(-1, -1.5F, -1, 2, 6, 2, 0);
 		setRotateAngle(upperLegR, -0.08726646259971647F, 0, 0.08726646259971647F);
+
 		lowerArmR = new ModelRendererTF(this, 9, 114);
 		lowerArmR.mirror = true;
 		lowerArmR.setRotationPoint(0.1F, 4.6F, -0.2F);
 		lowerArmR.addBox(-1.1F, -1, -1, 2, 5, 3, 0);
 		setRotateAngle(lowerArmR, -0.2617993877991494F, -0.08726646259971647F, -0.08726646259971647F);
+
 		shoulderR3 = new ModelRendererTF(this, 25, 63);
 		shoulderR3.mirror = true;
 		shoulderR3.setRotationPoint(-0.5F, -1.5F, -2);
 		shoulderR3.addBox(-3, 0, 0, 4, 1, 5, 0);
+
 		turret3 = new ModelRendererTF(this, 35, 77);
 		turret3.setRotationPoint(-2.3F, 2.5F, 0);
 		turret3.addBox(-2, -2, 0, 2, 2, 3, 0);
 		setRotateAngle(turret3, 0, 0, 1.1990411961201044F);
+
 		upperLegL = new ModelRendererTF(this, 80, 68);
 		upperLegL.mirror = true;
 		upperLegL.setRotationPoint(2, 2, 0);
 		upperLegL.addBox(-1, -1.5F, -1, 2, 6, 2, 0);
 		setRotateAngle(upperLegL, -0.08726646259971647F, 0, -0.08726646259971647F);
+
 		chestplateR2 = new ModelRendererTF(this, 71, 58);
 		chestplateR2.mirror = true;
 		chestplateR2.setRotationPoint(0, 0.5F, 0);
 		chestplateR2.addBox(-3, -2, 0, 3, 2, 1, 0);
 		setRotateAngle(chestplateR2, -0.4363323129985824F, -0.017453292519943295F, 0);
+
 		trackconnectorR4 = new ModelRendererTF(this, 24, 96);
 		trackconnectorR4.mirror = true;
 		trackconnectorR4.setRotationPoint(-1, -6, 0);
 		trackconnectorR4.addBox(0, -3, 0, 1, 3, 1, 0);
 		setRotateAngle(trackconnectorR4, 0, 0, 0.5235987755982988F);
+
 		lowerlegR5 = new ModelRendererTF(this, 94, 85);
 		lowerlegR5.setRotationPoint(1.8F, 0.6F, -1.8F);
 		lowerlegR5.addBox(-2, 0, 0, 2, 2, 2, 0);
 		setRotateAngle(lowerlegR5, 0.40142572795869574F, 0.03490658503988659F, 0);
+
 		lowerlegL2 = new ModelRendererTF(this, 71, 88);
 		lowerlegL2.mirror = true;
 		lowerlegL2.setRotationPoint(-1.2F, -1, -1);
 		lowerlegL2.addBox(0, 0, 0, 3, 6, 1, 0);
+
 		shoulderL5 = new ModelRendererTF(this, 39, 63);
 		shoulderL5.setRotationPoint(0.2F, 2.5F, 0.6F);
 		shoulderL5.addBox(0, 0, 0, 1, 1, 4, 0);
 		setRotateAngle(shoulderL5, -0.03490658503988659F, 0, 0);
+
 		trackL3 = new ModelRendererTF(this, 9, 100);
 		trackL3.setRotationPoint(-1, -3, 0);
 		trackL3.addBox(0, -3, 0, 1, 3, 3, 0);
 		setRotateAngle(trackL3, -0.03490658503988659F, -0.017453292519943295F, 0.5235987755982988F);
+
 		skirtR1 = new ModelRendererTF(this, 80, 50);
 		skirtR1.mirror = true;
 		skirtR1.setRotationPoint(-1.5F, 0.2F, -0.5F);
 		skirtR1.addBox(-1, 0, 0, 1, 6, 3, 0);
 		setRotateAngle(skirtR1, 0, 0.05235987755982988F, 0.10471975511965977F);
+
 		lowerlegL9 = new ModelRendererTF(this, 73, 84);
 		lowerlegL9.mirror = true;
 		lowerlegL9.setRotationPoint(0, -1, 0);
 		lowerlegL9.addBox(0, 0, 0, 1, 1, 3, 0);
 		setRotateAngle(lowerlegL9, -0.3490658503988659F, 0.017453292519943295F, 0);
+
 		upperArmL = new ModelRendererTF(this, 24, 111);
 		upperArmL.setRotationPoint(2, -1.5F, 0);
 		upperArmL.addBox(-1, -1, -1, 1, 5, 2, 0);
 		setRotateAngle(upperArmL, 0.08726646259971647F, 0, -0.17453292519943295F);
+
 		trackcnnectorL5 = new ModelRendererTF(this, 20, 96);
 		trackcnnectorL5.setRotationPoint(-1, -3, 0);
 		trackcnnectorL5.addBox(0, -2, 0, 1, 2, 1, 0);
 		setRotateAngle(trackcnnectorL5, -0.017453292519943295F, 0, 0.5235987755982988F);
+
 		turret11 = new ModelRendererTF(this, 33, 103);
 		turret11.setRotationPoint(-2.6F, -1.1F, 2.7F);
 		turret11.addBox(0, 0, 0, 2, 2, 1, 0);
+
 		fistL = new ModelRendererTF(this, 0, 115);
 		fistL.setRotationPoint(0.1F, 3.6F, 0.2F);
 		fistL.addBox(-1, 0, -1, 2, 2, 2, 0);
 		setRotateAngle(fistL, -0.08726646259971647F, 0, 0.20943951023931953F);
+
 		turret9 = new ModelRendererTF(this, 27, 104);
 		turret9.setRotationPoint(2, 0, 0);
 		turret9.addBox(0, 0, 0, 1, 2, 2, 0);
 		setRotateAngle(turret9, 0, -0.017453292519943295F, 0.2617993877991494F);
+
 		shoulderL1 = new ModelRendererTF(this, 25, 50);
 		shoulderL1.setRotationPoint(1, -2.5F, 0.5F);
 		shoulderL1.addBox(0, -0.5F, -2.5F, 1, 3, 4, 0);
+
 		trackR4 = new ModelRendererTF(this, 8, 109);
 		trackR4.mirror = true;
 		trackR4.setRotationPoint(2.25F, -3.25F, 0);
 		trackR4.addBox(-3, 0, 0, 3, 1, 3, 0);
 		setRotateAngle(trackR4, 0, -0.017453292519943295F, 0);
+
 		upperlegR2 = new ModelRendererTF(this, 82, 62);
 		upperlegR2.setRotationPoint(-0.5F, 0, 0.9F);
 		upperlegR2.addBox(0, 0, 0, 1, 4, 1, 0);
+
 		shoulderL4 = new ModelRendererTF(this, 34, 53);
 		shoulderL4.setRotationPoint(2, 1, 0);
 		shoulderL4.addBox(0, 0, 0, 1, 4, 5, 0);
+
 		lowerarmL3 = new ModelRendererTF(this, 6, 114);
 		lowerarmL3.setRotationPoint(-0.9F, -1, 2);
 		lowerarmL3.addBox(0, -2, -1, 2, 2, 1, 0);
 		setRotateAngle(lowerarmL3, 0.17453292519943295F, 0, 0);
+
 		wheelR5 = new ModelRendererTF(this, 11, 96);
 		wheelR5.mirror = true;
 		wheelR5.setRotationPoint(-0.5F, -4.5F, 0);
 		wheelR5.addBox(-1, -1, -1.5F, 2, 2, 2, 0);
+
 		turret8 = new ModelRendererTF(this, 27, 99);
 		turret8.setRotationPoint(0, -1.3F, 0.9F);
 		turret8.addBox(-2, 0, 0, 4, 2, 2, 0);
+
 		lowerlegL8 = new ModelRendererTF(this, 62, 89);
 		lowerlegL8.mirror = true;
 		lowerlegL8.setRotationPoint(-0.2F, 2.1F, 1);
 		lowerlegL8.addBox(0, 0, 0, 1, 4, 3, 0);
+
 		boxR1 = new ModelRendererTF(this, 2, 86);
 		boxR1.mirror = true;
 		boxR1.setRotationPoint(-0.7F, -0.1F, 0);
 		boxR1.addBox(-3, 0, 0, 3, 3, 2, 0);
+
 		boxL3 = new ModelRendererTF(this, 10, 86);
 		boxL3.mirror = true;
 		boxL3.setRotationPoint(1, -0.2F, 1.2F);
 		boxL3.addBox(0, 0, 0, 1, 1, 1, 0);
 		setRotateAngle(boxL3, 0.06806784082777885F, 0, 0);
+
 		feetR4 = new ModelRendererTF(this, 80, 77);
 		feetR4.setRotationPoint(-0.3F, -1, 2.5F);
 		feetR4.addBox(-1, -1, 0, 1, 3, 2, 0);
 		setRotateAngle(feetR4, -1.0471975511965976F, 0, 0);
+
 		bodyparts2 = new ModelRendererTF(this, 63, 66);
 		bodyparts2.mirror = true;
 		bodyparts2.setRotationPoint(-1, -4.8F, 2);
 		bodyparts2.addBox(-1, 0, -1, 1, 5, 1, 0);
 		setRotateAngle(bodyparts2, -0.12217304763960307F, 0, -0.10471975511965977F);
+
 		headcrest1 = new ModelRendererTF(this, 3, 71);
 		headcrest1.setRotationPoint(0, 0.9F, -1.5F);
 		headcrest1.addBox(-0.5F, -3, -0.5F, 1, 3, 1, 0);
 		setRotateAngle(headcrest1, 0.08726646259971647F, 0, 0);
+
 		headR1 = new ModelRendererTF(this, 3, 64);
 		headR1.mirror = true;
 		headR1.setRotationPoint(-1, -2.7F, -1.4F);
 		headR1.addBox(-1, 0, 0, 1, 3, 3, 0);
 		setRotateAngle(headR1, 0, 0, 0.13962634015954636F);
+
 		boxL1 = new ModelRendererTF(this, 2, 86);
 		boxL1.setRotationPoint(0.7F, -0.1F, 0);
 		boxL1.addBox(0, 0, 0, 3, 3, 2, 0);
+
 		wheelR1 = new ModelRendererTF(this, 11, 96);
 		wheelR1.mirror = true;
 		wheelR1.setRotationPoint(-0.5F, -1.5F, 0);
 		wheelR1.addBox(-1, -1, -1.5F, 2, 2, 2, 0);
+
 		wheelL5 = new ModelRendererTF(this, 11, 96);
 		wheelL5.setRotationPoint(0.5F, -4.5F, 0);
 		wheelL5.addBox(-1, -1, -1.5F, 2, 2, 2, 0);
+
 		wheelL2 = new ModelRendererTF(this, 11, 96);
 		wheelL2.setRotationPoint(-0.5F, -1.5F, 0);
 		wheelL2.addBox(-1, -1, -1.5F, 2, 2, 2, 0);
+
 		waistR2 = new ModelRendererTF(this, 56, 77);
 		waistR2.mirror = true;
 		waistR2.setRotationPoint(0, 0, -1);
 		waistR2.addBox(-2, 0, 0, 2, 2, 1, 0);
 		setRotateAngle(waistR2, 0, 0.15184364492350666F, 0);
+
 		trackbase1 = new ModelRendererTF(this, 63, 74);
 		trackbase1.setRotationPoint(1.5F, -2, 0);
 		trackbase1.addBox(-4, -2, 0, 5, 1, 2, 0);
 		setRotateAngle(trackbase1, -0.06981317007977318F, 0, 0);
+
 		bodyparts3 = new ModelRendererTF(this, 68, 69);
 		bodyparts3.setRotationPoint(1.2F, -2, -0.2F);
 		bodyparts3.addBox(0, 0, 0, 1, 2, 2, 0);
 		setRotateAngle(bodyparts3, -0.15707963267948966F, 0, 0);
+
 		wheelR4 = new ModelRendererTF(this, 11, 96);
 		wheelR4.mirror = true;
 		wheelR4.setRotationPoint(0.5F, -2, 0);
 		wheelR4.addBox(-2, -1, -1.5F, 2, 2, 2, 0);
+
 		chestplateR1 = new ModelRendererTF(this, 61, 59);
 		chestplateR1.mirror = true;
 		chestplateR1.setRotationPoint(-0.2F, -2.8F, -2.7F);
 		chestplateR1.addBox(-3, 0, -1, 3, 3, 3, 0);
 		setRotateAngle(chestplateR1, 0.3141592653589793F, 0.13962634015954636F, 0);
+
 		lowerlegL6 = new ModelRendererTF(this, 94, 85);
 		lowerlegL6.mirror = true;
 		lowerlegL6.setRotationPoint(0, 2, 1.6F);
 		lowerlegL6.addBox(0, 0, -2, 2, 2, 2, 0);
 		setRotateAngle(lowerlegL6, -0.22689280275926282F, 0.017453292519943295F, 0);
+
 		waistR3 = new ModelRendererTF(this, 60, 78);
 		waistR3.mirror = true;
 		waistR3.setRotationPoint(0, 0, 2.5F);
 		waistR3.addBox(-3, 0, -2, 3, 2, 2, 0);
 		setRotateAngle(waistR3, 0, -0.24434609527920614F, 0);
+
 		headcrest4 = new ModelRendererTF(this, 0, 77);
 		headcrest4.setRotationPoint(0, -0.5F, 0);
 		headcrest4.addBox(-1.5F, 0, -1.5F, 3, 1, 3, 0);
+
 		turret4 = new ModelRendererTF(this, 32, 83);
 		turret4.setRotationPoint(0, 2, 2);
 		turret4.addBox(-2.5F, 0, -2, 5, 1, 3, 0);
+
 		wheelL3 = new ModelRendererTF(this, 11, 96);
 		wheelL3.setRotationPoint(0.5F, 0.5F, 0);
 		wheelL3.addBox(-1, -1, -1.5F, 2, 2, 2, 0);
+
 		shoulderL8 = new ModelRendererTF(this, 25, 58);
 		shoulderL8.setRotationPoint(1, -0.5F, -1.7F);
 		shoulderL8.addBox(0, 0, 0, 1, 1, 3, 0);
+
 		lowerarmR4 = new ModelRendererTF(this, 16, 114);
 		lowerarmR4.mirror = true;
 		lowerarmR4.setRotationPoint(-1, 3.8F, 0);
 		lowerarmR4.addBox(0, 0, 0, 1, 1, 2, 0);
 		setRotateAngle(lowerarmR4, 0.017453292519943295F, 0, -0.3839724354387525F);
+
 		headcrest2 = new ModelRendererTF(this, 16, 71);
 		headcrest2.setRotationPoint(1, 0.5F, -1.5F);
 		headcrest2.addBox(-0.5F, -2, -0.5F, 1, 2, 1, 0);
 		setRotateAngle(headcrest2, 0.20071286397934787F, 0, 0.19198621771937624F);
+
 		trackconnectorR3 = new ModelRendererTF(this, 29, 90);
 		trackconnectorR3.mirror = true;
 		trackconnectorR3.setRotationPoint(-2, 0, -1);
 		trackconnectorR3.addBox(-1, -6, 0, 1, 7, 1, 0);
 		setRotateAngle(trackconnectorR3, 0.06981317007977318F, 0.10471975511965977F, 0.03490658503988659F);
+
 		trackR2 = new ModelRendererTF(this, 9, 100);
 		trackR2.mirror = true;
 		trackR2.setRotationPoint(-1, 0, 0);
 		trackR2.addBox(0, -3, 0, 1, 3, 3, 0);
 		setRotateAngle(trackR2, 0, 0, 0.5235987755982988F);
+
 		turret6 = new ModelRendererTF(this, 42, 94);
 		turret6.setRotationPoint(1.5F, 0, 0);
 		turret6.addBox(0, 0, 0, 2, 2, 3, 0);
 		setRotateAngle(turret6, 0, 0, 0.7138396640656808F);
+
 		lowerarmR2 = new ModelRendererTF(this, 2, 120);
 		lowerarmR2.mirror = true;
 		lowerarmR2.setRotationPoint(0.9F, -1, -1);
 		lowerarmR2.addBox(0, 0, 0, 1, 5, 2, 0);
 		setRotateAngle(lowerarmR2, 0.03490658503988659F, -0.03490658503988659F, 0.19198621771937624F);
+
 		turret7 = new ModelRendererTF(this, 42, 94);
 		turret7.setRotationPoint(-1.5F, 0, 0);
 		turret7.addBox(-2, 0, 0, 2, 2, 3, 0);
 		setRotateAngle(turret7, 0, 0, -0.7138396640656808F);
+
 		lowerlegR12 = new ModelRendererTF(this, 85, 88);
 		lowerlegR12.addBox(-2, -1, 0, 2, 1, 1, 0);
 		setRotateAngle(lowerlegR12, -0.5061454830783556F, 0, -0.017453292519943295F);
+
 		waistL3 = new ModelRendererTF(this, 60, 78);
 		waistL3.setRotationPoint(0, 0, 2.5F);
 		waistL3.addBox(0, 0, -2, 3, 2, 2, 0);
 		setRotateAngle(waistL3, 0, 0.24434609527920614F, 0);
+
 		headcrest3 = new ModelRendererTF(this, 16, 71);
 		headcrest3.mirror = true;
 		headcrest3.setRotationPoint(-1, 0.5F, -1.5F);
 		headcrest3.addBox(-0.5F, -2, -0.5F, 1, 2, 1, 0);
 		setRotateAngle(headcrest3, 0.20071286397934787F, 0, -0.19198621771937624F);
+
 		trackconnectorR2 = new ModelRendererTF(this, 20, 93);
 		trackconnectorR2.mirror = true;
 		trackconnectorR2.setRotationPoint(0, 0.1F, -0.1F);
 		trackconnectorR2.addBox(-3, 0, 0, 3, 1, 1, 0);
 		setRotateAngle(trackconnectorR2, 0, 0.7853981633974483F, -0.13962634015954636F);
+
 		upperarmL2 = new ModelRendererTF(this, 27, 119);
 		upperarmL2.setRotationPoint(0, -1, -0.5F);
 		upperarmL2.addBox(0, 0, 0, 1, 5, 1, 0);
+
 		headL2 = new ModelRendererTF(this, 9, 63);
 		headL2.setRotationPoint(0, 0.7F, 0);
 		headL2.addBox(0, 0, -1, 1, 2, 1, 0);
 		setRotateAngle(headL2, 0.4625122517784973F, 0, 0.017453292519943295F);
+
 		turret2 = new ModelRendererTF(this, 35, 77);
 		turret2.setRotationPoint(2.3F, 2.5F, 0);
 		turret2.addBox(0, -2, 0, 2, 2, 3, 0);
 		setRotateAngle(turret2, 0, 0, -1.1990411961201044F);
+
 		barrelbase4 = new ModelRendererTF(this, 35, 90);
 		barrelbase4.addBox(-0.2F, 0.5F, -0.8F, 1, 2, 1, 0);
+
 		boxL2 = new ModelRendererTF(this, 2, 82);
 		boxL2.setRotationPoint(0, -0.9F, 0.2F);
 		boxL2.addBox(0, 0, 0, 3, 1, 2, 0);
 		setRotateAngle(boxL2, -0.32637657012293964F, 0, 0);
+
 		lowerlegL12 = new ModelRendererTF(this, 85, 88);
 		lowerlegL12.mirror = true;
 		lowerlegL12.addBox(0, -1, 0, 2, 1, 1, 0);
 		setRotateAngle(lowerlegL12, -0.5061454830783556F, 0, 0.017453292519943295F);
+
 		shoulderL6 = new ModelRendererTF(this, 31, 50);
 		shoulderL6.setRotationPoint(-0.5F, -0.3F, 2.8F);
 		shoulderL6.addBox(0, 0, 0, 3, 1, 2, 0);
+
 		headL1 = new ModelRendererTF(this, 3, 64);
 		headL1.setRotationPoint(1, -2.7F, -1.4F);
 		headL1.addBox(0, 0, 0, 1, 3, 3, 0);
 		setRotateAngle(headL1, 0, 0, -0.13962634015954636F);
+
 		lowerarmL5 = new ModelRendererTF(this, 16, 114);
 		lowerarmL5.setRotationPoint(1, 3.8F, 0);
 		lowerarmL5.addBox(-1, 0, 0, 1, 1, 2, 0);
 		setRotateAngle(lowerarmL5, 0.017453292519943295F, 0, 0.3839724354387525F);
+
 		lowerlegR13 = new ModelRendererTF(this, 98, 77);
 		lowerlegR13.setRotationPoint(-2.3F, 1.3F, 0.5F);
 		lowerlegR13.addBox(-1, 0, 0, 1, 5, 1, 0);
+
 		lowerlegR2 = new ModelRendererTF(this, 71, 88);
 		lowerlegR2.setRotationPoint(1.2F, -1, -1);
 		lowerlegR2.addBox(-3, 0, 0, 3, 6, 1, 0);
+
 		trackL8 = new ModelRendererTF(this, 8, 109);
 		trackL8.setRotationPoint(0.25F, 7.25F, 0);
 		trackL8.addBox(0, 0, 0, 3, 1, 3, 0);
 		setRotateAngle(trackL8, -0.03490658503988659F, 0, 0);
+
 		upperArmR = new ModelRendererTF(this, 24, 111);
 		upperArmR.mirror = true;
 		upperArmR.setRotationPoint(-2, -1.5F, 0);
 		upperArmR.addBox(0, -1, -1, 1, 5, 2, 0);
 		setRotateAngle(upperArmR, 0.08726646259971647F, 0, 0.17453292519943295F);
+
 		trackconnectorL4 = new ModelRendererTF(this, 24, 96);
 		trackconnectorL4.setRotationPoint(1, -6, 0);
 		trackconnectorL4.addBox(-1, -3, 0, 1, 3, 1, 0);
 		setRotateAngle(trackconnectorL4, 0, 0, -0.5235987755982988F);
+
 		shoulderR1 = new ModelRendererTF(this, 25, 50);
 		shoulderR1.mirror = true;
 		shoulderR1.setRotationPoint(-1, -2.5F, 0.5F);
 		shoulderR1.addBox(-1, -0.5F, -2.5F, 1, 3, 4, 0);
+
 		lowerlegR6 = new ModelRendererTF(this, 94, 85);
 		lowerlegR6.setRotationPoint(0, 2, 1.6F);
 		lowerlegR6.addBox(-2, 0, -2, 2, 2, 2, 0);
 		setRotateAngle(lowerlegR6, -0.22689280275926282F, -0.017453292519943295F, 0);
+
 		turret1 = new ModelRendererTF(this, 32, 71);
 		turret1.setRotationPoint(0, 1.3F, 0);
 		turret1.addBox(-2, 0.4F, 0, 4, 2, 3, 0);
+
 		turret5 = new ModelRendererTF(this, 45, 88);
 		turret5.setRotationPoint(0, -2.3F, 0);
 		turret5.addBox(-1.5F, 0, 0, 3, 2, 3, 0);
+
 		wheelR3 = new ModelRendererTF(this, 11, 96);
 		wheelR3.mirror = true;
 		wheelR3.setRotationPoint(-0.5F, 0.5F, 0);
 		wheelR3.addBox(-1, -1, -1.5F, 2, 2, 2, 0);
+
 		feetL4 = new ModelRendererTF(this, 80, 77);
 		feetL4.mirror = true;
 		feetL4.setRotationPoint(0.3F, -1, 2.5F);
 		feetL4.addBox(0, -1, 0, 1, 3, 2, 0);
 		setRotateAngle(feetL4, -1.0471975511965976F, 0, 0);
+
 		trackconnectorL2 = new ModelRendererTF(this, 20, 93);
 		trackconnectorL2.setRotationPoint(0, 0.1F, -0.1F);
 		trackconnectorL2.addBox(0, 0, 0, 3, 1, 1, 0);
 		setRotateAngle(trackconnectorL2, 0, -0.7853981633974483F, 0.13962634015954636F);
+
 		lowerlegR10 = new ModelRendererTF(this, 96, 90);
 		lowerlegR10.setRotationPoint(0.2F, 5, 0);
 		lowerlegR10.addBox(-1, 0, 0, 1, 2, 4, 0);
 		setRotateAngle(lowerlegR10, 0, 0.08726646259971647F, 0);
+
 		crotch2 = new ModelRendererTF(this, 58, 89);
 		crotch2.setRotationPoint(1, 2, 3);
 		crotch2.addBox(-1, -2, -1, 2, 2, 1, 0);
 		setRotateAngle(crotch2, -0.4886921905584123F, 0, 0);
+
 		torsoconnector = new ModelRendererTF(this, 50, 50);
 		torsoconnector.addBox(-1.5F, -5, -1, 3, 5, 2, 0);
+
 		chestplateL1 = new ModelRendererTF(this, 61, 59);
 		chestplateL1.setRotationPoint(0.2F, -2.8F, -2.7F);
 		chestplateL1.addBox(0, 0, -1, 3, 3, 3, 0);
 		setRotateAngle(chestplateL1, 0.3141592653589793F, -0.13962634015954636F, 0);
+
 		shoulderL3 = new ModelRendererTF(this, 25, 63);
 		shoulderL3.setRotationPoint(0.5F, -1.5F, -2);
 		shoulderL3.addBox(-1, 0, 0, 4, 1, 5, 0);
+
 		turretconnector = new ModelRendererTF(this, 21, 70);
 		turretconnector.setRotationPoint(0, -4, 1.5F);
 		turretconnector.addBox(-2, 0, 0, 4, 5, 1, 0);
 		setRotateAngle(turretconnector, 0.10471975511965977F, 0, 0);
+
 		trackconnectorR1 = new ModelRendererTF(this, 20, 90);
 		trackconnectorR1.mirror = true;
 		trackconnectorR1.setRotationPoint(-3, -4, 3);
 		trackconnectorR1.addBox(0, 0, 0, 3, 1, 1, 0);
 		setRotateAngle(trackconnectorR1, 0.06981317007977318F, 0.7853981633974483F, 0.13962634015954636F);
+
 		trackR3 = new ModelRendererTF(this, 9, 100);
 		trackR3.mirror = true;
 		trackR3.setRotationPoint(1, -3, 0);
 		trackR3.addBox(-1, -3, 0, 1, 3, 3, 0);
 		setRotateAngle(trackR3, -0.03490658503988659F, 0.017453292519943295F, -0.5235987755982988F);
+
 		trackR8 = new ModelRendererTF(this, 9, 100);
 		trackR8.setRotationPoint(1, -3, 0);
 		trackR8.addBox(-1, -3, 0, 1, 3, 3, 0);
 		setRotateAngle(trackR8, -0.03490658503988659F, 0.017453292519943295F, -0.5235987755982988F);
+
 		lowerlegR9 = new ModelRendererTF(this, 73, 84);
 		lowerlegR9.setRotationPoint(0, -1, 0);
 		lowerlegR9.addBox(-1, 0, 0, 1, 1, 3, 0);
 		setRotateAngle(lowerlegR9, -0.3490658503988659F, -0.017453292519943295F, 0);
+
 		chestplateL2 = new ModelRendererTF(this, 71, 58);
 		chestplateL2.setRotationPoint(0, 0.5F, 0);
 		chestplateL2.addBox(0, -2, 0, 3, 2, 1, 0);
 		setRotateAngle(chestplateL2, -0.4363323129985824F, 0.017453292519943295F, 0);
+
 		shoulderR5 = new ModelRendererTF(this, 39, 63);
 		shoulderR5.mirror = true;
 		shoulderR5.setRotationPoint(-0.2F, 2.5F, 0.6F);
 		shoulderR5.addBox(-1, 0, 0, 1, 1, 4, 0);
 		setRotateAngle(shoulderR5, -0.03490658503988659F, 0, 0);
+
 		shoulderR7 = new ModelRendererTF(this, 24, 64);
 		shoulderR7.mirror = true;
 		shoulderR7.setRotationPoint(-0.5F, 0, 0);
 		shoulderR7.addBox(-2, 0, -1, 2, 1, 1, 0);
 		setRotateAngle(shoulderR7, 0.3490658503988659F, 0, 0);
+
 		lowerlegR4 = new ModelRendererTF(this, 89, 88);
 		lowerlegR4.setRotationPoint(0, 0, 3.1F);
 		lowerlegR4.addBox(-1, -0.3F, -2, 1, 6, 2, 0);
 		setRotateAngle(lowerlegR4, 0.3211405823669566F, -0.03490658503988659F, 0);
+
 		boxR3 = new ModelRendererTF(this, 10, 86);
 		boxR3.setRotationPoint(-1, -0.2F, 1.2F);
 		boxR3.addBox(-1, 0, 0, 1, 1, 1, 0);
 		setRotateAngle(boxR3, 0.06806784082777885F, 0, 0);
+
 		shoulderL2 = new ModelRendererTF(this, 25, 50);
 		shoulderL2.mirror = true;
 		shoulderL2.setRotationPoint(1.5F, -0.5F, -2.5F);
 		shoulderL2.addBox(0, 0, 0, 1, 3, 4, 0);
+
 		shoulderR6 = new ModelRendererTF(this, 31, 50);
 		shoulderR6.mirror = true;
 		shoulderR6.setRotationPoint(0.5F, -0.3F, 2.8F);
 		shoulderR6.addBox(-3, 0, 0, 3, 1, 2, 0);
+
 		trackconnectorL3 = new ModelRendererTF(this, 29, 90);
 		trackconnectorL3.setRotationPoint(2, 0, -1);
 		trackconnectorL3.addBox(0, -6, 0, 1, 7, 1, 0);
 		setRotateAngle(trackconnectorL3, 0.05235987755982988F, -0.10471975511965977F, -0.03490658503988659F);
+
 		lowerlegR3 = new ModelRendererTF(this, 80, 88);
 		lowerlegR3.setRotationPoint(-2, 1, 1);
 		lowerlegR3.addBox(-1, 0, 0, 1, 6, 3, 0);
@@ -855,40 +981,50 @@ public class ModelPurge extends ModelTransformerBase {
 
 		barrelbase3 = new ModelRendererTF(this, 35, 90);
 		barrelbase3.addBox(-0.2F, 0.5F, -0.2F, 1, 2, 1, 0);
+
 		torsobase = new ModelRendererTF(this, 61, 50);
 		torsobase.setRotationPoint(0, -4.5F, 0);
 		torsobase.addBox(-2.5F, -4, -2, 5, 4, 4, 0);
+
 		fistR = new ModelRendererTF(this, 0, 115);
 		fistR.mirror = true;
 		fistR.setRotationPoint(-0.1F, 3.6F, 0.2F);
 		fistR.addBox(-1, 0, -1, 2, 2, 2, 0);
 		setRotateAngle(fistR, -0.08726646259971647F, 0, -0.20943951023931953F);
+
 		feetR5 = new ModelRendererTF(this, 79, 82);
 		feetR5.setRotationPoint(1.5F, 1, -4);
 		feetR5.addBox(-3, 0, 0, 3, 1, 4, 0);
+
 		barrelbase1 = new ModelRendererTF(this, 19, 84);
 		barrelbase1.setRotationPoint(0, 0.8F, -0.5F);
 		barrelbase1.addBox(-2, -0.5F, -1, 4, 1, 2, 0);
 		setRotateAngle(barrelbase1, -0.06981317007977318F, 0, 0);
+
 		barrel2 = new ModelRendererTF(this, 33, 94);
 		barrel2.setRotationPoint(0, 8.5F, 0);
 		barrel2.addBox(-1, -1, -1, 2, 2, 2, 0);
+
 		lowerarmR3 = new ModelRendererTF(this, 20, 118);
 		lowerarmR3.mirror = true;
 		lowerarmR3.setRotationPoint(-0.5F, -1, -0.9F);
 		lowerarmR3.addBox(-1, -1.2F, 0, 1, 5, 2, 0);
 		setRotateAngle(lowerarmR3, 0.15707963267948966F, 0, 0);
+
 		trackR5 = new ModelRendererTF(this, 8, 109);
 		trackR5.mirror = true;
 		trackR5.setRotationPoint(0.25F, 7.25F, 0);
 		trackR5.addBox(-1, 0, 0, 3, 1, 3, 0);
 		setRotateAngle(trackR5, -0.03490658503988659F, 0, 0);
+
 		lowerlegR8 = new ModelRendererTF(this, 62, 89);
 		lowerlegR8.setRotationPoint(0.2F, 2.1F, 1);
 		lowerlegR8.addBox(-1, 0, 0, 1, 4, 3, 0);
+
 		trackR6 = new ModelRendererTF(this, 18, 100);
 		trackR6.setRotationPoint(1.5F, -6, -2.1F);
 		trackR6.addBox(-1, 0, 0, 1, 8, 3, 0);
+
 		waistL2 = new ModelRendererTF(this, 56, 77);
 		waistL2.setRotationPoint(0, 0, -1);
 		waistL2.addBox(0, 0, 0, 2, 2, 1, 0);
@@ -931,6 +1067,7 @@ public class ModelPurge extends ModelTransformerBase {
 		shoulderR2.setRotationPoint(-1.5F, -0.5F, -2.5F);
 		shoulderR2.addBox(-1, 0, 0, 1, 3, 4, 0);
 
+		
 		shoulderR8 = new ModelRendererTF(this, 25, 58);
 		shoulderR8.setRotationPoint(-1, -0.5F, -1.7F);
 		shoulderR8.addBox(-1, 0, 0, 1, 1, 3, 0);
@@ -1179,20 +1316,20 @@ public class ModelPurge extends ModelTransformerBase {
 		applyDefaultHittingAnimation(torsobaseR, upperArmL, headbase, torsobase, lowerArmR, lowerArmL);
 
 		if(isRiding) {
-			upperArmR.rotateAngleX -= PI / 5F;
-			upperArmL.rotateAngleX -= PI / 5F;
-			upperLegR.rotateAngleX -= PI * 2F / 5F;
-			upperLegL.rotateAngleX -= PI * 2F / 5F;
+			upperArmR.rotateAngleX -= (float) Math.PI / 5F;
+			upperArmL.rotateAngleX -= (float) Math.PI / 5F;
+			upperLegR.rotateAngleX -= (float) Math.PI * 2F / 5F;
+			upperLegL.rotateAngleX -= (float) Math.PI * 2F / 5F;
 
-			upperLegR.rotateAngleY += PI / 10F;
-			upperLegL.rotateAngleY -= PI / 10F;
+			upperLegR.rotateAngleY += (float) Math.PI / 10F;
+			upperLegL.rotateAngleY -= (float) Math.PI / 10F;
 		}
 
 		if(aimedBow) {
 			upperArmR.rotateAngleY += -0.1F + headbase.rotateAngleY;
 			upperArmL.rotateAngleY += 0.1F + headbase.rotateAngleY + 0.4F;
-			upperArmR.rotateAngleX += -(PI / 2F) + headbase.rotateAngleX;
-			upperArmL.rotateAngleX += -(PI / 2F) + headbase.rotateAngleX;
+			upperArmR.rotateAngleX += -((float) Math.PI / 2F) + headbase.rotateAngleX;
+			upperArmL.rotateAngleX += -((float) Math.PI / 2F) + headbase.rotateAngleX;
 			upperArmR.rotateAngleZ += MathHelper.cos(ticks * 0.09F) * 0.05F + 0.05F;
 			upperArmL.rotateAngleZ -= MathHelper.cos(ticks * 0.09F) * 0.05F + 0.05F;
 			upperArmR.rotateAngleX += MathHelper.sin(ticks * 0.067F) * 0.05F;
@@ -1331,10 +1468,10 @@ public class ModelPurge extends ModelTransformerBase {
 	@Override
 	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + PI) * 1.4F * limbSwingAmount;
+		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 		upperLegR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		upperLegL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + PI) * 1.4F * limbSwingAmount;
+		upperLegL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 		if(isSneak) {
 			waist.rotateAngleX += 0.4F;
@@ -1448,39 +1585,42 @@ public class ModelPurge extends ModelTransformerBase {
 	public void renderArmorPiece(int armorPiece) {
 		setToInitPose();
 
-		if(armorPiece == 0) {
-			GL11.glTranslatef(0, 0.075F, -0.1F);
-			headbase.render(0.0625F);
-		}
-		else if(armorPiece == 1) {
-			upperLegL.showModel = false;
-			upperLegR.showModel = false;
-			headbase.showModel = false;
-			waist.render(0.0625F);
-			upperLegL.showModel = true;
-			upperLegR.showModel = true;
-			headbase.showModel = true;
-		}
-		else if(armorPiece == 2) {
-			GL11.glTranslatef(0, 0.05F, 0);
-			feetbaseL1.showModel = false;
-			feetbaseR1.showModel = false;
-			upperLegL.render(0.0625F);
-			upperLegR.render(0.0625F);
-			feetbaseL1.showModel = true;
-			feetbaseR1.showModel = true;
-		}
-		else if(armorPiece == 3) {
-			GL11.glTranslatef(0, 0, -0.0625F);
-			GL11.glRotatef(5, 1, 0, 0);
-			feetbaseL1.rotationPointX -= 3;
-			feetbaseR1.rotationPointX += 3;
-			feetbaseL1.rotateAngleX += 0.2F;
-			feetbaseL1.rotateAngleY += 0.2F;
-			feetbaseR1.rotateAngleX += 0.2F;
-			feetbaseR1.rotateAngleY -= 0.2F;
-			feetbaseL1.render(0.0625F);
-			feetbaseR1.render(0.0625F);
+		switch(armorPiece) {
+			case 0:
+				GL11.glTranslatef(0, 0.075F, -0.1F);
+				headbase.render(0.0625F);
+				break;
+
+			case 1:
+				upperLegL.showModel = false;
+				upperLegR.showModel = false;
+				headbase.showModel = false;
+				waist.render(0.0625F);
+				upperLegL.showModel = true;
+				upperLegR.showModel = true;
+				headbase.showModel = true;
+				break;
+
+			case 2:
+				GL11.glTranslatef(0, 0.05F, 0);
+				feetbaseL1.showModel = feetbaseR1.showModel = false;
+				upperLegL.render(0.0625F);
+				upperLegR.render(0.0625F);
+				feetbaseL1.showModel = feetbaseR1.showModel = true;
+				break;
+
+			case 3:
+				GL11.glTranslatef(0, 0, -0.0625F);
+				GL11.glRotatef(5, 1, 0, 0);
+				feetbaseL1.rotationPointX -= 3;
+				feetbaseR1.rotationPointX += 3;
+				feetbaseL1.rotateAngleX += 0.2F;
+				feetbaseL1.rotateAngleY += 0.2F;
+				feetbaseR1.rotateAngleX += 0.2F;
+				feetbaseR1.rotateAngleY -= 0.2F;
+				feetbaseL1.render(0.0625F);
+				feetbaseR1.render(0.0625F);
+				break;
 		}
 	}
 }

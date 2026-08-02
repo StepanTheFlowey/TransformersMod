@@ -18,8 +18,6 @@ import java.util.Random;
  */
 @SideOnly(Side.CLIENT)
 public class MowzieModelBase extends ModelBiped {
-	public static final float PI = (float) Math.PI;
-
 	/**
 	 * Store every MowzieModelRenderer in this array
 	 */
@@ -71,16 +69,20 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param parent is the parent box.
 	 */
 	protected void addChildTo(ModelRenderer child, ModelRenderer parent) {
-		final float distance = (float) Math.sqrt(Math.pow(child.rotationPointZ - parent.rotationPointZ, 2) + Math.pow(child.rotationPointY - parent.rotationPointY, 2));
+		final double distance = Math.hypot(child.rotationPointZ, parent.rotationPointY);
+		final double parentToChildAngle = Math.atan((child.rotationPointZ - parent.rotationPointZ) / (child.rotationPointY - parent.rotationPointY));
+		final double childRelativeRotation = parentToChildAngle - parent.rotateAngleX;
+
 		final float oldRotateAngleX = parent.rotateAngleX;
-		final float parentToChildAngle = (float) Math.atan((child.rotationPointZ - parent.rotationPointZ) / (child.rotationPointY - parent.rotationPointY));
-		final float childRelativeRotation = parentToChildAngle - parent.rotateAngleX;
-		final float newRotationPointY = (float) (distance * Math.cos(childRelativeRotation));
-		final float newRotationPointZ = (float) (distance * Math.sin(childRelativeRotation));
 		parent.rotateAngleX = 0F;
-		child.setRotationPoint(child.rotationPointX - parent.rotationPointX, newRotationPointY, newRotationPointZ);
+		child.setRotationPoint(
+						child.rotationPointX - parent.rotationPointX,
+						(float) (distance * Math.cos(childRelativeRotation)),
+						(float) (distance * Math.sin(childRelativeRotation))
+		);
 		parent.addChild(child);
 		parent.rotateAngleX = oldRotateAngleX;
+
 		child.rotateAngleX -= parent.rotateAngleX;
 		child.rotateAngleY -= parent.rotateAngleY;
 		child.rotateAngleZ -= parent.rotateAngleZ;
@@ -106,8 +108,8 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f4 is the rotationPitch of the EntityLivingBase.
 	 */
 	public void faceTarget(MowzieModelRenderer box, float f, float f3, float f4) {
-		box.rotateAngleY += f3 / (180f / PI) / f;
-		box.rotateAngleX += f4 / (180f / PI) / f;
+		box.rotateAngleY += f3 / (180F / (float) Math.PI) / f;
+		box.rotateAngleX += f4 / (180F / (float) Math.PI) / f;
 	}
 
 	/**
@@ -167,10 +169,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1     is the walk speed.
 	 */
 	public void walk(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
-		int inverted = 1;
-		if(invert) {
-			inverted = -1;
-		}
+		final int inverted = invert ? -1 : 1;
 		box.rotateAngleX += MathHelper.cos(f * speed + offset) * degree * inverted * f1 + weight * f1;
 	}
 
@@ -189,10 +188,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1     is the walk speed.
 	 */
 	public void flap(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
-		int inverted = 1;
-		if(invert) {
-			inverted = -1;
-		}
+		final int inverted = invert ? -1 : 1;
 		box.rotateAngleZ += MathHelper.cos(f * speed + offset) * degree * inverted * f1 + weight * f1;
 	}
 
@@ -211,10 +207,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1     is the walk speed.
 	 */
 	public void swing(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
-		int inverted = 1;
-		if(invert) {
-			inverted = -1;
-		}
+		final int inverted = invert ? -1 : 1;
 		box.rotateAngleY += MathHelper.cos(f * speed + offset) * degree * inverted * f1 + weight * f1;
 	}
 
@@ -231,9 +224,9 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1     is the walk speed.
 	 */
 	public void bob(MowzieModelRenderer box, float speed, float degree, boolean bounce, float f, float f1) {
-		final double a = Math.sin(f * speed) * f1 * degree;
-		final double bob = bounce ? -Math.abs(a) : (a - f1 * degree);
-		box.rotationPointY += (float) bob;
+		final float a = MathHelper.sin(f * speed) * f1 * degree;
+		final float bob = bounce ? -Math.abs(a) : (a - f1 * degree);
+		box.rotationPointY += bob;
 	}
 
 	/**
@@ -249,8 +242,8 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1         is the walk speed.
 	 */
 	public void chainSwing(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
-		int numberOfSegments = boxes.length;
-		float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
+		final int numberOfSegments = boxes.length;
+		final float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
 		for(int i = 0; i < numberOfSegments; i++) {
 			boxes[i].rotateAngleY += MathHelper.cos(f * speed + offset * i) * f1 * degree;
 		}
@@ -269,8 +262,8 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1         is the walk speed.
 	 */
 	public void chainWave(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
-		int numberOfSegments = boxes.length;
-		float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
+		final int numberOfSegments = boxes.length;
+		final float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
 		for(int i = 0; i < numberOfSegments; i++) {
 			boxes[i].rotateAngleX += MathHelper.cos(f * speed + offset * i) * f1 * degree;
 		}
@@ -289,8 +282,8 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f1         is the walk speed.
 	 */
 	public void chainFlap(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
-		int numberOfSegments = boxes.length;
-		float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
+		final int numberOfSegments = boxes.length;
+		final float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
 		for(int i = 0; i < numberOfSegments; i++) {
 			boxes[i].rotateAngleZ += MathHelper.cos(f * speed + offset * i) * f1 * degree;
 		}
@@ -304,13 +297,13 @@ public class MowzieModelBase extends ModelBiped {
 
 		if(entity != Minecraft.getMinecraft().thePlayer) {
 			double moveY = -0.2;
-			double actualMoveY = moveY;
+			final double actualMoveY = moveY;
 
 			entity.ySize *= 0.4F;
-			List collidingEntities = entity.worldObj.getCollidingBoundingBoxes(entity, entity.boundingBox.addCoord(0, moveY, 0));
 
-			for(Object collidingEntity : collidingEntities) {
-				moveY = ((AxisAlignedBB) collidingEntity).calculateYOffset(entity.boundingBox, moveY);
+			List<AxisAlignedBB> collidingEntities = entity.worldObj.getCollidingBoundingBoxes(entity, entity.boundingBox.addCoord(0, moveY, 0));
+			for(AxisAlignedBB collidingEntity : collidingEntities) {
+				moveY = collidingEntity.calculateYOffset(entity.boundingBox, moveY);
 			}
 
 			onGround = actualMoveY != moveY;
@@ -325,17 +318,17 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f        The progress (0-1)
 	 */
 	protected void rotateTo(ModelRenderer rotating, ModelRenderer to, float f) {
-		float rotXDif = to.rotateAngleX - rotating.rotateAngleX;
-		float rotYDif = to.rotateAngleY - rotating.rotateAngleY;
-		float rotZDif = to.rotateAngleZ - rotating.rotateAngleZ;
+		final float rotXDif = to.rotateAngleX - rotating.rotateAngleX;
+		final float rotYDif = to.rotateAngleY - rotating.rotateAngleY;
+		final float rotZDif = to.rotateAngleZ - rotating.rotateAngleZ;
 
-		float posXDif = to.rotationPointX - rotating.rotationPointX;
-		float posYDif = to.rotationPointY - rotating.rotationPointY;
-		float posZDif = to.rotationPointZ - rotating.rotationPointZ;
+		final float posXDif = to.rotationPointX - rotating.rotationPointX;
+		final float posYDif = to.rotationPointY - rotating.rotationPointY;
+		final float posZDif = to.rotationPointZ - rotating.rotationPointZ;
 
-		float offsetXDif = to.offsetX - rotating.offsetX;
-		float offsetYDif = to.offsetY - rotating.offsetY;
-		float offsetZDif = to.offsetZ - rotating.offsetZ;
+		final float offsetXDif = to.offsetX - rotating.offsetX;
+		final float offsetYDif = to.offsetY - rotating.offsetY;
+		final float offsetZDif = to.offsetZ - rotating.offsetZ;
 
 		rotating.rotateAngleX += rotXDif * f;
 		rotating.rotateAngleY += rotYDif * f;

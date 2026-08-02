@@ -1099,7 +1099,7 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase {
 		setToInitPose();
 
 		if(entity instanceof EntityPlayer) {
-			waistbase.rotateAngleX = rotationPitch / (180F / PI);
+			waistbase.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
 			waistbase.rotateAngleZ = -bipedHead.rotateAngleY;
 		}
 	}

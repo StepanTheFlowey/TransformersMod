@@ -27,17 +27,17 @@ public class ItemDisplayVehicle extends Item {
 
 		for(Transformer transformer : TransformersAPI.getTransformers()) {
 			if(transformerIndex == itemstack.getItemDamage()) {
-				ItemStack head = new ItemStack(transformer.getHelmet());
-				ItemStack chest = new ItemStack(transformer.getChestplate());
-				ItemStack legs = new ItemStack(transformer.getLeggings());
-				ItemStack feet = new ItemStack(transformer.getBoots());
+				final ItemStack head = new ItemStack(transformer.getHelmet());
+				final ItemStack chest = new ItemStack(transformer.getChestplate());
+				final ItemStack legs = new ItemStack(transformer.getLeggings());
+				final ItemStack feet = new ItemStack(transformer.getBoots());
 
-				ItemStack[] itemstacks = {head, chest, legs, feet};
-				NBTTagList itemsList = new NBTTagList();
+				final ItemStack[] itemstacks = {head, chest, legs, feet};
+				final NBTTagList itemsList = new NBTTagList();
 
 				for(int i = 0; i < itemstacks.length; ++i) {
 					if(itemstacks[i] != null) {
-						NBTTagCompound itemTag = new NBTTagCompound();
+						final NBTTagCompound itemTag = new NBTTagCompound();
 						itemTag.setByte("Slot", (byte) i);
 						itemstacks[i].writeToNBT(itemTag);
 						itemsList.appendTag(itemTag);
@@ -54,12 +54,12 @@ public class ItemDisplayVehicle extends Item {
 
 	public static ItemStack[] getArmorFromNBT(ItemStack itemstack) {
 		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Items")) {
-			NBTTagList nbtItems = itemstack.getTagCompound().getTagList("Items", 10);
-			ItemStack[] items = new ItemStack[4];
+			final NBTTagList nbtItems = itemstack.getTagCompound().getTagList("Items", 10);
+			final ItemStack[] items = new ItemStack[4];
 
 			for(int i = 0; i < nbtItems.tagCount(); ++i) {
-				NBTTagCompound item = nbtItems.getCompoundTagAt(i);
-				byte slot = item.getByte("Slot");
+				final NBTTagCompound item = nbtItems.getCompoundTagAt(i);
+				final byte slot = item.getByte("Slot");
 
 				if(slot >= 0 && slot < items.length) {
 					items[slot] = ItemStack.loadItemStackFromNBT(item);
@@ -74,7 +74,7 @@ public class ItemDisplayVehicle extends Item {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		Transformer transformer = TransformersAPI.getTransformers().get(stack.getItemDamage());
+		final Transformer transformer = TransformersAPI.getTransformers().get(stack.getItemDamage());
 
 		if(transformer != null) {
 			return StatCollector.translateToLocal("item.display_" + transformer.getName().toLowerCase().replace(" ", "_") + ".name");

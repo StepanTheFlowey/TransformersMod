@@ -35,15 +35,14 @@ public class ClientTickHandler {
 
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent event) {
-		EntityPlayer player = event.player;
-		Transformer transformer = TFHelper.getTransformer(player);
-
-		int altMode = TFData.ALT_MODE.get(player);
-		float transformationTimer = TFHelper.getTransformationTimer(player);
-		TFHelper.getStealthModeTimer(player);
+		final EntityPlayer player = event.player;
 
 		if(event.phase == TickEvent.Phase.END) {
+			final Transformer transformer = TFHelper.getTransformer(player);
+
 			if(transformer != null) {
+				final float transformationTimer = TFHelper.getTransformationTimer(player);
+
 				if(transformationTimer >= 0.5F) {
 					transformer.updateMovement(player);
 
@@ -92,21 +91,23 @@ public class ClientTickHandler {
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
 		if(event.phase == TickEvent.Phase.START) {
-			if(Minecraft.getMinecraft().theWorld != null) {
-				for(EntityPlayer player : (List<EntityPlayer>) Minecraft.getMinecraft().theWorld.playerEntities) {
+			final Minecraft minecraft = Minecraft.getMinecraft();
+
+			if(minecraft.theWorld != null) {
+				for(EntityPlayer player : (List<EntityPlayer>) minecraft.theWorld.playerEntities) {
 					TFRenderHelper.updateMotionY(player);
 				}
 
-				if(Minecraft.getMinecraft().theWorld.isRemote && !Minecraft.getMinecraft().isGamePaused()) {
+				if(minecraft.theWorld.isRemote && !minecraft.isGamePaused()) {
 					for(Map.Entry<DimensionalCoords, TileData> e : TFTileHelper.getTileData().entrySet()) {
 						e.getValue().clientTick();
 					}
 				}
 
-				if(ClientProxy.fakePlayer == null || ClientProxy.fakePlayer.worldObj != Minecraft.getMinecraft().theWorld) {
-					if(Minecraft.getMinecraft().playerController != null) {
-						ClientProxy.fakePlayer = Minecraft.getMinecraft().playerController.func_147493_a(Minecraft.getMinecraft().theWorld, new StatFileWriter());
-						ClientProxy.fakePlayer.movementInput = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
+				if(ClientProxy.fakePlayer == null || ClientProxy.fakePlayer.worldObj != minecraft.theWorld) {
+					if(minecraft.playerController != null) {
+						ClientProxy.fakePlayer = minecraft.playerController.func_147493_a(minecraft.theWorld, new StatFileWriter());
+						ClientProxy.fakePlayer.movementInput = new MovementInputFromOptions(minecraft.gameSettings);
 					}
 				}
 				else {
@@ -118,35 +119,37 @@ public class ClientTickHandler {
 
 	@SubscribeEvent
 	public void onRenderTick(RenderTickEvent event) {
-		World world = Minecraft.getMinecraft().theWorld;
 		renderTick = event.renderTickTime;
+
+		final Minecraft minecraft = Minecraft.getMinecraft();
+		final World world = minecraft.theWorld;
 
 		if(world != null) {
 			if(event.phase == TickEvent.Phase.START) {
-				EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+				final EntityClientPlayerMP player = minecraft.thePlayer;
 
 				if(TFRenderHelper.shouldOverrideView(player)) {
 					if(renderer == null) {
-						renderer = new EntityRendererTF(Minecraft.getMinecraft());
+						renderer = new EntityRendererTF(minecraft);
 					}
 
-					if(Minecraft.getMinecraft().entityRenderer != renderer) {
-						prevRenderer = Minecraft.getMinecraft().entityRenderer;
-						Minecraft.getMinecraft().entityRenderer = renderer;
+					if(minecraft.entityRenderer != renderer) {
+						prevRenderer = minecraft.entityRenderer;
+						minecraft.entityRenderer = renderer;
 					}
 				}
-				else if(prevRenderer != null && Minecraft.getMinecraft().entityRenderer == renderer) {
-					Minecraft.getMinecraft().entityRenderer = prevRenderer;
+				else if(prevRenderer != null && minecraft.entityRenderer == renderer) {
+					minecraft.entityRenderer = prevRenderer;
 				}
 			}
 
-			if(Minecraft.getMinecraft().thePlayer != null) {
-				EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-				Transformer transformer = TFHelper.getTransformer(player);
+			if(minecraft.thePlayer != null) {
+				final EntityPlayer player = minecraft.thePlayer;
 
 				if(TFRenderHelper.shouldOverrideThirdPersonDistance(player)) {
+					final Transformer transformer = TFHelper.getTransformer(player);
+
 					if(transformer != null) {
-						final int altMode = TFData.ALT_MODE.get(player);
 						float thirdPersonDistance;
 
 						if(transformer.canZoom() && TFHelper.isFullyTransformed(player) && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFKeyBinds.keyBindingViewFront.getIsKeyPressed()) {
@@ -156,7 +159,7 @@ public class ClientTickHandler {
 							thirdPersonDistance = transformer.getThirdPersonDistance(player);
 						}
 
-						TFReflection.setField(TFReflection.thirdPersonDistanceField, Minecraft.getMinecraft().entityRenderer, thirdPersonDistance);
+						TFReflection.setField(TFReflection.thirdPersonDistanceField, minecraft.entityRenderer, thirdPersonDistance);
 					}
 				}
 			}

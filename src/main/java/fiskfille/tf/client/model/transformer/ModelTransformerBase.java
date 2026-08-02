@@ -192,26 +192,19 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		return model;
 	}
 
-	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-	}
+	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
 
-	public void doActiveAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-	}
+	public void doActiveAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
 
-	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-	}
+	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
 
-	public void doIdleAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-	}
+	public void doIdleAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
 
-	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-	}
+	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
 
-	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-	}
+	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
 
-	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-	}
+	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
 
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale, Entity entity) {
@@ -277,7 +270,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 	protected void applyDefaultHittingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer head, ModelRenderer chest, ModelRenderer lowerArmR, ModelRenderer lowerArmL) {
 		if(onGround > -9990F) {
 			float hitAnimation = onGround;
-			final float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * PI * 2F) * 0.2F;
+			final float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * (float) Math.PI * 2F) * 0.2F;
 
 			chest.rotateAngleY += change;
 			head.rotateAngleY -= change;
@@ -294,11 +287,11 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 			hitAnimation *= hitAnimation;
 			hitAnimation *= hitAnimation;
 			hitAnimation = 1F - hitAnimation;
-			final float f7 = MathHelper.sin(hitAnimation * PI);
-			final float f8 = MathHelper.sin(onGround * PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+			final float f7 = MathHelper.sin(hitAnimation * (float) Math.PI);
+			final float f8 = MathHelper.sin(onGround * (float) Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
 
 			final float armRXChange = (upperArmR.rotateAngleX - (f7 * 1.2F + f8)) * 0.5F;
-			final float armRZChange = MathHelper.sin(onGround * PI) * -0.4F * 0.5F;
+			final float armRZChange = MathHelper.sin(onGround * (float) Math.PI) * -0.4F * 0.5F;
 
 			upperArmR.rotateAngleX += armRXChange;
 			upperArmR.rotateAngleY += change;

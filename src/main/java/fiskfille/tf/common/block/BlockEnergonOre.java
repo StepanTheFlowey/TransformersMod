@@ -11,10 +11,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class BlockEnergonOre extends Block {
 	public static int renderPass;
-	private final Random rand = new Random();
 	private IIcon[] icons;
 
 	public BlockEnergonOre() {
@@ -54,8 +54,10 @@ public class BlockEnergonOre extends Block {
 
 	@Override
 	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
-		if(getItemDropped(metadata, rand, fortune) != Item.getItemFromBlock(this)) {
-			return 1 + rand.nextInt(5);
+		final Random random = ThreadLocalRandom.current();
+
+		if(getItemDropped(metadata, random, fortune) != Item.getItemFromBlock(this)) {
+			return 1 + random.nextInt(5);
 		}
 
 		return 0;
@@ -68,9 +70,10 @@ public class BlockEnergonOre extends Block {
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		icons = new IIcon[3];
-		icons[0] = iconRegister.registerIcon(getTextureName());
-		icons[1] = iconRegister.registerIcon(getTextureName() + "_background");
-		icons[2] = iconRegister.registerIcon(getTextureName() + "_overlay");
+		icons = new IIcon[]{
+						iconRegister.registerIcon(getTextureName()),
+						iconRegister.registerIcon(getTextureName() + "_background"),
+						iconRegister.registerIcon(getTextureName() + "_overlay")
+		};
 	}
 }

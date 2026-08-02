@@ -55,7 +55,6 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 			if(getItemStacks()[slot].stackSize <= amount) {
 				itemstack = getItemStacks()[slot];
 				getItemStacks()[slot] = null;
-				return itemstack;
 			}
 			else {
 				itemstack = getItemStacks()[slot].splitStack(amount);
@@ -63,9 +62,9 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 				if(getItemStacks()[slot].stackSize == 0) {
 					getItemStacks()[slot] = null;
 				}
-
-				return itemstack;
 			}
+
+			return itemstack;
 		}
 		else {
 			return null;
@@ -103,12 +102,12 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 		super.readCustomNBT(nbt);
 
 		if(nbt.hasKey("LoadInventory")) {
-			NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+			final NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 			setItemStacks(new ItemStack[getSizeInventory()]);
 
 			for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-				byte slot = nbttagcompound1.getByte("Slot");
+				final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+				final byte slot = nbttagcompound1.getByte("Slot");
 
 				if(slot >= 0 && slot < getItemStacks().length) {
 					getItemStacks()[slot] = ItemStack.loadItemStackFromNBT(nbttagcompound1);

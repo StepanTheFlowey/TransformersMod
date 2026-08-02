@@ -25,29 +25,30 @@ public class GuiButtonAlt extends GuiButton {
 
 		GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
 		GL11.glColor3f(1F, 1F, 1F);
-		field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
-		int k = getHoverState(field_146123_n);
+		final int k = getHoverState(field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY));
 		GL11.glEnable(GL11.GL_BLEND);
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
 		drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height / 2);
 		drawTexturedModalRect(xPosition, yPosition + height / 2, 0, 66 - height / 2 + k * 20, width / 2, height / 2);
 		drawTexturedModalRect(xPosition + width / 2, yPosition, 200 - width / 2, 46 + k * 20, width / 2, height / 2);
 		drawTexturedModalRect(xPosition + width / 2, yPosition + height / 2, 200 - width / 2, 66 - height / 2 + k * 20, width / 2, height / 2);
-		mouseDragged(mc, mouseX, mouseY);
-		int l = 14737632;
 
+		mouseDragged(mc, mouseX, mouseY);
+
+		int color = 0xE0E0E0;
 		if(packedFGColour != 0) {
-			l = packedFGColour;
+			color = packedFGColour;
 		}
 		else if(!enabled) {
-			l = 10526880;
+			color = 0xA0A0A0;
 		}
 		else if(field_146123_n) {
-			l = 16777120;
+			color = 0xFFFFA0;
 		}
 
-		drawCenteredString(mc.fontRenderer, displayString, xPosition + width / 2, yPosition + (height - 8) / 2, l);
+		drawCenteredString(mc.fontRenderer, displayString, xPosition + width / 2, yPosition + (height - 8) / 2, color);
 		GL11.glPopAttrib();
 	}
 }

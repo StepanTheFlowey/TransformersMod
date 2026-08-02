@@ -48,7 +48,8 @@ public class ModelRendererBreakable extends ModelRendererTF {
 	@Override
 	public ModelRenderer addBox(String name, float p_78786_2_, float p_78786_3_, float p_78786_4_, int p_78786_5_, int p_78786_6_, int p_78786_7_) {
 		name = boxName + "." + name;
-		TextureOffset offset = baseModel.getTextureOffset(name);
+
+		final TextureOffset offset = baseModel.getTextureOffset(name);
 		setTextureOffset(offset.textureOffsetX, offset.textureOffsetY);
 		cubeList.add(new ModelBoxBreakable(this, textureOffsetX, textureOffsetY, p_78786_2_, p_78786_3_, p_78786_4_, p_78786_5_, p_78786_6_, p_78786_7_, 0F).func_78244_a(name));
 		return this;
@@ -79,14 +80,13 @@ public class ModelRendererBreakable extends ModelRendererTF {
 		displayLists[0] = displayList;
 		displayLists[1] = GLAllocation.generateDisplayLists(1);
 
-		boolean prevBreaking = breaking;
+		final boolean prevBreaking = breaking;
 		breaking = true;
 		GL11.glNewList(displayLists[1], GL11.GL_COMPILE);
-		Tessellator tessellator = Tessellator.instance;
 
 		for(Object cube : cubeList) {
 			if(renderBreaking) {
-				((ModelBox) cube).render(tessellator, f);
+				((ModelBox) cube).render(Tessellator.instance, f);
 			}
 		}
 
