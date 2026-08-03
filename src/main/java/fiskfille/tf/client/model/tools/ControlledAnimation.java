@@ -201,18 +201,18 @@ public class ControlledAnimation {
 	/**
 	 * Returns a value between 0F and 1F depending on the timer and duration of the animation. It reaches 1F using x^2 / (x^2 + (1-x)^2). It is smooth.
 	 */
-	public float getAnimationProgressPoly2() {
-		float x = (float) (timer / duration);
-		float x2 = x * x;
+	public double getAnimationProgressPoly2() {
+		final double x = timer / duration;
+		final double x2 = x * x;
 		return x2 / (x2 + (1 - x) * (1 - x));
 	}
 
 	/**
 	 * Returns a value between 0F and 1F depending on the timer and duration of the animation. It reaches 1F using x^3 / (x^3 + (1-x)^3). It is steep.
 	 */
-	public float getAnimationProgressPoly3() {
-		float x = (float) (timer / duration);
-		float x3 = x * x * x;
+	public double getAnimationProgressPoly3() {
+		final double x = timer / duration;
+		final double x3 = x * x * x;
 		return x3 / (x3 + (1 - x) * (1 - x) * (1 - x));
 	}
 
@@ -221,10 +221,10 @@ public class ControlledAnimation {
 	 *
 	 * @param n is the power of the polynomial function.
 	 */
-	public float getAnimationProgressPolyN(int n) {
-		double x = timer / duration;
-		double xi = Math.pow(x, n);
-		return (float) (xi / (xi + Math.pow(1D - x, n)));
+	public double getAnimationProgressPolyN(int n) {
+		final double x = timer / duration;
+		final double xn = Math.pow(x, n);
+		return xn / (xn + Math.pow(1 - x, n));
 	}
 
 	/**
