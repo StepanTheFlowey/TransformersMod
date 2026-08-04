@@ -9,37 +9,31 @@ import fiskfille.tf.common.transformer.TransformerVurp;
 import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import org.lwjgl.input.Mouse;
 
 public class TFShootManager {
 	public static int shootCooldown = 0;
 	public static int shotsLeft = 4;
-
-	public static boolean reloading;
-
 	public static int laserCharge;
 	public static boolean laserFilling;
+
+	private static boolean reloading;
 
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event) {
 		if(event.entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) event.entity;
+			final EntityPlayer player = (EntityPlayer) event.entity;
 
 			if(event.entity.worldObj.isRemote) {
-				int altMode = TFData.ALT_MODE.get(player);
-				boolean isTransformed = altMode != -1;
+				final boolean isTransformed = TFData.ALT_MODE.get(player) != -1;
 
 				if(player == Minecraft.getMinecraft().thePlayer) {
-					Transformer transformer = TFHelper.getTransformer(player);
-
 					if(laserFilling) {
-						int max = 50;
+						final int max = 50;
 
 						if(laserCharge < max) {
 							laserCharge += 1;
@@ -50,15 +44,15 @@ public class TFShootManager {
 						}
 					}
 
+					final Transformer transformer = TFHelper.getTransformer(player);
 					if(transformer != null) {
 						if(shootCooldown > 0) {
 							shootCooldown--;
 						}
 
-						Item ammo = transformer.getShootItem();
-
+						final Item ammo = transformer.getShootItem();
 						if(ammo != null) {
-							int ammoCount = getShotsLeft(player, transformer, ammo);
+							final int ammoCount = getShotsLeft(player, transformer, ammo);
 
 							if(isTransformed) {
 								if(reloading && shootCooldown <= 0) {
@@ -66,23 +60,19 @@ public class TFShootManager {
 									reloading = false;
 								}
 							}
-							else {
-								int shots = ammoCount;
-
-								if(shotsLeft > shots) {
-									shotsLeft = shots;
-								}
+							else if(shotsLeft > ammoCount) {
+								shotsLeft = ammoCount;
 							}
 						}
 					}
 				}
 
-				Transformer transformer = TFHelper.getTransformer(player);
-
 				if(Mouse.isButtonDown(1)) {
+					final Transformer transformer = TFHelper.getTransformer(player);
+
 					if(transformer != null && isTransformed) {
 						if(transformer.canShoot(player) && transformer.hasRapidFire() && player.ticksExisted % 2 == 0) {
-							stealthForceShoot(transformer, player, altMode);
+							stealthForceShoot(transformer, player);
 						}
 					}
 				}
@@ -90,8 +80,8 @@ public class TFShootManager {
 		}
 	}
 
-	private int getShotsLeft(EntityPlayer player, Transformer transformer, Item shootItem) {
-		int maxAmmo = transformer.getShots();
+	private static int getShotsLeft(EntityPlayer player, Transformer transformer, Item shootItem) {
+		final int maxAmmo = transformer.getShots();
 		int ammoCount;
 
 		if(player.capabilities.isCreativeMode) {
@@ -112,11 +102,10 @@ public class TFShootManager {
 		return ammoCount;
 	}
 
-	private int getAmountOf(Item item, EntityPlayer player) {
+	private static int getAmountOf(Item item, EntityPlayer player) {
 		int amount = 0;
-		InventoryPlayer inventory = player.inventory;
 
-		for(ItemStack stack : inventory.mainInventory) {
+		for(final ItemStack stack : player.inventory.mainInventory) {
 			if(stack != null) {
 				if(stack.getItem() == item) {
 					amount += stack.stackSize;
@@ -129,24 +118,24 @@ public class TFShootManager {
 
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		EntityPlayer player = event.entityPlayer;
-		Transformer transformer = TFHelper.getTransformer(player);
-		Action action = event.action;
+		switch(event.action) {
+			case RIGHT_CLICK_AIR:
+			case RIGHT_CLICK_BLOCK:
+				final EntityPlayer player = event.entityPlayer;
+				final Transformer transformer = TFHelper.getTransformer(player);
+				final boolean isTransformed = TFData.ALT_MODE.get(player) != -1;
 
-		if(action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR || action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-			int altMode = TFData.ALT_MODE.get(player);
-			boolean isTransformed = altMode != -1;
-
-			if(transformer != null && isTransformed) {
-				if(transformer.canShoot(player) && !transformer.hasRapidFire() && player.worldObj.isRemote) {
-					stealthForceShoot(transformer, player, altMode);
-					event.setCanceled(true);
+				if(transformer != null && isTransformed) {
+					if(transformer.canShoot(player) && !transformer.hasRapidFire() && player.worldObj.isRemote) {
+						stealthForceShoot(transformer, player);
+						event.setCanceled(true);
+					}
 				}
-			}
+				break;
 		}
 	}
 
-	private void stealthForceShoot(Transformer transformer, EntityPlayer player, int altMode) {
+	private static void stealthForceShoot(Transformer transformer, EntityPlayer player) {
 		if(player == Minecraft.getMinecraft().thePlayer) {
 			if(transformer instanceof TransformerVurp) {
 				if(transformer.canShoot(player)) {
@@ -155,11 +144,9 @@ public class TFShootManager {
 						player.playSound("random.fizz", 1, 2F);
 						TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, false));
 					}
-					else {
-						if(!laserFilling && (player.inventory.hasItem(transformer.getShootItem()) || player.capabilities.isCreativeMode)) {
-							TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, true));
-							laserFilling = true;
-						}
+					else if(!laserFilling && (player.inventory.hasItem(transformer.getShootItem()) || player.capabilities.isCreativeMode)) {
+						TFNetworkManager.networkWrapper.sendToServer(new MessageLaserShoot(player, true));
+						laserFilling = true;
 					}
 				}
 			}
@@ -167,10 +154,10 @@ public class TFShootManager {
 				if(shotsLeft > 0) {
 					if(shootCooldown <= 0) {
 						if(transformer.canShoot(player)) {
-							Item shootItem = transformer.getShootItem();
+							final Item shootItem = transformer.getShootItem();
 
-							boolean isCreative = player.capabilities.isCreativeMode;
-							boolean hasAmmo = isCreative || player.inventory.hasItem(shootItem);
+							final boolean isCreative = player.capabilities.isCreativeMode;
+							final boolean hasAmmo = isCreative || player.inventory.hasItem(shootItem);
 
 							if(hasAmmo) {
 								TFNetworkManager.networkWrapper.sendToServer(new MessageVehicleShoot(player));
@@ -193,11 +180,9 @@ public class TFShootManager {
 						}
 					}
 				}
-				else {
-					if(!reloading) {
-						shootCooldown = 20;
-						reloading = true;
-					}
+				else if(!reloading) {
+					shootCooldown = 20;
+					reloading = true;
 				}
 			}
 		}
