@@ -151,12 +151,13 @@ public class TFShootManager {
 				}
 			}
 			else {
+				final boolean isCreative = player.capabilities.isCreativeMode;
+
 				if(shotsLeft > 0) {
 					if(shootCooldown <= 0) {
 						if(transformer.canShoot(player)) {
 							final Item shootItem = transformer.getShootItem();
 
-							final boolean isCreative = player.capabilities.isCreativeMode;
 							final boolean hasAmmo = isCreative || player.inventory.hasItem(shootItem);
 
 							if(hasAmmo) {
@@ -175,13 +176,13 @@ public class TFShootManager {
 						shotsLeft--;
 
 						if(shotsLeft <= 0) {
-							shootCooldown = 20;
+							shootCooldown = isCreative ? 0 : 20;
 							reloading = true;
 						}
 					}
 				}
 				else if(!reloading) {
-					shootCooldown = 20;
+					shootCooldown = isCreative ? 0 : 20;
 					reloading = true;
 				}
 			}
