@@ -8,6 +8,7 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.common.tileentity.TileEntityDisplayStation;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class MessageColorArmor implements IMessage {
@@ -50,15 +51,13 @@ public class MessageColorArmor implements IMessage {
 		public IMessage onMessage(MessageColorArmor message, MessageContext ctx) {
 			final EntityPlayer player = ctx.side.isClient() ? TransformersMod.proxy.getPlayer() : ctx.getServerHandler().playerEntity;
 			final World world = player.worldObj;
-			final TileEntityDisplayStation tileentity = (TileEntityDisplayStation) world.getTileEntity(message.x, message.y, message.z);
+			final TileEntity tileentity = world.getTileEntity(message.x, message.y, message.z);
 
-			if(tileentity != null) {
-				if(tileentity.setColor(message.primaryColor, message.secondaryColor)) {
-					world.markBlockForUpdate(message.x, message.y, message.z);
+			if(tileentity instanceof TileEntityDisplayStation && ((TileEntityDisplayStation) tileentity).setColor(message.primaryColor, message.secondaryColor)) {
+				world.markBlockForUpdate(message.x, message.y, message.z);
 
-					if(ctx.side.isServer()) {
-						TFNetworkManager.networkWrapper.sendToAll(new MessageColorArmor(message.x, message.y, message.z, message.primaryColor, message.secondaryColor));
-					}
+				if(ctx.side.isServer()) {
+					TFNetworkManager.networkWrapper.sendToAll(new MessageColorArmor(message.x, message.y, message.z, message.primaryColor, message.secondaryColor));
 				}
 			}
 
