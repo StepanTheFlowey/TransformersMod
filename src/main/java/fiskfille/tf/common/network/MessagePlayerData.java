@@ -88,7 +88,6 @@ public class MessagePlayerData implements IMessage {
 			return null;
 		}
 
-		@SideOnly(Side.SERVER)
 		private IMessage server(MessagePlayerData message, MessageContext ctx) {
 			final EntityPlayer player = ctx.getServerHandler().playerEntity;
 
