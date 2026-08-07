@@ -26,7 +26,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 		return inventory;
 	}
 
-	public void setItemStacks(ItemStack[] itemstacks) {
+	public void setItemStacks(final ItemStack[] itemstacks) {
 		if(hasWorldObj()) {
 			final TileEntityContainer base = TFTileHelper.getTileBase(this);
 
@@ -43,14 +43,14 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int slot) {
+	public ItemStack getStackInSlot(final int slot) {
 		return getItemStacks()[slot];
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
+	public ItemStack decrStackSize(final int slot, final int amount) {
 		if(getItemStacks()[slot] != null) {
-			ItemStack itemstack;
+			final ItemStack itemstack;
 
 			if(getItemStacks()[slot].stackSize <= amount) {
 				itemstack = getItemStacks()[slot];
@@ -73,7 +73,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack getStackInSlotOnClosing(final int slot) {
 		if(getItemStacks()[slot] != null) {
 			final ItemStack itemstack = getItemStacks()[slot];
 			getItemStacks()[slot] = null;
@@ -85,7 +85,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack itemstack) {
+	public void setInventorySlotContents(final int slot, final ItemStack itemstack) {
 		getItemStacks()[slot] = itemstack;
 
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
@@ -99,7 +99,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		if(nbt.hasKey("LoadInventory")) {
 			final NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 			setItemStacks(new ItemStack[getSizeInventory()]);
@@ -116,7 +116,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		if(TFTileHelper.getTileBase(this) != this) {
 			return;
 		}
@@ -142,7 +142,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUseableByPlayer(final EntityPlayer player) {
 		return player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
 	}
 
@@ -155,7 +155,7 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
 		return true;
 	}
 }

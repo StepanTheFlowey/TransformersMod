@@ -14,8 +14,8 @@ import java.util.Map;
 public class TFDataManager {
 	private static final Map<EntityPlayer, Integer> zoomTimerClient = new HashMap<>();
 
-	public static int getAltForTransformAnimation(EntityPlayer player) {
-		int alt = TFData.ALT_MODE.get(player);
+	public static int getAltForTransformAnimation(final EntityPlayer player) {
+		final int alt = TFData.ALT_MODE.get(player);
 
 		if(alt != -1) {
 			return alt;
@@ -28,15 +28,15 @@ public class TFDataManager {
 	/**
 	 * Sets Vurp's Sniper zoom for the specified player.
 	 */
-	public static void setZoomTimer(EntityPlayer player, int timer) {
+	public static void setZoomTimer(final EntityPlayer player, final int timer) {
 		zoomTimerClient.put(player, timer);
 	}
 
 	/**
 	 * @return the current frame of the zoom animation for the specified player.
 	 */
-	public static int getZoomTimer(EntityPlayer player) {
-		Integer timer = zoomTimerClient.get(player);
+	public static int getZoomTimer(final EntityPlayer player) {
+		final Integer timer = zoomTimerClient.get(player);
 
 		return timer != null ? timer : 0;
 	}
@@ -44,7 +44,7 @@ public class TFDataManager {
 	/**
 	 * Tells the player about certain settings set on the server. Call only from server side.
 	 */
-	public static void updatePlayerWithServerInfo(EntityPlayer player) {
+	public static void updatePlayerWithServerInfo(final EntityPlayer player) {
 		if(!player.worldObj.isRemote) {
 			TFNetworkManager.networkWrapper.sendTo(new MessagePlayerJoin(player), (EntityPlayerMP) player);
 		}

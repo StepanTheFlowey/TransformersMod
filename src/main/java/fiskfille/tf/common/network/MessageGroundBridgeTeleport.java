@@ -15,7 +15,7 @@ public class MessageGroundBridgeTeleport implements IMessage {
 
 	public MessageGroundBridgeTeleport() {}
 
-	public MessageGroundBridgeTeleport(Entity entity, TileEntityGroundBridgeTeleporter tile) {
+	public MessageGroundBridgeTeleport(final Entity entity, final TileEntityGroundBridgeTeleporter tile) {
 		id = entity.getEntityId();
 		x = tile.xCoord;
 		y = tile.yCoord;
@@ -23,7 +23,7 @@ public class MessageGroundBridgeTeleport implements IMessage {
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 		x = buf.readInt();
 		y = buf.readInt();
@@ -31,7 +31,7 @@ public class MessageGroundBridgeTeleport implements IMessage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		buf.writeInt(x);
 		buf.writeInt(y);
@@ -40,12 +40,12 @@ public class MessageGroundBridgeTeleport implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessageGroundBridgeTeleport, IMessage> {
 		@Override
-		public IMessage onMessage(MessageGroundBridgeTeleport message, MessageContext ctx) {
+		public IMessage onMessage(final MessageGroundBridgeTeleport message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.id);
 
 				if(entity != null && entity.worldObj.getTileEntity(message.x, message.y, message.z) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter teleporter = (TileEntityGroundBridgeTeleporter) entity.worldObj.getTileEntity(message.x, message.y, message.z);
+					final TileEntityGroundBridgeTeleporter teleporter = (TileEntityGroundBridgeTeleporter) entity.worldObj.getTileEntity(message.x, message.y, message.z);
 					BlockGroundBridgeTeleporter.doTeleportClient(entity, teleporter);
 				}
 			}

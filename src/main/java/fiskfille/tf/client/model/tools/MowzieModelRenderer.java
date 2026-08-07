@@ -34,11 +34,11 @@ public class MowzieModelRenderer extends ModelRenderer {
 	protected boolean compiled;
 	protected int displayList;
 
-	public MowzieModelRenderer(ModelBase modelBase, String name) {
+	public MowzieModelRenderer(final ModelBase modelBase, final String name) {
 		super(modelBase, name);
 	}
 
-	public MowzieModelRenderer(ModelBase modelBase, int x, int y) {
+	public MowzieModelRenderer(final ModelBase modelBase, final int x, final int y) {
 		super(modelBase, x, y);
 
 		if(modelBase instanceof MowzieModelBase) {
@@ -46,12 +46,12 @@ public class MowzieModelRenderer extends ModelRenderer {
 		}
 	}
 
-	public MowzieModelRenderer(ModelBase modelBase) {
+	public MowzieModelRenderer(final ModelBase modelBase) {
 		super(modelBase);
 	}
 
 	@Override
-	public void addChild(ModelRenderer renderer) {
+	public void addChild(final ModelRenderer renderer) {
 		super.addChild(renderer);
 
 		if(renderer instanceof MowzieModelRenderer) {
@@ -59,7 +59,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 		}
 	}
 
-	public void postRenderParentChain(float f) {
+	public void postRenderParentChain(final float f) {
 		if(parent instanceof MowzieModelRenderer) {
 			((MowzieModelRenderer) parent).postRenderParentChain(f);
 		}
@@ -80,7 +80,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 	/**
 	 * Sets the parent of this ModelRenderer
 	 */
-	private void setParent(ModelRenderer modelRenderer) {
+	private void setParent(final ModelRenderer modelRenderer) {
 		parent = modelRenderer;
 	}
 
@@ -122,7 +122,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 		}
 	}
 
-	public void setRotationAngles(float x, float y, float z) {
+	public void setRotationAngles(final float x, final float y, final float z) {
 		rotateAngleX = x;
 		rotateAngleY = y;
 		rotateAngleZ = z;
@@ -191,7 +191,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 	/**
 	 * Copies the rotation point coordinates.
 	 */
-	public void copyAllRotationPoints(MowzieModelRenderer target) {
+	public void copyAllRotationPoints(final MowzieModelRenderer target) {
 		rotationPointX = target.rotationPointX;
 		rotationPointY = target.rotationPointY;
 		rotationPointZ = target.rotationPointZ;
@@ -200,25 +200,25 @@ public class MowzieModelRenderer extends ModelRenderer {
 	/**
 	 * Copies X rotation point.
 	 */
-	public void copyXRotationPoint(MowzieModelRenderer target) {
+	public void copyXRotationPoint(final MowzieModelRenderer target) {
 		rotationPointX = target.rotationPointX;
 	}
 
 	/**
 	 * Copies Y rotation point.
 	 */
-	public void copyYRotationPoint(MowzieModelRenderer target) {
+	public void copyYRotationPoint(final MowzieModelRenderer target) {
 		rotationPointY = target.rotationPointY;
 	}
 
 	/**
 	 * Copies Z rotation point.
 	 */
-	public void copyZRotationPoint(MowzieModelRenderer target) {
+	public void copyZRotationPoint(final MowzieModelRenderer target) {
 		rotationPointZ = target.rotationPointZ;
 	}
 
-	public void renderWithParents(float partialTicks) {
+	public void renderWithParents(final float partialTicks) {
 		if(parent instanceof MowzieModelRenderer) {
 			((MowzieModelRenderer) parent).renderWithParents(partialTicks);
 		}
@@ -229,7 +229,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 		render(partialTicks);
 	}
 
-	public void setScale(float x, float y, float z) {
+	public void setScale(final float x, final float y, final float z) {
 		scaleX = x;
 		scaleY = y;
 		scaleZ = z;
@@ -237,7 +237,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void render(float f) {
+	public void render(final float f) {
 		GL11.glPushMatrix();
 
 		if(!isHidden && showModel) {
@@ -302,7 +302,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void postRender(float f) {
+	public void postRender(final float f) {
 		if(!isHidden && showModel) {
 			if(!compiled) {
 				compileDisplayList(f);
@@ -336,12 +336,12 @@ public class MowzieModelRenderer extends ModelRenderer {
 	}
 
 	@SideOnly(Side.CLIENT)
-	protected void compileDisplayList(float f) {
+	protected void compileDisplayList(final float f) {
 		displayList = GLAllocation.generateDisplayLists(1);
 		GL11.glNewList(displayList, GL11.GL_COMPILE);
 
 		final Tessellator tessellator = Tessellator.instance;
-		for(Object cube : cubeList) {
+		for(final Object cube : cubeList) {
 			((ModelBox) cube).render(tessellator, f);
 		}
 
@@ -349,7 +349,7 @@ public class MowzieModelRenderer extends ModelRenderer {
 		compiled = true;
 	}
 
-	public void renderWithParentRotations(float partialTicks) {
+	public void renderWithParentRotations(final float partialTicks) {
 		final float x = getParentRotX();
 		final float y = getParentRotY();
 		final float z = getParentRotZ();

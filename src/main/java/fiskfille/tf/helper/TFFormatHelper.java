@@ -7,8 +7,8 @@ import net.minecraft.util.IChatComponent;
 import java.util.List;
 
 public class TFFormatHelper {
-	public static String formatNumber(float f) {
-		String s = (long) f + "";
+	public static String formatNumber(final float f) {
+		final String s = (long) f + "";
 
 		if(!s.contains("E")) {
 			final StringBuilder s1 = new StringBuilder();
@@ -27,9 +27,9 @@ public class TFFormatHelper {
 		return s;
 	}
 
-	public static String formatNumberPrecise(float f) {
+	public static String formatNumberPrecise(final float f) {
 		String s = formatNumber(f);
-		String s1 = ItemStack.field_111284_a.format(f);
+		final String s1 = ItemStack.field_111284_a.format(f);
 
 		if(s1.contains(".")) {
 			s += s1.substring(s1.lastIndexOf("."));
@@ -51,10 +51,10 @@ public class TFFormatHelper {
 		return s.substring(0, 1).toUpperCase() + s.substring(1);
 	}
 
-	public static List<String> toString(List<IChatComponent> list) {
-		List<String> list1 = Lists.newArrayList();
+	public static List<String> toString(final List<IChatComponent> list) {
+		final List<String> list1 = Lists.newArrayList();
 
-		for(IChatComponent component : list) {
+		for(final IChatComponent component : list) {
 			list1.add(component == null ? "" : component.getFormattedText());
 		}
 

@@ -21,29 +21,29 @@ public class DataProviderMachine implements IWailaDataProvider {
 	public final String key;
 	public final Class targetClass;
 
-	public DataProviderMachine(String s, Class c) {
+	public DataProviderMachine(final String s, final Class c) {
 		key = s;
 		targetClass = c;
 	}
 
 	@Override
-	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
+	public ItemStack getWailaStack(final IWailaDataAccessor accessor, final IWailaConfigHandler config) {
 		return null;
 	}
 
 	@Override
-	public List<String> getWailaHead(ItemStack itemstack, List<String> list, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+	public List<String> getWailaHead(final ItemStack itemstack, final List<String> list, final IWailaDataAccessor accessor, final IWailaConfigHandler config) {
 		return list;
 	}
 
 	@Override
-	public List<String> getWailaBody(ItemStack itemstack, List<String> list, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		TileEntity tileentity = TFTileHelper.getTileBase(accessor.getTileEntity());
+	public List<String> getWailaBody(final ItemStack itemstack, final List<String> list, final IWailaDataAccessor accessor, final IWailaConfigHandler config) {
+		final TileEntity tileentity = TFTileHelper.getTileBase(accessor.getTileEntity());
 
 		if(tileentity.getClass() == targetClass && config.getConfig(key, true)) {
 			if(tileentity instanceof IEnergyContainer) {
-				IEnergyContainer energyContainer = (IEnergyContainer) tileentity;
-				EnergyStorage storage = new EnergyStorage(energyContainer.getMaxEnergy());
+				final IEnergyContainer energyContainer = (IEnergyContainer) tileentity;
+				final EnergyStorage storage = new EnergyStorage(energyContainer.getMaxEnergy());
 				storage.set(energyContainer.getEnergy());
 				storage.setUsage(energyContainer.getEnergyUsage());
 
@@ -55,8 +55,8 @@ public class DataProviderMachine implements IWailaDataProvider {
 			}
 
 			if(tileentity instanceof IFluidHandlerTF) {
-				IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tileentity;
-				FluidTankTF tank = getFluid(tileentity, fluidHandler);
+				final IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tileentity;
+				final FluidTankTF tank = getFluid(tileentity, fluidHandler);
 
 				list.addAll(TFFormatHelper.toString(tank.format()));
 			}
@@ -65,17 +65,17 @@ public class DataProviderMachine implements IWailaDataProvider {
 		return list;
 	}
 
-	public FluidTankTF getFluid(TileEntity tile, IFluidHandlerTF fluidHandler) {
+	public FluidTankTF getFluid(final TileEntity tile, final IFluidHandlerTF fluidHandler) {
 		return fluidHandler.getTank();
 	}
 
 	@Override
-	public List<String> getWailaTail(ItemStack itemstack, List<String> list, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+	public List<String> getWailaTail(final ItemStack itemstack, final List<String> list, final IWailaDataAccessor accessor, final IWailaConfigHandler config) {
 		return list;
 	}
 
 	@Override
-	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound nbttagcompound, World world, int x, int y, int z) {
+	public NBTTagCompound getNBTData(final EntityPlayerMP player, final TileEntity tile, final NBTTagCompound nbttagcompound, final World world, final int x, final int y, final int z) {
 		return null;
 	}
 }

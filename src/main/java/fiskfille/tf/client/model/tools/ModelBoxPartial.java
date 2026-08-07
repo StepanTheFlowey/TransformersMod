@@ -23,7 +23,7 @@ public class ModelBoxPartial extends ModelBox {
 	protected float depth;
 	private TexturedQuadPartial[] quadList;
 
-	public ModelBoxPartial(ModelRendererPartial modelRenderer, int texX, int texY, float x, float y, float z, int w, int h, int d, float mcScale) {
+	public ModelBoxPartial(final ModelRendererPartial modelRenderer, final int texX, final int texY, final float x, final float y, final float z, final int w, final int h, final int d, final float mcScale) {
 		super(modelRenderer, texX, texY, x, y, z, w, h, d, mcScale);
 		model = modelRenderer;
 		textureX = texX;
@@ -37,7 +37,7 @@ public class ModelBoxPartial extends ModelBox {
 		return AxisAlignedBB.getBoundingBox(posX1, posY1, posZ1, posX2, posY2, posZ2);
 	}
 
-	public void setBounds(AxisAlignedBB aabb) {
+	public void setBounds(final AxisAlignedBB aabb) {
 		width = (float) (aabb.maxX - aabb.minX);
 		height = (float) (aabb.maxY - aabb.minY);
 		depth = (float) (aabb.maxZ - aabb.minZ);
@@ -90,7 +90,7 @@ public class ModelBoxPartial extends ModelBox {
 		quadList[5] = new TexturedQuadPartial(new PositionTextureVertex[]{vertex5, vertex6, vertex7, vertex8}, textureX + depth + width + depth, textureY + depth + offset, textureX + depth + width + depth + width, textureY + depth + offset + height, model.textureWidth, model.textureHeight);
 
 		if(model.mirror) {
-			for(TexturedQuadPartial texturedQuadPartial : quadList) {
+			for(final TexturedQuadPartial texturedQuadPartial : quadList) {
 				texturedQuadPartial.flipFace();
 			}
 		}
@@ -98,8 +98,8 @@ public class ModelBoxPartial extends ModelBox {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void render(Tessellator tessellator, float f) {
-		for(TexturedQuadPartial texturedQuadPartial : quadList) {
+	public void render(final Tessellator tessellator, final float f) {
+		for(final TexturedQuadPartial texturedQuadPartial : quadList) {
 			texturedQuadPartial.draw(tessellator, f);
 		}
 	}

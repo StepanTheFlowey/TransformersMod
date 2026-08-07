@@ -23,7 +23,7 @@ public class GuiTransmitter extends GuiContainerTF {
 	private GuiHoverFieldEnergy fieldEnergy;
 	private GuiHoverFieldFluid fieldFluid;
 
-	public GuiTransmitter(InventoryPlayer inventoryPlayer, TileEntityTransmitter tile) {
+	public GuiTransmitter(final InventoryPlayer inventoryPlayer, final TileEntityTransmitter tile) {
 		super(new ContainerTransmitter(inventoryPlayer, tile));
 		tileentity = tile;
 	}
@@ -31,8 +31,8 @@ public class GuiTransmitter extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2;
+		final int y = (height - ySize) / 2;
 
 		buttonList.add(fieldEnergy = new GuiHoverFieldEnergy(x + 107, y + 17, 16, 52, tileentity.data.storage));
 		buttonList.add(fieldFluid = new GuiHoverFieldFluid(x + 77, y + 17, 20, 52, tileentity.data.tank));
@@ -48,8 +48,8 @@ public class GuiTransmitter extends GuiContainerTF {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
+	protected void actionPerformed(final GuiButton button) {
+		final int id = button.id;
 
 		if(id == 0) {
 			mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
@@ -61,14 +61,14 @@ public class GuiTransmitter extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
 		mc.getTextureManager().bindTexture(guiTextures);

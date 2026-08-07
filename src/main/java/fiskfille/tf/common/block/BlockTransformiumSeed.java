@@ -20,7 +20,7 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
+	public void onBlockAdded(final World world, final int x, final int y, final int z) {
 		if(world.isBlockIndirectlyGettingPowered(x, y, z)) {
 			ignite(world, x, y, z, world.getBlockMetadata(x, y, z), null);
 			world.setBlockToAir(x, y, z);
@@ -28,14 +28,14 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+	public void onNeighborBlockChange(final World world, final int x, final int y, final int z, final Block block) {
 		if(world.isBlockIndirectlyGettingPowered(x, y, z)) {
 			ignite(world, x, y, z, world.getBlockMetadata(x, y, z), null);
 			world.setBlockToAir(x, y, z);
 		}
 	}
 
-	public void ignite(World world, int x, int y, int z, int metadata, EntityLivingBase entity) {
+	public void ignite(final World world, final int x, final int y, final int z, final int metadata, final EntityLivingBase entity) {
 		if(!world.isRemote) {
 			final EntityTransformiumSeed seed = new EntityTransformiumSeed(world, x + 0.5F, y, z + 0.5F);
 			world.spawnEntityInWorld(seed);
@@ -48,14 +48,14 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int metadata, final float p_149727_7_, final float p_149727_8_, final float p_149727_9_) {
 		ignite(world, x, y, z, 1, player);
 		world.setBlockToAir(x, y, z);
 		return true;
 	}
 
 	@Override
-	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 src, Vec3 dst) {
+	public MovingObjectPosition collisionRayTrace(final World world, final int x, final int y, final int z, final Vec3 src, final Vec3 dst) {
 		final float f = 0.2F;
 		setBlockBounds(0.5F - f, 0F, 0.5F - f, 0.5F + f, 1F, 0.5F + f);
 		return super.collisionRayTrace(world, x, y, z, src, dst);
@@ -77,7 +77,7 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public TileEntity createNewTileEntity(final World world, final int metadata) {
 		return new TileEntityTransformiumSeed();
 	}
 }

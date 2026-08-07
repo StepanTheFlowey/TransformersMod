@@ -16,20 +16,20 @@ public class BlockEnergyPort extends BlockMachineBase {
 	}
 
 	@Override
-	public int getPlacedRotation(EntityLivingBase entity) {
+	public int getPlacedRotation(final EntityLivingBase entity) {
 		return 0;
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+	public int onBlockPlaced(final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY, final float hitZ, final int metadata) {
 		return ForgeDirection.getOrientation(side).getOpposite().ordinal();
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
-		float f = 0.0625F * 3.5F;
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
+		final float f = 0.0625F * 3.5F;
 
 		switch(dir) {
 			case DOWN:
@@ -72,7 +72,7 @@ public class BlockEnergyPort extends BlockMachineBase {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("iron_block");
 	}
 }

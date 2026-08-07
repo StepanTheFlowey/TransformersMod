@@ -25,7 +25,7 @@ public class BlockGroundBridgeFrame extends Block implements ITileEntityProvider
 		setResistance(5);
 	}
 
-	public static ForgeDirection getFrameDirection(IBlockAccess world, int x, int y, int z) {
+	public static ForgeDirection getFrameDirection(final IBlockAccess world, final int x, final int y, final int z) {
 		if(BlockGroundBridgeTeleporter.isNorthSouthFacingFramePresent(world, x, y, z)) {
 			return ForgeDirection.NORTH;
 		}
@@ -42,8 +42,8 @@ public class BlockGroundBridgeFrame extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		int metadata = world.getBlockMetadata(x, y, z);
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
+		final int metadata = world.getBlockMetadata(x, y, z);
 
 		if(getFrameDirection(world, x, y, z) != null) {
 			if(metadata == 0) {
@@ -60,19 +60,19 @@ public class BlockGroundBridgeFrame extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public TileEntity createNewTileEntity(final World world, final int metadata) {
 		return new TileEntityGroundBridgeFrame();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+	public IIcon getIcon(final IBlockAccess world, final int x, final int y, final int z, final int side) {
 		return side == 1 && getFrameDirection(world, x, y, z) != null ? centerIcon : super.getIcon(world, x, y, z, side);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon(getTextureName());
 		centerIcon = iconRegister.registerIcon(getTextureName() + "_center");
 	}

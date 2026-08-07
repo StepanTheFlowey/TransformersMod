@@ -11,8 +11,8 @@ public class RenderItemTransmitter extends RenderItemTileEntity {
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		float scale = 0.4F;
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
+		final float scale = 0.4F;
 		GL11.glScalef(scale, scale, scale);
 
 		if(type == ItemRenderType.ENTITY || type == ItemRenderType.INVENTORY) {
@@ -35,7 +35,7 @@ public class RenderItemTransmitter extends RenderItemTileEntity {
 		try {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(tileentity, 0, 0, 0, 0);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}

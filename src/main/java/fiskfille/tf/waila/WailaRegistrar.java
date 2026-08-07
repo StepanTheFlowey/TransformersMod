@@ -4,7 +4,7 @@ import fiskfille.tf.common.tileentity.*;
 import mcp.mobius.waila.api.IWailaRegistrar;
 
 public class WailaRegistrar {
-	public static void wailaCallback(IWailaRegistrar registrar) {
+	public static void wailaCallback(final IWailaRegistrar registrar) {
 		registrar.addConfig("Transformers Mod", "tf.energon_processor");
 		registrar.addConfig("Transformers Mod", "tf.alloy_crucible");
 		registrar.addConfig("Transformers Mod", "tf.energon_tank");

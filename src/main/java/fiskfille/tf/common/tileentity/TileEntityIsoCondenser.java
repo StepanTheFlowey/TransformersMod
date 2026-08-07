@@ -35,9 +35,9 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 
 		providers.clear();
 
-		for(ForgeDirection dir : new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST}) {
-			Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			float f = animationTimer.get(dir) == null ? 0 : animationTimer.get(dir);
+		for(final ForgeDirection dir : new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST}) {
+			final Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			final float f = animationTimer.get(dir) == null ? 0 : animationTimer.get(dir);
 
 			boolean active = false;
 
@@ -56,8 +56,8 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 
 		if(!worldObj.isRemote) {
 			if(canActivate()) {
-				for(Map.Entry<ForgeDirection, Block> e : providers.entrySet()) {
-					IEnergon ienergon = (IEnergon) e.getValue();
+				for(final Map.Entry<ForgeDirection, Block> e : providers.entrySet()) {
+					final IEnergon ienergon = (IEnergon) e.getValue();
 					receiveEnergy(getGenerationRate(ienergon.getMass()), false);
 				}
 			}
@@ -65,14 +65,14 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 			data.serverTick();
 		}
 
-		TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
+		final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
 
 		if(prevData instanceof TileDataEnergyContainer) {
 			data = new TileDataEnergyContainer((TileDataEnergyContainer) prevData);
 		}
 	}
 
-	public float getGenerationRate(int mass) {
+	public float getGenerationRate(final int mass) {
 		if(!canActivate()) {
 			return 0;
 		}
@@ -95,7 +95,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
@@ -105,7 +105,7 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 
 		if(data.storage.getEnergy() > 0) {
@@ -116,12 +116,12 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 	}
 
 	@Override
-	public float receiveEnergy(float amount, boolean simulate) {
+	public float receiveEnergy(final float amount, final boolean simulate) {
 		return data.storage.add(amount, simulate);
 	}
 
 	@Override
-	public float extractEnergy(float amount, boolean simulate) {
+	public float extractEnergy(final float amount, final boolean simulate) {
 		return data.storage.remove(amount, simulate);
 	}
 

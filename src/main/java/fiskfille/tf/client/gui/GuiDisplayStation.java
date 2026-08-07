@@ -32,7 +32,7 @@ public class GuiDisplayStation extends GuiContainerTF {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/display_station.png");
 	private final TileEntityDisplayStation tileentity;
 
-	public GuiDisplayStation(InventoryPlayer inventoryPlayer, TileEntityDisplayStation tile) {
+	public GuiDisplayStation(final InventoryPlayer inventoryPlayer, final TileEntityDisplayStation tile) {
 		super(new ContainerDisplayStation(inventoryPlayer, tile));
 		tileentity = tile;
 		ySize = 186;
@@ -64,7 +64,7 @@ public class GuiDisplayStation extends GuiContainerTF {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		switch(button.id) {
 			case 0:
 				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, 0));
@@ -80,11 +80,11 @@ public class GuiDisplayStation extends GuiContainerTF {
 		}
 	}
 
-	public Component getComponent(int slot) {
+	public Component getComponent(final int slot) {
 		final ItemStack itemstack = tileentity.getStackInSlot(4 + slot);
 
 		if(itemstack != null && itemstack.getItem() instanceof IComponent) {
-			IComponent icomponent = (IComponent) itemstack.getItem();
+			final IComponent icomponent = (IComponent) itemstack.getItem();
 			return icomponent.getComponent();
 		}
 
@@ -92,14 +92,14 @@ public class GuiDisplayStation extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = tileentity.hasCustomInventoryName() ? tileentity.getInventoryName() : I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		mc.getTextureManager().bindTexture(guiTextures);
 		GL11.glColor3f(1, 1, 1);
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
@@ -140,7 +140,7 @@ public class GuiDisplayStation extends GuiContainerTF {
 			}
 
 			if(tileentity.getStackInSlot(6) == null) {
-				ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1, TransformersAPI.getTransformers().indexOf(transformer));
+				final ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1, TransformersAPI.getTransformers().indexOf(transformer));
 				itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.getTextureManager(), itemstack, x + 144, y + 63);
 			}
 

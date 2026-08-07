@@ -15,8 +15,8 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
 
 	public IEnergyContainer getReceiver() {
-		ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
-		TileEntity tile = TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ));
+		final ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
+		final TileEntity tile = TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ));
 
 		if(tile instanceof IEnergyContainer && !(tile instanceof TileEntityEnergyPort)) {
 			return (IEnergyContainer) tile;
@@ -31,11 +31,11 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 	}
 
 	@Override
-	public boolean canReceiveEnergy(TileEntity from) {
+	public boolean canReceiveEnergy(final TileEntity from) {
 		return true;
 	}
 
@@ -58,9 +58,9 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 		return getInputVec(1.5F);
 	}
 
-	public Vec3 getInputVec(float height) {
-		ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
-		float f = 0.0625F * height;
+	public Vec3 getInputVec(final float height) {
+		final ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
+		final float f = 0.0625F * height;
 
 		if(dir == ForgeDirection.UP) {
 			return Vec3.createVectorHelper(0, 0.5F - f, 0);
@@ -69,10 +69,10 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 			return Vec3.createVectorHelper(0, -0.5F + f, 0);
 		}
 
-		int[] rotations = {2, 0, 1, 3};
-		float yaw = rotations[dir.ordinal() - 2] * 90;
+		final int[] rotations = {2, 0, 1, 3};
+		final float yaw = rotations[dir.ordinal() - 2] * 90;
 
-		Vec3 vec3 = Vec3.createVectorHelper(0, 0, 0.5F - f);
+		final Vec3 vec3 = Vec3.createVectorHelper(0, 0, 0.5F - f);
 		vec3.rotateAroundY(-yaw * (float) Math.PI / 180F);
 
 		return vec3;
@@ -84,8 +84,8 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 	}
 
 	@Override
-	public float receiveEnergy(float amount, boolean simulate) {
-		IEnergyContainer container = getReceiver();
+	public float receiveEnergy(final float amount, final boolean simulate) {
+		final IEnergyContainer container = getReceiver();
 
 		if(container != null) {
 			return container.receiveEnergy(amount, simulate);
@@ -95,8 +95,8 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 	}
 
 	@Override
-	public float extractEnergy(float amount, boolean simulate) {
-		IEnergyContainer container = getReceiver();
+	public float extractEnergy(final float amount, final boolean simulate) {
+		final IEnergyContainer container = getReceiver();
 
 		if(container != null) {
 			return container.extractEnergy(amount, simulate);
@@ -107,7 +107,7 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 
 	@Override
 	public float getEnergy() {
-		IEnergyContainer container = getReceiver();
+		final IEnergyContainer container = getReceiver();
 
 		if(container != null) {
 			return container.getEnergy();
@@ -118,7 +118,7 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 
 	@Override
 	public float getMaxEnergy() {
-		IEnergyContainer container = getReceiver();
+		final IEnergyContainer container = getReceiver();
 
 		if(container != null) {
 			return container.getMaxEnergy();
@@ -129,7 +129,7 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 
 	@Override
 	public float getEnergyUsage() {
-		IEnergyContainer container = getReceiver();
+		final IEnergyContainer container = getReceiver();
 
 		if(container != null) {
 			return container.getEnergyUsage();

@@ -14,7 +14,7 @@ public class DisplayableFlamethrower extends Displayable {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/flame_thrower.png");
 
 	@Override
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		bindTexture(texture);
 		GL11.glScalef(0.7F, 0.7F, 0.7F);
 		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);

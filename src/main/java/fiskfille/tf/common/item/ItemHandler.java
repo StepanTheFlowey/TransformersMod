@@ -24,8 +24,8 @@ public class ItemHandler {
 		MinecraftForge.EVENT_BUS.post(new ItemHandlerEvent.Init(itemHandlers));
 		hasInit = true;
 
-		for(Map.Entry<Class, String> e : itemHandlers.entrySet()) {
-			for(Field field : e.getKey().getFields()) {
+		for(final Map.Entry<Class, String> e : itemHandlers.entrySet()) {
+			for(final Field field : e.getKey().getFields()) {
 				final String s = field.getType().getName();
 
 				if(s.equals(ItemStack[].class.getName())) {
@@ -39,12 +39,12 @@ public class ItemHandler {
 		ItemMetaBasic.iconDomains = domains.toArray(new String[0]);
 	}
 
-	public static void load(World world) {
-		TFWorldData data = TFWorldData.get(world);
+	public static void load(final World world) {
+		final TFWorldData data = TFWorldData.get(world);
 		MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Pre(world));
 
-		for(Map.Entry<Class, String> e : itemHandlers.entrySet()) {
-			for(Field field : e.getKey().getFields()) {
+		for(final Map.Entry<Class, String> e : itemHandlers.entrySet()) {
+			for(final Field field : e.getKey().getFields()) {
 				final String s = field.getType().getName();
 
 				if(s.equals(ItemStack[].class.getName())) {
@@ -66,7 +66,7 @@ public class ItemHandler {
 
 						field.set(null, itemstacks);
 					}
-					catch(Exception exception) {
+					catch(final Exception exception) {
 						exception.printStackTrace();
 					}
 				}
@@ -77,7 +77,7 @@ public class ItemHandler {
 		MinecraftForge.EVENT_BUS.post(new ItemStitchEvent.Post(world));
 	}
 
-	public static boolean matches(ItemStack itemstack, ItemStack[] item) {
+	public static boolean matches(final ItemStack itemstack, final ItemStack[] item) {
 		return itemstack != null && item[1].getItem() == itemstack.getItem() && item[1].getItemDamage() == itemstack.getItemDamage();
 	}
 }

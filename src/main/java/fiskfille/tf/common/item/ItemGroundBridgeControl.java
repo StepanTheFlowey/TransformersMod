@@ -9,12 +9,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemGroundBridgeControl extends ItemMachine {
-	public ItemGroundBridgeControl(Block block) {
+	public ItemGroundBridgeControl(final Block block) {
 		super(block);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(final ItemStack itemstack, final EntityPlayer player, final World world, int x, int y, int z, final int side, final float hitX, final float hitY, final float hitZ) {
 		if(world.isRemote) {
 			return true;
 		}

@@ -40,7 +40,7 @@ public class TransformerSubwoofer extends TransformerTruck {
 	}
 
 	@Override
-	public void tick(EntityPlayer player, float timer) {
+	public void tick(final EntityPlayer player, final float timer) {
 		super.tick(player, timer);
 
 		player.addStat(TFAchievements.subwoofer, 1);

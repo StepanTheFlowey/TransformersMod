@@ -12,12 +12,12 @@ import java.util.List;
 public class GuiHoverFieldFluid extends GuiHoverField {
 	private FluidTankTF fluidTank;
 
-	public GuiHoverFieldFluid(int x, int y, int width, int height, FluidTankTF tank) {
+	public GuiHoverFieldFluid(final int x, final int y, final int width, final int height, final FluidTankTF tank) {
 		super(x, y, width, height, new ArrayList<>());
 		fluidTank = tank;
 	}
 
-	public void update(FluidTankTF tank) {
+	public void update(final FluidTankTF tank) {
 		fluidTank = tank;
 	}
 

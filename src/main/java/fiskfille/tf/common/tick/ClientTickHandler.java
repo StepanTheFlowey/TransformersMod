@@ -34,7 +34,7 @@ public class ClientTickHandler {
 	private EntityRenderer renderer, prevRenderer;
 
 	@SubscribeEvent
-	public void onPlayerTick(PlayerTickEvent event) {
+	public void onPlayerTick(final PlayerTickEvent event) {
 		final EntityPlayer player = event.player;
 
 		if(event.phase == TickEvent.Phase.END) {
@@ -53,7 +53,7 @@ public class ClientTickHandler {
 
 				if(player == Minecraft.getMinecraft().thePlayer) {
 					if(transformer.overrideFirstPerson()) {
-						GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
+						final GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
 
 						if(transformationTimer >= 0.5F) {
 							if(TFKeyBinds.keyBindingViewFront.getIsKeyPressed() && Minecraft.getMinecraft().currentScreen == null) {
@@ -85,17 +85,17 @@ public class ClientTickHandler {
 	}
 
 	@SubscribeEvent
-	public void onClientTick(ClientTickEvent event) {
+	public void onClientTick(final ClientTickEvent event) {
 		if(event.phase == TickEvent.Phase.START) {
 			final Minecraft minecraft = Minecraft.getMinecraft();
 
 			if(minecraft.theWorld != null) {
-				for(EntityPlayer player : (List<EntityPlayer>) minecraft.theWorld.playerEntities) {
+				for(final EntityPlayer player : (List<EntityPlayer>) minecraft.theWorld.playerEntities) {
 					TFRenderHelper.updateMotionY(player);
 				}
 
 				if(minecraft.theWorld.isRemote && !minecraft.isGamePaused()) {
-					for(Map.Entry<DimensionalCoords, TileData> e : TFTileHelper.getTileData().entrySet()) {
+					for(final Map.Entry<DimensionalCoords, TileData> e : TFTileHelper.getTileData().entrySet()) {
 						e.getValue().clientTick();
 					}
 				}
@@ -114,7 +114,7 @@ public class ClientTickHandler {
 	}
 
 	@SubscribeEvent
-	public void onRenderTick(RenderTickEvent event) {
+	public void onRenderTick(final RenderTickEvent event) {
 		renderTick = event.renderTickTime;
 
 		final Minecraft minecraft = Minecraft.getMinecraft();
@@ -146,7 +146,7 @@ public class ClientTickHandler {
 					final Transformer transformer = TFHelper.getTransformer(player);
 
 					if(transformer != null) {
-						float thirdPersonDistance;
+						final float thirdPersonDistance;
 
 						if(transformer.canZoom() && TFHelper.isFullyTransformed(player) && TFKeyBinds.keyBindingZoom.getIsKeyPressed() && !TFKeyBinds.keyBindingViewFront.getIsKeyPressed()) {
 							thirdPersonDistance = transformer.getZoomAmount();

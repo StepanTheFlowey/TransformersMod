@@ -19,7 +19,7 @@ public class ItemVurpsSniper extends Item {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player) {
 		if(TFHelper.getTransformer(player) instanceof TransformerVurp && !TFHelper.isFullyTransformed(player) && world.isRemote) {
 			if(!TFShootManager.laserFilling && TFShootManager.laserCharge > 0) {
 				TFShootManager.laserCharge -= 5;

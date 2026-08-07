@@ -40,7 +40,7 @@ public class GuiSelectReceivers extends GuiScreen {
 	public DimensionalCoords[] coordArray;
 	public GuiVerticalHeightSlider heightSlider;
 
-	public GuiSelectReceivers(TileEntity tile) {
+	public GuiSelectReceivers(final TileEntity tile) {
 		owner = tile;
 		transmitter = (IEnergyTransmitter) owner;
 	}
@@ -77,7 +77,7 @@ public class GuiSelectReceivers extends GuiScreen {
 		layers.add(owner.yCoord);
 
 		final List<TileEntity> tiles = mc.theWorld.loadedTileEntityList;
-		for(TileEntity loadedTile : tiles) {
+		for(final TileEntity loadedTile : tiles) {
 			if(loadedTile instanceof IEnergyReceiver && ((IEnergyReceiver) loadedTile).canReceiveEnergy(owner) && TFEnergyHelper.isInRange(owner, loadedTile)) {
 				if(!layers.contains(loadedTile.yCoord)) {
 					layers.add(loadedTile.yCoord);
@@ -146,21 +146,21 @@ public class GuiSelectReceivers extends GuiScreen {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		if(button.id == 0) {
 			mc.thePlayer.closeScreen();
 		}
 	}
 
 	@Override
-	protected void keyTyped(char c, int key) {
+	protected void keyTyped(final char c, final int key) {
 		if(key == 1 || key == mc.gameSettings.keyBindInventory.getKeyCode()) {
 			mc.thePlayer.closeScreen();
 		}
 	}
 
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int button) {
+	protected void mouseClicked(final int mouseX, final int mouseY, final int button) {
 		super.mouseClicked(mouseX, mouseY, button);
 
 		if(button == 0) {
@@ -215,7 +215,7 @@ public class GuiSelectReceivers extends GuiScreen {
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj, I18n.format("gui.transmitter.select_receivers"), width / 2, 15, 16777215);
 
@@ -277,12 +277,12 @@ public class GuiSelectReceivers extends GuiScreen {
 			}
 
 			final HashSet<DimensionalCoords> receiverCoords = new HashSet<>();
-			for(ReceiverEntry entry : transmitter.getTransmissionHandler().getReceivers()) {
+			for(final ReceiverEntry entry : transmitter.getTransmissionHandler().getReceivers()) {
 				receiverCoords.add(entry.getCoords());
 			}
 
 			final Tessellator tessellator = Tessellator.instance;
-			float prevWidth = GL11.glGetFloat(GL11.GL_LINE_WIDTH);
+			final float prevWidth = GL11.glGetFloat(GL11.GL_LINE_WIDTH);
 
 			final ArrayList<DimensionalCoords> coordList = Lists.newArrayList(coordArray);
 			final float f = 0.5F;
@@ -308,7 +308,7 @@ public class GuiSelectReceivers extends GuiScreen {
 								color = ((IEnergyReceiver) tile).getMapColor();
 							}
 
-							for(ReceiverEntry entry : transmitter1.getTransmissionHandler().getReceivers()) {
+							for(final ReceiverEntry entry : transmitter1.getTransmissionHandler().getReceivers()) {
 								final int index = coordList.indexOf(entry.getCoords());
 
 								if(index >= 0 && entry.getCoords().posY == getLayer()) {
@@ -356,7 +356,7 @@ public class GuiSelectReceivers extends GuiScreen {
 				}
 			}
 
-			for(DimensionalCoords coords : receiverCoords) {
+			for(final DimensionalCoords coords : receiverCoords) {
 				final int index = coordList.indexOf(coords);
 
 				if(index >= 0 && coords.posY == getLayer()) {
@@ -461,8 +461,8 @@ public class GuiSelectReceivers extends GuiScreen {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
 		final int direction = MathHelper.floor_float(mc.thePlayer.rotationYaw * 4F / 360F + 2.5F) & 3;
-		String[] dirs = {"north", "east", "south", "west"};
-		String[] astring = new String[dirs.length];
+		final String[] dirs = {"north", "east", "south", "west"};
+		final String[] astring = new String[dirs.length];
 
 		for(int i = 0; i < dirs.length; ++i) {
 			astring[i] = I18n.format("direction." + dirs[(i + direction) % dirs.length] + ".short");

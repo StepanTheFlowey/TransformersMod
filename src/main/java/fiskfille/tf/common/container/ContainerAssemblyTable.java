@@ -13,7 +13,7 @@ public class ContainerAssemblyTable extends ContainerBasic {
 	public final InventoryAssembly craftMatrix = new InventoryAssembly(this, 5, 5);
 	public final IInventory craftResult = new InventoryCraftResult();
 
-	public ContainerAssemblyTable(InventoryPlayer inventoryPlayer, TileEntityAssemblyTable tile) {
+	public ContainerAssemblyTable(final InventoryPlayer inventoryPlayer, final TileEntityAssemblyTable tile) {
 		super(tile);
 		addSlotToContainer(new SlotAssembly(inventoryPlayer.player, craftMatrix, craftResult, 0, 136, 25));
 		addSlotToContainer(new Slot(craftMatrix, 0, 136, 56));
@@ -43,24 +43,24 @@ public class ContainerAssemblyTable extends ContainerBasic {
 	}
 
 	@Override
-	public ItemStack slotClick(int p_75144_1_, int p_75144_2_, int p_75144_3_, EntityPlayer p_75144_4_) {
-		ItemStack itemstack = super.slotClick(p_75144_1_, p_75144_2_, p_75144_3_, p_75144_4_);
+	public ItemStack slotClick(final int p_75144_1_, final int p_75144_2_, final int p_75144_3_, final EntityPlayer p_75144_4_) {
+		final ItemStack itemstack = super.slotClick(p_75144_1_, p_75144_2_, p_75144_3_, p_75144_4_);
 		onCraftMatrixChanged(craftMatrix);
 		return itemstack;
 	}
 
 	@Override
-	public void onCraftMatrixChanged(IInventory iinventory) {
+	public void onCraftMatrixChanged(final IInventory iinventory) {
 		craftResult.setInventorySlotContents(0, AssemblyTableCraftingManager.getInstance().findMatchingRecipe(craftMatrix, worldObj));
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer player) {
+	public void onContainerClosed(final EntityPlayer player) {
 		super.onContainerClosed(player);
 
 		if(!worldObj.isRemote) {
 			for(int i = 0; i < 25; ++i) {
-				ItemStack itemstack = craftMatrix.getStackInSlotOnClosing(i);
+				final ItemStack itemstack = craftMatrix.getStackInSlotOnClosing(i);
 
 				if(itemstack != null) {
 					player.dropPlayerItemWithRandomChoice(itemstack, false);
@@ -70,13 +70,13 @@ public class ContainerAssemblyTable extends ContainerBasic {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer player, final int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		int MAX = 24;
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		final int MAX = 24;
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if(slotId == MAX) {
@@ -118,7 +118,7 @@ public class ContainerAssemblyTable extends ContainerBasic {
 	}
 
 	@Override
-	public boolean func_94530_a(ItemStack itemstack, Slot slot) {
+	public boolean func_94530_a(final ItemStack itemstack, final Slot slot) {
 		return slot.inventory != craftResult && super.func_94530_a(itemstack, slot);
 	}
 }

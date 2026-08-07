@@ -16,7 +16,7 @@ public class RenderItemEnergonTank extends RenderItemTileEntity {
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		tileentity = new TileEntityEnergonTank();
 
 		if(item.hasTagCompound() && item.getTagCompound().hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {

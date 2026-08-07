@@ -15,12 +15,12 @@ import net.minecraftforge.common.util.Constants.NBT;
 import java.util.List;
 
 public class ItemMachine extends ItemBlock {
-	public ItemMachine(Block block) {
+	public ItemMachine(final Block block) {
 		super(block);
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
+	public String getItemStackDisplayName(final ItemStack itemstack) {
 		String s = super.getItemStackDisplayName(itemstack);
 
 		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
@@ -31,7 +31,7 @@ public class ItemMachine extends ItemBlock {
 	}
 
 	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
+	public void addInformation(final ItemStack itemstack, final EntityPlayer player, final List list, final boolean flag) {
 		final TileEntity tile = getTileEntity(player.worldObj);
 
 		if(tile instanceof IEnergyTransmitter) {
@@ -40,7 +40,7 @@ public class ItemMachine extends ItemBlock {
 		}
 	}
 
-	public TileEntity getTileEntity(World world) {
+	public TileEntity getTileEntity(final World world) {
 		if(field_150939_a.hasTileEntity(0)) {
 			return field_150939_a.createTileEntity(world, 0);
 		}

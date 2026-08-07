@@ -34,7 +34,7 @@ public class TFMotionManager {
 	 * @param canDriveOffroad     If the vehicle can drive off-road
 	 * @param canMoveSideways     If the vehicle can move to the left or to the right
 	 */
-	public static void motion(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double sidewaysSpeedLimit, double reversingSpeedLimit, boolean canDrift, boolean canDriveOffroad, boolean canMoveSideways) {
+	public static void motion(final EntityPlayer player, final double speedLimit, final double nitroSpeedLimit, final double sidewaysSpeedLimit, final double reversingSpeedLimit, final boolean canDrift, final boolean canDriveOffroad, final boolean canMoveSideways) {
 		// Controls
 		final GameSettings gameSettings = Minecraft.getMinecraft().gameSettings;
 		final boolean moveForward = gameSettings.keyBindForward.getIsKeyPressed();
@@ -48,7 +48,7 @@ public class TFMotionManager {
 		// Variables
 		double forwardVelocity = TFData.FORWARD_VELOCITY.get(player);
 		double horizontalVelocity = TFData.HORIZONTAL_VELOCITY.get(player);
-		double currentSpeedLimit = canMoveSideways ? sidewaysSpeedLimit : nitroPressed && TFData.NITRO.get(player) > 0 ? nitroSpeedLimit : speedLimit;
+		final double currentSpeedLimit = canMoveSideways ? sidewaysSpeedLimit : nitroPressed && TFData.NITRO.get(player) > 0 ? nitroSpeedLimit : speedLimit;
 
 		if(moveForward) {
 			if(forwardVelocity < currentSpeedLimit) {
@@ -125,7 +125,7 @@ public class TFMotionManager {
 			final Block block = player.worldObj.getBlock((int) player.posX, (int) player.posY - 2, (int) player.posZ - 1);
 			boolean isDrivingOffroad = false;
 
-			for(Material mat : OFFROAD_MATERIALS) {
+			for(final Material mat : OFFROAD_MATERIALS) {
 				if(block.getMaterial().equals(mat)) {
 					isDrivingOffroad = true;
 					break;
@@ -159,7 +159,7 @@ public class TFMotionManager {
 	 * @param nitroSpeedLimit  How many km/h the jet can go while using nitro
 	 * @param idlingSpeedLimit How many km/h the jet goes while idling
 	 */
-	public static void motionJet(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double idlingSpeedLimit) {
+	public static void motionJet(final EntityPlayer player, final double speedLimit, final double nitroSpeedLimit, final double idlingSpeedLimit) {
 		// Controls
 		final Minecraft minecraft = Minecraft.getMinecraft();
 		final boolean moveForward = minecraft.gameSettings.keyBindForward.getIsKeyPressed();
@@ -167,7 +167,7 @@ public class TFMotionManager {
 		final boolean clientPlayer = player == minecraft.thePlayer;
 
 		double forwardVelocity = TFData.FORWARD_VELOCITY.get(player);
-		double currentSpeedLimit = nitroPressed && TFData.NITRO.get(player) > 0 ? nitroSpeedLimit : speedLimit;
+		final double currentSpeedLimit = nitroPressed && TFData.NITRO.get(player) > 0 ? nitroSpeedLimit : speedLimit;
 
 		if(moveForward) {
 			if(forwardVelocity < currentSpeedLimit) {
@@ -196,7 +196,7 @@ public class TFMotionManager {
 		}
 	}
 
-	public static void drift(EntityPlayer player, double forwardVelocity, double driftAmount, boolean tireParticles) {
+	public static void drift(final EntityPlayer player, final double forwardVelocity, final double driftAmount, final boolean tireParticles) {
 		moveWithVelocity(player, forwardVelocity, -driftAmount * 10);
 
 		if(tireParticles) {
@@ -215,13 +215,13 @@ public class TFMotionManager {
 		}
 	}
 
-	public static void moveWithVelocity(EntityPlayer player, double forwardVel, double horizontalVel) {
+	public static void moveWithVelocity(final EntityPlayer player, final double forwardVel, final double horizontalVel) {
 		final Vec3 frontCoords = TFVectorHelper.getBackSideCoords(player, fromKMPH(horizontalVel), false, fromKMPH(forwardVel), false);
 		player.motionX = frontCoords.xCoord - player.posX;
 		player.motionZ = frontCoords.zCoord - player.posZ;
 	}
 
-	public static void moveForward(EntityPlayer player, double vel, boolean pitch) {
+	public static void moveForward(final EntityPlayer player, final double vel, final boolean pitch) {
 		final Vec3 frontCoords = TFVectorHelper.getFrontCoords(player, fromKMPH(vel), pitch);
 		player.motionX = frontCoords.xCoord - player.posX;
 
@@ -232,7 +232,7 @@ public class TFMotionManager {
 		player.motionZ = frontCoords.zCoord - player.posZ;
 	}
 
-	public static double fromKMPH(double speed) {
+	public static double fromKMPH(final double speed) {
 		return speed * 1000D / 60D / 60D / 20D;
 	}
 }

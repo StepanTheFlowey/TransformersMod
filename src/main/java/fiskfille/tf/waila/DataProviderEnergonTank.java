@@ -12,19 +12,19 @@ import net.minecraftforge.fluids.FluidTank;
 public class DataProviderEnergonTank extends DataProviderMachine {
 	public FluidTankTF fluidTank = new FluidTankTF(TFFluids.energon, 0, 0);
 
-	public DataProviderEnergonTank(String s) {
+	public DataProviderEnergonTank(final String s) {
 		super(s, TileEntityEnergonTank.class);
 	}
 
-	public void updateFluids(TileEntity tile) {
-		TileEntity tileBase = TFTileHelper.getTileBase(tile);
+	public void updateFluids(final TileEntity tile) {
+		final TileEntity tileBase = TFTileHelper.getTileBase(tile);
 		FluidStack stack = null;
 		int y = tileBase.yCoord;
 		int capacity = 0;
 
 		while(y < tile.getWorldObj().getHeight() && TFTileHelper.getTileBase(tile.getWorldObj().getTileEntity(tile.xCoord, y, tile.zCoord)) == tileBase && tile.getWorldObj().getTileEntity(tile.xCoord, y, tile.zCoord) instanceof IFluidHandlerTF) {
-			IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tile.getWorldObj().getTileEntity(tile.xCoord, y, tile.zCoord);
-			FluidTank tank = fluidHandler.getTank();
+			final IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tile.getWorldObj().getTileEntity(tile.xCoord, y, tile.zCoord);
+			final FluidTank tank = fluidHandler.getTank();
 
 			if(stack == null && tank.getFluid() != null) {
 				stack = tank.getFluid().copy();
@@ -43,7 +43,7 @@ public class DataProviderEnergonTank extends DataProviderMachine {
 	}
 
 	@Override
-	public FluidTankTF getFluid(TileEntity tile, IFluidHandlerTF fluidHandler) {
+	public FluidTankTF getFluid(final TileEntity tile, final IFluidHandlerTF fluidHandler) {
 		updateFluids(tile);
 		return fluidTank;
 	}

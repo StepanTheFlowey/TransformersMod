@@ -11,7 +11,7 @@ public class RenderItemControlPanel extends RenderItemTileEntity {
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		GL11.glScalef(0.65F, 0.65F, 0.65F);
 
 		if(type == ItemRenderType.ENTITY || type == ItemRenderType.INVENTORY) {

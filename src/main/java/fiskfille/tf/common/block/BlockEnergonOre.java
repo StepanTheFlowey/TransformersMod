@@ -24,7 +24,7 @@ public class BlockEnergonOre extends Block {
 	}
 
 	@Override
-	public int getMixedBrightnessForBlock(IBlockAccess world, int x, int y, int z) {
+	public int getMixedBrightnessForBlock(final IBlockAccess world, final int x, final int y, final int z) {
 		if(renderPass > 1) {
 			return 0xF000F0;
 		}
@@ -38,22 +38,22 @@ public class BlockEnergonOre extends Block {
 	}
 
 	@Override
-	public Item getItemDropped(int metadata, Random random, int fortune) {
+	public Item getItemDropped(final int metadata, final Random random, final int fortune) {
 		return TFItems.energonDust;
 	}
 
 	@Override
-	public int quantityDroppedWithBonus(int fortune, Random random) {
+	public int quantityDroppedWithBonus(final int fortune, final Random random) {
 		return quantityDropped(random) + random.nextInt(fortune + 1);
 	}
 
 	@Override
-	public int quantityDropped(Random random) {
+	public int quantityDropped(final Random random) {
 		return 4 + random.nextInt(2);
 	}
 
 	@Override
-	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
+	public int getExpDrop(final IBlockAccess world, final int metadata, final int fortune) {
 		final Random random = ThreadLocalRandom.current();
 
 		if(getItemDropped(metadata, random, fortune) != Item.getItemFromBlock(this)) {
@@ -64,12 +64,12 @@ public class BlockEnergonOre extends Block {
 	}
 
 	@Override
-	public IIcon getIcon(int side, int metadata) {
+	public IIcon getIcon(final int side, final int metadata) {
 		return icons[MathHelper.clamp_int(renderPass, 0, icons.length - 1)];
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		icons = new IIcon[]{
 						iconRegister.registerIcon(getTextureName()),
 						iconRegister.registerIcon(getTextureName() + "_background"),

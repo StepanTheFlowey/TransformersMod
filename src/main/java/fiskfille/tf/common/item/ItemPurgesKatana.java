@@ -22,9 +22,9 @@ public class ItemPurgesKatana extends ItemSword {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
+	public void onPlayerStoppedUsing(final ItemStack stack, final World world, final EntityPlayer player, final int time) {
 		if(!TFHelper.isFullyTransformed(player) && TFHelper.getTransformer(player) instanceof TransformerPurge) {
-			int timeLeft = getMaxItemUseDuration(stack) - time;
+			final int timeLeft = getMaxItemUseDuration(stack) - time;
 			double force = (double) timeLeft / 10;
 
 			if(force > 2D) {
@@ -32,7 +32,7 @@ public class ItemPurgesKatana extends ItemSword {
 			}
 
 			stack.damageItem(1, player);
-			Vec3 vec3 = TFVectorHelper.getFrontCoords(player, player.onGround ? force : force * 0.75D, true);
+			final Vec3 vec3 = TFVectorHelper.getFrontCoords(player, player.onGround ? force : force * 0.75D, true);
 			player.motionX += vec3.xCoord - player.posX;
 			player.motionY += vec3.yCoord - player.boundingBox.minY;
 			player.motionZ += vec3.zCoord - player.posZ;
@@ -42,12 +42,12 @@ public class ItemPurgesKatana extends ItemSword {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
+	public EnumAction getItemUseAction(final ItemStack stack) {
 		return EnumAction.drink;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player) {
 		if(TFHelper.getTransformer(player) instanceof TransformerPurge) {
 			if(!TFHelper.isFullyTransformed(player)) {
 				player.setItemInUse(stack, getMaxItemUseDuration(stack));
@@ -59,7 +59,7 @@ public class ItemPurgesKatana extends ItemSword {
 
 	@Override
 	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
+		final Multimap multimap = super.getItemAttributeModifiers();
 		multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 8D, 0));
 		return multimap;

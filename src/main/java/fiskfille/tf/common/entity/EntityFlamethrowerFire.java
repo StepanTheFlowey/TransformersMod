@@ -13,17 +13,17 @@ import java.util.concurrent.ThreadLocalRandom;
 public class EntityFlamethrowerFire extends EntityThrowable {
 	protected final int particleMaxAge = (int) (8D / (ThreadLocalRandom.current().nextDouble() * 0.8D + 0.2D)) + 2;
 
-	public EntityFlamethrowerFire(World world) {
+	public EntityFlamethrowerFire(final World world) {
 		super(world);
 		noClip = false;
 	}
 
-	public EntityFlamethrowerFire(World world, EntityLivingBase entity) {
+	public EntityFlamethrowerFire(final World world, final EntityLivingBase entity) {
 		super(world, entity);
 		noClip = false;
 	}
 
-	public EntityFlamethrowerFire(World world, double x, double y, double z) {
+	public EntityFlamethrowerFire(final World world, final double x, final double y, final double z) {
 		super(world, x, y, z);
 		noClip = false;
 	}
@@ -50,14 +50,14 @@ public class EntityFlamethrowerFire extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(final MovingObjectPosition mop) {
 		if(mop.entityHit != null) {
 			final float multiplier = (float) (particleMaxAge - ticksExisted) / particleMaxAge;
 
 			mop.entityHit.setFire((int) (20F * multiplier));
 
 			if(getThrower() instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) getThrower();
+				final EntityPlayer player = (EntityPlayer) getThrower();
 				mop.entityHit.attackEntityFrom(DamageSource.causePlayerDamage(player), 5F * multiplier);
 			}
 		}
@@ -78,7 +78,7 @@ public class EntityFlamethrowerFire extends EntityThrowable {
 		}
 	}
 
-	public boolean setFire(World world, int x, int y, int z, int sideHit) {
+	public boolean setFire(final World world, int x, int y, int z, final int sideHit) {
 		switch(sideHit) {
 			case 0:
 				--y;

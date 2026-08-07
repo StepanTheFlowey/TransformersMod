@@ -33,7 +33,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	private int disabledColor = 0x7F7F7F;
 	private boolean visible = true;
 
-	public GuiTextFieldFlat(FontRenderer fontRenderer, int x, int y, int w) {
+	public GuiTextFieldFlat(final FontRenderer fontRenderer, final int x, final int y, final int w) {
 		super(fontRenderer, x, y, w, 13);
 		fontRendererObj = fontRenderer;
 		xPosition = x;
@@ -53,7 +53,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setText(String s) {
+	public void setText(final String s) {
 		if(s.length() > maxStringLength) {
 			text = s.substring(0, maxStringLength);
 		}
@@ -70,17 +70,17 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void writeText(String s) {
+	public void writeText(final String s) {
 		String s1 = "";
-		String s2 = ChatAllowedCharacters.filerAllowedCharacters(s);
-		int i = Math.min(cursorPosition, selectionEnd);
-		int j = Math.max(cursorPosition, selectionEnd);
-		int k = maxStringLength - text.length() - (i - selectionEnd);
+		final String s2 = ChatAllowedCharacters.filerAllowedCharacters(s);
+		final int i = Math.min(cursorPosition, selectionEnd);
+		final int j = Math.max(cursorPosition, selectionEnd);
+		final int k = maxStringLength - text.length() - (i - selectionEnd);
 		if(!text.isEmpty()) {
 			s1 = s1 + text.substring(0, i);
 		}
 
-		int l;
+		final int l;
 
 		if(k < s2.length()) {
 			s1 = s1 + s2.substring(0, k);
@@ -100,7 +100,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void deleteWords(int num) {
+	public void deleteWords(final int num) {
 		if(text.isEmpty()) {
 			return;
 		}
@@ -114,7 +114,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void deleteFromCursor(int num) {
+	public void deleteFromCursor(final int num) {
 		if(text.isEmpty()) {
 			return;
 		}
@@ -145,17 +145,17 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public int getNthWordFromCursor(int num) {
+	public int getNthWordFromCursor(final int num) {
 		return getNthWordFromPos(num, getCursorPosition());
 	}
 
 	@Override
-	public int getNthWordFromPos(int num, int pos) {
+	public int getNthWordFromPos(final int num, final int pos) {
 		return func_146197_a(num, getCursorPosition(), true);
 	}
 
 	@Override
-	public int func_146197_a(int i, int j, boolean flag) {
+	public int func_146197_a(final int i, final int j, final boolean flag) {
 		int k = j;
 		final boolean flag1 = i < 0;
 		final int l = Math.abs(i);
@@ -189,7 +189,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void moveCursorBy(int amount) {
+	public void moveCursorBy(final int amount) {
 		setCursorPosition(selectionEnd + amount);
 	}
 
@@ -204,7 +204,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public boolean textboxKeyTyped(char c, int key) {
+	public boolean textboxKeyTyped(final char c, final int key) {
 		if(!isFocused) {
 			return false;
 		}
@@ -327,8 +327,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 	 * Args: x, y, buttonClicked
 	 */
 	@Override
-	public void mouseClicked(int mouseX, int mouseY, int button) {
-		boolean flag = mouseX >= xPosition && mouseX < xPosition + width && mouseY >= yPosition && mouseY < yPosition + height;
+	public void mouseClicked(final int mouseX, final int mouseY, final int button) {
+		final boolean flag = mouseX >= xPosition && mouseX < xPosition + width && mouseY >= yPosition && mouseY < yPosition + height;
 
 		if(canLoseFocus) {
 			setFocused(flag);
@@ -341,7 +341,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 				l -= 4;
 			}
 
-			String s = fontRendererObj.trimStringToWidth(text.substring(lineScrollOffset), getWidth());
+			final String s = fontRendererObj.trimStringToWidth(text.substring(lineScrollOffset), getWidth());
 			setCursorPosition(fontRendererObj.trimStringToWidth(s, l).length() + lineScrollOffset);
 		}
 	}
@@ -367,14 +367,14 @@ public class GuiTextFieldFlat extends GuiTextField {
 				}
 			}
 
-			int i = isEnabled ? enabledColor : disabledColor;
-			int j = cursorPosition - lineScrollOffset;
+			final int i = isEnabled ? enabledColor : disabledColor;
+			final int j = cursorPosition - lineScrollOffset;
 			int k = selectionEnd - lineScrollOffset;
-			String s = fontRendererObj.trimStringToWidth(text.substring(lineScrollOffset), getWidth());
-			boolean flag = j >= 0 && j <= s.length();
-			boolean flag1 = isFocused && cursorCounter / 6 % 2 == 0 && flag;
-			int l = enableBackgroundDrawing ? xPosition + 4 : xPosition;
-			int i1 = enableBackgroundDrawing ? yPosition + (height - 8) / 2 + 1 : yPosition;
+			final String s = fontRendererObj.trimStringToWidth(text.substring(lineScrollOffset), getWidth());
+			final boolean flag = j >= 0 && j <= s.length();
+			final boolean flag1 = isFocused && cursorCounter / 6 % 2 == 0 && flag;
+			final int l = enableBackgroundDrawing ? xPosition + 4 : xPosition;
+			final int i1 = enableBackgroundDrawing ? yPosition + (height - 8) / 2 + 1 : yPosition;
 			int j1 = l;
 
 			if(k > s.length()) {
@@ -382,11 +382,11 @@ public class GuiTextFieldFlat extends GuiTextField {
 			}
 
 			if(!s.isEmpty()) {
-				String s1 = flag ? s.substring(0, j) : s;
+				final String s1 = flag ? s.substring(0, j) : s;
 				j1 = fontRendererObj.drawString(s1, l, i1, i);
 			}
 
-			boolean flag2 = cursorPosition < text.length() || text.length() >= getMaxStringLength();
+			final boolean flag2 = cursorPosition < text.length() || text.length() >= getMaxStringLength();
 			int k1 = j1;
 
 			if(!flag) {
@@ -411,7 +411,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 			}
 
 			if(k != j) {
-				int l1 = l + fontRendererObj.getStringWidth(s.substring(0, k));
+				final int l1 = l + fontRendererObj.getStringWidth(s.substring(0, k));
 				drawCursorVertical(k1, i1 - 1, l1 - 1, i1 + 1 + fontRendererObj.FONT_HEIGHT);
 			}
 		}
@@ -440,7 +440,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 			x = xPosition + width;
 		}
 
-		Tessellator tessellator = Tessellator.instance;
+		final Tessellator tessellator = Tessellator.instance;
 		GL11.glColor3f(0F, 0F, 1F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_COLOR_LOGIC_OP);
@@ -461,7 +461,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setMaxStringLength(int length) {
+	public void setMaxStringLength(final int length) {
 		maxStringLength = length;
 
 		if(text.length() > length) {
@@ -475,9 +475,9 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setCursorPosition(int pos) {
+	public void setCursorPosition(final int pos) {
 		cursorPosition = pos;
-		int j = text.length();
+		final int j = text.length();
 
 		if(cursorPosition < 0) {
 			cursorPosition = 0;
@@ -496,17 +496,17 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setEnableBackgroundDrawing(boolean enabled) {
+	public void setEnableBackgroundDrawing(final boolean enabled) {
 		enableBackgroundDrawing = enabled;
 	}
 
 	@Override
-	public void setTextColor(int color) {
+	public void setTextColor(final int color) {
 		enabledColor = color;
 	}
 
 	@Override
-	public void setDisabledTextColour(int color) {
+	public void setDisabledTextColour(final int color) {
 		disabledColor = color;
 	}
 
@@ -516,7 +516,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setFocused(boolean focused) {
+	public void setFocused(final boolean focused) {
 		if(focused && !isFocused) {
 			cursorCounter = 0;
 		}
@@ -525,7 +525,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(final boolean enabled) {
 		isEnabled = enabled;
 	}
 
@@ -541,7 +541,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 
 	@Override
 	public void setSelectionPos(int pos) {
-		int j = text.length();
+		final int j = text.length();
 
 		if(pos > j) {
 			pos = j;
@@ -558,9 +558,9 @@ public class GuiTextFieldFlat extends GuiTextField {
 				lineScrollOffset = j;
 			}
 
-			int k = getWidth();
-			String s = fontRendererObj.trimStringToWidth(text.substring(lineScrollOffset), k);
-			int l = s.length() + lineScrollOffset;
+			final int k = getWidth();
+			final String s = fontRendererObj.trimStringToWidth(text.substring(lineScrollOffset), k);
+			final int l = s.length() + lineScrollOffset;
 
 			if(pos == lineScrollOffset) {
 				lineScrollOffset -= fontRendererObj.trimStringToWidth(text, k, true).length();
@@ -584,7 +584,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setCanLoseFocus(boolean loseFocuse) {
+	public void setCanLoseFocus(final boolean loseFocuse) {
 		canLoseFocus = loseFocuse;
 	}
 
@@ -594,7 +594,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 	}
 
 	@Override
-	public void setVisible(boolean isVisible) {
+	public void setVisible(final boolean isVisible) {
 		visible = isVisible;
 	}
 }

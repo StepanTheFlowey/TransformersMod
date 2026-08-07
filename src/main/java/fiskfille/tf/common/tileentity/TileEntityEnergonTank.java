@@ -60,17 +60,17 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 
 		if(!worldObj.isRemote) {
 			if(data.getFluidAmount() > 0) {
-				TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(this);
+				final TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(this);
 
 				if(tileBase != this) {
 					if(TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord, yCoord - 1, zCoord)) == tileBase) {
-						TileEntityEnergonTank tile1 = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+						final TileEntityEnergonTank tile1 = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 
 						if(tile1.getTank().getFluidAmount() < tile1.getTank().getCapacity()) {
-							FluidStack fluid = data.tank.drain(data.getFluidAmount(), false);
+							final FluidStack fluid = data.tank.drain(data.getFluidAmount(), false);
 
 							if(fluid != null && fluid.amount > 0 && tile1.canFill(ForgeDirection.UP, fluid.getFluid())) {
-								int amount = tile1.fill(ForgeDirection.UP, fluid, true);
+								final int amount = tile1.fill(ForgeDirection.UP, fluid, true);
 
 								if(amount > 0) {
 									data.tank.drain(amount, true);
@@ -80,16 +80,16 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 					}
 				}
 				else {
-					ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
-					TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-					int maxTransfer = 100;
+					final ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
+					final TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+					final int maxTransfer = 100;
 
 					if(canActivate() && maxTransfer > 0 && tile instanceof IFluidHandler) {
-						IFluidHandler fluidHandler = (IFluidHandler) tile;
-						FluidStack fluid = drain(dir, maxTransfer, false);
+						final IFluidHandler fluidHandler = (IFluidHandler) tile;
+						final FluidStack fluid = drain(dir, maxTransfer, false);
 
 						if(fluid != null && fluid.amount > 0 && fluidHandler.canFill(dir.getOpposite(), fluid.getFluid())) {
-							int amount = fluidHandler.fill(dir.getOpposite(), fluid, true);
+							final int amount = fluidHandler.fill(dir.getOpposite(), fluid, true);
 
 							if(amount > 0) {
 								drain(dir, amount, true);
@@ -100,11 +100,11 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 			}
 
 			if(input != null && input.getItem() instanceof IFluidContainerItem) {
-				IFluidContainerItem container = (IFluidContainerItem) input.getItem();
-				FluidStack fluid = container.getFluid(input);
+				final IFluidContainerItem container = (IFluidContainerItem) input.getItem();
+				final FluidStack fluid = container.getFluid(input);
 
 				if(fluid != null && fluid.amount > 0 && fluid.getFluid() == TFFluids.energon) {
-					int success = TFTileHelper.getTileBase(this).fill(ForgeDirection.UNKNOWN, container.drain(input, ItemFuelCanister.getFluidAmount(input), false), true);
+					final int success = TFTileHelper.getTileBase(this).fill(ForgeDirection.UNKNOWN, container.drain(input, ItemFuelCanister.getFluidAmount(input), false), true);
 
 					if(success > 0) {
 						container.drain(input, success, true);
@@ -112,24 +112,24 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 				}
 			}
 
-			TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(this);
+			final TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(this);
 
 			if(tileBase == this) {
-				FluidStack mix = new FluidStack(TFFluids.energon, 0);
+				final FluidStack mix = new FluidStack(TFFluids.energon, 0);
 				int y = tileBase.yCoord;
 				float f = 0;
 
-				Map<String, Float> ratios = FluidEnergon.getRatios(mix);
-				List<TileEntityEnergonTank> tiles = Lists.newArrayList();
+				final Map<String, Float> ratios = FluidEnergon.getRatios(mix);
+				final List<TileEntityEnergonTank> tiles = Lists.newArrayList();
 
 				while(y < worldObj.getHeight() && TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord, y, zCoord)) == tileBase) {
-					TileEntityEnergonTank tile = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, y, zCoord);
+					final TileEntityEnergonTank tile = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, y, zCoord);
 					tiles.add(tile);
 
 					if(tile.getTank().getFluid() != null) {
-						Map<String, Float> ratios1 = FluidEnergon.getRatios(tile.getTank().getFluid());
+						final Map<String, Float> ratios1 = FluidEnergon.getRatios(tile.getTank().getFluid());
 
-						for(Map.Entry<String, Float> e : ratios1.entrySet()) {
+						for(final Map.Entry<String, Float> e : ratios1.entrySet()) {
 							ratios.put(e.getKey(), ratios.get(e.getKey()) + e.getValue() * tile.getTank().getFluidAmount());
 						}
 
@@ -140,11 +140,11 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 				}
 
 				if(data.getFluid() != null) {
-					for(Map.Entry<String, Float> e : ratios.entrySet()) {
+					for(final Map.Entry<String, Float> e : ratios.entrySet()) {
 						ratios.put(e.getKey(), ratios.get(e.getKey()) / f);
 					}
 
-					for(TileEntityEnergonTank tile : tiles) {
+					for(final TileEntityEnergonTank tile : tiles) {
 						final FluidStack fluid = tile.getTank().getFluid();
 
 						if(fluid != null) {
@@ -157,17 +157,17 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 			data.serverTick();
 		}
 
-		TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
+		final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
 
 		if(prevData instanceof TileDataEnergonTank) {
 			data = new TileDataEnergonTank((TileDataEnergonTank) prevData);
 		}
 	}
 
-	public void fillCanister(ItemStack fluidContainer) {
+	public void fillCanister(final ItemStack fluidContainer) {
 		if(fluidContainer.getItem() instanceof IFluidContainerItem) {
-			IFluidContainerItem item = (IFluidContainerItem) fluidContainer.getItem();
-			int amount = Math.min(data.getFluidAmount(), item.getCapacity(fluidContainer) - ItemFuelCanister.getFluidAmount(fluidContainer));
+			final IFluidContainerItem item = (IFluidContainerItem) fluidContainer.getItem();
+			final int amount = Math.min(data.getFluidAmount(), item.getCapacity(fluidContainer) - ItemFuelCanister.getFluidAmount(fluidContainer));
 
 			FluidStack stack = item.getFluid(fluidContainer);
 
@@ -175,12 +175,12 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 				stack = new FluidStack(TFFluids.energon, 0);
 			}
 
-			FluidStack stack1 = new FluidStack(TFFluids.energon, amount);
+			final FluidStack stack1 = new FluidStack(TFFluids.energon, amount);
 			FluidEnergon.setRatios(stack1, FluidEnergon.getRatios(data.getFluid()));
-			NBTTagCompound prevNBT = stack1.tag;
+			final NBTTagCompound prevNBT = stack1.tag;
 
 			stack1.tag = stack.tag;
-			int i = item.fill(fluidContainer, stack1, true);
+			final int i = item.fill(fluidContainer, stack1, true);
 			drain(ForgeDirection.UNKNOWN, amount, true);
 			stack.amount += i;
 			stack1.tag = prevNBT;
@@ -225,18 +225,18 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		FluidStack stack = data.getFluid();
-		int fill = resource.amount;
+	public int fill(final ForgeDirection from, final FluidStack resource, final boolean doFill) {
+		final FluidStack stack = data.getFluid();
+		final int fill = resource.amount;
 
 		if(stack == null || stack.amount <= 0 || FluidStack.areFluidStackTagsEqual(stack, resource)) {
 			resource.amount -= data.tank.fill(resource, doFill);
 		}
 		else if(stack.getFluid() == TFFluids.energon) {
-			NBTTagCompound prevNBT = resource.tag;
+			final NBTTagCompound prevNBT = resource.tag;
 
 			resource.tag = stack.tag;
-			int amount = data.tank.fill(resource, doFill);
+			final int amount = data.tank.fill(resource, doFill);
 			resource.tag = prevNBT;
 
 			FluidEnergon.merge(stack, resource, amount);
@@ -247,7 +247,7 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 			int y = yCoord + 1;
 
 			while(y < worldObj.getHeight() && TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord, y, zCoord)) == TFTileHelper.getTileBase(this)) {
-				TileEntityEnergonTank tile = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, y, zCoord);
+				final TileEntityEnergonTank tile = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, y, zCoord);
 				resource.amount -= tile.fill(ForgeDirection.UNKNOWN, resource, doFill);
 
 				if(resource.amount <= 0) {
@@ -262,7 +262,7 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+	public FluidStack drain(final ForgeDirection from, final FluidStack resource, final boolean doDrain) {
 		if(resource == null || !resource.isFluidEqual(data.getFluid())) {
 			return null;
 		}
@@ -271,8 +271,8 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		TileEntity tileBase = TFTileHelper.getTileBase(this);
+	public FluidStack drain(final ForgeDirection from, final int maxDrain, final boolean doDrain) {
+		final TileEntity tileBase = TFTileHelper.getTileBase(this);
 		TileEntityEnergonTank topTile = null;
 		int y = tileBase.yCoord;
 
@@ -282,12 +282,12 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 		}
 
 		if(topTile != null) {
-			FluidStack drained = new FluidStack(TFFluids.energon, 0);
+			final FluidStack drained = new FluidStack(TFFluids.energon, 0);
 			y = topTile.yCoord;
 
 			while(y > 0 && TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord, y, zCoord)) == tileBase) {
-				TileEntityEnergonTank tile = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, y, zCoord);
-				FluidStack stack = tile.getTank().drain(maxDrain - drained.amount, doDrain);
+				final TileEntityEnergonTank tile = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, y, zCoord);
+				final FluidStack stack = tile.getTank().drain(maxDrain - drained.amount, doDrain);
 
 				if(stack != null && stack.amount > 0) {
 					FluidEnergon.merge(drained, stack, stack.amount);
@@ -308,56 +308,56 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
+	public boolean canFill(final ForgeDirection from, final Fluid fluid) {
 		return fluid == TFFluids.energon;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+	public boolean canDrain(final ForgeDirection from, final Fluid fluid) {
 		return true;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+	public FluidTankInfo[] getTankInfo(final ForgeDirection from) {
 		return new FluidTankInfo[]{data.tank.getInfo()};
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 		fillTime = nbt.getInteger("FillTime");
 
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.tank.readFromNBT(config);
 		}
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 		nbt.setInteger("FillTime", fillTime);
 
 		if(data.getFluid() != null && data.getFluidAmount() > 0) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.tank.writeToNBT(config);
 			nbt.setTag("ConfigDataTF", config);
 		}
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
 		return stack.getItem() instanceof IFluidContainerItem && (slot == 0 ? !ItemFuelCanister.isEmpty(stack) && ItemFuelCanister.getContainerFluid(stack).getFluid() == TFFluids.energon : ItemFuelCanister.isEmpty(stack) || !ItemFuelCanister.isFull(stack) && ItemFuelCanister.getContainerFluid(stack).getFluid() == TFFluids.energon);
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+	public boolean canInsertItem(final int slot, final ItemStack stack, final int side) {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return isItemValidForSlot(slot, stack);
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
+	public boolean canExtractItem(final int slot, final ItemStack stack, final int side) {
 		if(stack.getItem() instanceof IFluidContainerItem) {
 			if(slot == 1) {
 				return !ItemFuelCanister.isEmpty(stack);
@@ -375,7 +375,7 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
+	public int[] getAccessibleSlotsFromSide(final int side) {
 		return slotsSides;
 	}
 
@@ -385,8 +385,8 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public int[] getBaseOffsets(int metadata) {
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata);
+	public int[] getBaseOffsets(final int metadata) {
+		final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
 		int offset = 0;
 
 		if(dir == ForgeDirection.DOWN || dir == ForgeDirection.UP) {

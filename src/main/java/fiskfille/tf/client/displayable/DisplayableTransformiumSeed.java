@@ -14,7 +14,7 @@ public class DisplayableTransformiumSeed extends Displayable {
 	private final TileEntityTransformiumSeed tileentity = new TileEntityTransformiumSeed();
 
 	@Override
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		TFRenderHelper.renderTag(StatCollector.translateToLocalFormatted("tile.display_pedestal.amount", itemstack.stackSize), 0, 0.05F, 0);
 
 		final Minecraft minecraft = Minecraft.getMinecraft();

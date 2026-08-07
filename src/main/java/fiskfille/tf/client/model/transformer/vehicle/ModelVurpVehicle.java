@@ -367,7 +367,7 @@ public class ModelVurpVehicle extends ModelVehicleBase {
 		vehicleLowerlegR1.addChild(vehicleWheelBackR);
 		vehicleLowerarmL1.addChild(vehicleLowerarmL2);
 
-		float scale = 1.25F;
+		final float scale = 1.25F;
 		vehicleWheelR.setScale(1, scale, scale);
 		vehicleWheelL.setScale(1, scale, scale);
 		vehicleWheelBackR.setScale(1, scale, scale);
@@ -377,20 +377,20 @@ public class ModelVurpVehicle extends ModelVehicleBase {
 	}
 
 	@Override
-	public void render(EntityPlayer player, ItemStack itemstack) {
+	public void render(final EntityPlayer player, final ItemStack itemstack) {
 		TFRenderHelper.setupRenderLayers(player, itemstack, vehicleBase);
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale, Entity entity) {
+	public void setRotationAngles(final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final float scale, final Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ticks, rotationYaw, rotationPitch, scale, entity);
 		setToInitPose();
 
 		if(entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) entity;
-			float wheelSpinSpeed = (TFData.FORWARD_VELOCITY.get(player) < 0 ? -limbSwing : limbSwing) * 0.8F;
+			final EntityPlayer player = (EntityPlayer) entity;
+			final float wheelSpinSpeed = (TFData.FORWARD_VELOCITY.get(player) < 0 ? -limbSwing : limbSwing) * 0.8F;
 
-			for(ModelRenderer modelRenderer : new ModelRenderer[]{vehicleWheelR, vehicleWheelL, vehicleWheelBackR, vehicleWheelBackL}) {
+			for(final ModelRenderer modelRenderer : new ModelRenderer[]{vehicleWheelR, vehicleWheelL, vehicleWheelBackR, vehicleWheelBackL}) {
 				modelRenderer.rotateAngleX = wheelSpinSpeed;
 			}
 

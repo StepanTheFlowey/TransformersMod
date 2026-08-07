@@ -12,16 +12,16 @@ import net.minecraft.world.World;
 public class EntityTankShell extends EntityThrowable implements IEntityAdditionalSpawnData {
 	public boolean allowExplosions;
 
-	public EntityTankShell(World world) {
+	public EntityTankShell(final World world) {
 		super(world);
 	}
 
-	public EntityTankShell(World world, EntityLivingBase entity, boolean explosions) {
+	public EntityTankShell(final World world, final EntityLivingBase entity, final boolean explosions) {
 		super(world, entity);
 		allowExplosions = explosions;
 	}
 
-	public EntityTankShell(World world, double x, double y, double z) {
+	public EntityTankShell(final World world, final double x, final double y, final double z) {
 		super(world, x, y, z);
 	}
 
@@ -36,7 +36,7 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(final MovingObjectPosition mop) {
 		if(!worldObj.isRemote) {
 			if(mop.typeOfHit == MovingObjectType.BLOCK) {
 				explode(mop.blockX, mop.blockY, mop.blockZ, mop.sideHit);
@@ -49,7 +49,7 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
 		setDead();
 	}
 
-	public void explode(int x, int y, int z, int sideHit) {
+	public void explode(int x, int y, int z, final int sideHit) {
 		switch(sideHit) {
 			case 0:
 				--y;
@@ -80,24 +80,24 @@ public class EntityTankShell extends EntityThrowable implements IEntityAdditiona
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
+	public void writeEntityToNBT(final NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("Explosions", allowExplosions);
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
+	public void readEntityFromNBT(final NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		allowExplosions = nbt.getBoolean("Explosions");
 	}
 
 	@Override
-	public void writeSpawnData(ByteBuf buf) {
+	public void writeSpawnData(final ByteBuf buf) {
 		buf.writeBoolean(allowExplosions);
 	}
 
 	@Override
-	public void readSpawnData(ByteBuf buf) {
+	public void readSpawnData(final ByteBuf buf) {
 		allowExplosions = buf.readBoolean();
 	}
 }

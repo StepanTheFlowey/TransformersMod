@@ -25,18 +25,18 @@ public class MessagePlayerData implements IMessage {
 
 	public MessagePlayerData() {}
 
-	public MessagePlayerData(EntityPlayer player, TFData<?> data, Object obj) {
+	public MessagePlayerData(final EntityPlayer player, final TFData<?> data, final Object obj) {
 		id = player.getEntityId();
 		type = data;
 		value = obj;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
-		String id = ByteBufUtils.readUTF8String(buf);
+		final String id = ByteBufUtils.readUTF8String(buf);
 
-		for(TFData<?> data : TFData.VALUES) {
+		for(final TFData<?> data : TFData.VALUES) {
 			if(data.id.equals(id)) {
 				type = data;
 				break;
@@ -47,7 +47,7 @@ public class MessagePlayerData implements IMessage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		ByteBufUtils.writeUTF8String(buf, type.id);
 		ByteBufUtils.writeTag(buf, type.writeDataToNBT(new NBTTagCompound(), value));
@@ -55,7 +55,7 @@ public class MessagePlayerData implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessagePlayerData, IMessage> {
 		@Override
-		public IMessage onMessage(MessagePlayerData message, MessageContext ctx) {
+		public IMessage onMessage(final MessagePlayerData message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				return client(message, ctx);
 			}
@@ -64,7 +64,7 @@ public class MessagePlayerData implements IMessage {
 		}
 
 		@SideOnly(Side.CLIENT)
-		private IMessage client(MessagePlayerData message, MessageContext ctx) {
+		private IMessage client(final MessagePlayerData message, final MessageContext ctx) {
 			final Entity entity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);
 
 			if(entity instanceof EntityPlayer) {
@@ -88,7 +88,7 @@ public class MessagePlayerData implements IMessage {
 			return null;
 		}
 
-		private IMessage server(MessagePlayerData message, MessageContext ctx) {
+		private IMessage server(final MessagePlayerData message, final MessageContext ctx) {
 			final EntityPlayer player = ctx.getServerHandler().playerEntity;
 
 			if(player != null) {

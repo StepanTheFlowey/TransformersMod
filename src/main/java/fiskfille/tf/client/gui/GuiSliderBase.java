@@ -11,18 +11,18 @@ public class GuiSliderBase extends GuiButton {
 	public float percentage;
 	public boolean dragging;
 
-	public GuiSliderBase(int id, int x, int y, int width, int height, String s) {
+	public GuiSliderBase(final int id, final int x, final int y, final int width, final int height, final String s) {
 		super(id, x, y, width, height, s);
 		percentage = 1F;
 	}
 
 	@Override
-	public int getHoverState(boolean b) {
+	public int getHoverState(final boolean b) {
 		return 0;
 	}
 
 	@Override
-	protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
+	protected void mouseDragged(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}
@@ -45,7 +45,7 @@ public class GuiSliderBase extends GuiButton {
 	}
 
 	@Override
-	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+	public boolean mousePressed(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(super.mousePressed(mc, mouseX, mouseY)) {
 			percentage = (float) (mouseX - (xPosition + 4)) / (float) (width - 8);
 
@@ -65,7 +65,7 @@ public class GuiSliderBase extends GuiButton {
 	}
 
 	@Override
-	public void mouseReleased(int mouseX, int mouseY) {
+	public void mouseReleased(final int mouseX, final int mouseY) {
 		dragging = false;
 	}
 }

@@ -23,9 +23,9 @@ public class TFReflection {
 		setSizeMethod = getMethod(Entity.class, "setSize", "func_70105_a");
 	}
 
-	public static Method getMethod(Class clazz, String... names) {
-		for(String name : names) {
-			for(Method method : clazz.getDeclaredMethods()) {
+	public static Method getMethod(final Class clazz, final String... names) {
+		for(final String name : names) {
+			for(final Method method : clazz.getDeclaredMethods()) {
 				if(method.getName().equals(name)) {
 					method.setAccessible(true);
 					return method;
@@ -36,9 +36,9 @@ public class TFReflection {
 		return null;
 	}
 
-	public static Field getField(Class clazz, String... names) {
-		for(String name : names) {
-			for(Field field : clazz.getDeclaredFields()) {
+	public static Field getField(final Class clazz, final String... names) {
+		for(final String name : names) {
+			for(final Field field : clazz.getDeclaredFields()) {
 				if(field.getName().equals(name)) {
 					field.setAccessible(true);
 					return field;
@@ -49,71 +49,71 @@ public class TFReflection {
 		return null;
 	}
 
-	public static Object getField(Object obj, Field field) {
+	public static Object getField(final Object obj, final Field field) {
 		try {
 			return field.get(obj);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 
 		return null;
 	}
 
-	public static void renderHand(EntityRenderer obj, float f, int i) {
+	public static void renderHand(final EntityRenderer obj, final float f, final int i) {
 		try {
 			renderHandMethod.invoke(obj, f, i);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void setSize(Entity obj, float f, float f1) {
+	public static void setSize(final Entity obj, final float f, final float f1) {
 		try {
 			setSizeMethod.invoke(obj, f, f1);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static Object getField(Field field, Object owner) {
+	public static Object getField(final Field field, final Object owner) {
 		try {
 			return field.get(owner);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 
 		return null;
 	}
 
-	public static void setField(Field field, Object owner, Object arg) {
+	public static void setField(final Field field, final Object owner, final Object arg) {
 		try {
 			field.set(owner, arg);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static Object getMethod(Method method, Object owner, Object... args) {
+	public static Object getMethod(final Method method, final Object owner, final Object... args) {
 		try {
 			return method.invoke(owner, args);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 
 		return null;
 	}
 
-	public static void invokeMethod(Method method, Object owner, Object... args) {
+	public static void invokeMethod(final Method method, final Object owner, final Object... args) {
 		try {
 			method.invoke(owner, args);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -23,17 +23,17 @@ public final class TFFluidRenderHelper {
 	private static final Map<Fluid, int[]> flowingRenderCache = new HashMap<>();
 	private static final Map<Fluid, int[]> stillRenderCache = new HashMap<>();
 
-	public static void onTextureStitch(TextureMap map) {
-		for(int[] aint : flowingRenderCache.values()) {
-			for(int i : aint) {
+	public static void onTextureStitch(final TextureMap map) {
+		for(final int[] aint : flowingRenderCache.values()) {
+			for(final int i : aint) {
 				GL11.glDeleteLists(i, 1);
 			}
 		}
 
 		flowingRenderCache.clear();
 
-		for(int[] aint : stillRenderCache.values()) {
-			for(int i : aint) {
+		for(final int[] aint : stillRenderCache.values()) {
+			for(final int i : aint) {
 				GL11.glDeleteLists(i, 1);
 			}
 		}
@@ -41,7 +41,7 @@ public final class TFFluidRenderHelper {
 		stillRenderCache.clear();
 	}
 
-	public static IIcon getFluidTexture(FluidStack fluidStack, boolean flowing) {
+	public static IIcon getFluidTexture(final FluidStack fluidStack, final boolean flowing) {
 		if(fluidStack == null) {
 			return null;
 		}
@@ -49,7 +49,7 @@ public final class TFFluidRenderHelper {
 		return getFluidTexture(fluidStack.getFluid(), flowing);
 	}
 
-	public static IIcon getFluidTexture(Fluid fluid, boolean flowing) {
+	public static IIcon getFluidTexture(final Fluid fluid, final boolean flowing) {
 		if(fluid == null) {
 			return null;
 		}
@@ -63,28 +63,28 @@ public final class TFFluidRenderHelper {
 		return icon;
 	}
 
-	public static void setColorForFluidStack(FluidStack fluidstack) {
+	public static void setColorForFluidStack(final FluidStack fluidstack) {
 		if(fluidstack == null) {
 			return;
 		}
 
-		int color = fluidstack.getFluid().getColor(fluidstack);
-		float[] afloat = TFRenderHelper.hexToRGB(color);
+		final int color = fluidstack.getFluid().getColor(fluidstack);
+		final float[] afloat = TFRenderHelper.hexToRGB(color);
 		GL11.glColor4f(afloat[0], afloat[1], afloat[2], 1);
 	}
 
-	public static int[] getFluidDisplayLists(RenderBlocks renderBlocks, FluidStack fluidStack, World world, boolean flowing) {
+	public static int[] getFluidDisplayLists(final RenderBlocks renderBlocks, final FluidStack fluidStack, final World world, final boolean flowing) {
 		if(fluidStack == null) {
 			return null;
 		}
 
-		Fluid fluid = fluidStack.getFluid();
+		final Fluid fluid = fluidStack.getFluid();
 
 		if(fluid == null) {
 			return null;
 		}
 
-		Map<Fluid, int[]> cache = flowing ? flowingRenderCache : stillRenderCache;
+		final Map<Fluid, int[]> cache = flowing ? flowingRenderCache : stillRenderCache;
 		int[] diplayLists = cache.get(fluid);
 
 		if(diplayLists != null) {
@@ -130,8 +130,8 @@ public final class TFFluidRenderHelper {
 		return diplayLists;
 	}
 
-	public static void renderIntoGUI(FluidTankTF tank, int x, int y, int width, int height, float zLevel) {
-		FluidStack stack = tank.getFluid();
+	public static void renderIntoGUI(final FluidTankTF tank, final int x, final int y, final int width, final int height, final float zLevel) {
+		final FluidStack stack = tank.getFluid();
 
 		if(stack != null && stack.amount > 0) {
 			final IIcon icon = stack.getFluid().getStillIcon();

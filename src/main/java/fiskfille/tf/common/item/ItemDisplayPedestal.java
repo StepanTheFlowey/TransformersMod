@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 
 public class ItemDisplayPedestal extends ItemBlockWithMetadata {
-	public ItemDisplayPedestal(Block block) {
+	public ItemDisplayPedestal(final Block block) {
 		super(block);
 	}
 
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List list) {
+	public void getSubItems(final Item item, final CreativeTabs tab, final List list) {
 		for(int i = 0; i < BlockDisplayPedestal.getTextures().size(); ++i) {
 			list.add(new ItemStack(item, 1, i));
 		}

@@ -21,7 +21,7 @@ public class RenderTransformiumSeedEntity extends Render {
 		shadowSize = 0.5F;
 	}
 
-	public void doRender(EntityTransformiumSeed seed, double x, double y, double z, float rotationYaw, float p_76986_9_) {
+	public void doRender(final EntityTransformiumSeed seed, final double x, final double y, final double z, final float rotationYaw, final float p_76986_9_) {
 		bindTexture(getEntityTexture(seed));
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
@@ -41,12 +41,12 @@ public class RenderTransformiumSeedEntity extends Render {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(final Entity entity) {
 		return texture;
 	}
 
 	@Override
-	public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
+	public void doRender(final Entity p_76986_1_, final double p_76986_2_, final double p_76986_4_, final double p_76986_6_, final float p_76986_8_, final float p_76986_9_) {
 		this.doRender((EntityTransformiumSeed) p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
 	}
 }

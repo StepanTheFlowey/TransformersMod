@@ -6,34 +6,34 @@ import net.minecraft.entity.player.EntityPlayer;
 public class TFDataPrev extends TFData {
 	public final TFData tracking;
 
-	public TFDataPrev(TFData type) {
+	public TFDataPrev(final TFData type) {
 		super(false, type.defaultValue, Predicates.alwaysFalse());
 		tracking = type;
 	}
 
 	@Override
-	public boolean set(EntityPlayer player, Object value) {
+	public boolean set(final EntityPlayer player, final Object value) {
 		return false;
 	}
 
 	@Override
-	public boolean setWithoutNotify(EntityPlayer player, Object value) {
+	public boolean setWithoutNotify(final EntityPlayer player, final Object value) {
 		return false;
 	}
 
 	@Override
-	public void clamp(EntityPlayer player, Object min, Object max) {
+	public void clamp(final EntityPlayer player, final Object min, final Object max) {
 	}
 
 	@Override
-	public void clampWithoutNotify(EntityPlayer player, Object min, Object max) {
+	public void clampWithoutNotify(final EntityPlayer player, final Object min, final Object max) {
 	}
 
 	@Override
-	public void incr(EntityPlayer player, Object value) {
+	public void incr(final EntityPlayer player, final Object value) {
 	}
 
 	@Override
-	public void incrWithoutNotify(EntityPlayer player, Object value) {
+	public void incrWithoutNotify(final EntityPlayer player, final Object value) {
 	}
 }

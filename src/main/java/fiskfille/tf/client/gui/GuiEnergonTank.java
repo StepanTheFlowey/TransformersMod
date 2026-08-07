@@ -26,7 +26,7 @@ public class GuiEnergonTank extends GuiContainerTF {
 	public FluidTankTF fluidTank;
 	private GuiHoverFieldFluid fieldFluid;
 
-	public GuiEnergonTank(InventoryPlayer inventoryPlayer, TileEntityEnergonTank tile) {
+	public GuiEnergonTank(final InventoryPlayer inventoryPlayer, final TileEntityEnergonTank tile) {
 		super(new ContainerEnergonTank(inventoryPlayer, tile));
 		tileentity = tile;
 	}
@@ -48,7 +48,7 @@ public class GuiEnergonTank extends GuiContainerTF {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		if(button.id == 1) {
 			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
 		}
@@ -81,7 +81,7 @@ public class GuiEnergonTank extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
@@ -92,7 +92,7 @@ public class GuiEnergonTank extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
 		mc.getTextureManager().bindTexture(guiTextures);

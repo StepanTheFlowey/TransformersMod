@@ -17,19 +17,19 @@ public class SlotAlloyCrucible extends Slot {
 	private final TileEntityAlloyCrucible tileentity;
 	private int amountTaken;
 
-	public SlotAlloyCrucible(EntityPlayer player, TileEntityAlloyCrucible tile, int id, int x, int y) {
+	public SlotAlloyCrucible(final EntityPlayer player, final TileEntityAlloyCrucible tile, final int id, final int x, final int y) {
 		super(tile, id, x, y);
 		thePlayer = player;
 		tileentity = tile;
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack itemstack) {
+	public boolean isItemValid(final ItemStack itemstack) {
 		return false;
 	}
 
 	@Override
-	public ItemStack decrStackSize(int amount) {
+	public ItemStack decrStackSize(final int amount) {
 		if(getHasStack()) {
 			amountTaken += Math.min(amount, getStack().stackSize);
 			tileentity.alloyResults += amountTaken;
@@ -39,24 +39,24 @@ public class SlotAlloyCrucible extends Slot {
 	}
 
 	@Override
-	public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack) {
+	public void onPickupFromSlot(final EntityPlayer player, final ItemStack itemstack) {
 		onCrafting(itemstack);
 		super.onPickupFromSlot(player, itemstack);
 	}
 
 	@Override
-	protected void onCrafting(ItemStack itemstack, int amount) {
+	protected void onCrafting(final ItemStack itemstack, final int amount) {
 		amountTaken += amount;
 		onCrafting(itemstack);
 	}
 
 	@Override
-	protected void onCrafting(ItemStack itemstack) {
+	protected void onCrafting(final ItemStack itemstack) {
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, amountTaken);
 
 		if(!thePlayer.worldObj.isRemote) {
 			int amount = amountTaken;
-			float xp = (AlloyRecipes.getInstance().getXpYield(itemstack) * tileentity.alloyResults + FurnaceRecipes.smelting().func_151398_b(itemstack) * tileentity.furnaceResults) / amountTaken;
+			final float xp = (AlloyRecipes.getInstance().getXpYield(itemstack) * tileentity.alloyResults + FurnaceRecipes.smelting().func_151398_b(itemstack) * tileentity.furnaceResults) / amountTaken;
 			int i;
 
 			if(xp == 0F) {
@@ -80,7 +80,7 @@ public class SlotAlloyCrucible extends Slot {
 		}
 
 		int i = amountTaken;
-		int j = Math.min(tileentity.alloyResults, i);
+		final int j = Math.min(tileentity.alloyResults, i);
 
 		i -= j;
 		tileentity.alloyResults -= j;

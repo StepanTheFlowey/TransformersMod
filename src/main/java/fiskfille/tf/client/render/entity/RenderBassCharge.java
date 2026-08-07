@@ -17,7 +17,7 @@ public class RenderBassCharge extends Render {
 	private final ModelBassCharge model = new ModelBassCharge();
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float f, float partialTicks) {
+	public void doRender(final Entity entity, final double x, final double y, final double z, final float f, final float partialTicks) {
 		final float pitch = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
 		final float yaw = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
 		final float f1 = 0.2F + entity.ticksExisted / 10F;
@@ -46,7 +46,7 @@ public class RenderBassCharge extends Render {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+	protected ResourceLocation getEntityTexture(final Entity p_110775_1_) {
 		return TextureMap.locationItemsTexture;
 	}
 }

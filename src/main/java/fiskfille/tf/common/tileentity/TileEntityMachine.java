@@ -47,8 +47,8 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 					}
 				}
 
-				for(ForgeDirection dir : list) {
-					IEnergyContainer receiver = (IEnergyContainer) TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0), zCoord + dir.offsetZ));
+				for(final ForgeDirection dir : list) {
+					final IEnergyContainer receiver = (IEnergyContainer) TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0), zCoord + dir.offsetZ));
 					float rate = getTransferRate(dir, io[dir.ordinal()]);
 
 					if(distribution == EnumDistribution.SPREAD) {
@@ -76,7 +76,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
 			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			final NBTTagList nbttaglist = config.getTagList("IO", NBT.TAG_COMPOUND);
@@ -92,7 +92,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		if(isConfigured()) {
 			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			final NBTTagList nbttaglist = new NBTTagList();
@@ -112,7 +112,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	}
 
 	public boolean isConfigured() {
-		for(EnumIO enumIO : io) {
+		for(final EnumIO enumIO : io) {
 			if(enumIO.ordinal() > 0) {
 				return true;
 			}
@@ -121,7 +121,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 		return redstoneMode.ordinal() > 0 || distribution.ordinal() > 0;
 	}
 
-	public EnumIO getInOutMode(ForgeDirection dir) {
+	public EnumIO getInOutMode(final ForgeDirection dir) {
 		if(dir.ordinal() < io.length) {
 			return io[dir.ordinal()];
 		}
@@ -147,11 +147,11 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 		}
 	}
 
-	public float getTransferRate(ForgeDirection dir, EnumIO mode) {
+	public float getTransferRate(final ForgeDirection dir, final EnumIO mode) {
 		return 10;
 	}
 
-	public boolean canTransfer(ForgeDirection dir) {
+	public boolean canTransfer(final ForgeDirection dir) {
 		final int x = xCoord + dir.offsetX;
 		final int y = yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0);
 		final int z = zCoord + dir.offsetZ;
@@ -169,7 +169,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	}
 
 	@Override
-	public void receive(EntityPlayer player, int action) {
+	public void receive(final EntityPlayer player, final int action) {
 		if(action < 0) {
 			if(action >= -io.length) {
 				final int id = -action - 1;

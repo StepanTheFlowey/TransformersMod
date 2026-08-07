@@ -42,16 +42,16 @@ public class BlockTransmitter extends BlockMachineBase {
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		float f = 0.0625F;
+	public void addCollisionBoxesToList(final World world, final int x, final int y, final int z, final AxisAlignedBB aabb, final List list, final Entity entity) {
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final float f = 0.0625F;
 
 		if(metadata < 4) {
 			addBox(0, 0, 0, 1, f * 4, 1, x, y, z, aabb, list);
 
 			for(int i = 0; i < 26; ++i) {
-				float width = 1 - 0.6F * ((float) i / 26);
-				float f1 = 1 - width;
+				final float width = 1 - 0.6F * ((float) i / 26);
+				final float f1 = 1 - width;
 				addBox(f1 / 2, f * (i + 4), f1 / 2, 1 - f1 / 2, f * (i + 5), 1 - f1 / 2, x, y, z, aabb, list);
 			}
 		}
@@ -66,8 +66,8 @@ public class BlockTransmitter extends BlockMachineBase {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
+		final int metadata = world.getBlockMetadata(x, y, z);
 
 		if(metadata < 4) {
 			setBlockBounds(0, 0, 0, 1, 3, 1);
@@ -81,16 +81,16 @@ public class BlockTransmitter extends BlockMachineBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, float hitX, float hitY, final float hitZ) {
 		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
 			return true;
 		}
 
 		if(!player.isSneaking()) {
-			TileEntity tile = world.getTileEntity(x, y, z);
-			TileEntity tileBase = TFTileHelper.getTileBase(tile);
-			int metadata = world.getBlockMetadata(x, y, z);
-			int direction = metadata % 4;
+			final TileEntity tile = world.getTileEntity(x, y, z);
+			final TileEntity tileBase = TFTileHelper.getTileBase(tile);
+			final int metadata = world.getBlockMetadata(x, y, z);
+			final int direction = metadata % 4;
 			int face = -1;
 
 			if(side == 0) {
@@ -217,7 +217,7 @@ public class BlockTransmitter extends BlockMachineBase {
 		return false;
 	}
 
-	public boolean onRightClick(World world, int x, int y, int z, TileEntityTransmitter tile, EntityPlayer player, int face, float hitX, float hitY) {
+	public boolean onRightClick(final World world, final int x, final int y, final int z, final TileEntityTransmitter tile, final EntityPlayer player, final int face, final float hitX, final float hitY) {
 		// 0 = back, 1 = front, 2 = left, 3 = right, 4 = top, 5 = bottom
 		if(face == 1) {
 			final float f = 0.0625F;
@@ -231,7 +231,7 @@ public class BlockTransmitter extends BlockMachineBase {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("stone");
 	}
 }

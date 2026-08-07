@@ -19,7 +19,7 @@ public class EnergyStorage {
 	protected float energyUsage;
 	protected float lastEnergy;
 
-	public EnergyStorage(float max) {
+	public EnergyStorage(final float max) {
 		maxEnergy = max;
 	}
 
@@ -31,32 +31,32 @@ public class EnergyStorage {
 		return storage;
 	}
 
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeFloat(energy);
 		buf.writeFloat(energyUsage);
 	}
 
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		energy = buf.readFloat();
 		energyUsage = buf.readFloat();
 		lastEnergy = energy - energyUsage;
 	}
 
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(final NBTTagCompound nbt) {
 		final NBTTagCompound storage = nbt.getCompoundTag("EmB");
 		energy = storage.getFloat("Energy");
 		energyUsage = storage.getFloat("Usage");
 		lastEnergy = energy - energyUsage;
 	}
 
-	public void writeToNBT(NBTTagCompound nbt) {
+	public void writeToNBT(final NBTTagCompound nbt) {
 		final NBTTagCompound storage = nbt.getCompoundTag("EmB");
 		storage.setFloat("Energy", energy);
 		storage.setFloat("Usage", energyUsage);
 		nbt.setTag("EmB", storage);
 	}
 
-	public float remove(float amount, boolean simulate) {
+	public float remove(final float amount, final boolean simulate) {
 		final float actual = Math.min(amount, getEnergy());
 
 		if(!simulate) {
@@ -66,7 +66,7 @@ public class EnergyStorage {
 		return actual;
 	}
 
-	public float add(float amount, boolean simulate) {
+	public float add(final float amount, final boolean simulate) {
 		final float actual = Math.max(Math.min(amount, getMaxEnergy() - getEnergy()), 0);
 
 		if(!simulate) {
@@ -88,7 +88,7 @@ public class EnergyStorage {
 		return maxEnergy;
 	}
 
-	public void set(float amount) {
+	public void set(final float amount) {
 		energy = Math.min(getMaxEnergy(), Math.max(0F, amount));
 	}
 
@@ -96,7 +96,7 @@ public class EnergyStorage {
 		return energyUsage;
 	}
 
-	public void setUsage(float usage) {
+	public void setUsage(final float usage) {
 		energyUsage = usage;
 		lastEnergy = energy;
 	}
@@ -109,9 +109,9 @@ public class EnergyStorage {
 	public List<IChatComponent> format() {
 		final float usage = getUsage();
 
-		IChatComponent gain = new ChatComponentText("+").setChatStyle(new ChatStyle().setColor(GREEN));
-		IChatComponent loss = new ChatComponentText("-").setChatStyle(new ChatStyle().setColor(RED));
-		IChatComponent rate = new ChatComponentText(TFFormatHelper.formatNumberPrecise(Math.abs(usage)));
+		final IChatComponent gain = new ChatComponentText("+").setChatStyle(new ChatStyle().setColor(GREEN));
+		final IChatComponent loss = new ChatComponentText("-").setChatStyle(new ChatStyle().setColor(RED));
+		final IChatComponent rate = new ChatComponentText(TFFormatHelper.formatNumberPrecise(Math.abs(usage)));
 		IChatComponent prefix = new ChatComponentText("").setChatStyle(new ChatStyle().setColor(GRAY));
 		prefix = usage > 0 ? gain : usage < 0 ? loss : prefix;
 

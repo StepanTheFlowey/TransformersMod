@@ -34,15 +34,15 @@ public class ItemFuelCanister extends ItemFluidContainer {
 		setMaxDamage(0);
 	}
 
-	public static boolean isEmpty(ItemStack itemstack) {
+	public static boolean isEmpty(final ItemStack itemstack) {
 		return getFluidAmount(itemstack) <= 0;
 	}
 
-	public static boolean isFull(ItemStack itemstack) {
+	public static boolean isFull(final ItemStack itemstack) {
 		return getFluidAmount(itemstack) >= getContainerCapacity(itemstack);
 	}
 
-	public static int getFluidAmount(ItemStack itemstack) {
+	public static int getFluidAmount(final ItemStack itemstack) {
 		if(itemstack.stackTagCompound == null || !itemstack.stackTagCompound.hasKey("Fluid")) {
 			return 0;
 		}
@@ -50,7 +50,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 		return itemstack.stackTagCompound.getCompoundTag("Fluid").getInteger("Amount");
 	}
 
-	public static FluidStack getContainerFluid(ItemStack itemstack) {
+	public static FluidStack getContainerFluid(final ItemStack itemstack) {
 		if(itemstack.stackTagCompound == null || !itemstack.stackTagCompound.hasKey("Fluid")) {
 			return null;
 		}
@@ -58,7 +58,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 		return FluidStack.loadFluidStackFromNBT(itemstack.stackTagCompound.getCompoundTag("Fluid"));
 	}
 
-	public static int getContainerCapacity(ItemStack itemstack) {
+	public static int getContainerCapacity(final ItemStack itemstack) {
 		if(itemstack.getItem() instanceof IFluidContainerItem) {
 			return ((IFluidContainerItem) itemstack.getItem()).getCapacity(itemstack);
 		}
@@ -67,7 +67,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 	}
 
 	@Override
-	public int fill(ItemStack container, FluidStack resource, boolean doFill) {
+	public int fill(final ItemStack container, final FluidStack resource, final boolean doFill) {
 		if(resource == null || resource.getFluid() != TFFluids.energon) {
 			return 0;
 		}
@@ -76,12 +76,12 @@ public class ItemFuelCanister extends ItemFluidContainer {
 	}
 
 	@Override
-	public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain) {
+	public FluidStack drain(final ItemStack container, final int maxDrain, final boolean doDrain) {
 		return super.drain(container, maxDrain, container.getItemDamage() == 0 && doDrain);
 	}
 
 	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean p_77624_4_) {
+	public void addInformation(final ItemStack itemstack, final EntityPlayer player, final List list, final boolean p_77624_4_) {
 		final FluidTankTF tank = new FluidTankTF(getCapacity(itemstack));
 		tank.setFluid(getFluid(itemstack));
 
@@ -89,17 +89,17 @@ public class ItemFuelCanister extends ItemFluidContainer {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack) {
-		int i = MathHelper.clamp_int(itemstack.getItemDamage(), 0, unlocalizedNames.length - 1);
+	public String getUnlocalizedName(final ItemStack itemstack) {
+		final int i = MathHelper.clamp_int(itemstack.getItemDamage(), 0, unlocalizedNames.length - 1);
 		return "item." + unlocalizedNames[i] + "fuel_canister";
 	}
 
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List list) {
+	public void getSubItems(final Item item, final CreativeTabs tab, final List list) {
 		for(int i = 0; i < unlocalizedNames.length; ++i) {
 			list.add(new ItemStack(item, 1, i));
 
-			for(Energon energon : TransformersAPI.getEnergonTypes()) {
+			for(final Energon energon : TransformersAPI.getEnergonTypes()) {
 				final ItemStack itemstack = new ItemStack(item, 1, i);
 				fill(itemstack, FluidEnergon.create(energon, capacity), true);
 				list.add(itemstack);
@@ -108,7 +108,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack itemstack, int pass) {
+	public IIcon getIcon(final ItemStack itemstack, final int pass) {
 		if(pass > 0) {
 			final FluidStack fluidStack = getFluid(itemstack);
 
@@ -122,14 +122,14 @@ public class ItemFuelCanister extends ItemFluidContainer {
 	}
 
 	@Override
-	public IIcon getIconFromDamage(int damage) {
+	public IIcon getIconFromDamage(final int damage) {
 		final int i = MathHelper.clamp_int(damage, 0, unlocalizedNames.length - 1);
 		return icons[i];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack itemstack, int pass) {
+	public int getColorFromItemStack(final ItemStack itemstack, final int pass) {
 		if(pass == 1) {
 			final FluidStack fluidStack = getFluid(itemstack);
 
@@ -149,7 +149,7 @@ public class ItemFuelCanister extends ItemFluidContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(final IIconRegister iconRegister) {
 		icons = new IIcon[unlocalizedNames.length];
 		overlays = new IIcon[5];
 

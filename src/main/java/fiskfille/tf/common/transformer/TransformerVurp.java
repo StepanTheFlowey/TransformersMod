@@ -60,7 +60,7 @@ public class TransformerVurp extends TransformerCar {
 	}
 
 	@Override
-	public Entity getShootEntity(EntityPlayer player) {
+	public Entity getShootEntity(final EntityPlayer player) {
 		return new EntityLaser(player.worldObj, player);
 	}
 
@@ -85,7 +85,7 @@ public class TransformerVurp extends TransformerCar {
 	}
 
 	@Override
-	public void tick(EntityPlayer player, float timer) {
+	public void tick(final EntityPlayer player, final float timer) {
 		super.tick(player, timer);
 
 		final ItemStack heldItem = player.getHeldItem();

@@ -26,7 +26,7 @@ public class TFConfig {
 
 	public static Configuration configFile;
 
-	public static void load(Configuration config) {
+	public static void load(final Configuration config) {
 		configFile = config;
 
 		groundBridgeMinRange = config.getBoolean("Ground Bridge Min Range", CATEGORY_GENERAL, true, "If false, the 'Invalid Coords' Ground Bridge error will be discarded.");
@@ -41,13 +41,13 @@ public class TFConfig {
 
 		firstPersonAfterTransformation = config.getBoolean("First-person Switch", CATEGORY_TRANSFORMATION, false, "If true, you will switch to first-person mode after transforming from vehicle to robot mode.");
 
-		for(Transformer transformer : TransformersAPI.getTransformers()) {
-			String name = transformer.getName();
+		for(final Transformer transformer : TransformersAPI.getTransformers()) {
+			final String name = transformer.getName();
 			canTransform.put(transformer, config.getBoolean("Can Transform As " + name, CATEGORY_TRANSFORMATION, true, "If false, you will not be able to transform as " + name + ". Useful for servers."));
 		}
 	}
 
-	public static Boolean canTransform(Transformer transformer) {
+	public static Boolean canTransform(final Transformer transformer) {
 		return transformer != null ? TFConfig.canTransform.get(transformer) : true;
 	}
 }

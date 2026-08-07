@@ -22,10 +22,10 @@ public class ItemDisplayVehicle extends Item {
 		setHasSubtypes(true);
 	}
 
-	public static void setNBTData(ItemStack itemstack) {
+	public static void setNBTData(final ItemStack itemstack) {
 		int transformerIndex = 0;
 
-		for(Transformer transformer : TransformersAPI.getTransformers()) {
+		for(final Transformer transformer : TransformersAPI.getTransformers()) {
 			if(transformerIndex == itemstack.getItemDamage()) {
 				final ItemStack head = new ItemStack(transformer.getHelmet());
 				final ItemStack chest = new ItemStack(transformer.getChestplate());
@@ -52,7 +52,7 @@ public class ItemDisplayVehicle extends Item {
 		}
 	}
 
-	public static ItemStack[] getArmorFromNBT(ItemStack itemstack) {
+	public static ItemStack[] getArmorFromNBT(final ItemStack itemstack) {
 		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Items")) {
 			final NBTTagList nbtItems = itemstack.getTagCompound().getTagList("Items", 10);
 			final ItemStack[] items = new ItemStack[4];
@@ -73,7 +73,7 @@ public class ItemDisplayVehicle extends Item {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
+	public String getItemStackDisplayName(final ItemStack stack) {
 		final Transformer transformer = TransformersAPI.getTransformers().get(stack.getItemDamage());
 
 		if(transformer != null) {
@@ -85,12 +85,12 @@ public class ItemDisplayVehicle extends Item {
 	}
 
 	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean p_77624_4_) {
+	public void addInformation(final ItemStack itemstack, final EntityPlayer player, final List info, final boolean p_77624_4_) {
 		info.add("Equippable");
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack itemstack, final World world, final EntityPlayer player) {
 		if(!itemstack.hasTagCompound()) {
 			itemstack.setTagCompound(new NBTTagCompound());
 		}
@@ -123,14 +123,14 @@ public class ItemDisplayVehicle extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister) {
+	public void registerIcons(final IIconRegister par1IconRegister) {
 	}
 
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
+	public void getSubItems(final Item item, final CreativeTabs tab, final List subItems) {
 		int index = 0;
 
-		for(Transformer transformer : TransformersAPI.getTransformers()) {
+		for(final Transformer transformer : TransformersAPI.getTransformers()) {
 			subItems.add(new ItemStack(this, 1, index));
 			index++;
 		}

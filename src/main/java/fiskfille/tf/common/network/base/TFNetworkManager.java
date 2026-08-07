@@ -33,7 +33,7 @@ public class TFNetworkManager {
 		registerPacket(MessageUpdateArmor.Handler.class, MessageUpdateArmor.class);
 	}
 
-	private static <REQ extends IMessage, REPLY extends IMessage> void registerPacket(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Class<REQ> requestMessageType) {
+	private static <REQ extends IMessage, REPLY extends IMessage> void registerPacket(final Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, final Class<REQ> requestMessageType) {
 		networkWrapper.registerMessage(messageHandler, requestMessageType, packetId++, Side.CLIENT);
 		networkWrapper.registerMessage(messageHandler, requestMessageType, packetId++, Side.SERVER);
 	}

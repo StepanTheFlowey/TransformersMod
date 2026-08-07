@@ -16,23 +16,23 @@ public class MessageSetTileData implements IMessage {
 
 	public MessageSetTileData() {}
 
-	public MessageSetTileData(DimensionalCoords coords, TileData data) {
+	public MessageSetTileData(final DimensionalCoords coords, final TileData data) {
 		tileData = data;
 		tileCoords = coords;
 	}
 
-	public MessageSetTileData(TileData data) {
+	public MessageSetTileData(final TileData data) {
 		this(data.getCoords(), data);
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		if(buf.readBoolean()) {
 			try {
 				tileData = (TileData) Class.forName(ByteBufUtils.readUTF8String(buf)).newInstance();
 				tileData.fromBytes(buf);
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -42,7 +42,7 @@ public class MessageSetTileData implements IMessage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeBoolean(tileData != null);
 
 		if(tileData == null) {
@@ -56,7 +56,7 @@ public class MessageSetTileData implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessageSetTileData, IMessage> {
 		@Override
-		public IMessage onMessage(MessageSetTileData message, MessageContext ctx) {
+		public IMessage onMessage(final MessageSetTileData message, final MessageContext ctx) {
 			final TileData data = message.tileData;
 			final DimensionalCoords coords = data != null ? data.getCoords() : message.tileCoords;
 

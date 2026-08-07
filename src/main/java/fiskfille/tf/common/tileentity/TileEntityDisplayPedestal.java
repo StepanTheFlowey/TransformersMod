@@ -15,7 +15,7 @@ public class TileEntityDisplayPedestal extends TileEntityContainer {
 		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(1, 1, 1);
 	}
 
-	public void setDisplayItem(ItemStack itemstack, boolean sync) {
+	public void setDisplayItem(final ItemStack itemstack, final boolean sync) {
 		if(itemstack != getDisplayItem()) {
 			if(sync) {
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -35,7 +35,7 @@ public class TileEntityDisplayPedestal extends TileEntityContainer {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
 		return TransformersAPI.hasDisplayable(stack.getItem());
 	}
 }

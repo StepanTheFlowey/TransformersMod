@@ -10,7 +10,7 @@ public class InventoryDisplayStationArmor implements IInventory {
 	private final Container eventHandler;
 	private int inventoryWidth;
 
-	public InventoryDisplayStationArmor(Container container) {
+	public InventoryDisplayStationArmor(final Container container) {
 		this.eventHandler = container;
 	}
 
@@ -20,13 +20,13 @@ public class InventoryDisplayStationArmor implements IInventory {
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int slot) {
+	public ItemStack getStackInSlot(final int slot) {
 		return slot >= this.getSizeInventory() ? null : this.stackList[slot];
 	}
 
-	public ItemStack getStackInRowAndColumn(int row, int column) {
+	public ItemStack getStackInRowAndColumn(final int row, final int column) {
 		if(row >= 0 && row < this.inventoryWidth) {
-			int k = row + column * this.inventoryWidth;
+			final int k = row + column * this.inventoryWidth;
 			return this.getStackInSlot(k);
 		}
 		else {
@@ -45,9 +45,9 @@ public class InventoryDisplayStationArmor implements IInventory {
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack getStackInSlotOnClosing(final int slot) {
 		if(this.stackList[slot] != null) {
-			ItemStack itemstack = this.stackList[slot];
+			final ItemStack itemstack = this.stackList[slot];
 			this.stackList[slot] = null;
 			return itemstack;
 		}
@@ -57,9 +57,9 @@ public class InventoryDisplayStationArmor implements IInventory {
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
+	public ItemStack decrStackSize(final int slot, final int amount) {
 		if(this.stackList[slot] != null) {
-			ItemStack itemstack;
+			final ItemStack itemstack;
 
 			if(this.stackList[slot].stackSize <= amount) {
 				itemstack = this.stackList[slot];
@@ -82,7 +82,7 @@ public class InventoryDisplayStationArmor implements IInventory {
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack itemstack) {
+	public void setInventorySlotContents(final int slot, final ItemStack itemstack) {
 		this.stackList[slot] = itemstack;
 		this.eventHandler.onCraftMatrixChanged(this);
 	}
@@ -97,7 +97,7 @@ public class InventoryDisplayStationArmor implements IInventory {
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUseableByPlayer(final EntityPlayer player) {
 		return true;
 	}
 
@@ -110,7 +110,7 @@ public class InventoryDisplayStationArmor implements IInventory {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack itemstack) {
 		return true;
 	}
 }

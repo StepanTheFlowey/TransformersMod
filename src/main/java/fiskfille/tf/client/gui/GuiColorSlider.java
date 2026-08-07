@@ -14,13 +14,13 @@ import java.awt.*;
 public class GuiColorSlider extends GuiSliderBase {
 	public final int sliderId;
 
-	public GuiColorSlider(int id, int x, int y, int sliderId, String s) {
+	public GuiColorSlider(final int id, final int x, final int y, final int sliderId, final String s) {
 		super(id, x, y, 150, 20, s);
 		this.sliderId = sliderId;
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(visible) {
 			mc.getTextureManager().bindTexture(buttonTextures);
 			GL11.glColor3f(1F, 1F, 1F);

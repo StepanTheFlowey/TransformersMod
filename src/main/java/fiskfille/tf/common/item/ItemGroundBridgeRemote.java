@@ -30,14 +30,14 @@ public class ItemGroundBridgeRemote extends Item {
 	}
 
 	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
+	public void addInformation(final ItemStack itemstack, final EntityPlayer player, final List list, final boolean flag) {
 		final ItemCSD.DimensionalCoords coords = ItemCSD.getCoords(itemstack);
 		list.add(coords.getFormatted().getFormattedText());
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int usingTick, boolean holding) {
-		ItemCSD.DimensionalCoords coords = ItemCSD.getCoords(itemstack);
+	public void onUpdate(final ItemStack itemstack, final World world, final Entity entity, final int usingTick, final boolean holding) {
+		final ItemCSD.DimensionalCoords coords = ItemCSD.getCoords(itemstack);
 
 		if(TFTileHelper.getTileData(coords) instanceof TileDataControlPanel) {
 			itemstack.setItemDamage(1);
@@ -48,7 +48,7 @@ public class ItemGroundBridgeRemote extends Item {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player) {
 		if(!world.isRemote) {
 			final ItemCSD.DimensionalCoords coords = ItemCSD.getCoords(stack);
 			final WorldServer targetWorld = MinecraftServer.getServer().worldServerForDimension(coords.dimension);
@@ -74,7 +74,7 @@ public class ItemGroundBridgeRemote extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(final ItemStack itemstack, final EntityPlayer player, final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY, final float hitZ) {
 		if(player.isSneaking()) {
 			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
@@ -94,12 +94,12 @@ public class ItemGroundBridgeRemote extends Item {
 	}
 
 	@Override
-	public IIcon getIconFromDamage(int damage) {
+	public IIcon getIconFromDamage(final int damage) {
 		return icons[Math.min(damage, 1)];
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(final IIconRegister iconRegister) {
 		icons = new IIcon[]{
 			iconRegister.registerIcon(getIconString() + "_off"),
 			iconRegister.registerIcon(getIconString() + "_on")

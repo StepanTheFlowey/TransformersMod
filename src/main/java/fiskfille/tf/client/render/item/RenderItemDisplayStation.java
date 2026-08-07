@@ -11,7 +11,7 @@ public class RenderItemDisplayStation extends RenderItemTileEntity {
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		GL11.glScalef(0.6F, 0.6F, 0.6F);
 
 		if(type == ItemRenderType.ENTITY || type == ItemRenderType.INVENTORY) {
@@ -34,7 +34,7 @@ public class RenderItemDisplayStation extends RenderItemTileEntity {
 		try {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(tileentity, 0, 0, 0, 0);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}

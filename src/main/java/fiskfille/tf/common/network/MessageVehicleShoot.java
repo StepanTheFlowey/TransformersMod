@@ -21,23 +21,23 @@ public class MessageVehicleShoot implements IMessage {
 
 	public MessageVehicleShoot() {}
 
-	public MessageVehicleShoot(EntityPlayer player) {
+	public MessageVehicleShoot(final EntityPlayer player) {
 		id = player.getEntityId();
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 	}
 
 	public static class Handler implements IMessageHandler<MessageVehicleShoot, IMessage> {
 		@Override
-		public IMessage onMessage(MessageVehicleShoot message, MessageContext ctx) {
+		public IMessage onMessage(final MessageVehicleShoot message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final Entity fromEntity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);
 
@@ -57,8 +57,8 @@ public class MessageVehicleShoot implements IMessage {
 			else {
 				EntityPlayer from = null;
 
-				for(World world : MinecraftServer.getServer().worldServers) {
-					Entity entity = world.getEntityByID(message.id);
+				for(final World world : MinecraftServer.getServer().worldServers) {
+					final Entity entity = world.getEntityByID(message.id);
 					if(entity instanceof EntityPlayer) {
 						from = (EntityPlayer) entity;
 						break;
@@ -66,13 +66,13 @@ public class MessageVehicleShoot implements IMessage {
 				}
 
 				if(from != null) {
-					Transformer transformer = TFHelper.getTransformer(from);
+					final Transformer transformer = TFHelper.getTransformer(from);
 
 					if(transformer != null) {
 						if(transformer.canShoot(from) && TFHelper.isFullyTransformed(from)) {
-							Item shootItem = transformer.getShootItem();
-							boolean isCreative = from.capabilities.isCreativeMode;
-							boolean hasAmmo = isCreative || from.inventory.hasItem(shootItem);
+							final Item shootItem = transformer.getShootItem();
+							final boolean isCreative = from.capabilities.isCreativeMode;
+							final boolean hasAmmo = isCreative || from.inventory.hasItem(shootItem);
 
 							if(hasAmmo) {
 								if(transformer.getShootSound() != null) {

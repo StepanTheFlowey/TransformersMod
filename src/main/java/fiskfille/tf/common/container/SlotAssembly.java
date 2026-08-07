@@ -19,19 +19,19 @@ public class SlotAssembly extends Slot {
 	private final EntityPlayer thePlayer;
 	private int amountCrafted;
 
-	public SlotAssembly(EntityPlayer player, InventoryAssembly inventory1, IInventory inventory2, int id, int x, int y) {
+	public SlotAssembly(final EntityPlayer player, final InventoryAssembly inventory1, final IInventory inventory2, final int id, final int x, final int y) {
 		super(inventory2, id, x, y);
 		thePlayer = player;
 		craftMatrix = inventory1;
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack itemstack) {
+	public boolean isItemValid(final ItemStack itemstack) {
 		return false;
 	}
 
 	@Override
-	public ItemStack decrStackSize(int amount) {
+	public ItemStack decrStackSize(final int amount) {
 		if(getHasStack()) {
 			amountCrafted += Math.min(amount, getStack().stackSize);
 		}
@@ -40,13 +40,13 @@ public class SlotAssembly extends Slot {
 	}
 
 	@Override
-	protected void onCrafting(ItemStack itemstack, int amount) {
+	protected void onCrafting(final ItemStack itemstack, final int amount) {
 		amountCrafted += amount;
 		onCrafting(itemstack);
 	}
 
 	@Override
-	protected void onCrafting(ItemStack itemstack) {
+	protected void onCrafting(final ItemStack itemstack) {
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, amountCrafted);
 		amountCrafted = 0;
 
@@ -92,7 +92,7 @@ public class SlotAssembly extends Slot {
 	}
 
 	@Override
-	public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack) {
+	public void onPickupFromSlot(final EntityPlayer player, final ItemStack itemstack) {
 		FMLCommonHandler.instance().firePlayerCraftingEvent(player, itemstack, craftMatrix);
 		onCrafting(itemstack);
 

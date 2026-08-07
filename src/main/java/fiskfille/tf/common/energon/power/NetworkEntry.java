@@ -10,20 +10,20 @@ public class NetworkEntry {
 	private final DimensionalCoords coords;
 	private TileEntity owner;
 
-	protected NetworkEntry(DimensionalCoords coordinates, TileEntity tile) {
+	protected NetworkEntry(final DimensionalCoords coordinates, final TileEntity tile) {
 		coords = coordinates;
 		owner = tile;
 	}
 
-	public NetworkEntry(TileEntity tile) {
+	public NetworkEntry(final TileEntity tile) {
 		this(new DimensionalCoords(tile), tile);
 	}
 
-	public static NetworkEntry readFromNBT(NBTTagCompound compound) {
+	public static NetworkEntry readFromNBT(final NBTTagCompound compound) {
 		return new NetworkEntry(new DimensionalCoords(compound.getInteger("X"), compound.getInteger("Y"), compound.getInteger("Z"), compound.getInteger("Dim")), null);
 	}
 
-	public static NetworkEntry fromBytes(ByteBuf buf) {
+	public static NetworkEntry fromBytes(final ByteBuf buf) {
 		return new NetworkEntry(new DimensionalCoords().fromBytes(buf), null);
 	}
 
@@ -43,7 +43,7 @@ public class NetworkEntry {
 		return (IEnergyReceiver) getTile();
 	}
 
-	public void load(World world) {
+	public void load(final World world) {
 		final TileEntity tile = world.getTileEntity(coords.posX, coords.posY, coords.posZ);
 
 		if(tile instanceof IEnergyTransmitter || tile instanceof IEnergyReceiver) {
@@ -51,14 +51,14 @@ public class NetworkEntry {
 		}
 	}
 
-	public void writeToNBT(NBTTagCompound compound) {
+	public void writeToNBT(final NBTTagCompound compound) {
 		compound.setInteger("X", coords.posX);
 		compound.setInteger("Y", coords.posY);
 		compound.setInteger("Z", coords.posZ);
 		compound.setInteger("Dim", coords.dimension);
 	}
 
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		coords.toBytes(buf);
 	}
 
@@ -68,7 +68,7 @@ public class NetworkEntry {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		return obj instanceof NetworkEntry && ((NetworkEntry) obj).coords.equals(coords);
 	}
 }

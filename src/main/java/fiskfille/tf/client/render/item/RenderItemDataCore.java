@@ -14,17 +14,17 @@ public class RenderItemDataCore implements IItemRenderer {
 	public final RenderBlocks renderBlocks = RenderBlocks.getInstance();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(final ItemStack item, final ItemRenderType type) {
 		return true;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(final ItemRenderType type, final ItemStack item, final ItemRendererHelper helper) {
 		return true;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		GL11.glColor3f(1F, 1F, 1F);
 
 		float scale = type != ItemRenderType.INVENTORY ? 0.5F : 1F;
@@ -39,7 +39,7 @@ public class RenderItemDataCore implements IItemRenderer {
 		render(item);
 	}
 
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		final Block block = TFBlocks.groundBridgeControlPanel;
 		final Tessellator tessellator = Tessellator.instance;
 

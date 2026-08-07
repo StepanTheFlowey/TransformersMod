@@ -31,7 +31,7 @@ public class GuiIsoCondenser extends GuiContainerTF {
 
 	private GuiHoverFieldEnergy fieldEnergy;
 
-	public GuiIsoCondenser(InventoryPlayer inventoryPlayer, TileEntityIsoCondenser tile) {
+	public GuiIsoCondenser(final InventoryPlayer inventoryPlayer, final TileEntityIsoCondenser tile) {
 		super(new ContainerEmpty(inventoryPlayer));
 		tileentity = tile;
 	}
@@ -53,7 +53,7 @@ public class GuiIsoCondenser extends GuiContainerTF {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		switch(button.id) {
 			case 0:
 				mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
@@ -67,15 +67,15 @@ public class GuiIsoCondenser extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = I18n.format("gui.isotopic_condenser");
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 
-		HashMap<Block, Integer> map = new HashMap<>();
-		ArrayList<Block> blocks = new ArrayList<>();
+		final HashMap<Block, Integer> map = new HashMap<>();
+		final ArrayList<Block> blocks = new ArrayList<>();
 
-		for(Map.Entry<ForgeDirection, Block> e : tileentity.providers.entrySet()) {
+		for(final Map.Entry<ForgeDirection, Block> e : tileentity.providers.entrySet()) {
 			if(!map.containsKey(e.getValue())) {
 				map.put(e.getValue(), 1);
 				blocks.add(e.getValue());
@@ -112,7 +112,7 @@ public class GuiIsoCondenser extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		mc.getTextureManager().bindTexture(texture);
 		GL11.glColor3f(1, 1, 1);
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;

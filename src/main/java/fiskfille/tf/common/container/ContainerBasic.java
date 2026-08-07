@@ -13,7 +13,7 @@ public class ContainerBasic extends Container {
 	protected final TileEntity tileentity;
 	protected final World worldObj;
 
-	public ContainerBasic(TileEntity tile) {
+	public ContainerBasic(final TileEntity tile) {
 		tileentity = tile;
 		worldObj = tile != null ? tile.getWorldObj() : null;
 	}
@@ -22,7 +22,7 @@ public class ContainerBasic extends Container {
 		return tileentity;
 	}
 
-	public void addPlayerInventory(InventoryPlayer inventoryPlayer, int yOffset) {
+	public void addPlayerInventory(final InventoryPlayer inventoryPlayer, final int yOffset) {
 		int i;
 		int j;
 
@@ -38,7 +38,7 @@ public class ContainerBasic extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player) {
+	public boolean canInteractWith(final EntityPlayer player) {
 		if(tileentity != null) {
 			if(tileentity instanceof IInventory) {
 				return ((IInventory) tileentity).isUseableByPlayer(player);
@@ -51,11 +51,11 @@ public class ContainerBasic extends Container {
 	}
 
 	@Override
-	protected boolean mergeItemStack(ItemStack stackToMove, int fromId, int toId, boolean descending) {
+	protected boolean mergeItemStack(final ItemStack stackToMove, final int fromId, final int toId, final boolean descending) {
 		return mergeItemStack(stackToMove, fromId, toId, descending, false);
 	}
 
-	protected boolean mergeItemStack(ItemStack stackToMove, int fromId, int toId, boolean descending, boolean check) {
+	protected boolean mergeItemStack(final ItemStack stackToMove, final int fromId, final int toId, final boolean descending, final boolean check) {
 		boolean success = false;
 		int id = fromId;
 
@@ -72,8 +72,8 @@ public class ContainerBasic extends Container {
 				dstStack = slot.getStack();
 
 				if((!check || slot.isItemValid(stackToMove)) && dstStack != null && dstStack.getItem() == stackToMove.getItem() && (!stackToMove.getHasSubtypes() || stackToMove.getItemDamage() == dstStack.getItemDamage()) && ItemStack.areItemStackTagsEqual(stackToMove, dstStack)) {
-					int maxStackSize = Math.min(slot.inventory.getInventoryStackLimit(), Math.min(dstStack.getMaxStackSize(), slot.getSlotStackLimit()));
-					int combinedStackSize = dstStack.stackSize + stackToMove.stackSize;
+					final int maxStackSize = Math.min(slot.inventory.getInventoryStackLimit(), Math.min(dstStack.getMaxStackSize(), slot.getSlotStackLimit()));
+					final int combinedStackSize = dstStack.stackSize + stackToMove.stackSize;
 
 					if(combinedStackSize <= maxStackSize) {
 						stackToMove.stackSize = 0;
@@ -111,8 +111,8 @@ public class ContainerBasic extends Container {
 				dstStack = slot.getStack();
 
 				if((!check || slot.isItemValid(stackToMove)) && dstStack == null) {
-					int maxStackSize = Math.min(slot.inventory.getInventoryStackLimit(), Math.min(stackToMove.getMaxStackSize(), slot.getSlotStackLimit()));
-					ItemStack itemstack1 = stackToMove.copy();
+					final int maxStackSize = Math.min(slot.inventory.getInventoryStackLimit(), Math.min(stackToMove.getMaxStackSize(), slot.getSlotStackLimit()));
+					final ItemStack itemstack1 = stackToMove.copy();
 					itemstack1.stackSize = Math.min(maxStackSize, itemstack1.stackSize);
 					slot.putStack(itemstack1);
 

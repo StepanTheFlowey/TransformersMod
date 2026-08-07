@@ -50,7 +50,7 @@ public class TransformerCloudtrap extends TransformerJet {
 	}
 
 	@Override
-	public void tick(EntityPlayer player, float timer) {
+	public void tick(final EntityPlayer player, final float timer) {
 		if(timer < 0.5F) {
 			if(player.worldObj.isRemote) {
 				CloudtrapJetpackManager.cloudtrapTick(player);
@@ -67,17 +67,17 @@ public class TransformerCloudtrap extends TransformerJet {
 	}
 
 	@Override
-	public boolean onJump(EntityPlayer player) {
+	public boolean onJump(final EntityPlayer player) {
 		return !player.isSneaking();
 	}
 
 	@Override
-	public void updateMovement(EntityPlayer player) {
+	public void updateMovement(final EntityPlayer player) {
 		TFMotionManager.motionJet(player, 140, 200, 50);
 	}
 
 	@Override
-	public void doNitroParticles(EntityPlayer player) {
+	public void doNitroParticles(final EntityPlayer player) {
 		final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		for(int i = 0; i < 4; ++i) {

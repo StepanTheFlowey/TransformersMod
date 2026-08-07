@@ -18,7 +18,7 @@ public class TileDataRelay extends TileData {
 	public TileDataRelay() {
 	}
 
-	public TileDataRelay(TileDataRelay data) {
+	public TileDataRelay(final TileDataRelay data) {
 		super(data);
 		transmissionHandler = data.transmissionHandler;
 		transmissionHandler.setNeedsUpdate(false);
@@ -27,7 +27,7 @@ public class TileDataRelay extends TileData {
 	}
 
 	@Override
-	public <T extends TileEntity> T initialize(T tile) {
+	public <T extends TileEntity> T initialize(final T tile) {
 		if(!isInitialized()) {
 			transmissionHandler.setOwner(tile);
 		}
@@ -36,24 +36,24 @@ public class TileDataRelay extends TileData {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 		transmissionHandler.toBytes(buf);
 		buf.writeBoolean(isPowered);
 		buf.writeInt(invertCurrent.size());
 
-		for(DimensionalCoords coords : invertCurrent) {
+		for(final DimensionalCoords coords : invertCurrent) {
 			coords.toBytes(buf);
 		}
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		transmissionHandler.fromBytes(buf);
 		isPowered = buf.readBoolean();
 
-		int size = buf.readInt();
+		final int size = buf.readInt();
 
 		for(int i = 0; i < size; ++i) {
 			invertCurrent.add(new DimensionalCoords().fromBytes(buf));
@@ -61,7 +61,7 @@ public class TileDataRelay extends TileData {
 	}
 
 	public void serverTickPre() {
-		WorldServer world = MinecraftServer.getServer().worldServerForDimension(getCoords().dimension);
+		final WorldServer world = MinecraftServer.getServer().worldServerForDimension(getCoords().dimension);
 
 		if(world != null) {
 			transmissionHandler.onUpdate(world);
@@ -78,9 +78,9 @@ public class TileDataRelay extends TileData {
 	}
 
 	@Override
-	public boolean matches(TileData tileData) {
+	public boolean matches(final TileData tileData) {
 		if(tileData instanceof TileDataRelay) {
-			TileDataRelay data = (TileDataRelay) tileData;
+			final TileDataRelay data = (TileDataRelay) tileData;
 
 			return isPowered == data.isPowered && !transmissionHandler.needsUpdate() && invertCurrent.size() == data.invertCurrent.size() && invertCurrent.containsAll(data.invertCurrent);
 		}

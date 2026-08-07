@@ -46,7 +46,7 @@ public class Dyes {
 	private static final Map<Integer, String> names = Maps.newHashMap();
 
 	static {
-		for(Field field : Dyes.class.getFields()) {
+		for(final Field field : Dyes.class.getFields()) {
 			final String s = field.getType().getName();
 
 			if(s.equals("int")) {
@@ -54,7 +54,7 @@ public class Dyes {
 					names.put(field.getInt(null), field.getName());
 					dyes.add(field.getInt(null));
 				}
-				catch(Exception e) {
+				catch(final Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -63,12 +63,12 @@ public class Dyes {
 
 	private final LinkedList<ItemStack> itemstacks = Lists.newLinkedList();
 
-	public Dyes(int... dyes) {
+	public Dyes(final int... dyes) {
 		for(int i = 0; i < dyes.length; ++i) {
 			if(i % 2 == 1) {
 				Item item = Items.dye;
 				int id = dyes[i - 1];
-				int amount = dyes[i];
+				final int amount = dyes[i];
 
 				if(id >= 16) {
 					item = TFItems.dye;
@@ -80,16 +80,16 @@ public class Dyes {
 		}
 	}
 
-	public static ItemStack get(int id) {
+	public static ItemStack get(final int id) {
 		return get(id, 1);
 	}
 
-	public static ItemStack get(int id, int amount) {
+	public static ItemStack get(final int id, final int amount) {
 		return new Dyes(id, amount).compile()[0];
 	}
 
-	public static ItemStack dye(Object obj, int id) {
-		ItemStack itemstack;
+	public static ItemStack dye(final Object obj, final int id) {
+		final ItemStack itemstack;
 
 		if(obj instanceof Block) {
 			itemstack = new ItemStack((Block) obj);
@@ -115,11 +115,11 @@ public class Dyes {
 		return null;
 	}
 
-	public static String getName(int id) {
+	public static String getName(final int id) {
 		return names.get(id);
 	}
 
-	public static String getName(ItemStack itemstack) {
+	public static String getName(final ItemStack itemstack) {
 		if(itemstack != null) {
 			final Item item = itemstack.getItem();
 			int id = itemstack.getItemDamage();
@@ -132,7 +132,7 @@ public class Dyes {
 				return getName(id);
 			}
 			else if(item instanceof ItemBlock) {
-				Block block = Block.getBlockFromItem(item);
+				final Block block = Block.getBlockFromItem(item);
 
 				if(block instanceof BlockStainedGlass || block instanceof BlockStainedGlassPane || block instanceof BlockColored || item instanceof ItemCloth) {
 					if(item.delegate.name().startsWith("minecraft:")) {
@@ -148,7 +148,7 @@ public class Dyes {
 	}
 
 	public Dyes invert() {
-		for(ItemStack itemstack : itemstacks) {
+		for(final ItemStack itemstack : itemstacks) {
 			if(itemstack.getItem() == Items.dye) {
 				itemstack.setItemDamage(15 - itemstack.getItemDamage());
 			}

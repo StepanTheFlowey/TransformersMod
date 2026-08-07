@@ -12,12 +12,12 @@ import java.util.List;
 public class GuiHoverFieldEnergy extends GuiHoverField {
 	private EnergyStorage energyStorage;
 
-	public GuiHoverFieldEnergy(int x, int y, int width, int height, EnergyStorage storage) {
+	public GuiHoverFieldEnergy(final int x, final int y, final int width, final int height, final EnergyStorage storage) {
 		super(x, y, width, height, new ArrayList<>());
 		energyStorage = storage;
 	}
 
-	public void update(EnergyStorage storage) {
+	public void update(final EnergyStorage storage) {
 		energyStorage = storage;
 	}
 

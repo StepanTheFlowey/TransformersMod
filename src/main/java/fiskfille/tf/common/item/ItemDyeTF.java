@@ -23,31 +23,31 @@ public class ItemDyeTF extends Item {
 		setCreativeTab(CreativeTabs.tabMaterials);
 	}
 
-	public static int getDyeColor(int damage) {
+	public static int getDyeColor(final int damage) {
 		return dyeColors[MathHelper.clamp_int(damage, 0, dyeColors.length - 1)];
 	}
 
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
+	public void getSubItems(final Item item, final CreativeTabs tab, final List subItems) {
 		for(int i = 0; i < dyes.length; ++i) {
 			subItems.add(new ItemStack(this, 1, i));
 		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack) {
+	public String getUnlocalizedName(final ItemStack itemstack) {
 		return super.getUnlocalizedName() + "." + dyes[MathHelper.clamp_int(itemstack.getItemDamage(), 0, dyeColors.length - 1)];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
+	public IIcon getIconFromDamage(final int damage) {
 		return icons[MathHelper.clamp_int(damage, 0, icons.length - 1)];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(final IIconRegister iconRegister) {
 		icons = new IIcon[dyes.length];
 
 		for(int i = 0; i < dyes.length; ++i) {

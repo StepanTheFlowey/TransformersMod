@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 public class RecipeDisplayItems implements IRecipe {
 	@Override
-	public boolean matches(InventoryCrafting inventoryCrafting, World world) {
+	public boolean matches(final InventoryCrafting inventoryCrafting, final World world) {
 		final ItemStack[] stacks = new ItemStack[9];
 
 		for(int i = 0; i < stacks.length; i++) {
@@ -29,9 +29,9 @@ public class RecipeDisplayItems implements IRecipe {
 
 		int emptySlots = 0;
 
-		for(ItemStack itemStack : stacks) {
+		for(final ItemStack itemStack : stacks) {
 			if(itemStack != null) {
-				Item item = itemStack.getItem();
+				final Item item = itemStack.getItem();
 
 				if(item instanceof ItemTransformerArmor) {
 					final ItemArmor armorItem = (ItemArmor) item;
@@ -68,11 +68,11 @@ public class RecipeDisplayItems implements IRecipe {
 	}
 
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
+	public ItemStack getCraftingResult(final InventoryCrafting inventoryCrafting) {
 		ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1);
 		itemstack.setTagCompound(new NBTTagCompound());
 
-		ItemStack[] stacks = new ItemStack[9];
+		final ItemStack[] stacks = new ItemStack[9];
 
 		for(int i = 0; i < stacks.length; i++) {
 			stacks[i] = inventoryCrafting.getStackInSlot(i);
@@ -83,7 +83,7 @@ public class RecipeDisplayItems implements IRecipe {
 		ItemStack legs = null;
 		ItemStack feet = null;
 
-		for(ItemStack itemStack : stacks) {
+		for(final ItemStack itemStack : stacks) {
 			if(itemStack != null) {
 				final Item item = itemStack.getItem();
 
@@ -121,7 +121,7 @@ public class RecipeDisplayItems implements IRecipe {
 
 			boolean found = false;
 
-			for(Transformer transformer : TransformersAPI.getTransformers()) {
+			for(final Transformer transformer : TransformersAPI.getTransformers()) {
 				final Item helmet = transformer.getHelmet();
 				final Item chestplate = transformer.getChestplate();
 				final Item leggings = transformer.getLeggings();
@@ -144,7 +144,7 @@ public class RecipeDisplayItems implements IRecipe {
 		return itemstack;
 	}
 
-	public void setNBTData(ItemStack head, ItemStack chest, ItemStack legs, ItemStack feet, ItemStack itemstack) {
+	public void setNBTData(final ItemStack head, final ItemStack chest, final ItemStack legs, final ItemStack feet, final ItemStack itemstack) {
 		final ItemStack[] itemstacks = {head, chest, legs, feet};
 		final NBTTagList itemsList = new NBTTagList();
 

@@ -9,17 +9,17 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-public class WorldGenCrystal extends WorldGenerator {
+public final class WorldGenCrystal extends WorldGenerator {
 	private final Block target;
 	private final Material growthMaterial;
 
-	public WorldGenCrystal(Block block, Material material) {
+	public WorldGenCrystal(final Block block, final Material material) {
 		target = block;
 		growthMaterial = material;
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(final World world, final Random rand, final int x, final int y, final int z) {
 		boolean flag = false;
 
 		final int range = 3;
@@ -37,7 +37,7 @@ public class WorldGenCrystal extends WorldGenerator {
 		}
 
 		if(flag && world.getBlock(x, y, z) == Blocks.air) {
-			for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				if(world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ).getMaterial() == growthMaterial) {
 					return world.setBlock(x, y, z, target, dir.getOpposite().ordinal(), 2);
 				}

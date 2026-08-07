@@ -115,14 +115,14 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 			data.serverTick();
 		}
 
-		TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
+		final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
 
 		if(prevData instanceof TileDataEnergonTank) {
 			data = new TileDataEnergonTank((TileDataEnergonTank) prevData);
 		}
 	}
 
-	public void fillCanister(ItemStack fluidContainer) {
+	public void fillCanister(final ItemStack fluidContainer) {
 		if(fluidContainer.getItem() instanceof IFluidContainerItem) {
 			final IFluidContainerItem item = (IFluidContainerItem) fluidContainer.getItem();
 			final int amount = Math.min(data.getFluidAmount(), item.getCapacity(fluidContainer) - ItemFuelCanister.getFluidAmount(fluidContainer));
@@ -135,7 +135,7 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 
 			final FluidStack stack1 = new FluidStack(TFFluids.energon, amount);
 			FluidEnergon.setRatios(stack1, FluidEnergon.getRatios(data.getFluid()));
-			NBTTagCompound prevNBT = stack1.tag;
+			final NBTTagCompound prevNBT = stack1.tag;
 
 			stack1.tag = stack.tag;
 			final int i = item.fill(fluidContainer, stack1, true);
@@ -156,7 +156,7 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 		notifyNeighborBlocksOfChange();
 	}
 
-	public boolean addContents(ItemStack crystal) {
+	public boolean addContents(final ItemStack crystal) {
 		if(!worldObj.isRemote) {
 			FluidStack stack = data.getFluid();
 
@@ -166,11 +166,11 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 			}
 
 			if(stack.getFluid() == TFFluids.energon) {
-				FluidStack stack1 = FluidEnergon.create(crystal);
-				NBTTagCompound prevNBT = stack1.tag;
+				final FluidStack stack1 = FluidEnergon.create(crystal);
+				final NBTTagCompound prevNBT = stack1.tag;
 
 				stack1.tag = stack.tag;
-				int amount = fill(ForgeDirection.UNKNOWN, stack1, true);
+				final int amount = fill(ForgeDirection.UNKNOWN, stack1, true);
 				stack1.tag = prevNBT;
 
 				FluidEnergon.merge(stack, stack1, amount);
@@ -188,9 +188,9 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 		worldObj.getBlock(xCoord, yCoord, zCoord - 1).onNeighborBlockChange(worldObj, xCoord, yCoord, zCoord - 1, blockType);
 	}
 
-	public boolean canProcessCrystal(ItemStack itemstack) {
+	public boolean canProcessCrystal(final ItemStack itemstack) {
 		if(itemstack != null && isItemValidForSlot(1, itemstack) && canActivate()) {
-			IEnergon ienergon = (IEnergon) (itemstack.getItem() instanceof ItemBlock ? Block.getBlockFromItem(itemstack.getItem()) : itemstack.getItem());
+			final IEnergon ienergon = (IEnergon) (itemstack.getItem() instanceof ItemBlock ? Block.getBlockFromItem(itemstack.getItem()) : itemstack.getItem());
 
 			return data.getFluidAmount() + ienergon.getMass() <= data.getCapacity();
 		}
@@ -218,17 +218,17 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		FluidStack stack = data.tank.getFluid();
+	public int fill(final ForgeDirection from, final FluidStack resource, final boolean doFill) {
+		final FluidStack stack = data.tank.getFluid();
 
 		if(stack == null || stack.amount <= 0 || FluidStack.areFluidStackTagsEqual(stack, resource)) {
 			return data.tank.fill(resource, doFill);
 		}
 		else if(stack.getFluid() == TFFluids.energon) {
-			NBTTagCompound prevNBT = resource.tag;
+			final NBTTagCompound prevNBT = resource.tag;
 
 			resource.tag = stack.tag;
-			int amount = data.tank.fill(resource, doFill);
+			final int amount = data.tank.fill(resource, doFill);
 			resource.tag = prevNBT;
 
 			FluidEnergon.merge(stack, resource, amount);
@@ -240,7 +240,7 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+	public FluidStack drain(final ForgeDirection from, final FluidStack resource, final boolean doDrain) {
 		if(resource == null || !resource.isFluidEqual(data.getFluid())) {
 			return null;
 		}
@@ -249,22 +249,22 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+	public FluidStack drain(final ForgeDirection from, final int maxDrain, final boolean doDrain) {
 		return data.tank.drain(maxDrain, doDrain);
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
+	public boolean canFill(final ForgeDirection from, final Fluid fluid) {
 		return fluid == TFFluids.energon;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+	public boolean canDrain(final ForgeDirection from, final Fluid fluid) {
 		return true;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+	public FluidTankInfo[] getTankInfo(final ForgeDirection from) {
 		return new FluidTankInfo[]{data.tank.getInfo()};
 	}
 
@@ -274,7 +274,7 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 		burnTime = nbt.getInteger("BurnTime");
 		powerTime = nbt.getInteger("PowerTime");
@@ -282,13 +282,13 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 		currentMaxPowerTime = nbt.getInteger("MaxPowerTime");
 
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.tank.readFromNBT(config);
 		}
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 		nbt.setInteger("BurnTime", burnTime);
 		nbt.setInteger("PowerTime", powerTime);
@@ -296,30 +296,30 @@ public class TileEntityEnergonProcessor extends TileEntityMachineContainer imple
 		nbt.setInteger("MaxPowerTime", currentMaxPowerTime);
 
 		if(data.getFluid() != null && data.getFluidAmount() > 0) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.tank.writeToNBT(config);
 			nbt.setTag("ConfigDataTF", config);
 		}
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
 		return slot == 0 ? PowerManager.isPowerSource(stack) : slot == 1 ? stack.getItem() instanceof IEnergon || Block.getBlockFromItem(stack.getItem()) instanceof IEnergon : slot == 2 && stack.getItem() == TFItems.fuelCanister && ItemFuelCanister.isEmpty(stack) && stack.stackSize == 1 && inventory[slot] == null;
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
+	public int[] getAccessibleSlotsFromSide(final int side) {
 		return side == 0 ? slotsBottom : side == 1 ? slotsTop : slotsSides;
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+	public boolean canInsertItem(final int slot, final ItemStack stack, final int side) {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return isItemValidForSlot(slot, stack);
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
+	public boolean canExtractItem(final int slot, final ItemStack stack, final int side) {
 		return side != 0 || slot == 0 || slot == 2 && !ItemFuelCanister.isEmpty(stack);
 	}
 

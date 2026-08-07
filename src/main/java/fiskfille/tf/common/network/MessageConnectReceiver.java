@@ -19,26 +19,26 @@ public class MessageConnectReceiver implements IMessage {
 
 	public MessageConnectReceiver() {}
 
-	public MessageConnectReceiver(DimensionalCoords transmitterCoords, DimensionalCoords receiverCoords) {
+	public MessageConnectReceiver(final DimensionalCoords transmitterCoords, final DimensionalCoords receiverCoords) {
 		this.transmitterCoords = transmitterCoords;
 		this.receiverCoords = receiverCoords;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		transmitterCoords = new DimensionalCoords().fromBytes(buf);
 		receiverCoords = new DimensionalCoords().fromBytes(buf);
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		transmitterCoords.toBytes(buf);
 		receiverCoords.toBytes(buf);
 	}
 
 	public static class Handler implements IMessageHandler<MessageConnectReceiver, IMessage> {
 		@Override
-		public IMessage onMessage(MessageConnectReceiver message, MessageContext ctx) {
+		public IMessage onMessage(final MessageConnectReceiver message, final MessageContext ctx) {
 			if(ctx.side.isServer()) {
 				final World world = MinecraftServer.getServer().worldServerForDimension(message.transmitterCoords.dimension);
 

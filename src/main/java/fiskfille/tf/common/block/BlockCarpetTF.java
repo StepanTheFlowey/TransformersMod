@@ -18,13 +18,13 @@ public class BlockCarpetTF extends BlockCarpet {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
+	public IIcon getIcon(final int side, final int metadata) {
 		return TFBlocks.wool.getIcon(side, metadata);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+	public void getSubBlocks(final Item item, final CreativeTabs tab, final List list) {
 		for(int i = 0; i < ItemDyeTF.dyes.length; ++i) {
 			list.add(new ItemStack(item, 1, i));
 		}

@@ -20,7 +20,7 @@ public class MessageColorArmor implements IMessage {
 
 	public MessageColorArmor() {}
 
-	public MessageColorArmor(int x, int y, int z, int primaryColor, int secondaryColor) {
+	public MessageColorArmor(final int x, final int y, final int z, final int primaryColor, final int secondaryColor) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -29,7 +29,7 @@ public class MessageColorArmor implements IMessage {
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
@@ -38,7 +38,7 @@ public class MessageColorArmor implements IMessage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
@@ -48,7 +48,7 @@ public class MessageColorArmor implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessageColorArmor, IMessage> {
 		@Override
-		public IMessage onMessage(MessageColorArmor message, MessageContext ctx) {
+		public IMessage onMessage(final MessageColorArmor message, final MessageContext ctx) {
 			final EntityPlayer player = ctx.side.isClient() ? TransformersMod.proxy.getPlayer() : ctx.getServerHandler().playerEntity;
 			final World world = player.worldObj;
 			final TileEntity tileentity = world.getTileEntity(message.x, message.y, message.z);

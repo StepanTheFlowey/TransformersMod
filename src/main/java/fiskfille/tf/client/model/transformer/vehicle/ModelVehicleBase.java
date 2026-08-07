@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ModelVehicleBase extends MowzieModelBase {
-	public void renderDisplayVehicle(ItemStack itemstack) {
+	public void renderDisplayVehicle(final ItemStack itemstack) {
 		if(!itemstack.hasTagCompound()) {
 			itemstack.setTagCompound(new NBTTagCompound());
 		}
@@ -36,5 +36,5 @@ public class ModelVehicleBase extends MowzieModelBase {
 	 * @param player    The player for which this vehicle mode should be rendered, if any
 	 * @param itemstack The ItemStack containing the vehicle mode's data
 	 */
-	public void render(EntityPlayer player, ItemStack itemstack) {}
+	public void render(final EntityPlayer player, final ItemStack itemstack) {}
 }

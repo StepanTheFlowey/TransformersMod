@@ -14,7 +14,7 @@ public class DisplayablePurgesKatana extends Displayable {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/purge/purge.png");
 
 	@Override
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		bindTexture(texture);
 		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0, 1, 0);
 		final float f1 = MathHelper.sin((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;

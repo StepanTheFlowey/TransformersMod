@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 public class EntityTFFlameFX extends EntityFX {
 	private final float flameScale;
 
-	public EntityTFFlameFX(World world, double x, double y, double z, double motionX, double motionY, double motionZ) {
+	public EntityTFFlameFX(final World world, final double x, final double y, final double z, final double motionX, final double motionY, final double motionZ) {
 		super(world, x, y, z, motionX, motionY, motionZ);
 		this.motionX = this.motionX * 0.009999999776482582D + motionX;
 		this.motionY = this.motionY * 0.009999999776482582D + motionY;
@@ -20,19 +20,19 @@ public class EntityTFFlameFX extends EntityFX {
 	}
 
 	@Override
-	public void renderParticle(Tessellator tesselator, float x, float y, float z, float r, float g, float b) {
-		float f6 = (particleAge + x) / particleMaxAge;
+	public void renderParticle(final Tessellator tesselator, final float x, final float y, final float z, final float r, final float g, final float b) {
+		final float f6 = (particleAge + x) / particleMaxAge;
 		particleScale = flameScale * (1F - f6 * f6 * 0.5F);
 		super.renderParticle(tesselator, x, y, z, r, g, b);
 	}
 
 	@Override
-	public int getBrightnessForRender(float partialTicks) {
+	public int getBrightnessForRender(final float partialTicks) {
 		return 0xF000F0;
 	}
 
 	@Override
-	public float getBrightness(float partialTicks) {
+	public float getBrightness(final float partialTicks) {
 		return 0xF000F0;
 	}
 

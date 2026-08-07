@@ -11,25 +11,25 @@ public class TileDataTransmitter extends TileDataTransmitterBase {
 	public TileDataTransmitter() {
 	}
 
-	public TileDataTransmitter(float maxEnergy, int fluidCapacity) {
+	public TileDataTransmitter(final float maxEnergy, final int fluidCapacity) {
 		super(maxEnergy);
 		tank = new FluidTankTF(fluidCapacity);
 	}
 
-	public TileDataTransmitter(TileDataTransmitter data) {
+	public TileDataTransmitter(final TileDataTransmitter data) {
 		super(data);
 		tank = data.tank.copy();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 		buf.writeInt(getCapacity());
 		tank.toBytes(buf);
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		tank = new FluidTankTF(buf.readInt());
 		tank.fromBytes(buf);
@@ -51,7 +51,7 @@ public class TileDataTransmitter extends TileDataTransmitterBase {
 		return tank.getFluid();
 	}
 
-	public void setFluid(FluidStack fluid) {
+	public void setFluid(final FluidStack fluid) {
 		tank.setFluid(fluid);
 	}
 
@@ -68,9 +68,9 @@ public class TileDataTransmitter extends TileDataTransmitterBase {
 	}
 
 	@Override
-	public boolean matches(TileData tileData) {
+	public boolean matches(final TileData tileData) {
 		if(tileData instanceof TileDataTransmitter) {
-			TileDataTransmitter data = (TileDataTransmitter) tileData;
+			final TileDataTransmitter data = (TileDataTransmitter) tileData;
 
 			return super.matches(tileData) && getUsage() == data.getUsage() && FluidStack.areFluidStackTagsEqual(getFluid(), data.getFluid());
 		}

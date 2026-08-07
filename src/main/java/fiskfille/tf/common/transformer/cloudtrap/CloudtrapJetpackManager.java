@@ -23,8 +23,8 @@ public class CloudtrapJetpackManager {
 
 	private static boolean prevJetpacking;
 
-	public static void cloudtrapTick(EntityPlayer player) {
-		boolean isClientPlayer = TransformersMod.proxy.getPlayer() == player;
+	public static void cloudtrapTick(final EntityPlayer player) {
+		final boolean isClientPlayer = TransformersMod.proxy.getPlayer() == player;
 		boolean jetpacking = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed() && !player.capabilities.isFlying;
 
 		if(isClientPlayer) {

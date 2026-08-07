@@ -9,39 +9,39 @@ import org.objectweb.asm.tree.TypeInsnNode;
 
 @SideOnly(Side.CLIENT)
 public class ASMHelper {
-	public static MethodInsnNode divide(String type) {
+	public static MethodInsnNode divide(final String type) {
 		return new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHelper.class), "divide", "(" + type.toUpperCase() + type.toUpperCase() + ")" + type.toUpperCase(), false);
 	}
 
-	public static int divide(int arg1, int arg2) {
+	public static int divide(final int arg1, final int arg2) {
 		return arg1 / arg2;
 	}
 
-	public static float divide(float arg1, float arg2) {
+	public static float divide(final float arg1, final float arg2) {
 		return arg1 / arg2;
 	}
 
-	public static double divide(double arg1, double arg2) {
+	public static double divide(final double arg1, final double arg2) {
 		return arg1 / arg2;
 	}
 
-	public static MethodInsnNode multiply(String type) {
+	public static MethodInsnNode multiply(final String type) {
 		return new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHelper.class), "multiply", "(" + type.toUpperCase() + type.toUpperCase() + ")" + type.toUpperCase(), false);
 	}
 
-	public static int multiply(int arg1, int arg2) {
+	public static int multiply(final int arg1, final int arg2) {
 		return arg1 * arg2;
 	}
 
-	public static float multiply(float arg1, float arg2) {
+	public static float multiply(final float arg1, final float arg2) {
 		return arg1 * arg2;
 	}
 
-	public static double multiply(double arg1, double arg2) {
+	public static double multiply(final double arg1, final double arg2) {
 		return arg1 * arg2;
 	}
 
-	public static TypeInsnNode cast(String to) {
+	public static TypeInsnNode cast(final String to) {
 		return new TypeInsnNode(Opcodes.CHECKCAST, to);
 	}
 
@@ -49,7 +49,7 @@ public class ASMHelper {
 		return new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHelper.class), "and", "(ZZ)Z", false);
 	}
 
-	public static boolean and(boolean arg1, boolean arg2) {
+	public static boolean and(final boolean arg1, final boolean arg2) {
 		return arg1 && arg2;
 	}
 
@@ -57,7 +57,7 @@ public class ASMHelper {
 		return new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHelper.class), "or", "(ZZ)Z", false);
 	}
 
-	public static boolean or(boolean arg1, boolean arg2) {
+	public static boolean or(final boolean arg1, final boolean arg2) {
 		return arg1 || arg2;
 	}
 
@@ -65,7 +65,7 @@ public class ASMHelper {
 		return new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHelper.class), "not", "(Z)Z", false);
 	}
 
-	public static boolean not(boolean arg) {
+	public static boolean not(final boolean arg) {
 		return !arg;
 	}
 
@@ -73,7 +73,7 @@ public class ASMHelper {
 		return new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHelper.class), "conditional", "(ZLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", false);
 	}
 
-	public static Object conditional(boolean condition, Object arg1, Object arg2) {
+	public static Object conditional(final boolean condition, final Object arg1, final Object arg2) {
 		return condition ? arg1 : arg2;
 	}
 }

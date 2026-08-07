@@ -14,10 +14,10 @@ public class RenderBlank extends Render {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(final Entity entity) {
 		return null;
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks) {}
+	public void doRender(final Entity entity, final double x, final double y, final double z, final float yaw, final float partialTicks) {}
 }

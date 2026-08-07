@@ -56,7 +56,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	public TileDataControlPanel data;
 	private GuiHoverFieldEnergy fieldEnergy;
 
-	public GuiGroundBridge(InventoryPlayer inventoryPlayer, InventoryGroundBridge inventoryGroundBridge, DimensionalCoords coords) {
+	public GuiGroundBridge(final InventoryPlayer inventoryPlayer, final InventoryGroundBridge inventoryGroundBridge, final DimensionalCoords coords) {
 		super(new ContainerGroundBridge(inventoryPlayer, inventoryGroundBridge));
 		inventory = inventoryGroundBridge;
 		tileCoords = coords;
@@ -113,7 +113,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 			try {
 				newDestination[i] = Integer.parseInt(coordinateFields[i].getText());
 			}
-			catch(Exception ignored) {}
+			catch(final Exception ignored) {}
 		}
 
 		if(inventory.getStackInSlot(0) != null) {
@@ -145,7 +145,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		final boolean activationLeverState = data.activationLeverState;
 		final boolean canEditCoords = data != null && !activationLeverState && inventory.getStackInSlot(0) == null;
 
-		for(GuiTextField coordinateField : coordinateFields) {
+		for(final GuiTextField coordinateField : coordinateFields) {
 			coordinateField.setEnabled(canEditCoords);
 		}
 
@@ -165,7 +165,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		switch(button.id) {
 			case 0:
 			case 1:
@@ -186,10 +186,10 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	@Override
-	protected void keyTyped(char c, int key) {
+	protected void keyTyped(final char c, final int key) {
 		super.keyTyped(c, key);
 
-		for(GuiTextField coordinateField : coordinateFields) {
+		for(final GuiTextField coordinateField : coordinateFields) {
 			coordinateField.textboxKeyTyped(c, key);
 
 			final StringBuilder s = new StringBuilder();
@@ -208,16 +208,16 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int button) {
+	protected void mouseClicked(final int mouseX, final int mouseY, final int button) {
 		super.mouseClicked(mouseX, mouseY, button);
 
-		for(GuiTextField coordinateField : coordinateFields) {
+		for(final GuiTextField coordinateField : coordinateFields) {
 			coordinateField.mouseClicked(mouseX, mouseY, button);
 		}
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		if(data == null) {
 			return;
 		}
@@ -227,7 +227,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		fontRendererObj.drawString(destDimension, (buttonDimLeft.xPosition + buttonDimRight.xPosition + buttonDimRight.width - fontRendererObj.getStringWidth(destDimension)) / 2 - x, (buttonDimLeft.yPosition + buttonDimLeft.height / 2 + buttonDimRight.yPosition + buttonDimRight.height / 2 - fontRendererObj.FONT_HEIGHT + 1) / 2 + 1 - y, -1);
 
 		if(data.hasUpgrade(DataCore.leveler)) {
-			String modifiedY = "(-> " + data.modifiedDestY + ")";
+			final String modifiedY = "(-> " + data.modifiedDestY + ")";
 			fontRendererObj.drawString(modifiedY, coordinateFields[1].xPosition + (coordinateFields[1].width - fontRendererObj.getStringWidth(modifiedY)) / 2 - x, coordinateFields[1].yPosition + coordinateFields[1].height + fontRendererObj.FONT_HEIGHT / 2 - y, 0x7F7F7F);
 		}
 
@@ -245,7 +245,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
 		GL11.glColor3f(1F, 1F, 1F);
@@ -253,7 +253,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		drawTexturedModalRect(x + xSize + 2, y + 2, 192, 0, 16, 86);
-		float energy = data.getEnergy();
+		final float energy = data.getEnergy();
 
 		if(energy > 0) {
 			final float f = energy / data.getMaxEnergy();
@@ -265,7 +265,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 			drawTexturedModalRect(x + xSize + 20, y + 10 + i * 17, 176, flag ? 16 : 0, 16, 16);
 		}
 
-		for(GuiTextField coordinateField : coordinateFields) {
+		for(final GuiTextField coordinateField : coordinateFields) {
 			coordinateField.drawTextBox();
 		}
 
@@ -273,7 +273,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
@@ -297,7 +297,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	@Override
-	public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility) {
+	public VisiblityData modifyVisiblity(final GuiContainer gui, final VisiblityData currentVisibility) {
 		currentVisibility.showWidgets = width - xSize >= 107;
 
 		if(guiLeft < 58) {
@@ -308,22 +308,22 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	}
 
 	@Override
-	public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack item) {
+	public Iterable<Integer> getItemSpawnSlots(final GuiContainer gui, final ItemStack item) {
 		return null;
 	}
 
 	@Override
-	public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui) {
+	public List<TaggedInventoryArea> getInventoryAreas(final GuiContainer gui) {
 		return Collections.emptyList();
 	}
 
 	@Override
-	public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button) {
+	public boolean handleDragNDrop(final GuiContainer gui, final int mousex, final int mousey, final ItemStack draggedStack, final int button) {
 		return false;
 	}
 
 	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) {
+	public boolean hideItemPanelSlot(final GuiContainer gui, final int x, final int y, final int w, final int h) {
 		final Rectangle slot = new Rectangle(x, y, w, h);
 		final Rectangle bounds = new Rectangle(guiLeft + xSize, guiTop, 18, 88);
 

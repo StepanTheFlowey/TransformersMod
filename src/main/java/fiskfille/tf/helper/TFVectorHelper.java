@@ -7,17 +7,17 @@ import net.minecraft.util.Vec3;
 /**
  * @author FiskFille
  */
-public class TFVectorHelper {
-	public static Vec3 getBackSideCoords(EntityPlayer player, double amount, boolean side, double backAmount, boolean pitch) {
+public final class TFVectorHelper {
+	public static Vec3 getBackSideCoords(final EntityPlayer player, final double amount, final boolean side, final double backAmount, final boolean pitch) {
 		final Vec3 front = getFrontCoords(player, backAmount, pitch).addVector(-player.posX, -player.boundingBox.minY, -player.posZ);
 		return getSideCoords(player, amount, side).addVector(front.xCoord, front.yCoord, front.zCoord);
 	}
 
-	public static Vec3 add(Vec3 vec31, Vec3 vec32) {
+	public static Vec3 add(final Vec3 vec31, final Vec3 vec32) {
 		return vec31.addVector(vec32.xCoord, vec32.yCoord, vec32.zCoord);
 	}
 
-	public static Vec3 getSideCoords(EntityPlayer player, double amount, boolean side) {
+	public static Vec3 getSideCoords(final EntityPlayer player, final double amount, final boolean side) {
 		final float rotationYaw = player.rotationYaw + (side ? -90 : 90);
 
 		final float f3 = MathHelper.cos(-rotationYaw * 0.017453292F - (float) Math.PI);
@@ -26,7 +26,7 @@ public class TFVectorHelper {
 		return Vec3.createVectorHelper(player.posX, player.boundingBox.minY, player.posZ).addVector(-f4 * amount, 0, -f3 * amount);
 	}
 
-	public static Vec3 getSideCoords(EntityPlayer player, double amount, boolean side, boolean pitch) {
+	public static Vec3 getSideCoords(final EntityPlayer player, final double amount, final boolean side, final boolean pitch) {
 		final float rotationPitch = pitch ? player.rotationPitch : 0;
 		final float rotationYaw = player.rotationYaw + (side ? -90 : 90);
 
@@ -40,7 +40,7 @@ public class TFVectorHelper {
 		return Vec3.createVectorHelper(player.posX, player.boundingBox.minY, player.posZ).addVector(f7 * amount, f6 * amount, f8 * amount);
 	}
 
-	public static Vec3 getFrontCoords(EntityPlayer player, double amount, boolean pitch) {
+	public static Vec3 getFrontCoords(final EntityPlayer player, final double amount, final boolean pitch) {
 		final float rotationPitch = pitch ? player.rotationPitch : 0;
 
 		final float f3 = MathHelper.cos(-player.rotationYaw * 0.017453292F - (float) Math.PI);
@@ -53,7 +53,7 @@ public class TFVectorHelper {
 		return Vec3.createVectorHelper(player.posX, player.boundingBox.minY, player.posZ).addVector(f7 * amount, f6 * amount, f8 * amount);
 	}
 
-	public static Vec3 getFrontCoords(EntityPlayer player, float angle, double amount) {
+	public static Vec3 getFrontCoords(final EntityPlayer player, final float angle, final double amount) {
 		final float f3 = MathHelper.cos(-player.rotationYaw * 0.017453292F - (float) Math.PI);
 		final float f4 = MathHelper.sin(-player.rotationYaw * 0.017453292F - (float) Math.PI);
 		final float f5 = -MathHelper.cos(angle * 0.017453292F);

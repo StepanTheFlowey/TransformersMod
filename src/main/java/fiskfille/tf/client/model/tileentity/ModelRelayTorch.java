@@ -190,7 +190,7 @@ public class ModelRelayTorch extends ModelRelayTower {
 	}
 
 	@Override
-	public void render(TileEntityRelayTower tile, float partialTicks) {
+	public void render(final TileEntityRelayTower tile, final float partialTicks) {
 		setToInitPose();
 		shape1.render(0.0625F);
 	}

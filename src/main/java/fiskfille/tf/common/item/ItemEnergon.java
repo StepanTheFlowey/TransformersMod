@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 public class ItemEnergon extends Item implements IEnergon {
 	private final Energon energonType;
 
-	public ItemEnergon(Energon type) {
+	public ItemEnergon(final Energon type) {
 		energonType = type;
 	}
 

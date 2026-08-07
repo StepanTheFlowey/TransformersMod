@@ -11,10 +11,10 @@ import java.util.List;
 
 public class TFLoadingCallback implements ForgeChunkManager.OrderedLoadingCallback {
 	@Override
-	public void ticketsLoaded(List<Ticket> tickets, World world) {
-		for(Ticket ticket : tickets) {
-			for(SubTicket subTicket : SubTicket.getChildren(ticket)) {
-				TileEntity tile = world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord);
+	public void ticketsLoaded(final List<Ticket> tickets, final World world) {
+		for(final Ticket ticket : tickets) {
+			for(final SubTicket subTicket : SubTicket.getChildren(ticket)) {
+				final TileEntity tile = world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord);
 
 				if(tile instanceof IChunkLoaderTile) {
 					((IChunkLoaderTile) tile).forceChunks(subTicket);
@@ -24,11 +24,11 @@ public class TFLoadingCallback implements ForgeChunkManager.OrderedLoadingCallba
 	}
 
 	@Override
-	public List<Ticket> ticketsLoaded(List<Ticket> tickets, World world, int maxTicketCount) {
+	public List<Ticket> ticketsLoaded(final List<Ticket> tickets, final World world, final int maxTicketCount) {
 		final List<Ticket> validTickets = Lists.newArrayList();
 
-		for(Ticket ticket : tickets) {
-			for(SubTicket subTicket : SubTicket.getChildren(ticket)) {
+		for(final Ticket ticket : tickets) {
+			for(final SubTicket subTicket : SubTicket.getChildren(ticket)) {
 				if(world.getTileEntity(subTicket.xCoord, subTicket.yCoord, subTicket.zCoord) instanceof IChunkLoaderTile) {
 					validTickets.add(ticket);
 					break;

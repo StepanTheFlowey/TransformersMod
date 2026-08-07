@@ -9,13 +9,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class GuiButtonTransform extends GuiButtonFlat {
-	public GuiButtonTransform(int id, int x, int y) {
+	public GuiButtonTransform(final int id, final int x, final int y) {
 		super(id, x, y, 24, "");
 		height = 6;
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}

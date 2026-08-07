@@ -15,26 +15,26 @@ public class MessageControlPanelSetConfig implements IMessage {
 
 	public MessageControlPanelSetConfig() {}
 
-	public MessageControlPanelSetConfig(DimensionalCoords coords, DimensionalCoords dest) {
+	public MessageControlPanelSetConfig(final DimensionalCoords coords, final DimensionalCoords dest) {
 		this.coordinates = coords;
 		this.configuration = dest;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		coordinates = new DimensionalCoords().fromBytes(buf);
 		configuration = new DimensionalCoords().fromBytes(buf);
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		coordinates.toBytes(buf);
 		configuration.toBytes(buf);
 	}
 
 	public static class Handler implements IMessageHandler<MessageControlPanelSetConfig, IMessage> {
 		@Override
-		public IMessage onMessage(MessageControlPanelSetConfig message, MessageContext ctx) {
+		public IMessage onMessage(final MessageControlPanelSetConfig message, final MessageContext ctx) {
 			if(ctx.side.isServer()) {
 				final DimensionalCoords coords = message.coordinates;
 				final World world = MinecraftServer.getServer().worldServerForDimension(coords.dimension);

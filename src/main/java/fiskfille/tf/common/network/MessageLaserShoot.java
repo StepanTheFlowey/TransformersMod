@@ -23,30 +23,30 @@ public class MessageLaserShoot implements IMessage {
 
 	public MessageLaserShoot() {}
 
-	public MessageLaserShoot(EntityPlayer player, boolean consumeItems) {
+	public MessageLaserShoot(final EntityPlayer player, final boolean consumeItems) {
 		id = player.getEntityId();
 		consume = consumeItems;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 		consume = buf.readBoolean();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		buf.writeBoolean(consume);
 	}
 
 	public static class Handler implements IMessageHandler<MessageLaserShoot, IMessage> {
 		@Override
-		public IMessage onMessage(MessageLaserShoot message, MessageContext ctx) {
+		public IMessage onMessage(final MessageLaserShoot message, final MessageContext ctx) {
 			if(!ctx.side.isClient()) {
 				EntityPlayer from = null;
 
-				for(World world : MinecraftServer.getServer().worldServers) {
+				for(final World world : MinecraftServer.getServer().worldServers) {
 					final Entity entity = world.getEntityByID(message.id);
 
 					if(entity instanceof EntityPlayer) {

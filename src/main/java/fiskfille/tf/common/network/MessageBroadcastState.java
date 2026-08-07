@@ -17,26 +17,26 @@ public class MessageBroadcastState extends MessageSyncBase {
 
 	public MessageBroadcastState() {}
 
-	public MessageBroadcastState(EntityPlayer player) {
+	public MessageBroadcastState(final EntityPlayer player) {
 		super(player);
 		id = player.getEntityId();
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		id = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 		buf.writeInt(id);
 	}
 
 	public static class Handler implements IMessageHandler<MessageBroadcastState, IMessage> {
 		@Override
-		public IMessage onMessage(MessageBroadcastState message, MessageContext ctx) {
+		public IMessage onMessage(final MessageBroadcastState message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final EntityPlayer player = TransformersMod.proxy.getPlayer();
 				final Entity lookupEntity = player.worldObj.getEntityByID(message.id);
@@ -44,7 +44,7 @@ public class MessageBroadcastState extends MessageSyncBase {
 				if(lookupEntity instanceof EntityPlayer && player != lookupEntity) {
 					final EntityPlayer lookupPlayer = (EntityPlayer) lookupEntity;
 
-					for(Entry<TFData, Object> e : message.playerData.entrySet()) {
+					for(final Entry<TFData, Object> e : message.playerData.entrySet()) {
 						e.getKey().setWithoutNotify(lookupPlayer, e.getValue());
 					}
 				}
@@ -52,7 +52,7 @@ public class MessageBroadcastState extends MessageSyncBase {
 			else {
 				final EntityPlayer player = ctx.getServerHandler().playerEntity;
 
-				for(Entry<TFData, Object> e : message.playerData.entrySet()) {
+				for(final Entry<TFData, Object> e : message.playerData.entrySet()) {
 					e.getKey().setWithoutNotify(player, e.getValue());
 				}
 

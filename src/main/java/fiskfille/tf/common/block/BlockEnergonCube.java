@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 public class BlockEnergonCube extends BlockBasic implements IEnergon {
 	private final Energon energonType;
 
-	public BlockEnergonCube(Energon type) {
+	public BlockEnergonCube(final Energon type) {
 		super(TFMaterial.energon);
 		energonType = type;
 
@@ -22,7 +22,7 @@ public class BlockEnergonCube extends BlockBasic implements IEnergon {
 	}
 
 	@Override
-	public int getMixedBrightnessForBlock(IBlockAccess world, int x, int y, int z) {
+	public int getMixedBrightnessForBlock(final IBlockAccess world, final int x, final int y, final int z) {
 		return 0xF000F0;
 	}
 
@@ -37,7 +37,7 @@ public class BlockEnergonCube extends BlockBasic implements IEnergon {
 	}
 
 	@Override
-	public MapColor getMapColor(int metadata) {
+	public MapColor getMapColor(final int metadata) {
 		return TFMathHelper.getClosestMapColor(getEnergonType().getColor());
 	}
 }

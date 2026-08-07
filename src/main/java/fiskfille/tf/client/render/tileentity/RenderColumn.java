@@ -20,7 +20,7 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_column.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_column_lights.png");
 
-	public void render(TileEntityColumn tile, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityColumn tile, final double x, final double y, final double z, final float partialTicks) {
 		final World world = tile.getWorldObj();
 		int metadata = 0;
 
@@ -109,7 +109,7 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityColumn) tileentity, d, d1, d2, f);
 	}
 }

@@ -7,7 +7,7 @@ public class AnimationModifier {
 	public final Predicate predicate;
 	public final float factor;
 
-	public AnimationModifier(Type t, Predicate p, float f) {
+	public AnimationModifier(final Type t, final Predicate p, final float f) {
 		type = t;
 		predicate = p;
 		factor = f;

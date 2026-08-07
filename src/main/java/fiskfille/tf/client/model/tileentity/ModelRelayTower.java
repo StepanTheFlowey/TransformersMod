@@ -364,7 +364,7 @@ public class ModelRelayTower extends MowzieModelBase {
 		setInitPose();
 	}
 
-	public void render(TileEntityRelayTower tile, float partialTicks) {
+	public void render(final TileEntityRelayTower tile, final float partialTicks) {
 		setToInitPose();
 		relaytower1.render(0.0625F);
 	}

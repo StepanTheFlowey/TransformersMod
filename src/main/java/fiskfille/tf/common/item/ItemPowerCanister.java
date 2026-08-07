@@ -23,8 +23,8 @@ public class ItemPowerCanister extends ItemEnergyContainer {
 	}
 
 	@Override
-	public float getEnergyCapacity(ItemStack itemstack) {
-		int tier = Math.min(itemstack.getItemDamage(), tiers.length - 1);
+	public float getEnergyCapacity(final ItemStack itemstack) {
+		final int tier = Math.min(itemstack.getItemDamage(), tiers.length - 1);
 		int i = 4;
 
 		for(int j = 0; j < tier; ++j) {
@@ -35,7 +35,7 @@ public class ItemPowerCanister extends ItemEnergyContainer {
 	}
 
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
+	public void getSubItems(final Item item, final CreativeTabs tab, final List subItems) {
 		for(int i = 0; i < tiers.length; ++i) {
 			final ItemStack itemstack = new ItemStack(this, 1, i);
 			subItems.add(itemstack.copy());
@@ -46,26 +46,26 @@ public class ItemPowerCanister extends ItemEnergyContainer {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
+	public String getItemStackDisplayName(final ItemStack itemstack) {
 		final int tier = Math.min(itemstack.getItemDamage(), tiers.length - 1);
 		return StatCollector.translateToLocal("item.power_canister_" + tiers[tier] + ".name");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
+	public IIcon getIconFromDamage(final int damage) {
 		return icons[Math.min(damage, tiers.length - 1)];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int damage, int pass) {
+	public IIcon getIconFromDamageForRenderPass(final int damage, final int pass) {
 		return pass == 1 ? icons[tiers.length] : icons[Math.min(damage, tiers.length - 1)];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(final IIconRegister iconRegister) {
 		icons = new IIcon[tiers.length + 1];
 
 		for(int i = 0; i < tiers.length; ++i) {

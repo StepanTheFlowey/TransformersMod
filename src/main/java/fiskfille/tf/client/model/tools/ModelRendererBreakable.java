@@ -18,35 +18,35 @@ public class ModelRendererBreakable extends ModelRendererTF {
 	private int textureOffsetX;
 	private int textureOffsetY;
 
-	public ModelRendererBreakable(ModelBase modelBase, String name) {
+	public ModelRendererBreakable(final ModelBase modelBase, final String name) {
 		super(modelBase, name);
 		baseModel = modelBase;
 	}
 
-	public ModelRendererBreakable(ModelBase modelBase, boolean render, int x, int y) {
+	public ModelRendererBreakable(final ModelBase modelBase, final boolean render, final int x, final int y) {
 		super(modelBase, x, y);
 		baseModel = modelBase;
 		renderBreaking = render;
 	}
 
-	public ModelRendererBreakable(ModelBase modelBase, int x, int y) {
+	public ModelRendererBreakable(final ModelBase modelBase, final int x, final int y) {
 		this(modelBase, true, x, y);
 	}
 
-	public ModelRendererBreakable(ModelBase modelBase) {
+	public ModelRendererBreakable(final ModelBase modelBase) {
 		super(modelBase);
 		baseModel = modelBase;
 	}
 
 	@Override
-	public ModelRenderer setTextureOffset(int x, int y) {
+	public ModelRenderer setTextureOffset(final int x, final int y) {
 		textureOffsetX = x;
 		textureOffsetY = y;
 		return super.setTextureOffset(x, y);
 	}
 
 	@Override
-	public ModelRenderer addBox(String name, float p_78786_2_, float p_78786_3_, float p_78786_4_, int p_78786_5_, int p_78786_6_, int p_78786_7_) {
+	public ModelRenderer addBox(String name, final float p_78786_2_, final float p_78786_3_, final float p_78786_4_, final int p_78786_5_, final int p_78786_6_, final int p_78786_7_) {
 		name = boxName + "." + name;
 
 		final TextureOffset offset = baseModel.getTextureOffset(name);
@@ -56,26 +56,26 @@ public class ModelRendererBreakable extends ModelRendererTF {
 	}
 
 	@Override
-	public ModelRenderer addBox(float p_78789_1_, float p_78789_2_, float p_78789_3_, int p_78789_4_, int p_78789_5_, int p_78789_6_) {
+	public ModelRenderer addBox(final float p_78789_1_, final float p_78789_2_, final float p_78789_3_, final int p_78789_4_, final int p_78789_5_, final int p_78789_6_) {
 		cubeList.add(new ModelBoxBreakable(this, textureOffsetX, textureOffsetY, p_78789_1_, p_78789_2_, p_78789_3_, p_78789_4_, p_78789_5_, p_78789_6_, 0F));
 		return this;
 	}
 
 	@Override
-	public void addBox(float p_78790_1_, float p_78790_2_, float p_78790_3_, int p_78790_4_, int p_78790_5_, int p_78790_6_, float p_78790_7_) {
+	public void addBox(final float p_78790_1_, final float p_78790_2_, final float p_78790_3_, final int p_78790_4_, final int p_78790_5_, final int p_78790_6_, final float p_78790_7_) {
 		cubeList.add(new ModelBoxBreakable(this, textureOffsetX, textureOffsetY, p_78790_1_, p_78790_2_, p_78790_3_, p_78790_4_, p_78790_5_, p_78790_6_, p_78790_7_));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void render(float f) {
+	public void render(final float f) {
 		displayList = displayLists[breaking ? 1 : 0];
 		super.render(f);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	protected void compileDisplayList(float f) {
+	protected void compileDisplayList(final float f) {
 		super.compileDisplayList(f);
 		displayLists[0] = displayList;
 		displayLists[1] = GLAllocation.generateDisplayLists(1);
@@ -84,7 +84,7 @@ public class ModelRendererBreakable extends ModelRendererTF {
 		breaking = true;
 		GL11.glNewList(displayLists[1], GL11.GL_COMPILE);
 
-		for(Object cube : cubeList) {
+		for(final Object cube : cubeList) {
 			if(renderBreaking) {
 				((ModelBox) cube).render(Tessellator.instance, f);
 			}

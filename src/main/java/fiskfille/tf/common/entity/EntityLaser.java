@@ -11,20 +11,20 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
 public class EntityLaser extends EntityThrowable {
-	public EntityLaser(World world) {
+	public EntityLaser(final World world) {
 		super(world);
 	}
 
-	public EntityLaser(World world, EntityLivingBase entity) {
+	public EntityLaser(final World world, final EntityLivingBase entity) {
 		super(world, entity);
 	}
 
-	public EntityLaser(World world, double x, double y, double z) {
+	public EntityLaser(final World world, final double x, final double y, final double z) {
 		super(world, x, y, z);
 	}
 
 	@Override
-	public void setThrowableHeading(double p_70186_1_, double p_70186_3_, double p_70186_5_, float p_70186_7_, float p_70186_8_) {
+	public void setThrowableHeading(double p_70186_1_, double p_70186_3_, double p_70186_5_, final float p_70186_7_, final float p_70186_8_) {
 		final float f2 = MathHelper.sqrt_double(p_70186_1_ * p_70186_1_ + p_70186_3_ * p_70186_3_ + p_70186_5_ * p_70186_5_);
 		p_70186_1_ /= f2;
 		p_70186_3_ /= f2;
@@ -51,7 +51,7 @@ public class EntityLaser extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(final MovingObjectPosition mop) {
 		if(!worldObj.isRemote) {
 			if(mop.typeOfHit == MovingObjectType.BLOCK) {
 				setFire(mop.blockX, mop.blockY, mop.blockZ, mop.sideHit);
@@ -67,7 +67,7 @@ public class EntityLaser extends EntityThrowable {
 		}
 	}
 
-	public void setFire(int x, int y, int z, int sideHit) {
+	public void setFire(int x, int y, int z, final int sideHit) {
 		switch(sideHit) {
 			case 0:
 				--y;

@@ -24,20 +24,20 @@ public class FluidTankTF extends FluidTank {
 	protected int fluidUsage;
 	protected int lastFluidAmount;
 
-	public FluidTankTF(int capacity) {
+	public FluidTankTF(final int capacity) {
 		super(capacity);
 	}
 
-	public FluidTankTF(FluidStack stack, int capacity) {
+	public FluidTankTF(final FluidStack stack, final int capacity) {
 		super(stack, capacity);
 	}
 
-	public FluidTankTF(Fluid fluid, int amount, int capacity) {
+	public FluidTankTF(final Fluid fluid, final int amount, final int capacity) {
 		super(fluid, amount, capacity);
 	}
 
 	public FluidTankTF copy() {
-		FluidTankTF tank = new FluidTankTF(getCapacity());
+		final FluidTankTF tank = new FluidTankTF(getCapacity());
 
 		if(getFluid() != null) {
 			tank.setFluid(getFluid().copy());
@@ -48,21 +48,21 @@ public class FluidTankTF extends FluidTank {
 		return tank;
 	}
 
-	public void toBytes(ByteBuf buf) {
-		boolean hasFluid = fluid != null;
+	public void toBytes(final ByteBuf buf) {
+		final boolean hasFluid = fluid != null;
 		buf.writeBoolean(hasFluid);
 
 		if(hasFluid) {
-			NBTTagCompound tag = fluid.writeToNBT(new NBTTagCompound());
+			final NBTTagCompound tag = fluid.writeToNBT(new NBTTagCompound());
 			ByteBufUtils.writeTag(buf, tag);
 		}
 
 		buf.writeShort(fluidUsage);
 	}
 
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		if(buf.readBoolean()) {
-			NBTTagCompound tag = ByteBufUtils.readTag(buf);
+			final NBTTagCompound tag = ByteBufUtils.readTag(buf);
 			fluid = FluidStack.loadFluidStackFromNBT(tag);
 		}
 
@@ -71,8 +71,8 @@ public class FluidTankTF extends FluidTank {
 	}
 
 	@Override
-	public FluidTank readFromNBT(NBTTagCompound nbt) {
-		FluidTank tank = super.readFromNBT(nbt);
+	public FluidTank readFromNBT(final NBTTagCompound nbt) {
+		final FluidTank tank = super.readFromNBT(nbt);
 		fluidUsage = nbt.getShort("FluidUsage");
 		lastFluidAmount = getFluidAmount() - fluidUsage;
 		return tank;
@@ -89,7 +89,7 @@ public class FluidTankTF extends FluidTank {
 		return fluidUsage;
 	}
 
-	public void setUsage(int usage) {
+	public void setUsage(final int usage) {
 		fluidUsage = usage;
 		lastFluidAmount = getFluidAmount();
 	}
@@ -101,20 +101,20 @@ public class FluidTankTF extends FluidTank {
 	}
 
 	public List<IChatComponent> format() {
-		List<IChatComponent> list = Lists.newArrayList();
-		FluidStack stack = getFluid();
+		final List<IChatComponent> list = Lists.newArrayList();
+		final FluidStack stack = getFluid();
 
 		if(stack != null && stack.amount > 0) {
-			Map<String, Float> ratios = FluidEnergon.getRatios(stack);
+			final Map<String, Float> ratios = FluidEnergon.getRatios(stack);
 			boolean flag = false;
 
-			for(Map.Entry<String, Float> e : ratios.entrySet()) {
-				Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
-				int percentage = Math.round(e.getValue() * 100);
+			for(final Map.Entry<String, Float> e : ratios.entrySet()) {
+				final Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
+				final int percentage = Math.round(e.getValue() * 100);
 
 				if(percentage > 0) {
-					IChatComponent name = new ChatComponentText(energon.getTranslatedName()).setChatStyle(new ChatStyle().setColor(GRAY));
-					IChatComponent ratio = new ChatComponentText(percentage + "").setChatStyle(new ChatStyle().setColor(YELLOW));
+					final IChatComponent name = new ChatComponentText(energon.getTranslatedName()).setChatStyle(new ChatStyle().setColor(GRAY));
+					final IChatComponent ratio = new ChatComponentText(percentage + "").setChatStyle(new ChatStyle().setColor(YELLOW));
 
 					list.add(new ChatComponentTranslation("gui.energon_processor.content", name, ratio).setChatStyle(new ChatStyle().setColor(GRAY)));
 					flag = true;
@@ -129,8 +129,8 @@ public class FluidTankTF extends FluidTank {
 			}
 		}
 
-		IChatComponent amount = new ChatComponentText(TFFormatHelper.formatNumber(getFluidAmount())).setChatStyle(new ChatStyle().setColor(YELLOW));
-		IChatComponent capacity = new ChatComponentText(TFFormatHelper.formatNumber(getCapacity())).setChatStyle(new ChatStyle().setColor(YELLOW));
+		final IChatComponent amount = new ChatComponentText(TFFormatHelper.formatNumber(getFluidAmount())).setChatStyle(new ChatStyle().setColor(YELLOW));
+		final IChatComponent capacity = new ChatComponentText(TFFormatHelper.formatNumber(getCapacity())).setChatStyle(new ChatStyle().setColor(YELLOW));
 
 		list.add(new ChatComponentTranslation("gui.energon_processor.filled", amount, capacity).setChatStyle(new ChatStyle().setColor(GRAY)));
 

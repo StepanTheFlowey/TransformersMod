@@ -21,27 +21,27 @@ import java.util.List;
 
 public class GuiHandlerTF implements IGuiHandler {
 	@Override
-	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-		int dimension = id >> 8;
-		TFGui tfGui = TFGui.get(id ^ dimension << 8);
+	public Object getServerGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z) {
+		final int dimension = id >> 8;
+		final TFGui tfGui = TFGui.get(id ^ dimension << 8);
 
 		if(tfGui != null) {
 			if(tfGui.containerClass == null) {
 				return null;
 			}
 
-			DimensionalCoords coords = new DimensionalCoords(x, y, z, dimension);
+			final DimensionalCoords coords = new DimensionalCoords(x, y, z, dimension);
 
 			if(tfGui == TFGui.GROUND_BRIDGE_REMOTE || tfGui.containerBlock == null || world.getBlock(x, y, z) == tfGui.containerBlock) {
-				int[] aint = coords.toArray();
+				final int[] aint = coords.toArray();
 				int integer = 0;
 
 				try {
-					Constructor c = tfGui.containerClass.getConstructor(tfGui.containerArgs);
-					Object[] args = new Object[tfGui.containerArgs.length];
+					final Constructor c = tfGui.containerClass.getConstructor(tfGui.containerArgs);
+					final Object[] args = new Object[tfGui.containerArgs.length];
 
 					for(int i = 0; i < tfGui.containerArgs.length; ++i) {
-						Class clazz = tfGui.containerArgs[i];
+						final Class clazz = tfGui.containerArgs[i];
 
 						if(InventoryPlayer.class.isAssignableFrom(clazz)) {
 							args[i] = player.inventory;
@@ -53,7 +53,7 @@ public class GuiHandlerTF implements IGuiHandler {
 							args[i] = coords;
 						}
 						else if(InventoryGroundBridge.class.isAssignableFrom(clazz)) {
-							ItemStack itemstack = player.getHeldItem();
+							final ItemStack itemstack = player.getHeldItem();
 
 							if(itemstack == null || itemstack.getItem() != TFItems.groundBridgeRemote) {
 								return null;
@@ -78,7 +78,7 @@ public class GuiHandlerTF implements IGuiHandler {
 
 					return c.newInstance(args);
 				}
-				catch(Exception e) {
+				catch(final Exception e) {
 					TransformersMod.log.error("Unable to load class for gui element {}!", tfGui);
 					e.printStackTrace();
 				}
@@ -91,7 +91,7 @@ public class GuiHandlerTF implements IGuiHandler {
 	}
 
 	@Override
-	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getClientGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z) {
 		final int dimension = id >> 8;
 		final TFGui tfGui = TFGui.get(id ^ dimension << 8);
 
@@ -102,15 +102,15 @@ public class GuiHandlerTF implements IGuiHandler {
 
 			final DimensionalCoords coords = new DimensionalCoords(x, y, z, dimension);
 			if(tfGui == TFGui.GROUND_BRIDGE_REMOTE || tfGui.containerBlock == null || world.getBlock(x, y, z) == tfGui.containerBlock) {
-				int[] aint = coords.toArray();
+				final int[] aint = coords.toArray();
 				int integer = 0;
 
 				try {
-					Constructor c = Class.forName(tfGui.guiPath).getConstructor(tfGui.guiArgs);
-					Object[] args = new Object[tfGui.guiArgs.length];
+					final Constructor c = Class.forName(tfGui.guiPath).getConstructor(tfGui.guiArgs);
+					final Object[] args = new Object[tfGui.guiArgs.length];
 
 					for(int i = 0; i < tfGui.guiArgs.length; ++i) {
-						Class clazz = tfGui.guiArgs[i];
+						final Class clazz = tfGui.guiArgs[i];
 
 						if(InventoryPlayer.class.isAssignableFrom(clazz)) {
 							args[i] = player.inventory;
@@ -122,7 +122,7 @@ public class GuiHandlerTF implements IGuiHandler {
 							args[i] = coords;
 						}
 						else if(InventoryGroundBridge.class.isAssignableFrom(clazz)) {
-							ItemStack itemstack = player.getHeldItem();
+							final ItemStack itemstack = player.getHeldItem();
 
 							if(itemstack == null || itemstack.getItem() != TFItems.groundBridgeRemote) {
 								return null;
@@ -147,7 +147,7 @@ public class GuiHandlerTF implements IGuiHandler {
 
 					return c.newInstance(args);
 				}
-				catch(Exception e) {
+				catch(final Exception e) {
 					TransformersMod.log.error("Unable to load class for gui element '{}'", tfGui);
 					e.printStackTrace();
 				}
@@ -181,19 +181,19 @@ public class GuiHandlerTF implements IGuiHandler {
 		private final String guiPath;
 		private final Class[] guiArgs;
 
-		public TFGui(Block block, Class<? extends Container> clazz, String path, Class... gui) {
+		public TFGui(final Block block, final Class<? extends Container> clazz, final String path, final Class... gui) {
 			this(block, clazz, path, gui, gui);
 		}
 
-		public TFGui(Block block, Class<? extends Container> clazz, String path, Class[] gui, Class[] container) {
+		public TFGui(final Block block, final Class<? extends Container> clazz, final String path, final Class[] gui, final Class[] container) {
 			this(++nextId, block, clazz, path, gui, container);
 		}
 
-		public TFGui(int id, Block block, Class<? extends Container> clazz, String path, Class... gui) {
+		public TFGui(final int id, final Block block, final Class<? extends Container> clazz, final String path, final Class... gui) {
 			this(id, block, clazz, path, gui, gui);
 		}
 
-		public TFGui(int id, Block block, Class<? extends Container> clazz, String path, Class[] gui, Class[] container) {
+		public TFGui(final int id, final Block block, final Class<? extends Container> clazz, final String path, final Class[] gui, final Class[] container) {
 			guiId = id;
 			guiPath = path;
 			guiArgs = gui;
@@ -219,8 +219,8 @@ public class GuiHandlerTF implements IGuiHandler {
 			RECEIVER_NETWORK = new TFGui(null, null, "fiskfille.tf.client.gui.GuiSelectReceivers", TileEntity.class);
 		}
 
-		public static TFGui get(int id) {
-			for(TFGui gui : guis) {
+		public static TFGui get(final int id) {
+			for(final TFGui gui : guis) {
 				if(gui.guiId == id) {
 					return gui;
 				}
@@ -229,19 +229,19 @@ public class GuiHandlerTF implements IGuiHandler {
 			return null;
 		}
 
-		public void open(EntityPlayer player, TileEntity tile) {
+		public void open(final EntityPlayer player, final TileEntity tile) {
 			open(player, player.worldObj, tile);
 		}
 
-		public void open(EntityPlayer player, World world, TileEntity tile) {
+		public void open(final EntityPlayer player, final World world, final TileEntity tile) {
 			open(player, world, tile.xCoord, tile.yCoord, tile.zCoord);
 		}
 
-		public void open(EntityPlayer player, int x, int y, int z) {
+		public void open(final EntityPlayer player, final int x, final int y, final int z) {
 			open(player, player.worldObj, x, y, z);
 		}
 
-		public void open(EntityPlayer player, World world, int x, int y, int z) {
+		public void open(final EntityPlayer player, final World world, final int x, final int y, final int z) {
 			player.openGui(TransformersMod.instance, guiId, world, x, y, z);
 		}
 

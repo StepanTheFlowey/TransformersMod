@@ -45,7 +45,7 @@ public class TFAchievements {
 				try {
 					achievements.add((Achievement) field.get(null));
 				}
-				catch(Exception e) {
+				catch(final Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -73,7 +73,7 @@ public class TFAchievements {
 				itemField.set(achievement, displayItems.get(achievement));
 			}
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 
@@ -82,19 +82,19 @@ public class TFAchievements {
 		}
 	}
 
-	private static void setItem(Achievement achievement, ItemStack itemstack) {
+	private static void setItem(final Achievement achievement, final ItemStack itemstack) {
 		displayItems.put(achievement, itemstack);
 	}
 
-	private static void setItem(Achievement achievement, ItemStack[] aitemstack) {
+	private static void setItem(final Achievement achievement, final ItemStack[] aitemstack) {
 		setItem(achievement, aitemstack[1]);
 	}
 
-	private static void setItem(Achievement achievement, Item item) {
+	private static void setItem(final Achievement achievement, final Item item) {
 		setItem(achievement, new ItemStack(item));
 	}
 
-	private static void setItem(Achievement achievement, Block block) {
+	private static void setItem(final Achievement achievement, final Block block) {
 		setItem(achievement, new ItemStack(block));
 	}
 }

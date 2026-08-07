@@ -18,7 +18,7 @@ public class ContainerDisplayStationArmor extends ContainerBasic {
 			final int finalSlotIndex = i;
 			addSlotToContainer(new SlotDisplayStationArmor(this, tile, tile, i, 25, 18 + i * 18) {
 				@Override
-				public boolean isItemValid(ItemStack itemstack) {
+				public boolean isItemValid(final ItemStack itemstack) {
 					return super.isItemValid(itemstack) && itemstack.getItem().isValidArmor(itemstack, finalSlotIndex, tile.fakePlayer);
 				}
 			});
@@ -28,7 +28,7 @@ public class ContainerDisplayStationArmor extends ContainerBasic {
 			final int finalSlotIndex = i;
 			addSlotToContainer(new SlotDisplayStationArmor(this, craftMatrix, tile, i, 47, 18 + i * 18) {
 				@Override
-				public boolean isItemValid(ItemStack itemstack) {
+				public boolean isItemValid(final ItemStack itemstack) {
 					return super.isItemValid(itemstack) && itemstack.getItem().isValidArmor(itemstack, finalSlotIndex, inventoryPlayer.player);
 				}
 			});
@@ -37,7 +37,7 @@ public class ContainerDisplayStationArmor extends ContainerBasic {
 		addPlayerInventory(inventoryPlayer, 20);
 
 		for(int i = 0; i < 4; ++i) {
-			ItemStack itemstack = tile.getStackInSlot(i);
+			final ItemStack itemstack = tile.getStackInSlot(i);
 
 			if(itemstack != null) {
 				craftMatrix.setInventorySlotContents(i, TFArmorHelper.getArmorShell(itemstack));
@@ -51,21 +51,21 @@ public class ContainerDisplayStationArmor extends ContainerBasic {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer player, final int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		int MAX = 7;
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		final int MAX = 7;
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if(slotId > MAX) {
 				boolean flag = true;
-				boolean flag1 = itemstack1.getItem() instanceof ItemTransformerArmor;
+				final boolean flag1 = itemstack1.getItem() instanceof ItemTransformerArmor;
 
 				for(int i = 0; i < 8; ++i) {
-					Slot slot1 = (Slot) inventorySlots.get(i % 4);
+					final Slot slot1 = (Slot) inventorySlots.get(i % 4);
 
 					if(itemstack1.getItem().isValidArmor(itemstack1, i % 4, player) && (i < 4 ? flag1 && slot1.isItemValid(itemstack1) : !flag1 && slot1.getHasStack())) {
 						if(!mergeItemStack(itemstack1, i, i + 1, false)) {
@@ -115,8 +115,8 @@ public class ContainerDisplayStationArmor extends ContainerBasic {
 	@Override
 	public void detectAndSendChanges() {
 		for(int i = 0; i < inventorySlots.size(); ++i) {
-			ItemStack itemstack = ((Slot) inventorySlots.get(i)).getStack();
-			ItemStack itemstack1 = (ItemStack) inventoryItemStacks.get(i);
+			final ItemStack itemstack = ((Slot) inventorySlots.get(i)).getStack();
+			final ItemStack itemstack1 = (ItemStack) inventoryItemStacks.get(i);
 
 			if(!ItemStack.areItemStacksEqual(itemstack1, itemstack)) {
 				getTile().markDirty();

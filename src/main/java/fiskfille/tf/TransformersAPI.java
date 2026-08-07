@@ -13,7 +13,7 @@ import java.util.HashMap;
 /**
  * @author gegy1000, FiskFille
  */
-public class TransformersAPI {
+public final class TransformersAPI {
 	private static final ArrayList<Transformer> transformers = new ArrayList<>();
 	private static final ArrayList<Energon> energonTypes = new ArrayList<>();
 	private static final ArrayList<Item> displayablesServer = new ArrayList<>();
@@ -24,7 +24,7 @@ public class TransformersAPI {
 	 *
 	 * @param transformer The Transformer registered.
 	 */
-	public static void registerTransformer(Transformer transformer) {
+	public static void registerTransformer(final Transformer transformer) {
 		if(!transformers.contains(transformer)) {
 			transformers.add(transformer);
 		}
@@ -46,8 +46,8 @@ public class TransformersAPI {
 	 * @param name The name of the Transformer
 	 * @return the Transformer with the specified name, or null if there is none.
 	 */
-	public static Transformer getTransformerByName(String name) {
-		for(Transformer transformer : transformers) {
+	public static Transformer getTransformerByName(final String name) {
+		for(final Transformer transformer : transformers) {
 			if(transformer.getName().equals(name)) {
 				return transformer;
 			}
@@ -61,7 +61,7 @@ public class TransformersAPI {
 	 *
 	 * @param energon The energon type being registered.
 	 */
-	public static void registerEnergonType(Energon energon) {
+	public static void registerEnergonType(final Energon energon) {
 		if(!energonTypes.contains(energon)) {
 			energonTypes.add(energon);
 		}
@@ -81,8 +81,8 @@ public class TransformersAPI {
 	 * @param name The name of the energon type
 	 * @return an instance of an energon type with the specified name
 	 */
-	public static Energon getEnergonTypeByName(String name) {
-		for(Energon energon : energonTypes) {
+	public static Energon getEnergonTypeByName(final String name) {
+		for(final Energon energon : energonTypes) {
 			if(energon.getId().equals(name)) {
 				return energon;
 			}
@@ -97,12 +97,12 @@ public class TransformersAPI {
 	 * @param item             The item to be assigned to.
 	 * @param displayableClass The Displayable registered.
 	 */
-	public static void registerDisplayable(Item item, Class<? extends Displayable> displayableClass) {
+	public static void registerDisplayable(final Item item, final Class<? extends Displayable> displayableClass) {
 		if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			try {
 				displayables.put(item, displayableClass.newInstance());
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -122,8 +122,8 @@ public class TransformersAPI {
 	 * @param item The item to get the Displayable for.
 	 * @return the Displayable for the specific item.
 	 */
-	public static Displayable getDisplayableFor(Item item) {
-		for(HashMap.Entry<Item, Displayable> e : displayables.entrySet()) {
+	public static Displayable getDisplayableFor(final Item item) {
+		for(final HashMap.Entry<Item, Displayable> e : displayables.entrySet()) {
 			if(e.getKey() == item) {
 				return e.getValue();
 			}
@@ -136,7 +136,7 @@ public class TransformersAPI {
 	 * @param item The item to query
 	 * @return if the specific item has a Displayable on the client side.
 	 */
-	public static boolean hasDisplayable(Item item) {
+	public static boolean hasDisplayable(final Item item) {
 		if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			return getDisplayableFor(item) != null;
 		}

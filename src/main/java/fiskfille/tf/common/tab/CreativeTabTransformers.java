@@ -4,7 +4,7 @@ import fiskfille.tf.common.block.TFBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class CreativeTabTransformers extends CreativeTabs {
+public final class CreativeTabTransformers extends CreativeTabs {
 	public CreativeTabTransformers() {
 		super("Transformers");
 	}

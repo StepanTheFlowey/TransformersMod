@@ -17,21 +17,21 @@ public class MessageUpdateArmor implements IMessage {
 
 	public MessageUpdateArmor() {}
 
-	public MessageUpdateArmor(EntityPlayer player, ItemStack itemstack, int slot) {
+	public MessageUpdateArmor(final EntityPlayer player, final ItemStack itemstack, final int slot) {
 		id = player.getEntityId();
 		armor = itemstack;
 		armorSlot = slot;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 		armor = ByteBufUtils.readItemStack(buf);
 		armorSlot = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		ByteBufUtils.writeItemStack(buf, armor);
 		buf.writeInt(armorSlot);
@@ -39,7 +39,7 @@ public class MessageUpdateArmor implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessageUpdateArmor, IMessage> {
 		@Override
-		public IMessage onMessage(MessageUpdateArmor message, MessageContext ctx) {
+		public IMessage onMessage(final MessageUpdateArmor message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final Entity entity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);
 

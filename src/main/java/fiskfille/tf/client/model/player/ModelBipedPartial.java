@@ -8,7 +8,7 @@ public class ModelBipedPartial extends ModelBiped {
 		this(0, 0, 64, 32);
 	}
 
-	public ModelBipedPartial(float scale, float offset, int texWidth, int texHeight) {
+	public ModelBipedPartial(final float scale, final float offset, final int texWidth, final int texHeight) {
 		super(scale, offset, texWidth, texHeight);
 
 		bipedCloak = new ModelRendererPartial(this, 0, 0);

@@ -10,11 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class ContainerTransmitter extends ContainerBasic {
-	public ContainerTransmitter(InventoryPlayer inventoryPlayer, TileEntityTransmitter tile) {
+	public ContainerTransmitter(final InventoryPlayer inventoryPlayer, final TileEntityTransmitter tile) {
 		super(tile);
 		addSlotToContainer(new Slot(tile, 0, 45, 35) {
 			@Override
-			public boolean isItemValid(ItemStack itemstack) {
+			public boolean isItemValid(final ItemStack itemstack) {
 				return itemstack.getItem() instanceof IFluidContainerItem && !ItemFuelCanister.isEmpty(itemstack) && ItemFuelCanister.getContainerFluid(itemstack).getFluid() == TFFluids.energon;
 			}
 
@@ -28,13 +28,13 @@ public class ContainerTransmitter extends ContainerBasic {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer player, final int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		int INPUT = 0;
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		final int INPUT = 0;
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if(slotId == INPUT) {

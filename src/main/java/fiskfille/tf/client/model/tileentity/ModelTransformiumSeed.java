@@ -77,7 +77,7 @@ public class ModelTransformiumSeed extends ModelBase {
 		wingD.rotateAngleZ = 0.06981317007977318F;
 	}
 
-	public void render(EntityTransformiumSeed seed) {
+	public void render(final EntityTransformiumSeed seed) {
 		setRotationAngles(seed);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0F, -0.85F, 0F);
@@ -99,13 +99,13 @@ public class ModelTransformiumSeed extends ModelBase {
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer modelRenderer, float x, float y, float z) {
+	private void setRotation(final ModelRenderer modelRenderer, final float x, final float y, final float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(EntityTransformiumSeed seed) {
+	public void setRotationAngles(final EntityTransformiumSeed seed) {
 		super.setRotationAngles(0, 0, 0, 0, 0, 0, seed);
 
 		final float t = (float) (Math.min(seed.ticksExisted, 50)) / 50;

@@ -51,7 +51,7 @@ public class CommonProxy {
 		ItemHandler.init();
 	}
 
-	public void registerEventHandler(Object obj) {
+	public void registerEventHandler(final Object obj) {
 		MinecraftForge.EVENT_BUS.register(obj);
 		MinecraftForge.ORE_GEN_BUS.register(obj);
 		FMLCommonHandler.instance().bus().register(obj);
@@ -69,7 +69,7 @@ public class CommonProxy {
 		return 0;
 	}
 
-	public void queueTask(Runnable task) {
+	public void queueTask(final Runnable task) {
 		tasks.add(task);
 	}
 

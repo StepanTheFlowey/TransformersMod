@@ -15,21 +15,21 @@ public class MessageClosePortal implements IMessage {
 
 	public MessageClosePortal() {}
 
-	public MessageClosePortal(int x, int y, int z) {
+	public MessageClosePortal(final int x, final int y, final int z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
@@ -37,7 +37,7 @@ public class MessageClosePortal implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessageClosePortal, IMessage> {
 		@Override
-		public IMessage onMessage(MessageClosePortal message, MessageContext ctx) {
+		public IMessage onMessage(final MessageClosePortal message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final TileEntity tile = TransformersMod.proxy.getPlayer().worldObj.getTileEntity(message.x, message.y, message.z);
 

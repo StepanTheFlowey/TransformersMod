@@ -51,7 +51,7 @@ public class GuiConfigSides extends GuiContainerTF {
 	private final List<ChunkCoordinates> configurables = Lists.newArrayList();
 	private final Vector3d camera;
 
-	public GuiConfigSides(InventoryPlayer inventoryPlayer, GuiScreen gui, TileEntityMachine tile) {
+	public GuiConfigSides(final InventoryPlayer inventoryPlayer, final GuiScreen gui, final TileEntityMachine tile) {
 		super(new ContainerEmpty(inventoryPlayer, 16));
 		machine = tile;
 		parent = gui;
@@ -70,7 +70,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		final int y = (height - ySize) / 2;
 
 		buttonList.add(new GuiButtonDistribution(0, x + 111, y + 66, machine));
-		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+		for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			final int index = dir.ordinal();
 			buttonList.add(new GuiButtonIO(index + 1, x + 108 + index % 2 * 15, y + 18 + index / 2 * 15, machine, dir));
 		}
@@ -80,7 +80,7 @@ public class GuiConfigSides extends GuiContainerTF {
 	public void updateScreen() {
 		super.updateScreen();
 
-		for(GuiButton button : (List<GuiButton>) buttonList) {
+		for(final GuiButton button : (List<GuiButton>) buttonList) {
 			if(button instanceof GuiButtonIO) {
 				final GuiButtonIO iobutton = (GuiButtonIO) button;
 				button.enabled = iobutton.machine.canTransfer(iobutton.side);
@@ -89,7 +89,7 @@ public class GuiConfigSides extends GuiContainerTF {
 
 		neighbors.clear();
 
-		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+		for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			final int x = machine.xCoord + dir.offsetX;
 			final int y = machine.yCoord + dir.offsetY + (dir.offsetY > 0 ? machine.getBlockType().getBlockHeight() - 1 : 0);
 			final int z = machine.zCoord + dir.offsetZ;
@@ -101,7 +101,7 @@ public class GuiConfigSides extends GuiContainerTF {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		final int id = button.id;
 
 		if(id == 0) {
@@ -113,14 +113,14 @@ public class GuiConfigSides extends GuiContainerTF {
 	}
 
 	@Override
-	protected void keyTyped(char c, int key) {
+	protected void keyTyped(final char c, final int key) {
 		if(key == 1 || key == mc.gameSettings.keyBindInventory.getKeyCode()) {
 			mc.displayGuiScreen(parent);
 		}
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
 		final String s = I18n.format("gui.tf.io");
@@ -142,7 +142,7 @@ public class GuiConfigSides extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(guiTextures);
 		drawTexturedModalRect((width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize);
@@ -189,7 +189,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		renderBlocks.setRenderAllFaces(true);
 
 		final BlockMachineBase block = machine.getBlockType();
-		for(GuiButton button : (List<GuiButton>) buttonList) {
+		for(final GuiButton button : (List<GuiButton>) buttonList) {
 			if(button instanceof GuiButtonIO) {
 				final GuiButtonIO iobutton = (GuiButtonIO) button;
 
@@ -208,7 +208,7 @@ public class GuiConfigSides extends GuiContainerTF {
 					IIcon icon = renderBlocks.getBlockIcon(Blocks.wool);
 					for(int i = 0; i < 2; ++i) {
 						if(i == 1) {
-							EnumIO io = machine.getInOutMode(dir);
+							final EnumIO io = machine.getInOutMode(dir);
 
 							if(io.ordinal() == 0) {
 								break;
@@ -249,7 +249,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 
-	private void renderFace(ForgeDirection dir, Block block, int x, int y, int z, IIcon icon) {
+	private void renderFace(final ForgeDirection dir, final Block block, final int x, final int y, final int z, final IIcon icon) {
 		switch(dir) {
 			case DOWN:
 				renderBlocks.renderFaceYNeg(block, x, y, z, icon);
@@ -274,11 +274,11 @@ public class GuiConfigSides extends GuiContainerTF {
 		}
 	}
 
-	private void doTileEntityRenderPass(List<ChunkCoordinates> blocks, int pass) {
+	private void doTileEntityRenderPass(final List<ChunkCoordinates> blocks, final int pass) {
 		ForgeHooksClient.setRenderPass(pass);
 
-		for(ChunkCoordinates coords : blocks) {
-			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(coords.posX, coords.posY, coords.posZ));
+		for(final ChunkCoordinates coords : blocks) {
+			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(coords.posX, coords.posY, coords.posZ));
 
 			if(tile != null) {
 				GL11.glColor3f(1F, 1F, 1F);
@@ -287,7 +287,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		}
 	}
 
-	private void doWorldRenderPass(List<ChunkCoordinates> blocks, int pass) {
+	private void doWorldRenderPass(final List<ChunkCoordinates> blocks, final int pass) {
 		ForgeHooksClient.setRenderPass(pass);
 
 		final Tessellator tessellator = Tessellator.instance;
@@ -295,7 +295,7 @@ public class GuiConfigSides extends GuiContainerTF {
 		tessellator.setTranslation(camera.x, camera.y, camera.z);
 		tessellator.setBrightness(15 << 20 | 15 << 4);
 
-		for(ChunkCoordinates coords : blocks) {
+		for(final ChunkCoordinates coords : blocks) {
 			final Block block = world.getBlock(coords.posX, coords.posY, coords.posZ);
 
 			if(block != null) {
@@ -312,11 +312,11 @@ public class GuiConfigSides extends GuiContainerTF {
 		tessellator.setTranslation(0, 0, 0);
 	}
 
-	private void setGlStateForPass(int pass, boolean isNeighbour) {
+	private void setGlStateForPass(final int pass, final boolean isNeighbour) {
 		GL11.glColor3f(1F, 1F, 1F);
 
 		if(isNeighbour) {
-			float alpha = 0.6F;
+			final float alpha = 0.6F;
 
 			if(pass == 0) {
 				GL11.glEnable(GL11.GL_DEPTH_TEST);

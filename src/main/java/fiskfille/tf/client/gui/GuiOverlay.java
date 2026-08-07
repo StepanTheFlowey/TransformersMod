@@ -39,7 +39,7 @@ public class GuiOverlay extends Gui {
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onRender(RenderGameOverlayEvent.Pre event) {
+	public void onRender(final RenderGameOverlayEvent.Pre event) {
 		if(event.isCanceled()) {
 			return;
 		}
@@ -61,20 +61,20 @@ public class GuiOverlay extends Gui {
 		}
 	}
 
-	public void renderLaserCharge(EntityPlayer player) {
+	public void renderLaserCharge(final EntityPlayer player) {
 		final ItemStack heldItem = player.getHeldItem();
 		final Transformer transformer = TFHelper.getTransformer(player);
 		final boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFHelper.isInRobotMode(player);
 
 		if(transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(player))) {
-			float stealthModeTimer = TFHelper.getStealthModeTimer(player);
+			final float stealthModeTimer = TFHelper.getStealthModeTimer(player);
 
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4f(0F, 0F, 0F, 0.3F);
 
-			int offset = Math.round((1 - Math.min(TFHelper.getTransformationTimer(player), stealthModeTimer)) * 210);
+			final int offset = Math.round((1 - Math.min(TFHelper.getTransformationTimer(player), stealthModeTimer)) * 210);
 			int x = 6 - offset;
 
 			if(hasSniper) {
@@ -117,7 +117,7 @@ public class GuiOverlay extends Gui {
 			GL11.glDepthMask(true);
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
 
-			float scale = 0.5F;
+			final float scale = 0.5F;
 			GL11.glPushMatrix();
 			GL11.glScalef(scale, scale, scale);
 			drawString(Minecraft.getMinecraft().fontRenderer, I18n.format("stats.ammo.name", I18n.format(transformer.getShootItem().getUnlocalizedName() + ".name")), (int) ((x - 1) / scale), (int) ((y + 17) / scale), 0xffffff);
@@ -125,7 +125,7 @@ public class GuiOverlay extends Gui {
 		}
 	}
 
-	public void renderNitroAndSpeed(RenderGameOverlayEvent.Pre event, EntityPlayer player) {
+	public void renderNitroAndSpeed(final RenderGameOverlayEvent.Pre event, final EntityPlayer player) {
 		final float transformationTimer = TFHelper.getTransformationTimer(player);
 
 		if(transformationTimer > 0) {
@@ -158,12 +158,12 @@ public class GuiOverlay extends Gui {
 		}
 	}
 
-	public void renderShotsLeft(int width, int height, EntityPlayer player) {
+	public void renderShotsLeft(final int width, final int height, final EntityPlayer player) {
 		final Transformer transformer = TFHelper.getTransformer(player);
 
 		if(transformer != null && !(transformer instanceof TransformerVurp)) {
-			float transformationTimer = TFHelper.getTransformationTimer(player);
-			float stealthModeTimer = TFHelper.getStealthModeTimer(player);
+			final float transformationTimer = TFHelper.getTransformationTimer(player);
+			final float stealthModeTimer = TFHelper.getStealthModeTimer(player);
 
 			if(transformationTimer > 0 && transformer.canShoot(player)) {
 				float f = transformationTimer;
@@ -247,7 +247,7 @@ public class GuiOverlay extends Gui {
 		}
 	}
 
-	public void renderKatanaDash(int width, int height, EntityPlayer player) {
+	public void renderKatanaDash(final int width, final int height, final EntityPlayer player) {
 		if(player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.purgesKatana && !TFHelper.isFullyTransformed(player) && TFHelper.getTransformer(player) instanceof TransformerPurge && player.isUsingItem()) {
 			final int j = TFItems.purgesKatana.getMaxItemUseDuration(player.getHeldItem()) - player.getItemInUseCount();
 			double d = (double) j / 10;

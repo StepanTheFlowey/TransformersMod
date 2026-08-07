@@ -9,7 +9,7 @@ public class ModelOffset {
 	public float headOffsetX = 0;
 	public float headOffsetZ = 0;
 
-	public ModelOffset(boolean init) {
+	public ModelOffset(final boolean init) {
 		initialized = init;
 	}
 

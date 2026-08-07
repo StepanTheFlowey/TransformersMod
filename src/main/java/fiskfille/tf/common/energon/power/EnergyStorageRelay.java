@@ -10,7 +10,7 @@ import java.util.List;
 public class EnergyStorageRelay extends EnergyStorage {
 	protected final TileEntityRelayTower relay;
 
-	public EnergyStorageRelay(TileEntityRelayTower tile) {
+	public EnergyStorageRelay(final TileEntityRelayTower tile) {
 		super(0);
 		relay = tile;
 	}
@@ -21,24 +21,24 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {}
+	public void toBytes(final ByteBuf buf) {}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {}
+	public void fromBytes(final ByteBuf buf) {}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {}
+	public void readFromNBT(final NBTTagCompound nbt) {}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {}
+	public void writeToNBT(final NBTTagCompound nbt) {}
 
 	@Override
-	public float remove(float amount, boolean simulate) {
-		List<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
+	public float remove(final float amount, final boolean simulate) {
+		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
 		float removed = 0;
 
-		for(ReceiverEntry entry : receivers) {
-			float f = entry.getReceiver().extractEnergy(amount / receivers.size(), simulate);
+		for(final ReceiverEntry entry : receivers) {
+			final float f = entry.getReceiver().extractEnergy(amount / receivers.size(), simulate);
 			removed += f;
 
 			relay.netEnergyTransfer.put(entry.getCoords(), relay.getNetTransfer(entry.getCoords()) - f);
@@ -48,12 +48,12 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public float add(float amount, boolean simulate) {
-		List<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
+	public float add(final float amount, final boolean simulate) {
+		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
 		float added = 0;
 
-		for(ReceiverEntry entry : receivers) {
-			float f = entry.getReceiver().receiveEnergy(amount / receivers.size(), simulate);
+		for(final ReceiverEntry entry : receivers) {
+			final float f = entry.getReceiver().receiveEnergy(amount / receivers.size(), simulate);
 			added += f;
 
 			relay.netEnergyTransfer.put(entry.getCoords(), relay.getNetTransfer(entry.getCoords()) + f);
@@ -64,10 +64,10 @@ public class EnergyStorageRelay extends EnergyStorage {
 
 	@Override
 	public float getEnergy() {
-		List<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
+		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
 		float energy = 0;
 
-		for(ReceiverEntry entry : receivers) {
+		for(final ReceiverEntry entry : receivers) {
 			energy += entry.getReceiver().getEnergy();
 		}
 
@@ -76,10 +76,10 @@ public class EnergyStorageRelay extends EnergyStorage {
 
 	@Override
 	public float getMaxEnergy() {
-		List<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
+		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
 		float maxEnergy = 0;
 
-		for(ReceiverEntry entry : receivers) {
+		for(final ReceiverEntry entry : receivers) {
 			maxEnergy += entry.getReceiver().getMaxEnergy();
 		}
 
@@ -87,11 +87,11 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public void set(float amount) {
+	public void set(final float amount) {
 	}
 
 	@Override
-	public void setUsage(float usage) {
+	public void setUsage(final float usage) {
 		energyUsage = usage;
 		lastEnergy = getEnergy();
 	}

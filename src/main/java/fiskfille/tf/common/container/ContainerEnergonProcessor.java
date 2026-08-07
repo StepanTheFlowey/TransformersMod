@@ -21,7 +21,7 @@ public class ContainerEnergonProcessor extends ContainerBasic {
 	private int lastFillTime;
 	private int lastCurrentMaxPowerTime;
 
-	public ContainerEnergonProcessor(InventoryPlayer inventoryPlayer, TileEntityEnergonProcessor tile) {
+	public ContainerEnergonProcessor(final InventoryPlayer inventoryPlayer, final TileEntityEnergonProcessor tile) {
 		super(tile);
 		addSlotToContainer(new Slot(tile, 0, 24, 53));
 		addSlotToContainer(new Slot(tile, 1, 24, 17));
@@ -41,7 +41,7 @@ public class ContainerEnergonProcessor extends ContainerBasic {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting icrafting) {
+	public void addCraftingToCrafters(final ICrafting icrafting) {
 		super.addCraftingToCrafters(icrafting);
 		icrafting.sendProgressBarUpdate(this, 0, getTile().burnTime);
 		icrafting.sendProgressBarUpdate(this, 1, getTile().powerTime);
@@ -53,8 +53,8 @@ public class ContainerEnergonProcessor extends ContainerBasic {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for(Object crafter : crafters) {
-			ICrafting icrafting = (ICrafting) crafter;
+		for(final Object crafter : crafters) {
+			final ICrafting icrafting = (ICrafting) crafter;
 
 			if(lastBurnTime != getTile().burnTime) {
 				icrafting.sendProgressBarUpdate(this, 0, getTile().burnTime);
@@ -81,7 +81,7 @@ public class ContainerEnergonProcessor extends ContainerBasic {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int value) {
+	public void updateProgressBar(final int id, final int value) {
 		if(id == 0) {
 			getTile().burnTime = value;
 		}
@@ -97,15 +97,15 @@ public class ContainerEnergonProcessor extends ContainerBasic {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer player, final int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		int FUEL = 0;
-		int INPUT = 1;
-		int OUTPUT = 2;
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		final int FUEL = 0;
+		final int INPUT = 1;
+		final int OUTPUT = 2;
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if(slotId == OUTPUT) {

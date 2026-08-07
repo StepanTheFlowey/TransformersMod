@@ -9,7 +9,7 @@ import fiskfille.tf.common.block.TFBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class NEITransformersModConfig implements IConfigureNEI {
+public final class NEITransformersModConfig implements IConfigureNEI {
 	@Override
 	public void loadConfig() {
 		registerHandler(new EnergonProcessorRecipeHandler());
@@ -20,7 +20,7 @@ public class NEITransformersModConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(TFBlocks.groundBridgeTeleporter, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
-	public void registerHandler(Object obj) {
+	public void registerHandler(final Object obj) {
 		if(obj instanceof ICraftingHandler) {
 			API.registerRecipeHandler((ICraftingHandler) obj);
 		}

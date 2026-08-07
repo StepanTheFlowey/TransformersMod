@@ -14,7 +14,7 @@ public class DisplayableBassBlaster extends Displayable {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/bass_blaster.png");
 
 	@Override
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		bindTexture(texture);
 		GL11.glScalef(0.75F, 0.75F, 0.75F);
 		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.ticksExisted * 0.75F, 0, 1, 0);

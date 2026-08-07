@@ -40,13 +40,13 @@ public class TransformerSkystrike extends TransformerJet {
 	}
 
 	@Override
-	public boolean onJump(EntityPlayer player) {
+	public boolean onJump(final EntityPlayer player) {
 		player.motionY += 0.205D;
 		return true;
 	}
 
 	@Override
-	public void tick(EntityPlayer player, float timer) {
+	public void tick(final EntityPlayer player, final float timer) {
 		player.addStat(TFAchievements.skystrike, 1);
 	}
 }

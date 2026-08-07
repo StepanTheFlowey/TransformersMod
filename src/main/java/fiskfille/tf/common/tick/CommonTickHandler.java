@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class CommonTickHandler {
 	@SubscribeEvent
-	public void onPlayerTick(PlayerTickEvent event) {
+	public void onPlayerTick(final PlayerTickEvent event) {
 		final EntityPlayer player = event.player;
 		final Transformer transformer = TFHelper.getTransformer(player);
 		final float transformationTimer = TFHelper.getTransformationTimer(player);

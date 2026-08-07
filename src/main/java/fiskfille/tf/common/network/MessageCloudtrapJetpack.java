@@ -16,26 +16,26 @@ public class MessageCloudtrapJetpack implements IMessage {
 
 	public MessageCloudtrapJetpack() {}
 
-	public MessageCloudtrapJetpack(EntityPlayer player, boolean j) {
+	public MessageCloudtrapJetpack(final EntityPlayer player, final boolean j) {
 		id = player.getEntityId();
 		jetpacking = j;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 		jetpacking = buf.readBoolean();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		buf.writeBoolean(jetpacking);
 	}
 
 	public static class Handler implements IMessageHandler<MessageCloudtrapJetpack, IMessage> {
 		@Override
-		public IMessage onMessage(MessageCloudtrapJetpack message, MessageContext ctx) {
+		public IMessage onMessage(final MessageCloudtrapJetpack message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final EntityPlayer player = TransformersMod.proxy.getPlayer();
 				final Entity entity = player.worldObj.getEntityByID(message.id);

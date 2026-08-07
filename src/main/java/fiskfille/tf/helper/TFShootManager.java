@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.lwjgl.input.Mouse;
 
-public class TFShootManager {
+public final class TFShootManager {
 	public static int shootCooldown = 0;
 	public static int shotsLeft = 4;
 	public static int laserCharge;
@@ -24,7 +24,7 @@ public class TFShootManager {
 	private static boolean reloading;
 
 	@SubscribeEvent
-	public void onLivingUpdate(LivingUpdateEvent event) {
+	public void onLivingUpdate(final LivingUpdateEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) event.entity;
 
@@ -80,7 +80,7 @@ public class TFShootManager {
 		}
 	}
 
-	private static int getShotsLeft(EntityPlayer player, Transformer transformer, Item shootItem) {
+	private static int getShotsLeft(final EntityPlayer player, final Transformer transformer, final Item shootItem) {
 		final int maxAmmo = transformer.getShots();
 		int ammoCount;
 
@@ -102,7 +102,7 @@ public class TFShootManager {
 		return ammoCount;
 	}
 
-	private static int getAmountOf(Item item, EntityPlayer player) {
+	private static int getAmountOf(final Item item, final EntityPlayer player) {
 		int amount = 0;
 
 		for(final ItemStack stack : player.inventory.mainInventory) {
@@ -117,7 +117,7 @@ public class TFShootManager {
 	}
 
 	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent event) {
+	public void onPlayerInteract(final PlayerInteractEvent event) {
 		switch(event.action) {
 			case RIGHT_CLICK_AIR:
 			case RIGHT_CLICK_BLOCK:
@@ -135,7 +135,7 @@ public class TFShootManager {
 		}
 	}
 
-	private static void stealthForceShoot(Transformer transformer, EntityPlayer player) {
+	private static void stealthForceShoot(final Transformer transformer, final EntityPlayer player) {
 		if(player == Minecraft.getMinecraft().thePlayer) {
 			if(transformer instanceof TransformerVurp) {
 				if(transformer.canShoot(player)) {

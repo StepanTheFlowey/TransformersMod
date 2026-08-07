@@ -19,8 +19,8 @@ public class ItemTransformiumDetector extends Item {
 	// TODO-TF improve it for 0.6.0
 
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean hand) {
-		int time = entity.ticksExisted;
+	public void onUpdate(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean hand) {
+		final int time = entity.ticksExisted;
 
 		if(time > 0) {
 			NBTTagCompound tagCompound = stack.getTagCompound();
@@ -86,7 +86,7 @@ public class ItemTransformiumDetector extends Item {
 
 					if(player.worldObj.isRemote) {
 						if(Minecraft.getMinecraft().thePlayer == player) {
-							int d = tagCompound.getInteger("d");
+							final int d = tagCompound.getInteger("d");
 
 							if(d > 0) {
 								if(time % (d * 3) == 0) {
@@ -106,7 +106,7 @@ public class ItemTransformiumDetector extends Item {
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player) {
 		if(stack.getTagCompound() == null) {
 			stack.setTagCompound(new NBTTagCompound());
 		}
@@ -146,7 +146,7 @@ public class ItemTransformiumDetector extends Item {
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List informationList, boolean p_77624_4_) {
+	public void addInformation(final ItemStack stack, final EntityPlayer player, final List informationList, final boolean p_77624_4_) {
 		final NBTTagCompound tagCompound = stack.getTagCompound();
 
 		if(tagCompound != null) {

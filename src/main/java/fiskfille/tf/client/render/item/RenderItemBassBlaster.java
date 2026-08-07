@@ -13,17 +13,17 @@ public class RenderItemBassBlaster implements IItemRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/bass_blaster.png");
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(final ItemStack item, final ItemRenderType type) {
 		return type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(final ItemRenderType type, final ItemStack item, final ItemRendererHelper helper) {
 		return false;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {

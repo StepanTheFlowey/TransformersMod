@@ -16,7 +16,7 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transmitter.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transmitter_lights.png");
 
-	public void render(TileEntityTransmitter transmitter, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityTransmitter transmitter, final double x, final double y, final double z, final float partialTicks) {
 		final World world = transmitter.getWorldObj();
 		int metadata = 0;
 
@@ -74,7 +74,7 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityTransmitter) tileentity, d, d1, d2, f);
 	}
 }

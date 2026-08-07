@@ -9,10 +9,10 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
-public class TFMathHelper {
-	public static int[] split(int number, int digits, int m) {
-		int[] increments = new int[digits];
-		int[] aint = new int[digits];
+public final class TFMathHelper {
+	public static int[] split(final int number, final int digits, final int m) {
+		final int[] increments = new int[digits];
+		final int[] aint = new int[digits];
 		int incr = 1;
 		int total = 0;
 
@@ -22,7 +22,7 @@ public class TFMathHelper {
 		}
 
 		for(int i = digits - 1; i >= 0; --i) {
-			int j = MathHelper.floor_double((float) number / increments[i]);
+			final int j = MathHelper.floor_double((float) number / increments[i]);
 
 			aint[i] = j * increments[i] - total;
 			total = j * increments[i];
@@ -31,12 +31,12 @@ public class TFMathHelper {
 		return aint;
 	}
 
-	public static <T> Object getMinKey(Map<T, Integer> map) {
+	public static <T> Object getMinKey(final Map<T, Integer> map) {
 		T minKey = null;
 		int minValue = Integer.MAX_VALUE;
 
-		for(Map.Entry<T, Integer> e : map.entrySet()) {
-			int value = e.getValue();
+		for(final Map.Entry<T, Integer> e : map.entrySet()) {
+			final int value = e.getValue();
 
 			if(value < minValue) {
 				minValue = value;
@@ -47,21 +47,21 @@ public class TFMathHelper {
 		return minKey;
 	}
 
-	public static MapColor getClosestMapColor(int color) {
-		List<Integer> colors = Lists.newArrayList();
+	public static MapColor getClosestMapColor(final int color) {
+		final List<Integer> colors = Lists.newArrayList();
 
 		for(int i = 0; i < MapColor.mapColorArray.length; ++i) {
-			MapColor mapColor = MapColor.mapColorArray[i];
+			final MapColor mapColor = MapColor.mapColorArray[i];
 
 			if(mapColor != null) {
 				colors.add(mapColor.colorValue);
 			}
 		}
 
-		int color1 = getClosestColor(color, colors);
+		final int color1 = getClosestColor(color, colors);
 
 		for(int i = 0; i < MapColor.mapColorArray.length; ++i) {
-			MapColor mapColor = MapColor.mapColorArray[i];
+			final MapColor mapColor = MapColor.mapColorArray[i];
 
 			if(mapColor != null && mapColor.colorValue == color1) {
 				return mapColor;
@@ -71,18 +71,18 @@ public class TFMathHelper {
 		return MapColor.airColor;
 	}
 
-	public static int getClosestColor(int color, List<Integer> colors) {
-		Map<Integer, Integer> distances = Maps.newHashMap();
-		Color color1 = new Color(color);
+	public static int getClosestColor(final int color, final List<Integer> colors) {
+		final Map<Integer, Integer> distances = Maps.newHashMap();
+		final Color color1 = new Color(color);
 
-		for(int color2 : colors) {
+		for(final int color2 : colors) {
 			distances.put(color2, getColorDistance(color1, new Color(color2)));
 		}
 
 		return (Integer) getMinKey(distances);
 	}
 
-	public static int getColorDistance(Color a, Color b) {
+	public static int getColorDistance(final Color a, final Color b) {
 		return (int) Math.sqrt(Math.pow(a.getRed() - b.getRed(), 2) + Math.pow(a.getGreen() - b.getGreen(), 2) + Math.pow(a.getBlue() - b.getBlue(), 2));
 	}
 }

@@ -40,7 +40,7 @@ public class CommonEventHandler {
 	private final HashMap<EntityPlayer, Boolean> prevFlying = new HashMap<>();
 
 	@SubscribeEvent
-	public void onHit(LivingAttackEvent event) {
+	public void onHit(final LivingAttackEvent event) {
 		final Entity cause = event.source.getEntity();
 
 		if(cause instanceof EntityPlayer) {
@@ -54,21 +54,21 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onSmelt(ItemSmeltedEvent event) {
+	public void onSmelt(final ItemSmeltedEvent event) {
 		if(event.smelting.getItem() == TFItems.transformiumFragment) {
 			event.player.addStat(TFAchievements.transformium, 1);
 		}
 	}
 
 	@SubscribeEvent
-	public void onCraft(ItemCraftedEvent event) {
+	public void onCraft(final ItemCraftedEvent event) {
 		if(ItemHandler.matches(event.crafting, TFSubItems.tank_track)) {
 			event.player.addStat(TFAchievements.tracks, 1);
 		}
 	}
 
 	@SubscribeEvent
-	public void onEntityLoad(EntityEvent.EntityConstructing event) {
+	public void onEntityLoad(final EntityEvent.EntityConstructing event) {
 		if(event.entity instanceof EntityPlayer) {
 			event.entity.registerExtendedProperties(TFPlayerData.IDENTIFIER, new TFPlayerData());
 		}
@@ -77,7 +77,7 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onBlockBreak(BlockEvent.BreakEvent event) {
+	public void onBlockBreak(final BlockEvent.BreakEvent event) {
 		final EntityPlayer player = event.getPlayer();
 
 		if(TFHelper.isFullyTransformed(player)) {
@@ -90,7 +90,7 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void startTracking(StartTracking event) {
+	public void startTracking(final StartTracking event) {
 		final EntityPlayer player = event.entityPlayer;
 
 		if(player != null && !player.worldObj.isRemote && event.target instanceof EntityPlayer) {
@@ -108,12 +108,12 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onClonePlayer(PlayerEvent.Clone event) {
+	public void onClonePlayer(final PlayerEvent.Clone event) {
 		TFPlayerData.getData(event.entityPlayer).copy(TFPlayerData.getData(event.original));
 	}
 
 	@SubscribeEvent
-	public void onEntityInteract(EntityInteractEvent event) {
+	public void onEntityInteract(final EntityInteractEvent event) {
 		final EntityPlayer player = event.entityPlayer;
 
 		if(TFHelper.isFullyTransformed(player)) {
@@ -126,7 +126,7 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onSpawn(EntityJoinWorldEvent event) {
+	public void onSpawn(final EntityJoinWorldEvent event) {
 		final Entity entity = event.entity;
 
 		if(entity instanceof EntityPlayer) {
@@ -147,7 +147,7 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onLivingJump(LivingEvent.LivingJumpEvent event) {
+	public void onLivingJump(final LivingEvent.LivingJumpEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) event.entity;
 			final Transformer transformer = TFHelper.getTransformer(player);
@@ -164,7 +164,7 @@ public class CommonEventHandler {
 	//}
 
 	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event) {
+	public void onWorldLoad(final WorldEvent.Load event) {
 		final World world = event.world;
 
 		if(!world.isRemote) {
@@ -175,18 +175,18 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onItemStitchPost(ItemStitchEvent.Post event) {
+	public void onItemStitchPost(final ItemStitchEvent.Post event) {
 		TFRecipes.register();
 		TFAchievements.register();
 	}
 
 	@SubscribeEvent
-	public void onItemHandlerInit(ItemHandlerEvent.Init event) {
+	public void onItemHandlerInit(final ItemHandlerEvent.Init event) {
 		event.registerItemHandler(TransformersMod.MODID, TFSubItems.class);
 	}
 
 	@SubscribeEvent
-	public void onLivingUpdate(LivingUpdateEvent event) {
+	public void onLivingUpdate(final LivingUpdateEvent event) {
 		TFEntityData.getData(event.entity).onUpdate();
 
 		if(event.entity instanceof EntityPlayer) {
@@ -221,7 +221,7 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onLivingFall(LivingFallEvent event) {
+	public void onLivingFall(final LivingFallEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) event.entity;
 			final Transformer transformer = TFHelper.getTransformer(player);
@@ -240,7 +240,7 @@ public class CommonEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onTick(TickEvent event) {
+	public void onTick(final TickEvent event) {
 		switch(event.type) {
 			case CLIENT:
 			case SERVER:

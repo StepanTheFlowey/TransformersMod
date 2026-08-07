@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 public class BlockBasic extends Block {
-	public BlockBasic(Material material) {
+	public BlockBasic(final Material material) {
 		super(material);
 	}
 
-	public BlockBasic setHarvestLvl(String tool, int level) {
+	public BlockBasic setHarvestLvl(final String tool, final int level) {
 		setHarvestLevel(tool, level);
 		return this;
 	}

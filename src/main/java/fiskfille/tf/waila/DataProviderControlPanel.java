@@ -15,25 +15,25 @@ import java.util.List;
 import java.util.Map;
 
 public class DataProviderControlPanel extends DataProviderMachine {
-	public DataProviderControlPanel(String s) {
+	public DataProviderControlPanel(final String s) {
 		super(s, TileEntityControlPanel.class);
 	}
 
 	@Override
-	public List<String> getWailaBody(ItemStack itemstack, List<String> list, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+	public List<String> getWailaBody(final ItemStack itemstack, List<String> list, final IWailaDataAccessor accessor, final IWailaConfigHandler config) {
 		list = super.getWailaBody(itemstack, list, accessor, config);
-		TileEntity tileentity = TFTileHelper.getTileBase(accessor.getTileEntity());
+		final TileEntity tileentity = TFTileHelper.getTileBase(accessor.getTileEntity());
 
 		if(tileentity instanceof TileEntityControlPanel && config.getConfig(key, true)) {
-			TileEntityControlPanel tile = (TileEntityControlPanel) tileentity;
-			List<DataCore> upgrades = tile.getUpgrades();
-			LinkedHashMap<DataCore, Integer> map = Maps.newLinkedHashMap();
+			final TileEntityControlPanel tile = (TileEntityControlPanel) tileentity;
+			final List<DataCore> upgrades = tile.getUpgrades();
+			final LinkedHashMap<DataCore, Integer> map = Maps.newLinkedHashMap();
 
-			for(DataCore dataCore : upgrades) {
+			for(final DataCore dataCore : upgrades) {
 				map.put(dataCore, map.containsKey(dataCore) ? map.get(dataCore) + 1 : 1);
 			}
 
-			for(Map.Entry<DataCore, Integer> e : map.entrySet()) {
+			for(final Map.Entry<DataCore, Integer> e : map.entrySet()) {
 				String s = e.getKey().getTranslatedName();
 
 				if(e.getValue() > 1) {

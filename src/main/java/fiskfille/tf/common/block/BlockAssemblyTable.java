@@ -19,7 +19,7 @@ public class BlockAssemblyTable extends BlockMachineBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
 		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
 			return true;
 		}
@@ -48,7 +48,7 @@ public class BlockAssemblyTable extends BlockMachineBase {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("iron_block");
 	}
 }

@@ -99,7 +99,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(RenderBlockEnergonOre.instance);
 	}
 
-	public void registerArmorRenderer(ItemTransformerArmor helmet, ItemTransformerArmor chest, ItemTransformerArmor legs, ItemTransformerArmor boots) {
+	public void registerArmorRenderer(final ItemTransformerArmor helmet, final ItemTransformerArmor chest, final ItemTransformerArmor legs, final ItemTransformerArmor boots) {
 		MinecraftForgeClient.registerItemRenderer(helmet, new RenderItemArmor(helmet.getTransformer(), 0));
 		MinecraftForgeClient.registerItemRenderer(chest, new RenderItemArmor(chest.getTransformer(), 1));
 		MinecraftForgeClient.registerItemRenderer(legs, new RenderItemArmor(legs.getTransformer(), 2));

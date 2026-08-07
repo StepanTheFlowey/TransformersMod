@@ -43,8 +43,8 @@ public class TFOreDictRegistry {
 		registerOre("slabStone", new ItemStack(Blocks.stone_slab, 1, 0));
 	}
 
-	private static void registerOre(String name, Object... args) {
-		for(Object obj : args) {
+	private static void registerOre(final String name, final Object... args) {
+		for(final Object obj : args) {
 			if(obj instanceof Item) {
 				OreDictionary.registerOre(name, new ItemStack((Item) obj, 1, OreDictionary.WILDCARD_VALUE));
 			}

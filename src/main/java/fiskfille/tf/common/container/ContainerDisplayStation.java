@@ -15,7 +15,7 @@ import net.minecraft.util.IIcon;
 public class ContainerDisplayStation extends ContainerBasic {
 	private final EntityPlayer player;
 
-	public ContainerDisplayStation(InventoryPlayer inventoryPlayer, final TileEntityDisplayStation tile) {
+	public ContainerDisplayStation(final InventoryPlayer inventoryPlayer, final TileEntityDisplayStation tile) {
 		super(tile);
 		player = inventoryPlayer.player;
 
@@ -28,7 +28,7 @@ public class ContainerDisplayStation extends ContainerBasic {
 				}
 
 				@Override
-				public boolean isItemValid(ItemStack itemstack) {
+				public boolean isItemValid(final ItemStack itemstack) {
 					return itemstack.getItem().isValidArmor(itemstack, finalSlotIndex, tile.fakePlayer) && itemstack.getItem() instanceof ItemTransformerArmor;
 				}
 			});
@@ -43,7 +43,7 @@ public class ContainerDisplayStation extends ContainerBasic {
 				}
 
 				@Override
-				public boolean isItemValid(ItemStack stack) {
+				public boolean isItemValid(final ItemStack stack) {
 					return stack.getItem().isValidArmor(stack, finalSlotIndex, player);
 				}
 
@@ -64,7 +64,7 @@ public class ContainerDisplayStation extends ContainerBasic {
 			}
 
 			@Override
-			public boolean isItemValid(ItemStack itemstack) {
+			public boolean isItemValid(final ItemStack itemstack) {
 				return itemstack.getItem() == TFItems.displayVehicle;
 			}
 		});
@@ -78,15 +78,15 @@ public class ContainerDisplayStation extends ContainerBasic {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer player, final int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		int HELMET1 = 0;
-		int BOOTS2 = 7;
-		int MAX = 10;
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		final int HELMET1 = 0;
+		final int BOOTS2 = 7;
+		final int MAX = 10;
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			// stack is in player inventory, try to place in appropriate furnace slot
@@ -94,7 +94,7 @@ public class ContainerDisplayStation extends ContainerBasic {
 				boolean flag = true;
 
 				for(int i = 0; i <= MAX; ++i) {
-					Slot slot1 = (Slot) inventorySlots.get(i);
+					final Slot slot1 = (Slot) inventorySlots.get(i);
 
 					if(slot1 != null && slot1.isItemValid(itemstack1)) {
 						if(mergeItemStack(itemstack1, i, i + 1, false)) {
@@ -111,7 +111,7 @@ public class ContainerDisplayStation extends ContainerBasic {
 				boolean flag = true;
 
 				for(int i = 0; i <= MAX; ++i) {
-					Slot slot1 = (Slot) inventorySlots.get(i);
+					final Slot slot1 = (Slot) inventorySlots.get(i);
 
 					if(slot1 != null && slot1.isItemValid(itemstack1)) {
 						if(mergeItemStack(itemstack1, i, i + 1, false)) {
@@ -150,8 +150,8 @@ public class ContainerDisplayStation extends ContainerBasic {
 	@Override
 	public void detectAndSendChanges() {
 		for(int i = 0; i < inventorySlots.size(); ++i) {
-			ItemStack itemstack = ((Slot) inventorySlots.get(i)).getStack();
-			ItemStack itemstack1 = (ItemStack) inventoryItemStacks.get(i);
+			final ItemStack itemstack = ((Slot) inventorySlots.get(i)).getStack();
+			final ItemStack itemstack1 = (ItemStack) inventoryItemStacks.get(i);
 
 			if(!ItemStack.areItemStacksEqual(itemstack1, itemstack)) {
 				getTile().markDirty();

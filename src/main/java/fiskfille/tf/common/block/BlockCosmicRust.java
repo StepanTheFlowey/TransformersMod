@@ -24,27 +24,27 @@ public class BlockCosmicRust extends Block {
 	}
 
 	@Override
-	public float getBlockHardness(World world, int x, int y, int z) {
+	public float getBlockHardness(final World world, final int x, final int y, final int z) {
 		return world.getBlockMetadata(x, y, z) == 1 ? 2F : blockHardness;
 	}
 
 	@Override
-	public int damageDropped(int meta) {
+	public int damageDropped(final int meta) {
 		return meta;
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
+	public int quantityDropped(final int meta, final int fortune, final Random random) {
 		return meta == 1 ? 1 : 0;
 	}
 
 	@Override
-	public int tickRate(World world) {
+	public int tickRate(final World world) {
 		return 1000000000;
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
+	public void updateTick(final World world, final int x, final int y, final int z, final Random rand) {
 		tryRust(world, x + 1, y, z);
 		tryRust(world, x - 1, y, z);
 		tryRust(world, x, y - 1, z);
@@ -57,7 +57,7 @@ public class BlockCosmicRust extends Block {
 		}
 	}
 
-	private void tryRust(World world, int x, int y, int z) {
+	private void tryRust(final World world, final int x, final int y, final int z) {
 		if(world.getBlock(x, y, z) == TFBlocks.transformiumStone) {
 			world.setBlock(x, y, z, this);
 		}
@@ -65,29 +65,29 @@ public class BlockCosmicRust extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
+	public void getSubBlocks(final Item item, final CreativeTabs tab, final List subBlocks) {
 		subBlocks.add(new ItemStack(item, 1, 1));
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
+	public void onBlockAdded(final World world, final int x, final int y, final int z) {
 		world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+	public void onNeighborBlockChange(final World world, final int x, final int y, final int z, final Block block) {
 		onBlockAdded(world, x, y, z);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
+	public IIcon getIcon(final int side, final int metadata) {
 		return metadata == 1 ? coreIcon : blockIcon;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon(TransformersMod.MODID + ":cosmic_rust");
 		coreIcon = iconRegister.registerIcon(TransformersMod.MODID + ":cosmic_rust_core");
 	}

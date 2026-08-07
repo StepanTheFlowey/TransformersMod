@@ -10,17 +10,17 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
 public class EntityBassCharge extends EntityThrowable {
-	public EntityBassCharge(World world) {
+	public EntityBassCharge(final World world) {
 		super(world);
 		setSize(1F, 1F);
 	}
 
-	public EntityBassCharge(World world, EntityLivingBase entity) {
+	public EntityBassCharge(final World world, final EntityLivingBase entity) {
 		super(world, entity);
 		setSize(1F, 1F);
 	}
 
-	public EntityBassCharge(World world, double x, double y, double z) {
+	public EntityBassCharge(final World world, final double x, final double y, final double z) {
 		super(world, x, y, z);
 		setSize(1F, 1F);
 	}
@@ -45,7 +45,7 @@ public class EntityBassCharge extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(final MovingObjectPosition mop) {
 		if(mop.entityHit != null) {
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 2F * (1F - ticksExisted / 20F));
 			mop.entityHit.hurtResistantTime = 0;

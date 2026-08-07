@@ -22,20 +22,20 @@ public class BlockControlPanel extends BlockMachineBase {
 		setStepSound(soundTypeMetal);
 	}
 
-	public static boolean isBlockLeftSideOfPanel(int metadata) {
+	public static boolean isBlockLeftSideOfPanel(final int metadata) {
 		return metadata < 4;
 	}
 
-	public static boolean isBlockTopOfPanel(int metadata) {
+	public static boolean isBlockTopOfPanel(final int metadata) {
 		return metadata >= 8;
 	}
 
-	public static int getDirection(int metadata) {
+	public static int getDirection(final int metadata) {
 		return metadata % 4;
 	}
 
 	@Override
-	public int getPlacedRotation(EntityLivingBase entity) {
+	public int getPlacedRotation(final EntityLivingBase entity) {
 		return 0;
 	}
 
@@ -55,18 +55,18 @@ public class BlockControlPanel extends BlockMachineBase {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
-		int metadata = world.getBlockMetadata(x, y, z);
-		int direction = getDirection(metadata);
-		float f = 0.0625F;
-		float f1 = 0.9575F;
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
+		final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final int direction = getDirection(metadata);
+		final float f = 0.0625F;
+		final float f1 = 0.9575F;
 
 		if(isBlockTopOfPanel(metadata)) {
 			if(tile instanceof TileEntityControlPanel && ((TileEntityControlPanel) tile).hasUpgrade(DataCore.spaceBridge)) {
-				float width = f * 6;
-				float depth = f * 4;
-				float height = f * 8;
+				final float width = f * 6;
+				final float depth = f * 4;
+				final float height = f * 8;
 
 				if(direction == 0) {
 					setBlockBounds(0, f1 - 1, 1 - depth, width, f1 - 1 + height, 1);
@@ -96,13 +96,13 @@ public class BlockControlPanel extends BlockMachineBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, float hitX, float hitY, final float hitZ) {
 		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
 			return true;
 		}
 
-		int metadata = world.getBlockMetadata(x, y, z);
-		int direction = getDirection(metadata);
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final int direction = getDirection(metadata);
 		int face = -1;
 
 		if(side == 0) {
@@ -207,8 +207,8 @@ public class BlockControlPanel extends BlockMachineBase {
 				hitX = 1 - hitX;
 			}
 
-			boolean isSide = !isBlockLeftSideOfPanel(metadata);
-			boolean isTop = isBlockTopOfPanel(metadata);
+			final boolean isSide = !isBlockLeftSideOfPanel(metadata);
+			final boolean isTop = isBlockTopOfPanel(metadata);
 
 			if(isSide && face != 2 && face != 3) {
 				++hitX;
@@ -218,7 +218,7 @@ public class BlockControlPanel extends BlockMachineBase {
 				--hitY;
 			}
 
-			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 			if(tile instanceof TileEntityControlPanel) {
 				return onRightClick(world, (TileEntityControlPanel) tile, player, face, hitX, hitY);
@@ -228,9 +228,9 @@ public class BlockControlPanel extends BlockMachineBase {
 		return false;
 	}
 
-	public boolean onRightClick(World world, TileEntityControlPanel tile, EntityPlayer player, int face, float hitX, float hitY) {
+	public boolean onRightClick(final World world, final TileEntityControlPanel tile, final EntityPlayer player, final int face, final float hitX, final float hitY) {
 		// 0 = front, 1 = back, 2 = right, 3 = left, 4 = top, 5 = bottom
-		float f = 0.0625F;
+		final float f = 0.0625F;
 
 		if(world.isRemote) {
 			if(face == 0) {
@@ -344,14 +344,14 @@ public class BlockControlPanel extends BlockMachineBase {
 		return false;
 	}
 
-	public void sendActionPacket(TileEntityControlPanel tile, EntityPlayer player, int action) {
+	public void sendActionPacket(final TileEntityControlPanel tile, final EntityPlayer player, final int action) {
 		if(player.worldObj.isRemote) {
 			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tile), player, action));
 		}
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("iron_block");
 	}
 }

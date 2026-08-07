@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiTFModConfig extends GuiConfig {
-	public GuiTFModConfig(GuiScreen parent) {
+	public GuiTFModConfig(final GuiScreen parent) {
 		super(parent, getConfigElements(), TransformersMod.MODID, false, false, "Transformers Mod Configuration");
 	}
 
@@ -20,7 +20,7 @@ public class GuiTFModConfig extends GuiConfig {
 	 * Compiles a list of config elements
 	 */
 	private static List<IConfigElement> getConfigElements() {
-		List<IConfigElement> elements = new ArrayList<>();
+		final List<IConfigElement> elements = new ArrayList<>();
 
 		elements.add(categoryElement("Options", "General", "General Options"));
 		elements.add(categoryElement("Aesthetic", "Aesthetic", "Aesthetic Options"));
@@ -33,7 +33,7 @@ public class GuiTFModConfig extends GuiConfig {
 	/**
 	 * Creates a button linking to another screen where all options of the category are available
 	 */
-	private static IConfigElement categoryElement(String category, String name, String tooltip_key) {
+	private static IConfigElement categoryElement(final String category, final String name, final String tooltip_key) {
 		return new DummyConfigElement.DummyCategoryElement(name, tooltip_key, new ConfigElement(TFConfig.configFile.getCategory(category.toLowerCase())).getChildElements());
 	}
 }

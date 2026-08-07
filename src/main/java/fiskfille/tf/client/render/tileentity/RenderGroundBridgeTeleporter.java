@@ -27,12 +27,12 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		try {
 			shader = new PortalShader();
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void render(TileEntityGroundBridgeTeleporter tileentity, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityGroundBridgeTeleporter tileentity, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
 
 		if(tileentity.getWorldObj() != null) {
@@ -45,7 +45,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 			GL11.glScalef(1F, -1F, -1F);
 
 			if(tileentity.controlPanel != null) {
-				TileDataControlPanel data = (TileDataControlPanel) TFTileHelper.getTileData(tileentity.controlPanel);
+				final TileDataControlPanel data = (TileDataControlPanel) TFTileHelper.getTileData(tileentity.controlPanel);
 
 				if(data != null) {
 					if(tileentity.isReturnPortal(metadata)) {
@@ -74,16 +74,16 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 
 			if(shader == null || TFConfig.oldPortalRender) {
-				float scale = 1.9425F;
-				float radius = 1.5F;
+				final float scale = 1.9425F;
+				final float radius = 1.5F;
 
 				bindTexture(TextureMap.locationBlocksTexture);
 				drawPortalOld(0, 0, 0, scale, radius, false);
 				drawPortalOld(0, 0, 0, scale, radius, true);
 			}
 			else {
-				float zOffset = 0.6F;
-				float scale = 1.9F;
+				final float zOffset = 0.6F;
+				final float scale = 1.9F;
 
 				bindTexture(PORTAL_EFFECT);
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
@@ -105,20 +105,20 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		}
 	}
 
-	public void drawPortal(float offsetX, float offsetY, float offsetZ, float scale, boolean invert) {
+	public void drawPortal(final float offsetX, final float offsetY, final float offsetZ, final float scale, final boolean invert) {
 		GL11.glPushMatrix();
 		GL11.glRotatef(180, 0, 0, 1);
 		GL11.glTranslatef(offsetX, offsetY, offsetZ);
 		GL11.glScalef(scale, scale, 1);
-		Tessellator tessellator = Tessellator.instance;
+		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawing(GL11.GL_TRIANGLES);
 
-		float corners = 45;
-		float angle = 360F / corners;
+		final float corners = 45;
+		final float angle = 360F / corners;
 		float offset = 0;
 
 		for(int i = 0; i < 3; ++i) {
-			float radius;
+			final float radius;
 			float innerRadius = 0;
 			float dent = 0;
 
@@ -137,20 +137,20 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 			}
 
 			for(float f = 0; f < corners; ++f) {
-				float f1 = f - 1;
+				final float f1 = f - 1;
 
 				if(f == corners - 1) {
 					f += 0.001F;
 				}
 
-				Vec3 pos1 = Vec3.createVectorHelper(0, radius, 0);
-				Vec3 pos2 = Vec3.createVectorHelper(0, radius, 0);
+				final Vec3 pos1 = Vec3.createVectorHelper(0, radius, 0);
+				final Vec3 pos2 = Vec3.createVectorHelper(0, radius, 0);
 				pos1.rotateAroundZ(angle * f * (float) Math.PI / 180F);
 				pos2.rotateAroundZ(angle * f1 * (float) Math.PI / 180F);
-				Vec3 pos3 = Vec3.createVectorHelper((pos1.xCoord + pos2.xCoord) / 2, (pos1.yCoord + pos2.yCoord) / 2, (pos1.zCoord + pos2.zCoord) / 2);
+				final Vec3 pos3 = Vec3.createVectorHelper((pos1.xCoord + pos2.xCoord) / 2, (pos1.yCoord + pos2.yCoord) / 2, (pos1.zCoord + pos2.zCoord) / 2);
 
-				Vec3 pos4 = Vec3.createVectorHelper(0, innerRadius, 0);
-				Vec3 pos5 = Vec3.createVectorHelper(0, innerRadius, 0);
+				final Vec3 pos4 = Vec3.createVectorHelper(0, innerRadius, 0);
+				final Vec3 pos5 = Vec3.createVectorHelper(0, innerRadius, 0);
 				pos4.rotateAroundZ(angle * f * (float) Math.PI / 180F);
 				pos5.rotateAroundZ(angle * f1 * (float) Math.PI / 180F);
 
@@ -185,7 +185,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	public void drawPortalOld(float offsetX, float offsetY, float offsetZ, float scale, float radius, boolean invert) {
+	public void drawPortalOld(final float offsetX, final float offsetY, final float offsetZ, final float scale, final float radius, final boolean invert) {
 		GL11.glPushMatrix();
 		GL11.glRotatef(180, 0, 0, 1);
 
@@ -194,23 +194,23 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		}
 
 		GL11.glScalef(scale, scale, 1);
-		Tessellator tessellator = Tessellator.instance;
+		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawing(GL11.GL_TRIANGLES);
 
-		IIcon icon = TFBlocks.groundBridgeTeleporter.getIcon(0, 0);
-		float indent = 1;
-		float corners = 60;
-		float angle = 360F / corners;
-		float zoom = 46 * (16F / icon.getIconWidth());
+		final IIcon icon = TFBlocks.groundBridgeTeleporter.getIcon(0, 0);
+		final float indent = 1;
+		final float corners = 60;
+		final float angle = 360F / corners;
+		final float zoom = 46 * (16F / icon.getIconWidth());
 
 		for(int j = 0; j <= corners; ++j) {
-			Vec3 pos1 = Vec3.createVectorHelper(0, radius, 0);
-			Vec3 pos2 = Vec3.createVectorHelper(0, radius, 0);
+			final Vec3 pos1 = Vec3.createVectorHelper(0, radius, 0);
+			final Vec3 pos2 = Vec3.createVectorHelper(0, radius, 0);
 			pos1.rotateAroundZ(angle * j * (float) Math.PI / 180F);
 			pos2.rotateAroundZ(angle * (j - 1) * (float) Math.PI / 180F);
 
-			float minX = -icon.getInterpolatedU(8);
-			float minY = icon.getInterpolatedV(8);
+			final float minX = -icon.getInterpolatedU(8);
+			final float minY = icon.getInterpolatedV(8);
 
 			Vec3 tex1 = Vec3.createVectorHelper(0.5F, 0.5F, 0);
 			Vec3 tex2 = Vec3.createVectorHelper(0.5F, 0.5F, 0);
@@ -242,7 +242,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityGroundBridgeTeleporter) tileentity, d, d1, d2, f);
 	}
 }

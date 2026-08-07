@@ -192,7 +192,7 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		setInitPose();
 	}
 
-	public void render(TileEntityColumn tile) {
+	public void render(final TileEntityColumn tile) {
 		setToInitPose();
 
 		GL11.glPushMatrix();

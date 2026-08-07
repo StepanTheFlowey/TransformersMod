@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author gegy1000
  */
 public abstract class TransformerTank extends Transformer {
-	public TransformerTank(String name) {
+	public TransformerTank(final String name) {
 		super(name);
 	}
 
@@ -33,17 +33,17 @@ public abstract class TransformerTank extends Transformer {
 	}
 
 	@Override
-	public float fall(EntityPlayer player, float distance, int altMode) {
+	public float fall(final EntityPlayer player, final float distance, final int altMode) {
 		return TFHelper.isFullyTransformed(player) ? 0 : super.fall(player, distance, altMode);
 	}
 
 	@Override
-	public void updateMovement(EntityPlayer player) {
+	public void updateMovement(final EntityPlayer player) {
 		TFMotionManager.motion(player, 20, 30, 0, 20, false, true, false);
 	}
 
 	@Override
-	public boolean canShoot(EntityPlayer player) {
+	public boolean canShoot(final EntityPlayer player) {
 		return true;
 	}
 
@@ -53,12 +53,12 @@ public abstract class TransformerTank extends Transformer {
 	}
 
 	@Override
-	public Entity getShootEntity(EntityPlayer player) {
+	public Entity getShootEntity(final EntityPlayer player) {
 		return new EntityTankShell(player.worldObj, player, TFConfig.allowTankShellExplosions);
 	}
 
 	@Override
-	public void doNitroParticles(EntityPlayer player) {
+	public void doNitroParticles(final EntityPlayer player) {
 		final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		for(int i = 0; i < 4; ++i) {

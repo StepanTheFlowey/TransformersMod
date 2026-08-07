@@ -7,11 +7,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.List;
 
 public class TFOreDictHelper {
-	public static List<String> getAliases(ItemStack itemstack) {
-		List<String> list = Lists.newArrayList();
-		int[] ids = OreDictionary.getOreIDs(itemstack);
+	public static List<String> getAliases(final ItemStack itemstack) {
+		final List<String> list = Lists.newArrayList();
+		final int[] ids = OreDictionary.getOreIDs(itemstack);
 
-		for(int id : ids) {
+		for(final int id : ids) {
 			list.add(OreDictionary.getOreName(id));
 		}
 

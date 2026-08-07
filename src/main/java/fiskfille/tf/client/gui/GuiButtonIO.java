@@ -20,14 +20,14 @@ public class GuiButtonIO extends GuiButtonFlat {
 	public final TileEntityMachine machine;
 	public final ForgeDirection side;
 
-	public GuiButtonIO(int id, int x, int y, TileEntityMachine tile, ForgeDirection dir) {
+	public GuiButtonIO(final int id, final int x, final int y, final TileEntityMachine tile, final ForgeDirection dir) {
 		super(id, x, y, 13, "");
 		machine = tile;
 		side = dir;
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}

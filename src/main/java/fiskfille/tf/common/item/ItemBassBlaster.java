@@ -16,7 +16,7 @@ public class ItemBassBlaster extends Item {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
+	public void onPlayerStoppedUsing(final ItemStack stack, final World world, final EntityPlayer player, final int time) {
 		if(TFHelper.getTransformer(player) instanceof TransformerSubwoofer && !world.isRemote && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
 			stack.damageItem(1, player);
 
@@ -27,7 +27,7 @@ public class ItemBassBlaster extends Item {
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+	public void onUsingTick(final ItemStack stack, final EntityPlayer player, final int count) {
 		final int duration = getMaxItemUseDuration(stack) - count;
 
 		if(duration < 60) {
@@ -52,7 +52,7 @@ public class ItemBassBlaster extends Item {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player) {
 		if(TFHelper.getTransformer(player) instanceof TransformerSubwoofer && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
@@ -61,7 +61,7 @@ public class ItemBassBlaster extends Item {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public int getMaxItemUseDuration(final ItemStack stack) {
 		return 72000;
 	}
 }

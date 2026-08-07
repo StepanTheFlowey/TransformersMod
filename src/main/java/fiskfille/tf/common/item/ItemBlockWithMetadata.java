@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.IIcon;
 
 public class ItemBlockWithMetadata extends ItemBlock {
-	public ItemBlockWithMetadata(Block block) {
+	public ItemBlockWithMetadata(final Block block) {
 		super(block);
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -15,12 +15,12 @@ public class ItemBlockWithMetadata extends ItemBlock {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
+	public IIcon getIconFromDamage(final int damage) {
 		return field_150939_a.getIcon(2, damage);
 	}
 
 	@Override
-	public int getMetadata(int meta) {
+	public int getMetadata(final int meta) {
 		return meta;
 	}
 }

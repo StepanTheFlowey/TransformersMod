@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class TFPredicates {
 	public static Predicate<EntityPlayer> and(final Predicate... predicates) {
 		return input -> {
-			for(Predicate p : predicates) {
+			for(final Predicate p : predicates) {
 				if(!p.apply(input)) {
 					return false;
 				}
@@ -21,7 +21,7 @@ public class TFPredicates {
 
 	public static Predicate<EntityPlayer> or(final Predicate... predicates) {
 		return input -> {
-			for(Predicate p : predicates) {
+			for(final Predicate p : predicates) {
 				if(p.apply(input)) {
 					return true;
 				}
@@ -49,7 +49,7 @@ public class TFPredicates {
 
 	public static Predicate<EntityPlayer> hasStealthForce() {
 		return input -> {
-			Transformer transformer = TFHelper.getTransformer(input);
+			final Transformer transformer = TFHelper.getTransformer(input);
 			return transformer != null && transformer.hasStealthForce();
 		};
 	}

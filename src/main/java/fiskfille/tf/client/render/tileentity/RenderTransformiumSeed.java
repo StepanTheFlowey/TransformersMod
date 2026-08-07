@@ -15,7 +15,7 @@ public class RenderTransformiumSeed extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed_lights.png");
 
-	public void renderModelAt(TileEntityTransformiumSeed seed, double x, double y, double z) {
+	public void renderModelAt(final TileEntityTransformiumSeed seed, final double x, final double y, final double z) {
 		final EntityTransformiumSeed entity = new EntityTransformiumSeed(seed.getWorldObj());
 
 		GL11.glPushMatrix();
@@ -36,7 +36,7 @@ public class RenderTransformiumSeed extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float partialTicks) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
 		renderModelAt((TileEntityTransformiumSeed) tileentity, x, y, z);
 	}
 }

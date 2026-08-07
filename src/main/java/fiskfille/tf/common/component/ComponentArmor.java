@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class ComponentArmor extends Component {
 	@Override
-	public void load(TileEntityDisplayStation tile, int slot, EntityPlayer player) {
+	public void load(final TileEntityDisplayStation tile, final int slot, final EntityPlayer player) {
 		TFNetworkManager.networkWrapper.sendToServer(new MessageOpenGui(player, TFGui.DISPLAY_STATION_ARMOR.guiId, tile.xCoord, tile.yCoord, tile.zCoord));
 	}
 }

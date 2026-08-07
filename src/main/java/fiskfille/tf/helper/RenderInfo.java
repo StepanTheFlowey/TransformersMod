@@ -28,26 +28,26 @@ public class RenderInfo {
 	public RenderInfo() {
 	}
 
-	public RenderInfo(Block template, IIcon[] texture) {
+	public RenderInfo(final Block template, final IIcon[] texture) {
 		this();
 		this.baseBlock = template;
 		this.textureArray = texture;
 	}
 
-	public RenderInfo(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+	public RenderInfo(final float minX, final float minY, final float minZ, final float maxX, final float maxY, final float maxZ) {
 		this();
 		setBounds(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 
-	public void setSkyBlockLight(World world, int x, int y, int z, int light) {
+	public void setSkyBlockLight(final World world, final int x, final int y, final int z, final int light) {
 		this.brightness = world.getSkyBlockTypeBrightness(EnumSkyBlock.Sky, x, y, z) << 16 | light;
 	}
 
-	public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j, int k) {
+	public float getBlockBrightness(final IBlockAccess iblockaccess, final int i, final int j, final int k) {
 		return baseBlock.getMixedBrightnessForBlock(iblockaccess, i, j, k);
 	}
 
-	public final void setBounds(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
+	public final void setBounds(final double minX, final double minY, final double minZ, final double maxX, final double maxY, final double maxZ) {
 		this.minX = minX;
 		this.minY = minY;
 		this.minZ = minZ;
@@ -56,7 +56,7 @@ public class RenderInfo {
 		this.maxZ = maxZ;
 	}
 
-	public final void setRenderSingleSide(int side) {
+	public final void setRenderSingleSide(final int side) {
 		Arrays.fill(renderSide, false);
 		renderSide[side] = true;
 	}
@@ -76,18 +76,18 @@ public class RenderInfo {
 	}
 
 	public void reverseX() {
-		double temp = minX;
+		final double temp = minX;
 		minX = 1 - maxX;
 		maxX = 1 - temp;
 	}
 
 	public void reverseZ() {
-		double temp = minZ;
+		final double temp = minZ;
 		minZ = 1 - maxZ;
 		maxZ = 1 - temp;
 	}
 
-	public IIcon getBlockTextureFromSide(int i) {
+	public IIcon getBlockTextureFromSide(final int i) {
 		if(texture != null) {
 			return texture;
 		}
@@ -106,8 +106,8 @@ public class RenderInfo {
 		}
 	}
 
-	public void renderBlock(RenderBlocks renderBlocks) {
-		Tessellator tessellator = Tessellator.instance;
+	public void renderBlock(final RenderBlocks renderBlocks) {
+		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 
 		renderBlocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);

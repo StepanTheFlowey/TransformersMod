@@ -20,7 +20,7 @@ public class ItemCSD extends Item {
 		setMaxStackSize(1);
 	}
 
-	public static DimensionalCoords getCoords(ItemStack itemstack) {
+	public static DimensionalCoords getCoords(final ItemStack itemstack) {
 		final DimensionalCoords coords = new DimensionalCoords();
 
 		if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("Coordinates", NBT.TAG_COMPOUND)) {
@@ -31,7 +31,7 @@ public class ItemCSD extends Item {
 		return coords;
 	}
 
-	public static void setCoords(ItemStack itemstack, DimensionalCoords coords) {
+	public static void setCoords(final ItemStack itemstack, final DimensionalCoords coords) {
 		if(!itemstack.hasTagCompound()) {
 			itemstack.setTagCompound(new NBTTagCompound());
 		}
@@ -46,13 +46,13 @@ public class ItemCSD extends Item {
 	}
 
 	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
+	public void addInformation(final ItemStack itemstack, final EntityPlayer player, final List list, final boolean flag) {
 		final DimensionalCoords coords = getCoords(itemstack);
 		list.add(coords.getFormatted().getFormattedText());
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(final ItemStack itemstack, final EntityPlayer player, final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY, final float hitZ) {
 		world.getBlockMetadata(x, y, z);
 
 		if(player.isSneaking()) {
@@ -103,21 +103,21 @@ public class ItemCSD extends Item {
 		public DimensionalCoords() {
 		}
 
-		public DimensionalCoords(int x, int y, int z, int dim) {
+		public DimensionalCoords(final int x, final int y, final int z, final int dim) {
 			super(x, y, z);
 			dimension = dim;
 		}
 
-		public DimensionalCoords(ChunkCoordinates coords, int dim) {
+		public DimensionalCoords(final ChunkCoordinates coords, final int dim) {
 			super(coords);
 			dimension = dim;
 		}
 
-		public DimensionalCoords(TileEntity tile) {
+		public DimensionalCoords(final TileEntity tile) {
 			set(tile);
 		}
 
-		public static DimensionalCoords copy(DimensionalCoords coords) {
+		public static DimensionalCoords copy(final DimensionalCoords coords) {
 			if(coords != null) {
 				return new DimensionalCoords().set(coords);
 			}
@@ -125,7 +125,7 @@ public class ItemCSD extends Item {
 			return null;
 		}
 
-		public static DimensionalCoords fromArray(int[] aint) {
+		public static DimensionalCoords fromArray(final int[] aint) {
 			final int[] aint1 = new int[4];
 
 			System.arraycopy(aint, 0, aint1, 0, Math.min(aint.length, aint1.length));
@@ -133,7 +133,7 @@ public class ItemCSD extends Item {
 			return new DimensionalCoords(aint1[0], aint1[1], aint1[2], aint1[3]);
 		}
 
-		public DimensionalCoords set(int x, int y, int z, int dim) {
+		public DimensionalCoords set(final int x, final int y, final int z, final int dim) {
 			posX = x;
 			posY = y;
 			posZ = z;
@@ -142,7 +142,7 @@ public class ItemCSD extends Item {
 			return this;
 		}
 
-		public DimensionalCoords set(TileEntity tile) {
+		public DimensionalCoords set(final TileEntity tile) {
 			if(tile.getWorldObj() != null) {
 				return set(tile.xCoord, tile.yCoord, tile.zCoord, tile.getWorldObj().provider.dimensionId);
 			}
@@ -150,11 +150,11 @@ public class ItemCSD extends Item {
 			return this;
 		}
 
-		public DimensionalCoords set(DimensionalCoords coords) {
+		public DimensionalCoords set(final DimensionalCoords coords) {
 			return set(coords.toArray());
 		}
 
-		public DimensionalCoords set(int... args) {
+		public DimensionalCoords set(final int... args) {
 			final int[] aint = toArray();
 
 			System.arraycopy(args, 0, aint, 0, Math.min(args.length, aint.length));
@@ -167,14 +167,14 @@ public class ItemCSD extends Item {
 			return new ChatComponentTranslation("csd.format", new ChatComponentText(TFDimensionHelper.getDimensionName(dimension)).setChatStyle(green), new ChatComponentText(posX + "").setChatStyle(green), new ChatComponentText(posY + "").setChatStyle(green), new ChatComponentText(posZ + "").setChatStyle(green));
 		}
 
-		public void toBytes(ByteBuf buf) {
+		public void toBytes(final ByteBuf buf) {
 			buf.writeInt(posX);
 			buf.writeInt(posY);
 			buf.writeInt(posZ);
 			buf.writeInt(dimension);
 		}
 
-		public DimensionalCoords fromBytes(ByteBuf buf) {
+		public DimensionalCoords fromBytes(final ByteBuf buf) {
 			set(buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt());
 
 			return this;
@@ -185,7 +185,7 @@ public class ItemCSD extends Item {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(final Object obj) {
 			if(!(obj instanceof DimensionalCoords)) {
 				return false;
 			}
@@ -206,11 +206,11 @@ public class ItemCSD extends Item {
 		}
 
 		@Override
-		public int compareTo(Object obj) {
+		public int compareTo(final Object obj) {
 			return compareTo((DimensionalCoords) obj);
 		}
 
-		public int compareTo(DimensionalCoords coords) {
+		public int compareTo(final DimensionalCoords coords) {
 			return dimension == coords.dimension ? posY == coords.posY ? posZ == coords.posZ ? posX - coords.posX : posZ - coords.posZ : posY - coords.posY : dimension - coords.dimension;
 		}
 	}

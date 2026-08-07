@@ -66,25 +66,25 @@ public class TFModelCloudtrap extends TransformerModel {
 	}
 
 	@Override
-	public void renderItem(EntityPlayer player, ItemStack stack) {
+	public void renderItem(final EntityPlayer player, final ItemStack stack) {
 		GL11.glTranslatef(0.075F, -0.18F, -0.02F);
 		GL11.glRotatef(10, 1, 0, 0);
 	}
 
 	@Override
-	public void renderCape(EntityPlayer player) {
+	public void renderCape(final EntityPlayer player) {
 		GL11.glRotatef(20, 1, 0, 0);
 		GL11.glTranslatef(0, -0.05F, 0F);
 	}
 
 	@Override
-	public void renderFirstPersonArm(EntityPlayer player) {
+	public void renderFirstPersonArm(final EntityPlayer player) {
 		GL11.glScalef(1.3F, 1.3F, 1.3F);
 		GL11.glTranslatef(0.2F, -0.1F, 0.2F);
 	}
 
 	@Override
-	public ResourceLocation getTexture(Entity entity, String suffix) {
+	public ResourceLocation getTexture(final Entity entity, final String suffix) {
 		return new ResourceLocation(TransformersMod.MODID, String.format("textures/models/cloudtrap/cloudtrap%s.png", suffix));
 	}
 

@@ -63,7 +63,7 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 		if(fakePlayer == null && minecraft != null && minecraft.playerController != null && getWorldObj() != null) {
 			final EntityClientPlayerMP player = new EntityClientPlayerMP(minecraft, getWorldObj(), minecraft.getSession(), minecraft.getNetHandler(), new StatFileWriter()) {
 				@Override
-				public boolean isInvisibleToPlayer(EntityPlayer player) {
+				public boolean isInvisibleToPlayer(final EntityPlayer player) {
 					return true;
 				}
 			};
@@ -87,11 +87,11 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 		return TFHelper.isTransformer(getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), getStackInSlot(3));
 	}
 
-	public boolean setColor(int primaryColor, int secondaryColor) {
-		ItemStack head = getStackInSlot(0);
-		ItemStack chest = getStackInSlot(1);
-		ItemStack legs = getStackInSlot(2);
-		ItemStack feet = getStackInSlot(3);
+	public boolean setColor(final int primaryColor, final int secondaryColor) {
+		final ItemStack head = getStackInSlot(0);
+		final ItemStack chest = getStackInSlot(1);
+		final ItemStack legs = getStackInSlot(2);
+		final ItemStack feet = getStackInSlot(3);
 
 		if(head != null && chest != null && legs != null && feet != null) {
 			if(primaryColor == secondaryColor && primaryColor == Integer.MIN_VALUE) {
@@ -118,13 +118,13 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 		isRedstonePowered = nbt.getBoolean("Powered");
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 		nbt.setBoolean("Powered", isRedstonePowered);
 	}
@@ -145,20 +145,20 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
 		return getStackInSlot(slot) == null && (slot < 4 ? stack.getItem() instanceof ItemTransformerArmor && stack.getItem().isValidArmor(stack, slot, fakePlayer) : slot == 6 ? stack.getItem() == TFItems.displayVehicle : stack.getItem() instanceof ItemComponent);
 	}
 
 	@Override
-	public int[] getBaseOffsets(int metadata) {
+	public int[] getBaseOffsets(final int metadata) {
 		return new int[]{0, -metadata / 4, 0};
 	}
 
 	@Override
-	public void receive(EntityPlayer player, int action) {
+	public void receive(final EntityPlayer player, final int action) {
 		if(action == 0) {
 			if(canTransform()) {
-				ItemStack vehicle = getStackInSlot(6);
+				final ItemStack vehicle = getStackInSlot(6);
 
 				if(vehicle != null) {
 					if(!vehicle.hasTagCompound()) {
@@ -179,13 +179,13 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 					setInventorySlotContents(6, null);
 				}
 				else {
-					ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1, TransformersAPI.getTransformers().indexOf(TFHelper.getTransformer(getStackInSlot(0))));
-					ItemStack[] itemstacks = {getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), getStackInSlot(3)};
-					NBTTagList itemsList = new NBTTagList();
+					final ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1, TransformersAPI.getTransformers().indexOf(TFHelper.getTransformer(getStackInSlot(0))));
+					final ItemStack[] itemstacks = {getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), getStackInSlot(3)};
+					final NBTTagList itemsList = new NBTTagList();
 
 					for(int i = 0; i < itemstacks.length; ++i) {
 						if(itemstacks[i] != null) {
-							NBTTagCompound itemTag = new NBTTagCompound();
+							final NBTTagCompound itemTag = new NBTTagCompound();
 							itemTag.setByte("Slot", (byte) i);
 							itemstacks[i].writeToNBT(itemTag);
 							itemsList.appendTag(itemTag);

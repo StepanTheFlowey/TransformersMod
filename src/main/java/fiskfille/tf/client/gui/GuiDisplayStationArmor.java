@@ -29,28 +29,28 @@ public class GuiDisplayStationArmor extends GuiContainer {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/display_station_armor.png");
 	private final TileEntityDisplayStation tileentity;
 
-	public GuiDisplayStationArmor(InventoryPlayer inventoryPlayer, TileEntityDisplayStation tile) {
+	public GuiDisplayStationArmor(final InventoryPlayer inventoryPlayer, final TileEntityDisplayStation tile) {
 		super(new ContainerDisplayStationArmor(inventoryPlayer, tile));
 		tileentity = tile;
 		ySize = 186;
 	}
 
 	@Override
-	protected void keyTyped(char c, int key) {
+	protected void keyTyped(final char c, final int key) {
 		if(key == 1 || key == mc.gameSettings.keyBindInventory.getKeyCode()) {
 			TFNetworkManager.networkWrapper.sendToServer(new MessageOpenGui(mc.thePlayer, TFGui.DISPLAY_STATION.guiId, tileentity.xCoord, tileentity.yCoord, tileentity.zCoord));
 		}
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		mc.getTextureManager().bindTexture(guiTextures);
 		GL11.glColor3f(1, 1, 1);
 		drawTexturedModalRect((width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize);
@@ -62,7 +62,7 @@ public class GuiDisplayStationArmor extends GuiContainer {
 			final ItemStack itemstack = tileentity.getStackInSlot(i);
 
 			if(itemstack != null) {
-				Transformer transformer = TFHelper.getTransformerFromArmor(itemstack);
+				final Transformer transformer = TFHelper.getTransformerFromArmor(itemstack);
 
 				if(transformer != null && !list.contains(transformer)) {
 					list.add(transformer);
@@ -70,8 +70,8 @@ public class GuiDisplayStationArmor extends GuiContainer {
 
 				final ItemStack itemstack1 = container.craftMatrix.getStackInSlot(i);
 				if(itemstack1 != null) {
-					int amount = TFArmorHelper.getArmorValue(mc.thePlayer, itemstack1, i) - TFArmorHelper.getArmorValue(mc.thePlayer, new ItemStack(itemstack.getItem()), i);
-					String s = (amount < 0 ? EnumChatFormatting.DARK_RED : EnumChatFormatting.DARK_BLUE) + I18n.format(amount < 0 ? "gui.display_station.armor.neg" : "gui.display_station.armor", amount < 0 ? -amount : amount);
+					final int amount = TFArmorHelper.getArmorValue(mc.thePlayer, itemstack1, i) - TFArmorHelper.getArmorValue(mc.thePlayer, new ItemStack(itemstack.getItem()), i);
+					final String s = (amount < 0 ? EnumChatFormatting.DARK_RED : EnumChatFormatting.DARK_BLUE) + I18n.format(amount < 0 ? "gui.display_station.armor.neg" : "gui.display_station.armor", amount < 0 ? -amount : amount);
 
 					fontRendererObj.drawString(s, (width - xSize) / 2 + 71, (height - ySize) / 2 + 22 + i * 18, -1);
 				}

@@ -36,7 +36,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BlockMachineBase extends Block implements ITileEntityProvider {
 	public Class<? extends TileEntity> tileClass;
 
-	protected BlockMachineBase(Material material) {
+	protected BlockMachineBase(final Material material) {
 		super(material);
 	}
 
@@ -44,12 +44,12 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 		return 1;
 	}
 
-	public int getPlacedRotation(EntityLivingBase entity) {
+	public int getPlacedRotation(final EntityLivingBase entity) {
 		return MathHelper.floor_double(entity.rotationYaw * 4F / 360F + 2.5D) & 3;
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
 		final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 		final ItemStack heldItem = player.getHeldItem();
 
@@ -119,7 +119,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 		return false;
 	}
 
-	public ItemStack addItem(EntityPlayer player, ItemStack itemstack, ItemStack newItem) {
+	public ItemStack addItem(final EntityPlayer player, final ItemStack itemstack, final ItemStack newItem) {
 		if(player.capabilities.isCreativeMode) {
 			return itemstack;
 		}
@@ -138,7 +138,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(final World world, final int x, final int y, final int z) {
 		boolean flag = super.canPlaceBlockAt(world, x, y, z);
 
 		final int height = getBlockHeight();
@@ -151,18 +151,18 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(final World world, final int x, final int y, final int z) {
 		setBlockBoundsBasedOnState(world, x, y, z);
 		return super.getSelectedBoundingBoxFromPool(world, x, y, z);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world, final int x, final int y, final int z) {
 		setBlockBoundsBasedOnState(world, x, y, z);
 		return super.getCollisionBoundingBoxFromPool(world, x, y, z);
 	}
 
-	public void addBox(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int x, int y, int z, AxisAlignedBB aabb, List list) {
+	public void addBox(final double minX, final double minY, final double minZ, final double maxX, final double maxY, final double maxZ, final int x, final int y, final int z, final AxisAlignedBB aabb, final List list) {
 		final AxisAlignedBB aabb1 = AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ).offset(x, y, z);
 
 		if(aabb1.intersectsWith(aabb)) {
@@ -176,7 +176,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public int getComparatorInputOverride(World world, int x, int y, int z, int metadata) {
+	public int getComparatorInputOverride(final World world, final int x, final int y, final int z, final int metadata) {
 		final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 		if(tile instanceof IFluidHandler) {
@@ -184,10 +184,10 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 			float amount = 0;
 			float capacity = 0;
 
-			for(ForgeDirection dir : ForgeDirection.values()) {
+			for(final ForgeDirection dir : ForgeDirection.values()) {
 				final FluidTankInfo[] info = fluidHandler.getTankInfo(dir);
 
-				for(FluidTankInfo fluidTankInfo : info) {
+				for(final FluidTankInfo fluidTankInfo : info) {
 					capacity += fluidTankInfo.capacity;
 
 					if(fluidTankInfo.fluid != null) {
@@ -206,7 +206,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
+	public void breakBlock(final World world, final int x, final int y, final int z, final Block block, final int metadata) {
 		final TileEntity tile = world.getTileEntity(x, y, z);
 
 		if(tile instanceof IInventory) {
@@ -247,7 +247,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 			world.func_147453_f(x, y, z, block);
 		}
 
-		TileEntity tileBase = TFTileHelper.getTileBase(tile);
+		final TileEntity tileBase = TFTileHelper.getTileBase(tile);
 
 		if(tileBase != null && tile != tileBase && getBlockHeight() > 0) {
 			world.setBlockToAir(tileBase.xCoord, tileBase.yCoord, tileBase.zCoord);
@@ -257,7 +257,7 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
+	public boolean removedByPlayer(final World world, final EntityPlayer player, final int x, final int y, final int z, final boolean willHarvest) {
 		if(!world.isRemote && (player == null || !player.capabilities.isCreativeMode)) {
 			final ItemStack itemstack = new ItemStack(this, 1, damageDropped(world.getBlockMetadata(x, y, z)));
 			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
@@ -291,12 +291,12 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public int quantityDropped(Random random) {
+	public int quantityDropped(final Random random) {
 		return 0;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemstack) {
+	public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLivingBase entity, final ItemStack itemstack) {
 		super.onBlockPlacedBy(world, x, y, z, entity, itemstack);
 		final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
@@ -333,18 +333,18 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
+	public void onBlockAdded(final World world, final int x, final int y, final int z) {
 		super.onBlockAdded(world, x, y, z);
 		world.markBlockForUpdate(x, y, z);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+	public void onNeighborBlockChange(final World world, final int x, final int y, final int z, final Block block) {
 		final TileEntity tile = world.getTileEntity(x, y, z);
 		final int metadata = world.getBlockMetadata(x, y, z);
 
 		if(tile != null && getBlockHeight() > 0) {
-			int[] offsets = TFTileHelper.getTileBaseOffsets(tile, metadata);
+			final int[] offsets = TFTileHelper.getTileBaseOffsets(tile, metadata);
 
 			if(world.getBlock(x + offsets[0], y + offsets[1], z + offsets[2]) != this) {
 				world.setBlockToAir(x, y, z);
@@ -353,17 +353,17 @@ public class BlockMachineBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean hasTileEntity(int metadata) {
+	public boolean hasTileEntity(final int metadata) {
 		return tileClass != null;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public TileEntity createNewTileEntity(final World world, final int metadata) {
 		if(tileClass != null) {
 			try {
 				return tileClass.newInstance();
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 				TransformersMod.log.error("Could not create tile entity for block '{}' from class {}", delegate.name(), tileClass);
 			}
 		}

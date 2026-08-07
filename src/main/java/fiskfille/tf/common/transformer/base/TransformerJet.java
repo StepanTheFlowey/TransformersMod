@@ -17,27 +17,27 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author gegy1000
  */
 public abstract class TransformerJet extends Transformer {
-	public TransformerJet(String name) {
+	public TransformerJet(final String name) {
 		super(name);
 	}
 
 	@Override
-	public float fall(EntityPlayer player, float distance, int altMode) {
+	public float fall(final EntityPlayer player, final float distance, final int altMode) {
 		return 0;
 	}
 
 	@Override
-	public float getThirdPersonDistance(EntityPlayer player) {
+	public float getThirdPersonDistance(final EntityPlayer player) {
 		return 4F;
 	}
 
 	@Override
-	public void updateMovement(EntityPlayer player) {
+	public void updateMovement(final EntityPlayer player) {
 		TFMotionManager.motionJet(player, 100, 140, 20);
 	}
 
 	@Override
-	public boolean canShoot(EntityPlayer player) {
+	public boolean canShoot(final EntityPlayer player) {
 		return true;
 	}
 
@@ -47,12 +47,12 @@ public abstract class TransformerJet extends Transformer {
 	}
 
 	@Override
-	public Entity getShootEntity(EntityPlayer player) {
+	public Entity getShootEntity(final EntityPlayer player) {
 		return new EntityMissile(player.worldObj, player, TFConfig.allowMissileExplosions, TFHelper.isInStealthMode(player));
 	}
 
 	@Override
-	public void doNitroParticles(EntityPlayer player) {
+	public void doNitroParticles(final EntityPlayer player) {
 		final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		for(int i = 0; i < 4; ++i) {

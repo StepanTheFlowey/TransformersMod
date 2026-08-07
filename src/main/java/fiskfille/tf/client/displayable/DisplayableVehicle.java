@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class DisplayableVehicle extends Displayable {
 	@Override
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		final Transformer transformer = TransformersAPI.getTransformers().get(itemstack.getItemDamage());
 		if(transformer == null) {
 			return;

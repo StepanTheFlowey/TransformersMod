@@ -6,22 +6,22 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerEmpty extends ContainerBasic {
-	public ContainerEmpty(InventoryPlayer inventoryPlayer, int yOffset) {
+	public ContainerEmpty(final InventoryPlayer inventoryPlayer, final int yOffset) {
 		super(null);
 		addPlayerInventory(inventoryPlayer, yOffset);
 	}
 
-	public ContainerEmpty(InventoryPlayer inventoryPlayer) {
+	public ContainerEmpty(final InventoryPlayer inventoryPlayer) {
 		this(inventoryPlayer, 0);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer player, final int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
+		final Slot slot = (Slot) inventorySlots.get(slotId);
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if(slotId >= 0 && slotId < 27) {

@@ -10,7 +10,7 @@ public class TFEntityData implements IExtendedEntityProperties {
 
 	public int groundBridgeCooldown;
 
-	public static TFEntityData getData(Entity entity) {
+	public static TFEntityData getData(final Entity entity) {
 		return (TFEntityData) entity.getExtendedProperties(IDENTIFIER);
 	}
 
@@ -21,16 +21,16 @@ public class TFEntityData implements IExtendedEntityProperties {
 	}
 
 	@Override
-	public void saveNBTData(NBTTagCompound compound) {
+	public void saveNBTData(final NBTTagCompound compound) {
 		compound.setInteger("GroundBridgeCooldown", groundBridgeCooldown);
 	}
 
 	@Override
-	public void loadNBTData(NBTTagCompound compound) {
+	public void loadNBTData(final NBTTagCompound compound) {
 		groundBridgeCooldown = compound.getInteger("GroundBridgeCooldown");
 	}
 
 	@Override
-	public void init(Entity entity, World world) {
+	public void init(final Entity entity, final World world) {
 	}
 }

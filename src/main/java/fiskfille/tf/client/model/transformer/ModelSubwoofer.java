@@ -538,7 +538,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void setupOffsets(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final ModelOffset offsets = TFModelHelper.getOffsets(player);
 		head.rotationPointX += offsets.headOffsetX;
 		head.rotationPointY += offsets.headOffsetY;
@@ -560,7 +560,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doActiveAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doActiveAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		applyDefaultHoldingAnimation(upperArmR, upperArmL, lowerArmR, lowerArmL);
 		applyDefaultHittingAnimation(upperArmR, upperArmL, head, chestmain1, lowerArmR, lowerArmL);
 
@@ -594,7 +594,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doWalkingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		waist.rotationPointY -= 2F;
 
 		upperLegR.rotateAngleY += 0.2F;
@@ -650,7 +650,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doIdleAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doIdleAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		walk(stomach, 0.08F, 0.1F, true, 1, 0, ticks, 1F);
 		walk(chestmain1, 0.08F, 0.15F, false, 1, 0, ticks, 1F);
 		walk(head, 0.08F, 0.05F, true, 1, 0, ticks, 1F);
@@ -677,7 +677,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doFallingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final double motionY = TFRenderHelper.getMotionY(player);
 
 		final float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
@@ -721,7 +721,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doPartialAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		waist.rotationPointY += 1F;
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
@@ -747,7 +747,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doTransformationAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final ModelSubwooferVehicle vehicle = (ModelSubwooferVehicle) getTransformerModel().getVehicleModel();
 
 		rotateTo(waist, vehicle.vehicleBase, progress);
@@ -786,7 +786,7 @@ public class ModelSubwoofer extends ModelTransformerBase {
 	}
 
 	@Override
-	public void renderArmorPiece(int armorPiece) {
+	public void renderArmorPiece(final int armorPiece) {
 		setToInitPose();
 
 		switch(armorPiece) {

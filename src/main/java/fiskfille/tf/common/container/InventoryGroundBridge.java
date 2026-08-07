@@ -25,7 +25,7 @@ public class InventoryGroundBridge implements IInventory {
 
 	public final ItemStack[] inventory = new ItemStack[1];
 
-	public InventoryGroundBridge(EntityPlayer player, ItemStack itemstack) {
+	public InventoryGroundBridge(final EntityPlayer player, final ItemStack itemstack) {
 		this.player = player;
 		remoteItem = itemstack;
 
@@ -34,7 +34,7 @@ public class InventoryGroundBridge implements IInventory {
 				itemstack.setTagCompound(new NBTTagCompound());
 			}
 
-			NBTTagCompound nbt = itemstack.getTagCompound();
+			final NBTTagCompound nbt = itemstack.getTagCompound();
 
 			for(int i = 0; i < getSizeInventory(); i++) {
 				if(nbt.hasKey("Slot" + i)) {
@@ -45,7 +45,7 @@ public class InventoryGroundBridge implements IInventory {
 	}
 
 	public ItemStack getFirstItemStack() {
-		for(ItemStack itemstack : inventory) {
+		for(final ItemStack itemstack : inventory) {
 			if(itemstack != null) {
 				return itemstack;
 			}
@@ -56,7 +56,7 @@ public class InventoryGroundBridge implements IInventory {
 
 	public int getFirstSlotID() {
 		for(int i = 0; i < inventory.length; ++i) {
-			ItemStack itemstack = inventory[i];
+			final ItemStack itemstack = inventory[i];
 
 			if(itemstack != null) {
 				return i;
@@ -66,12 +66,12 @@ public class InventoryGroundBridge implements IInventory {
 		return -1;
 	}
 
-	public boolean addItemStackToInventory(ItemStack itemstack) {
-		boolean flag = addItemStackToInventoryTemp(itemstack);
+	public boolean addItemStackToInventory(final ItemStack itemstack) {
+		final boolean flag = addItemStackToInventoryTemp(itemstack);
 
 		if(flag) {
 			if(remoteItem != null) {
-				NBTTagCompound nbt = remoteItem.getTagCompound();
+				final NBTTagCompound nbt = remoteItem.getTagCompound();
 
 				for(int j = 0; j < getSizeInventory(); j++) {
 					if(inventory[j] != null) {
@@ -125,9 +125,9 @@ public class InventoryGroundBridge implements IInventory {
 					}
 				}
 			}
-			catch(Throwable throwable) {
-				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Adding item to inventory");
-				CrashReportCategory crashreportcategory = crashreport.makeCategory("Item being added");
+			catch(final Throwable throwable) {
+				final CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Adding item to inventory");
+				final CrashReportCategory crashreportcategory = crashreport.makeCategory("Item being added");
 				crashreportcategory.addCrashSection("Item ID", Item.getIdFromItem(itemstack.getItem()));
 				crashreportcategory.addCrashSection("Item data", itemstack.getItemDamage());
 				crashreportcategory.addCrashSectionCallable("Item name", itemstack::getDisplayName);
@@ -149,8 +149,8 @@ public class InventoryGroundBridge implements IInventory {
 		return -1;
 	}
 
-	private int storePartialItemStack(ItemStack itemstack) {
-		Item item = itemstack.getItem();
+	private int storePartialItemStack(final ItemStack itemstack) {
+		final Item item = itemstack.getItem();
 		int i = itemstack.stackSize;
 		int j;
 
@@ -204,7 +204,7 @@ public class InventoryGroundBridge implements IInventory {
 		}
 	}
 
-	private int storeItemStack(ItemStack itemstack) {
+	private int storeItemStack(final ItemStack itemstack) {
 		for(int i = 0; i < inventory.length; ++i) {
 			if(inventory[i] != null && inventory[i].getItem() == itemstack.getItem() && inventory[i].isStackable() && inventory[i].stackSize < inventory[i].getMaxStackSize() && inventory[i].stackSize < getInventoryStackLimit() && (!inventory[i].getHasSubtypes() || inventory[i].getItemDamage() == itemstack.getItemDamage()) && ItemStack.areItemStackTagsEqual(inventory[i], itemstack)) {
 				return i;
@@ -220,12 +220,12 @@ public class InventoryGroundBridge implements IInventory {
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int slot) {
+	public ItemStack getStackInSlot(final int slot) {
 		return inventory[slot];
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
+	public ItemStack decrStackSize(final int slot, final int amount) {
 		ItemStack stack = getStackInSlot(slot);
 		if(stack != null) {
 			if(stack.stackSize > amount) {
@@ -240,15 +240,15 @@ public class InventoryGroundBridge implements IInventory {
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		ItemStack stack = getStackInSlot(slot);
+	public ItemStack getStackInSlotOnClosing(final int slot) {
+		final ItemStack stack = getStackInSlot(slot);
 		setInventorySlotContents(slot, null);
 		return stack;
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		ItemStack remote = player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote ? player.getHeldItem() : remoteItem;
+	public void setInventorySlotContents(final int slot, final ItemStack stack) {
+		final ItemStack remote = player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote ? player.getHeldItem() : remoteItem;
 		inventory[slot] = stack;
 
 		if(stack != null && stack.stackSize > getInventoryStackLimit()) {
@@ -256,16 +256,16 @@ public class InventoryGroundBridge implements IInventory {
 		}
 
 		if(remote != null && stack != null && !player.worldObj.isRemote) {
-			DimensionalCoords tileCoords = ItemCSD.getCoords(remote);
-			DimensionalCoords coords = ItemCSD.getCoords(stack);
-			WorldServer targetWorld = MinecraftServer.getServer().worldServerForDimension(tileCoords.dimension);
+			final DimensionalCoords tileCoords = ItemCSD.getCoords(remote);
+			final DimensionalCoords coords = ItemCSD.getCoords(stack);
+			final WorldServer targetWorld = MinecraftServer.getServer().worldServerForDimension(tileCoords.dimension);
 
 			if(targetWorld != null) {
-				TileEntity tile = targetWorld.getTileEntity(tileCoords.posX, tileCoords.posY, tileCoords.posZ);
-				int metadata = targetWorld.getBlockMetadata(tileCoords.posX, tileCoords.posY, tileCoords.posZ);
+				final TileEntity tile = targetWorld.getTileEntity(tileCoords.posX, tileCoords.posY, tileCoords.posZ);
+				final int metadata = targetWorld.getBlockMetadata(tileCoords.posX, tileCoords.posY, tileCoords.posZ);
 
 				if(tile instanceof TileEntityControlPanel && BlockControlPanel.isBlockLeftSideOfPanel(metadata)) {
-					TileEntityControlPanel panel = (TileEntityControlPanel) tile;
+					final TileEntityControlPanel panel = (TileEntityControlPanel) tile;
 					panel.setSwitchesTo(coords);
 					panel.markBlockForUpdate();
 				}
@@ -292,10 +292,10 @@ public class InventoryGroundBridge implements IInventory {
 
 	@Override
 	public void markDirty() {
-		ItemStack remote = player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote ? player.getHeldItem() : remoteItem;
+		final ItemStack remote = player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote ? player.getHeldItem() : remoteItem;
 
 		if(remote != null) {
-			NBTTagCompound nbt = remote.getTagCompound();
+			final NBTTagCompound nbt = remote.getTagCompound();
 
 			for(int i = 0; i < getSizeInventory(); i++) {
 				if(inventory[i] != null) {
@@ -309,7 +309,7 @@ public class InventoryGroundBridge implements IInventory {
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUseableByPlayer(final EntityPlayer player) {
 		return true;
 	}
 
@@ -322,14 +322,14 @@ public class InventoryGroundBridge implements IInventory {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		ItemStack remote = player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote ? player.getHeldItem() : remoteItem;
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
+		final ItemStack remote = player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote ? player.getHeldItem() : remoteItem;
 
 		if(remote != null) {
-			DimensionalCoords tileCoords = ItemCSD.getCoords(remote);
+			final DimensionalCoords tileCoords = ItemCSD.getCoords(remote);
 
 			if(TFTileHelper.getTileData(tileCoords) instanceof TileDataControlPanel) {
-				TileDataControlPanel data = (TileDataControlPanel) TFTileHelper.getTileData(tileCoords);
+				final TileDataControlPanel data = (TileDataControlPanel) TFTileHelper.getTileData(tileCoords);
 
 				if(data.activationLeverState) {
 					return false;

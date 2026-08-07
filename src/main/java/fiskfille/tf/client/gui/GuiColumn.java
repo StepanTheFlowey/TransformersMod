@@ -23,7 +23,7 @@ public class GuiColumn extends GuiContainerTF {
 
 	private GuiHoverFieldEnergy[] fieldEnergy;
 
-	public GuiColumn(InventoryPlayer inventoryPlayer, TileEntityColumn tile) {
+	public GuiColumn(final InventoryPlayer inventoryPlayer, final TileEntityColumn tile) {
 		super(new ContainerColumn(inventoryPlayer, tile));
 		tileentity = tile;
 		ySize = 190;
@@ -49,13 +49,13 @@ public class GuiColumn extends GuiContainerTF {
 	public void updateScreen() {
 		super.updateScreen();
 
-		for(GuiHoverFieldEnergy field : fieldEnergy) {
+		for(final GuiHoverFieldEnergy field : fieldEnergy) {
 			field.update(tileentity.storage);
 		}
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		switch(button.id) {
 			case 0:
 				mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
@@ -69,14 +69,14 @@ public class GuiColumn extends GuiContainerTF {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		mc.getTextureManager().bindTexture(guiTextures);
 		GL11.glColor3f(1, 1, 1);
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;

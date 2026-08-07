@@ -9,13 +9,13 @@ import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityTF extends TileEntity {
 	@Override
-	public final void readFromNBT(NBTTagCompound nbt) {
+	public final void readFromNBT(final NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		readCustomNBT(nbt);
 	}
 
 	@Override
-	public final void writeToNBT(NBTTagCompound nbt) {
+	public final void writeToNBT(final NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		writeCustomNBT(nbt);
 	}
@@ -32,7 +32,7 @@ public abstract class TileEntityTF extends TileEntity {
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+	public void onDataPacket(final NetworkManager net, final S35PacketUpdateTileEntity pkt) {
 		readCustomNBT(pkt.func_148857_g());
 	}
 

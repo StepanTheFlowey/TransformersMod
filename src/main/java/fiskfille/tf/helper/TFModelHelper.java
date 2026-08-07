@@ -20,7 +20,7 @@ public class TFModelHelper {
 	/**
 	 * @returns the model offsets for the specified entity.
 	 */
-	public static ModelOffset getOffsets(Entity entity) {
+	public static ModelOffset getOffsets(final Entity entity) {
 		return offsets.computeIfAbsent(entity, k -> new ModelOffset(false));
 	}
 
@@ -37,7 +37,7 @@ public class TFModelHelper {
 	 * @param rotationPitch
 	 * @param scale
 	 */
-	public static void renderBipedPre(ModelBiped model, Entity entity, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale) {
+	public static void renderBipedPre(final ModelBiped model, final Entity entity, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final float scale) {
 		ModelOffset offset = TFModelHelper.getOffsets(entity);
 
 		if(!offset.isInitialized()) {

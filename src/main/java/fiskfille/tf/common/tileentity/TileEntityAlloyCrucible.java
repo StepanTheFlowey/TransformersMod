@@ -68,13 +68,13 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 			data.serverTick();
 		}
 
-		TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
+		final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
 
 		if(prevData instanceof TileDataEnergyContainer) {
 			data = new TileDataEnergyContainer((TileDataEnergyContainer) prevData);
 		}
 
-		int i = getMetadataFlags();
+		final int i = getMetadataFlags();
 
 		if(i != metadataFlags) {
 			metadataFlags = i;
@@ -128,18 +128,18 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getSmeltProgressScaled(int i) {
+	public int getSmeltProgressScaled(final int i) {
 		return smeltTime * i / getSmeltTimeMax();
 	}
 
 	public ItemStack[] getStacksToSmelt() {
-		LinkedList<ItemStack> list = Lists.newLinkedList();
+		final LinkedList<ItemStack> list = Lists.newLinkedList();
 
 		if(smeltingMode != EnumSmeltingMode.FURNACE) {
 			for(int i = 0; i < 3; ++i) {
 				if(inventory[i] != null) {
 					list.add(inventory[i]);
-					ItemStack result = AlloyRecipes.getInstance().getSmeltingResult(new AlloyIngredients(list.toArray()));
+					final ItemStack result = AlloyRecipes.getInstance().getSmeltingResult(new AlloyIngredients(list.toArray()));
 
 					if(result != null) {
 						if(inventory[3] == null) {
@@ -149,7 +149,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 							return list.toArray(new ItemStack[3]);
 						}
 						else if(inventory[3].isItemEqual(result)) {
-							int amount = inventory[3].stackSize + result.stackSize;
+							final int amount = inventory[3].stackSize + result.stackSize;
 
 							if(amount <= getInventoryStackLimit() && amount <= inventory[3].getMaxStackSize()) {
 								smeltingResult = result;
@@ -168,14 +168,14 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 		if(smeltingMode != EnumSmeltingMode.ALLOY) {
 			for(int i = 0; i < 3; ++i) {
 				if(inventory[i] != null) {
-					ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inventory[i]);
+					final ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inventory[i]);
 
 					if(result != null) {
 						if(inventory[3] == null) {
 							list.add(inventory[i]);
 						}
 						else if(inventory[3].isItemEqual(result)) {
-							int amount = inventory[3].stackSize + result.stackSize;
+							final int amount = inventory[3].stackSize + result.stackSize;
 
 							if(amount <= getInventoryStackLimit() && amount <= inventory[3].getMaxStackSize()) {
 								list.add(inventory[i]);
@@ -197,7 +197,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	public void smeltItem() {
 		if(canSmelt()) {
 			if(smeltingMode != EnumSmeltingMode.FURNACE) {
-				ItemStack result = AlloyRecipes.getInstance().getSmeltingResult(new AlloyIngredients(Arrays.asList(getStacksToSmelt()).toArray()));
+				final ItemStack result = AlloyRecipes.getInstance().getSmeltingResult(new AlloyIngredients(Arrays.asList(getStacksToSmelt()).toArray()));
 
 				if(result != null) {
 					if(inventory[3] == null) {
@@ -207,7 +207,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 						inventory[3].stackSize += result.stackSize;
 					}
 
-					List<ItemStack> list = Lists.newArrayList(getStacksToSmelt());
+					final List<ItemStack> list = Lists.newArrayList(getStacksToSmelt());
 
 					for(int i = 0; i < 3; ++i) {
 						if(inventory[i] != null && list.contains(inventory[i])) {
@@ -228,7 +228,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 			}
 
 			if(smeltingMode != EnumSmeltingMode.ALLOY) {
-				ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(getStacksToSmelt()[0]);
+				final ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(getStacksToSmelt()[0]);
 
 				if(result != null) {
 					for(int i = 0; i < 3; ++i) {
@@ -258,7 +258,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 		smeltingMode = EnumSmeltingMode.values()[nbt.getByte("Mode") % EnumSmeltingMode.values().length];
 		smeltTime = nbt.getShort("SmeltTime");
@@ -266,13 +266,13 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 		furnaceResults = nbt.getByte("FurnaceSmelts");
 
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.storage.readFromNBT(config);
 		}
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 		nbt.setByte("Mode", (byte) smeltingMode.ordinal());
 		nbt.setShort("SmeltTime", (short) smeltTime);
@@ -280,19 +280,19 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 		nbt.setByte("FurnaceSmelts", (byte) furnaceResults);
 
 		if(data.storage.getEnergy() > 0) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.storage.writeToNBT(config);
 			nbt.setTag("ConfigDataTF", config);
 		}
 	}
 
 	@Override
-	public float receiveEnergy(float amount, boolean simulate) {
+	public float receiveEnergy(final float amount, final boolean simulate) {
 		return data.storage.add(amount, simulate);
 	}
 
 	@Override
-	public float extractEnergy(float amount, boolean simulate) {
+	public float extractEnergy(final float amount, final boolean simulate) {
 		return data.storage.remove(amount, simulate);
 	}
 
@@ -317,7 +317,7 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	}
 
 	@Override
-	public boolean canReceiveEnergy(TileEntity from) {
+	public boolean canReceiveEnergy(final TileEntity from) {
 		return true;
 	}
 
@@ -332,13 +332,13 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
+	public ItemStack decrStackSize(final int slot, final int amount) {
 		if(slot == 3) {
-			ItemStack itemstack = getStackInSlot(slot);
+			final ItemStack itemstack = getStackInSlot(slot);
 
 			if(itemstack != null) {
 				int toRemove = Math.min(itemstack.stackSize, amount);
-				int i = Math.min(alloyResults, toRemove);
+				final int i = Math.min(alloyResults, toRemove);
 
 				toRemove -= i;
 				alloyResults -= i;
@@ -350,27 +350,27 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack itemstack) {
 		return slot != 3;
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
+	public int[] getAccessibleSlotsFromSide(final int side) {
 		return side == 0 ? slotsBottom : slotsSides;
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack itemstack, int side) {
+	public boolean canInsertItem(final int slot, final ItemStack itemstack, final int side) {
 		return isItemValidForSlot(slot, itemstack);
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack itemstack, int side) {
+	public boolean canExtractItem(final int slot, final ItemStack itemstack, final int side) {
 		return slot == 3;
 	}
 
 	@Override
-	public void receive(EntityPlayer player, int action) {
+	public void receive(final EntityPlayer player, final int action) {
 		super.receive(player, action);
 
 		if(action == 0) {

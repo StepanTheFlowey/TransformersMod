@@ -5,7 +5,7 @@ import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.transformer.base.Transformer;
 
 public class ItemVurpArmor extends ItemTransformerArmor {
-	public ItemVurpArmor(int armorPiece) {
+	public ItemVurpArmor(final int armorPiece) {
 		super(TFItems.TRANSFORMERMATERIAL, 4, armorPiece);
 	}
 

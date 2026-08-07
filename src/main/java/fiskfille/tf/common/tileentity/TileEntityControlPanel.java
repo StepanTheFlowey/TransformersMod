@@ -75,7 +75,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 				final ArrayList<TileEntity> list = new ArrayList<TileEntity>(worldObj.loadedTileEntityList);
 				list.sort((tile1, tile2) -> Double.compare(Math.sqrt(getDistanceFrom(tile1.xCoord, tile1.zCoord, tile1.yCoord)), Math.sqrt(getDistanceFrom(tile2.xCoord, tile2.zCoord, tile2.yCoord))));
 
-				for(TileEntity tile : list) {
+				for(final TileEntity tile : list) {
 					if(Math.sqrt(getDistanceFrom(tile.xCoord, tile.yCoord, tile.zCoord)) <= TFConfig.controlPanelMaxRange) {
 						if(tile instanceof TileEntityGroundBridgeFrame) {
 							final ForgeDirection direction = BlockGroundBridgeFrame.getFrameDirection(worldObj, tile.xCoord, tile.yCoord, tile.zCoord);
@@ -177,7 +177,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 
 						extractEnergy(getConsumptionRate(), false);
 					}
-					catch(Exception e) {
+					catch(final Exception e) {
 						e.printStackTrace();
 					}
 				}
@@ -216,8 +216,8 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 				activationLeverTimer = MathHelper.clamp_float(activationLeverTimer, 0, 1);
 				activationLeverCoverTimer = MathHelper.clamp_float(activationLeverCoverTimer, 0, 1);
 
-				int dir = data.direction == 0 && animPortalDirection > data.direction ? animPortalDirection == 0 ? 0 : 4 : data.direction;
-				float incr = 0.2F;
+				final int dir = data.direction == 0 && animPortalDirection > data.direction ? animPortalDirection == 0 ? 0 : 4 : data.direction;
+				final float incr = 0.2F;
 
 				if(animPortalDirection < dir) {
 					animPortalDirection += incr;
@@ -260,9 +260,9 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 			final World world = getDestWorld();
 
 			if(world != null) {
-				int x = data.destination.posX;
+				final int x = data.destination.posX;
 				int y = data.destination.posY;
-				int z = data.destination.posZ;
+				final int z = data.destination.posZ;
 
 				if(hasUpgrade(DataCore.leveler)) {
 					if(!data.activationLeverState) {
@@ -283,11 +283,11 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	private int[] getCoordinateIncrements() {
-		int[] increments = {1, 10, 100, 1000};
+		final int[] increments = {1, 10, 100, 1000};
 
 		if(hasUpgrade(DataCore.range)) {
 			for(int i = 0; i < data.upgrades.size(); ++i) {
-				DataCore dataCore = data.upgrades.get(i);
+				final DataCore dataCore = data.upgrades.get(i);
 
 				if(dataCore == DataCore.range) {
 					for(int j = 0; j < increments.length; ++j) {
@@ -300,7 +300,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		return increments;
 	}
 
-	private boolean isPortalObstructed(int x, int y, int z, ForgeDirection direction) {
+	private boolean isPortalObstructed(final int x, final int y, final int z, final ForgeDirection direction) {
 		if(direction == ForgeDirection.NORTH) {
 			for(int i = 0; i < 5; ++i) {
 				for(int j = 0; j < 3; ++j) {
@@ -323,9 +323,9 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		return false;
 	}
 
-	private boolean checkForSpace(World world, int x, int y, int z) {
-		Block b = Blocks.air;
-		Block b1 = TFBlocks.groundBridgeTeleporter;
+	private boolean checkForSpace(final World world, final int x, final int y, final int z) {
+		final Block b = Blocks.air;
+		final Block b1 = TFBlocks.groundBridgeTeleporter;
 
 		if(data.direction % 2 == 0) {
 			for(int i = 0; i < 5; ++i) {
@@ -350,11 +350,11 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	private WorldServer getDestWorld() {
-		MinecraftServer server = MinecraftServer.getServer();
+		final MinecraftServer server = MinecraftServer.getServer();
 		return server.worldServerForDimension(getDestDimensionID());
 	}
 
-	public void changeSwitch(int group, int id, int amount) {
+	public void changeSwitch(final int group, final int id, final int amount) {
 		if(!data.activationLeverState) {
 			if(switches[group][id] + amount <= 10 && switches[group][id] + amount >= -10) {
 				switches[group][id] += amount;
@@ -365,7 +365,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public void setSwitchesTo(DimensionalCoords coords) {
+	public void setSwitchesTo(final DimensionalCoords coords) {
 		if(!data.activationLeverState) {
 			int coordinateScale = 1;
 
@@ -384,8 +384,8 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 			switches = new Integer[][]{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
 
 			for(int axisIndex = 0; axisIndex < target.length; ++axisIndex) {
-				int delta = (target[axisIndex] - current[axisIndex]) / coordinateScale;
-				int[] split = TFMathHelper.split(delta, increments.length, 10);
+				final int delta = (target[axisIndex] - current[axisIndex]) / coordinateScale;
+				final int[] split = TFMathHelper.split(delta, increments.length, 10);
 
 				for(int i = 0; i < split.length; ++i) {
 					switches[axisIndex][i] = MathHelper.clamp_int(split[i] / increments[i], -10, 10);
@@ -405,7 +405,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public void cycleDimensionID(int amount) {
+	public void cycleDimensionID(final int amount) {
 		if(!data.activationLeverState) {
 			destDimIndex += amount;
 
@@ -425,7 +425,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		return data.upgrades;
 	}
 
-	public boolean hasUpgrade(DataCore dataCore) {
+	public boolean hasUpgrade(final DataCore dataCore) {
 		return data.hasUpgrade(dataCore);
 	}
 
@@ -441,7 +441,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		float base = 10;
 
 		for(int i = 0; i < data.upgrades.size(); ++i) {
-			DataCore dataCore = data.upgrades.get(i);
+			final DataCore dataCore = data.upgrades.get(i);
 
 			if(dataCore == DataCore.range) {
 				base *= 1.25F;
@@ -493,7 +493,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 		data.direction = nbt.getInteger("PortalDirection");
 		data.frameDirection = nbt.getInteger("SrcPortalDirection");
@@ -527,7 +527,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 		nbt.setInteger("PortalDirection", data.direction);
 		nbt.setInteger("SrcPortalDirection", data.frameDirection);
@@ -546,14 +546,14 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 
 		if(data.storage.getEnergy() > 0) {
-			NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 			data.storage.writeToNBT(config);
 			nbt.setTag("ConfigDataTF", config);
 		}
 
 		final NBTTagList nbttaglist = new NBTTagList();
 
-		for(Integer[] aint : switches) {
+		for(final Integer[] aint : switches) {
 			final NBTTagCompound nbttagcompound = new NBTTagCompound();
 
 			for(int j = 0; j < aint.length; ++j) {
@@ -567,22 +567,22 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
 		return stack.getItem() == TFItems.dataCore;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUseableByPlayer(final EntityPlayer player) {
 		return super.isUseableByPlayer(player) || player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote;
 	}
 
 	@Override
-	public float receiveEnergy(float amount, boolean simulate) {
+	public float receiveEnergy(final float amount, final boolean simulate) {
 		return data.storage.add(amount, simulate);
 	}
 
 	@Override
-	public float extractEnergy(float amount, boolean simulate) {
+	public float extractEnergy(final float amount, final boolean simulate) {
 		return data.storage.remove(amount, simulate);
 	}
 
@@ -607,7 +607,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	@Override
-	public boolean canReceiveEnergy(TileEntity from) {
+	public boolean canReceiveEnergy(final TileEntity from) {
 		return BlockControlPanel.isBlockLeftSideOfPanel(getBlockMetadata());
 	}
 
@@ -636,7 +636,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	@Override
-	public void forceChunks(SubTicket subTicket) {
+	public void forceChunks(final SubTicket subTicket) {
 		if(subTicket.getTag().hasKey("destX") && subTicket.getTag().hasKey("destZ")) {
 			forceChunk(subTicket, 1, new ForcedChunk(getDestWorld(), data.destination.posX >> 4, data.destination.posZ >> 4));
 		}
@@ -645,7 +645,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public void forceChunk(SubTicket subTicket, int index, ForcedChunk chunk) {
+	public void forceChunk(final SubTicket subTicket, final int index, final ForcedChunk chunk) {
 		releaseChunk(index);
 		chunkTickets.set(index, subTicket.owner);
 		forcedChunks.set(index, chunk);
@@ -654,7 +654,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 
 	public void loadChunks() {
 		if(chunkTickets.get(0) == null || chunkTickets.get(1) == null) {
-			SubTicket subTicket = SubTicket.fromTile(this);
+			final SubTicket subTicket = SubTicket.fromTile(this);
 			subTicket.getTag().setInteger("destX", data.destination.posX);
 			subTicket.getTag().setInteger("destZ", data.destination.posZ);
 
@@ -663,9 +663,9 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public void loadChunk(SubTicket subTicket, int index, ForcedChunk chunk) {
+	public void loadChunk(final SubTicket subTicket, final int index, final ForcedChunk chunk) {
 		if(chunkTickets.get(index) == null) {
-			Ticket ticket = TFChunkManager.getTicketForChunk(chunk);
+			final Ticket ticket = TFChunkManager.getTicketForChunk(chunk);
 
 			if(ticket != null) {
 				forceChunk(subTicket.assign(ticket), index, chunk);
@@ -673,9 +673,9 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public void releaseChunk(int index) {
+	public void releaseChunk(final int index) {
 		if(chunkTickets.get(index) != null) {
-			SubTicket subTicket = getSubTicket(chunkTickets.get(index), index);
+			final SubTicket subTicket = getSubTicket(chunkTickets.get(index), index);
 
 			if(subTicket != null) {
 				TFChunkManager.releaseChunk(subTicket, forcedChunks.get(index));
@@ -685,10 +685,10 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public SubTicket getSubTicket(Ticket ticket, int index) {
-		List<SubTicket> list = SubTicket.getChildren(chunkTickets.get(index));
+	public SubTicket getSubTicket(final Ticket ticket, final int index) {
+		final List<SubTicket> list = SubTicket.getChildren(chunkTickets.get(index));
 
-		for(SubTicket subTicket : list) {
+		for(final SubTicket subTicket : list) {
 			if(subTicket.xCoord == xCoord && subTicket.yCoord == yCoord && subTicket.zCoord == zCoord) {
 				if(index == 1 && subTicket.getTag().hasKey("destX") && subTicket.getTag().hasKey("destZ")) {
 					return subTicket;
@@ -703,20 +703,20 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	@Override
-	public int[] getBaseOffsets(int metadata) {
-		int direction = BlockControlPanel.getDirection(metadata);
-		boolean isSide = !BlockControlPanel.isBlockLeftSideOfPanel(metadata);
+	public int[] getBaseOffsets(final int metadata) {
+		final int direction = BlockControlPanel.getDirection(metadata);
+		final boolean isSide = !BlockControlPanel.isBlockLeftSideOfPanel(metadata);
 
 		return new int[]{-(isSide ? directions[direction][0] : 0), -(BlockControlPanel.isBlockTopOfPanel(metadata) ? 1 : 0), -(isSide ? directions[direction][1] : 0)};
 	}
 
 	@Override
-	public void receive(EntityPlayer player, int action) {
+	public void receive(final EntityPlayer player, final int action) {
 		super.receive(player, action);
 
 		if(player != null) {
 			if(isUseableByPlayer(player) || player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.groundBridgeRemote) {
-				int increment = player.isSneaking() ? -1 : 1;
+				final int increment = player.isSneaking() ? -1 : 1;
 
 				if(action >= 1 && action <= 4) {
 					changeSwitch(0, action - 1, increment);
@@ -739,14 +739,14 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 				}
 				else if(action >= 15 && action <= 17) {
 					if(!data.activationLeverState) {
-						int slot = action - 15;
+						final int slot = action - 15;
 
 						if(getStackInSlot(slot) == null && player.getHeldItem() != null && isItemValidForSlot(slot, player.getHeldItem())) {
 							setInventorySlotContents(slot, player.getHeldItem());
 							player.setCurrentItemOrArmor(0, null);
 						}
 						else if(getStackInSlot(slot) != null && (player.getHeldItem() == null || isItemValidForSlot(slot, player.getHeldItem()))) {
-							ItemStack itemstack = getStackInSlot(slot).copy();
+							final ItemStack itemstack = getStackInSlot(slot).copy();
 
 							setInventorySlotContents(slot, player.getHeldItem());
 							player.setCurrentItemOrArmor(0, itemstack);

@@ -13,29 +13,29 @@ import java.util.List;
 public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 	protected float capacity;
 
-	public ItemEnergyContainer(float max) {
+	public ItemEnergyContainer(final float max) {
 		setMaxStackSize(1);
 		capacity = max;
 	}
 
-	public ItemEnergyContainer setCapacity(float max) {
+	public ItemEnergyContainer setCapacity(final float max) {
 		capacity = max;
 		return this;
 	}
 
 	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
+	public void addInformation(final ItemStack itemstack, final EntityPlayer player, final List list, final boolean flag) {
 		list.add(StatCollector.translateToLocalFormatted("gui.emb.storage", TFFormatHelper.formatNumber(getEnergyStored(itemstack)), TFFormatHelper.formatNumber(getEnergyCapacity(itemstack))));
 	}
 
 	@Override
-	public float receiveEnergy(ItemStack itemstack, float amount, boolean simulate) {
+	public float receiveEnergy(final ItemStack itemstack, final float amount, final boolean simulate) {
 		if(!itemstack.hasTagCompound()) {
 			itemstack.setTagCompound(new NBTTagCompound());
 		}
 
 		float energy = itemstack.getTagCompound().getFloat("Energy");
-		float energyReceived = Math.min(getEnergyCapacity(itemstack) - energy, amount);
+		final float energyReceived = Math.min(getEnergyCapacity(itemstack) - energy, amount);
 
 		if(!simulate) {
 			energy += energyReceived;
@@ -46,13 +46,13 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 	}
 
 	@Override
-	public float extractEnergy(ItemStack itemstack, float amount, boolean simulate) {
+	public float extractEnergy(final ItemStack itemstack, final float amount, final boolean simulate) {
 		if(!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy")) {
 			return 0;
 		}
 
 		float energy = itemstack.getTagCompound().getFloat("Energy");
-		float energyExtracted = Math.min(energy, amount);
+		final float energyExtracted = Math.min(energy, amount);
 
 		if(!simulate) {
 			energy -= energyExtracted;
@@ -63,7 +63,7 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 	}
 
 	@Override
-	public float getEnergyStored(ItemStack itemstack) {
+	public float getEnergyStored(final ItemStack itemstack) {
 		if(!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy")) {
 			return 0;
 		}
@@ -78,7 +78,7 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 	}
 
 	@Override
-	public float getEnergyCapacity(ItemStack itemstack) {
+	public float getEnergyCapacity(final ItemStack itemstack) {
 		return capacity;
 	}
 }

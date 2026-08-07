@@ -17,13 +17,13 @@ import java.util.Locale;
 public class GuiButtonConfigRedstone extends GuiButtonFlat {
 	public final TileEntityMachine machine;
 
-	public GuiButtonConfigRedstone(int id, int x, int y, TileEntityMachine tile) {
+	public GuiButtonConfigRedstone(final int id, final int x, final int y, final TileEntityMachine tile) {
 		super(id, x, y, 13, "");
 		machine = tile;
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}

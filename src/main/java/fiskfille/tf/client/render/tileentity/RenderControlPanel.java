@@ -23,7 +23,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 	private final ModelControlPanel model = new ModelControlPanel();
 	private final ItemRenderer itemRenderer = new ItemRenderer(Minecraft.getMinecraft());
 
-	public void render(TileEntityControlPanel tile, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityControlPanel tile, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
 
 		if(tile.getWorldObj() != null) {
@@ -77,14 +77,14 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 			model.table2.postRender(0.0625F);
 
 			if(tile.getWorldObj() != null) {
-				Tessellator tessellator = Tessellator.instance;
-				float energy = tile.getEnergy();
+				final Tessellator tessellator = Tessellator.instance;
+				final float energy = tile.getEnergy();
 
 				if(energy > 0) {
-					float f = 1F / 32;
-					float f1 = energy / tile.getMaxEnergy();
-					float length = f * 18;
-					float width = f * 4;
+					final float f = 1F / 32;
+					final float f1 = energy / tile.getMaxEnergy();
+					final float length = f * 18;
+					final float width = f * 4;
 					tessellator.startDrawingQuads();
 					tessellator.addVertexWithUV(width, 0, 0, width, length);
 					tessellator.addVertexWithUV(width, 0, length * f1, width, length * (1 - f1));
@@ -101,7 +101,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 				}
 			}
 
-			TileDataControlPanel data = tile.data;
+			final TileDataControlPanel data = tile.data;
 			String dimensionName = "";
 
 			if(tile.getWorldObj() != null) {
@@ -186,7 +186,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 			TFRenderHelper.resetLighting();
 
 			if(tile.getWorldObj() != null) {
-				int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
+				final int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
 
 				if(progress >= 0) {
 					OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -212,13 +212,13 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	protected void renderText(String s, int line, float x, float y, int color) {
+	protected void renderText(final String s, final int line, final float x, final float y, final int color) {
 		renderText(s, line, x, y, color, 0.004F);
 	}
 
-	protected void renderText(String s, int line, float x, float y, int color, float scale) {
-		float left = 0.05F;
-		float top = 0.0375F;
+	protected void renderText(final String s, final int line, final float x, final float y, final int color, final float scale) {
+		final float left = 0.05F;
+		final float top = 0.0375F;
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
 		GL11.glScalef(scale, scale, -scale);
@@ -229,9 +229,9 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	protected void renderCenteredText(String s, int line, float x, float y, int color, float scale) {
-		float left = 0.05F;
-		float top = 0.0375F;
+	protected void renderCenteredText(final String s, final int line, final float x, final float y, final int color, final float scale) {
+		final float left = 0.05F;
+		final float top = 0.0375F;
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
 		GL11.glScalef(scale, scale, -scale);
@@ -243,7 +243,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityControlPanel) tileentity, d, d1, d2, f);
 	}
 }

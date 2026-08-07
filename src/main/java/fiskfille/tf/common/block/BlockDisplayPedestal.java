@@ -52,7 +52,7 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 		return textures;
 	}
 
-	public static BlockIcon[] getTexture(int metadata) {
+	public static BlockIcon[] getTexture(final int metadata) {
 		return getTextures().get(MathHelper.clamp_int(metadata, 0, getTextures().size() - 1));
 	}
 
@@ -62,30 +62,30 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 	}
 
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+	public void getSubBlocks(final Item item, final CreativeTabs tab, final List list) {
 		for(int i = 0; i < getTextures().size(); ++i) {
 			list.add(new ItemStack(item, 1, i));
 		}
 	}
 
 	@Override
-	public String getHarvestTool(int metadata) {
+	public String getHarvestTool(final int metadata) {
 		final BlockIcon icon = getTexture(metadata)[0];
 		return icon.block.getHarvestTool(icon.metadata);
 	}
 
 	@Override
-	public boolean isToolEffective(String type, int metadata) {
+	public boolean isToolEffective(final String type, final int metadata) {
 		final BlockIcon icon = getTexture(metadata)[0];
 		return icon.block.isToolEffective(type, icon.metadata);
 	}
 
 	@Override
-	public int getFlammability(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
-		BlockIcon[] icons = getTexture(world.getBlockMetadata(x, y, z));
+	public int getFlammability(final IBlockAccess world, final int x, final int y, final int z, final ForgeDirection face) {
+		final BlockIcon[] icons = getTexture(world.getBlockMetadata(x, y, z));
 		int fire = 0;
 
-		for(BlockIcon icon : icons) {
+		for(final BlockIcon icon : icons) {
 			fire += Blocks.fire.getFlammability(icon.block);
 		}
 
@@ -93,11 +93,11 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 	}
 
 	@Override
-	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
+	public int getFireSpreadSpeed(final IBlockAccess world, final int x, final int y, final int z, final ForgeDirection face) {
 		final BlockIcon[] icons = getTexture(world.getBlockMetadata(x, y, z));
 		int fire = 0;
 
-		for(BlockIcon icon : icons) {
+		for(final BlockIcon icon : icons) {
 			fire += Blocks.fire.getEncouragement(icon.block);
 		}
 
@@ -105,24 +105,24 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 	}
 
 	@Override
-	public int getPlacedRotation(EntityLivingBase entity) {
+	public int getPlacedRotation(final EntityLivingBase entity) {
 		return 0;
 	}
 
 	@Override
-	public int damageDropped(int metadata) {
+	public int damageDropped(final int metadata) {
 		return metadata;
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity) {
-		for(AxisAlignedBB aabb1 : getBounds()) {
+	public void addCollisionBoxesToList(final World world, final int x, final int y, final int z, final AxisAlignedBB aabb, final List list, final Entity entity) {
+		for(final AxisAlignedBB aabb1 : getBounds()) {
 			addBox(aabb1.minX, aabb1.minY, aabb1.minZ, aabb1.maxX, aabb1.maxY, aabb1.maxZ, x, y, z, aabb, list);
 		}
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
 		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
 			return true;
 		}
@@ -174,10 +174,10 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
 		AxisAlignedBB aabb = null;
 
-		for(AxisAlignedBB aabb1 : getBounds()) {
+		for(final AxisAlignedBB aabb1 : getBounds()) {
 			if(aabb == null) {
 				aabb = aabb1;
 			}
@@ -205,13 +205,13 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 	}
 
 	@Override
-	public IIcon getIcon(int side, int metadata) {
+	public IIcon getIcon(final int side, final int metadata) {
 		final BlockIcon icon = getTexture(metadata)[side % getTexture(metadata).length];
 		return icon.block.getIcon(icon.side, icon.metadata);
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 	}
 
 	public static class BlockIcon {
@@ -219,7 +219,7 @@ public class BlockDisplayPedestal extends BlockMachineBase {
 		public final int side;
 		public final int metadata;
 
-		public BlockIcon(Block block, int side, int metadata) {
+		public BlockIcon(final Block block, final int side, final int metadata) {
 			this.block = block;
 			this.side = side;
 			this.metadata = metadata;

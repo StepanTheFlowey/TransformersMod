@@ -28,12 +28,12 @@ public class MessagePlayerJoin extends MessageSyncBase {
 
 	public MessagePlayerJoin() {}
 
-	public MessagePlayerJoin(EntityPlayer player) {
+	public MessagePlayerJoin(final EntityPlayer player) {
 		super(player);
 		canTransform = TFConfig.canTransform;
 
 		if(canTransform.isEmpty() || !canTransform.keySet().containsAll(TransformersAPI.getTransformers())) {
-			for(Transformer transformer : TransformersAPI.getTransformers()) {
+			for(final Transformer transformer : TransformersAPI.getTransformers()) {
 				if(!canTransform.containsKey(transformer)) {
 					canTransform.put(transformer, true);
 				}
@@ -43,7 +43,7 @@ public class MessagePlayerJoin extends MessageSyncBase {
 		dimensionNames = TFDimensionHelper.dimensionNames;
 
 		final Integer[] ids = DimensionManager.getIDs();
-		for(int id : ids) {
+		for(final int id : ids) {
 			final WorldServer world = MinecraftServer.getServer().worldServerForDimension(id);
 
 			if(world != null && world.provider != null) {
@@ -52,7 +52,7 @@ public class MessagePlayerJoin extends MessageSyncBase {
 		}
 
 		final ArrayList<Integer> list = new ArrayList<>();
-		for(int id : ids) {
+		for(final int id : ids) {
 			if(DimensionManager.shouldLoadSpawn(id)) {
 				list.add(id);
 			}
@@ -64,11 +64,11 @@ public class MessagePlayerJoin extends MessageSyncBase {
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		canTransform = Maps.newHashMap();
 
-		for(Transformer transformer : TransformersAPI.getTransformers()) {
+		for(final Transformer transformer : TransformersAPI.getTransformers()) {
 			canTransform.put(transformer, buf.readBoolean());
 		}
 
@@ -84,32 +84,32 @@ public class MessagePlayerJoin extends MessageSyncBase {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 
-		for(Map.Entry<Transformer, Boolean> transformable : canTransform.entrySet()) {
+		for(final Map.Entry<Transformer, Boolean> transformable : canTransform.entrySet()) {
 			buf.writeBoolean(transformable.getValue());
 		}
 
 		buf.writeInt(dimensionNames.size());
-		for(Map.Entry<Integer, String> e : dimensionNames.entrySet()) {
+		for(final Map.Entry<Integer, String> e : dimensionNames.entrySet()) {
 			buf.writeInt(e.getKey());
 			ByteBufUtils.writeUTF8String(buf, e.getValue());
 		}
 
 		buf.writeInt(dimensionIDs.length);
-		for(Integer dimensionID : dimensionIDs) {
+		for(final Integer dimensionID : dimensionIDs) {
 			buf.writeInt(dimensionID);
 		}
 	}
 
 	public static class Handler implements IMessageHandler<MessagePlayerJoin, IMessage> {
 		@Override
-		public IMessage onMessage(MessagePlayerJoin message, MessageContext ctx) {
+		public IMessage onMessage(final MessagePlayerJoin message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final EntityPlayer player = TransformersMod.proxy.getPlayer();
 
-				for(Map.Entry<TFData, Object> e : message.playerData.entrySet()) {
+				for(final Map.Entry<TFData, Object> e : message.playerData.entrySet()) {
 					e.getKey().setWithoutNotify(player, e.getValue());
 				}
 

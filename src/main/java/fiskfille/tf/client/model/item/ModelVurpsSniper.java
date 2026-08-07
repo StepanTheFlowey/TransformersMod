@@ -106,7 +106,7 @@ public class ModelVurpsSniper extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5) {
 		backPiece2.render(f5);
 		bodypart.render(f5);
 		monitorA.render(f5);
@@ -151,7 +151,7 @@ public class ModelVurpsSniper extends ModelBase {
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	private void setRotateAngle(ModelRenderer modelRenderer, float x, float z) {
+	private void setRotateAngle(final ModelRenderer modelRenderer, final float x, final float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = 0;
 		modelRenderer.rotateAngleZ = z;

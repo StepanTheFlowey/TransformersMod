@@ -16,7 +16,7 @@ public class TileEntityRelayTorch extends TileEntityRelayTower {
 		if(isValid(getBlockMetadata())) {
 			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
-			for(ReceiverEntry entry : receivers) {
+			for(final ReceiverEntry entry : receivers) {
 				final TileEntity tile = entry.getTile();
 
 				if(tile != null) {
@@ -60,12 +60,12 @@ public class TileEntityRelayTorch extends TileEntityRelayTower {
 	}
 
 	@Override
-	public boolean isValid(int metadata) {
+	public boolean isValid(final int metadata) {
 		return true;
 	}
 
 	@Override
-	public int[] getBaseOffsets(int metadata) {
+	public int[] getBaseOffsets(final int metadata) {
 		return new int[]{0, 0, 0};
 	}
 }

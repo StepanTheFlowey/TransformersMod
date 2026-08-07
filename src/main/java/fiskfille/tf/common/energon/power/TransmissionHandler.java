@@ -23,29 +23,29 @@ public class TransmissionHandler {
 	private NetworkEntry owner;
 	private boolean needsUpdate = false;
 
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(receivers.size());
 
-		for(ReceiverEntry receiver : receivers) {
+		for(final ReceiverEntry receiver : receivers) {
 			receiver.toBytes(buf);
 		}
 	}
 
-	public void fromBytes(ByteBuf buf) {
-		int receiverCount = buf.readInt();
+	public void fromBytes(final ByteBuf buf) {
+		final int receiverCount = buf.readInt();
 
 		for(int i = 0; i < receiverCount; i++) {
 			receivers.add(ReceiverEntry.fromBytes(buf));
 		}
 	}
 
-	public void onUpdate(World world) {
+	public void onUpdate(final World world) {
 		if(owner == null) {
 			return;
 		}
 
-		for(Iterator<ReceiverEntry> iterator = receivers.iterator(); iterator.hasNext(); ) {
-			ReceiverEntry receiver = iterator.next();
+		for(final Iterator<ReceiverEntry> iterator = receivers.iterator(); iterator.hasNext(); ) {
+			final ReceiverEntry receiver = iterator.next();
 			TileEntity receiverTile = receiver.getTile();
 
 			if(receiverTile == null) {
@@ -54,12 +54,12 @@ public class TransmissionHandler {
 			}
 
 			if(receiverTile instanceof IEnergyReceiver) {
-				boolean invalid = world.getChunkProvider().chunkExists(receiverTile.xCoord >> 4, receiverTile.zCoord >> 4) && (receiverTile.isInvalid() || !exists(world, receiverTile));
-				boolean outRange = !TFEnergyHelper.isInRange(owner.getTile(), receiverTile);
-				boolean destroyed = !invalid && !exists(world, receiverTile);
+				final boolean invalid = world.getChunkProvider().chunkExists(receiverTile.xCoord >> 4, receiverTile.zCoord >> 4) && (receiverTile.isInvalid() || !exists(world, receiverTile));
+				final boolean outRange = !TFEnergyHelper.isInRange(owner.getTile(), receiverTile);
+				final boolean destroyed = !invalid && !exists(world, receiverTile);
 
 				if(!invalid && !outRange && !destroyed) {
-					boolean flag = receiver.canReach();
+					final boolean flag = receiver.canReach();
 					receiver.setCanReach(canPowerReach(receiver));
 
 					if(flag != receiver.canReach()) {
@@ -75,7 +75,7 @@ public class TransmissionHandler {
 		}
 
 		while(!queuedReceivers.isEmpty()) {
-			ReceiverEntry receiver = queuedReceivers.poll();
+			final ReceiverEntry receiver = queuedReceivers.poll();
 			needsUpdate |= processQueue(world, receiver);
 		}
 
@@ -84,19 +84,19 @@ public class TransmissionHandler {
 		}
 	}
 
-	private boolean canPowerReach(ReceiverEntry entry) {
-		TileEntity tile = owner.getTile();
-		IEnergyTransmitter transmitter = owner.getTransmitter();
-		IEnergyReceiver receiver = entry.getReceiver();
+	private boolean canPowerReach(final ReceiverEntry entry) {
+		final TileEntity tile = owner.getTile();
+		final IEnergyTransmitter transmitter = owner.getTransmitter();
+		final IEnergyReceiver receiver = entry.getReceiver();
 
-		DimensionalCoords coords = entry.getCoords();
+		final DimensionalCoords coords = entry.getCoords();
 		Vec3 hit = receiver.getEnergyInputOffset().addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
-		Vec3 original = receiver.getEnergyInputOffset().addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
+		final Vec3 original = receiver.getEnergyInputOffset().addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
 		Vec3 output = transmitter.getEnergyOutputOffset().addVector(tile.xCoord + 0.5F, tile.yCoord + 0.5F, tile.zCoord + 0.5F);
 
-		double deltaScale = 1F / hit.distanceTo(output);
+		final double deltaScale = 1F / hit.distanceTo(output);
 		output = Vec3.createVectorHelper(output.xCoord + (hit.xCoord - output.xCoord) * deltaScale, output.yCoord + (hit.yCoord - output.yCoord) * deltaScale, output.zCoord + (hit.zCoord - output.zCoord) * deltaScale);
-		MovingObjectPosition result = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), output, hit);
+		final MovingObjectPosition result = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), output, hit);
 
 		if(result != null) {
 			hit = result.hitVec;
@@ -106,15 +106,15 @@ public class TransmissionHandler {
 	}
 
 	public void kill() {
-		for(ReceiverEntry entry : receivers) {
+		for(final ReceiverEntry entry : receivers) {
 			entry.getReceiver().getReceiverHandler().remove(owner);
 		}
 	}
 
-	private boolean processQueue(World world, ReceiverEntry receiver) {
+	private boolean processQueue(final World world, final ReceiverEntry receiver) {
 		if(!receivers.contains(receiver)) {
 			receiver.load(world);
-			TileEntity tile = receiver.getTile();
+			final TileEntity tile = receiver.getTile();
 
 			if(tile instanceof IEnergyTransmitter && TFEnergyHelper.getDescendants(receiver.getTransmitter()).contains(owner.getCoords())) {
 				return false;
@@ -128,12 +128,12 @@ public class TransmissionHandler {
 		return false;
 	}
 
-	public void add(ReceiverEntry receiver) {
+	public void add(final ReceiverEntry receiver) {
 		if(!receivers.contains(receiver)) {
 			receivers.add(receiver);
 
 			if(receiver.getTile() != null) {
-				IEnergyReceiver energyReceiver = receiver.getReceiver();
+				final IEnergyReceiver energyReceiver = receiver.getReceiver();
 				energyReceiver.getReceiverHandler().add(owner);
 			}
 
@@ -141,12 +141,12 @@ public class TransmissionHandler {
 		}
 	}
 
-	public void remove(ReceiverEntry entry) {
+	public void remove(final ReceiverEntry entry) {
 		if(receivers.contains(entry)) {
 			receivers.remove(entry);
 
 			if(entry.getTile() != null) {
-				IEnergyReceiver receiver = entry.getReceiver();
+				final IEnergyReceiver receiver = entry.getReceiver();
 				receiver.getReceiverHandler().remove(owner);
 			}
 
@@ -154,32 +154,32 @@ public class TransmissionHandler {
 		}
 	}
 
-	private boolean exists(World world, TileEntity tile) {
+	private boolean exists(final World world, final TileEntity tile) {
 		return world.getBlock(tile.xCoord, tile.yCoord, tile.zCoord) == tile.getBlockType();
 	}
 
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(final NBTTagCompound nbt) {
 		receivers.clear();
 		queuedReceivers.clear();
 
-		NBTTagCompound energy = nbt.getCompoundTag("EmB");
-		NBTTagList receiverList = energy.getTagList("Receivers", NBT.TAG_COMPOUND);
+		final NBTTagCompound energy = nbt.getCompoundTag("EmB");
+		final NBTTagList receiverList = energy.getTagList("Receivers", NBT.TAG_COMPOUND);
 
 		for(int i = 0; i < receiverList.tagCount(); ++i) {
-			NBTTagCompound receiverTag = receiverList.getCompoundTagAt(i);
+			final NBTTagCompound receiverTag = receiverList.getCompoundTagAt(i);
 			queue(ReceiverEntry.readFromNBT(receiverTag));
 		}
 	}
 
-	public void writeToNBT(NBTTagCompound nbt) {
-		NBTTagCompound energy = nbt.getCompoundTag("EmB");
-		NBTTagList receiverList = new NBTTagList();
+	public void writeToNBT(final NBTTagCompound nbt) {
+		final NBTTagCompound energy = nbt.getCompoundTag("EmB");
+		final NBTTagList receiverList = new NBTTagList();
 
-		for(ReceiverEntry receiver : receivers) {
+		for(final ReceiverEntry receiver : receivers) {
 			writeReceiver(receiverList, receiver);
 		}
 
-		for(ReceiverEntry receiver : queuedReceivers) {
+		for(final ReceiverEntry receiver : queuedReceivers) {
 			writeReceiver(receiverList, receiver);
 		}
 
@@ -187,19 +187,19 @@ public class TransmissionHandler {
 		nbt.setTag("EmB", energy);
 	}
 
-	private void writeReceiver(NBTTagList list, ReceiverEntry receiver) {
-		NBTTagCompound tag = new NBTTagCompound();
+	private void writeReceiver(final NBTTagList list, final ReceiverEntry receiver) {
+		final NBTTagCompound tag = new NBTTagCompound();
 		receiver.writeToNBT(tag);
 		list.appendTag(tag);
 	}
 
-	public void queue(ReceiverEntry receiver) {
+	public void queue(final ReceiverEntry receiver) {
 		queuedReceivers.add(receiver);
 	}
 
-	public void reset(World world, Set<ReceiverEntry> newReceivers) {
-		for(ReceiverEntry receiver : receivers) {
-			ReceiverHandler receiverHandler = TFEnergyHelper.getReceiverHandler(receiver.getTile());
+	public void reset(final World world, final Set<ReceiverEntry> newReceivers) {
+		for(final ReceiverEntry receiver : receivers) {
+			final ReceiverHandler receiverHandler = TFEnergyHelper.getReceiverHandler(receiver.getTile());
 
 			if(receiverHandler != null) {
 				receiverHandler.remove(owner);
@@ -209,7 +209,7 @@ public class TransmissionHandler {
 		receivers.clear();
 		queuedReceivers.clear();
 
-		for(ReceiverEntry receiver : newReceivers) {
+		for(final ReceiverEntry receiver : newReceivers) {
 			processQueue(world, receiver);
 		}
 
@@ -220,8 +220,8 @@ public class TransmissionHandler {
 		return receivers;
 	}
 
-	public ReceiverEntry getReceiver(DimensionalCoords coords) {
-		for(ReceiverEntry receiver : receivers) {
+	public ReceiverEntry getReceiver(final DimensionalCoords coords) {
+		for(final ReceiverEntry receiver : receivers) {
 			if(receiver.getCoords().equals(coords)) {
 				return receiver;
 			}
@@ -234,7 +234,7 @@ public class TransmissionHandler {
 		return owner;
 	}
 
-	public void setOwner(TileEntity tile) {
+	public void setOwner(final TileEntity tile) {
 		owner = new NetworkEntry(tile);
 	}
 
@@ -242,7 +242,7 @@ public class TransmissionHandler {
 		return needsUpdate;
 	}
 
-	public void setNeedsUpdate(boolean flag) {
+	public void setNeedsUpdate(final boolean flag) {
 		needsUpdate = flag;
 	}
 }

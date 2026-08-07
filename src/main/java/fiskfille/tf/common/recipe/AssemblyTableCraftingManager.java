@@ -21,16 +21,16 @@ public class AssemblyTableCraftingManager {
 		return instance;
 	}
 
-	public void addRecipe(ItemStack result, ItemStack[] dyes, Object... ingredients) {
-		StringBuilder s = new StringBuilder();
+	public void addRecipe(final ItemStack result, final ItemStack[] dyes, final Object... ingredients) {
+		final StringBuilder s = new StringBuilder();
 		int i = 0;
 		int j = 0;
 		int k = 0;
 
 		if(ingredients[i] instanceof String[]) {
-			String[] astring = (String[]) ingredients[i++];
+			final String[] astring = (String[]) ingredients[i++];
 
-			for(String s1 : astring) {
+			for(final String s1 : astring) {
 				++k;
 				j = s1.length();
 				s.append(s1);
@@ -38,16 +38,16 @@ public class AssemblyTableCraftingManager {
 		}
 		else {
 			while(ingredients[i] instanceof String) {
-				String s2 = (String) ingredients[i++];
+				final String s2 = (String) ingredients[i++];
 				++k;
 				j = s2.length();
 				s.append(s2);
 			}
 		}
 
-		HashMap hashmap;
+		final HashMap hashmap;
 		for(hashmap = new HashMap(); i < ingredients.length; i += 2) {
-			Character character = (Character) ingredients[i];
+			final Character character = (Character) ingredients[i];
 			ItemStack itemstack1 = null;
 
 			if(ingredients[i + 1] instanceof Item) {
@@ -66,9 +66,9 @@ public class AssemblyTableCraftingManager {
 			hashmap.put(character, itemstack1);
 		}
 
-		ItemStack[] itemstacks = new ItemStack[j * k];
+		final ItemStack[] itemstacks = new ItemStack[j * k];
 		for(int i1 = 0; i1 < j * k; ++i1) {
-			char c = s.charAt(i1);
+			final char c = s.charAt(i1);
 
 			if(hashmap.containsKey(c)) {
 				itemstacks[i1] = ((ItemStack) hashmap.get(c)).copy();
@@ -78,22 +78,22 @@ public class AssemblyTableCraftingManager {
 			}
 		}
 
-		ItemStack[] aitemstack = new ItemStack[3];
+		final ItemStack[] aitemstack = new ItemStack[3];
 
 		System.arraycopy(dyes, 0, aitemstack, 0, dyes.length);
 
-		AssemblyTableRecipe recipe = new AssemblyTableRecipe(j, k, itemstacks, aitemstack, result);
+		final AssemblyTableRecipe recipe = new AssemblyTableRecipe(j, k, itemstacks, aitemstack, result);
 		recipes.add(recipe);
 	}
 
-	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {
+	public ItemStack findMatchingRecipe(final InventoryCrafting inventory, final World world) {
 		ItemStack itemstack = null;
 		ItemStack itemstack1 = null;
 		int i = 0;
 		int j;
 
 		for(j = 0; j < inventory.getSizeInventory(); ++j) {
-			ItemStack itemstack2 = inventory.getStackInSlot(j);
+			final ItemStack itemstack2 = inventory.getStackInSlot(j);
 
 			if(itemstack2 != null) {
 				if(i == 0) {
@@ -109,10 +109,10 @@ public class AssemblyTableCraftingManager {
 		}
 
 		if(i == 2 && itemstack.getItem() == itemstack1.getItem() && itemstack.stackSize == 1 && itemstack1.stackSize == 1 && itemstack.getItem().isRepairable()) {
-			Item item = itemstack.getItem();
-			int j1 = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
-			int k = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
-			int l = j1 + k + item.getMaxDamage() * 5 / 100;
+			final Item item = itemstack.getItem();
+			final int j1 = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
+			final int k = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
+			final int l = j1 + k + item.getMaxDamage() * 5 / 100;
 			int i1 = item.getMaxDamage() - l;
 
 			if(i1 < 0) {
@@ -123,7 +123,7 @@ public class AssemblyTableCraftingManager {
 		}
 		else {
 			for(j = 0; j < recipes.size(); ++j) {
-				IRecipe irecipe = (IRecipe) recipes.get(j);
+				final IRecipe irecipe = (IRecipe) recipes.get(j);
 
 				if(irecipe.matches(inventory, world)) {
 					return irecipe.getCraftingResult(inventory);
@@ -134,27 +134,27 @@ public class AssemblyTableCraftingManager {
 		}
 	}
 
-	public Map<Integer, Integer> getDecrMap(ItemStack result) {
-		Map<Integer, Integer> map = Maps.newHashMap();
+	public Map<Integer, Integer> getDecrMap(final ItemStack result) {
+		final Map<Integer, Integer> map = Maps.newHashMap();
 
-		for(IRecipe recipe : (List<IRecipe>) getRecipeList()) {
-			ItemStack itemstack = recipe.getRecipeOutput();
+		for(final IRecipe recipe : (List<IRecipe>) getRecipeList()) {
+			final ItemStack itemstack = recipe.getRecipeOutput();
 
 			if(itemstack != null && result != null && itemstack.getItem() == result.getItem() && itemstack.getItemDamage() == result.getItemDamage()) {
-				AssemblyTableRecipe recipe1 = (AssemblyTableRecipe) recipe;
+				final AssemblyTableRecipe recipe1 = (AssemblyTableRecipe) recipe;
 
 				for(int i = 0; i < recipe1.recipeItems.length; ++i) {
-					ItemStack itemstack1 = recipe1.recipeItems[i];
+					final ItemStack itemstack1 = recipe1.recipeItems[i];
 
 					if(itemstack1 != null) {
 						map.put(i, itemstack1.stackSize);
 					}
 				}
 
-				int[] aint = {0, 4, 20};
+				final int[] aint = {0, 4, 20};
 
 				for(int i = 0; i < recipe1.recipeDyes.length; ++i) {
-					ItemStack itemstack1 = recipe1.recipeDyes[i];
+					final ItemStack itemstack1 = recipe1.recipeDyes[i];
 
 					if(itemstack1 != null) {
 						map.put(aint[i], itemstack1.stackSize);

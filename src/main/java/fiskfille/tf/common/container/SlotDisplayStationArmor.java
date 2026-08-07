@@ -17,7 +17,7 @@ public class SlotDisplayStationArmor extends Slot {
 	private final TileEntityDisplayStation tile;
 	private final boolean type;
 
-	public SlotDisplayStationArmor(ContainerDisplayStationArmor parent, IInventory inventory, TileEntityDisplayStation tile, int id, int x, int y) {
+	public SlotDisplayStationArmor(final ContainerDisplayStationArmor parent, final IInventory inventory, final TileEntityDisplayStation tile, final int id, final int x, final int y) {
 		super(inventory, id, x, y);
 		this.parent = parent;
 		this.tile = tile;
@@ -30,7 +30,7 @@ public class SlotDisplayStationArmor extends Slot {
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack itemstack) {
+	public boolean isItemValid(final ItemStack itemstack) {
 		final boolean flag = itemstack.getItem() instanceof ItemTransformerArmor;
 		return type ? flag : !flag && tile.getStackInSlot(slotNumber % 4) != null;
 	}
@@ -42,7 +42,7 @@ public class SlotDisplayStationArmor extends Slot {
 	}
 
 	@Override
-	public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack) {
+	public void onPickupFromSlot(final EntityPlayer player, final ItemStack itemstack) {
 		super.onPickupFromSlot(player, itemstack);
 
 		final int piece = slotNumber % 4;
@@ -58,7 +58,7 @@ public class SlotDisplayStationArmor extends Slot {
 	}
 
 	@Override
-	public void putStack(ItemStack itemstack) {
+	public void putStack(final ItemStack itemstack) {
 		super.putStack(itemstack);
 
 		final int piece = slotNumber % 4;

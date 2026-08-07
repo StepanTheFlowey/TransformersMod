@@ -35,14 +35,14 @@ import java.util.Map;
 import java.util.Random;
 import java.util.WeakHashMap;
 
-public class TFRenderHelper {
+public final class TFRenderHelper {
 	public static final int LIGHTING_LUMINOUS = 0xF0F0;
 	private static final RenderItem itemRender = new RenderItem();
 	private static final Map<EntityPlayer, Double> previousMotionY = new WeakHashMap<>();
 	private static float lastBrightnessX;
 	private static float lastBrightnessY;
 
-	public static void setLighting(int lighting) {
+	public static void setLighting(final int lighting) {
 		lastBrightnessX = OpenGlHelper.lastBrightnessX;
 		lastBrightnessY = OpenGlHelper.lastBrightnessY;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lighting % 65536 / 255F, lighting / 65536F / 255F);
@@ -52,14 +52,14 @@ public class TFRenderHelper {
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
 	}
 
-	public static float[] hexToRGB(int hex) {
+	public static float[] hexToRGB(final int hex) {
 		final float r = ((hex & 0xFF0000) >> 16) / 255F;
 		final float g = ((hex & 0xFF00) >> 8) / 255F;
 		final float b = (hex & 0xFF) / 255F;
 		return new float[]{r, g, b};
 	}
 
-	public static void setupRenderLayers(Entity entity, ItemStack itemstack, ModelRenderer model) {
+	public static void setupRenderLayers(final Entity entity, final ItemStack itemstack, final ModelRenderer model) {
 		if(itemstack != null && itemstack.getItem() instanceof ItemTransformerArmor) {
 			final TransformerModel tfModel = TFModelRegistry.getModel(((ItemTransformerArmor) itemstack.getItem()).getTransformer());
 
@@ -103,7 +103,7 @@ public class TFRenderHelper {
 		}
 	}
 
-	public static void startGlScissor(int x, int y, int width, int height) {
+	public static void startGlScissor(int x, int y, final int width, final int height) {
 		final ScaledResolution reso = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 		final double scaleW = Minecraft.getMinecraft().displayWidth / reso.getScaledWidth_double();
 		final double scaleH = Minecraft.getMinecraft().displayHeight / reso.getScaledHeight_double();
@@ -131,18 +131,18 @@ public class TFRenderHelper {
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);
 	}
 
-	public static double getMotionY(EntityPlayer player) {
+	public static double getMotionY(final EntityPlayer player) {
 		final double current = player == Minecraft.getMinecraft().thePlayer ? player.motionY : player.posY - player.prevPosY;
 		final double previous = previousMotionY.getOrDefault(player, 0D);
 
 		return TFHelper.median(current, previous, ClientTickHandler.renderTick);
 	}
 
-	public static void updateMotionY(EntityPlayer player) {
+	public static void updateMotionY(final EntityPlayer player) {
 		previousMotionY.put(player, player == Minecraft.getMinecraft().thePlayer ? player.motionY : player.posY - player.prevPosY);
 	}
 
-	public static void renderTag(String s, float x, float y, float z) {
+	public static void renderTag(final String s, final float x, final float y, final float z) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glNormal3f(0, 1, 0);
@@ -178,7 +178,7 @@ public class TFRenderHelper {
 		GL11.glPopMatrix();
 	}
 
-	public static void faceVec(Vec3 src, Vec3 dst) {
+	public static void faceVec(final Vec3 src, final Vec3 dst) {
 		final double d0 = dst.xCoord - src.xCoord;
 		final double d1 = dst.yCoord - src.yCoord;
 		final double d2 = dst.zCoord - src.zCoord;
@@ -188,7 +188,7 @@ public class TFRenderHelper {
 		GL11.glRotated(Math.toDegrees(Math.atan2(d1, d3)), -1, 0, 0);
 	}
 
-	public static void renderEnergyTransmissions(TileEntity transmitterTile, double x, double y, double z) {
+	public static void renderEnergyTransmissions(final TileEntity transmitterTile, final double x, final double y, final double z) {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -232,7 +232,8 @@ public class TFRenderHelper {
 					dstOffset1 = ((IReceiverRender) entry.getTile()).getRenderInputOffset();
 				}
 
-				Vec3 srcOffset, dstOffset;
+				final Vec3 srcOffset;
+				final Vec3 dstOffset;
 				if(invertCurrent) {
 					tile = entry.getTile();
 					entry = new ReceiverEntry(transmitterTile);
@@ -272,8 +273,8 @@ public class TFRenderHelper {
 
 				int primary = 0x57ABAF;
 				int secondary = 0x7BF2F8;
-				int parentPrimary = primary;
-				int parentSecondary = secondary;
+				final int parentPrimary = primary;
+				final int parentSecondary = secondary;
 
 				if(!canReach) {
 					primary = 0xAF5B57;
@@ -307,7 +308,7 @@ public class TFRenderHelper {
 		GL11.glPopMatrix();
 	}
 
-	public static void renderEnergyBeam(Vec3 src, Vec3 dst, int primaryColor, int secondaryColor, int primaryParentColor, int secondaryParentColor) {
+	public static void renderEnergyBeam(final Vec3 src, final Vec3 dst, final int primaryColor, final int secondaryColor, final int primaryParentColor, final int secondaryParentColor) {
 		final Tessellator tessellator = Tessellator.instance;
 		final float partialTicks = ClientTickHandler.renderTick;
 		final float[] primary = hexToRGB(primaryColor);
@@ -367,7 +368,7 @@ public class TFRenderHelper {
 		}
 	}
 
-	public static void renderEnergyStatic(Vec3 src, Vec3 dst, double width, float intensity, int segments, long seed) {
+	public static void renderEnergyStatic(Vec3 src, Vec3 dst, final double width, final float intensity, final int segments, final long seed) {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
@@ -453,11 +454,11 @@ public class TFRenderHelper {
 		GL11.glPopMatrix();
 	}
 
-	public static int getBlockDestroyProgress(World world, int x, int y, int z) {
+	public static int getBlockDestroyProgress(final World world, final int x, final int y, final int z) {
 		final Map damagedBlocks = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, Minecraft.getMinecraft().renderGlobal, "damagedBlocks", "field_72738_E", "O");
 
 		if(!damagedBlocks.isEmpty()) {
-			for(Object o : damagedBlocks.values()) {
+			for(final Object o : damagedBlocks.values()) {
 				final DestroyBlockProgress progress = (DestroyBlockProgress) o;
 				final int metadata = world.getBlockMetadata(progress.getPartialBlockX(), progress.getPartialBlockY(), progress.getPartialBlockZ());
 				final int[] offsets = TFTileHelper.getTileBaseOffsets(world.getTileEntity(x, y, z), metadata);
@@ -471,7 +472,7 @@ public class TFRenderHelper {
 		return -1;
 	}
 
-	public static void renderBlock(Block block, IIcon icon, RenderBlocks renderer) {
+	public static void renderBlock(final Block block, final IIcon icon, final RenderBlocks renderer) {
 		final Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
@@ -505,7 +506,7 @@ public class TFRenderHelper {
 		tessellator.draw();
 	}
 
-	public static void renderBlock(Block block, int meta, RenderBlocks renderer) {
+	public static void renderBlock(final Block block, final int meta, final RenderBlocks renderer) {
 		final Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
@@ -539,7 +540,7 @@ public class TFRenderHelper {
 		tessellator.draw();
 	}
 
-	public static void renderBlockAllFaces(RenderBlocks renderer, Block block, int x, int y, int z, IIcon icon) {
+	public static void renderBlockAllFaces(final RenderBlocks renderer, final Block block, final int x, final int y, final int z, final IIcon icon) {
 		renderer.renderFaceYNeg(block, x, y, z, icon);
 		renderer.renderFaceYPos(block, x, y, z, icon);
 		renderer.renderFaceZNeg(block, x, y, z, icon);
@@ -548,15 +549,15 @@ public class TFRenderHelper {
 		renderer.renderFaceXPos(block, x, y, z, icon);
 	}
 
-	public static boolean shouldOverrideView(EntityPlayer player) {
+	public static boolean shouldOverrideView(final EntityPlayer player) {
 		return TFHelper.getHeight(player) != 1.8F || TFHelper.getScale(player) != 1;
 	}
 
-	public static boolean shouldOverrideThirdPersonDistance(EntityPlayer player) {
+	public static boolean shouldOverrideThirdPersonDistance(final EntityPlayer player) {
 		return player.ridingEntity == null && (TFHelper.getTransformer(player) != null || TFData.PREV_TRANSFORMER.get(player) != null);
 	}
 
-	public static void renderItemIntoGUI(int x, int y, ItemStack itemstack) {
+	public static void renderItemIntoGUI(final int x, final int y, final ItemStack itemstack) {
 		if(itemstack == null) {
 			return;
 		}

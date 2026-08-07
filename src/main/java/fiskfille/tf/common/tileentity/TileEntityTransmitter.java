@@ -68,7 +68,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 					final List<ReceiverEntry> receiversToPower = TFEnergyHelper.getReceiversToPower(this);
 					final float f = Math.min(getEnergy(), getTransmissionRate()) / receiversToPower.size();
 
-					for(ReceiverEntry entry : receiversToPower) {
+					for(final ReceiverEntry entry : receiversToPower) {
 						final IEnergyReceiver receiver = entry.getReceiver();
 
 						if(receiver.canReceiveEnergy(this)) {
@@ -84,7 +84,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 					final Map<String, Float> ratios = FluidEnergon.getRatios(fluidStack);
 					final int max = Math.min(10, fluidStack.amount);
 
-					for(Map.Entry<String, Float> e : ratios.entrySet()) {
+					for(final Map.Entry<String, Float> e : ratios.entrySet()) {
 						final Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
 
 						if(energon != null) {
@@ -136,7 +136,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 		if(getBlockMetadata() < 4) {
 			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
-			for(ReceiverEntry entry : receivers) {
+			for(final ReceiverEntry entry : receivers) {
 				final TileEntity tile = entry.getTile();
 
 				if(tile != null) {
@@ -149,7 +149,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 
 		if(nbt.getBoolean("Base")) {
@@ -163,7 +163,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 
 		final boolean base = getBlockMetadata() < 4;
@@ -201,17 +201,17 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 
 	@Override
 	public Vec3 getRenderOutputOffset() {
-		float f = animationTimer + TransformersMod.proxy.getRenderTick();
+		final float f = animationTimer + TransformersMod.proxy.getRenderTick();
 		return Vec3.createVectorHelper(0, 2 + (Math.cos(f / 10) * 2 + 2) / 16, 0);
 	}
 
 	@Override
-	public float receiveEnergy(float amount, boolean simulate) {
+	public float receiveEnergy(final float amount, final boolean simulate) {
 		return data.storage.add(amount, simulate);
 	}
 
 	@Override
-	public float extractEnergy(float amount, boolean simulate) {
+	public float extractEnergy(final float amount, final boolean simulate) {
 		return data.storage.remove(amount, simulate);
 	}
 
@@ -231,7 +231,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+	public int fill(final ForgeDirection from, final FluidStack resource, final boolean doFill) {
 		final FluidStack stack = data.tank.getFluid();
 
 		if(stack == null || stack.amount <= 0 || FluidStack.areFluidStackTagsEqual(stack, resource)) {
@@ -253,7 +253,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+	public FluidStack drain(final ForgeDirection from, final FluidStack resource, final boolean doDrain) {
 		if(resource == null || !resource.isFluidEqual(data.tank.getFluid())) {
 			return null;
 		}
@@ -262,43 +262,43 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+	public FluidStack drain(final ForgeDirection from, final int maxDrain, final boolean doDrain) {
 		return data.tank.drain(maxDrain, doDrain);
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
+	public boolean canFill(final ForgeDirection from, final Fluid fluid) {
 		return getBlockMetadata() < 4 && fluid == TFFluids.energon;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+	public boolean canDrain(final ForgeDirection from, final Fluid fluid) {
 		return getBlockMetadata() < 4;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+	public FluidTankInfo[] getTankInfo(final ForgeDirection from) {
 		return new FluidTankInfo[]{data.tank.getInfo()};
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
+	public int[] getAccessibleSlotsFromSide(final int side) {
 		return new int[]{0};
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack itemstack, int side) {
+	public boolean canInsertItem(final int slot, final ItemStack itemstack, final int side) {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return isItemValidForSlot(slot, itemstack);
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack itemstack, int side) {
+	public boolean canExtractItem(final int slot, final ItemStack itemstack, final int side) {
 		return ItemFuelCanister.isEmpty(itemstack);
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack itemstack) {
 		return itemstack.getItem() instanceof IFluidContainerItem && !ItemFuelCanister.isEmpty(itemstack) && ItemFuelCanister.getContainerFluid(itemstack).getFluid() == TFFluids.energon;
 	}
 
@@ -313,7 +313,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public void forceChunks(SubTicket subTicket) {
+	public void forceChunks(final SubTicket subTicket) {
 		releaseChunks();
 		chunkTicket = subTicket.owner;
 		TFChunkManager.forceChunk(subTicket.owner, ForcedChunk.fromTile(this));
@@ -332,7 +332,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public int[] getBaseOffsets(int metadata) {
+	public int[] getBaseOffsets(final int metadata) {
 		return new int[]{0, -metadata / 4, 0};
 	}
 }

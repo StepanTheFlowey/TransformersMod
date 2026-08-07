@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 import static codechicken.lib.gui.GuiDraw.changeTexture;
 import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
-public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
+public final class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 	public static TileEntityAlloyCrucible tileentity;
 
 	@Override
@@ -58,12 +58,12 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadCraftingRecipes(String outputId, Object... results) {
+	public void loadCraftingRecipes(final String outputId, final Object... results) {
 		if(outputId.equals("alloy_crucible") && getClass() == AlloyCrucibleRecipeHandler.class) {
-			Map<AlloyIngredients, ItemStack> recipes = AlloyRecipes.getInstance().getSmeltingList();
+			final Map<AlloyIngredients, ItemStack> recipes = AlloyRecipes.getInstance().getSmeltingList();
 
-			for(Entry<AlloyIngredients, ItemStack> e : recipes.entrySet()) {
-				AlloyPair recipe = new AlloyPair(e.getKey(), e.getValue());
+			for(final Entry<AlloyIngredients, ItemStack> e : recipes.entrySet()) {
+				final AlloyPair recipe = new AlloyPair(e.getKey(), e.getValue());
 				recipe.computeVisuals();
 				arecipes.add(recipe);
 			}
@@ -74,12 +74,12 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result) {
-		Map<AlloyIngredients, ItemStack> recipes = AlloyRecipes.getInstance().getSmeltingList();
+	public void loadCraftingRecipes(final ItemStack result) {
+		final Map<AlloyIngredients, ItemStack> recipes = AlloyRecipes.getInstance().getSmeltingList();
 
-		for(Entry<AlloyIngredients, ItemStack> e : recipes.entrySet()) {
+		for(final Entry<AlloyIngredients, ItemStack> e : recipes.entrySet()) {
 			if(NEIServerUtils.areStacksSameTypeCrafting(e.getValue(), result)) {
-				AlloyPair recipe = new AlloyPair(e.getKey(), e.getValue());
+				final AlloyPair recipe = new AlloyPair(e.getKey(), e.getValue());
 				recipe.computeVisuals();
 				arecipes.add(recipe);
 			}
@@ -87,11 +87,11 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadUsageRecipes(ItemStack ingredient) {
-		Map<AlloyIngredients, ItemStack> recipes = AlloyRecipes.getInstance().getSmeltingList();
+	public void loadUsageRecipes(final ItemStack ingredient) {
+		final Map<AlloyIngredients, ItemStack> recipes = AlloyRecipes.getInstance().getSmeltingList();
 
-		for(Entry<AlloyIngredients, ItemStack> e : recipes.entrySet()) {
-			AlloyPair recipe = new AlloyPair(e.getKey(), e.getValue());
+		for(final Entry<AlloyIngredients, ItemStack> e : recipes.entrySet()) {
+			final AlloyPair recipe = new AlloyPair(e.getKey(), e.getValue());
 
 			for(int i = 0; i < recipe.getIngredients().size(); ++i) {
 				if(recipe.getIngredients().get(i).contains(ingredient)) {
@@ -109,28 +109,28 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void drawExtras(int recipe) {
+	public void drawExtras(final int recipe) {
 		drawProgressBar(102, 40, 192, 0, 14, 14, 48, 3);
 		drawProgressBar(44, 8, 176, 0, 16, 52, 52 * 48, 7);
 	}
 
 	@Override
-	public void drawBackground(int recipe) {
+	public void drawBackground(final int recipe) {
 		GL11.glColor3f(1F, 1F, 1F);
 		changeTexture(getGuiTexture());
 		drawTexturedModalRect(0, 0, 5, 11, 166, 65);
 	}
 
 	@Override
-	public List<String> handleTooltip(GuiRecipe<?> gui, List<String> currenttip, int recipe) {
+	public List<String> handleTooltip(final GuiRecipe<?> gui, List<String> currenttip, final int recipe) {
 		currenttip = super.handleTooltip(gui, currenttip, recipe);
 
-		int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 4);
-		int guiTop = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 5);
+		final int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 4);
+		final int guiTop = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 5);
 
-		Point pos = GuiDraw.getMousePosition();
-		Point offset = gui.getRecipePosition(recipe);
-		Point relMouse = new Point(pos.x - guiLeft - offset.x, pos.y - guiTop - offset.y);
+		final Point pos = GuiDraw.getMousePosition();
+		final Point offset = gui.getRecipePosition(recipe);
+		final Point relMouse = new Point(pos.x - guiLeft - offset.x, pos.y - guiTop - offset.y);
 
 		if(new Rectangle(44, 8, 16, 52).contains(relMouse)) {
 			if(currenttip.isEmpty()) {
@@ -151,15 +151,15 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 		public final ArrayList<PositionedStack> ingredients;
 		public final PositionedStack result;
 
-		public AlloyPair(AlloyIngredients alloy, ItemStack out) {
+		public AlloyPair(final AlloyIngredients alloy, final ItemStack out) {
 			result = new PositionedStack(out, 107 - 5, 28 - 11);
 			ingredients = new ArrayList<>();
 
 			for(int i = 0; i < alloy.getIngredients().length; ++i) {
-				LinkedList<ItemStack> ingredients = Lists.newLinkedList();
-				List<String> list = alloy.getOreDictNames(i);
+				final LinkedList<ItemStack> ingredients = Lists.newLinkedList();
+				final List<String> list = alloy.getOreDictNames(i);
 
-				for(String s : list) {
+				for(final String s : list) {
 					ingredients.addAll(OreDictionary.getOres(s));
 				}
 
@@ -173,9 +173,9 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 			}
 		}
 
-		private void addSlotToContainer(int x, int y, Object item) {
+		private void addSlotToContainer(final int x, final int y, final Object item) {
 			if(item != null) {
-				PositionedStack stack = new PositionedStack(item, x - 5, y - 11, false);
+				final PositionedStack stack = new PositionedStack(item, x - 5, y - 11, false);
 				ingredients.add(stack);
 			}
 		}
@@ -191,7 +191,7 @@ public class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 		}
 
 		public void computeVisuals() {
-			for(PositionedStack p : ingredients) {
+			for(final PositionedStack p : ingredients) {
 				p.generatePermutations();
 			}
 		}

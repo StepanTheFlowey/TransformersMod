@@ -15,14 +15,14 @@ public class DataCore {
 
 	public final int index;
 
-	public DataCore(String s, int i) {
+	public DataCore(final String s, final int i) {
 		id = s;
 		color = i;
 		index = dataCores.size();
 		dataCores.add(this);
 	}
 
-	public static DataCore get(int index) {
+	public static DataCore get(final int index) {
 		return dataCores.get(index);
 	}
 

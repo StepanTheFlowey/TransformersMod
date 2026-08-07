@@ -14,7 +14,7 @@ public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 	private final ModelEnergonProcessor model = new ModelEnergonProcessor();
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energon_processor.png");
 
-	public void render(TileEntityEnergonProcessor tileentity, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityEnergonProcessor tileentity, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
 
 		if(tileentity.getWorldObj() != null) {
@@ -40,7 +40,7 @@ public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 		GL11.glEnable(GL11.GL_LIGHTING);
 
 		if(tileentity.getWorldObj() != null) {
-			int progress = TFRenderHelper.getBlockDestroyProgress(tileentity.getWorldObj(), tileentity.xCoord, tileentity.yCoord, tileentity.zCoord);
+			final int progress = TFRenderHelper.getBlockDestroyProgress(tileentity.getWorldObj(), tileentity.xCoord, tileentity.yCoord, tileentity.zCoord);
 
 			if(progress >= 0) {
 				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -65,7 +65,7 @@ public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityEnergonProcessor) tileentity, d, d1, d2, f);
 	}
 }

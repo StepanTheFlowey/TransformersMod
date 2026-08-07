@@ -33,7 +33,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 
 	private GuiHoverFieldEnergy fieldEnergy;
 
-	public GuiAlloyCrucible(InventoryPlayer inventoryPlayer, TileEntityAlloyCrucible tile) {
+	public GuiAlloyCrucible(final InventoryPlayer inventoryPlayer, final TileEntityAlloyCrucible tile) {
 		super(new ContainerAlloyCrucible(inventoryPlayer, tile));
 		tileentity = tile;
 		ySize = 170;
@@ -58,7 +58,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		switch(button.id) {
 			case 0:
 				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, 0));
@@ -76,7 +76,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 	}
 
 	@Override
-	public void render(GuiButton button, int mouseX, int mouseY) {
+	public void render(final GuiButton button, final int mouseX, final int mouseY) {
 		if(button.id == 0) {
 			final EnumSmeltingMode mode = tileentity.smeltingMode;
 			final IIcon alloyIcon = TFBlocks.alloyCrucible.getIcon(2, 2);
@@ -116,23 +116,23 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 	}
 
 	@Override
-	public List<String> getHoverText(GuiButton button) {
+	public List<String> getHoverText(final GuiButton button) {
 		return Arrays.asList(I18n.format("gui.alloy_crucible.mode"), EnumChatFormatting.GRAY + I18n.format(String.format("gui.alloy_crucible.mode.%s", tileentity.smeltingMode.name().toLowerCase(Locale.ENGLISH))));
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = I18n.format(tileentity.getInventoryName());
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 94, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		GL11.glColor3f(1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(texture);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
+		final int x = (width - xSize) / 2;
+		final int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		if(tileentity.getEnergy() > 0) {

@@ -9,12 +9,12 @@ public class TexturedQuadPartial {
 	public PositionTextureVertex[] vertexPositions;
 	private boolean invertNormal;
 
-	public TexturedQuadPartial(PositionTextureVertex[] vertices) {
+	public TexturedQuadPartial(final PositionTextureVertex[] vertices) {
 		vertexPositions = vertices;
 		nVertices = vertices.length;
 	}
 
-	public TexturedQuadPartial(PositionTextureVertex[] vertices, double f0, double f1, double f2, double f3, double width, double height) {
+	public TexturedQuadPartial(final PositionTextureVertex[] vertices, final double f0, final double f1, final double f2, final double f3, final double width, final double height) {
 		this(vertices);
 		final double x = 1 / width, y = 1 / height;
 		vertices[0] = vertices[0].setTexturePosition((float) (f2 / width - x), (float) (f1 / height + y));
@@ -33,7 +33,7 @@ public class TexturedQuadPartial {
 		vertexPositions = vertex;
 	}
 
-	public void draw(Tessellator tessellator, double f) {
+	public void draw(final Tessellator tessellator, final double f) {
 		final Vec3 vec3 = vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D);
 		final Vec3 vec31 = vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D);
 		final Vec3 vec32 = vec31.crossProduct(vec3).normalize();

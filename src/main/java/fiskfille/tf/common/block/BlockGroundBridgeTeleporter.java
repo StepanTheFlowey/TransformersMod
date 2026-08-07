@@ -35,7 +35,7 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		// setLightLevel(1);
 	}
 
-	public static void spawnTeleporter(World world, int x, int y, int z, TileEntityControlPanel tile) {
+	public static void spawnTeleporter(final World world, final int x, final int y, final int z, final TileEntityControlPanel tile) {
 		if(!tile.data.errors.isEmpty()) {
 			return;
 		}
@@ -48,16 +48,16 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		}
 	}
 
-	public static void doTeleport(Entity entity, TileEntityGroundBridgeTeleporter teleporter) {
+	public static void doTeleport(final Entity entity, final TileEntityGroundBridgeTeleporter teleporter) {
 		if(!entity.worldObj.isRemote) {
 //            TFNetworkManager.networkWrapper.sendToDimension(new MessageGroundBridgeTeleport(entity, teleporter), entity.dimension);
 			doTeleportClient(entity, teleporter);
 		}
 	}
 
-	public static void doTeleportClient(Entity entity, TileEntityGroundBridgeTeleporter teleporter) {
+	public static void doTeleportClient(final Entity entity, final TileEntityGroundBridgeTeleporter teleporter) {
 		if(teleporter.controlPanel != null) {
-			TileDataControlPanel data = (TileDataControlPanel) TFTileHelper.getTileData(teleporter.controlPanel);
+			final TileDataControlPanel data = (TileDataControlPanel) TFTileHelper.getTileData(teleporter.controlPanel);
 
 			if(data != null) {
 				if(data.framePos != null) {
@@ -77,13 +77,13 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 						dstYaw = data.frameDirection;
 					}
 
-					float yawDiff = entity.rotationYaw - (srcYaw * 90 + 180);
-					float yaw = dstYaw * 90 + 180 * 90 + yawDiff;
+					final float yawDiff = entity.rotationYaw - (srcYaw * 90 + 180);
+					final float yaw = dstYaw * 90 + 180 * 90 + yawDiff;
 
 					if(entity instanceof EntityPlayerMP) {
-						EntityPlayerMP playerMP = (EntityPlayerMP) entity;
-						double motionX = entity.motionX;
-						double motionZ = entity.motionZ;
+						final EntityPlayerMP playerMP = (EntityPlayerMP) entity;
+						final double motionX = entity.motionX;
+						final double motionZ = entity.motionZ;
 
 						if(dimension != entity.dimension) {
 							playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, dimension, new TeleporterGroundBridge(playerMP.mcServer.worldServerForDimension(dimension)));
@@ -94,8 +94,8 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 						entity.motionZ = motionZ;
 					}
 					else if(!(entity instanceof EntityPlayer) && dimension == entity.dimension) {
-						double motionX = entity.motionX;
-						double motionZ = entity.motionZ;
+						final double motionX = entity.motionX;
+						final double motionZ = entity.motionZ;
 
 //                        TODO: Re-enable Ground Bridge functionality for non-player entities
 //                        if (dimension != entity.dimension)
@@ -112,16 +112,16 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		}
 	}
 
-	public static int func_149999_b(int meta) {
+	public static int func_149999_b(final int meta) {
 		return meta & 3;
 	}
 
-	public static boolean isReturnPortal(int metadata) {
+	public static boolean isReturnPortal(final int metadata) {
 		return metadata > 1;
 	}
 
-	public static boolean isNorthSouthFacingFramePresent(IBlockAccess world, int x, int y, int z) {
-		Block b = TFBlocks.groundBridgeFrame;
+	public static boolean isNorthSouthFacingFramePresent(final IBlockAccess world, final int x, final int y, final int z) {
+		final Block b = TFBlocks.groundBridgeFrame;
 
 		if(world.getBlock(x, y, z) == b && world.getBlock(x - 1, y, z) == b && world.getBlock(x + 1, y, z) == b) {
 			if(world.getBlock(x - 2, y + 1, z) == b && world.getBlock(x + 2, y + 1, z) == b) {
@@ -144,8 +144,8 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		return false;
 	}
 
-	public static boolean isEastWestFacingFramePresent(IBlockAccess world, int x, int y, int z) {
-		Block b = TFBlocks.groundBridgeFrame;
+	public static boolean isEastWestFacingFramePresent(final IBlockAccess world, final int x, final int y, final int z) {
+		final Block b = TFBlocks.groundBridgeFrame;
 
 		if(world.getBlock(x, y, z) == b && world.getBlock(x, y, z - 1) == b && world.getBlock(x, y, z + 1) == b) {
 			if(world.getBlock(x, y + 1, z - 2) == b && world.getBlock(x, y + 1, z + 2) == b) {
@@ -168,9 +168,9 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		return false;
 	}
 
-	public static void fillNorthFacingFrame(World world, int x, int y, int z, Block block, TileEntityControlPanel tile, boolean returnPortal) {
-		DimensionalCoords coords = new DimensionalCoords(tile);
-		int metadata = returnPortal ? 2 : 0;
+	public static void fillNorthFacingFrame(final World world, final int x, final int y, final int z, final Block block, final TileEntityControlPanel tile, final boolean returnPortal) {
+		final DimensionalCoords coords = new DimensionalCoords(tile);
+		final int metadata = returnPortal ? 2 : 0;
 
 		for(int i = 0; i < 5; ++i) {
 			for(int j = 0; j < 3; ++j) {
@@ -178,11 +178,11 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 				int l = 0;
 
 				if(world.getTileEntity(x - 1 + j, y + 1 + i, z) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 1 + j, y + 1 + i, z);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 1 + j, y + 1 + i, z);
 					k = tileentity.ticks;
 				}
 				if(world.getTileEntity(x - 2 + i, y + 2 + j, z) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 2 + i, y + 2 + j, z);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 2 + i, y + 2 + j, z);
 					l = tileentity.ticks;
 				}
 
@@ -190,13 +190,13 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 				world.setBlock(x - 2 + i, y + 2 + j, z, block, metadata, 2);
 
 				if(world.getTileEntity(x - 1 + j, y + 1 + i, z) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 1 + j, y + 1 + i, z);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 1 + j, y + 1 + i, z);
 					tileentity.controlPanel = coords;
 					tileentity.lastUpdate = 0;
 					tileentity.ticks = ++k;
 				}
 				if(world.getTileEntity(x - 2 + i, y + 2 + j, z) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 2 + i, y + 2 + j, z);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x - 2 + i, y + 2 + j, z);
 					tileentity.controlPanel = coords;
 					tileentity.lastUpdate = 0;
 					tileentity.ticks = l;
@@ -207,9 +207,9 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		world.setBlockMetadataWithNotify(x, y + 3, z, metadata + 1, 2);
 	}
 
-	public static void fillEastFacingFrame(World world, int x, int y, int z, Block block, TileEntityControlPanel tile, boolean returnPortal) {
-		DimensionalCoords coords = new DimensionalCoords(tile);
-		int metadata = returnPortal ? 2 : 0;
+	public static void fillEastFacingFrame(final World world, final int x, final int y, final int z, final Block block, final TileEntityControlPanel tile, final boolean returnPortal) {
+		final DimensionalCoords coords = new DimensionalCoords(tile);
+		final int metadata = returnPortal ? 2 : 0;
 
 		for(int i = 0; i < 5; ++i) {
 			for(int j = 0; j < 3; ++j) {
@@ -217,11 +217,11 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 				int l = 0;
 
 				if(world.getTileEntity(x, y + 1 + i, z - 1 + j) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 1 + i, z - 1 + j);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 1 + i, z - 1 + j);
 					k = tileentity.ticks;
 				}
 				if(world.getTileEntity(x, y + 2 + j, z - 2 + i) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 2 + j, z - 2 + i);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 2 + j, z - 2 + i);
 					l = tileentity.ticks;
 				}
 
@@ -229,13 +229,13 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 				world.setBlock(x, y + 2 + j, z - 2 + i, block, metadata, 2);
 
 				if(world.getTileEntity(x, y + 1 + i, z - 1 + j) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 1 + i, z - 1 + j);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 1 + i, z - 1 + j);
 					tileentity.controlPanel = coords;
 					tileentity.lastUpdate = 0;
 					tileentity.ticks = ++k;
 				}
 				if(world.getTileEntity(x, y + 2 + j, z - 2 + i) instanceof TileEntityGroundBridgeTeleporter) {
-					TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 2 + j, z - 2 + i);
+					final TileEntityGroundBridgeTeleporter tileentity = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y + 2 + j, z - 2 + i);
 					tileentity.controlPanel = coords;
 					tileentity.lastUpdate = 0;
 					tileentity.ticks = l;
@@ -247,23 +247,23 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world, final int x, final int y, final int z) {
 		return null;
 	}
 
-	public boolean canPaneConnectTo(IBlockAccess world, int x, int y, int z, ForgeDirection dir) {
+	public boolean canPaneConnectTo(final IBlockAccess world, final int x, final int y, final int z, final ForgeDirection dir) {
 		return world.getBlock(x, y, z) == TFBlocks.groundBridgeTeleporter;
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		float thickness = 0.125F;
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
+		final float thickness = 0.125F;
 		float f = 0.5F - thickness;
 		float f1 = 0.5F + thickness;
 		float f2 = 0.5F - thickness;
 		float f3 = 0.5F + thickness;
-		boolean flag = canPaneConnectTo(world, x, y, z - 1, NORTH) || canPaneConnectTo(world, x, y, z + 1, SOUTH);
-		boolean flag1 = canPaneConnectTo(world, x - 1, y, z, WEST) || canPaneConnectTo(world, x + 1, y, z, EAST);
+		final boolean flag = canPaneConnectTo(world, x, y, z - 1, NORTH) || canPaneConnectTo(world, x, y, z + 1, SOUTH);
+		final boolean flag1 = canPaneConnectTo(world, x - 1, y, z, WEST) || canPaneConnectTo(world, x + 1, y, z, EAST);
 
 		if(!flag && flag1) {
 			f = 0F;
@@ -285,7 +285,7 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+	public boolean shouldSideBeRendered(final IBlockAccess world, final int x, final int y, final int z, final int side) {
 		int i1 = 0;
 
 		if(world.getBlock(x, y, z) == this) {
@@ -304,17 +304,17 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 			}
 		}
 
-		boolean flag = world.getBlock(x - 1, y, z) == this && world.getBlock(x - 2, y, z) != this;
-		boolean flag1 = world.getBlock(x + 1, y, z) == this && world.getBlock(x + 2, y, z) != this;
-		boolean flag2 = world.getBlock(x, y, z - 1) == this && world.getBlock(x, y, z - 2) != this;
-		boolean flag3 = world.getBlock(x, y, z + 1) == this && world.getBlock(x, y, z + 2) != this;
-		boolean flag4 = flag || flag1 || i1 == 1;
-		boolean flag5 = flag2 || flag3 || i1 == 2;
+		final boolean flag = world.getBlock(x - 1, y, z) == this && world.getBlock(x - 2, y, z) != this;
+		final boolean flag1 = world.getBlock(x + 1, y, z) == this && world.getBlock(x + 2, y, z) != this;
+		final boolean flag2 = world.getBlock(x, y, z - 1) == this && world.getBlock(x, y, z - 2) != this;
+		final boolean flag3 = world.getBlock(x, y, z + 1) == this && world.getBlock(x, y, z + 2) != this;
+		final boolean flag4 = flag || flag1 || i1 == 1;
+		final boolean flag5 = flag2 || flag3 || i1 == 2;
 		return flag4 && side == 4 || flag4 && side == 5 || flag5 && side == 2 || flag5 && side == 3;
 	}
 
 	@Override
-	public int quantityDropped(Random rand) {
+	public int quantityDropped(final Random rand) {
 		return 0;
 	}
 
@@ -324,11 +324,11 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+	public void onEntityCollidedWithBlock(final World world, final int x, final int y, final int z, final Entity entity) {
 		if(!world.isRemote) {
 			if(entity.ridingEntity == null && entity.riddenByEntity == null) {
 				if(TFEntityData.getData(entity).groundBridgeCooldown == 0) {
-					TileEntityGroundBridgeTeleporter teleporter = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y, z);
+					final TileEntityGroundBridgeTeleporter teleporter = (TileEntityGroundBridgeTeleporter) world.getTileEntity(x, y, z);
 
 					if(teleporter != null && teleporter.controlPanel != null) {
 						doTeleport(entity, teleporter);
@@ -348,12 +348,12 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z) {
+	public Item getItem(final World world, final int x, final int y, final int z) {
 		return Item.getItemById(0);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public TileEntity createNewTileEntity(final World world, final int metadata) {
 		return new TileEntityGroundBridgeTeleporter();
 	}
 }

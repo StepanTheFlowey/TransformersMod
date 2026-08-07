@@ -113,13 +113,13 @@ public class ModelSkystrikesCrossbow extends MowzieModelBase {
 		handle.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x) {
+	private void setRotation(final ModelRenderer model, final float x) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = 0;
 		model.rotateAngleZ = 0;
 	}
 
-	public void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void setRotationAngles(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5) {
 		if(entity instanceof EntityPlayer) {
 			final ItemStack itemstack = ((EntityPlayer) entity).getHeldItem();
 

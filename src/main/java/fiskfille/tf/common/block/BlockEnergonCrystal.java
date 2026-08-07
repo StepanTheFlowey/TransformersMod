@@ -23,7 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvider, IEnergon {
 	private final Energon energonType;
 
-	public BlockEnergonCrystal(Energon type) {
+	public BlockEnergonCrystal(final Energon type) {
 		super(TFMaterial.energon);
 		energonType = type;
 
@@ -35,7 +35,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 	}
 
 	@Override
-	public int getMixedBrightnessForBlock(IBlockAccess world, int x, int y, int z) {
+	public int getMixedBrightnessForBlock(final IBlockAccess world, final int x, final int y, final int z) {
 		return 255;
 	}
 
@@ -50,7 +50,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 	}
 
 	@Override
-	public MapColor getMapColor(int metadata) {
+	public MapColor getMapColor(final int metadata) {
 		return MapColor.airColor;
 	}
 
@@ -60,34 +60,34 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 	}
 
 	@Override
-	public int quantityDropped(Random random) {
+	public int quantityDropped(final Random random) {
 		return random.nextInt(3) + 2;
 	}
 
 	@Override
-	public Item getItemDropped(int metadata, Random random, int fortune) {
+	public Item getItemDropped(final int metadata, final Random random, final int fortune) {
 		return energonType.getCrystalPiece();
 	}
 
 	@Override
-	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
+	public int getExpDrop(final IBlockAccess world, final int metadata, final int fortune) {
 		return ThreadLocalRandom.current().nextInt(0, 3);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(final World world, final int x, final int y, final int z) {
 		setBlockBoundsBasedOnState(world, x, y, z);
 		return super.getSelectedBoundingBoxFromPool(world, x, y, z);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world, final int x, final int y, final int z) {
 		return null;
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
 		float f = 0.21F;
 		switch(ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).getOpposite()) {
 			case UP:
@@ -134,8 +134,8 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+	public boolean canPlaceBlockAt(final World world, final int x, final int y, final int z) {
+		for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			if(world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false)) {
 				return true;
 			}
@@ -145,14 +145,14 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+	public int onBlockPlaced(final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY, final float hitZ, final int metadata) {
 		final ForgeDirection dir = ForgeDirection.getOrientation(side).getOpposite();
 
 		if(world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false)) {
 			return side;
 		}
 
-		for(ForgeDirection dir1 : ForgeDirection.VALID_DIRECTIONS) {
+		for(final ForgeDirection dir1 : ForgeDirection.VALID_DIRECTIONS) {
 			if(world.isSideSolid(x + dir1.offsetX, y + dir1.offsetY, z + dir1.offsetZ, dir1.getOpposite(), false)) {
 				return dir1.getOpposite().ordinal();
 			}
@@ -162,7 +162,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+	public void onNeighborBlockChange(final World world, final int x, final int y, final int z, final Block block) {
 		final ForgeDirection dir = ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).getOpposite();
 
 		if(!world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite(), false)) {
@@ -189,7 +189,7 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
+	public TileEntity createNewTileEntity(final World world, final int metadata) {
 		return new TileEntityCrystal();
 	}
 }

@@ -4,12 +4,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants.NBT;
 
-public class TFArmorDyeHelper {
-	public static boolean isDyed(ItemStack itemstack) {
+public final class TFArmorDyeHelper {
+	public static boolean isDyed(final ItemStack itemstack) {
 		return itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("CustomColor");
 	}
 
-	public static void removeColor(ItemStack itemstack) {
+	public static void removeColor(final ItemStack itemstack) {
 		if(itemstack != null) {
 			if(!itemstack.hasTagCompound()) {
 				itemstack.setTagCompound(new NBTTagCompound());
@@ -21,13 +21,13 @@ public class TFArmorDyeHelper {
 		}
 	}
 
-	public static int getPrimaryColor(ItemStack itemstack) {
+	public static int getPrimaryColor(final ItemStack itemstack) {
 		if(itemstack != null) {
 			if(!itemstack.hasTagCompound()) {
 				itemstack.setTagCompound(new NBTTagCompound());
 			}
 
-			NBTTagCompound nbt = itemstack.getTagCompound().getCompoundTag("CustomColor");
+			final NBTTagCompound nbt = itemstack.getTagCompound().getCompoundTag("CustomColor");
 
 			if(nbt != null) {
 				return nbt.getInteger("PrimaryColor");
@@ -37,13 +37,13 @@ public class TFArmorDyeHelper {
 		return 0;
 	}
 
-	public static int getSecondaryColor(ItemStack itemstack) {
+	public static int getSecondaryColor(final ItemStack itemstack) {
 		if(itemstack != null) {
 			if(!itemstack.hasTagCompound()) {
 				itemstack.setTagCompound(new NBTTagCompound());
 			}
 
-			NBTTagCompound nbt = itemstack.getTagCompound().getCompoundTag("CustomColor");
+			final NBTTagCompound nbt = itemstack.getTagCompound().getCompoundTag("CustomColor");
 
 			if(nbt != null) {
 				return nbt.getInteger("SecondaryColor");
@@ -53,7 +53,7 @@ public class TFArmorDyeHelper {
 		return 0;
 	}
 
-	public static void setPrimaryColor(ItemStack itemstack, int i) {
+	public static void setPrimaryColor(final ItemStack itemstack, final int i) {
 		NBTTagCompound nbttagcompound = itemstack.getTagCompound();
 
 		if(nbttagcompound == null) {
@@ -61,7 +61,7 @@ public class TFArmorDyeHelper {
 			itemstack.setTagCompound(nbttagcompound);
 		}
 
-		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("CustomColor");
+		final NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("CustomColor");
 
 		if(!nbttagcompound.hasKey("CustomColor", NBT.TAG_COMPOUND)) {
 			nbttagcompound.setTag("CustomColor", nbttagcompound1);
@@ -70,7 +70,7 @@ public class TFArmorDyeHelper {
 		nbttagcompound1.setInteger("PrimaryColor", i);
 	}
 
-	public static void setSecondaryColor(ItemStack itemstack, int i) {
+	public static void setSecondaryColor(final ItemStack itemstack, final int i) {
 		NBTTagCompound nbttagcompound = itemstack.getTagCompound();
 
 		if(nbttagcompound == null) {
@@ -78,7 +78,7 @@ public class TFArmorDyeHelper {
 			itemstack.setTagCompound(nbttagcompound);
 		}
 
-		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("CustomColor");
+		final NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("CustomColor");
 
 		if(!nbttagcompound.hasKey("CustomColor", NBT.TAG_COMPOUND)) {
 			nbttagcompound.setTag("CustomColor", nbttagcompound1);
@@ -87,12 +87,12 @@ public class TFArmorDyeHelper {
 		nbttagcompound1.setInteger("SecondaryColor", i);
 	}
 
-	public static boolean areColorsIdentical(ItemStack... itemstacks) {
+	public static boolean areColorsIdentical(final ItemStack... itemstacks) {
 		if(itemstacks.length > 1) {
-			int primary = getPrimaryColor(itemstacks[0]);
-			int secondary = getSecondaryColor(itemstacks[0]);
+			final int primary = getPrimaryColor(itemstacks[0]);
+			final int secondary = getSecondaryColor(itemstacks[0]);
 
-			for(ItemStack itemstack : itemstacks) {
+			for(final ItemStack itemstack : itemstacks) {
 				if(itemstack == null || getPrimaryColor(itemstack) != primary || getSecondaryColor(itemstack) != secondary) {
 					return false;
 				}

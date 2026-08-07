@@ -14,7 +14,7 @@ import java.util.Random;
 
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.CUSTOM;
 
-public class TFWorldGenHandler {
+public final class TFWorldGenHandler {
 	public final WorldGenerator transformiumGen;
 	public final WorldGenerator energonGen;
 	public final WorldGenerator energonCrystalGen;
@@ -32,7 +32,7 @@ public class TFWorldGenHandler {
 	}
 
 	@SubscribeEvent
-	public void onOreGenPost(OreGenEvent.Post event) {
+	public void onOreGenPost(final OreGenEvent.Post event) {
 		world = event.world;
 		rand = event.rand;
 		xCoord = event.worldX;
@@ -43,7 +43,7 @@ public class TFWorldGenHandler {
 	}
 
 	@SubscribeEvent
-	public void onPopulateChunkPost(PopulateChunkEvent.Post event) {
+	public void onPopulateChunkPost(final PopulateChunkEvent.Post event) {
 		world = event.world;
 		rand = event.rand;
 		xCoord = event.chunkX * 16;
@@ -53,7 +53,7 @@ public class TFWorldGenHandler {
 		genStandardOre(10, redEnergonCrystalGen, 24);
 	}
 
-	protected void genStandardOre(int veins, WorldGenerator generator, int maxHeight) {
+	protected void genStandardOre(final int veins, final WorldGenerator generator, final int maxHeight) {
 		if(TerrainGen.generateOre(world, rand, generator, xCoord, zCoord, CUSTOM)) {
 			for(int i = 0; i < veins; ++i) {
 				final int x = xCoord + rand.nextInt(16);

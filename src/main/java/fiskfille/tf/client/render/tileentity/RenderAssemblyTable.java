@@ -15,7 +15,7 @@ public class RenderAssemblyTable extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/assembly_table.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/assembly_table_lights.png");
 
-	public void render(TileEntityAssemblyTable tileentity, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityAssemblyTable tileentity, final double x, final double y, final double z, final float partialTicks) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glScalef(1F, -1F, -1F);
@@ -33,7 +33,7 @@ public class RenderAssemblyTable extends TileEntitySpecialRenderer {
 		GL11.glEnable(GL11.GL_LIGHTING);
 
 		if(tileentity.getWorldObj() != null) {
-			int progress = TFRenderHelper.getBlockDestroyProgress(tileentity.getWorldObj(), tileentity.xCoord, tileentity.yCoord, tileentity.zCoord);
+			final int progress = TFRenderHelper.getBlockDestroyProgress(tileentity.getWorldObj(), tileentity.xCoord, tileentity.yCoord, tileentity.zCoord);
 
 			if(progress >= 0) {
 				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -60,7 +60,7 @@ public class RenderAssemblyTable extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityAssemblyTable) tileentity, d, d1, d2, f);
 	}
 }

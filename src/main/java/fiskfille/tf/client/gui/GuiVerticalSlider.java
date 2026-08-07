@@ -12,12 +12,12 @@ import org.lwjgl.opengl.GL11;
 public class GuiVerticalSlider extends GuiSliderBase {
 	private final ResourceLocation buttonTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/widgets.png");
 
-	public GuiVerticalSlider(int id, int x, int y, int height) {
+	public GuiVerticalSlider(final int id, final int x, final int y, final int height) {
 		super(id, x, y, 20, height, "");
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}
@@ -36,7 +36,7 @@ public class GuiVerticalSlider extends GuiSliderBase {
 	}
 
 	@Override
-	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+	public boolean mousePressed(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(enabled && visible && mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height) {
 			percentage = (float) (mouseY - (yPosition + 4)) / (float) (height - 8);
 
@@ -56,7 +56,7 @@ public class GuiVerticalSlider extends GuiSliderBase {
 	}
 
 	@Override
-	protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
+	protected void mouseDragged(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}

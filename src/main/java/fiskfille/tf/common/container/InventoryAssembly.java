@@ -9,9 +9,9 @@ public class InventoryAssembly extends InventoryCrafting {
 	private final int inventoryWidth;
 	private final Container eventHandler;
 
-	public InventoryAssembly(Container container, int width, int height) {
+	public InventoryAssembly(final Container container, final int width, final int height) {
 		super(container, width, height);
-		int k = width * height;
+		final int k = width * height;
 		stackList = new ItemStack[k];
 		eventHandler = container;
 		inventoryWidth = width;
@@ -23,14 +23,14 @@ public class InventoryAssembly extends InventoryCrafting {
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int slot) {
+	public ItemStack getStackInSlot(final int slot) {
 		return slot >= getSizeInventory() ? null : stackList[slot];
 	}
 
 	@Override
-	public ItemStack getStackInRowAndColumn(int row, int column) {
+	public ItemStack getStackInRowAndColumn(final int row, final int column) {
 		if(row >= 0 && row < inventoryWidth) {
-			int k = row + column * inventoryWidth;
+			final int k = row + column * inventoryWidth;
 			return getStackInSlot(k);
 		}
 		else {
@@ -39,9 +39,9 @@ public class InventoryAssembly extends InventoryCrafting {
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack getStackInSlotOnClosing(final int slot) {
 		if(stackList[slot] != null) {
-			ItemStack itemstack = stackList[slot];
+			final ItemStack itemstack = stackList[slot];
 			stackList[slot] = null;
 			return itemstack;
 		}
@@ -51,9 +51,9 @@ public class InventoryAssembly extends InventoryCrafting {
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
+	public ItemStack decrStackSize(final int slot, final int amount) {
 		if(stackList[slot] != null) {
-			ItemStack itemstack;
+			final ItemStack itemstack;
 
 			if(stackList[slot].stackSize <= amount) {
 				itemstack = stackList[slot];
@@ -76,7 +76,7 @@ public class InventoryAssembly extends InventoryCrafting {
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack itemstack) {
+	public void setInventorySlotContents(final int slot, final ItemStack itemstack) {
 		stackList[slot] = itemstack;
 		eventHandler.onCraftMatrixChanged(this);
 	}

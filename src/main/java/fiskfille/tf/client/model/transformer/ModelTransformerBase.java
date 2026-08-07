@@ -31,14 +31,14 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 	public float globalDegree;
 	public int backwardInverter = 1;
 
-	public ModelTransformerBase(float speed, float degree, AnimationModifier... modifiers) {
+	public ModelTransformerBase(final float speed, final float degree, final AnimationModifier... modifiers) {
 		baseSpeed = speed;
 		baseDegree = degree;
 		animModifiers = modifiers;
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5) {
 		if(entity instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) entity;
 			final ItemStack head = player.getCurrentArmor(3);
@@ -69,19 +69,19 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 					}
 
 					if(layerToRender == 3 && wearingLegs) {
-						List<ModelRenderer> hidden = Lists.newArrayList();
+						final List<ModelRenderer> hidden = Lists.newArrayList();
 						hidden.add(tfModel.getHead());
 						hidden.addAll(Arrays.asList(tfModel.getFeet()));
 
 						getWaist().hideUntil(tfModel.getLegs());
 
-						for(ModelRenderer model : hidden) {
+						for(final ModelRenderer model : hidden) {
 							model.isHidden = true;
 						}
 
 						TFRenderHelper.setupRenderLayers(entity, legs, getWaist());
 
-						for(ModelRenderer model : hidden) {
+						for(final ModelRenderer model : hidden) {
 							model.isHidden = false;
 						}
 					}
@@ -95,7 +95,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 					}
 				}
 				else if(!areIdentical(head, chest, legs, feet)) {
-					List<ModelRenderer> hidden = Lists.newArrayList();
+					final List<ModelRenderer> hidden = Lists.newArrayList();
 					ItemStack itemstack = chest;
 
 					if(layerToRender == 1) {
@@ -145,13 +145,13 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 						}
 					}
 
-					for(ModelRenderer model : hidden) {
+					for(final ModelRenderer model : hidden) {
 						model.isHidden = true;
 					}
 
 					TFRenderHelper.setupRenderLayers(entity, itemstack, getWaist());
 
-					for(ModelRenderer model : hidden) {
+					for(final ModelRenderer model : hidden) {
 						model.isHidden = false;
 					}
 				}
@@ -166,13 +166,13 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		}
 	}
 
-	private boolean areIdentical(ItemStack... itemstacks) {
+	private boolean areIdentical(final ItemStack... itemstacks) {
 		if(!TFArmorDyeHelper.areColorsIdentical(itemstacks)) {
 			return false;
 		}
 
 		if(itemstacks.length > 1) {
-			for(ItemStack itemstack : itemstacks) {
+			for(final ItemStack itemstack : itemstacks) {
 				if(itemstack == null || itemstacks[0] == null || itemstacks[0].hasEffect(0) != itemstack.hasEffect(0)) {
 					return false;
 				}
@@ -183,7 +183,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 	}
 
 	protected final TransformerModel getTransformerModel() {
-		TransformerModel model = TFModelRegistry.getModel(getTransformer());
+		final TransformerModel model = TFModelRegistry.getModel(getTransformer());
 
 		if(model == null) {
 			throw new RuntimeException(String.format("No TransformerModel instance registered for type '%s'!", getTransformer().getName()));
@@ -192,22 +192,22 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		return model;
 	}
 
-	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
+	public void setupOffsets(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {}
 
-	public void doActiveAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
+	public void doActiveAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {}
 
-	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
+	public void doWalkingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {}
 
-	public void doIdleAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
+	public void doIdleAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {}
 
-	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
+	public void doFallingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {}
 
-	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
+	public void doPartialAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {}
 
-	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {}
+	public void doTransformationAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale, Entity entity) {
+	public void setRotationAngles(final float limbSwing, final float limbSwingAmount, float ticks, final float rotationYaw, final float rotationPitch, final float scale, final Entity entity) {
 		if(entity.motionY == 1.25E-85) {
 			ticks = 0;
 		}
@@ -223,11 +223,11 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 			final boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) == getTransformer();
 			final boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) == getTransformer();
 			final boolean wearingFeet = TFHelper.getTransformerFromArmor(player, 0) == getTransformer();
-			float progress = TFHelper.getTransformationTimer(player);
+			final float progress = TFHelper.getTransformationTimer(player);
 
 			setupOffsets(player, progress, limbSwing, limbSwingAmount, ticks, rotationYaw, rotationPitch, wearingHead, wearingChest, wearingLegs, wearingFeet);
 
-			for(AnimationModifier modifier : animModifiers) {
+			for(final AnimationModifier modifier : animModifiers) {
 				if(modifier.predicate.apply(player)) {
 					switch(modifier.type) {
 						case SPEED:
@@ -267,7 +267,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		}
 	}
 
-	protected void applyDefaultHittingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer head, ModelRenderer chest, ModelRenderer lowerArmR, ModelRenderer lowerArmL) {
+	protected void applyDefaultHittingAnimation(final ModelRenderer upperArmR, final ModelRenderer upperArmL, final ModelRenderer head, final ModelRenderer chest, final ModelRenderer lowerArmR, final ModelRenderer lowerArmL) {
 		if(onGround > -9990F) {
 			float hitAnimation = onGround;
 			final float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * (float) Math.PI * 2F) * 0.2F;
@@ -303,7 +303,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		}
 	}
 
-	protected void applyDefaultHoldingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer lowerArmR, ModelRenderer lowerArmL) {
+	protected void applyDefaultHoldingAnimation(final ModelRenderer upperArmR, final ModelRenderer upperArmL, final ModelRenderer lowerArmR, final ModelRenderer lowerArmL) {
 		upperArmL.rotateAngleX -= heldItemLeft * 0.125F;
 		upperArmR.rotateAngleX -= heldItemRight * 0.125F;
 
@@ -319,5 +319,5 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 		return null;
 	}
 
-	public void renderArmorPiece(int armorPiece) {}
+	public void renderArmorPiece(final int armorPiece) {}
 }

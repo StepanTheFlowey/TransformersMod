@@ -1286,8 +1286,8 @@ public class ModelPurge extends ModelTransformerBase {
 	}
 
 	@Override
-	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		ModelOffset offsets = TFModelHelper.getOffsets(player);
+	public void setupOffsets(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
+		final ModelOffset offsets = TFModelHelper.getOffsets(player);
 		headbase.rotationPointX += offsets.headOffsetX;
 		headbase.rotationPointY += offsets.headOffsetY;
 		headbase.rotationPointZ += offsets.headOffsetZ;
@@ -1311,7 +1311,7 @@ public class ModelPurge extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doActiveAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doActiveAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		applyDefaultHoldingAnimation(upperArmR, upperArmL, lowerArmR, lowerArmL);
 		applyDefaultHittingAnimation(torsobaseR, upperArmL, headbase, torsobase, lowerArmR, lowerArmL);
 
@@ -1336,12 +1336,12 @@ public class ModelPurge extends ModelTransformerBase {
 			upperArmL.rotateAngleX -= MathHelper.sin(ticks * 0.067F) * 0.05F;
 		}
 
-		ItemStack heldItem = player.getHeldItem();
+		final ItemStack heldItem = player.getHeldItem();
 		trackconnectorR1.showModel = !(heldItem != null && heldItem.getItem() == TFItems.purgesKatana);
 	}
 
 	@Override
-	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doWalkingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		upperArmR.rotateAngleZ += 0.05F;
 		upperArmL.rotateAngleZ -= 0.05F;
 		lowerArmR.rotateAngleX -= 0.1F;
@@ -1406,7 +1406,7 @@ public class ModelPurge extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doIdleAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doIdleAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		walk(torsoconnector, 0.08F, 0.1F, true, 1, 0, ticks, 1F);
 		walk(torsobase, 0.08F, 0.15F, false, 1, 0, ticks, 1F);
 		flap(trackconnectorR3, 0.08F, 0.1F, false, 1, 0, ticks, 1F);
@@ -1422,11 +1422,11 @@ public class ModelPurge extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		double motionY = TFRenderHelper.getMotionY(player);
+	public void doFallingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
+		final double motionY = TFRenderHelper.getMotionY(player);
 
-		float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
-		float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
+		final float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
+		final float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
 
 		waist.rotateAngleX += 0.2F * limbSwingAmount * backwardInverter;
 
@@ -1466,7 +1466,7 @@ public class ModelPurge extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doPartialAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
@@ -1489,8 +1489,8 @@ public class ModelPurge extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
-		ModelPurgeVehicle vehicle = (ModelPurgeVehicle) getTransformerModel().getVehicleModel();
+	public void doTransformationAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
+		final ModelPurgeVehicle vehicle = (ModelPurgeVehicle) getTransformerModel().getVehicleModel();
 
 		rotateTo(waist, vehicle.vehiclebase, progress);
 		rotateTo(turretbase, vehicle.vehicleturretbase_rotatehere, progress);
@@ -1582,7 +1582,7 @@ public class ModelPurge extends ModelTransformerBase {
 	}
 
 	@Override
-	public void renderArmorPiece(int armorPiece) {
+	public void renderArmorPiece(final int armorPiece) {
 		setToInitPose();
 
 		switch(armorPiece) {

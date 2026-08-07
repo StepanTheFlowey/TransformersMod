@@ -29,7 +29,7 @@ public abstract class ShaderProgram {
 	private final boolean hasGeometryShader;
 	private int geometryShaderID;
 
-	public ShaderProgram(String vertex, String fragment, String geometry) throws Exception {
+	public ShaderProgram(final String vertex, final String fragment, final String geometry) throws Exception {
 		this.hasGeometryShader = geometry != null;
 		this.vertexShaderID = ShaderProgram.loadShader(vertex, ARBVertexShader.GL_VERTEX_SHADER_ARB);
 		this.fragmentShaderID = ShaderProgram.loadShader(fragment, ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
@@ -63,8 +63,8 @@ public abstract class ShaderProgram {
 
 		PROGRAMS.add(this);
 
-		for(String uniform : this.getUniforms()) {
-			int location = this.getUniformLocation(uniform);
+		for(final String uniform : this.getUniforms()) {
+			final int location = this.getUniformLocation(uniform);
 
 			if(location == -1) {
 				System.err.println("Could not find uniform location for " + uniform + " in " + this.getClass().getSimpleName() + "!");
@@ -79,15 +79,15 @@ public abstract class ShaderProgram {
 		this.stop();
 	}
 
-	public ShaderProgram(String vertex, String fragment) throws Exception {
+	public ShaderProgram(final String vertex, final String fragment) throws Exception {
 		this(vertex, fragment, null);
 	}
 
-	public static int loadShader(String resource, int type) throws Exception {
-		BufferedReader in = new BufferedReader(new InputStreamReader(ShaderProgram.class.getResourceAsStream("/assets/transformers/shaders/" + resource)));
+	public static int loadShader(final String resource, final int type) throws Exception {
+		final BufferedReader in = new BufferedReader(new InputStreamReader(ShaderProgram.class.getResourceAsStream("/assets/transformers/shaders/" + resource)));
 
 		String line;
-		StringBuilder source = new StringBuilder();
+		final StringBuilder source = new StringBuilder();
 		while((line = in.readLine()) != null) {
 			source.append(line).append("\n");
 		}
@@ -108,18 +108,18 @@ public abstract class ShaderProgram {
 	}
 
 	public static void deletePrograms() {
-		for(ShaderProgram program : PROGRAMS) {
+		for(final ShaderProgram program : PROGRAMS) {
 			program.delete();
 		}
 
 		PROGRAMS.clear();
 	}
 
-	private static String getLogInfoShader(int shader) {
+	private static String getLogInfoShader(final int shader) {
 		return OpenGlHelper.func_153158_d(shader, OpenGlHelper.func_153157_c(shader, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
 	}
 
-	private static String getLogInfoProgram(int program) {
+	private static String getLogInfoProgram(final int program) {
 		return OpenGlHelper.func_153166_e(program, OpenGlHelper.func_153175_a(program, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
 	}
 
@@ -127,37 +127,37 @@ public abstract class ShaderProgram {
 
 	protected abstract String[] getUniforms();
 
-	protected void bindAttribute(int index, String name) {
+	protected void bindAttribute(final int index, final String name) {
 		GL20.glBindAttribLocation(this.programID, index, name);
 	}
 
-	protected int getUniformLocation(String name) {
+	protected int getUniformLocation(final String name) {
 		return OpenGlHelper.func_153194_a(this.programID, name);
 	}
 
-	public void setUniform(String name, float value) {
+	public void setUniform(final String name, final float value) {
 		GL20.glUniform1f(this.uniforms.get(name), value);
 	}
 
-	public void setUniform(String name, int value) {
+	public void setUniform(final String name, final int value) {
 		GL20.glUniform1i(this.uniforms.get(name), value);
 	}
 
-	public void setUniform(String name, Vector3f value) {
+	public void setUniform(final String name, final Vector3f value) {
 		GL20.glUniform3f(this.uniforms.get(name), value.x, value.y, value.z);
 	}
 
-	public void setUniform(String name, boolean value) {
+	public void setUniform(final String name, final boolean value) {
 		GL20.glUniform1f(this.uniforms.get(name), value ? 1F : 0F);
 	}
 
-	public void setUniform(String name, Matrix4f value) {
+	public void setUniform(final String name, final Matrix4f value) {
 		value.store(MATRIX_BUFFER);
 		MATRIX_BUFFER.flip();
 		GL20.glUniformMatrix4(this.uniforms.get(name), false, MATRIX_BUFFER);
 	}
 
-	public void setUniform(String name, Vector4f value) {
+	public void setUniform(final String name, final Vector4f value) {
 		GL20.glUniform4f(this.uniforms.get(name), value.x, value.y, value.z, value.w);
 	}
 

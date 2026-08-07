@@ -38,7 +38,7 @@ public class BlockEnergonTank extends BlockMachineBase {
 	}
 
 	@Override
-	public int getPlacedRotation(EntityLivingBase entity) {
+	public int getPlacedRotation(final EntityLivingBase entity) {
 		return 0;
 	}
 
@@ -58,12 +58,12 @@ public class BlockEnergonTank extends BlockMachineBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
 		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
 			return true;
 		}
 
-		int metadata = world.getBlockMetadata(x, y, z);
+		final int metadata = world.getBlockMetadata(x, y, z);
 		boolean flag = true;
 
 		if((side == 0 || side == 1) && (metadata == 0 || metadata == 1)) {
@@ -79,21 +79,21 @@ public class BlockEnergonTank extends BlockMachineBase {
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+	public int onBlockPlaced(final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY, final float hitZ, final int metadata) {
 		return Facing.oppositeSide[side];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		Block block = world.getBlock(x, y, z);
+	public boolean shouldSideBeRendered(final IBlockAccess world, final int x, final int y, final int z, final int side) {
+		final Block block = world.getBlock(x, y, z);
 		boolean flag = renderingInside || !block.isOpaqueCube();
 
 		if(side == renderMetadata || Facing.oppositeSide[side] == renderMetadata) {
-			ForgeDirection dir = ForgeDirection.getOrientation(side);
+			final ForgeDirection dir = ForgeDirection.getOrientation(side);
 
 			if(dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-				int metadata = world.getBlockMetadata(x, y, z);
+				final int metadata = world.getBlockMetadata(x, y, z);
 
 				if(block == this && (metadata == side || metadata == Facing.oppositeSide[side])) {
 					flag = false;
@@ -106,8 +106,8 @@ public class BlockEnergonTank extends BlockMachineBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
-		IIcon icon = side == metadata ? iconFront : Facing.oppositeSide[side] == metadata ? iconBack : super.getIcon(side, metadata);
+	public IIcon getIcon(final int side, final int metadata) {
+		final IIcon icon = side == metadata ? iconFront : Facing.oppositeSide[side] == metadata ? iconBack : super.getIcon(side, metadata);
 
 		if(renderSide > 0) {
 			if(icon == super.getIcon(side, metadata)) {
@@ -121,7 +121,7 @@ public class BlockEnergonTank extends BlockMachineBase {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		super.registerBlockIcons(iconRegister);
 		iconSides = new IIcon[4];
 

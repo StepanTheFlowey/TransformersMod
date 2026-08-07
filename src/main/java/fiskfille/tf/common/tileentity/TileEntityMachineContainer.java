@@ -12,7 +12,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 
 	public ItemStack[] getItemStacks() {
 		if(hasWorldObj()) {
-			TileEntityMachineContainer base = TFTileHelper.getTileBase(this);
+			final TileEntityMachineContainer base = TFTileHelper.getTileBase(this);
 
 			if(base != this) {
 				if(base != null) {
@@ -26,9 +26,9 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 		return inventory;
 	}
 
-	public void setItemStacks(ItemStack[] itemstacks) {
+	public void setItemStacks(final ItemStack[] itemstacks) {
 		if(hasWorldObj()) {
-			TileEntityMachineContainer base = TFTileHelper.getTileBase(this);
+			final TileEntityMachineContainer base = TFTileHelper.getTileBase(this);
 
 			if(base != this) {
 				if(base != null) {
@@ -43,14 +43,14 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int slot) {
+	public ItemStack getStackInSlot(final int slot) {
 		return getItemStacks()[slot];
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
+	public ItemStack decrStackSize(final int slot, final int amount) {
 		if(getItemStacks()[slot] != null) {
-			ItemStack itemstack;
+			final ItemStack itemstack;
 
 			if(getItemStacks()[slot].stackSize <= amount) {
 				itemstack = getItemStacks()[slot];
@@ -72,9 +72,9 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack getStackInSlotOnClosing(final int slot) {
 		if(getItemStacks()[slot] != null) {
-			ItemStack itemstack = getItemStacks()[slot];
+			final ItemStack itemstack = getItemStacks()[slot];
 			getItemStacks()[slot] = null;
 			return itemstack;
 		}
@@ -84,7 +84,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack itemstack) {
+	public void setInventorySlotContents(final int slot, final ItemStack itemstack) {
 		getItemStacks()[slot] = itemstack;
 
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
@@ -98,7 +98,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 
 		if(nbt.hasKey("LoadInventory")) {
@@ -117,7 +117,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 
 		if(TFTileHelper.getTileBase(this) != this) {
@@ -125,11 +125,11 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 		}
 
 		nbt.setBoolean("LoadInventory", true);
-		NBTTagList nbttaglist = new NBTTagList();
+		final NBTTagList nbttaglist = new NBTTagList();
 
 		for(int i = 0; i < getItemStacks().length; ++i) {
 			if(getItemStacks()[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				getItemStacks()[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
@@ -145,7 +145,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUseableByPlayer(final EntityPlayer player) {
 		return player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
 	}
 
@@ -158,7 +158,7 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {
 		return true;
 	}
 }

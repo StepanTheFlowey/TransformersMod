@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 public class SlotComponent extends Slot {
-	public SlotComponent(IInventory iinventory, int id, int x, int y) {
+	public SlotComponent(final IInventory iinventory, final int id, final int x, final int y) {
 		super(iinventory, id, x, y);
 	}
 
@@ -18,7 +18,7 @@ public class SlotComponent extends Slot {
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack itemstack) {
+	public boolean isItemValid(final ItemStack itemstack) {
 		return itemstack != null && itemstack.getItem() instanceof IComponent;
 	}
 

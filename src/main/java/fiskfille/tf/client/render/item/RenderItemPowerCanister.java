@@ -19,7 +19,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 	private static final ModelPowerCanister modelCanister = new ModelPowerCanister();
 	private static final RenderItem renderItem = new RenderItem();
 
-	public static void renderCanister(ItemStack itemstack) {
+	public static void renderCanister(final ItemStack itemstack) {
 		final ItemPowerCanister container = (ItemPowerCanister) itemstack.getItem();
 		final float energy = container.getEnergyStored(itemstack);
 		final float max = container.getEnergyCapacity(itemstack);
@@ -36,17 +36,17 @@ public class RenderItemPowerCanister implements IItemRenderer {
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(final ItemStack item, final ItemRenderType type) {
 		return true;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(final ItemRenderType type, final ItemStack item, final ItemRendererHelper helper) {
 		return type != ItemRenderType.INVENTORY;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack itemstack, final Object... data) {
 		if(type == ItemRenderType.INVENTORY) {
 			renderItem.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), itemstack, 0, 0, true);
 
@@ -107,7 +107,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 		}
 	}
 
-	private void renderQuad(Tessellator tessellator, float x, float y, float width, float height, int color1, int color2) {
+	private void renderQuad(final Tessellator tessellator, final float x, final float y, final float width, final float height, final int color1, final int color2) {
 		tessellator.startDrawingQuads();
 		tessellator.setColorOpaque_I(color1);
 		tessellator.addVertex(x, y, 0);
@@ -118,7 +118,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 		tessellator.draw();
 	}
 
-	private void renderQuad(Tessellator tessellator, float width, float height, int color) {
+	private void renderQuad(final Tessellator tessellator, final float width, final float height, final int color) {
 		renderQuad(tessellator, 2F, 13F, width, height, color, color);
 	}
 }

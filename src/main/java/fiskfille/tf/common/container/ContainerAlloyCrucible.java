@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 public class ContainerAlloyCrucible extends ContainerBasic {
 	private int lastSmeltTime;
 
-	public ContainerAlloyCrucible(InventoryPlayer inventoryPlayer, TileEntityAlloyCrucible tile) {
+	public ContainerAlloyCrucible(final InventoryPlayer inventoryPlayer, final TileEntityAlloyCrucible tile) {
 		super(tile);
 
 		for(int i = 0; i < tile.getSizeInventory() - 1; ++i) {
@@ -29,7 +29,7 @@ public class ContainerAlloyCrucible extends ContainerBasic {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting icrafting) {
+	public void addCraftingToCrafters(final ICrafting icrafting) {
 		super.addCraftingToCrafters(icrafting);
 		icrafting.sendProgressBarUpdate(this, 0, getTile().smeltTime);
 	}
@@ -38,7 +38,7 @@ public class ContainerAlloyCrucible extends ContainerBasic {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for(Object crafter : crafters) {
+		for(final Object crafter : crafters) {
 			final ICrafting icrafting = (ICrafting) crafter;
 
 			if(lastSmeltTime != getTile().smeltTime) {
@@ -51,20 +51,20 @@ public class ContainerAlloyCrucible extends ContainerBasic {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int value) {
+	public void updateProgressBar(final int id, final int value) {
 		if(id == 0) {
 			getTile().smeltTime = value;
 		}
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer par1EntityPlayer, final int slotId) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotId);
-		int OUTPUT = 3;
+		final Slot slot = (Slot) inventorySlots.get(slotId);
+		final int OUTPUT = 3;
 
 		if(slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if(slotId == OUTPUT) {

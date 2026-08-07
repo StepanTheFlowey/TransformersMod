@@ -23,14 +23,14 @@ public class MowzieModelBase extends ModelBiped {
 	 */
 	protected List<MowzieModelRenderer> parts;
 
-	public static void setRotateAngle(ModelRenderer model, float x, float y, float z) {
+	public static void setRotateAngle(final ModelRenderer model, final float x, final float y, final float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public ModelRenderer getRandomModelBox(Random rand) {
+	public ModelRenderer getRandomModelBox(final Random rand) {
 		if(!parts.isEmpty()) {
 			return parts.get(rand.nextInt(parts.size()));
 		}
@@ -42,7 +42,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * Saves the initial rotate angles and initial rotation points. Note: Call this at the end of the constructor.
 	 */
 	protected void setInitPose() {
-		for(MowzieModelRenderer part : parts) {
+		for(final MowzieModelRenderer part : parts) {
 			part.setInitValuesToCurrentPose();
 		}
 	}
@@ -53,7 +53,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @see #setInitPose() method in MowzieModelBase class.
 	 */
 	public void setToInitPose() {
-		for(MowzieModelRenderer part : parts) {
+		for(final MowzieModelRenderer part : parts) {
 			part.setCurrentPoseToInitValues();
 		}
 	}
@@ -68,7 +68,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param child  is the child box;
 	 * @param parent is the parent box.
 	 */
-	protected void addChildTo(ModelRenderer child, ModelRenderer parent) {
+	protected void addChildTo(final ModelRenderer child, final ModelRenderer parent) {
 		final double distance = Math.hypot(child.rotationPointZ, parent.rotationPointY);
 		final double parentToChildAngle = Math.atan((child.rotationPointZ - parent.rotationPointZ) / (child.rotationPointY - parent.rotationPointY));
 		final double childRelativeRotation = parentToChildAngle - parent.rotateAngleX;
@@ -91,7 +91,7 @@ public class MowzieModelBase extends ModelBiped {
 	/**
 	 * Don't use this yet. I'm trying to refine the parenting method, but it's not ready yet.
 	 */
-	protected void newAddChildTo(ModelRenderer child, ModelRenderer parent) {
+	protected void newAddChildTo(final ModelRenderer child, final ModelRenderer parent) {
 		parent.addChild(child);
 		child.rotateAngleX -= parent.rotateAngleX;
 		child.rotateAngleY -= parent.rotateAngleY;
@@ -107,7 +107,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f3 is the rotationYaw of the EntityLivingBase;
 	 * @param f4 is the rotationPitch of the EntityLivingBase.
 	 */
-	public void faceTarget(MowzieModelRenderer box, float f, float f3, float f4) {
+	public void faceTarget(final MowzieModelRenderer box, final float f, final float f3, final float f4) {
 		box.rotateAngleY += f3 / (180F / (float) Math.PI) / f;
 		box.rotateAngleX += f4 / (180F / (float) Math.PI) / f;
 	}
@@ -125,7 +125,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f      is the walked distance;
 	 * @param f1     is the walk speed.
 	 */
-	public float rotateBox(float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+	public float rotateBox(final float speed, final float degree, final boolean invert, final float offset, final float weight, final float f, final float f1) {
 		if(invert) {
 			return -MathHelper.cos(f * speed + offset) * degree * f1 + weight * f1;
 		}
@@ -145,7 +145,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f      is the walked distance;
 	 * @param f1     is the walk speed.
 	 */
-	public float moveBox(float speed, float degree, boolean bounce, float f, float f1) {
+	public float moveBox(final float speed, final float degree, final boolean bounce, final float f, final float f1) {
 		if(bounce) {
 			return -MathHelper.abs(MathHelper.sin(f * speed) * f1 * degree);
 		}
@@ -168,7 +168,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f      is the walked distance;
 	 * @param f1     is the walk speed.
 	 */
-	public void walk(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+	public void walk(final MowzieModelRenderer box, final float speed, final float degree, final boolean invert, final float offset, final float weight, final float f, final float f1) {
 		final int inverted = invert ? -1 : 1;
 		box.rotateAngleX += MathHelper.cos(f * speed + offset) * degree * inverted * f1 + weight * f1;
 	}
@@ -187,7 +187,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f      is the walked distance;
 	 * @param f1     is the walk speed.
 	 */
-	public void flap(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+	public void flap(final MowzieModelRenderer box, final float speed, final float degree, final boolean invert, final float offset, final float weight, final float f, final float f1) {
 		final int inverted = invert ? -1 : 1;
 		box.rotateAngleZ += MathHelper.cos(f * speed + offset) * degree * inverted * f1 + weight * f1;
 	}
@@ -206,7 +206,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f      is the walked distance;
 	 * @param f1     is the walk speed.
 	 */
-	public void swing(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+	public void swing(final MowzieModelRenderer box, final float speed, final float degree, final boolean invert, final float offset, final float weight, final float f, final float f1) {
 		final int inverted = invert ? -1 : 1;
 		box.rotateAngleY += MathHelper.cos(f * speed + offset) * degree * inverted * f1 + weight * f1;
 	}
@@ -223,7 +223,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f      is the walked distance;
 	 * @param f1     is the walk speed.
 	 */
-	public void bob(MowzieModelRenderer box, float speed, float degree, boolean bounce, float f, float f1) {
+	public void bob(final MowzieModelRenderer box, final float speed, final float degree, final boolean bounce, final float f, final float f1) {
 		final float a = MathHelper.sin(f * speed) * f1 * degree;
 		final float bob = bounce ? -Math.abs(a) : (a - f1 * degree);
 		box.rotationPointY += bob;
@@ -241,7 +241,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f          is the walked distance;
 	 * @param f1         is the walk speed.
 	 */
-	public void chainSwing(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
+	public void chainSwing(final MowzieModelRenderer[] boxes, final float speed, final float degree, final double rootOffset, final float f, final float f1) {
 		final int numberOfSegments = boxes.length;
 		final float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
 		for(int i = 0; i < numberOfSegments; i++) {
@@ -261,7 +261,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f          is the walked distance;
 	 * @param f1         is the walk speed.
 	 */
-	public void chainWave(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
+	public void chainWave(final MowzieModelRenderer[] boxes, final float speed, final float degree, final double rootOffset, final float f, final float f1) {
 		final int numberOfSegments = boxes.length;
 		final float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
 		for(int i = 0; i < numberOfSegments; i++) {
@@ -281,7 +281,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f          is the walked distance;
 	 * @param f1         is the walk speed.
 	 */
-	public void chainFlap(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
+	public void chainFlap(final MowzieModelRenderer[] boxes, final float speed, final float degree, final double rootOffset, final float f, final float f1) {
 		final int numberOfSegments = boxes.length;
 		final float offset = (float) (rootOffset * Math.PI / (2 * numberOfSegments));
 		for(int i = 0; i < numberOfSegments; i++) {
@@ -292,7 +292,7 @@ public class MowzieModelBase extends ModelBiped {
 	/**
 	 * Checks whether specified entity is on the ground.
 	 */
-	public boolean onGround(Entity entity) {
+	public boolean onGround(final Entity entity) {
 		boolean onGround = entity.onGround;
 
 		if(entity != Minecraft.getMinecraft().thePlayer) {
@@ -301,8 +301,8 @@ public class MowzieModelBase extends ModelBiped {
 
 			entity.ySize *= 0.4F;
 
-			List<AxisAlignedBB> collidingEntities = entity.worldObj.getCollidingBoundingBoxes(entity, entity.boundingBox.addCoord(0, moveY, 0));
-			for(AxisAlignedBB collidingEntity : collidingEntities) {
+			final List<AxisAlignedBB> collidingEntities = entity.worldObj.getCollidingBoundingBoxes(entity, entity.boundingBox.addCoord(0, moveY, 0));
+			for(final AxisAlignedBB collidingEntity : collidingEntities) {
 				moveY = collidingEntity.calculateYOffset(entity.boundingBox, moveY);
 			}
 
@@ -317,7 +317,7 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param to       The ModelRenderer you are moving to
 	 * @param f        The progress (0-1)
 	 */
-	protected void rotateTo(ModelRenderer rotating, ModelRenderer to, float f) {
+	protected void rotateTo(final ModelRenderer rotating, final ModelRenderer to, final float f) {
 		final float rotXDif = to.rotateAngleX - rotating.rotateAngleX;
 		final float rotYDif = to.rotateAngleY - rotating.rotateAngleY;
 		final float rotZDif = to.rotateAngleZ - rotating.rotateAngleZ;
@@ -343,7 +343,7 @@ public class MowzieModelBase extends ModelBiped {
 		rotating.rotationPointZ += posZDif * f;
 	}
 
-	public void addPart(MowzieModelRenderer mowzieModelRenderer) {
+	public void addPart(final MowzieModelRenderer mowzieModelRenderer) {
 		if(parts == null) {
 			parts = new ArrayList<>();
 		}
@@ -351,8 +351,8 @@ public class MowzieModelBase extends ModelBiped {
 		parts.add(mowzieModelRenderer);
 	}
 
-	public MowzieModelBase setBreaking(boolean breaking) {
-		for(MowzieModelRenderer part : parts) {
+	public MowzieModelBase setBreaking(final boolean breaking) {
+		for(final MowzieModelRenderer part : parts) {
 			if(part instanceof ModelRendererBreakable) {
 				((ModelRendererBreakable) part).breaking = breaking;
 			}

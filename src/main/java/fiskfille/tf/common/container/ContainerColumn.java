@@ -7,14 +7,14 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerColumn extends ContainerBasic {
-	public ContainerColumn(InventoryPlayer inventoryPlayer, TileEntityColumn tile) {
+	public ContainerColumn(final InventoryPlayer inventoryPlayer, final TileEntityColumn tile) {
 		super(tile);
 
 		for(int i = 0; i < tile.getSizeInventory(); ++i) {
 			final int j = i;
 			addSlotToContainer(new Slot(tile, i, 25 + i * 22, 75) {
 				@Override
-				public boolean isItemValid(ItemStack itemstack) {
+				public boolean isItemValid(final ItemStack itemstack) {
 					return inventory.isItemValidForSlot(j, itemstack);
 				}
 			});
@@ -29,10 +29,10 @@ public class ContainerColumn extends ContainerBasic {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotId) {
+	public ItemStack transferStackInSlot(final EntityPlayer par1EntityPlayer, final int slotId) {
 		ItemStack itemstack = null;
 		final Slot slot = (Slot) inventorySlots.get(slotId);
-		int MAX = getTile().getSizeInventory() - 1;
+		final int MAX = getTile().getSizeInventory() - 1;
 
 		if(slot != null && slot.getHasStack()) {
 			final ItemStack itemstack1 = slot.getStack();

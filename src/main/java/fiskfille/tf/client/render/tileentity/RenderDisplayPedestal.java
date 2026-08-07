@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderDisplayPedestal extends TileEntitySpecialRenderer {
-	public void renderModelAt(TileEntityDisplayPedestal displayPillar, double x, double y, double z, float partialTicks) {
+	public void renderModelAt(final TileEntityDisplayPedestal displayPillar, final double x, final double y, final double z, final float partialTicks) {
 		final ItemStack displayItem = displayPillar.getDisplayItem();
 		if(displayItem == null) {
 			return;
@@ -34,7 +34,7 @@ public class RenderDisplayPedestal extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float partialTicks) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
 		renderModelAt((TileEntityDisplayPedestal) tileentity, x, y, z, partialTicks);
 	}
 }

@@ -892,7 +892,7 @@ public class ModelTransmitter extends MowzieModelBase {
 		setInitPose();
 	}
 
-	public void render(TileEntityTransmitter tile, float partialTicks) {
+	public void render(final TileEntityTransmitter tile, final float partialTicks) {
 		setToInitPose();
 
 		final float f = tile.animationTimer + partialTicks;

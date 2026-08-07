@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderEnergonTank extends TileEntitySpecialRenderer {
 	private RenderBlocks renderBlocks = RenderBlocks.getInstance();
 
-	public void render(TileEntityEnergonTank tile, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityEnergonTank tile, final double x, final double y, final double z, final float partialTicks) {
 		final FluidStack stack = tile.data.getFluid();
 		if(stack == null || stack.getFluid() == null || stack.amount <= 0) {
 			return;
@@ -43,7 +43,7 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 		float scaleOffset = 0;
 		final World world = tile.getWorldObj();
 		if(world != null) {
-			TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(tile);
+			final TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(tile);
 			boolean connectAbove = false;
 			boolean connectBelow = false;
 
@@ -59,12 +59,12 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 				scaleY = 1;
 			}
 			else if(connectAbove) {
-				float diff = (1 - scaleY) / 2;
+				final float diff = (1 - scaleY) / 2;
 				scaleY += diff;
 				scaleOffset = 0.5F;
 			}
 			else if(connectBelow) {
-				float diff = (1 - scaleY) / 2;
+				final float diff = (1 - scaleY) / 2;
 				scaleY += diff;
 				scaleOffset = -0.5F;
 			}
@@ -82,12 +82,12 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void func_147496_a(World world) {
+	public void func_147496_a(final World world) {
 		renderBlocks = new RenderBlocks(world);
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityEnergonTank) tileentity, d, d1, d2, f);
 	}
 }

@@ -352,7 +352,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		buttflapR.addBox(-1, 0, 0, 3, 3, 1, 0);
 		setRotateAngle(buttflapR, 0.13962634015954636F, 0.08726646259971647F, -0.10471975511965977F);
 
-		ModelRendererTF head5 = new ModelRendererTF(this, 14, 26);
+		final ModelRendererTF head5 = new ModelRendererTF(this, 14, 26);
 		head5.setRotationPoint(0, 0, -1);
 		head5.addBox(-1.9F, -0.8F, -1, 2, 1, 3, 0);
 		setRotateAngle(head5, 0.24434609527920614F, 0.33161255787892263F, 0);
@@ -397,12 +397,12 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		fistLbase.addBox(-1.5F, -0.2F, -1, 3, 1, 2, 0);
 		setRotateAngle(fistLbase, 0.08726646259971647F, -1.3962634015954636F, 0);
 
-		ModelRendererTF head8 = new ModelRendererTF(this, 14, 30);
+		final ModelRendererTF head8 = new ModelRendererTF(this, 14, 30);
 		head8.setRotationPoint(0, -2, 2.7F);
 		head8.addBox(-2, -0.3F, -1.4F, 4, 2, 1, 0);
 		setRotateAngle(head8, -0.33161255787892263F, 0, 0);
 
-		ModelRendererTF engineR7 = new ModelRendererTF(this, 4, 73);
+		final ModelRendererTF engineR7 = new ModelRendererTF(this, 4, 73);
 		engineR7.setRotationPoint(0, -1.2F, 0.5F);
 		engineR7.addBox(-1.5F, 0, -1.5F, 3, 1, 3, 0);
 
@@ -415,7 +415,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		lowerarmR1.addBox(-0.9F, -1.1F, 0.5F, 2, 2, 1, 0);
 		setRotateAngle(lowerarmR1, -0.08726646259971647F, -0.08726646259971647F, -0.7853981633974483F);
 
-		ModelRendererTF feetR6 = new ModelRendererTF(this, 0, 98);
+		final ModelRendererTF feetR6 = new ModelRendererTF(this, 0, 98);
 		feetR6.setRotationPoint(-1, 1.6F, -3.3F);
 		feetR6.addBox(0, 0, 0, 2, 1, 3, 0);
 		setRotateAngle(feetR6, 0.47123889803846897F, 0, 0);
@@ -453,7 +453,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		upperLegR.addBox(-1, -0.5F, -0.5F, 1, 7, 1, 0);
 		setRotateAngle(upperLegR, -0.10471975511965977F, 0, 0.03490658503988659F);
 
-		ModelRendererTF head7 = new ModelRendererTF(this, 21, 26);
+		final ModelRendererTF head7 = new ModelRendererTF(this, 21, 26);
 		head7.setRotationPoint(0, 0.05F, -1.75F);
 		head7.addBox(-1, -1.65F, -0.7F, 2, 2, 1, 0);
 		setRotateAngle(head7, -0.9948376736367678F, 0, 0);
@@ -850,7 +850,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		engineL1.addBox(-1.5F, 0, 0, 3, 1, 3, 0);
 		setRotateAngle(engineL1, 0.3490658503988659F, 0.017453292519943295F, 0.017453292519943295F);
 
-		ModelRendererTF feetR5 = new ModelRendererTF(this, 14, 93);
+		final ModelRendererTF feetR5 = new ModelRendererTF(this, 14, 93);
 		feetR5.mirror = true;
 		feetR5.setRotationPoint(0.9F, 0.5F, 0);
 		feetR5.addBox(-0.6F, -0.1F, -0.6F, 1, 2, 2, 0);
@@ -1015,7 +1015,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5) {
 		GL11.glPushMatrix();
 		GL11.glScalef(1.1F, 1.1F, 1.1F);
 		GL11.glTranslatef(0, -1.1F * 0.0625F, 0);
@@ -1036,7 +1036,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void setupOffsets(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final ModelOffset offsets = TFModelHelper.getOffsets(player);
 		head.rotationPointX += offsets.headOffsetX;
 		head.rotationPointY += offsets.headOffsetY;
@@ -1065,7 +1065,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doActiveAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doActiveAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		applyDefaultHoldingAnimation(upperArmR, upperArmL, lowerArmR, lowerArmL);
 		applyDefaultHittingAnimation(upperArmR, upperArmL, head, torsoConnector, lowerArmR, lowerArmL);
 
@@ -1106,7 +1106,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doWalkingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		bob(waist, globalSpeed, globalDegree, false, limbSwing, limbSwingAmount);
 
 		waist.rotationPointY += 1 * limbSwingAmount * 1.25F;
@@ -1180,7 +1180,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doIdleAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doIdleAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		walk(torsoConnector, 0.08F, 0.05F, true, 1, 0, ticks, 1F);
 		walk(upperBodyBase, 0.08F, 0.05F, false, 1, 0, ticks, 1F);
 		walk(head, 0.08F, 0.04F, true, 1, 0, ticks, 1F);
@@ -1203,7 +1203,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doFallingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final double motionY = TFRenderHelper.getMotionY(player);
 		final float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
 		final float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
@@ -1262,7 +1262,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doPartialAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
@@ -1285,7 +1285,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doTransformationAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final ModelCloudtrapVehicle vehicle = (ModelCloudtrapVehicle) getTransformerModel().getVehicleModel();
 
 		rotateTo(waist, vehicle.vehicleBody, progress);
@@ -1421,7 +1421,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	}
 
 	@Override
-	public void renderArmorPiece(int armorPiece) {
+	public void renderArmorPiece(final int armorPiece) {
 		setToInitPose();
 
 		if(armorPiece == 0) {

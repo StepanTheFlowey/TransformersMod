@@ -44,7 +44,7 @@ public class TFLoadingPlugin implements IFMLLoadingPlugin {
 	}
 
 	@Override
-	public void injectData(Map<String, Object> data) {
+	public void injectData(final Map<String, Object> data) {
 		TFTranslator.obfuscatedEnv = (Boolean) data.get("runtimeDeobfuscationEnabled");
 		loaded = true;
 	}

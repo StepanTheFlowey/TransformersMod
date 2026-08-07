@@ -66,22 +66,22 @@ public class TFModelPurge extends TransformerModel {
 	}
 
 	@Override
-	public void renderItem(EntityPlayer player, ItemStack stack) {
+	public void renderItem(final EntityPlayer player, final ItemStack stack) {
 		GL11.glTranslatef(0.05F, 0F, 0.1F);
 	}
 
 	@Override
-	public void renderCape(EntityPlayer player) {
+	public void renderCape(final EntityPlayer player) {
 		GL11.glTranslatef(0, -0.2F, 0.1F);
 	}
 
 	@Override
-	public void renderFirstPersonArm(EntityPlayer player) {
+	public void renderFirstPersonArm(final EntityPlayer player) {
 		GL11.glTranslatef(0, 0.05F, 0.15F);
 	}
 
 	@Override
-	public ResourceLocation getTexture(Entity entity, String suffix) {
+	public ResourceLocation getTexture(final Entity entity, final String suffix) {
 		return new ResourceLocation(TransformersMod.MODID, String.format("textures/models/purge/purge%s.png", suffix));
 	}
 

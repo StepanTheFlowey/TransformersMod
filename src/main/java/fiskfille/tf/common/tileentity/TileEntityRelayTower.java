@@ -42,10 +42,10 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 		if(isValid(getBlockMetadata())) {
 			if(!worldObj.isRemote) {
 				if(chunkTicket == null) {
-					Ticket ticket = TFChunkManager.getTicketForChunk(ForcedChunk.fromTile(this));
+					final Ticket ticket = TFChunkManager.getTicketForChunk(ForcedChunk.fromTile(this));
 
 					if(ticket != null) {
-						SubTicket subTicket = SubTicket.fromTile(this);
+						final SubTicket subTicket = SubTicket.fromTile(this);
 						forceChunks(subTicket.assign(ticket));
 					}
 				}
@@ -54,7 +54,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 				data.isPowered = energyTransfer > 0 || TFEnergyHelper.canPowerChainReach(this);
 				data.invertCurrent.clear();
 
-				for(Map.Entry<DimensionalCoords, Float> e : netEnergyTransfer.entrySet()) {
+				for(final Map.Entry<DimensionalCoords, Float> e : netEnergyTransfer.entrySet()) {
 					if(e.getValue() < 0) {
 						data.invertCurrent.add(e.getKey());
 					}
@@ -63,7 +63,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 				data.serverTick();
 			}
 
-			TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
+			final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
 
 			if(prevData instanceof TileDataRelay) {
 				data = new TileDataRelay((TileDataRelay) prevData);
@@ -76,11 +76,11 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 		netEnergyTransfer.clear();
 	}
 
-	public float getNetTransfer(DimensionalCoords coords) {
+	public float getNetTransfer(final DimensionalCoords coords) {
 		return netEnergyTransfer.containsKey(coords) ? netEnergyTransfer.get(coords) : 0;
 	}
 
-	public boolean isValid(int metadata) {
+	public boolean isValid(final int metadata) {
 		return metadata < 4;
 	}
 
@@ -91,7 +91,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 		if(isValid(getBlockMetadata())) {
 			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
-			for(ReceiverEntry entry : receivers) {
+			for(final ReceiverEntry entry : receivers) {
 				final TileEntity tile = entry.getTile();
 
 				if(tile != null) {
@@ -104,17 +104,17 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		if(nbt.getBoolean("Base")) {
 			if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
-				NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
+				final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
 				data.transmissionHandler.readFromNBT(config);
 			}
 		}
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		final boolean base = isValid(getBlockMetadata());
 		nbt.setBoolean("Base", base);
 
@@ -146,7 +146,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public boolean canReceiveEnergy(TileEntity from) {
+	public boolean canReceiveEnergy(final TileEntity from) {
 		return isValid(getBlockMetadata());
 	}
 
@@ -166,7 +166,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public float receiveEnergy(float amount, boolean simulate) {
+	public float receiveEnergy(float amount, final boolean simulate) {
 		amount = Math.min(amount, getTransmissionRate() - energyReceived);
 
 		if(amount <= 0) {
@@ -183,7 +183,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public float extractEnergy(float amount, boolean simulate) {
+	public float extractEnergy(float amount, final boolean simulate) {
 		amount = Math.min(amount, getTransmissionRate() - energyExtracted);
 
 		if(amount <= 0) {
@@ -226,7 +226,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public void forceChunks(SubTicket subTicket) {
+	public void forceChunks(final SubTicket subTicket) {
 		releaseChunks();
 		chunkTicket = subTicket.owner;
 		TFChunkManager.forceChunk(subTicket.owner, ForcedChunk.fromTile(this));
@@ -240,7 +240,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public int[] getBaseOffsets(int metadata) {
+	public int[] getBaseOffsets(final int metadata) {
 		return new int[]{0, -metadata / 4, 0};
 	}
 }

@@ -49,8 +49,8 @@ public class BlockDisplayStation extends BlockMachineBase {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
+		final int metadata = world.getBlockMetadata(x, y, z);
 
 		if(metadata >= 4) {
 			setBlockBounds(0, -1, 0, 1, 1, 1);
@@ -61,18 +61,18 @@ public class BlockDisplayStation extends BlockMachineBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
 		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
 			return true;
 		}
 
-		TileEntity tileentity = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+		final TileEntity tileentity = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 		if(tileentity instanceof TileEntityDisplayStation) {
-			TileEntityDisplayStation tile = (TileEntityDisplayStation) tileentity;
+			final TileEntityDisplayStation tile = (TileEntityDisplayStation) tileentity;
 
 			if(!player.isSneaking()) {
-				ItemStack heldItem = player.getHeldItem();
+				final ItemStack heldItem = player.getHeldItem();
 
 				if(heldItem != null && heldItem.getItem() == TFItems.displayVehicle) {
 					boolean flag = true;
@@ -112,12 +112,12 @@ public class BlockDisplayStation extends BlockMachineBase {
 		return true;
 	}
 
-	private void handleArmorTransition(EntityPlayer player, TileEntityDisplayStation tile, int armorType) {
-		ItemStack playerArmor = player.inventory.armorInventory[armorType];
-		int tileArmorSlot = 3 - armorType;
+	private void handleArmorTransition(final EntityPlayer player, final TileEntityDisplayStation tile, final int armorType) {
+		final ItemStack playerArmor = player.inventory.armorInventory[armorType];
+		final int tileArmorSlot = 3 - armorType;
 
 		if(tileArmorSlot != -1 && armorType < 4) {
-			ItemStack tileArmor = tile.getStackInSlot(tileArmorSlot);
+			final ItemStack tileArmor = tile.getStackInSlot(tileArmorSlot);
 			ItemStack itemstack1 = null;
 			ItemStack itemstack2 = null;
 
@@ -151,24 +151,24 @@ public class BlockDisplayStation extends BlockMachineBase {
 		}
 	}
 
-	private void sendPlayerArmorPacket(EntityPlayer player, ItemStack armor, int armorSlot) {
+	private void sendPlayerArmorPacket(final EntityPlayer player, final ItemStack armor, final int armorSlot) {
 		try {
 			TFNetworkManager.networkWrapper.sendTo(new MessageUpdateArmor(player, armor, armorSlot), (EntityPlayerMP) player);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+	public void onNeighborBlockChange(final World world, final int x, final int y, final int z, final Block block) {
 		super.onNeighborBlockChange(world, x, y, z, block);
 
 		if(world.getTileEntity(x, y, z) instanceof TileEntityDisplayStation) {
-			TileEntityDisplayStation tile = TFTileHelper.getTileBase((TileEntityDisplayStation) world.getTileEntity(x, y, z));
+			final TileEntityDisplayStation tile = TFTileHelper.getTileBase((TileEntityDisplayStation) world.getTileEntity(x, y, z));
 
 			if(!world.isRemote) {
-				boolean flag = world.isBlockIndirectlyGettingPowered(tile.xCoord, tile.yCoord, tile.zCoord);
+				final boolean flag = world.isBlockIndirectlyGettingPowered(tile.xCoord, tile.yCoord, tile.zCoord);
 
 				if(flag && !tile.isRedstonePowered) {
 					if(tile.canTransform()) {
@@ -183,7 +183,7 @@ public class BlockDisplayStation extends BlockMachineBase {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("stone");
 	}
 }

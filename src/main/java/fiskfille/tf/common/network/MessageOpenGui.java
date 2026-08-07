@@ -17,7 +17,7 @@ public class MessageOpenGui implements IMessage {
 
 	public MessageOpenGui() {}
 
-	public MessageOpenGui(EntityPlayer player, int modGuiId, int x, int y, int z) {
+	public MessageOpenGui(final EntityPlayer player, final int modGuiId, final int x, final int y, final int z) {
 		this.id = player.getEntityId();
 		this.modGuiId = modGuiId;
 		this.x = x;
@@ -26,7 +26,7 @@ public class MessageOpenGui implements IMessage {
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 		modGuiId = buf.readInt();
 		x = buf.readInt();
@@ -35,7 +35,7 @@ public class MessageOpenGui implements IMessage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		buf.writeInt(modGuiId);
 		buf.writeInt(x);
@@ -45,7 +45,7 @@ public class MessageOpenGui implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessageOpenGui, IMessage> {
 		@Override
-		public IMessage onMessage(MessageOpenGui message, MessageContext ctx) {
+		public IMessage onMessage(final MessageOpenGui message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
 				final EntityPlayer player = TransformersMod.proxy.getPlayer();
 				final Entity entity = player.worldObj.getEntityByID(message.id);

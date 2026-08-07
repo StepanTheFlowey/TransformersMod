@@ -17,7 +17,7 @@ public abstract class ClassTransformerMethodProcess extends ClassTransformerBase
 	private String methName;
 	private String methDesc;
 
-	public ClassTransformerMethodProcess(String classPath, String methodName, String methodNameDev, String methodDesc, String methodDescDev) {
+	public ClassTransformerMethodProcess(final String classPath, final String methodName, final String methodNameDev, final String methodDesc, final String methodDescDev) {
 		super(classPath);
 		this.methodName = methodName;
 		this.methodNameDev = methodNameDev;
@@ -26,8 +26,8 @@ public abstract class ClassTransformerMethodProcess extends ClassTransformerBase
 	}
 
 	@Override
-	public boolean processMethods(List<MethodNode> methods) {
-		for(MethodNode method : methods) {
+	public boolean processMethods(final List<MethodNode> methods) {
+		for(final MethodNode method : methods) {
 			if(method.name.equals(methName) && method.desc.equals(methDesc)) {
 				processMethod(method);
 				return true;
@@ -40,7 +40,7 @@ public abstract class ClassTransformerMethodProcess extends ClassTransformerBase
 	public abstract void processMethod(MethodNode method);
 
 	@Override
-	public boolean processFields(List<FieldNode> fields) {
+	public boolean processFields(final List<FieldNode> fields) {
 		return true;
 	}
 

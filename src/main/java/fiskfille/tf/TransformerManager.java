@@ -3,7 +3,7 @@ package fiskfille.tf;
 import fiskfille.tf.common.transformer.*;
 import fiskfille.tf.common.transformer.base.Transformer;
 
-public class TransformerManager {
+public final class TransformerManager {
 	public static final Transformer SKYSTRIKE = new TransformerSkystrike();
 	public static final Transformer PURGE = new TransformerPurge();
 	public static final Transformer VURP = new TransformerVurp();

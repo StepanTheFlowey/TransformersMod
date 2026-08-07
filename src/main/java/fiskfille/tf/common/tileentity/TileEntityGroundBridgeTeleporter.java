@@ -33,7 +33,7 @@ public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 		++ticks;
 	}
 
-	public boolean isReturnPortal(int metadata) {
+	public boolean isReturnPortal(final int metadata) {
 		return BlockGroundBridgeTeleporter.isReturnPortal(metadata);
 	}
 
@@ -47,7 +47,7 @@ public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		if(nbt.hasKey("ControlPanel", NBT.TAG_COMPOUND)) {
 			final NBTTagCompound nbttagcompound = nbt.getCompoundTag("ControlPanel");
 			controlPanel = new DimensionalCoords(
@@ -60,7 +60,7 @@ public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		if(controlPanel != null) {
 			final NBTTagCompound nbttagcompound = new NBTTagCompound();
 			nbttagcompound.setInteger("x", controlPanel.posX);

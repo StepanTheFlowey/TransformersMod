@@ -591,7 +591,7 @@ public class ModelVurp extends ModelTransformerBase {
 
 		setInitPose();
 
-		float scale = 1.25F;
+		final float scale = 1.25F;
 		shoulderpadR.setScale(scale, scale, scale);
 		shoulderpadL.setScale(scale, scale, scale);
 		lowerlegR6.setScale(scale, scale, scale);
@@ -609,7 +609,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void setupOffsets(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void setupOffsets(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final ModelOffset offsets = TFModelHelper.getOffsets(player);
 		head.rotationPointX += offsets.headOffsetX;
 		head.rotationPointY += offsets.headOffsetY;
@@ -648,7 +648,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doActiveAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doActiveAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		applyDefaultHoldingAnimation(upperArmR, upperArmL, lowerArmR1, lowerArmL1);
 		applyDefaultHittingAnimation(armbaseR1, armbaseL1, head, torsobase, lowerArmR1, lowerArmL1);
 
@@ -675,7 +675,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doWalkingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doWalkingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		waist.rotationPointY -= 3F;
 
 		if(!isRiding) {
@@ -738,7 +738,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doIdleAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doIdleAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		walk(fronttorso1, 0.08F, 0.1F, true, 1, 0, ticks, 1F);
 		walk(torsobase, 0.08F, 0.15F, false, 1, 0, ticks, 1F);
 		walk(head, 0.08F, 0.05F, true, 1, 0, ticks, 1F);
@@ -752,7 +752,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doFallingAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doFallingAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final double motionY = TFRenderHelper.getMotionY(player);
 
 		final float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
@@ -796,7 +796,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doPartialAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doPartialAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		waist.rotationPointY += 1;
 		upperArmL.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		upperArmR.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
@@ -822,7 +822,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void doTransformationAnimations(EntityPlayer player, float progress, float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, boolean wearingHead, boolean wearingChest, boolean wearingLegs, boolean wearingFeet) {
+	public void doTransformationAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
 		final ModelVurpVehicle vehicle = (ModelVurpVehicle) getTransformerModel().getVehicleModel();
 
 		if(TFHelper.getTransformationTimer(player) != 0) {
@@ -903,7 +903,7 @@ public class ModelVurp extends ModelTransformerBase {
 	}
 
 	@Override
-	public void renderArmorPiece(int armorPiece) {
+	public void renderArmorPiece(final int armorPiece) {
 		setToInitPose();
 
 		switch(armorPiece) {

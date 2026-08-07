@@ -14,30 +14,30 @@ public class MessageSendFlying implements IMessage {
 
 	public MessageSendFlying() {}
 
-	public MessageSendFlying(EntityPlayer player, boolean f) {
+	public MessageSendFlying(final EntityPlayer player, final boolean f) {
 		id = player.getEntityId();
 		flying = f;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 		flying = buf.readBoolean();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		buf.writeBoolean(flying);
 	}
 
 	public static class Handler implements IMessageHandler<MessageSendFlying, IMessage> {
 		@Override
-		public IMessage onMessage(MessageSendFlying message, MessageContext ctx) {
+		public IMessage onMessage(final MessageSendFlying message, final MessageContext ctx) {
 			if(ctx.side.isClient()) {
-				EntityPlayer player = TransformersMod.proxy.getPlayer();
+				final EntityPlayer player = TransformersMod.proxy.getPlayer();
 				EntityPlayer from = null;
-				Entity entity = player.worldObj.getEntityByID(message.id);
+				final Entity entity = player.worldObj.getEntityByID(message.id);
 
 				if(entity instanceof EntityPlayer) {
 					from = (EntityPlayer) entity;

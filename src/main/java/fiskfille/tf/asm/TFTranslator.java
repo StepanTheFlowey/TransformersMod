@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TFTranslator {
 	public static boolean obfuscatedEnv;
 
-	public static String getMappedName(String name, String devName) {
+	public static String getMappedName(final String name, final String devName) {
 		return obfuscatedEnv ? name : devName;
 	}
 }

@@ -8,10 +8,10 @@ import net.minecraft.tileentity.TileEntity;
 
 import java.util.Map;
 
-public class TFTileHelper {
+public final class TFTileHelper {
 	private static final Map<DimensionalCoords, TileData> tileData = Maps.newHashMap();
 
-	public static TileData getTileData(DimensionalCoords coords) {
+	public static TileData getTileData(final DimensionalCoords coords) {
 		return tileData.get(coords);
 	}
 
@@ -20,16 +20,16 @@ public class TFTileHelper {
 	}
 
 	public static void clearTileData() {
-		for(Map.Entry<DimensionalCoords, TileData> e : tileData.entrySet()) {
+		for(final Map.Entry<DimensionalCoords, TileData> e : tileData.entrySet()) {
 			e.getValue().kill();
 		}
 	}
 
-	public static void putServerData(TileData data) {
+	public static void putServerData(final TileData data) {
 		putServerData(data.getCoords(), data);
 	}
 
-	public static void putServerData(DimensionalCoords coords, TileData data) {
+	public static void putServerData(final DimensionalCoords coords, final TileData data) {
 		if(data == null) {
 			tileData.remove(coords);
 			return;
@@ -38,7 +38,7 @@ public class TFTileHelper {
 		tileData.put(coords, data);
 	}
 
-	public static int[] getTileBaseOffsets(TileEntity tile, int metadata) {
+	public static int[] getTileBaseOffsets(final TileEntity tile, final int metadata) {
 		if(tile instanceof IMultiTile) {
 			return ((IMultiTile) tile).getBaseOffsets(metadata);
 		}
@@ -46,8 +46,8 @@ public class TFTileHelper {
 		return new int[]{0, 0, 0};
 	}
 
-	public static <T extends TileEntity> T getTileBase(T tile) {
-		int[] offsets = getTileBaseOffsets(tile, tile != null ? tile.getBlockMetadata() : 0);
+	public static <T extends TileEntity> T getTileBase(final T tile) {
+		final int[] offsets = getTileBaseOffsets(tile, tile != null ? tile.getBlockMetadata() : 0);
 
 		if(offsets[0] != 0 || offsets[1] != 0 || offsets[2] != 0) {
 			return (T) tile.getWorldObj().getTileEntity(tile.xCoord + offsets[0], tile.yCoord + offsets[1], tile.zCoord + offsets[2]);

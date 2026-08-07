@@ -18,10 +18,10 @@ public class ClassTransformerEntity extends ClassTransformerBase {
 	}
 
 	@Override
-	public boolean processMethods(List<MethodNode> methods) {
+	public boolean processMethods(final List<MethodNode> methods) {
 		boolean flag = false;
 
-		for(MethodNode method : methods) {
+		for(final MethodNode method : methods) {
 			if(method.name.equals(TFTranslator.getMappedName("c", "getBrightnessForRender")) && method.desc.equals("(F)I")) {
 				final InsnList list = new InsnList();
 				int startIndex = -1;
@@ -58,7 +58,7 @@ public class ClassTransformerEntity extends ClassTransformerBase {
 	}
 
 	@Override
-	public boolean processFields(List<FieldNode> fields) {
+	public boolean processFields(final List<FieldNode> fields) {
 		return true;
 	}
 

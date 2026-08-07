@@ -8,11 +8,11 @@ import java.util.HashMap;
 public class TFModelRegistry {
 	private static final HashMap<Transformer, TransformerModel> models = new HashMap<>();
 
-	public static void registerModel(Transformer transformer, TransformerModel model) {
+	public static void registerModel(final Transformer transformer, final TransformerModel model) {
 		models.put(transformer, model);
 	}
 
-	public static TransformerModel getModel(Transformer transformer) {
+	public static TransformerModel getModel(final Transformer transformer) {
 		return models.get(transformer);
 	}
 

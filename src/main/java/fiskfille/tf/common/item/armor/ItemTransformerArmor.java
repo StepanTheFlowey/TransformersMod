@@ -21,13 +21,13 @@ import net.minecraftforge.common.ISpecialArmor;
 import java.util.List;
 
 public abstract class ItemTransformerArmor extends ItemArmor implements ISpecialArmor {
-	public ItemTransformerArmor(ArmorMaterial material, int renderIndex, int armorPiece) {
+	public ItemTransformerArmor(final ArmorMaterial material, final int renderIndex, final int armorPiece) {
 		super(material, renderIndex, armorPiece);
 		setCreativeTab(TransformersMod.tabTransformers);
 	}
 
 	@Override
-	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
+	public boolean isValidArmor(final ItemStack stack, final int armorType, final Entity entity) {
 		if(entity instanceof EntityLivingBase) {
 			final EntityLivingBase livingBase = (EntityLivingBase) entity;
 
@@ -46,7 +46,7 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 	}
 
 	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+	public ArmorProperties getProperties(final EntityLivingBase player, final ItemStack armor, final DamageSource source, final double damage, final int slot) {
 		if(!source.isUnblockable()) {
 			final ItemStack itemstack = TFArmorHelper.getArmorShell(armor);
 
@@ -63,7 +63,7 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 	}
 
 	@Override
-	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
+	public int getArmorDisplay(final EntityPlayer player, final ItemStack armor, final int slot) {
 		final ItemStack itemstack = TFArmorHelper.getArmorShell(armor);
 
 		if(itemstack != null) {
@@ -74,17 +74,17 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 	}
 
 	@Override
-	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
+	public void damageArmor(final EntityLivingBase entity, final ItemStack stack, final DamageSource source, final int damage, final int slot) {
 		stack.damageItem(damage, entity);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+	public String getArmorTexture(final ItemStack stack, final Entity entity, final int slot, final String type) {
 		return TFModelRegistry.getModel(getTransformer()).getTexture(entity, "").toString();
 	}
 
 	@Override
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean p_77624_4_) {
+	public void addInformation(final ItemStack itemstack, final EntityPlayer player, final List info, final boolean p_77624_4_) {
 		final ItemStack itemstack1 = TFArmorHelper.getArmorShell(itemstack);
 
 		if(itemstack1 != null) {
@@ -96,7 +96,7 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack itemstack, int armorSlot) {
+	public ModelBiped getArmorModel(final EntityLivingBase entity, final ItemStack itemstack, final int armorSlot) {
 		final ModelTransformerBase model = getTransformer().getModel().getMainModel();
 
 		if(itemstack != null && model != null) {
@@ -128,6 +128,6 @@ public abstract class ItemTransformerArmor extends ItemArmor implements ISpecial
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(final IIconRegister iconRegister) {
 	}
 }

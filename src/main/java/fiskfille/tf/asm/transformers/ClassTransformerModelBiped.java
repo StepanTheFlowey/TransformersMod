@@ -16,18 +16,18 @@ public class ClassTransformerModelBiped extends ClassTransformerBase {
 	}
 
 	@Override
-	public boolean processMethods(List<MethodNode> methods) {
+	public boolean processMethods(final List<MethodNode> methods) {
 		boolean flag = false;
 
-		for(MethodNode method : methods) {
+		for(final MethodNode method : methods) {
 			if(method.name.equals(TFTranslator.getMappedName("a", "render")) && method.desc.equals(TFTranslator.getMappedName("(Lsa;FFFFFF)V", "(Lnet/minecraft/entity/Entity;FFFFFF)V"))) {
-				InsnList list = new InsnList();
+				final InsnList list = new InsnList();
 
 				for(int i = 0; i < method.instructions.size(); ++i) {
-					AbstractInsnNode node = method.instructions.get(i);
+					final AbstractInsnNode node = method.instructions.get(i);
 
 					if(node instanceof MethodInsnNode) {
-						MethodInsnNode methodNode = (MethodInsnNode) node;
+						final MethodInsnNode methodNode = (MethodInsnNode) node;
 
 						if(methodNode.name.equals(TFTranslator.getMappedName("a", "setRotationAngles")) && methodNode.desc.equals(TFTranslator.getMappedName("(FFFFFFLsa;)V", "(FFFFFFLnet/minecraft/entity/Entity;)V"))) {
 							list.add(node);
@@ -85,7 +85,7 @@ public class ClassTransformerModelBiped extends ClassTransformerBase {
 	}
 
 	@Override
-	public boolean processFields(List<FieldNode> fields) {
+	public boolean processFields(final List<FieldNode> fields) {
 		return true;
 	}
 

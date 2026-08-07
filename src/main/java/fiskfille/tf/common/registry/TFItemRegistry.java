@@ -7,7 +7,7 @@ import fiskfille.tf.TransformersMod;
 import net.minecraft.item.Item;
 
 public class TFItemRegistry {
-	public static void registerItem(Item item, String name) {
+	public static void registerItem(final Item item, final String name) {
 		if(FMLCommonHandler.instance().getSide().isClient() && item.getCreativeTab() == null) {
 			item.setCreativeTab(TransformersMod.tabTransformers);
 		}
@@ -15,7 +15,7 @@ public class TFItemRegistry {
 		registerItemNoTab(item, name);
 	}
 
-	public static void registerItemNoTab(Item item, String name) {
+	public static void registerItemNoTab(final Item item, final String name) {
 		final String unlocalizedName = name.toLowerCase().replace(' ', '_').replace("'", "");
 
 		item.setUnlocalizedName(unlocalizedName);

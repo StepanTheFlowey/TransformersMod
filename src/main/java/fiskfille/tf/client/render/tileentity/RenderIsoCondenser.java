@@ -20,7 +20,7 @@ public class RenderIsoCondenser extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/isotopic_condenser.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/isotopic_condenser_lights.png");
 
-	public void render(TileEntityIsoCondenser tile, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityIsoCondenser tile, final double x, final double y, final double z, final float partialTicks) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glScalef(1F, -1F, -1F);
@@ -38,7 +38,7 @@ public class RenderIsoCondenser extends TileEntitySpecialRenderer {
 		GL11.glEnable(GL11.GL_LIGHTING);
 
 		if(tile.getWorldObj() != null) {
-			int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
+			final int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
 
 			if(progress >= 0) {
 				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -64,16 +64,16 @@ public class RenderIsoCondenser extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
 
-		for(Map.Entry<ForgeDirection, Block> e : tile.providers.entrySet()) {
-			ForgeDirection dir = e.getKey();
-			Block block = e.getValue();
-			float f = tile.animationTimer.get(dir) == null ? 0 : tile.animationTimer.get(dir);
+		for(final Map.Entry<ForgeDirection, Block> e : tile.providers.entrySet()) {
+			final ForgeDirection dir = e.getKey();
+			final Block block = e.getValue();
+			final float f = tile.animationTimer.get(dir) == null ? 0 : tile.animationTimer.get(dir);
 
 			if(!block.isOpaqueCube() && f == 1) {
 				block.setBlockBoundsBasedOnState(tile.getWorldObj(), tile.xCoord + dir.offsetX, tile.yCoord, tile.zCoord + dir.offsetZ);
 
-				Vec3 src = Vec3.createVectorHelper(-dir.offsetX * 0.5F, 0.2F, -dir.offsetZ * 0.5F);
-				Vec3 dst = Vec3.createVectorHelper(-dir.offsetX + 0.5F - (block.getBlockBoundsMinX() + block.getBlockBoundsMaxX()) / 2, 0.5F - (block.getBlockBoundsMinY() + block.getBlockBoundsMaxY()) / 2, -dir.offsetZ + 0.5F - (block.getBlockBoundsMinZ() + block.getBlockBoundsMaxZ()) / 2);
+				final Vec3 src = Vec3.createVectorHelper(-dir.offsetX * 0.5F, 0.2F, -dir.offsetZ * 0.5F);
+				final Vec3 dst = Vec3.createVectorHelper(-dir.offsetX + 0.5F - (block.getBlockBoundsMinX() + block.getBlockBoundsMaxX()) / 2, 0.5F - (block.getBlockBoundsMinY() + block.getBlockBoundsMaxY()) / 2, -dir.offsetZ + 0.5F - (block.getBlockBoundsMinZ() + block.getBlockBoundsMaxZ()) / 2);
 				TFRenderHelper.renderEnergyStatic(src, dst, 1F / 64, 0.5F, 8, e.getKey().hashCode());
 			}
 		}
@@ -82,7 +82,7 @@ public class RenderIsoCondenser extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityIsoCondenser) tileentity, d, d1, d2, f);
 	}
 }

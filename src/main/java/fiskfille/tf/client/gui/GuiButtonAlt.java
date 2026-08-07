@@ -11,12 +11,12 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonAlt extends GuiButton {
-	public GuiButtonAlt(int id, int x, int y, int width, int height, String s) {
+	public GuiButtonAlt(final int id, final int x, final int y, final int width, final int height, final String s) {
 		super(id, x, y, width, height, s);
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}

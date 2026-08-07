@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 
 public class RecipeClearConfig implements IRecipe {
 	@Override
-	public boolean matches(InventoryCrafting inventory, World world) {
+	public boolean matches(final InventoryCrafting inventory, final World world) {
 		boolean flag = false;
 
 		for(int i = 0; i < inventory.getSizeInventory(); ++i) {
@@ -28,7 +28,7 @@ public class RecipeClearConfig implements IRecipe {
 	}
 
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+	public ItemStack getCraftingResult(final InventoryCrafting inventory) {
 		for(int i = 0; i < inventory.getSizeInventory(); ++i) {
 			ItemStack itemstack = inventory.getStackInSlot(i);
 

@@ -10,28 +10,28 @@ public class TileDataEnergyContainer extends TileData {
 	public TileDataEnergyContainer() {
 	}
 
-	public TileDataEnergyContainer(EnergyStorage energyStorage) {
+	public TileDataEnergyContainer(final EnergyStorage energyStorage) {
 		storage = energyStorage;
 	}
 
-	public TileDataEnergyContainer(float max) {
+	public TileDataEnergyContainer(final float max) {
 		this(new EnergyStorage(max));
 	}
 
-	public TileDataEnergyContainer(TileDataEnergyContainer data) {
+	public TileDataEnergyContainer(final TileDataEnergyContainer data) {
 		super(data);
 		storage = data.storage.copy();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 		buf.writeFloat(getMaxEnergy());
 		storage.toBytes(buf);
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		storage = new EnergyStorage(buf.readFloat());
 		storage.fromBytes(buf);
@@ -61,9 +61,9 @@ public class TileDataEnergyContainer extends TileData {
 	}
 
 	@Override
-	public boolean matches(TileData tileData) {
+	public boolean matches(final TileData tileData) {
 		if(tileData instanceof TileDataEnergyContainer) {
-			TileDataEnergyContainer data = (TileDataEnergyContainer) tileData;
+			final TileDataEnergyContainer data = (TileDataEnergyContainer) tileData;
 
 			return Math.abs(getEnergyUsage() - data.getEnergyUsage()) <= 0.001F;
 		}

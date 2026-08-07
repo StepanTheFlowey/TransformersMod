@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 
 @SideOnly(Side.CLIENT)
 public class ASMHooks {
-	public static double getScaledSneakOffset(Entity entity, double d) {
+	public static double getScaledSneakOffset(final Entity entity, final double d) {
 		return d;
 	}
 }

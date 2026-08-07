@@ -12,21 +12,21 @@ import java.util.Arrays;
 public class ModelRendererTF extends MowzieModelRenderer {
 	private ArrayList<ModelRenderer> hideUntil = new ArrayList<>();
 
-	public ModelRendererTF(ModelBase modelBase, String name) {
+	public ModelRendererTF(final ModelBase modelBase, final String name) {
 		super(modelBase, name);
 	}
 
-	public ModelRendererTF(ModelBase modelBase, int x, int y) {
+	public ModelRendererTF(final ModelBase modelBase, final int x, final int y) {
 		super(modelBase, x, y);
 	}
 
-	public ModelRendererTF(ModelBase modelBase) {
+	public ModelRendererTF(final ModelBase modelBase) {
 		super(modelBase);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void render(float f) {
+	public void render(final float f) {
 		GL11.glPushMatrix();
 
 		if(!isHidden) {
@@ -87,9 +87,9 @@ public class ModelRendererTF extends MowzieModelRenderer {
 		}
 	}
 
-	protected void renderChildren(float f) {
+	protected void renderChildren(final float f) {
 		if(childModels != null) {
-			for(Object childModel : childModels) {
+			for(final Object childModel : childModels) {
 				final ModelRendererTF model = (ModelRendererTF) childModel;
 				ArrayList<ModelRenderer> list = new ArrayList<>(hideUntil);
 
@@ -103,12 +103,12 @@ public class ModelRendererTF extends MowzieModelRenderer {
 		}
 	}
 
-	public void hideUntil(ModelRenderer... modelRenderers) {
+	public void hideUntil(final ModelRenderer... modelRenderers) {
 		if(modelRenderers.length == 0) {
 			hideUntil.clear();
 
 			if(childModels != null) {
-				for(Object childModel : childModels) {
+				for(final Object childModel : childModels) {
 					((ModelRendererTF) childModel).hideUntil();
 				}
 			}

@@ -11,7 +11,7 @@ public class PlayerTransformEvent extends PlayerEvent {
 	public final boolean stealthForce;
 	public final Transformer transformer;
 
-	public PlayerTransformEvent(EntityPlayer player, Transformer transformer, int altMode, boolean stealthForce) {
+	public PlayerTransformEvent(final EntityPlayer player, final Transformer transformer, final int altMode, final boolean stealthForce) {
 		super(player);
 		this.altMode = altMode;
 		this.stealthForce = stealthForce;

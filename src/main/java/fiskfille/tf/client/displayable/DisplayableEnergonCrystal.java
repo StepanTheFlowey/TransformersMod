@@ -15,7 +15,7 @@ public class DisplayableEnergonCrystal extends Displayable {
 	private final ModelCrystal model = new ModelCrystal();
 
 	@Override
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		TFRenderHelper.renderTag(StatCollector.translateToLocalFormatted("tile.display_pedestal.amount", itemstack.stackSize), 0F, 0.1F, 0F);
 
 		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0F, 1F, 0F);

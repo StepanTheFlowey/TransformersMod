@@ -21,14 +21,14 @@ public class EntityTransformiumSeed extends Entity {
 	public int fuse;
 	public int maxFuse;
 
-	public EntityTransformiumSeed(World world) {
+	public EntityTransformiumSeed(final World world) {
 		super(world);
 		preventEntitySpawning = true;
 		setSize(0.98F, 0.98F);
 		yOffset = height / 2F;
 	}
 
-	public EntityTransformiumSeed(World world, double x, double y, double z) {
+	public EntityTransformiumSeed(final World world, final double x, final double y, final double z) {
 		this(world);
 		setPosition(x, y, z);
 		motionY = 0.05D;
@@ -37,7 +37,7 @@ public class EntityTransformiumSeed extends Entity {
 		prevPosZ = z;
 	}
 
-	public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float radius) {
+	public static List<Entity> getEntitiesNear(final World world, final double x, final double y, final double z, final float radius) {
 		return world.selectEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius), IEntitySelector.selectAnything);
 	}
 
@@ -111,7 +111,7 @@ public class EntityTransformiumSeed extends Entity {
 
 						final List<Entity> entities = getEntitiesNear(worldObj, x, y - depth, z, 5F);
 
-						for(Entity entity : entities) {
+						for(final Entity entity : entities) {
 							if(!entity.getUniqueID().equals(getUniqueID())) {
 								if(entity instanceof EntityLivingBase) {
 									entity.attackEntityFrom(DamageSource.onFire, Float.MAX_VALUE);
@@ -132,13 +132,13 @@ public class EntityTransformiumSeed extends Entity {
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbt) {
+	protected void writeEntityToNBT(final NBTTagCompound nbt) {
 		nbt.setByte("Fuse", (byte) fuse);
 		nbt.setByte("MaxFuse", (byte) maxFuse);
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbt) {
+	protected void readEntityFromNBT(final NBTTagCompound nbt) {
 		fuse = nbt.getByte("Fuse");
 		maxFuse = nbt.getByte("MaxFuse");
 	}
@@ -150,5 +150,5 @@ public class EntityTransformiumSeed extends Entity {
 	}
 
 	@Override
-	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int steps) {}
+	public void setPositionAndRotation2(final double x, final double y, final double z, final float yaw, final float pitch, final int steps) {}
 }

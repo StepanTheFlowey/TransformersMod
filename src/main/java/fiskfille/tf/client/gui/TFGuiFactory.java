@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class TFGuiFactory implements IModGuiFactory {
 	@Override
-	public void initialize(Minecraft minecraftInstance) {}
+	public void initialize(final Minecraft minecraftInstance) {}
 
 	@Override
 	public Class<? extends GuiScreen> mainConfigGuiClass() {
@@ -21,7 +21,7 @@ public class TFGuiFactory implements IModGuiFactory {
 	}
 
 	@Override
-	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) {
+	public RuntimeOptionGuiHandler getHandlerFor(final RuntimeOptionCategoryElement element) {
 		return null;
 	}
 }

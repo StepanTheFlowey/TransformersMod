@@ -317,12 +317,12 @@ public class ModelSubwooferVehicle extends ModelVehicleBase {
 	}
 
 	@Override
-	public void render(EntityPlayer player, ItemStack itemstack) {
+	public void render(final EntityPlayer player, final ItemStack itemstack) {
 		TFRenderHelper.setupRenderLayers(player, itemstack, vehicleBase);
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale, Entity entity) {
+	public void setRotationAngles(final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final float scale, final Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ticks, rotationYaw, rotationPitch, scale, entity);
 		setToInitPose();
 

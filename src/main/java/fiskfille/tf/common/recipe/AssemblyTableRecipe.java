@@ -14,7 +14,7 @@ public class AssemblyTableRecipe implements IRecipe {
 	private final ItemStack recipeOutput;
 	private boolean field_92101_f;
 
-	public AssemblyTableRecipe(int width, int height, ItemStack[] ingredients, ItemStack[] dyes, ItemStack result) {
+	public AssemblyTableRecipe(final int width, final int height, final ItemStack[] ingredients, final ItemStack[] dyes, final ItemStack result) {
 		recipeWidth = width;
 		recipeHeight = height;
 		recipeItems = ingredients;
@@ -28,7 +28,7 @@ public class AssemblyTableRecipe implements IRecipe {
 	}
 
 	@Override
-	public boolean matches(InventoryCrafting inventory, World world) {
+	public boolean matches(final InventoryCrafting inventory, final World world) {
 		for(int i = 0; i <= 5 - recipeWidth; ++i) {
 			for(int j = 0; j <= 5 - recipeHeight; ++j) {
 				if(checkMatch(inventory, i, j)) {
@@ -40,12 +40,12 @@ public class AssemblyTableRecipe implements IRecipe {
 		return false;
 	}
 
-	private boolean checkMatch(InventoryCrafting inventory, int x, int y) {
+	private boolean checkMatch(final InventoryCrafting inventory, final int x, final int y) {
 		for(int row = 0; row < 5; ++row) {
 			for(int column = 0; column < 5; ++column) {
-				int x1 = row - x;
-				int y1 = column - y;
-				int id = x1 + y1 * recipeWidth;
+				final int x1 = row - x;
+				final int y1 = column - y;
+				final int id = x1 + y1 * recipeWidth;
 				ItemStack recipeStack = null;
 
 				if(x1 >= 0 && y1 >= 0 && x1 < recipeWidth && y1 < recipeHeight) {
@@ -62,7 +62,7 @@ public class AssemblyTableRecipe implements IRecipe {
 					recipeStack = recipeDyes[2];
 				}
 
-				ItemStack stackInSlot = inventory.getStackInRowAndColumn(row, column);
+				final ItemStack stackInSlot = inventory.getStackInRowAndColumn(row, column);
 
 				if(stackInSlot != null || recipeStack != null) {
 					if(recipeStack.getItem() != stackInSlot.getItem()) {
@@ -84,7 +84,7 @@ public class AssemblyTableRecipe implements IRecipe {
 	}
 
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+	public ItemStack getCraftingResult(final InventoryCrafting inventory) {
 		final ItemStack itemstack = getRecipeOutput().copy();
 
 		if(field_92101_f) {

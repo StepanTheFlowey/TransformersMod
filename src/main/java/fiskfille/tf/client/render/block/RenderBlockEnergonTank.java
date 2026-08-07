@@ -15,16 +15,16 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
 	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(final IBlockAccess world, final int x, final int y, final int z, final Block block, final int modelId, final RenderBlocks renderer) {
 		boolean flag = false;
 		boolean connectAbove = false;
 		boolean connectBelow = false;
-		int metadata = world.getBlockMetadata(x, y, z);
+		final int metadata = world.getBlockMetadata(x, y, z);
 		BlockEnergonTank.renderMetadata = metadata;
 
 		if(world.getTileEntity(x, y, z) instanceof TileEntityEnergonTank) {
-			TileEntityEnergonTank tile = (TileEntityEnergonTank) world.getTileEntity(x, y, z);
-			TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(tile);
+			final TileEntityEnergonTank tile = (TileEntityEnergonTank) world.getTileEntity(x, y, z);
+			final TileEntityEnergonTank tileBase = TFTileHelper.getTileBase(tile);
 
 			if(tileBase == TFTileHelper.getTileBase(world.getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord))) {
 				connectAbove = true;
@@ -131,7 +131,7 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+	public void renderInventoryBlock(final Block block, final int metadata, final int modelID, final RenderBlocks renderer) {
 		final float min = 0.0001F, max = 1F - min;
 		BlockEnergonTank.renderSide = 4;
 		renderer.setRenderBounds(min, min, min, max, max, max);
@@ -207,7 +207,7 @@ public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
+	public boolean shouldRender3DInInventory(final int modelId) {
 		return true;
 	}
 

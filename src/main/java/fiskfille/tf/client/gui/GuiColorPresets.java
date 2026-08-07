@@ -33,7 +33,7 @@ public class GuiColorPresets extends GuiScreen {
 	public int maxPages = 0;
 	public int page = 0;
 
-	public GuiColorPresets(TileEntityDisplayStation tile, GuiColor gui) {
+	public GuiColorPresets(final TileEntityDisplayStation tile, final GuiColor gui) {
 		tileentity = tile;
 		parent = gui;
 	}
@@ -55,7 +55,7 @@ public class GuiColorPresets extends GuiScreen {
 						// Canon
 						new ColorPreset(0x0000ff, 0xff0000, "G1 Optimus Prime"), new ColorPreset(0xd7d7d7, 0x666868, "G1 Megatron"), new ColorPreset(0xe4160e, 0x3636e8, "G1 Starscream"), new ColorPreset(0xa0ff36, 0x9a009a, "G1 Constructicon"), new ColorPreset(0xfe3978, 0x198014, "G1 Scorponok"), new ColorPreset(0x7148d6, 0xfe6c6c, "G1 Galvatron"), new ColorPreset(0xcdcdcd, 0x0e0e0e, "G1 Prowl"), new ColorPreset(0x000083, 0xbb0000, "Movie Optimus Prime"), new ColorPreset(0xddc600, 0x101010, "Bumblebee"), new ColorPreset(0x173f17, 0x513838, "Brawl"), new ColorPreset(0x880000, 0x4f0000, "Warpath"), new ColorPreset(0x4f00b2, 0x656565, "Vehicon"), new ColorPreset(0xa51919, 0xcf6300, "Hot-Rod"), new ColorPreset(0x737a80, 0x2f3b47, "Starscream")};
 
-		int maxPresetsPerPage = columnsPerPage * rowsPerPage;
+		final int maxPresetsPerPage = columnsPerPage * rowsPerPage;
 		int xOffset = 0, yOffset = 0;
 		maxPages = presets.length / maxPresetsPerPage;
 
@@ -85,15 +85,15 @@ public class GuiColorPresets extends GuiScreen {
 	}
 
 	@Override
-	protected void keyTyped(char c, int key) {
+	protected void keyTyped(final char c, final int key) {
 		if(key == 1) {
 			mc.displayGuiScreen(null);
 		}
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
-		int id = button.id;
+	protected void actionPerformed(final GuiButton button) {
+		final int id = button.id;
 
 		if(id == 0) {
 			GuiColor.fromPresetMenu = true;
@@ -110,10 +110,10 @@ public class GuiColorPresets extends GuiScreen {
 	}
 
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int button) {
+	protected void mouseClicked(final int mouseX, final int mouseY, final int button) {
 		super.mouseClicked(mouseX, mouseY, button);
 
-		for(ColorPreset preset : presets) {
+		for(final ColorPreset preset : presets) {
 			if(button == 0) {
 				if(mouseX >= preset.posX && mouseX < preset.posX + 50 && mouseY >= preset.posY && mouseY < preset.posY + 50) {
 					final Color primary = new Color(preset.primaryColor);
@@ -139,11 +139,11 @@ public class GuiColorPresets extends GuiScreen {
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj, I18n.format("gui.display_station.color.presets"), width / 2, 15, 16777215);
 
-		int maxPresetsPerPage = columnsPerPage * rowsPerPage;
+		final int maxPresetsPerPage = columnsPerPage * rowsPerPage;
 		int xOffset = 0;
 		int yOffset = 0;
 
@@ -162,7 +162,7 @@ public class GuiColorPresets extends GuiScreen {
 					GL11.glDisable(GL11.GL_TEXTURE_2D);
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					float opacityMax = 20;
+					final float opacityMax = 20;
 					float opacity = (ticks + partialTicks) % opacityMax;
 					opacity = opacity > opacityMax / 2 ? opacityMax / 2 - (opacity - opacityMax / 2) : opacity;
 					GL11.glColor4f(1F, 1F, 0F, opacity / opacityMax + 0.1F);
@@ -201,8 +201,8 @@ public class GuiColorPresets extends GuiScreen {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		boolean flag = false;
-		for(float[] f : tempLayerColors) {
-			for(float f1 : f) {
+		for(final float[] f : tempLayerColors) {
+			for(final float f1 : f) {
 				if(f1 != 0) {
 					flag = true;
 					break;
@@ -279,7 +279,7 @@ public class GuiColorPresets extends GuiScreen {
 		public int posX;
 		public int posY;
 
-		public ColorPreset(int primaryColor, int secondaryColor, String name) {
+		public ColorPreset(final int primaryColor, final int secondaryColor, final String name) {
 			this.primaryColor = primaryColor;
 			this.secondaryColor = secondaryColor;
 			this.name = name;

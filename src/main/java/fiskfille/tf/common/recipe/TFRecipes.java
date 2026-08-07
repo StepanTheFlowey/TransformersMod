@@ -86,13 +86,13 @@ public class TFRecipes {
 	}
 
 	public static void save() {
-		for(IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList()) {
+		for(final IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList()) {
 			if(!prevRecipes.contains(recipe)) {
 				tempRecipes.add(recipe);
 			}
 		}
 
-		for(ItemStack itemstack : (Set<ItemStack>) FurnaceRecipes.smelting().getSmeltingList().keySet()) {
+		for(final ItemStack itemstack : (Set<ItemStack>) FurnaceRecipes.smelting().getSmeltingList().keySet()) {
 			if(!prevFurnaceRecipes.contains(itemstack)) {
 				tempFurnaceRecipes.add(itemstack);
 			}
@@ -101,7 +101,7 @@ public class TFRecipes {
 
 	public static void restore() {
 		final HashMap<ItemStack, ItemStack> map = new HashMap<>();
-		for(Map.Entry<ItemStack, ItemStack> e : ((Map<ItemStack, ItemStack>) FurnaceRecipes.smelting().getSmeltingList()).entrySet()) {
+		for(final Map.Entry<ItemStack, ItemStack> e : ((Map<ItemStack, ItemStack>) FurnaceRecipes.smelting().getSmeltingList()).entrySet()) {
 			if(!tempFurnaceRecipes.contains(e.getKey())) {
 				map.put(e.getKey(), e.getValue());
 			}
@@ -198,13 +198,13 @@ public class TFRecipes {
 		GameRegistry.addRecipe(new RecipeDisplayItems());
 
 		for(int i = 0; i < BlockDisplayPedestal.getTextures().size(); ++i) {
-			BlockIcon[] icons = BlockDisplayPedestal.getTexture(i);
+			final BlockIcon[] icons = BlockDisplayPedestal.getTexture(i);
 			GameRegistry.addRecipe(new ItemStack(TFBlocks.displayPedestal, 2, i), " T ", "BPB", 'T', new ItemStack(icons[2].block, 1, icons[2].metadata), 'P', new ItemStack(icons[1].block, 1, icons[1].metadata), 'B', new ItemStack(icons[0].block, 1, icons[0].metadata));
 		}
 
 		int i = 0;
 
-		for(Transformer transformer : TransformersAPI.getTransformers()) {
+		for(final Transformer transformer : TransformersAPI.getTransformers()) {
 			GameRegistry.addShapelessRecipe(new ItemStack(TFItems.displayVehicle, 1, i), transformer.getHelmet(), transformer.getChestplate(), transformer.getLeggings(), transformer.getBoots());
 			++i;
 		}
@@ -265,7 +265,7 @@ public class TFRecipes {
 		AssemblyTable.addRecipe(new ItemStack(TFItems.cloudtrapBoots), new Dyes(GRAY, 3, PALE_BROWN, 2), "     ", "     ", "     ", " TTT ", "     ", 'T', new ItemStack(TFItems.transformiumAlloy, 2));
 	}
 
-	private static void addMaterialCompression(Object... args) {
+	private static void addMaterialCompression(final Object... args) {
 		for(int i = 0; i < args.length; ++i) {
 
 			Object nugget = null;
@@ -279,7 +279,7 @@ public class TFRecipes {
 			}
 
 			ItemStack result;
-			Object ingot = args[i];
+			final Object ingot = args[i];
 			if(ingot instanceof String) {
 				if(!OreDictionary.doesOreNameExist((String) ingot)) {
 					continue;

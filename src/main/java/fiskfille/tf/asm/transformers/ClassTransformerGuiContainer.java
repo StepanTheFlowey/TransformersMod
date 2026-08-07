@@ -14,7 +14,7 @@ public class ClassTransformerGuiContainer extends ClassTransformerMethodProcess 
 	}
 
 	@Override
-	public void processMethod(MethodNode method) {
+	public void processMethod(final MethodNode method) {
 		final InsnList list = new InsnList();
 
 		for(int i = 0; i < method.instructions.size(); ++i) {

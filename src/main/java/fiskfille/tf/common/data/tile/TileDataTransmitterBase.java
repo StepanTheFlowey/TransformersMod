@@ -13,18 +13,18 @@ public class TileDataTransmitterBase extends TileDataEnergyContainer {
 	public TileDataTransmitterBase() {
 	}
 
-	public TileDataTransmitterBase(float max) {
+	public TileDataTransmitterBase(final float max) {
 		super(max);
 	}
 
-	public TileDataTransmitterBase(TileDataTransmitterBase data) {
+	public TileDataTransmitterBase(final TileDataTransmitterBase data) {
 		super(data);
 		transmissionHandler = data.transmissionHandler;
 		transmissionHandler.setNeedsUpdate(false);
 	}
 
 	@Override
-	public <T extends TileEntity> T initialize(T tile) {
+	public <T extends TileEntity> T initialize(final T tile) {
 		if(!isInitialized()) {
 			transmissionHandler.setOwner(tile);
 		}
@@ -33,19 +33,19 @@ public class TileDataTransmitterBase extends TileDataEnergyContainer {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 		transmissionHandler.toBytes(buf);
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		transmissionHandler.fromBytes(buf);
 	}
 
 	public void serverTickPre() {
-		WorldServer world = MinecraftServer.getServer().worldServerForDimension(getCoords().dimension);
+		final WorldServer world = MinecraftServer.getServer().worldServerForDimension(getCoords().dimension);
 
 		if(world != null) {
 			transmissionHandler.onUpdate(world);
@@ -62,7 +62,7 @@ public class TileDataTransmitterBase extends TileDataEnergyContainer {
 	}
 
 	@Override
-	public boolean matches(TileData tileData) {
+	public boolean matches(final TileData tileData) {
 		if(tileData instanceof TileDataTransmitterBase) {
 			return super.matches(tileData) && !transmissionHandler.needsUpdate();
 		}

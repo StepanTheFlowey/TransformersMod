@@ -17,23 +17,23 @@ public class RenderItemArmor implements IItemRenderer {
 	private final Transformer transformer;
 	private final int armorPiece;
 
-	public RenderItemArmor(Transformer transformer, int armorPiece) {
+	public RenderItemArmor(final Transformer transformer, final int armorPiece) {
 		this.transformer = transformer;
 		this.armorPiece = armorPiece;
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(final ItemStack item, final ItemRenderType type) {
 		return true;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(final ItemRenderType type, final ItemStack item, final ItemRendererHelper helper) {
 		return type == ItemRenderType.ENTITY || type == ItemRenderType.EQUIPPED_FIRST_PERSON;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		final TransformerModel tfModel = TFModelRegistry.getModel(transformer);
 		final ModelTransformerBase model = tfModel.getItemInventoryModel();
 
@@ -117,7 +117,7 @@ public class RenderItemArmor implements IItemRenderer {
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 
-	private void renderArmor(ItemRenderType type, ModelTransformerBase model) {
+	private void renderArmor(final ItemRenderType type, final ModelTransformerBase model) {
 		GL11.glPushMatrix();
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
 			GL11.glRotatef(180, 1, 0, 0);
@@ -158,7 +158,7 @@ public class RenderItemArmor implements IItemRenderer {
 				GL11.glRotatef(35, 0, 0, 1);
 			}
 
-			float scale = 0.7F;
+			final float scale = 0.7F;
 			GL11.glScalef(scale, scale, scale);
 			model.renderArmorPiece(armorPiece);
 		}
@@ -167,7 +167,7 @@ public class RenderItemArmor implements IItemRenderer {
 			GL11.glTranslatef(0.5F, 0.5F, 1);
 			GL11.glScalef(1, 1, -1);
 
-			float scale = 2F;
+			final float scale = 2F;
 			if(armorPiece == 0) {
 				GL11.glTranslatef(0.03125F, 0F, 0F);
 				GL11.glScalef(scale, scale, scale);

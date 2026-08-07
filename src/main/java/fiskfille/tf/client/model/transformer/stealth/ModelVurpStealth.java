@@ -434,12 +434,12 @@ public class ModelVurpStealth extends ModelVurpVehicle {
 	}
 
 	@Override
-	public void render(EntityPlayer player, ItemStack itemstack) {
+	public void render(final EntityPlayer player, final ItemStack itemstack) {
 		TFRenderHelper.setupRenderLayers(player, itemstack, vehicleBase);
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ticks, float rotationYaw, float rotationPitch, float scale, Entity entity) {
+	public void setRotationAngles(final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final float scale, final Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ticks, rotationYaw, rotationPitch, scale, entity);
 		setToInitPose();
 
@@ -470,7 +470,7 @@ public class ModelVurpStealth extends ModelVurpVehicle {
 			vehicleWheelBackL.setRotationPoint(2F - f1, 2F, 2.3F - f1);
 
 			final float wheelSpinSpeed = (TFData.FORWARD_VELOCITY.get(player) < 0 ? -limbSwing : limbSwing) * 0.8F;
-			for(ModelRenderer modelRenderer : new ModelRenderer[]{vehicleWheelR, vehicleWheelL, vehicleWheelBackR, vehicleWheelBackL}) {
+			for(final ModelRenderer modelRenderer : new ModelRenderer[]{vehicleWheelR, vehicleWheelL, vehicleWheelBackR, vehicleWheelBackL}) {
 				modelRenderer.rotateAngleX = wheelSpinSpeed;
 			}
 

@@ -23,7 +23,7 @@ public class ItemFlamethrower extends Item {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
+	public void onPlayerStoppedUsing(final ItemStack stack, final World world, final EntityPlayer player, final int time) {
 		if(TFHelper.getTransformer(player) instanceof TransformerCloudtrap && !world.isRemote && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
 			stack.damageItem(1, player);
 
@@ -34,8 +34,8 @@ public class ItemFlamethrower extends Item {
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		int duration = getMaxItemUseDuration(stack) - count;
+	public void onUsingTick(final ItemStack stack, final EntityPlayer player, final int count) {
+		final int duration = getMaxItemUseDuration(stack) - count;
 
 		if(duration < 40) {
 			if(player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode) {
@@ -82,12 +82,12 @@ public class ItemFlamethrower extends Item {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public int getMaxItemUseDuration(final ItemStack stack) {
 		return 72000;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player) {
 		if(TFHelper.getTransformer(player) instanceof TransformerCloudtrap && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}

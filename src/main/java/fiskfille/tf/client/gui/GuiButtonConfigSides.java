@@ -12,12 +12,12 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonConfigSides extends GuiButtonFlat {
-	public GuiButtonConfigSides(int id, int x, int y) {
+	public GuiButtonConfigSides(final int id, final int x, final int y) {
 		super(id, x, y, 13, "");
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}

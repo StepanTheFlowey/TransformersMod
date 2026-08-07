@@ -105,7 +105,7 @@ public class ModelEnergonProcessor extends MowzieModelBase {
 		shape1_1.setRotationPoint(-6.5F, 18F, -6.5F);
 		shape1_1.addBox(0F, 0F, 0F, 13, 1, 13, 0F);
 
-		MowzieModelRenderer rotatechamber_3 = new ModelRendererBreakable(this, 0, 11);
+		final MowzieModelRenderer rotatechamber_3 = new ModelRendererBreakable(this, 0, 11);
 		rotatechamber_3.setRotationPoint(0F, 0F, 0F);
 		rotatechamber_3.addBox(-6F, 0F, -2F, 12, 3, 4, 0F);
 		setRotateAngle(rotatechamber_3, 0F, -0.7853981633974483F, 0F);
@@ -168,7 +168,7 @@ public class ModelEnergonProcessor extends MowzieModelBase {
 		setInitPose();
 	}
 
-	public void render(TileEntityEnergonProcessor tileentity) {
+	public void render(final TileEntityEnergonProcessor tileentity) {
 		if(tileentity.burnTime == 0) {
 			setToInitPose();
 		}
@@ -205,7 +205,7 @@ public class ModelEnergonProcessor extends MowzieModelBase {
 		shape2_3.render(0.0625F);
 	}
 
-	private void setRotateAngle(MowzieModelRenderer model, float x, float y, float z) {
+	private void setRotateAngle(final MowzieModelRenderer model, final float x, final float y, final float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

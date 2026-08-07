@@ -15,9 +15,9 @@ import org.lwjgl.opengl.GL11;
 public class RenderCrystal extends TileEntitySpecialRenderer {
 	private final ModelCrystal model = new ModelCrystal();
 
-	public void render(TileEntityCrystal tile, double x, double y, double z) {
-		BlockEnergonCrystal block = (BlockEnergonCrystal) tile.getBlockType();
-		Energon energon = block.getEnergonType();
+	public void render(final TileEntityCrystal tile, final double x, final double y, final double z) {
+		final BlockEnergonCrystal block = (BlockEnergonCrystal) tile.getBlockType();
+		final Energon energon = block.getEnergonType();
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
@@ -35,7 +35,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		if(tile.getWorldObj() != null) {
-			int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
+			final int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
 
 			if(progress >= 0) {
 				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -59,7 +59,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	public void adjustRotation(TileEntityCrystal tile) {
+	public void adjustRotation(final TileEntityCrystal tile) {
 		final int metadata = tile.getBlockMetadata();
 		final ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
 
@@ -71,7 +71,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 			GL11.glTranslatef(0, -1, 0);
 		}
 		else {
-			int[] rotations = {2, 0, 1, 3};
+			final int[] rotations = {2, 0, 1, 3};
 
 			GL11.glTranslatef(0, 0.125F, 0);
 			GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
@@ -81,7 +81,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks) {
+	public void renderTileEntityAt(final TileEntity tile, final double x, final double y, final double z, final float partialTicks) {
 		render((TileEntityCrystal) tile, x, y, z);
 	}
 }

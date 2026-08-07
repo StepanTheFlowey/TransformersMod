@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class ASMHooksClient {
-	public static int getBrightnessForRender(Entity entity) {
+	public static int getBrightnessForRender(final Entity entity) {
 		if(entity instanceof EntityPlayer) {
 			final float scale = TFHelper.getHeight((EntityPlayer) entity) / 1.8F;
 
@@ -27,7 +27,7 @@ public class ASMHooksClient {
 		return MathHelper.floor_double(entity.posY - entity.yOffset + d0);
 	}
 
-	public static void applyPlayerRenderTranslation(RenderPlayer render, AbstractClientPlayer player, double x, double y, double z) {
+	public static void applyPlayerRenderTranslation(final RenderPlayer render, final AbstractClientPlayer player, final double x, final double y, final double z) {
 		if(player == Minecraft.getMinecraft().thePlayer) {
 			GL11.glTranslatef(0F, player.yOffset - 1.62F, 0F);
 		}
@@ -35,11 +35,11 @@ public class ASMHooksClient {
 		GL11.glTranslated(x, y, z);
 	}
 
-	public static double getScaledSneakOffset(EntityPlayer player) {
+	public static double getScaledSneakOffset(final EntityPlayer player) {
 		return 0.125D;
 	}
 
-	public static void renderSlotPost(GuiContainer gui, Slot slot) {
+	public static void renderSlotPost(final GuiContainer gui, final Slot slot) {
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 	}
 }

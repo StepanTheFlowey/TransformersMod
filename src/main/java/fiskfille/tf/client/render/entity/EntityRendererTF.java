@@ -6,12 +6,12 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class EntityRendererTF extends EntityRenderer {
-	public EntityRendererTF(Minecraft mc) {
+	public EntityRendererTF(final Minecraft mc) {
 		super(mc, mc.getResourceManager());
 	}
 
 	@Override
-	public void updateCameraAndRender(float partialTick) {
+	public void updateCameraAndRender(final float partialTick) {
 		final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		if(player == null || player.isPlayerSleeping()) {
 			super.updateCameraAndRender(partialTick);

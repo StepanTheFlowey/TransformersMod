@@ -17,24 +17,24 @@ public enum GroundBridgeError {
 		private final GroundBridgeError error;
 		private final Integer[] arguments;
 
-		public ErrorContainer(GroundBridgeError error, Integer... arguments) {
+		public ErrorContainer(final GroundBridgeError error, final Integer... arguments) {
 			this.error = error;
 			this.arguments = arguments;
 		}
 
-		public static ErrorContainer fromBytes(ByteBuf buf) {
+		public static ErrorContainer fromBytes(final ByteBuf buf) {
 			try {
 				final byte index = buf.readByte();
 				final byte length = buf.readByte();
 
-				Integer[] list = new Integer[length];
+				final Integer[] list = new Integer[length];
 				for(byte i = 0; i < length; ++i) {
 					list[i] = buf.readInt();
 				}
 
 				return new ErrorContainer(GroundBridgeError.values()[index], list);
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 				e.printStackTrace();
 			}
 
@@ -52,7 +52,7 @@ public enum GroundBridgeError {
 			);
 		}
 
-		public void toBytes(ByteBuf buf) {
+		public void toBytes(final ByteBuf buf) {
 			buf.writeByte(error.ordinal());
 			buf.writeByte(arguments.length);
 
@@ -67,7 +67,7 @@ public enum GroundBridgeError {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(final Object obj) {
 			if(obj instanceof ErrorContainer) {
 				final ErrorContainer container = (ErrorContainer) obj;
 				return container.error == error && Arrays.equals(container.arguments, arguments);

@@ -30,22 +30,22 @@ public class ItemMetaBasic extends Item {
 	}
 
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List list) {
+	public void getSubItems(final Item item, final CreativeTabs tab, final List list) {
 		final List<Double> list1 = Lists.newArrayList();
 
-		for(Map.Entry<String, Integer> e : subItems.entrySet()) {
+		for(final Map.Entry<String, Integer> e : subItems.entrySet()) {
 			list1.add(e.getValue().doubleValue());
 		}
 
 		Collections.sort(list1);
 
-		for(Double aDouble : list1) {
+		for(final Double aDouble : list1) {
 			list.add(new ItemStack(this, 1, aDouble.intValue()));
 		}
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int slot, boolean isHeld) {
+	public void onUpdate(final ItemStack itemstack, final World world, final Entity entity, final int slot, final boolean isHeld) {
 		if(StringUtils.isNullOrEmpty(getNameFromId(itemstack.getItemDamage()))) {
 			if(entity instanceof EntityPlayer) {
 				final EntityPlayer player = (EntityPlayer) entity;
@@ -55,19 +55,19 @@ public class ItemMetaBasic extends Item {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
+	public String getItemStackDisplayName(final ItemStack stack) {
 		return StatCollector.translateToLocal(String.format("item.%s.name", getNameFromId(stack.getItemDamage())));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
+	public IIcon getIconFromDamage(final int damage) {
 		return mappedIcons.get(getNameFromId(damage));
 	}
 
-	public String getNameFromId(int id) {
+	public String getNameFromId(final int id) {
 		if(subItems.containsValue(id)) {
-			for(Map.Entry<String, Integer> e : subItems.entrySet()) {
+			for(final Map.Entry<String, Integer> e : subItems.entrySet()) {
 				if(e.getValue() == id) {
 					return e.getKey();
 				}
@@ -79,7 +79,7 @@ public class ItemMetaBasic extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(final IIconRegister iconRegister) {
 		mappedIcons.clear();
 
 		for(int i = 0; i < iconNames.length; ++i) {

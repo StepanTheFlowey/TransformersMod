@@ -18,27 +18,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FluidEnergon extends Fluid {
-	public FluidEnergon(String fluidName) {
+	public FluidEnergon(final String fluidName) {
 		super(fluidName);
 	}
 
-	public static void refreshNBT(FluidStack stack) {
+	public static void refreshNBT(final FluidStack stack) {
 		if(stack.tag == null) {
 			stack.tag = new NBTTagCompound();
 		}
 	}
 
-	public static FluidStack create(ItemStack crystal) {
-		IEnergon energon = (IEnergon) (crystal.getItem() instanceof ItemBlock ? Block.getBlockFromItem(crystal.getItem()) : crystal.getItem());
+	public static FluidStack create(final ItemStack crystal) {
+		final IEnergon energon = (IEnergon) (crystal.getItem() instanceof ItemBlock ? Block.getBlockFromItem(crystal.getItem()) : crystal.getItem());
 
 		return create(energon.getEnergonType(), energon.getMass());
 	}
 
-	public static FluidStack create(Energon energon, int amount) {
-		FluidStack stack = new FluidStack(TFFluids.energon, amount);
-		Map<String, Float> ratios = Maps.newHashMap();
+	public static FluidStack create(final Energon energon, final int amount) {
+		final FluidStack stack = new FluidStack(TFFluids.energon, amount);
+		final Map<String, Float> ratios = Maps.newHashMap();
 
-		for(Energon energon1 : TransformersAPI.getEnergonTypes()) {
+		for(final Energon energon1 : TransformersAPI.getEnergonTypes()) {
 			ratios.put(energon1.getId(), energon.getId().equals(energon1.getId()) ? 1F : 0);
 		}
 
@@ -47,16 +47,16 @@ public class FluidEnergon extends Fluid {
 		return stack;
 	}
 
-	public static void merge(FluidStack stack1, FluidStack stack2, int amount) {
+	public static void merge(final FluidStack stack1, final FluidStack stack2, final int amount) {
 		Map<String, Float> ratios1 = getRatios(stack1);
-		Map<String, Float> ratios2 = getRatios(stack2);
+		final Map<String, Float> ratios2 = getRatios(stack2);
 
 		if(stack1.amount == 0) {
 			ratios1 = ratios2;
 		}
 		else {
-			for(Map.Entry<String, Float> e : ratios1.entrySet()) {
-				float f = (float) amount / stack1.amount;
+			for(final Map.Entry<String, Float> e : ratios1.entrySet()) {
+				final float f = (float) amount / stack1.amount;
 				e.setValue(e.getValue() * (1 - f) + ratios2.get(e.getKey()) * f);
 			}
 		}
@@ -64,16 +64,16 @@ public class FluidEnergon extends Fluid {
 		setRatios(stack1, ratios1);
 	}
 
-	public static void setRatios(FluidStack stack, Map<String, Float> ratios) {
-		NBTTagCompound nbttagcompound = new NBTTagCompound();
+	public static void setRatios(final FluidStack stack, final Map<String, Float> ratios) {
+		final NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-		for(Energon energon : TransformersAPI.getEnergonTypes()) {
+		for(final Energon energon : TransformersAPI.getEnergonTypes()) {
 			if(!ratios.containsKey(energon.getId())) {
 				ratios.put(energon.getId(), 0F);
 			}
 		}
 
-		for(Map.Entry<String, Float> e : ratios.entrySet()) {
+		for(final Map.Entry<String, Float> e : ratios.entrySet()) {
 			nbttagcompound.setFloat(e.getKey(), e.getValue());
 		}
 
@@ -83,24 +83,24 @@ public class FluidEnergon extends Fluid {
 		calculateLiquidColor(stack);
 	}
 
-	public static HashMap<String, Float> getRatios(FluidStack stack) {
+	public static HashMap<String, Float> getRatios(final FluidStack stack) {
 		refreshNBT(stack);
 
 		final NBTTagCompound nbttagcompound = stack.tag.getCompoundTag("Ratio");
 		final HashMap<String, Float> map = new HashMap<>();
-		for(Energon energon : TransformersAPI.getEnergonTypes()) {
+		for(final Energon energon : TransformersAPI.getEnergonTypes()) {
 			map.put(energon.getId(), nbttagcompound.getFloat(energon.getId()));
 		}
 
 		return map;
 	}
 
-	public static void calculateLiquidColor(FluidStack stack) {
-		Map<String, Float> ratios = getRatios(stack);
+	public static void calculateLiquidColor(final FluidStack stack) {
+		final Map<String, Float> ratios = getRatios(stack);
 		int liquidColor = -1;
 
-		for(Map.Entry<String, Float> e : ratios.entrySet()) {
-			Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
+		for(final Map.Entry<String, Float> e : ratios.entrySet()) {
+			final Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
 
 			if(energon != null) {
 				if(liquidColor == -1) {
@@ -115,12 +115,12 @@ public class FluidEnergon extends Fluid {
 		setLiquidColor(stack, liquidColor);
 	}
 
-	public static void setLiquidColor(FluidStack stack, int color) {
+	public static void setLiquidColor(final FluidStack stack, final int color) {
 		refreshNBT(stack);
 		stack.tag.setInteger("Color", color);
 	}
 
-	public static int getLiquidColor(FluidStack stack) {
+	public static int getLiquidColor(final FluidStack stack) {
 		return stack.tag != null && stack.tag.hasKey("Color") ? stack.tag.getInteger("Color") : -1;
 	}
 
@@ -135,7 +135,7 @@ public class FluidEnergon extends Fluid {
 	}
 
 	@Override
-	public int getColor(FluidStack stack) {
+	public int getColor(final FluidStack stack) {
 		return getLiquidColor(stack);
 	}
 }

@@ -18,13 +18,13 @@ public class TFWorldData extends WorldSavedData {
 
 	public final Map<String, Integer> subItems = Maps.newHashMap();
 
-	public TFWorldData(String s) {
+	public TFWorldData(final String s) {
 		super(s);
 	}
 
-	public static TFWorldData load(World world) {
+	public static TFWorldData load(final World world) {
 		if(!world.isRemote) {
-			MapStorage storage = world.perWorldStorage;
+			final MapStorage storage = world.perWorldStorage;
 			TFWorldData data = (TFWorldData) storage.loadData(TFWorldData.class, KEY);
 
 			if(data == null) {
@@ -40,7 +40,7 @@ public class TFWorldData extends WorldSavedData {
 		}
 	}
 
-	public static TFWorldData get(World world) {
+	public static TFWorldData get(final World world) {
 		if(instance == null && world.isRemote) {
 			instance = load(world);
 		}
@@ -49,12 +49,12 @@ public class TFWorldData extends WorldSavedData {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		NBTTagList list = nbt.getTagList("SubItems", NBT.TAG_COMPOUND);
+	public void readFromNBT(final NBTTagCompound nbt) {
+		final NBTTagList list = nbt.getTagList("SubItems", NBT.TAG_COMPOUND);
 
 		for(int i = 0; i < list.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound = list.getCompoundTagAt(i);
-			String name = nbttagcompound.getString("name");
+			final NBTTagCompound nbttagcompound = list.getCompoundTagAt(i);
+			final String name = nbttagcompound.getString("name");
 
 			if(Arrays.asList(ItemMetaBasic.iconNames).contains(name)) {
 				subItems.put(name, nbttagcompound.getInteger("id"));
@@ -63,11 +63,11 @@ public class TFWorldData extends WorldSavedData {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		NBTTagList list = new NBTTagList();
+	public void writeToNBT(final NBTTagCompound nbt) {
+		final NBTTagList list = new NBTTagList();
 
-		for(Map.Entry<String, Integer> e : subItems.entrySet()) {
-			NBTTagCompound nbttagcompound = new NBTTagCompound();
+		for(final Map.Entry<String, Integer> e : subItems.entrySet()) {
+			final NBTTagCompound nbttagcompound = new NBTTagCompound();
 			nbttagcompound.setInteger("id", e.getValue());
 			nbttagcompound.setString("name", e.getKey());
 			list.appendTag(nbttagcompound);

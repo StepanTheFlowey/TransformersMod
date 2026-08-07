@@ -18,16 +18,16 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 	protected final String classPath;
 	protected final String unobfClass;
 
-	public ClassTransformerBase(String classPath) {
+	public ClassTransformerBase(final String classPath) {
 		this.classPath = classPath;
 		this.unobfClass = classPath.substring(classPath.lastIndexOf('.') + 1);
 	}
 
-	public static MethodNode generateSetter(String className, String methodName, String fieldName, String fieldType) {
+	public static MethodNode generateSetter(final String className, final String methodName, final String fieldName, final String fieldType) {
 		final MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "(" + fieldType + ")V", null, null);
 		mn.visitCode();
 		mn.visitVarInsn(ALOAD, 0);
-		int opCode;
+		final int opCode;
 
 		switch(fieldType) {
 			case "I":
@@ -60,12 +60,12 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 		return mn;
 	}
 
-	public static MethodNode generateGetter(String className, String methodName, String fieldName, String fieldType) {
+	public static MethodNode generateGetter(final String className, final String methodName, final String fieldName, final String fieldType) {
 		final MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "()" + fieldType, null, null);
 		mn.visitCode();
 		mn.visitVarInsn(ALOAD, 0);
 		mn.visitFieldInsn(GETFIELD, className, fieldName, fieldType);
-		int opCode;
+		final int opCode;
 
 		switch(fieldType) {
 			case "I":
@@ -97,7 +97,7 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 	}
 
 	@Override
-	public byte[] transform(String name, String transformedName, byte[] bytes) {
+	public byte[] transform(final String name, final String transformedName, final byte[] bytes) {
 		try {
 			if(transformedName.equals(classPath)) {
 				TransformersMod.log.info("Patching class {} ({})...", unobfClass, name);
@@ -122,7 +122,7 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 				return cw.toByteArray();
 			}
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 

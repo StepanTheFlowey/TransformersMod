@@ -19,7 +19,7 @@ public class MessageTileTrigger implements IMessage {
 
 	public MessageTileTrigger() {}
 
-	public MessageTileTrigger(DimensionalCoords coords, EntityPlayer player, int action) {
+	public MessageTileTrigger(final DimensionalCoords coords, final EntityPlayer player, final int action) {
 		this.coordinates = coords;
 		this.action = action;
 
@@ -30,7 +30,7 @@ public class MessageTileTrigger implements IMessage {
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		id = buf.readInt();
 		action = buf.readInt();
 		playerDimension = buf.readInt();
@@ -38,7 +38,7 @@ public class MessageTileTrigger implements IMessage {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(id);
 		buf.writeInt(action);
 		buf.writeInt(playerDimension);
@@ -57,7 +57,7 @@ public class MessageTileTrigger implements IMessage {
 
 	public static class Handler implements IMessageHandler<MessageTileTrigger, IMessage> {
 		@Override
-		public IMessage onMessage(MessageTileTrigger message, MessageContext ctx) {
+		public IMessage onMessage(final MessageTileTrigger message, final MessageContext ctx) {
 			final EntityPlayer clientPlayer = ctx.side.isClient() ? TransformersMod.proxy.getPlayer() : ctx.getServerHandler().playerEntity;
 			World world = clientPlayer.worldObj;
 
@@ -74,7 +74,7 @@ public class MessageTileTrigger implements IMessage {
 				player = (EntityPlayer) world.getEntityByID(message.id);
 			}
 
-			DimensionalCoords coords = message.coordinates;
+			final DimensionalCoords coords = message.coordinates;
 			world = clientPlayer.worldObj;
 
 			if(world.provider.dimensionId != coords.dimension) {
@@ -86,7 +86,7 @@ public class MessageTileTrigger implements IMessage {
 			}
 
 			if(world.getTileEntity(coords.posX, coords.posY, coords.posZ) instanceof ITileDataCallback) {
-				ITileDataCallback callback = (ITileDataCallback) world.getTileEntity(coords.posX, coords.posY, coords.posZ);
+				final ITileDataCallback callback = (ITileDataCallback) world.getTileEntity(coords.posX, coords.posY, coords.posZ);
 				callback.receive(player, message.action);
 
 				if(ctx.side.isServer()) {

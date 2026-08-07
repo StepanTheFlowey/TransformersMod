@@ -5,7 +5,7 @@ import fiskfille.tf.common.item.TFItems;
 import fiskfille.tf.common.transformer.base.Transformer;
 
 public class ItemPurgeArmor extends ItemTransformerArmor {
-	public ItemPurgeArmor(int armorPiece) {
+	public ItemPurgeArmor(final int armorPiece) {
 		super(TFItems.TANKMATERIAL, 4, armorPiece);
 	}
 

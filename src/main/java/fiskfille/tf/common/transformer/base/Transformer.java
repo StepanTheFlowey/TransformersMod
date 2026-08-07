@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 public abstract class Transformer {
 	private final String name;
 
-	public Transformer(String name) {
+	public Transformer(final String name) {
 		this.name = name;
 	}
 
@@ -33,7 +33,7 @@ public abstract class Transformer {
 	 * @param player The player trying to use nitro.
 	 * @return whether the player can use nitro.
 	 */
-	public boolean canUseNitro(EntityPlayer player) {
+	public boolean canUseNitro(final EntityPlayer player) {
 		return true;
 	}
 
@@ -57,7 +57,7 @@ public abstract class Transformer {
 	 * @param player The player wearing the armor.
 	 * @param timer  The transformation timer.
 	 */
-	public void tick(EntityPlayer player, float timer) {
+	public void tick(final EntityPlayer player, final float timer) {
 	}
 
 	public boolean canZoom() {
@@ -76,7 +76,7 @@ public abstract class Transformer {
 		return -1.25F;
 	}
 
-	public boolean canJumpAsVehicle(EntityPlayer player) {
+	public boolean canJumpAsVehicle(final EntityPlayer player) {
 		return false;
 	}
 
@@ -90,7 +90,7 @@ public abstract class Transformer {
 		return null;
 	}
 
-	public Entity getShootEntity(EntityPlayer playe) {
+	public Entity getShootEntity(final EntityPlayer playe) {
 		return null;
 	}
 
@@ -106,15 +106,15 @@ public abstract class Transformer {
 		return 4;
 	}
 
-	public boolean canShoot(EntityPlayer player) {
+	public boolean canShoot(final EntityPlayer player) {
 		return false;
 	}
 
-	public boolean onJump(EntityPlayer player) {
+	public boolean onJump(final EntityPlayer player) {
 		return true;
 	}
 
-	public float getThirdPersonDistance(EntityPlayer player) {
+	public float getThirdPersonDistance(final EntityPlayer player) {
 		return 4 - TFHelper.getTransformationTimer(player) * 2;
 	}
 
@@ -123,7 +123,7 @@ public abstract class Transformer {
 	 *
 	 * @param player The player making the particles
 	 */
-	public void doNitroParticles(EntityPlayer player) {
+	public void doNitroParticles(final EntityPlayer player) {
 	}
 
 	/**
@@ -133,7 +133,7 @@ public abstract class Transformer {
 	 * @param distance The distance fell.
 	 * @return The damage to take.
 	 */
-	public float fall(EntityPlayer player, float distance, int altMode) {
+	public float fall(final EntityPlayer player, final float distance, final int altMode) {
 		return distance;
 	}
 
@@ -168,7 +168,7 @@ public abstract class Transformer {
 		return 1;
 	}
 
-	public ResourceLocation getTransformationSound(int altMode) {
+	public ResourceLocation getTransformationSound(final int altMode) {
 		return new ResourceLocation(TransformersMod.MODID, "transform_" + (altMode == -1 ? "robot" : "vehicle"));
 	}
 }

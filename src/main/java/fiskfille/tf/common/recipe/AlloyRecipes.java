@@ -33,10 +33,10 @@ public class AlloyRecipes {
 		getInstance().registerRecipes();
 	}
 
-	public static boolean matches(ItemStack itemstack, String oreDict) {
-		List<ItemStack> aliases = OreDictionary.getOres(oreDict);
+	public static boolean matches(final ItemStack itemstack, final String oreDict) {
+		final List<ItemStack> aliases = OreDictionary.getOres(oreDict);
 
-		for(ItemStack itemstack1 : aliases) {
+		for(final ItemStack itemstack1 : aliases) {
 			if(matches(itemstack, itemstack1)) {
 				return true;
 			}
@@ -45,7 +45,7 @@ public class AlloyRecipes {
 		return false;
 	}
 
-	public static boolean matches(ItemStack itemstack, ItemStack itemstack1) {
+	public static boolean matches(final ItemStack itemstack, final ItemStack itemstack1) {
 		return itemstack1.getItem() == itemstack.getItem() && (itemstack.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemstack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemstack1.getItemDamage() == itemstack.getItemDamage());
 	}
 
@@ -64,11 +64,11 @@ public class AlloyRecipes {
 		addRecipe(new AlloyIngredients("blockClayHardened"), new ItemStack(Blocks.hardened_clay), 0);
 	}
 
-	public void addRecipe(AlloyIngredients alloy, ItemStack result, float xp) {
+	public void addRecipe(final AlloyIngredients alloy, final ItemStack result, final float xp) {
 		addRecipe(alloy, result, 200, xp);
 	}
 
-	public void addRecipe(AlloyIngredients alloy, ItemStack result, int duration, float xp) {
+	public void addRecipe(final AlloyIngredients alloy, final ItemStack result, final int duration, final float xp) {
 		if(alloy == null || alloy.getIngredients()[0] == null) {
 			TransformersMod.log.warn("Mod '{}' attempted to register unknown or empty AlloyIngredients for item {}!", Loader.instance().activeModContainer().getModId(), Item.itemRegistry.getNameForObject(result.getItem()));
 			return;
@@ -79,13 +79,13 @@ public class AlloyRecipes {
 		experienceMap.put(result, xp);
 	}
 
-	public ItemStack getSmeltingResult(AlloyIngredients ingredients) {
-		ItemStack[] itemstacks = ingredients.getIngredients();
+	public ItemStack getSmeltingResult(final AlloyIngredients ingredients) {
+		final ItemStack[] itemstacks = ingredients.getIngredients();
 		return getSmeltingResult(itemstacks[0], itemstacks[1], itemstacks[2]);
 	}
 
-	public ItemStack getSmeltingResult(ItemStack input1, ItemStack input2, ItemStack input3) {
-		Iterator<Entry<AlloyIngredients, ItemStack>> iterator = smeltingMap.entrySet().iterator();
+	public ItemStack getSmeltingResult(final ItemStack input1, final ItemStack input2, final ItemStack input3) {
+		final Iterator<Entry<AlloyIngredients, ItemStack>> iterator = smeltingMap.entrySet().iterator();
 		Entry<AlloyIngredients, ItemStack> entry;
 
 		do {
@@ -104,8 +104,8 @@ public class AlloyRecipes {
 		return smeltingMap;
 	}
 
-	public int getSmeltTime(ItemStack itemstack) {
-		Iterator<Entry<ItemStack, Integer>> iterator = durationMap.entrySet().iterator();
+	public int getSmeltTime(final ItemStack itemstack) {
+		final Iterator<Entry<ItemStack, Integer>> iterator = durationMap.entrySet().iterator();
 		Entry<ItemStack, Integer> entry;
 
 		do {
@@ -120,14 +120,14 @@ public class AlloyRecipes {
 		return entry.getValue();
 	}
 
-	public float getXpYield(ItemStack itemstack) {
-		float xp = itemstack.getItem().getSmeltingExperience(itemstack);
+	public float getXpYield(final ItemStack itemstack) {
+		final float xp = itemstack.getItem().getSmeltingExperience(itemstack);
 
 		if(xp != -1) {
 			return xp;
 		}
 
-		Iterator<Entry<ItemStack, Float>> iterator = experienceMap.entrySet().iterator();
+		final Iterator<Entry<ItemStack, Float>> iterator = experienceMap.entrySet().iterator();
 		Entry<ItemStack, Float> entry;
 
 		do {
@@ -146,17 +146,17 @@ public class AlloyRecipes {
 		private final HashMap<Integer, List<String>> oreDictNames = new HashMap<>();
 		private final ItemStack[] ingredients;
 
-		public AlloyIngredients(Object... objects) {
-			LinkedList<ItemStack> list = new LinkedList<>();
+		public AlloyIngredients(final Object... objects) {
+			final LinkedList<ItemStack> list = new LinkedList<>();
 
 			for(int i = 0; i < objects.length; ++i) {
 				final Object obj = objects[i];
 
 				if(obj instanceof List) {
-					List list1 = (List) obj;
+					final List list1 = (List) obj;
 
-					for(Object o : list1) {
-						List<ItemStack> list2 = OreDictionary.getOres((String) o);
+					for(final Object o : list1) {
+						final List<ItemStack> list2 = OreDictionary.getOres((String) o);
 
 						if(!list2.isEmpty()) {
 							list.add(list2.get(0));
@@ -176,7 +176,7 @@ public class AlloyRecipes {
 					oreDictNames.put(i, Collections.singletonList((String) obj));
 				}
 				else {
-					ItemStack itemstack = getItemStack(obj);
+					final ItemStack itemstack = getItemStack(obj);
 
 					if(itemstack != null) {
 						list.add(itemstack);
@@ -187,7 +187,7 @@ public class AlloyRecipes {
 			ingredients = list.toArray(new ItemStack[3]);
 		}
 
-		public boolean matches(ItemStack input1, ItemStack input2, ItemStack input3) {
+		public boolean matches(final ItemStack input1, final ItemStack input2, final ItemStack input3) {
 			final ItemStack[] ingredients = new ItemStack[]{input1, input2, input3};
 
 			for(int i = 0; i < getIngredients().length; ++i) {
@@ -200,10 +200,10 @@ public class AlloyRecipes {
 					return false;
 				}
 
-				List<String> list = getOreDictNames(i);
+				final List<String> list = getOreDictNames(i);
 				boolean oreDictMatch = false;
 
-				for(String oreDict : list) {
+				for(final String oreDict : list) {
 					if(AlloyRecipes.matches(ingredients[i], oreDict)) {
 						oreDictMatch = true;
 						break;
@@ -220,7 +220,7 @@ public class AlloyRecipes {
 			return true;
 		}
 
-		private ItemStack getItemStack(Object obj) {
+		private ItemStack getItemStack(final Object obj) {
 			if(obj instanceof ItemStack) {
 				return (ItemStack) obj;
 			}
@@ -238,7 +238,7 @@ public class AlloyRecipes {
 			return ingredients;
 		}
 
-		public List<String> getOreDictNames(int index) {
+		public List<String> getOreDictNames(final int index) {
 			return oreDictNames.get(index) != null ? oreDictNames.get(index) : new ArrayList<>();
 		}
 
@@ -248,14 +248,14 @@ public class AlloyRecipes {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(final Object obj) {
 			if(obj instanceof AlloyIngredients) {
-				AlloyIngredients alloy = (AlloyIngredients) obj;
+				final AlloyIngredients alloy = (AlloyIngredients) obj;
 
 				if(getIngredients().length == alloy.getIngredients().length) {
 					for(int i = 0; i < getIngredients().length; ++i) {
-						ItemStack itemstack = getIngredients()[i];
-						ItemStack itemstack1 = alloy.getIngredients()[i];
+						final ItemStack itemstack = getIngredients()[i];
+						final ItemStack itemstack1 = alloy.getIngredients()[i];
 
 						if(itemstack == null && itemstack1 == null) {
 							continue;

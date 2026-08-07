@@ -15,7 +15,7 @@ public class TFEntities {
 		registerEntity(EntityLaserBeam.class, "laser_beam");
 	}
 
-	private static void registerEntity(Class<? extends Entity> entityClass, String name) {
+	private static void registerEntity(final Class<? extends Entity> entityClass, String name) {
 		name = "tf_" + name;
 
 		final int id = EntityRegistry.findGlobalUniqueEntityId();

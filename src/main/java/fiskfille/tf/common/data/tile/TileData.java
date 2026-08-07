@@ -14,7 +14,7 @@ public abstract class TileData {
 	public TileData() {
 	}
 
-	public TileData(TileData data) {
+	public TileData(final TileData data) {
 		coords = DimensionalCoords.copy(data.coords);
 		init = data.init;
 	}
@@ -23,7 +23,7 @@ public abstract class TileData {
 		return init;
 	}
 
-	public <T extends TileEntity> T initialize(T tile) {
+	public <T extends TileEntity> T initialize(final T tile) {
 		if(!isInitialized()) {
 			init = true;
 			coords = new DimensionalCoords(tile);
@@ -32,12 +32,12 @@ public abstract class TileData {
 		return tile;
 	}
 
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		coords.toBytes(buf);
 		buf.writeBoolean(init);
 	}
 
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		coords = new DimensionalCoords().fromBytes(buf);
 		init = buf.readBoolean();
 	}
@@ -65,9 +65,9 @@ public abstract class TileData {
 	}
 
 	@Override
-	public final boolean equals(Object obj) {
+	public final boolean equals(final Object obj) {
 		if(obj instanceof TileData) {
-			TileData data = (TileData) obj;
+			final TileData data = (TileData) obj;
 
 			return getCoords().equals(data.getCoords()) && matches(data);
 		}

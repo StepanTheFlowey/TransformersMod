@@ -19,24 +19,24 @@ public class PowerManager {
 		addPowerSource(Blocks.redstone_block, 0, 3600);
 	}
 
-	public static void addPowerSource(Item item, int metadata, int amount) {
+	public static void addPowerSource(final Item item, final int metadata, final int amount) {
 		powerSources.put(new ItemStack(item, 1, metadata), amount);
 	}
 
-	public static void addPowerSource(Block block, int metadata, int amount) {
+	public static void addPowerSource(final Block block, final int metadata, final int amount) {
 		powerSources.put(new ItemStack(block, 1, metadata), amount);
 	}
 
-	public static boolean isPowerSource(Item item, int metadata) {
+	public static boolean isPowerSource(final Item item, final int metadata) {
 		return getPowerSourceAmount(item, metadata) > 0;
 	}
 
-	public static boolean isPowerSource(ItemStack itemstack) {
+	public static boolean isPowerSource(final ItemStack itemstack) {
 		return itemstack != null && isPowerSource(itemstack.getItem(), itemstack.getItemDamage());
 	}
 
-	public static int getPowerSourceAmount(Item item, int metadata) {
-		for(Map.Entry<ItemStack, Integer> e : powerSources.entrySet()) {
+	public static int getPowerSourceAmount(final Item item, final int metadata) {
+		for(final Map.Entry<ItemStack, Integer> e : powerSources.entrySet()) {
 			new ItemStack(item, 1, metadata);
 
 			if(e.getKey().getItem() == item && e.getKey().getItemDamage() == metadata) {
@@ -47,7 +47,7 @@ public class PowerManager {
 		return 0;
 	}
 
-	public static int getPowerSourceAmount(ItemStack itemstack) {
+	public static int getPowerSourceAmount(final ItemStack itemstack) {
 		return getPowerSourceAmount(itemstack.getItem(), itemstack.getItemDamage());
 	}
 }

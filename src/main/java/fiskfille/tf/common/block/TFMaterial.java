@@ -9,7 +9,7 @@ public class TFMaterial extends Material {
 
 	protected boolean isTranslucent;
 
-	public TFMaterial(MapColor color) {
+	public TFMaterial(final MapColor color) {
 		super(color);
 	}
 

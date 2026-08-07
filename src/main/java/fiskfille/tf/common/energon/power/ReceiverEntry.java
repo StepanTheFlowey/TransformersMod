@@ -8,34 +8,34 @@ import net.minecraft.tileentity.TileEntity;
 public class ReceiverEntry extends NetworkEntry {
 	private boolean canReach;
 
-	public ReceiverEntry(DimensionalCoords coordinates) {
+	public ReceiverEntry(final DimensionalCoords coordinates) {
 		super(coordinates, null);
 	}
 
-	public ReceiverEntry(TileEntity tile) {
+	public ReceiverEntry(final TileEntity tile) {
 		super(tile);
 	}
 
-	public static ReceiverEntry readFromNBT(NBTTagCompound compound) {
+	public static ReceiverEntry readFromNBT(final NBTTagCompound compound) {
 		final ReceiverEntry entry = new ReceiverEntry(new DimensionalCoords(compound.getInteger("X"), compound.getInteger("Y"), compound.getInteger("Z"), compound.getInteger("Dim")));
 		entry.setCanReach(compound.getBoolean("CanReach"));
 		return entry;
 	}
 
-	public static ReceiverEntry fromBytes(ByteBuf buf) {
+	public static ReceiverEntry fromBytes(final ByteBuf buf) {
 		final ReceiverEntry entry = new ReceiverEntry(new DimensionalCoords().fromBytes(buf));
 		entry.setCanReach(buf.readBoolean());
 		return entry;
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound) {
+	public void writeToNBT(final NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setBoolean("CanReach", canReach);
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 		buf.writeBoolean(canReach);
 	}
@@ -44,7 +44,7 @@ public class ReceiverEntry extends NetworkEntry {
 		return canReach;
 	}
 
-	public void setCanReach(boolean canReach) {
+	public void setCanReach(final boolean canReach) {
 		this.canReach = canReach;
 	}
 }

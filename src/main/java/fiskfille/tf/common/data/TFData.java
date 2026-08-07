@@ -39,16 +39,16 @@ public class TFData<T> {
 	public static final List<TFData<?>> VALUES = Lists.newArrayList();
 
 	static {
-		for(Field field : TFData.class.getFields()) {
-			String s = field.getType().getName();
+		for(final Field field : TFData.class.getFields()) {
+			final String s = field.getType().getName();
 
 			if(s.equals(TFData.class.getName())) {
 				try {
-					TFData<?> data = (TFData<?>) field.get(null);
+					final TFData<?> data = (TFData<?>) field.get(null);
 					data.id = TFFormatHelper.getUnconventionalName(field.getName());
 					TFData.VALUES.add(data);
 				}
-				catch(Exception e) {
+				catch(final Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -59,19 +59,19 @@ public class TFData<T> {
 	public final T defaultValue;
 	public String id;
 
-	protected TFData(T defaultValue, Predicate<EntityPlayer> canSet) {
+	protected TFData(final T defaultValue, final Predicate<EntityPlayer> canSet) {
 		this(true, defaultValue, canSet);
 	}
 
-	protected TFData(boolean save, T defaultValue, Predicate<EntityPlayer> canSet) {
+	protected TFData(final boolean save, final T defaultValue, final Predicate<EntityPlayer> canSet) {
 		this.save = save;
 		this.defaultValue = defaultValue;
 	}
 
-	public static void writeToNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
+	public static void writeToNBT(final NBTTagCompound nbt, final Map<TFData, Object> data) {
 		final NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-		for(Map.Entry<TFData, Object> e : data.entrySet()) {
+		for(final Map.Entry<TFData, Object> e : data.entrySet()) {
 			if(e.getKey().save) {
 				Object obj = e.getValue();
 
@@ -86,10 +86,10 @@ public class TFData<T> {
 		nbt.setTag("DataArray", nbttagcompound);
 	}
 
-	public static Map<TFData, Object> readFromNBT(NBTTagCompound nbt, Map<TFData, Object> data) {
+	public static Map<TFData, Object> readFromNBT(final NBTTagCompound nbt, final Map<TFData, Object> data) {
 		final NBTTagCompound nbttagcompound = nbt.getCompoundTag("DataArray");
 
-		for(TFData<?> type : TFData.VALUES) {
+		for(final TFData<?> type : TFData.VALUES) {
 			if(type.save) {
 				Object obj = type.readDataFromNBT(nbttagcompound);
 
@@ -110,7 +110,7 @@ public class TFData<T> {
 		return input -> value == null ? data.get(input) == value : data.get(input) == value || data.get(input).equals(value);
 	}
 
-	public boolean set(EntityPlayer player, T value) {
+	public boolean set(final EntityPlayer player, final T value) {
 		if(get(player) == null || !get(player).equals(value)) {
 //            if (canSet.apply(player)) // TODO: Gegy-proof
 			{
@@ -134,7 +134,7 @@ public class TFData<T> {
 		return false;
 	}
 
-	public boolean setWithoutNotify(EntityPlayer player, T value) {
+	public boolean setWithoutNotify(final EntityPlayer player, final T value) {
 		if(get(player) == null || !get(player).equals(value)) {
 //            if (canSet.apply(player))
 			{
@@ -151,7 +151,7 @@ public class TFData<T> {
 					}
 				}
 
-				for(TFData type : TFData.VALUES) {
+				for(final TFData type : TFData.VALUES) {
 					if(type instanceof TFDataPrev && ((TFDataPrev) type).tracking == this) {
 						TFPlayerData.getData(player).putData(type, get(player));
 					}
@@ -170,21 +170,21 @@ public class TFData<T> {
 		return false;
 	}
 
-	public void incr(EntityPlayer player, T value) {
+	public void incr(final EntityPlayer player, final T value) {
 		if(value instanceof Integer) {
-			Integer i = (Integer) get(player) + (Integer) value;
+			final Integer i = (Integer) get(player) + (Integer) value;
 			set(player, (T) i);
 		}
 		else if(value instanceof Float) {
-			Float f = (Float) get(player) + (Float) value;
+			final Float f = (Float) get(player) + (Float) value;
 			set(player, (T) f);
 		}
 		else if(value instanceof Double) {
-			Double d = (Double) get(player) + (Double) value;
+			final Double d = (Double) get(player) + (Double) value;
 			set(player, (T) d);
 		}
 		else if(value instanceof String) {
-			String s = get(player) + (String) value;
+			final String s = get(player) + (String) value;
 			set(player, (T) s);
 		}
 		else {
@@ -192,21 +192,21 @@ public class TFData<T> {
 		}
 	}
 
-	public void incrWithoutNotify(EntityPlayer player, T value) {
+	public void incrWithoutNotify(final EntityPlayer player, final T value) {
 		if(value instanceof Integer) {
-			Integer i = (Integer) get(player) + (Integer) value;
+			final Integer i = (Integer) get(player) + (Integer) value;
 			setWithoutNotify(player, (T) i);
 		}
 		else if(value instanceof Float) {
-			Float f = (Float) get(player) + (Float) value;
+			final Float f = (Float) get(player) + (Float) value;
 			setWithoutNotify(player, (T) f);
 		}
 		else if(value instanceof Double) {
-			Double d = (Double) get(player) + (Double) value;
+			final Double d = (Double) get(player) + (Double) value;
 			setWithoutNotify(player, (T) d);
 		}
 		else if(value instanceof String) {
-			String s = get(player) + (String) value;
+			final String s = get(player) + (String) value;
 			setWithoutNotify(player, (T) s);
 		}
 		else {
@@ -214,7 +214,7 @@ public class TFData<T> {
 		}
 	}
 
-	public void clamp(EntityPlayer player, T min, T max) {
+	public void clamp(final EntityPlayer player, final T min, final T max) {
 		if(min instanceof Integer) {
 			if((Integer) get(player) < (Integer) min) {
 				set(player, min);
@@ -244,7 +244,7 @@ public class TFData<T> {
 		}
 	}
 
-	public void clampWithoutNotify(EntityPlayer player, T min, T max) {
+	public void clampWithoutNotify(final EntityPlayer player, final T min, final T max) {
 		if(min instanceof Integer) {
 			if((Integer) get(player) < (Integer) min) {
 				setWithoutNotify(player, min);
@@ -274,7 +274,7 @@ public class TFData<T> {
 		}
 	}
 
-	public T get(EntityPlayer player) {
+	public T get(final EntityPlayer player) {
 		T value = TFPlayerData.getData(player).getData(this);
 
 		if(this == ALT_MODE) {
@@ -287,7 +287,7 @@ public class TFData<T> {
 		return value;
 	}
 
-	public NBTTagCompound writeDataToNBT(NBTTagCompound nbt, Object obj) {
+	public NBTTagCompound writeDataToNBT(final NBTTagCompound nbt, final Object obj) {
 		if(obj instanceof Integer) {
 			nbt.setInteger(id, (Integer) obj);
 		}
@@ -301,7 +301,7 @@ public class TFData<T> {
 			nbt.setBoolean(id, (Boolean) obj);
 		}
 		else if(obj instanceof String) {
-			String s = (String) obj;
+			final String s = (String) obj;
 			if(s != null && !s.isEmpty()) {
 				nbt.setString(id, s);
 			}
@@ -310,8 +310,8 @@ public class TFData<T> {
 		return nbt;
 	}
 
-	public Object readDataFromNBT(NBTTagCompound nbt) {
-		NBTBase tag = nbt.getTag(id);
+	public Object readDataFromNBT(final NBTTagCompound nbt) {
+		final NBTBase tag = nbt.getTag(id);
 
 		if(tag instanceof NBTTagInt) {
 			return ((NBTTagInt) tag).func_150287_d();

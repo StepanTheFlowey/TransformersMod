@@ -33,7 +33,7 @@ import org.apache.logging.log4j.Logger;
 				name = "Transformers Mod",
 				version = Tags.VERSION
 )
-public class TransformersMod {
+public final class TransformersMod {
 	public static final CreativeTabs tabTransformers = new CreativeTabTransformers();
 	public static final Logger log = LogManager.getLogger("Transformers Mod");
 	public static final String MODID = "transformers";
@@ -48,7 +48,7 @@ public class TransformersMod {
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event) {
+	public static void preInit(final FMLPreInitializationEvent event) {
 		if(FMLLaunchHandler.side().isClient() && !TFLoadingPlugin.loaded) {
 			System.out.println("TransformersMod coremod not added! -Dfml.coreMods.load=fiskfille.tf.asm.TFLoadingPlugin");
 			FMLCommonHandler.instance().exitJava(0, false);
@@ -68,7 +68,7 @@ public class TransformersMod {
 	}
 
 	@EventHandler
-	public static void init(FMLInitializationEvent event) {
+	public static void init(final FMLInitializationEvent event) {
 		proxy.init();
 
 		if(Loader.isModLoaded("Waila")) {
@@ -77,13 +77,13 @@ public class TransformersMod {
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(final FMLPostInitializationEvent event) {
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, new TFLoadingCallback());
 	}
 
 	@EventHandler
-	public static void missingMappings(FMLMissingMappingsEvent event) {
-		for(MissingMapping mapping : event.get()) {
+	public static void missingMappings(final FMLMissingMappingsEvent event) {
+		for(final MissingMapping mapping : event.get()) {
 			remap(mapping, "transformium", TFItems.transformiumFragment);
 			remap(mapping, "energon_crystal_piece", TFItems.energonCrystalShard);
 			remap(mapping, "red_energon_crystal_piece", TFItems.redEnergonCrystalShard);
@@ -92,13 +92,13 @@ public class TransformersMod {
 		}
 	}
 
-	private static void remap(MissingMapping mapping, String name, Item item) {
+	private static void remap(final MissingMapping mapping, final String name, final Item item) {
 		if(mapping.type == GameRegistry.Type.ITEM && mapping.name.equals(MODID + ":" + name)) {
 			mapping.remap(item);
 		}
 	}
 
-	private static void remap(MissingMapping mapping, String name, Block block) {
+	private static void remap(final MissingMapping mapping, final String name, final Block block) {
 		remap(mapping, name, Item.getItemFromBlock(block));
 
 		if(mapping.type == GameRegistry.Type.BLOCK && mapping.name.equals(MODID + ":" + name)) {

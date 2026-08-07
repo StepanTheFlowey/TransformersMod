@@ -11,19 +11,19 @@ import java.util.List;
 public class GuiHoverField extends GuiButtonFlat {
 	private final List<String> hoverText;
 
-	public GuiHoverField(int x, int y, int width, int height, List<String> text) {
+	public GuiHoverField(final int x, final int y, final int width, final int height, final List<String> text) {
 		super(-1, x, y, width, "");
 		this.height = height;
 		hoverText = text;
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
 	}
 
 	@Override
-	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+	public boolean mousePressed(final Minecraft mc, final int mouseX, final int mouseY) {
 		return false;
 	}
 
@@ -32,7 +32,7 @@ public class GuiHoverField extends GuiButtonFlat {
 		return hoverText;
 	}
 
-	public String colorFormat(int color) {
+	public String colorFormat(final int color) {
 		return String.format("&<0x%s>", color);
 	}
 }

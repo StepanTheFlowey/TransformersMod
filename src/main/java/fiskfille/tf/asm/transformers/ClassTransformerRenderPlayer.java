@@ -19,10 +19,10 @@ public class ClassTransformerRenderPlayer extends ClassTransformerBase {
 	}
 
 	@Override
-	public boolean processMethods(List<MethodNode> methods) {
+	public boolean processMethods(final List<MethodNode> methods) {
 		boolean flag = false;
 
-		for(MethodNode method : methods) {
+		for(final MethodNode method : methods) {
 			if(method.name.equals(TFTranslator.getMappedName("a", "renderLivingAt")) && method.desc.equals(TFTranslator.getMappedName("(Lsv;DDD)V", "(Lnet/minecraft/entity/EntityLivingBase;DDD)V"))) {
 				final InsnList list = new InsnList();
 
@@ -75,7 +75,7 @@ public class ClassTransformerRenderPlayer extends ClassTransformerBase {
 	}
 
 	@Override
-	public boolean processFields(List<FieldNode> fields) {
+	public boolean processFields(final List<FieldNode> fields) {
 		return true;
 	}
 

@@ -11,28 +11,28 @@ public class TileDataEnergonTank extends TileData {
 	public TileDataEnergonTank() {
 	}
 
-	public TileDataEnergonTank(FluidTankTF fluidTank) {
+	public TileDataEnergonTank(final FluidTankTF fluidTank) {
 		tank = fluidTank;
 	}
 
-	public TileDataEnergonTank(int max) {
+	public TileDataEnergonTank(final int max) {
 		this(new FluidTankTF(max));
 	}
 
-	public TileDataEnergonTank(TileDataEnergonTank data) {
+	public TileDataEnergonTank(final TileDataEnergonTank data) {
 		super(data);
 		tank = data.tank.copy();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
 		buf.writeInt(getCapacity());
 		tank.toBytes(buf);
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		tank = new FluidTankTF(buf.readInt());
 		tank.fromBytes(buf);
@@ -53,7 +53,7 @@ public class TileDataEnergonTank extends TileData {
 		return tank.getFluid();
 	}
 
-	public void setFluid(FluidStack fluid) {
+	public void setFluid(final FluidStack fluid) {
 		tank.setFluid(fluid);
 	}
 
@@ -70,9 +70,9 @@ public class TileDataEnergonTank extends TileData {
 	}
 
 	@Override
-	public boolean matches(TileData tileData) {
+	public boolean matches(final TileData tileData) {
 		if(tileData instanceof TileDataEnergonTank) {
-			TileDataEnergonTank data = (TileDataEnergonTank) tileData;
+			final TileDataEnergonTank data = (TileDataEnergonTank) tileData;
 
 			return getUsage() == data.getUsage() && FluidStack.areFluidStackTagsEqual(getFluid(), data.getFluid());
 		}

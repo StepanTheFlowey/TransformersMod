@@ -5,27 +5,27 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
 public class TeleporterGroundBridge extends Teleporter {
-	public TeleporterGroundBridge(WorldServer world) {
+	public TeleporterGroundBridge(final WorldServer world) {
 		super(world);
 	}
 
 	@Override
-	public void placeInPortal(Entity entity, double x, double y, double z, float f) {
+	public void placeInPortal(final Entity entity, final double x, final double y, final double z, final float f) {
 
 	}
 
 	@Override
-	public boolean placeInExistingPortal(Entity entity, double x, double y, double z, float f) {
+	public boolean placeInExistingPortal(final Entity entity, final double x, final double y, final double z, final float f) {
 		return false;
 	}
 
 	@Override
-	public boolean makePortal(Entity entity) {
+	public boolean makePortal(final Entity entity) {
 		return false;
 	}
 
 	@Override
-	public void removeStalePortalLocations(long l) {
+	public void removeStalePortalLocations(final long l) {
 
 	}
 }

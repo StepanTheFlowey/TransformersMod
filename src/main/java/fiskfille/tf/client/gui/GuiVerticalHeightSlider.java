@@ -9,14 +9,14 @@ public class GuiVerticalHeightSlider extends GuiVerticalSlider {
 	public final GuiSelectReceivers parent;
 	private final Runnable onChange;
 
-	public GuiVerticalHeightSlider(int id, GuiSelectReceivers parentScreen, int x, int y, int height, Runnable onChange) {
+	public GuiVerticalHeightSlider(final int id, final GuiSelectReceivers parentScreen, final int x, final int y, final int height, final Runnable onChange) {
 		super(id, x, y, height);
 		this.onChange = onChange;
 		parent = parentScreen;
 	}
 
 	@Override
-	protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
+	protected void mouseDragged(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(visible && enabled) {
 			if(dragging) {
 				percentage = MathHelper.clamp_float((float) (mouseY - (yPosition + 4)) / (float) (height - 8), 0, 1);

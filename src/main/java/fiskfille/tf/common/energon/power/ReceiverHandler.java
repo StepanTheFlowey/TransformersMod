@@ -12,11 +12,11 @@ public class ReceiverHandler {
 	private final HashSet<NetworkEntry> transmitters = new HashSet<>();
 	private final NetworkEntry owner;
 
-	public ReceiverHandler(TileEntity tile) {
+	public ReceiverHandler(final TileEntity tile) {
 		owner = new NetworkEntry(tile);
 	}
 
-	public void add(NetworkEntry transmitter) {
+	public void add(final NetworkEntry transmitter) {
 		transmitters.add(transmitter);
 	}
 
@@ -24,11 +24,11 @@ public class ReceiverHandler {
 		return transmitters;
 	}
 
-	public void remove(DimensionalCoords coords) {
+	public void remove(final DimensionalCoords coords) {
 		remove(new NetworkEntry(coords, null));
 	}
 
-	public void remove(NetworkEntry transmitter) {
+	public void remove(final NetworkEntry transmitter) {
 		transmitters.remove(transmitter);
 	}
 

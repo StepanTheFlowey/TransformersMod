@@ -22,7 +22,7 @@ public class ItemSkystrikesCrossbow extends Item {
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean b) {
+	public void onUpdate(final ItemStack itemstack, final World world, final Entity entity, final int i, final boolean b) {
 		if(!itemstack.hasTagCompound()) {
 			itemstack.setTagCompound(new NBTTagCompound());
 			itemstack.getTagCompound().setBoolean("blueMode", false);
@@ -30,7 +30,7 @@ public class ItemSkystrikesCrossbow extends Item {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
+	public void onPlayerStoppedUsing(final ItemStack stack, final World world, final EntityPlayer player, final int time) {
 		if(TFHelper.getTransformer(player) instanceof TransformerSkystrike && !world.isRemote && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
 			final boolean blue = isBlue(stack);
 			stack.getTagCompound().setBoolean("blueMode", !blue);
@@ -43,12 +43,12 @@ public class ItemSkystrikesCrossbow extends Item {
 		}
 	}
 
-	private boolean isBlue(ItemStack stack) {
+	private boolean isBlue(final ItemStack stack) {
 		return stack.hasTagCompound() && stack.getTagCompound().getBoolean("blueMode");
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+	public void onUsingTick(final ItemStack stack, final EntityPlayer player, final int count) {
 		final int duration = getMaxItemUseDuration(stack) - count;
 
 		if(stack.hasTagCompound() && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
@@ -64,17 +64,17 @@ public class ItemSkystrikesCrossbow extends Item {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public int getMaxItemUseDuration(final ItemStack stack) {
 		return 72000;
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
+	public EnumAction getItemUseAction(final ItemStack stack) {
 		return EnumAction.bow;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player) {
 		if(TFHelper.getTransformer(player) instanceof TransformerSkystrike && (player.inventory.hasItem(TFItems.energonCrystalShard) || player.capabilities.isCreativeMode)) {
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
@@ -84,7 +84,7 @@ public class ItemSkystrikesCrossbow extends Item {
 
 	@Override
 	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
+		final Multimap multimap = super.getItemAttributeModifiers();
 		multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 4D, 0));
 		return multimap;

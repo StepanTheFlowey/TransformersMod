@@ -18,28 +18,28 @@ public class MessageSetPlayerData extends MessageSyncBase {
 
 	public MessageSetPlayerData() {}
 
-	public MessageSetPlayerData(EntityPlayer player, Map<TFData, Object> data) {
+	public MessageSetPlayerData(final EntityPlayer player, final Map<TFData, Object> data) {
 		super(player);
 		id = player.getEntityId();
 		playerData = data;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		id = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
 		buf.writeInt(id);
 	}
 
 	public static class Handler implements IMessageHandler<MessageSetPlayerData, IMessage> {
 		@Override
-		public IMessage onMessage(MessageSetPlayerData message, MessageContext ctx) {
-			Map<TFData, Object> playerData = message.playerData;
+		public IMessage onMessage(final MessageSetPlayerData message, final MessageContext ctx) {
+			final Map<TFData, Object> playerData = message.playerData;
 
 			if(ctx.side.isClient()) {
 				final Entity entity = TransformersMod.proxy.getPlayer().worldObj.getEntityByID(message.id);

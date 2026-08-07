@@ -23,7 +23,7 @@ public class ControlledAnimation {
 
 	private double timerChange;
 
-	public ControlledAnimation(int duration) {
+	public ControlledAnimation(final int duration) {
 		timer = 0;
 		this.duration = duration;
 	}
@@ -33,7 +33,7 @@ public class ControlledAnimation {
 	 *
 	 * @param duration is the maximum number of ticks that the timer can reach.
 	 */
-	public void setDuration(int duration) {
+	public void setDuration(final int duration) {
 		timer = 0;
 		this.duration = duration;
 	}
@@ -50,7 +50,7 @@ public class ControlledAnimation {
 	 *
 	 * @param time is the number of ticks to be set.
 	 */
-	public void setTimer(int time) {
+	public void setTimer(final int time) {
 		timer = time;
 
 		if(timer > duration) {
@@ -90,7 +90,7 @@ public class ControlledAnimation {
 	 *
 	 * @param time is the number of ticks to be increased in the timer
 	 */
-	public void increaseTimer(int time) {
+	public void increaseTimer(final int time) {
 		if(timer + time < duration) {
 			timer += time;
 		}
@@ -121,7 +121,7 @@ public class ControlledAnimation {
 	 *
 	 * @param time is the number of ticks to be decreased in the timer
 	 */
-	public void decreaseTimer(int time) {
+	public void decreaseTimer(final int time) {
 		if(timer - time > 0D) {
 			timer -= time;
 		}
@@ -170,7 +170,7 @@ public class ControlledAnimation {
 	 * Returns a value between 0F and 1F depending on the timer and duration of the animation. It reaches 1F using a sine function squared. It is very smooth.
 	 */
 	public float getAnimationProgressSinSqrt() {
-		float result = MathHelper.sin(1.57079632679F * (float) (timer / duration));
+		final float result = MathHelper.sin(1.57079632679F * (float) (timer / duration));
 		return result * result;
 	}
 
@@ -194,7 +194,7 @@ public class ControlledAnimation {
 	 *
 	 * @param i is the power of the sine function.
 	 */
-	public float getAnimationProgressSinPowerOf(int i) {
+	public float getAnimationProgressSinPowerOf(final int i) {
 		return (float) Math.pow(MathHelper.sin(1.57079632679F * (float) (timer / duration)), i);
 	}
 
@@ -221,7 +221,7 @@ public class ControlledAnimation {
 	 *
 	 * @param n is the power of the polynomial function.
 	 */
-	public double getAnimationProgressPolyN(int n) {
+	public double getAnimationProgressPolyN(final int n) {
 		final double x = timer / duration;
 		final double xn = Math.pow(x, n);
 		return xn / (xn + Math.pow(1 - x, n));
@@ -238,7 +238,7 @@ public class ControlledAnimation {
 	 * Returns a value between 0F and 1F depending on the timer and duration of the animation. This value starts at 1F and ends at 1F. The equation used is 0.5 - 0.5 * cos(2 * PI * x + sin(2 * PI * x)). It is smooth.
 	 */
 	public float getAnimationProgressTemporary() {
-		float x = 6.28318530718F * (float) (timer / duration);
+		final float x = 6.28318530718F * (float) (timer / duration);
 		return 0.5F - 0.5F * MathHelper.cos(x + MathHelper.sin(x));
 	}
 
@@ -246,7 +246,7 @@ public class ControlledAnimation {
 	 * Returns a value between 0F and 1F depending on the timer and duration of the animation. This value starts at 0F and ends at 0F. The equation used is sin(x * PI + sin(x * PI)). It is fast in the beginning and slow in the end.
 	 */
 	public float getAnimationProgressTemporaryFS() {
-		float x = 3.14159265359F * (float) (timer / duration);
+		final float x = 3.14159265359F * (float) (timer / duration);
 		return MathHelper.sin(x + MathHelper.sin(x));
 	}
 
@@ -254,7 +254,7 @@ public class ControlledAnimation {
 	 * Returns a value between 0F and 1F depending on the timer and duration of the animation. This value starts at 1F and ends at 1F. The equation used is 0.5 + 0.5 * cos(2 PI * x + sin(2 * PI * x)). It is smooth.
 	 */
 	public float getAnimationProgressTemporaryInvesed() {
-		float x = 6.28318530718F * (float) (timer / duration);
+		final float x = 6.28318530718F * (float) (timer / duration);
 		return 0.5F + 0.5F * MathHelper.cos(x + MathHelper.sin(x));
 	}
 }

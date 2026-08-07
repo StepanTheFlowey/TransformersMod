@@ -40,20 +40,20 @@ public abstract class TransformerModel {
 		return null;
 	}
 
-	public void renderItem(EntityPlayer player, ItemStack stack) {
+	public void renderItem(final EntityPlayer player, final ItemStack stack) {
 	}
 
-	public void renderCape(EntityPlayer player) {
+	public void renderCape(final EntityPlayer player) {
 	}
 
-	public void renderFirstPersonArm(EntityPlayer player) {
+	public void renderFirstPersonArm(final EntityPlayer player) {
 	}
 
 	public boolean hasLightsLayer() {
 		return false;
 	}
 
-	public final ModelVehicleBase getEffectiveVehicleModel(EntityPlayer player) {
+	public final ModelVehicleBase getEffectiveVehicleModel(final EntityPlayer player) {
 		if(getStealthModel() != null && TFHelper.getStealthModeTimer(player) > 0 && TFHelper.isFullyTransformed(player)) {
 			return getStealthModel();
 		}

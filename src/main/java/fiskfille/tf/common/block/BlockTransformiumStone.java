@@ -16,12 +16,12 @@ public class BlockTransformiumStone extends BlockBasic {
 	}
 
 	@Override
-	public int tickRate(World world) {
+	public int tickRate(final World world) {
 		return 1000000000;
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
+	public void updateTick(final World world, final int x, final int y, final int z, final Random rand) {
 		if(rand.nextInt(100000) == 0 && !world.canBlockSeeTheSky(x, y + 1, z)) {
 			world.setBlock(x, y, z, TFBlocks.cosmicRust, 1, 2);
 		}
@@ -30,12 +30,12 @@ public class BlockTransformiumStone extends BlockBasic {
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
+	public void onBlockAdded(final World world, final int x, final int y, final int z) {
 		world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+	public void onNeighborBlockChange(final World world, final int x, final int y, final int z, final Block block) {
 		onBlockAdded(world, x, y, z);
 	}
 }

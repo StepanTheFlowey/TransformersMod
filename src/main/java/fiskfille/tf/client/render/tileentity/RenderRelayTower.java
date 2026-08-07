@@ -18,7 +18,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 	private final ModelRelayTower modelTower = new ModelRelayTower();
 	private final ModelRelayTorch modelTorch = new ModelRelayTorch();
 
-	public void render(TileEntityRelayTower tower, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityRelayTower tower, final double x, final double y, final double z, final float partialTicks) {
 		final World world = tower.getWorldObj();
 		int metadata = 0;
 
@@ -44,7 +44,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 					GL11.glTranslatef(0, -1, 0);
 				}
 				else {
-					int[] rotations = {0, 2, 3, 1};
+					final int[] rotations = {0, 2, 3, 1};
 
 					GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
 					GL11.glRotatef(90, 1, 0, 0);
@@ -70,7 +70,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 			GL11.glEnable(GL11.GL_LIGHTING);
 
 			if(world != null) {
-				int progress = TFRenderHelper.getBlockDestroyProgress(world, tower.xCoord, tower.yCoord, tower.zCoord);
+				final int progress = TFRenderHelper.getBlockDestroyProgress(world, tower.xCoord, tower.yCoord, tower.zCoord);
 
 				if(progress >= 0) {
 					OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -99,7 +99,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 		}
 	}
 
-	public ModelRelayTower getModel(TileEntityRelayTower tower) {
+	public ModelRelayTower getModel(final TileEntityRelayTower tower) {
 		if(tower instanceof TileEntityRelayTorch) {
 			return modelTorch;
 		}
@@ -108,7 +108,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityRelayTower) tileentity, d, d1, d2, f);
 	}
 }

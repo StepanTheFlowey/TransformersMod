@@ -35,7 +35,7 @@ public class GuiColor extends GuiScreen {
 	public static GuiTextField inputField;
 	private final TileEntityDisplayStation tileentity;
 
-	public GuiColor(TileEntityDisplayStation tile) {
+	public GuiColor(final TileEntityDisplayStation tile) {
 		tileentity = tile;
 	}
 
@@ -52,8 +52,8 @@ public class GuiColor extends GuiScreen {
 
 		final ItemStack head = tileentity.getStackInSlot(0).copy();
 		if(TFArmorDyeHelper.isDyed(head) && !fromPresetMenu) {
-			Color primary = new Color(TFArmorDyeHelper.getPrimaryColor(head));
-			Color secondary = new Color(TFArmorDyeHelper.getSecondaryColor(head));
+			final Color primary = new Color(TFArmorDyeHelper.getPrimaryColor(head));
+			final Color secondary = new Color(TFArmorDyeHelper.getSecondaryColor(head));
 
 			layerColors[0][0] = (float) primary.getRed() / 255;
 			layerColors[0][1] = (float) primary.getGreen() / 255;
@@ -94,13 +94,13 @@ public class GuiColor extends GuiScreen {
 				sliderGreen.percentage = (float) color.getGreen() / 255F;
 				sliderBlue.percentage = (float) color.getBlue() / 255F;
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 			}
 		}
 	}
 
 	@Override
-	protected void keyTyped(char c, int key) {
+	protected void keyTyped(final char c, final int key) {
 		if(key == 1) {
 			mc.displayGuiScreen(null);
 		}
@@ -110,7 +110,7 @@ public class GuiColor extends GuiScreen {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
+	protected void actionPerformed(final GuiButton button) {
 		final int id = button.id;
 
 		if(id == 0) {
@@ -125,7 +125,7 @@ public class GuiColor extends GuiScreen {
 			mc.displayGuiScreen(new GuiColorPresets(tileentity, this));
 		}
 		else if(id == 5) {
-			float[] afloat = layerColors[0];
+			final float[] afloat = layerColors[0];
 			layerColors[0] = layerColors[1];
 			layerColors[1] = afloat;
 			sliderRed.percentage = layerColors[layerSelected][0];
@@ -133,7 +133,7 @@ public class GuiColor extends GuiScreen {
 			sliderBlue.percentage = layerColors[layerSelected][2];
 		}
 		else if(id == 6) {
-			int i = Integer.MIN_VALUE;
+			final int i = Integer.MIN_VALUE;
 			TFNetworkManager.networkWrapper.sendToServer(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, i, i));
 
 			mc.displayGuiScreen(null);
@@ -141,13 +141,13 @@ public class GuiColor extends GuiScreen {
 	}
 
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int button) {
+	protected void mouseClicked(final int mouseX, final int mouseY, final int button) {
 		super.mouseClicked(mouseX, mouseY, button);
 
 		if(button == 0) {
 			for(int i = 0; i < 2; ++i) {
-				int x = width / 2 - 21 + 67 * i;
-				int y = height / 6 + 85;
+				final int x = width / 2 - 21 + 67 * i;
+				final int y = height / 6 + 85;
 
 				if(mouseX >= x && mouseX < x + 64 && mouseY >= y && mouseY < y + 64) {
 					layerSelected = i;
@@ -162,7 +162,7 @@ public class GuiColor extends GuiScreen {
 	}
 
 	@Override
-	protected void mouseClickMove(int mouseX, int mouseY, int button, long timeSinceMouseClick) {
+	protected void mouseClickMove(final int mouseX, final int mouseY, final int button, final long timeSinceMouseClick) {
 		super.mouseClickMove(mouseX, mouseY, button, timeSinceMouseClick);
 	}
 
@@ -172,7 +172,7 @@ public class GuiColor extends GuiScreen {
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
 		drawDefaultBackground();
 		inputField.drawTextBox();
 		drawCenteredString(fontRendererObj, I18n.format("gui.display_station.color"), width / 2, 15, 16777215);
@@ -187,8 +187,8 @@ public class GuiColor extends GuiScreen {
 
 		final EntityPlayer entity = ClientProxy.fakePlayer;
 		if(entity != null) {
-			Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
-			Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
+			final Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
+			final Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
 
 			for(int i = 0; i < 4; ++i) {
 				ItemStack armor = tileentity.getStackInSlot(i);
@@ -236,7 +236,7 @@ public class GuiColor extends GuiScreen {
 		drawTexturedModalRect(width / 2 - 22, height / 6 + 84, 0, 0, 66, 66);
 		drawTexturedModalRect(width / 2 - 22 + 67, height / 6 + 84, 0, 0, 66, 66);
 
-		float opacityMax = 20;
+		final float opacityMax = 20;
 		float opacity = (ticks + partialTicks) % opacityMax;
 		opacity = opacity > opacityMax / 2 ? opacityMax / 2 - (opacity - opacityMax / 2) : opacity;
 		GL11.glColor4f(1, 1, 0, opacity / opacityMax + 0.1F);

@@ -15,16 +15,16 @@ import net.minecraft.world.World;
 public class EntityLaserBeam extends EntityThrowable implements IEntityAdditionalSpawnData {
 	private boolean blue;
 
-	public EntityLaserBeam(World world) {
+	public EntityLaserBeam(final World world) {
 		super(world);
 	}
 
-	public EntityLaserBeam(World world, EntityLivingBase entity, boolean blue) {
+	public EntityLaserBeam(final World world, final EntityLivingBase entity, final boolean blue) {
 		super(world, entity);
 		this.blue = blue;
 	}
 
-	public EntityLaserBeam(World world, double x, double y, double z, boolean blue) {
+	public EntityLaserBeam(final World world, final double x, final double y, final double z, final boolean blue) {
 		super(world, x, y, z);
 		this.blue = blue;
 	}
@@ -46,7 +46,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 		if(isEntityAlive()) {
 			if(worldObj.isRemote) {
 				for(int i = 0; i < 5; ++i) {
-					float f = rand.nextFloat() / 5;
+					final float f = rand.nextFloat() / 5;
 
 					worldObj.spawnParticle("reddust", posX + f, posY + 0.15F, posZ + f, blue ? -1D : 0D, 0D, blue ? 1D : 0D);
 				}
@@ -59,7 +59,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(final MovingObjectPosition mop) {
 		final Entity entityHit = mop.entityHit;
 
 		if(entityHit != null) {
@@ -84,7 +84,7 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
+	public void writeEntityToNBT(final NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 
 		nbt.setBoolean("Blue", blue);
@@ -94,19 +94,19 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
+	public void readEntityFromNBT(final NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 
 		blue = nbt.getBoolean("Blue");
 	}
 
 	@Override
-	public void writeSpawnData(ByteBuf buf) {
+	public void writeSpawnData(final ByteBuf buf) {
 		buf.writeBoolean(blue);
 	}
 
 	@Override
-	public void readSpawnData(ByteBuf buf) {
+	public void readSpawnData(final ByteBuf buf) {
 		blue = buf.readBoolean();
 	}
 }

@@ -18,12 +18,12 @@ import java.util.List;
 public class GuiButtonFlat extends GuiButton {
 	public static final ResourceLocation tfButtonTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/widgets.png");
 
-	public GuiButtonFlat(int id, int x, int y, int width, String s) {
+	public GuiButtonFlat(final int id, final int x, final int y, final int width, final String s) {
 		super(id, x, y, width, 13, s);
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(!visible) {
 			return;
 		}

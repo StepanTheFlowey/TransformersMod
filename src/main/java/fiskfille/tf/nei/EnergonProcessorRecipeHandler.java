@@ -64,7 +64,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	private void findPowerSources() {
 		powerSources = new ArrayList<>();
 
-		for(Map.Entry<ItemStack, Integer> e : PowerManager.powerSources.entrySet()) {
+		for(final Map.Entry<ItemStack, Integer> e : PowerManager.powerSources.entrySet()) {
 			if(e.getValue() > 0) {
 				powerSources.add(new PowerSourcePair(e.getKey().copy(), e.getValue()));
 			}
@@ -74,40 +74,40 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	private void findCrystals() {
 		crystals = new ArrayList<>();
 
-		for(ItemStack itemstack : ItemList.items) {
+		for(final ItemStack itemstack : ItemList.items) {
 			final Item item = itemstack.getItem();
 
 			if(item instanceof IEnergon || item instanceof ItemBlock && Block.getBlockFromItem(item) instanceof IEnergon) {
-				IEnergon ienergon = (IEnergon) (item instanceof ItemBlock ? Block.getBlockFromItem(item) : item);
+				final IEnergon ienergon = (IEnergon) (item instanceof ItemBlock ? Block.getBlockFromItem(item) : item);
 				crystals.add(new CrystalPair(itemstack, ienergon));
 			}
 		}
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result) {
+	public void loadCraftingRecipes(final ItemStack result) {
 		final Item item = result.getItem();
 
 		if(item instanceof IFluidContainerItem) {
-			IFluidContainerItem container = (IFluidContainerItem) item;
-			FluidStack stack = container.getFluid(result);
+			final IFluidContainerItem container = (IFluidContainerItem) item;
+			final FluidStack stack = container.getFluid(result);
 
-			int amount = stack != null ? stack.amount : 0;
+			final int amount = stack != null ? stack.amount : 0;
 
 			if(!ItemFuelCanister.isEmpty(result) && stack.getFluid() == TFFluids.energon) {
-				Map<String, Float> ratios = FluidEnergon.getRatios(stack);
+				final Map<String, Float> ratios = FluidEnergon.getRatios(stack);
 
-				for(CrystalPair crystal : crystals) {
-					String id = crystal.energon.getEnergonType().getId();
-					int mass = crystal.energon.getMass();
+				for(final CrystalPair crystal : crystals) {
+					final String id = crystal.energon.getEnergonType().getId();
+					final int mass = crystal.energon.getMass();
 
 					if(ratios.get(id) > 0 && amount >= mass) {
 						result.stackSize = 1;
-						CachedProcessorRecipe recipe = new CachedProcessorRecipe(crystal.stack, result);
-						FluidStack stack1 = new FluidStack(TFFluids.energon, 0);
+						final CachedProcessorRecipe recipe = new CachedProcessorRecipe(crystal.stack, result);
+						final FluidStack stack1 = new FluidStack(TFFluids.energon, 0);
 
-						for(Map.Entry<String, Float> e : ratios.entrySet()) {
-							Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
+						for(final Map.Entry<String, Float> e : ratios.entrySet()) {
+							final Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
 							int amount1 = Math.round(e.getValue() * amount);
 
 							if(e.getKey().equals(id)) {
@@ -130,12 +130,12 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadUsageRecipes(ItemStack ingredient) {
-		Item item = ingredient.getItem();
+	public void loadUsageRecipes(final ItemStack ingredient) {
+		final Item item = ingredient.getItem();
 
 		if(item instanceof IEnergon || item instanceof ItemBlock && Block.getBlockFromItem(item) instanceof IEnergon) {
-			CachedProcessorRecipe recipe = new CachedProcessorRecipe(new ItemStack(ingredient.getItem(), 1, ingredient.getItemDamage()), new ItemStack(TFItems.fuelCanister));
-			FluidStack stack = FluidEnergon.create(ingredient);
+			final CachedProcessorRecipe recipe = new CachedProcessorRecipe(new ItemStack(ingredient.getItem(), 1, ingredient.getItemDamage()), new ItemStack(TFItems.fuelCanister));
+			final FluidStack stack = FluidEnergon.create(ingredient);
 
 			((ItemFuelCanister) recipe.result.item.getItem()).fill(recipe.result.item, stack, true);
 
@@ -150,7 +150,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void drawExtras(int recipe) {
+	public void drawExtras(final int recipe) {
 		drawProgressBar(20, 25, 176, 0, 14, 14, 48, 7);
 		drawProgressBar(42, 24, 176, 14, 24, 17, 48, 0);
 		drawProgressBar(130, 25, 176, 31, 13, 12, 48, 0);
@@ -164,14 +164,14 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public List<String> handleTooltip(GuiRecipe<?> gui, List<String> currenttip, int recipe) {
+	public List<String> handleTooltip(final GuiRecipe<?> gui, List<String> currenttip, final int recipe) {
 		currenttip = super.handleTooltip(gui, currenttip, recipe);
-		int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 4);
-		int guiTop = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 5);
+		final int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 4);
+		final int guiTop = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, 5);
 
-		Point mousepos = GuiDraw.getMousePosition();
-		Point relMouse = new Point(mousepos.x - guiLeft, mousepos.y - guiTop);
-		Point recipepos = gui.getRecipePosition(recipe);
+		final Point mousepos = GuiDraw.getMousePosition();
+		final Point relMouse = new Point(mousepos.x - guiLeft, mousepos.y - guiTop);
+		final Point recipepos = gui.getRecipePosition(recipe);
 
 		if(currenttip.isEmpty() && GuiContainerManager.getStackMouseOver(gui) == null && new Rectangle(recipepos.x + 72, recipepos.y + 6, 52, 52).contains(relMouse)) {
 			currenttip.addAll(TFFormatHelper.toString(getProcessorRecipes().get(recipe).tank.format()));
@@ -181,9 +181,9 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	public List<CachedProcessorRecipe> getProcessorRecipes() {
-		List<CachedProcessorRecipe> list = new ArrayList<>();
+		final List<CachedProcessorRecipe> list = new ArrayList<>();
 
-		for(CachedRecipe recipe : arecipes) {
+		for(final CachedRecipe recipe : arecipes) {
 			if(recipe instanceof CachedProcessorRecipe) {
 				list.add((CachedProcessorRecipe) recipe);
 			}
@@ -196,7 +196,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 		public final PositionedStack stack;
 		public final int burnTime;
 
-		public PowerSourcePair(ItemStack ingred, int burnTime) {
+		public PowerSourcePair(final ItemStack ingred, final int burnTime) {
 			this.stack = new PositionedStack(ingred, 19, 42, false);
 			this.burnTime = burnTime;
 		}
@@ -206,7 +206,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 		public final ItemStack stack;
 		public final IEnergon energon;
 
-		public CrystalPair(ItemStack ingred, IEnergon energon) {
+		public CrystalPair(final ItemStack ingred, final IEnergon energon) {
 			this.stack = ingred;
 			this.energon = energon;
 		}
@@ -218,7 +218,7 @@ public class EnergonProcessorRecipeHandler extends TemplateRecipeHandler {
 
 		public final FluidTankTF tank = new FluidTankTF(2000);
 
-		public CachedProcessorRecipe(ItemStack in, ItemStack out) {
+		public CachedProcessorRecipe(final ItemStack in, final ItemStack out) {
 			ingredient = new PositionedStack(in, 19, 6);
 			result = new PositionedStack(out, 133, 42);
 		}

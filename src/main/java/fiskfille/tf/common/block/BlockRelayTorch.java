@@ -17,15 +17,15 @@ public class BlockRelayTorch extends BlockRelayTower {
 	}
 
 	@Override
-	public int getPlacedRotation(EntityLivingBase entity) {
+	public int getPlacedRotation(final EntityLivingBase entity) {
 		return 0;
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata);
-		float f = 0.0625F;
+	public void addCollisionBoxesToList(final World world, final int x, final int y, final int z, final AxisAlignedBB aabb, final List list, final Entity entity) {
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
+		final float f = 0.0625F;
 		float width = f * 8;
 		float height = f * 4.75F;
 
@@ -60,12 +60,12 @@ public class BlockRelayTorch extends BlockRelayTower {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata);
-		float f = 0.0625F;
-		float width = f * 8;
-		float height = f * 12;
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
+		final float f = 0.0625F;
+		final float width = f * 8;
+		final float height = f * 12;
 
 		switch(dir) {
 			case DOWN:
@@ -93,8 +93,8 @@ public class BlockRelayTorch extends BlockRelayTower {
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+	public boolean canPlaceBlockAt(final World world, final int x, final int y, final int z) {
+		for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			if(canPlaceAt(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite())) {
 				return true;
 			}
@@ -104,14 +104,14 @@ public class BlockRelayTorch extends BlockRelayTower {
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
-		ForgeDirection dir = ForgeDirection.getOrientation(side);
+	public int onBlockPlaced(final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY, final float hitZ, final int metadata) {
+		final ForgeDirection dir = ForgeDirection.getOrientation(side);
 
 		if(canPlaceAt(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite())) {
 			return side;
 		}
 
-		for(ForgeDirection dir1 : ForgeDirection.VALID_DIRECTIONS) {
+		for(final ForgeDirection dir1 : ForgeDirection.VALID_DIRECTIONS) {
 			if(canPlaceAt(world, x + dir1.offsetX, y + dir1.offsetY, z + dir1.offsetZ, dir1.getOpposite())) {
 				return dir1.ordinal();
 			}
@@ -121,9 +121,9 @@ public class BlockRelayTorch extends BlockRelayTower {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata);
+	public void onNeighborBlockChange(final World world, final int x, final int y, final int z, final Block block) {
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
 
 		if(!canPlaceAt(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite())) {
 			removedByPlayer(world, null, x, y, z, true);
@@ -131,8 +131,8 @@ public class BlockRelayTorch extends BlockRelayTower {
 		}
 	}
 
-	public boolean canPlaceAt(World world, int x, int y, int z, ForgeDirection dir) {
-		Block block = world.getBlock(x, y, z);
+	public boolean canPlaceAt(final World world, final int x, final int y, final int z, final ForgeDirection dir) {
+		final Block block = world.getBlock(x, y, z);
 
 		return block.isSideSolid(world, x, y, z, dir) || block == TFBlocks.energyColumn && (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN);
 	}

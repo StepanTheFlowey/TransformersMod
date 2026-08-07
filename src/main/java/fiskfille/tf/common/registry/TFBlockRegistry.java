@@ -11,7 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
 public class TFBlockRegistry {
-	public static void registerBlock(Block block, String name) {
+	public static void registerBlock(final Block block, final String name) {
 		final String unlocalizedName = name.toLowerCase().replace(' ', '_').replace("'", "");
 
 		block.setBlockName(unlocalizedName);
@@ -23,7 +23,7 @@ public class TFBlockRegistry {
 		}
 	}
 
-	public static void registerItemBlock(Block block, String name, Class clazz) {
+	public static void registerItemBlock(final Block block, final String name, final Class clazz) {
 		final String unlocalizedName = name.toLowerCase().replace(' ', '_').replace("'", "");
 
 		block.setBlockName(unlocalizedName);
@@ -35,11 +35,11 @@ public class TFBlockRegistry {
 		}
 	}
 
-	public static void registerItemBlock(Block block, String name) {
+	public static void registerItemBlock(final Block block, final String name) {
 		registerItemBlock(block, name, ItemBlockWithMetadata.class);
 	}
 
-	public static void registerItemBlockAsTileEntity(Block block, String name, Class clazz, Class clazz1) {
+	public static void registerItemBlockAsTileEntity(final Block block, final String name, final Class clazz, final Class clazz1) {
 		registerItemBlock(block, name, clazz1);
 		GameRegistry.registerTileEntity(clazz, name);
 
@@ -48,11 +48,11 @@ public class TFBlockRegistry {
 		}
 	}
 
-	public static void registerTileEntity(Block block, String name, Class clazz) {
+	public static void registerTileEntity(final Block block, final String name, final Class clazz) {
 		registerItemBlockAsTileEntity(block, name, clazz, ItemBlock.class);
 	}
 
-	public static void registerMachine(Block block, String name, Class clazz) {
+	public static void registerMachine(final Block block, final String name, final Class clazz) {
 		registerItemBlockAsTileEntity(block, name, clazz, ItemMachine.class);
 	}
 

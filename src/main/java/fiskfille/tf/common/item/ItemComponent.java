@@ -11,7 +11,7 @@ public class ItemComponent extends Item implements IComponent {
 	public static IIcon outline;
 	private final Component component;
 
-	public ItemComponent(Component c) {
+	public ItemComponent(final Component c) {
 		component = c;
 	}
 
@@ -21,7 +21,7 @@ public class ItemComponent extends Item implements IComponent {
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(final IIconRegister iconRegister) {
 		super.registerIcons(iconRegister);
 		outline = iconRegister.registerIcon(TransformersMod.MODID + ":component_outline");
 	}

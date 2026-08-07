@@ -8,12 +8,12 @@ public abstract class ItemHandlerEvent extends Event {
 	public static class Init extends ItemHandlerEvent {
 		public final Map<Class, String> itemHandlers;
 
-		public Init(Map<Class, String> handlers) {
+		public Init(final Map<Class, String> handlers) {
 			super();
 			itemHandlers = handlers;
 		}
 
-		public void registerItemHandler(String modid, Class handlerClass) {
+		public void registerItemHandler(final String modid, final Class handlerClass) {
 			itemHandlers.put(handlerClass, modid);
 		}
 	}

@@ -11,14 +11,14 @@ import java.util.List;
 public class GuiIconFlat extends GuiButtonFlat {
 	public final IButtonRenderCallback callback;
 
-	public GuiIconFlat(int id, int x, int y, IButtonRenderCallback renderCallback) {
+	public GuiIconFlat(final int id, final int x, final int y, final IButtonRenderCallback renderCallback) {
 		super(id, x, y, 20, "");
 		callback = renderCallback;
 		height = 20;
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(visible) {
 			mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
 

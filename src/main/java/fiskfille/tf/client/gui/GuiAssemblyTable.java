@@ -14,20 +14,20 @@ import org.lwjgl.opengl.GL11;
 public class GuiAssemblyTable extends GuiContainerTF {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/assembly_table.png");
 
-	public GuiAssemblyTable(InventoryPlayer inventoryPlayer, TileEntityAssemblyTable tile) {
+	public GuiAssemblyTable(final InventoryPlayer inventoryPlayer, final TileEntityAssemblyTable tile) {
 		super(new ContainerAssemblyTable(inventoryPlayer, tile));
 		ySize = 222;
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		final String s = I18n.format("gui.assembly_table");
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		GL11.glColor3f(1, 1, 1);
 		mc.getTextureManager().bindTexture(texture);
 		drawTexturedModalRect((width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize);

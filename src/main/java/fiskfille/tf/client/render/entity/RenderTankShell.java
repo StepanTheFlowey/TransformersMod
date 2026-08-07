@@ -15,7 +15,7 @@ public class RenderTankShell extends Render {
 	public final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/tank_shell.png");
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float par8, float par9) {
+	public void doRender(final Entity entity, final double x, final double y, final double z, final float par8, final float par9) {
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 + 180, 0F, 1F, 0F);
@@ -29,7 +29,7 @@ public class RenderTankShell extends Render {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+	protected ResourceLocation getEntityTexture(final Entity p_110775_1_) {
 		return texture;
 	}
 }

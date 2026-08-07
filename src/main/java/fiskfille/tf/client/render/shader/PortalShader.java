@@ -8,7 +8,7 @@ public class PortalShader extends ShaderProgram {
 	@Override
 	protected void bindAttributes() {}
 
-	public void setTime(float time) {
+	public void setTime(final float time) {
 		this.setUniform("time", time);
 	}
 

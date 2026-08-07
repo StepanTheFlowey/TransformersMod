@@ -784,21 +784,21 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		setInitPose();
 	}
 
-	public void render(TileEntityIsoCondenser tile, boolean light) {
+	public void render(final TileEntityIsoCondenser tile, final boolean light) {
 		setToInitPose();
 
 		shape2.showModel = light;
 
 		if(!light) {
-			Map<ForgeDirection, MowzieModelRenderer[]> map = Maps.newHashMap();
+			final Map<ForgeDirection, MowzieModelRenderer[]> map = Maps.newHashMap();
 			map.put(ForgeDirection.WEST, new MowzieModelRenderer[]{arm1_1, arm1_2, arm1_8, arm1_9, arm1_11, shape81, shape82});
 			map.put(ForgeDirection.SOUTH, new MowzieModelRenderer[]{arm2_1, arm2_2, arm2_8, arm2_9, arm2_11, shape77, shape78});
 			map.put(ForgeDirection.EAST, new MowzieModelRenderer[]{arm3_1, arm3_2, arm3_8, arm3_9, arm3_11, shape73, shape74});
 			map.put(ForgeDirection.NORTH, new MowzieModelRenderer[]{arm4_1, arm4_2, arm4_8, arm4_9, arm4_11, shape64, shape65});
 
-			for(Map.Entry<ForgeDirection, MowzieModelRenderer[]> e : map.entrySet()) {
-				float f = 1 - TFHelper.median(tile.animationTimer.get(e.getKey()) == null ? 0 : tile.animationTimer.get(e.getKey()), tile.prevAnimationTimer.get(e.getKey()) == null ? 0 : tile.prevAnimationTimer.get(e.getKey()), ClientTickHandler.renderTick);
-				MowzieModelRenderer[] parts = e.getValue();
+			for(final Map.Entry<ForgeDirection, MowzieModelRenderer[]> e : map.entrySet()) {
+				final float f = 1 - TFHelper.median(tile.animationTimer.get(e.getKey()) == null ? 0 : tile.animationTimer.get(e.getKey()), tile.prevAnimationTimer.get(e.getKey()) == null ? 0 : tile.prevAnimationTimer.get(e.getKey()), ClientTickHandler.renderTick);
+				final MowzieModelRenderer[] parts = e.getValue();
 
 				parts[0].rotateAngleX -= f * 0.6F;
 				parts[1].rotateAngleX -= f * 1.1F;

@@ -17,7 +17,7 @@ public class RenderDisplayStation extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/display_station.png");
 	private final ResourceLocation textureLamp = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/display_station_lamp.png");
 
-	public void render(TileEntityDisplayStation tile, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityDisplayStation tile, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
 
 		if(tile.getWorldObj() != null) {
@@ -90,7 +90,7 @@ public class RenderDisplayStation extends TileEntitySpecialRenderer {
 					RenderManager.instance.renderEntityWithPosYaw(entity, 0, 0, 0, 0, 1);
 				}
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -99,7 +99,7 @@ public class RenderDisplayStation extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityDisplayStation) tileentity, d, d1, d2, f);
 	}
 }

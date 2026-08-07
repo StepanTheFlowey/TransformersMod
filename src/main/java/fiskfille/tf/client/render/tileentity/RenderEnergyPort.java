@@ -17,7 +17,7 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer {
 	private final ResourceLocation textureOff = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_port_overlay_off.png");
 	private final ResourceLocation textureOn = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_port_overlay_on.png");
 
-	public void render(TileEntityEnergyPort tile, double x, double y, double z, float partialTicks) {
+	public void render(final TileEntityEnergyPort tile, final double x, final double y, final double z, final float partialTicks) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
 		GL11.glScalef(1F, -1F, -1F);
@@ -43,7 +43,7 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer {
 		}
 
 		if(tile.getWorldObj() != null) {
-			int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
+			final int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
 
 			if(progress >= 0) {
 				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
@@ -67,14 +67,14 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	public void adjustRotation(TileEntityEnergyPort tile, double x, double y, double z, float partialTicks) {
+	public void adjustRotation(final TileEntityEnergyPort tile, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
 
 		if(tile.getWorldObj() != null) {
 			metadata = tile.getBlockMetadata();
 		}
 
-		ForgeDirection dir = ForgeDirection.getOrientation(metadata);
+		final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
 
 		if(dir == ForgeDirection.UP) {
 			GL11.glTranslatef(0, 1, 0);
@@ -84,7 +84,7 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer {
 			GL11.glTranslatef(0, -1, 0);
 		}
 		else {
-			int[] rotations = {0, 2, 3, 1};
+			final int[] rotations = {0, 2, 3, 1};
 
 			GL11.glRotatef(90 * rotations[metadata - 2], 0, 1, 0);
 			GL11.glRotatef(90, 1, 0, 0);
@@ -95,7 +95,7 @@ public class RenderEnergyPort extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		render((TileEntityEnergyPort) tileentity, d, d1, d2, f);
 	}
 }

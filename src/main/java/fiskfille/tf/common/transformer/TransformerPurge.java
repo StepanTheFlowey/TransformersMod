@@ -45,7 +45,7 @@ public class TransformerPurge extends TransformerTank {
 	}
 
 	@Override
-	public void tick(EntityPlayer player, float timer) {
+	public void tick(final EntityPlayer player, final float timer) {
 		super.tick(player, timer);
 
 		player.addStat(TFAchievements.purge, 1);

@@ -16,7 +16,7 @@ public class TFChunkManager {
 	private static final HashMap<World, LinkedList<Ticket>> ticketsForWorld = new HashMap<>();
 	private static final HashMap<ForcedChunk, Integer> chunkForcers = new HashMap<>();
 
-	public static void forceChunk(Ticket ticket, ForcedChunk chunk) {
+	public static void forceChunk(final Ticket ticket, final ForcedChunk chunk) {
 		int i = chunkForcers.get(chunk) == null ? 0 : chunkForcers.get(chunk);
 
 		if(i == 0) {
@@ -26,7 +26,7 @@ public class TFChunkManager {
 		chunkForcers.put(chunk, ++i);
 	}
 
-	public static void releaseChunk(SubTicket subTicket, ForcedChunk chunk) {
+	public static void releaseChunk(final SubTicket subTicket, final ForcedChunk chunk) {
 		int i = chunkForcers.get(chunk) == null ? 0 : chunkForcers.get(chunk);
 		subTicket.remove();
 
@@ -36,15 +36,15 @@ public class TFChunkManager {
 
 		chunkForcers.put(chunk, Math.max(--i, 0));
 
-		for(Map.Entry<World, LinkedList<Ticket>> e : ticketsForWorld.entrySet()) {
+		for(final Map.Entry<World, LinkedList<Ticket>> e : ticketsForWorld.entrySet()) {
 			for(int j = 0; j < ticketsForWorld.get(e.getKey()).size(); ++j) {
-				Ticket ticket = ticketsForWorld.get(e.getKey()).get(j);
+				final Ticket ticket = ticketsForWorld.get(e.getKey()).get(j);
 
 				if(ticket.getChunkList().isEmpty()) {
 					try {
 						ForgeChunkManager.releaseTicket(ticket);
 					}
-					catch(Exception ignored) {
+					catch(final Exception ignored) {
 					}
 
 					ticketsForWorld.get(e.getKey()).remove(j);
@@ -63,15 +63,15 @@ public class TFChunkManager {
 		int chunks = 0;
 		int tickets = 0;
 
-		for(Map.Entry<World, LinkedList<Ticket>> e : ticketsForWorld.entrySet()) {
+		for(final Map.Entry<World, LinkedList<Ticket>> e : ticketsForWorld.entrySet()) {
 			if(e.getValue() != null) {
 				for(int i = 0; i < e.getValue().size(); ++i) {
-					Ticket ticket = e.getValue().get(i);
+					final Ticket ticket = e.getValue().get(i);
 					chunks += ticket.getChunkList().size();
 
 					for(int j = 0; j < ticket.getChunkList().size(); ++j) {
-						ChunkCoordIntPair coords = ticket.getChunkList().asList().get(j);
-						Integer k = chunkForcers.get(new ForcedChunk(ticket.world, coords.chunkXPos, coords.chunkZPos));
+						final ChunkCoordIntPair coords = ticket.getChunkList().asList().get(j);
+						final Integer k = chunkForcers.get(new ForcedChunk(ticket.world, coords.chunkXPos, coords.chunkZPos));
 
 						entries += k != null ? k : 0;
 					}
@@ -84,16 +84,16 @@ public class TFChunkManager {
 		TransformersMod.log.info("{} entries / {} chunks / {} tickets", entries, chunks, tickets);
 	}
 
-	public static Ticket getTicketForChunk(ForcedChunk chunk) {
+	public static Ticket getTicketForChunk(final ForcedChunk chunk) {
 		final World world = chunk.worldObj;
 
 		ticketsForWorld.computeIfAbsent(world, k -> new LinkedList<>());
 
 		for(int i = 0; i < ticketsForWorld.get(world).size(); ++i) {
-			Ticket ticket = ticketsForWorld.get(world).get(i);
-			List<SubTicket> list = SubTicket.getChildren(ticket);
+			final Ticket ticket = ticketsForWorld.get(world).get(i);
+			final List<SubTicket> list = SubTicket.getChildren(ticket);
 
-			for(SubTicket subTicket : list) {
+			for(final SubTicket subTicket : list) {
 				if(subTicket.xCoord << 4 == chunk.chunkXPos && subTicket.zCoord << 4 == chunk.chunkZPos) {
 					return ticket;
 				}
@@ -103,12 +103,12 @@ public class TFChunkManager {
 		return requestTicket(world);
 	}
 
-	public static Ticket requestTicket(World world) {
+	public static Ticket requestTicket(final World world) {
 		ticketsForWorld.computeIfAbsent(world, k -> new LinkedList<>());
 		return getNextAvailableTicket(world);
 	}
 
-	private static void newTicket(World world) {
+	private static void newTicket(final World world) {
 		final LinkedList<Ticket> list = ticketsForWorld.get(world);
 		final Ticket ticket = ForgeChunkManager.requestTicket(TransformersMod.instance, world, Type.NORMAL);
 
@@ -118,11 +118,11 @@ public class TFChunkManager {
 		}
 	}
 
-	private static LinkedList<Ticket> getAvailableTickets(World world) {
+	private static LinkedList<Ticket> getAvailableTickets(final World world) {
 		final LinkedList<Ticket> list = new LinkedList<>();
 
 		for(int i = 0; i < ticketsForWorld.get(world).size(); ++i) {
-			Ticket ticket = ticketsForWorld.get(world).get(i);
+			final Ticket ticket = ticketsForWorld.get(world).get(i);
 
 			if(ticket.getChunkList().size() < ticket.getMaxChunkListDepth()) {
 				list.add(ticket);
@@ -136,7 +136,7 @@ public class TFChunkManager {
 		return list;
 	}
 
-	private static Ticket getNextAvailableTicket(World world) {
+	private static Ticket getNextAvailableTicket(final World world) {
 		return getAvailableTickets(world).isEmpty() ? null : getAvailableTickets(world).getLast();
 	}
 }

@@ -16,18 +16,18 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 	public boolean isInStealthMode;
 	public boolean allowExplosions;
 
-	public EntityMissile(World world) {
+	public EntityMissile(final World world) {
 		super(world);
 	}
 
-	public EntityMissile(World world, EntityLivingBase entity, boolean explosions, boolean stealthMode) {
+	public EntityMissile(final World world, final EntityLivingBase entity, final boolean explosions, final boolean stealthMode) {
 		super(world, entity);
 		isInStealthMode = stealthMode;
 		allowExplosions = explosions;
 		setThrowableHeading(motionX, motionY, motionZ, func_70182_d(), 1F);
 	}
 
-	public EntityMissile(World world, double x, double y, double z) {
+	public EntityMissile(final World world, final double x, final double y, final double z) {
 		super(world, x, y, z);
 	}
 
@@ -56,7 +56,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(final MovingObjectPosition mop) {
 		if(!worldObj.isRemote) {
 			if(mop.typeOfHit == MovingObjectType.BLOCK) {
 				explode(mop.blockX, mop.blockY, mop.blockZ, mop.sideHit);
@@ -77,7 +77,7 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 		setDead();
 	}
 
-	public void explode(int x, int y, int z, int sideHit) {
+	public void explode(int x, int y, int z, final int sideHit) {
 		switch(sideHit) {
 			case 0:
 				--y;
@@ -108,27 +108,27 @@ public class EntityMissile extends EntityThrowable implements IEntityAdditionalS
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
+	public void writeEntityToNBT(final NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("Explosions", allowExplosions);
 		nbt.setBoolean("StealthForce", isInStealthMode);
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
+	public void readEntityFromNBT(final NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		allowExplosions = nbt.getBoolean("Explosions");
 		isInStealthMode = nbt.getBoolean("StealthForce");
 	}
 
 	@Override
-	public void writeSpawnData(ByteBuf buf) {
+	public void writeSpawnData(final ByteBuf buf) {
 		buf.writeBoolean(allowExplosions);
 		buf.writeBoolean(isInStealthMode);
 	}
 
 	@Override
-	public void readSpawnData(ByteBuf buf) {
+	public void readSpawnData(final ByteBuf buf) {
 		allowExplosions = buf.readBoolean();
 		isInStealthMode = buf.readBoolean();
 	}

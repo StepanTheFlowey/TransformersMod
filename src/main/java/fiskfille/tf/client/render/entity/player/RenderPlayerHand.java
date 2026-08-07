@@ -21,15 +21,15 @@ public class RenderPlayerHand extends RenderPlayer {
 	public Render parent;
 
 	@Override
-	public void renderFirstPersonArm(EntityPlayer player) {
+	public void renderFirstPersonArm(final EntityPlayer player) {
 		final float partialTicks = ClientTickHandler.renderTick;
 
 		if(TFHelper.getTransformationTimer(player) == 0) {
-			Transformer transformer = TFHelper.getTransformerFromArmor(player, 2);
+			final Transformer transformer = TFHelper.getTransformerFromArmor(player, 2);
 
 			if(transformer != null) {
-				TransformerModel model = TFModelRegistry.getModel(transformer);
-				ModelTransformerBase mainModel = model.getMainModel();
+				final TransformerModel model = TFModelRegistry.getModel(transformer);
+				final ModelTransformerBase mainModel = model.getMainModel();
 				ModelRenderer upperArm = model.getUpperArm();
 
 				if(upperArm == null) {
@@ -39,7 +39,7 @@ public class RenderPlayerHand extends RenderPlayer {
 				mainModel.onGround = 0F;
 				mainModel.setToInitPose();
 
-				int pass = shouldRenderPass(player, 1, partialTicks);
+				final int pass = shouldRenderPass(player, 1, partialTicks);
 				final float ticks = player.ticksExisted + partialTicks;
 				final float scale = 1.2F;
 				GL11.glScalef(scale, scale, scale);
@@ -101,7 +101,7 @@ public class RenderPlayerHand extends RenderPlayer {
 		}
 	}
 
-	public void setParent(Render render) {
+	public void setParent(final Render render) {
 		parent = render;
 	}
 }

@@ -16,25 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TFEnergyHelper {
-	public static boolean isInRange(TileEntity transmitterTile, TileEntity receiverTile) {
-		IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
-		IEnergyReceiver receiver = (IEnergyReceiver) receiverTile;
-		Vec3 src = transmitter.getEnergyOutputOffset().addVector(transmitterTile.xCoord + 0.5F, transmitterTile.yCoord + 0.5F, transmitterTile.zCoord + 0.5F);
-		Vec3 dst = receiver.getEnergyInputOffset().addVector(receiverTile.xCoord + 0.5F, receiverTile.yCoord + 0.5F, receiverTile.zCoord + 0.5F);
+public final class TFEnergyHelper {
+	public static boolean isInRange(final TileEntity transmitterTile, final TileEntity receiverTile) {
+		final IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
+		final IEnergyReceiver receiver = (IEnergyReceiver) receiverTile;
+		final Vec3 src = transmitter.getEnergyOutputOffset().addVector(transmitterTile.xCoord + 0.5F, transmitterTile.yCoord + 0.5F, transmitterTile.zCoord + 0.5F);
+		final Vec3 dst = receiver.getEnergyInputOffset().addVector(receiverTile.xCoord + 0.5F, receiverTile.yCoord + 0.5F, receiverTile.zCoord + 0.5F);
 
 		return src.distanceTo(dst) <= transmitter.getRange();
 	}
 
-	public static boolean isInRange(TileEntity transmitterTile, ChunkCoordinates dstCoords) {
-		IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
-		Vec3 src = transmitter.getEnergyOutputOffset().addVector(transmitterTile.xCoord + 0.5F, transmitterTile.yCoord + 0.5F, transmitterTile.zCoord + 0.5F);
-		Vec3 dst = Vec3.createVectorHelper(dstCoords.posX + 0.5F, dstCoords.posY + 0.5F, dstCoords.posZ + 0.5F);
+	public static boolean isInRange(final TileEntity transmitterTile, final ChunkCoordinates dstCoords) {
+		final IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
+		final Vec3 src = transmitter.getEnergyOutputOffset().addVector(transmitterTile.xCoord + 0.5F, transmitterTile.yCoord + 0.5F, transmitterTile.zCoord + 0.5F);
+		final Vec3 dst = Vec3.createVectorHelper(dstCoords.posX + 0.5F, dstCoords.posY + 0.5F, dstCoords.posZ + 0.5F);
 
 		return src.distanceTo(dst) <= transmitter.getRange();
 	}
 
-	public static TransmissionHandler getTransmissionHandler(TileEntity tile) {
+	public static TransmissionHandler getTransmissionHandler(final TileEntity tile) {
 		if(tile instanceof IEnergyTransmitter) {
 			return ((IEnergyTransmitter) tile).getTransmissionHandler();
 		}
@@ -42,7 +42,7 @@ public class TFEnergyHelper {
 		return null;
 	}
 
-	public static ReceiverHandler getReceiverHandler(TileEntity tile) {
+	public static ReceiverHandler getReceiverHandler(final TileEntity tile) {
 		if(tile instanceof IEnergyReceiver) {
 			return ((IEnergyReceiver) tile).getReceiverHandler();
 		}
@@ -50,14 +50,14 @@ public class TFEnergyHelper {
 		return null;
 	}
 
-	public static List<DimensionalCoords> getDescendants(IEnergyTransmitter transmitter) {
+	public static List<DimensionalCoords> getDescendants(final IEnergyTransmitter transmitter) {
 		return getDescendants(transmitter, new ArrayList<>());
 	}
 
-	private static List<DimensionalCoords> getDescendants(IEnergyTransmitter transmitter, List<DimensionalCoords> list) {
-		TransmissionHandler handler = transmitter.getTransmissionHandler();
+	private static List<DimensionalCoords> getDescendants(final IEnergyTransmitter transmitter, final List<DimensionalCoords> list) {
+		final TransmissionHandler handler = transmitter.getTransmissionHandler();
 
-		for(ReceiverEntry entry : handler.getReceivers()) {
+		for(final ReceiverEntry entry : handler.getReceivers()) {
 			list.add(entry.getCoords());
 
 			if(entry.getTile() instanceof IEnergyTransmitter) {
@@ -68,28 +68,28 @@ public class TFEnergyHelper {
 		return list;
 	}
 
-	public static MovingObjectPosition rayTraceBlocks(World world, Vec3 src, Vec3 dst) {
+	public static MovingObjectPosition rayTraceBlocks(final World world, final Vec3 src, final Vec3 dst) {
 		return rayTraceBlocks(world, src, dst, false, false, false);
 	}
 
-	public static MovingObjectPosition rayTraceBlocks(World world, Vec3 src, Vec3 dst, boolean flag) {
+	public static MovingObjectPosition rayTraceBlocks(final World world, final Vec3 src, final Vec3 dst, final boolean flag) {
 		return rayTraceBlocks(world, src, dst, flag, false, false);
 	}
 
-	public static MovingObjectPosition rayTraceBlocks(World world, Vec3 src, Vec3 dst, boolean flag, boolean flag1, boolean flag2) {
+	public static MovingObjectPosition rayTraceBlocks(final World world, final Vec3 src, final Vec3 dst, final boolean flag, final boolean flag1, final boolean flag2) {
 		if(!Double.isNaN(src.xCoord) && !Double.isNaN(src.yCoord) && !Double.isNaN(src.zCoord)) {
 			if(!Double.isNaN(dst.xCoord) && !Double.isNaN(dst.yCoord) && !Double.isNaN(dst.zCoord)) {
-				int x = MathHelper.floor_double(dst.xCoord);
-				int y = MathHelper.floor_double(dst.yCoord);
-				int z = MathHelper.floor_double(dst.zCoord);
+				final int x = MathHelper.floor_double(dst.xCoord);
+				final int y = MathHelper.floor_double(dst.yCoord);
+				final int z = MathHelper.floor_double(dst.zCoord);
 				int x1 = MathHelper.floor_double(src.xCoord);
 				int y1 = MathHelper.floor_double(src.yCoord);
 				int z1 = MathHelper.floor_double(src.zCoord);
-				Block block = world.getBlock(x1, y1, z1);
+				final Block block = world.getBlock(x1, y1, z1);
 				int metadata = world.getBlockMetadata(x1, y1, z1);
 
 				if((!flag1 || block.getCollisionBoundingBoxFromPool(world, x1, y1, z1) != null) && block.canCollideCheck(metadata, flag) && !(!block.isOpaqueCube() && world.getTileEntity(x1, y1, z1) instanceof IEnergyReceiver)) {
-					MovingObjectPosition mop = block.collisionRayTrace(world, x1, y1, z1, src, dst);
+					final MovingObjectPosition mop = block.collisionRayTrace(world, x1, y1, z1, src, dst);
 
 					if(mop != null) {
 						return mop;
@@ -148,9 +148,9 @@ public class TFEnergyHelper {
 					double d3 = 999D;
 					double d4 = 999D;
 					double d5 = 999D;
-					double d6 = dst.xCoord - src.xCoord;
-					double d7 = dst.yCoord - src.yCoord;
-					double d8 = dst.zCoord - src.zCoord;
+					final double d6 = dst.xCoord - src.xCoord;
+					final double d7 = dst.yCoord - src.yCoord;
+					final double d8 = dst.zCoord - src.zCoord;
 
 					if(flag6) {
 						d3 = (d0 - src.xCoord) / d6;
@@ -164,7 +164,7 @@ public class TFEnergyHelper {
 						d5 = (d2 - src.zCoord) / d8;
 					}
 
-					byte b0;
+					final byte b0;
 
 					if(d3 < d4 && d3 < d5) {
 						if(x > x1) {
@@ -203,7 +203,7 @@ public class TFEnergyHelper {
 						src.zCoord = d2;
 					}
 
-					Vec3 vec32 = Vec3.createVectorHelper(src.xCoord, src.yCoord, src.zCoord);
+					final Vec3 vec32 = Vec3.createVectorHelper(src.xCoord, src.yCoord, src.zCoord);
 					x1 = (int) (vec32.xCoord = MathHelper.floor_double(src.xCoord));
 
 					if(b0 == 5) {
@@ -225,12 +225,12 @@ public class TFEnergyHelper {
 						++vec32.zCoord;
 					}
 
-					Block block1 = world.getBlock(x1, y1, z1);
-					int l1 = world.getBlockMetadata(x1, y1, z1);
+					final Block block1 = world.getBlock(x1, y1, z1);
+					final int l1 = world.getBlockMetadata(x1, y1, z1);
 
 					if(!flag1 || block1.getCollisionBoundingBoxFromPool(world, x1, y1, z1) != null) {
 						if(block1.canCollideCheck(l1, flag) && !(world.getTileEntity(x1, y1, z1) instanceof IEnergyReceiver && world.getTileEntity(x1, y1, z1) instanceof IEnergyTransmitter)) {
-							MovingObjectPosition movingobjectposition1 = block1.collisionRayTrace(world, x1, y1, z1, src, dst);
+							final MovingObjectPosition movingobjectposition1 = block1.collisionRayTrace(world, x1, y1, z1, src, dst);
 
 							if(movingobjectposition1 != null) {
 								return movingobjectposition1;
@@ -253,11 +253,11 @@ public class TFEnergyHelper {
 		}
 	}
 
-	public static List<ReceiverEntry> getReceiversToPower(IEnergyTransmitter transmitter) {
-		TransmissionHandler transmissionHandler = transmitter.getTransmissionHandler();
-		List<ReceiverEntry> tilesToPower = Lists.newArrayList();
+	public static List<ReceiverEntry> getReceiversToPower(final IEnergyTransmitter transmitter) {
+		final TransmissionHandler transmissionHandler = transmitter.getTransmissionHandler();
+		final List<ReceiverEntry> tilesToPower = Lists.newArrayList();
 
-		for(ReceiverEntry receiver : transmissionHandler.getReceivers()) {
+		for(final ReceiverEntry receiver : transmissionHandler.getReceivers()) {
 			if(receiver.canReach() && receiver.getTile() != null) {
 				tilesToPower.add(receiver);
 			}
@@ -271,11 +271,11 @@ public class TFEnergyHelper {
 	 * @param transmitter
 	 * @returns A list of every descendant of this transmitter
 	 */
-	public static List<ReceiverEntry> getReceiverChain(IEnergyTransmitter transmitter) {
-		List<ReceiverEntry> tilesToPower = getReceiversToPower(transmitter);
-		List<ReceiverEntry> list = Lists.newArrayList(tilesToPower);
+	public static List<ReceiverEntry> getReceiverChain(final IEnergyTransmitter transmitter) {
+		final List<ReceiverEntry> tilesToPower = getReceiversToPower(transmitter);
+		final List<ReceiverEntry> list = Lists.newArrayList(tilesToPower);
 
-		for(ReceiverEntry receiver : tilesToPower) {
+		for(final ReceiverEntry receiver : tilesToPower) {
 			if(receiver.getTile() instanceof IEnergyTransmitter) {
 				list.addAll(getReceiverChain(receiver.getTransmitter()));
 			}
@@ -289,11 +289,11 @@ public class TFEnergyHelper {
 	 * @param transmitter
 	 * @returns A list of receivers which are at the very end of the lineage of this transmitter
 	 */
-	public static List<ReceiverEntry> getReceiverDescendants(IEnergyTransmitter transmitter) {
-		List<ReceiverEntry> tiles = getReceiverChain(transmitter);
-		List<ReceiverEntry> list = Lists.newArrayList();
+	public static List<ReceiverEntry> getReceiverDescendants(final IEnergyTransmitter transmitter) {
+		final List<ReceiverEntry> tiles = getReceiverChain(transmitter);
+		final List<ReceiverEntry> list = Lists.newArrayList();
 
-		for(ReceiverEntry receiver : tiles) {
+		for(final ReceiverEntry receiver : tiles) {
 			if(!list.contains(receiver) && (!(receiver.getTile() instanceof IEnergyTransmitter) || getReceiversToPower(receiver.getTransmitter()).isEmpty())) {
 				list.add(receiver);
 			}
@@ -302,14 +302,14 @@ public class TFEnergyHelper {
 		return list;
 	}
 
-	public static boolean isPowering(IEnergyTransmitter transmitter, ReceiverEntry entry) {
+	public static boolean isPowering(final IEnergyTransmitter transmitter, final ReceiverEntry entry) {
 		return getReceiversToPower(transmitter).contains(entry);
 	}
 
-	public static boolean isPowering(IEnergyTransmitter transmitter, DimensionalCoords coords) {
-		List<ReceiverEntry> receivers = getReceiversToPower(transmitter);
+	public static boolean isPowering(final IEnergyTransmitter transmitter, final DimensionalCoords coords) {
+		final List<ReceiverEntry> receivers = getReceiversToPower(transmitter);
 
-		for(ReceiverEntry receiver : receivers) {
+		for(final ReceiverEntry receiver : receivers) {
 			if(receiver.getCoords().equals(coords)) {
 				return true;
 			}
@@ -318,16 +318,16 @@ public class TFEnergyHelper {
 		return false;
 	}
 
-	public static boolean isPowering(IEnergyTransmitter transmitter, TileEntity tile) {
+	public static boolean isPowering(final IEnergyTransmitter transmitter, final TileEntity tile) {
 		return isPowering(transmitter, new DimensionalCoords(tile));
 	}
 
-	public static void transferEnergy(IEnergyContainer to, IEnergyContainer from, float amount, boolean simulate) {
+	public static void transferEnergy(final IEnergyContainer to, final IEnergyContainer from, final float amount, final boolean simulate) {
 		to.receiveEnergy(from.extractEnergy(to.receiveEnergy(amount, true), simulate), simulate);
 	}
 
-	public static void applyEnergyUsage(EnergyStorage storage) {
-		float usage = storage.getUsage();
+	public static void applyEnergyUsage(final EnergyStorage storage) {
+		final float usage = storage.getUsage();
 
 		if(usage < 0F) {
 			storage.remove(-usage, false);
@@ -337,13 +337,13 @@ public class TFEnergyHelper {
 		}
 	}
 
-	public static boolean canPowerChainReach(IEnergyReceiver receiver) {
-		TileEntity tile = receiver.getReceiverHandler().getOwner().getTile();
+	public static boolean canPowerChainReach(final IEnergyReceiver receiver) {
+		final TileEntity tile = receiver.getReceiverHandler().getOwner().getTile();
 
 		if(tile != null) {
-			Set<NetworkEntry> transmitters = receiver.getReceiverHandler().getTransmitters();
+			final Set<NetworkEntry> transmitters = receiver.getReceiverHandler().getTransmitters();
 
-			for(NetworkEntry ownerEntry : transmitters) {
+			for(final NetworkEntry ownerEntry : transmitters) {
 				if(ownerEntry.getTile() instanceof IEnergyReceiver) {
 					if(isPowering(ownerEntry.getTransmitter(), tile) && canPowerChainReach(ownerEntry.getReceiver())) {
 						return true;
@@ -351,7 +351,7 @@ public class TFEnergyHelper {
 				}
 				else if(ownerEntry.getTransmitter().getEnergy() > 0 && isPowering(ownerEntry.getTransmitter(), tile)) {
 					if(ownerEntry.getTile() instanceof TileEntityMachine) {
-						TileEntityMachine machine = (TileEntityMachine) ownerEntry.getTile();
+						final TileEntityMachine machine = (TileEntityMachine) ownerEntry.getTile();
 
 						if(!machine.canActivate()) {
 							continue;

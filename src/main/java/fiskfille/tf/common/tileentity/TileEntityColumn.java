@@ -34,19 +34,19 @@ public class TileEntityColumn extends TileEntityMachineContainer implements IEne
 	}
 
 	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
+	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
 		storage.readFromNBT(nbt);
 	}
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
+	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
 		storage.writeToNBT(nbt);
 	}
 
 	@Override
-	public float receiveEnergy(float amount, boolean simulate) {
+	public float receiveEnergy(final float amount, final boolean simulate) {
 		if(!canActivate()) {
 			return 0;
 		}
@@ -55,7 +55,7 @@ public class TileEntityColumn extends TileEntityMachineContainer implements IEne
 	}
 
 	@Override
-	public float extractEnergy(float amount, boolean simulate) {
+	public float extractEnergy(final float amount, final boolean simulate) {
 		if(!canActivate()) {
 			return 0;
 		}
@@ -84,7 +84,7 @@ public class TileEntityColumn extends TileEntityMachineContainer implements IEne
 	}
 
 	@Override
-	public boolean canReceiveEnergy(TileEntity from) {
+	public boolean canReceiveEnergy(final TileEntity from) {
 		return getBlockMetadata() < 4;
 	}
 
@@ -104,12 +104,12 @@ public class TileEntityColumn extends TileEntityMachineContainer implements IEne
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+	public boolean isItemValidForSlot(final int slot, final ItemStack itemstack) {
 		return itemstack.getItem() == TFItems.powerCanister;
 	}
 
 	@Override
-	public int[] getBaseOffsets(int metadata) {
+	public int[] getBaseOffsets(final int metadata) {
 		return new int[]{0, -metadata / 4, 0};
 	}
 }

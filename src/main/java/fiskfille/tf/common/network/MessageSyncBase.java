@@ -16,17 +16,17 @@ public abstract class MessageSyncBase implements IMessage {
 
 	public MessageSyncBase() {}
 
-	public MessageSyncBase(EntityPlayer player) {
+	public MessageSyncBase(final EntityPlayer player) {
 		playerData = TFPlayerData.getData(player).data;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(final ByteBuf buf) {
 		playerData = TFData.readFromNBT(ByteBufUtils.readTag(buf), new HashMap<>());
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(final ByteBuf buf) {
 		final NBTTagCompound nbttagcompound = new NBTTagCompound();
 		TFData.writeToNBT(nbttagcompound, playerData);
 		ByteBufUtils.writeTag(buf, nbttagcompound);

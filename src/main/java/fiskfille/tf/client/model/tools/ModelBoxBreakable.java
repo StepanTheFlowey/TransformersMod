@@ -11,7 +11,7 @@ public class ModelBoxBreakable extends ModelBox {
 	public final ModelRendererBreakable model;
 	private final TexturedQuad[] quadList;
 
-	public ModelBoxBreakable(ModelRendererBreakable modelRenderer, int textureX, int textureY, float x, float y, float z, int width, int height, int depth, float mcScale) {
+	public ModelBoxBreakable(final ModelRendererBreakable modelRenderer, final int textureX, final int textureY, float x, float y, float z, final int width, final int height, final int depth, final float mcScale) {
 		super(modelRenderer, textureX, textureY, x, y, z, width, height, depth, mcScale);
 		model = modelRenderer;
 
@@ -46,9 +46,9 @@ public class ModelBoxBreakable extends ModelBox {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void render(Tessellator tessellator, float f) {
+	public void render(final Tessellator tessellator, final float f) {
 		if(model.breaking) {
-			for(TexturedQuad texturedQuad : quadList) {
+			for(final TexturedQuad texturedQuad : quadList) {
 				texturedQuad.draw(tessellator, f);
 			}
 		}

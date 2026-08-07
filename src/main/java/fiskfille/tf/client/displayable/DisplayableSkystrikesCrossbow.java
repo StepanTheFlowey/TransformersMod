@@ -14,7 +14,7 @@ public class DisplayableSkystrikesCrossbow extends Displayable {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/skystrikes_crossbow.png");
 
 	@Override
-	public void render(ItemStack itemstack) {
+	public void render(final ItemStack itemstack) {
 		bindTexture(texture);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
 		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0, 1, 0);

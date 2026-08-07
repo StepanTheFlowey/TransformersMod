@@ -42,9 +42,9 @@ public class BlockRelayTower extends BlockMachineBase {
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		float f = 0.0625F;
+	public void addCollisionBoxesToList(final World world, final int x, final int y, final int z, final AxisAlignedBB aabb, final List list, final Entity entity) {
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final float f = 0.0625F;
 		float width = f * 2;
 
 		if(metadata < 4) {
@@ -59,10 +59,10 @@ public class BlockRelayTower extends BlockMachineBase {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		float f = 0.0625F;
-		float width = f * 4;
+	public void setBlockBoundsBasedOnState(final IBlockAccess world, final int x, final int y, final int z) {
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final float f = 0.0625F;
+		final float width = f * 4;
 
 		if(metadata < 4) {
 			setBlockBounds(width, 0, width, 1 - width, 2, 1 - width);
@@ -73,13 +73,13 @@ public class BlockRelayTower extends BlockMachineBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
 		if(super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
 			return true;
 		}
 
 		if(!player.isSneaking()) {
-			TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
+			final TileEntity tile = TFTileHelper.getTileBase(world.getTileEntity(x, y, z));
 
 			if(tile instanceof TileEntityRelayTower) {
 				TFGui.RECEIVER_NETWORK.open(player, tile);
@@ -92,7 +92,7 @@ public class BlockRelayTower extends BlockMachineBase {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(final IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("stone");
 	}
 }

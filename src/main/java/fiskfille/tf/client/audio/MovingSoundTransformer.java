@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 public class MovingSoundTransformer extends MovingSound {
 	private final Entity entity;
 
-	public MovingSoundTransformer(Entity entity, ResourceLocation sound) {
+	public MovingSoundTransformer(final Entity entity, final ResourceLocation sound) {
 		super(sound);
 		this.entity = entity;
 		this.volume = 0.5F;

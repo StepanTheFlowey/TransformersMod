@@ -12,7 +12,7 @@ public class RenderItemTileEntity implements IItemRenderer {
 	protected final Block block;
 	protected TileEntity tileentity;
 
-	public RenderItemTileEntity(Block b) {
+	public RenderItemTileEntity(final Block b) {
 		block = b;
 		tileentity = block.createTileEntity(null, 0);
 		tileentity.blockType = block;
@@ -20,17 +20,17 @@ public class RenderItemTileEntity implements IItemRenderer {
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(final ItemStack item, final ItemRenderType type) {
 		return true;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(final ItemRenderType type, final ItemStack item, final ItemRendererHelper helper) {
 		return true;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		if(type == ItemRenderType.INVENTORY) {
 			GL11.glRotatef(90F, 0F, 1F, 0F);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -43,7 +43,7 @@ public class RenderItemTileEntity implements IItemRenderer {
 		try {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(tileentity, 0, 0, 0, 0);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			e.printStackTrace();
 		}
 	}

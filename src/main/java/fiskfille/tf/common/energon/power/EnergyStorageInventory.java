@@ -8,7 +8,7 @@ public class EnergyStorageInventory extends EnergyStorage {
 	protected final TileEntity tile;
 	protected final IInventory energyInventory;
 
-	public EnergyStorageInventory(TileEntity tileentity, IInventory inventory) {
+	public EnergyStorageInventory(final TileEntity tileentity, final IInventory inventory) {
 		super(0);
 		tile = tileentity;
 		energyInventory = inventory;
@@ -20,7 +20,7 @@ public class EnergyStorageInventory extends EnergyStorage {
 	}
 
 	@Override
-	public float remove(float amount, boolean simulate) {
+	public float remove(final float amount, final boolean simulate) {
 		if(amount <= 0) {
 			return 0;
 		}
@@ -51,7 +51,7 @@ public class EnergyStorageInventory extends EnergyStorage {
 	}
 
 	@Override
-	public float add(float amount, boolean simulate) {
+	public float add(final float amount, final boolean simulate) {
 		if(amount <= 0) {
 			return 0;
 		}
@@ -89,7 +89,7 @@ public class EnergyStorageInventory extends EnergyStorage {
 			final ItemStack stack = energyInventory.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
+				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
 				energy += container.getEnergyStored(stack);
 			}
 		}
@@ -114,12 +114,12 @@ public class EnergyStorageInventory extends EnergyStorage {
 	}
 
 	@Override
-	public void set(float amount) {
+	public void set(final float amount) {
 		energy = Math.min(getMaxEnergy(), Math.max(0, amount));
 	}
 
 	@Override
-	public void setUsage(float usage) {
+	public void setUsage(final float usage) {
 		energyUsage = usage;
 		lastEnergy = getEnergy();
 	}
