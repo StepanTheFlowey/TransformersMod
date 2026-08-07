@@ -136,7 +136,6 @@ public class CommonEventHandler {
 
 		if(entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
-			player.addStat(TFAchievements.transformersMod, 1);
 
 			if(!world.isRemote) {
 				playersNotSunc.add(player);

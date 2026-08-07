@@ -17,19 +17,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TFAchievements {
-	public static final Achievement transformersMod = new TFAchievement("transformers_mod", 0, 0, null).initIndependentStat().registerStat();
-	public static final Achievement transformium = new TFAchievement("transformium", 2, -2, transformersMod).registerStat();
+	public static final Achievement transformium = new TFAchievement("transformium", 2, -2, null).registerStat();
 	public static final Achievement transform = new TFAchievement("transform", 4, -2, transformium).registerStat();
 	public static final Achievement firstMissile = new TFAchievement("shoot_missile", 4, 0, transform).registerStat();
 	public static final Achievement sharpshooter = new TFAchievement("sharpshooter", 6, 1, firstMissile).setSpecial().registerStat();
 	public static final Achievement detonateSeed = new TFAchievement("detonateSeed", -1, -4, transformium).setSpecial().registerStat();
-	public static final Achievement donate = new TFAchievement("donate", -3, -1, transformersMod).setSpecial().registerStat();
+	public static final Achievement donate = new TFAchievement("donate", -3, -1, null).setSpecial().registerStat();
 	public static final Achievement tracks = new TFAchievement("tracks", -5, -3, null).registerStat();
 	public static final Achievement skystrike = new TFAchievement("skystrike", -7, -5, null).setSpecial().registerStat();
 	public static final Achievement purge = new TFAchievement("purge", -7, -4, tracks).setSpecial().registerStat();
 	public static final Achievement vurp = new TFAchievement("vurp", -7, -3, null).setSpecial().registerStat();
 	public static final Achievement subwoofer = new TFAchievement("subwoofer", -7, -2, null).setSpecial().registerStat();
-	public static final ArrayList<Achievement> achievements = new ArrayList<>();
+
 	private static final HashMap<Achievement, ItemStack> displayItems = new HashMap<>();
 	private static boolean init = false;
 
@@ -40,7 +39,8 @@ public class TFAchievements {
 
 		init = true;
 
-		for(Field field : TFAchievements.class.getFields()) {
+		final ArrayList<Achievement> achievements = new ArrayList<>();
+		for(final Field field : TFAchievements.class.getFields()) {
 			if(field.getType().getName().equals(Achievement.class.getName())) {
 				try {
 					achievements.add((Achievement) field.get(null));
@@ -51,7 +51,6 @@ public class TFAchievements {
 			}
 		}
 
-		setItem(transformersMod, TFBlocks.energonCrystal);
 		setItem(transformium, TFItems.transformiumFragment);
 		setItem(transform, TFSubItems.wheel);
 		setItem(firstMissile, TFItems.missile);
@@ -65,12 +64,12 @@ public class TFAchievements {
 		setItem(sharpshooter, TFItems.vurpsSniper);
 
 		try {
-			Field itemField = Achievement.class.getField(TFTranslator.getMappedName("field_75990_d", "theItemStack"));
-			Field modifiersField = Field.class.getDeclaredField("modifiers");
+			final Field itemField = Achievement.class.getField(TFTranslator.getMappedName("field_75990_d", "theItemStack"));
+			final Field modifiersField = Field.class.getDeclaredField("modifiers");
 			modifiersField.setAccessible(true);
 			modifiersField.setInt(itemField, itemField.getModifiers() & ~Modifier.FINAL);
 
-			for(Achievement achievement : achievements) {
+			for(final Achievement achievement : achievements) {
 				itemField.set(achievement, displayItems.get(achievement));
 			}
 		}
