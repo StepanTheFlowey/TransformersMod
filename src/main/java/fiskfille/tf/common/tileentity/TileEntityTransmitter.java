@@ -37,10 +37,8 @@ import java.util.Set;
 
 public class TileEntityTransmitter extends TileEntityMachineContainer implements IEnergyTransmitter, IFluidHandlerTF, ISidedInventory, IChunkLoaderTile, IMultiTile, ITransmitterRender {
 	public TileDataTransmitter data = new TileDataTransmitter(16000, 6000);
-
-	public int animationTimer;
-
 	public Ticket chunkTicket;
+	public int animationTimer;
 
 	@Override
 	public void updateEntity() {
@@ -57,8 +55,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 					final Ticket ticket = TFChunkManager.getTicketForChunk(ForcedChunk.fromTile(this));
 
 					if(ticket != null) {
-						final SubTicket subTicket = SubTicket.fromTile(this);
-						forceChunks(subTicket.assign(ticket));
+						forceChunks(SubTicket.fromTile(this).assign(ticket));
 					}
 				}
 
@@ -88,7 +85,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 						final Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
 
 						if(energon != null) {
-							final float factor = energon.getEnergyValue();
+							final int factor = energon.getEnergyValue();
 							final float receivedEnergy = receiveEnergy(e.getValue() * factor * max, false);
 							drain(ForgeDirection.UNKNOWN, Math.round(receivedEnergy / factor), true);
 						}

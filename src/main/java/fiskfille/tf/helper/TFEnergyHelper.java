@@ -13,8 +13,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public final class TFEnergyHelper {
 	public static boolean isInRange(final TileEntity transmitterTile, final TileEntity receiverTile) {
@@ -269,7 +269,7 @@ public final class TFEnergyHelper {
 	/**
 	 *
 	 * @param transmitter
-	 * @returns A list of every descendant of this transmitter
+	 * @return A list of every descendant of this transmitter
 	 */
 	public static List<ReceiverEntry> getReceiverChain(final IEnergyTransmitter transmitter) {
 		final List<ReceiverEntry> tilesToPower = getReceiversToPower(transmitter);
@@ -287,7 +287,7 @@ public final class TFEnergyHelper {
 	/**
 	 *
 	 * @param transmitter
-	 * @returns A list of receivers which are at the very end of the lineage of this transmitter
+	 * @return A list of receivers which are at the very end of the lineage of this transmitter
 	 */
 	public static List<ReceiverEntry> getReceiverDescendants(final IEnergyTransmitter transmitter) {
 		final List<ReceiverEntry> tiles = getReceiverChain(transmitter);
@@ -329,10 +329,10 @@ public final class TFEnergyHelper {
 	public static void applyEnergyUsage(final EnergyStorage storage) {
 		final float usage = storage.getUsage();
 
-		if(usage < 0F) {
+		if(usage < 0) {
 			storage.remove(-usage, false);
 		}
-		else if(usage > 0F) {
+		else if(usage > 0) {
 			storage.add(usage, false);
 		}
 	}
@@ -341,7 +341,7 @@ public final class TFEnergyHelper {
 		final TileEntity tile = receiver.getReceiverHandler().getOwner().getTile();
 
 		if(tile != null) {
-			final Set<NetworkEntry> transmitters = receiver.getReceiverHandler().getTransmitters();
+			final HashSet<NetworkEntry> transmitters = receiver.getReceiverHandler().getTransmitters();
 
 			for(final NetworkEntry ownerEntry : transmitters) {
 				if(ownerEntry.getTile() instanceof IEnergyReceiver) {

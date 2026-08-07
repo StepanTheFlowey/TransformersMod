@@ -36,19 +36,22 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 			if(tower instanceof TileEntityRelayTorch && world != null) {
 				final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
 
-				if(dir == ForgeDirection.UP) {
-					GL11.glTranslatef(0, 1, 0);
-					GL11.glRotatef(180, 0, 0, 1);
-				}
-				else if(dir == ForgeDirection.DOWN) {
-					GL11.glTranslatef(0, -1, 0);
-				}
-				else {
-					final int[] rotations = {0, 2, 3, 1};
+				switch(dir) {
+					case UP:
+						GL11.glTranslatef(0, 1, 0);
+						GL11.glRotatef(180, 0, 0, 1);
+						break;
 
-					GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
-					GL11.glRotatef(90, 1, 0, 0);
-					GL11.glTranslatef(0, -1, 0);
+					case DOWN:
+						GL11.glTranslatef(0, -1, 0);
+						break;
+
+					default:
+						final int[] rotations = {0, 2, 3, 1};
+						GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
+						GL11.glRotatef(90, 1, 0, 0);
+						GL11.glTranslatef(0, -1, 0);
+						break;
 				}
 			}
 			else {
@@ -81,7 +84,9 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 					GL11.glEnable(GL11.GL_ALPHA_TEST);
 					model.setBreaking(true);
+
 					model.render(tower, partialTicks);
+
 					GL11.glDisable(GL11.GL_ALPHA_TEST);
 					GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
 					GL11.glEnable(GL11.GL_ALPHA_TEST);

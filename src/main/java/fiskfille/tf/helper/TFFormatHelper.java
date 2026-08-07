@@ -42,7 +42,7 @@ public class TFFormatHelper {
 		s = s.toLowerCase();
 
 		for(int i = 0; i < s.length(); ++i) {
-			if(i > 0 && s.charAt(i - 1) == '_' && i < s.length()) {
+			if(i > 0 && s.charAt(i - 1) == '_') {
 				s = s.substring(0, i) + s.substring(i, i + 1).toUpperCase() + s.substring(i + 1);
 			}
 		}

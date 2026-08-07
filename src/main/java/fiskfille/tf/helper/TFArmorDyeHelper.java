@@ -10,25 +10,22 @@ public final class TFArmorDyeHelper {
 	}
 
 	public static void removeColor(final ItemStack itemstack) {
-		if(itemstack != null) {
-			if(!itemstack.hasTagCompound()) {
-				itemstack.setTagCompound(new NBTTagCompound());
-			}
+		if(!itemstack.hasTagCompound()) {
+			return;
+		}
 
-			if(itemstack.getTagCompound().hasKey("CustomColor")) {
-				itemstack.getTagCompound().removeTag("CustomColor");
-			}
+		final NBTTagCompound compound = itemstack.getTagCompound();
+		if(compound.hasKey("CustomColor")) {
+			compound.removeTag("CustomColor");
+		}
+		if(compound.hasNoTags()) {
+			itemstack.setTagCompound(null);
 		}
 	}
 
 	public static int getPrimaryColor(final ItemStack itemstack) {
-		if(itemstack != null) {
-			if(!itemstack.hasTagCompound()) {
-				itemstack.setTagCompound(new NBTTagCompound());
-			}
-
+		if(itemstack.hasTagCompound()) {
 			final NBTTagCompound nbt = itemstack.getTagCompound().getCompoundTag("CustomColor");
-
 			if(nbt != null) {
 				return nbt.getInteger("PrimaryColor");
 			}
@@ -38,13 +35,8 @@ public final class TFArmorDyeHelper {
 	}
 
 	public static int getSecondaryColor(final ItemStack itemstack) {
-		if(itemstack != null) {
-			if(!itemstack.hasTagCompound()) {
-				itemstack.setTagCompound(new NBTTagCompound());
-			}
-
+		if(itemstack.hasTagCompound()) {
 			final NBTTagCompound nbt = itemstack.getTagCompound().getCompoundTag("CustomColor");
-
 			if(nbt != null) {
 				return nbt.getInteger("SecondaryColor");
 			}
@@ -54,37 +46,29 @@ public final class TFArmorDyeHelper {
 	}
 
 	public static void setPrimaryColor(final ItemStack itemstack, final int i) {
-		NBTTagCompound nbttagcompound = itemstack.getTagCompound();
-
-		if(nbttagcompound == null) {
-			nbttagcompound = new NBTTagCompound();
-			itemstack.setTagCompound(nbttagcompound);
+		if(!itemstack.hasTagCompound()) {
+			itemstack.setTagCompound(new NBTTagCompound());
 		}
 
-		final NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("CustomColor");
-
-		if(!nbttagcompound.hasKey("CustomColor", NBT.TAG_COMPOUND)) {
-			nbttagcompound.setTag("CustomColor", nbttagcompound1);
+		final NBTTagCompound compound = itemstack.getTagCompound();
+		final NBTTagCompound color = compound.getCompoundTag("CustomColor");
+		color.setInteger("PrimaryColor", i);
+		if(!compound.hasKey("CustomColor", NBT.TAG_COMPOUND)) {
+			compound.setTag("CustomColor", color);
 		}
-
-		nbttagcompound1.setInteger("PrimaryColor", i);
 	}
 
 	public static void setSecondaryColor(final ItemStack itemstack, final int i) {
-		NBTTagCompound nbttagcompound = itemstack.getTagCompound();
-
-		if(nbttagcompound == null) {
-			nbttagcompound = new NBTTagCompound();
-			itemstack.setTagCompound(nbttagcompound);
+		if(!itemstack.hasTagCompound()) {
+			itemstack.setTagCompound(new NBTTagCompound());
 		}
 
-		final NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("CustomColor");
-
-		if(!nbttagcompound.hasKey("CustomColor", NBT.TAG_COMPOUND)) {
-			nbttagcompound.setTag("CustomColor", nbttagcompound1);
+		final NBTTagCompound compound = itemstack.getTagCompound();
+		final NBTTagCompound color = compound.getCompoundTag("CustomColor");
+		color.setInteger("SecondaryColor", i);
+		if(!compound.hasKey("CustomColor", NBT.TAG_COMPOUND)) {
+			compound.setTag("CustomColor", color);
 		}
-
-		nbttagcompound1.setInteger("SecondaryColor", i);
 	}
 
 	public static boolean areColorsIdentical(final ItemStack... itemstacks) {

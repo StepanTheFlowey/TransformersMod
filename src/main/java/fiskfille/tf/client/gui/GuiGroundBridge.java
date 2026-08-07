@@ -43,9 +43,9 @@ import java.util.List;
 )
 public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	private static final ResourceLocation guiTextures = new ResourceLocation(TransformersMod.MODID, "textures/gui/container/ground_bridge.png");
-	public final InventoryGroundBridge inventory;
 
 	public final GuiTextField[] coordinateFields = new GuiTextField[3];
+	public final InventoryGroundBridge inventory;
 	public final DimensionalCoords tileCoords;
 	public GuiTextField dimensionField;
 	public GuiButton buttonDeactivate;
@@ -130,7 +130,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 				data.destination.set(coords);
 
 				for(int i = 0; i < coordinateFields.length; ++i) {
-					coordinateFields[i].setText(newDestination[i] + "");
+					coordinateFields[i].setText(Integer.toString(newDestination[i]));
 				}
 
 				TFNetworkManager.networkWrapper.sendToServer(new MessageControlPanelSetConfig(data.getCoords(), coords));

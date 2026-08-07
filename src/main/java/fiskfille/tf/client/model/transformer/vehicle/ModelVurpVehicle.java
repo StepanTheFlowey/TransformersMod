@@ -377,8 +377,8 @@ public class ModelVurpVehicle extends ModelVehicleBase {
 	}
 
 	@Override
-	public void render(final EntityPlayer player, final ItemStack itemstack) {
-		TFRenderHelper.setupRenderLayers(player, itemstack, vehicleBase);
+	public void render(final ItemStack itemstack) {
+		TFRenderHelper.setupRenderLayers(itemstack, vehicleBase);
 	}
 
 	@Override

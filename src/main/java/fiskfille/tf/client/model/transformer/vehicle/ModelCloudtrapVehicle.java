@@ -845,8 +845,8 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 	}
 
 	@Override
-	public void render(final EntityPlayer player, final ItemStack itemstack) {
-		TFRenderHelper.setupRenderLayers(player, itemstack, vehicleBody);
+	public void render(final ItemStack itemstack) {
+		TFRenderHelper.setupRenderLayers(itemstack, vehicleBody);
 	}
 
 	@Override
@@ -855,7 +855,7 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase {
 		setToInitPose();
 
 		if(entity instanceof EntityPlayer) {
-			vehicleBody.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
+			vehicleBody.rotateAngleX = (float) Math.toRadians(rotationPitch);
 			vehicleBody.rotateAngleZ = -bipedHead.rotateAngleY;
 		}
 	}

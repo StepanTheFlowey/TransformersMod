@@ -9,6 +9,7 @@ import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFTextureHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
@@ -41,6 +42,7 @@ public class RenderItemArmor implements IItemRenderer {
 			case 0:
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				break;
+
 			case 1:
 				GL11.glScalef(0.8F, 0.8F, 0.8F);
 				break;
@@ -53,37 +55,34 @@ public class RenderItemArmor implements IItemRenderer {
 			RenderHelper.enableGUIStandardItemLighting();
 		}
 
+		final TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
 		if(TFArmorDyeHelper.isDyed(item)) {
-			final float[] primaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getPrimaryColor(item));
-			final float[] secondaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(item));
-
-			GL11.glColor3f(primaryColor[0], primaryColor[1], primaryColor[2]);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_primary"));
+			textureManager.bindTexture(tfModel.getTexture(null, "_primary"));
+			TFRenderHelper.glColorRGB(TFArmorDyeHelper.getPrimaryColor(item));
 			renderArmor(type, model);
 
-			GL11.glColor3f(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_secondary"));
+			textureManager.bindTexture(tfModel.getTexture(null, "_secondary"));
+			TFRenderHelper.glColorRGB(TFArmorDyeHelper.getSecondaryColor(item));
 			renderArmor(type, model);
 
-			GL11.glColor3f(1F, 1F, 1F);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_base"));
-			renderArmor(type, model);
+			textureManager.bindTexture(tfModel.getTexture(null, "_base"));
+			GL11.glColor3f(1, 1, 1);
 		}
 		else {
-			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, ""));
+			textureManager.bindTexture(tfModel.getTexture(null, ""));
 		}
 
 		renderArmor(type, model);
 
 		if(tfModel.hasLightsLayer()) {
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(null, "_lights"));
+			textureManager.bindTexture(tfModel.getTexture(null, "_lights"));
 			renderArmor(type, model);
 			TFRenderHelper.resetLighting();
 		}
 
 		if(item.hasEffect(0)) {
-			Minecraft.getMinecraft().getTextureManager().bindTexture(TFTextureHelper.RES_ITEM_GLINT);
+			textureManager.bindTexture(TFTextureHelper.RES_ITEM_GLINT);
 			GL11.glColor3f(0.5F, 0.5F, 0.5F);
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDepthMask(false);
@@ -104,7 +103,7 @@ public class RenderItemArmor implements IItemRenderer {
 				renderArmor(type, model);
 			}
 
-			GL11.glColor3f(1F, 1F, 1F);
+			GL11.glColor3f(1, 1, 1);
 			GL11.glMatrixMode(GL11.GL_TEXTURE);
 			GL11.glDepthMask(true);
 			GL11.glLoadIdentity();
@@ -119,95 +118,117 @@ public class RenderItemArmor implements IItemRenderer {
 
 	private void renderArmor(final ItemRenderType type, final ModelTransformerBase model) {
 		GL11.glPushMatrix();
-		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glRotatef(210, 0, 1, 0);
-			GL11.glRotatef(10, 0, 0, 1);
-			GL11.glTranslatef(-0.9F, -1, 0.2F);
+		switch(type) {
+			case EQUIPPED_FIRST_PERSON:
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glRotatef(210, 0, 1, 0);
+				GL11.glRotatef(10, 0, 0, 1);
+				GL11.glTranslatef(-0.9F, -1, 0.2F);
 
-			if(armorPiece == 0) {
-				GL11.glTranslatef(0.5F, 0.5F, 0.1F);
-			}
-			else if(armorPiece == 1) {
-				GL11.glTranslatef(-0.2F, -0.4F, 0);
-			}
-			else if(armorPiece == 2) {
-				GL11.glTranslatef(0, -0.2F, 0);
-			}
+				switch(armorPiece) {
+					case 0:
+						GL11.glTranslatef(0.5F, 0.5F, 0.1F);
+						break;
 
-			model.renderArmorPiece(armorPiece);
-		}
-		else if(type == ItemRenderType.EQUIPPED) {
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glRotatef(-45, 0, 1, 0);
-			GL11.glRotatef(-45, 0, 0, 1);
-			GL11.glTranslatef(0.5F, -0.5F, 0);
+					case 1:
+						GL11.glTranslatef(-0.2F, -0.4F, 0);
+						break;
 
-			if(armorPiece == 0) {
-				GL11.glTranslatef(-0.25F, 0.6F, -0.2F);
-			}
-			else if(armorPiece == 1) {
-				GL11.glTranslatef(-0.1F, 0.1F, -0.4F);
-			}
-			else if(armorPiece == 2) {
-				GL11.glTranslatef(0.1F, 0.3F, -0.35F);
-				GL11.glRotatef(35, 0, 0, 1);
-			}
-			else if(armorPiece == 3) {
-				GL11.glTranslatef(-0.05F, 0.3F, -0.3F);
-				GL11.glRotatef(35, 0, 0, 1);
-			}
+					case 2:
+						GL11.glTranslatef(0, -0.2F, 0);
+						break;
+				}
 
-			final float scale = 0.7F;
-			GL11.glScalef(scale, scale, scale);
-			model.renderArmorPiece(armorPiece);
-		}
-		else if(type == ItemRenderType.INVENTORY) {
-			GL11.glScalef(10, 10, 10);
-			GL11.glTranslatef(0.5F, 0.5F, 1);
-			GL11.glScalef(1, 1, -1);
+				model.renderArmorPiece(armorPiece);
+				break;
 
-			final float scale = 2F;
-			if(armorPiece == 0) {
-				GL11.glTranslatef(0.03125F, 0F, 0F);
-				GL11.glScalef(scale, scale, scale);
-				GL11.glTranslatef(0F, 0.125F, 0F);
-			}
-			else if(armorPiece == 1) {
-				GL11.glTranslatef(0.5F, -0.1F, 0F);
-				GL11.glScalef(scale, scale, scale);
-			}
-			else if(armorPiece == 2) {
-				GL11.glTranslatef(0.325F, -0.6F, 0F);
-				GL11.glScalef(scale, scale, scale);
-			}
-			else if(armorPiece == 3) {
-				GL11.glTranslatef(0.3125F, 0F, 0F);
-				GL11.glScalef(scale, scale, scale);
-				GL11.glTranslatef(0F, -0.125F, 0F);
-			}
+			case EQUIPPED:
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glRotatef(-45, 0, 1, 0);
+				GL11.glRotatef(-45, 0, 0, 1);
+				GL11.glTranslatef(0.5F, -0.5F, 0);
 
-			model.renderArmorPiece(armorPiece);
-		}
-		else if(type == ItemRenderType.ENTITY) {
-			GL11.glRotatef(180F, 1F, 0F, 0F);
-			GL11.glRotatef(-90F, 0F, 1F, 0F);
-			GL11.glTranslatef(0F, -1F, 0.1F);
+				switch(armorPiece) {
+					case 0:
+						GL11.glTranslatef(-0.25F, 0.6F, -0.2F);
+						break;
 
-			if(armorPiece == 0) {
-				GL11.glTranslatef(0F, 1.125F, 0F);
-			}
-			else if(armorPiece == 1) {
-				GL11.glTranslatef(0F, 0.6F, -0.2F);
-			}
-			else if(armorPiece == 2) {
-				GL11.glTranslatef(0F, 0.55F, -0.1F);
-			}
-			else if(armorPiece == 3) {
-				GL11.glTranslatef(0F, 0.7F, -0.1F);
-			}
+					case 1:
+						GL11.glTranslatef(-0.1F, 0.1F, -0.4F);
+						break;
 
-			model.renderArmorPiece(armorPiece);
+					case 2:
+						GL11.glTranslatef(0.1F, 0.3F, -0.35F);
+						GL11.glRotatef(35, 0, 0, 1);
+						break;
+
+					case 3:
+						GL11.glTranslatef(-0.05F, 0.3F, -0.3F);
+						GL11.glRotatef(35, 0, 0, 1);
+						break;
+				}
+
+				GL11.glScalef(0.7F, 0.7F, 0.7F);
+				model.renderArmorPiece(armorPiece);
+				break;
+
+			case INVENTORY:
+				GL11.glScalef(10, 10, 10);
+				GL11.glTranslatef(0.5F, 0.5F, 1);
+				GL11.glScalef(1, 1, -1);
+
+				switch(armorPiece) {
+					case 0:
+						GL11.glTranslatef(0.03125F, 0, 0);
+						GL11.glScalef(2, 2, 2);
+						GL11.glTranslatef(0, 0.125F, 0);
+						break;
+
+					case 1:
+						GL11.glTranslatef(0.5F, -0.1F, 0);
+						GL11.glScalef(2, 2, 2);
+						break;
+
+					case 2:
+						GL11.glTranslatef(0.325F, -0.6F, 0);
+						GL11.glScalef(2, 2, 2);
+						break;
+
+					case 3:
+						GL11.glTranslatef(0.3125F, 0, 0);
+						GL11.glScalef(2, 2, 2);
+						GL11.glTranslatef(0, -0.125F, 0);
+						break;
+				}
+
+				model.renderArmorPiece(armorPiece);
+				break;
+
+			case ENTITY:
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glRotatef(-90, 0, 1, 0);
+				GL11.glTranslatef(0, -1, 0.1F);
+
+				switch(armorPiece) {
+					case 0:
+						GL11.glTranslatef(0, 1.125F, 0);
+						break;
+
+					case 1:
+						GL11.glTranslatef(0, 0.6F, -0.2F);
+						break;
+
+					case 2:
+						GL11.glTranslatef(0, 0.55F, -0.1F);
+						break;
+
+					case 3:
+						GL11.glTranslatef(0, 0.7F, -0.1F);
+						break;
+				}
+
+				model.renderArmorPiece(armorPiece);
+				break;
 		}
 		GL11.glPopMatrix();
 	}

@@ -81,8 +81,16 @@ public class TransformerCloudtrap extends TransformerJet {
 		final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		for(int i = 0; i < 4; ++i) {
-			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.135F, i < 2, -2.5, true);
-			player.worldObj.spawnParticle("flame", side.xCoord, side.yCoord + 0.25F, side.zCoord, (random.nextFloat() - 0.5F) / 20, (random.nextFloat() - 0.5F) / 20, (random.nextFloat() - 0.5F) / 20);
+			final Vec3 side = TFVectorHelper.getBackSideCoords(player, 0.135D, i < 2, -2.5, true);
+			player.worldObj.spawnParticle(
+							"flame",
+							side.xCoord,
+							side.yCoord + 0.25D,
+							side.zCoord,
+							(random.nextDouble() - 0.5D) / 20,
+							(random.nextDouble() - 0.5D) / 20,
+							(random.nextDouble() - 0.5D) / 20
+			);
 		}
 	}
 }

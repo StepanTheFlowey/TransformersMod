@@ -15,15 +15,15 @@ public class TileDataRelay extends TileData {
 	public ArrayList<DimensionalCoords> invertCurrent = new ArrayList<>();
 	public boolean isPowered;
 
-	public TileDataRelay() {
-	}
+	public TileDataRelay() {}
 
 	public TileDataRelay(final TileDataRelay data) {
 		super(data);
+
 		transmissionHandler = data.transmissionHandler;
 		transmissionHandler.setNeedsUpdate(false);
+		invertCurrent.addAll(data.invertCurrent);
 		isPowered = data.isPowered;
-		invertCurrent = new ArrayList<>(data.invertCurrent);
 	}
 
 	@Override
@@ -38,10 +38,11 @@ public class TileDataRelay extends TileData {
 	@Override
 	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
+
 		transmissionHandler.toBytes(buf);
 		buf.writeBoolean(isPowered);
-		buf.writeInt(invertCurrent.size());
 
+		buf.writeInt(invertCurrent.size());
 		for(final DimensionalCoords coords : invertCurrent) {
 			coords.toBytes(buf);
 		}
@@ -50,11 +51,12 @@ public class TileDataRelay extends TileData {
 	@Override
 	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
+
 		transmissionHandler.fromBytes(buf);
 		isPowered = buf.readBoolean();
 
 		final int size = buf.readInt();
-
+		invertCurrent.ensureCapacity(size);
 		for(int i = 0; i < size; ++i) {
 			invertCurrent.add(new DimensionalCoords().fromBytes(buf));
 		}
@@ -81,7 +83,6 @@ public class TileDataRelay extends TileData {
 	public boolean matches(final TileData tileData) {
 		if(tileData instanceof TileDataRelay) {
 			final TileDataRelay data = (TileDataRelay) tileData;
-
 			return isPowered == data.isPowered && !transmissionHandler.needsUpdate() && invertCurrent.size() == data.invertCurrent.size() && invertCurrent.containsAll(data.invertCurrent);
 		}
 

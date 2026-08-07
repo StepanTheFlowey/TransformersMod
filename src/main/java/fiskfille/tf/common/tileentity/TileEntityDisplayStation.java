@@ -27,13 +27,9 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import java.util.UUID;
 
 public class TileEntityDisplayStation extends TileEntityContainer implements IMultiTile, ITileDataCallback {
-	public final GameProfile username;
-	public boolean isRedstonePowered = false;
+	public final GameProfile username = new GameProfile(UUID.randomUUID(), String.format("[%s]", new DimensionalCoords(this)));
 	public EntityPlayer fakePlayer;
-
-	public TileEntityDisplayStation() {
-		username = new GameProfile(UUID.randomUUID(), String.format("[%s]", new DimensionalCoords(this)));
-	}
+	public boolean isRedstonePowered = false;
 
 	@Override
 	public void updateEntity() {
@@ -179,7 +175,6 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 					setInventorySlotContents(6, null);
 				}
 				else {
-					final ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1, TransformersAPI.getTransformers().indexOf(TFHelper.getTransformer(getStackInSlot(0))));
 					final ItemStack[] itemstacks = {getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), getStackInSlot(3)};
 					final NBTTagList itemsList = new NBTTagList();
 
@@ -192,6 +187,7 @@ public class TileEntityDisplayStation extends TileEntityContainer implements IMu
 						}
 					}
 
+					final ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1, TransformersAPI.getTransformers().indexOf(TFHelper.getTransformer(getStackInSlot(0))));
 					itemstack.setTagCompound(new NBTTagCompound());
 					itemstack.getTagCompound().setTag("Items", itemsList);
 

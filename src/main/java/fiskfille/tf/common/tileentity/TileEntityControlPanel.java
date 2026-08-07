@@ -50,19 +50,18 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
 	public final LinkedList<Ticket> chunkTickets = Lists.newLinkedList(Arrays.asList(null, null));
 	public final LinkedList<ForcedChunk> forcedChunks = Lists.newLinkedList(Arrays.asList(null, null));
-	public Integer[][] switches = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
 	public TileDataControlPanel data = new TileDataControlPanel();
+	public Integer[][] switches = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
 	public float animPortalDirection;
 	public float prevAnimPortalDirection;
-	public boolean activationLeverCoverState = false;
 	public float activationLeverTimer;
 	public float prevActivationLeverTimer;
 	public float activationLeverCoverTimer;
 	public float prevActivationLeverCoverTimer;
-	public boolean hasSpace;
-	public float lastUsage;
 	public int destDimIndex = 1;
 	public int prevYCoord;
+	public boolean hasSpace;
+	public boolean activationLeverCoverState;
 
 	@Override
 	public void updateEntity() {
@@ -111,17 +110,14 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 			if(!worldObj.isRemote) {
 				data.errors.clear();
 				data.upgrades.clear();
-				final List<DataCore> upgrades = Lists.newArrayList();
 
 				for(int i = 0; i < getSizeInventory(); ++i) {
 					final ItemStack itemstack = getStackInSlot(i);
 
 					if(itemstack != null && itemstack.getItem() == TFItems.dataCore) {
-						upgrades.add(DataCore.get(itemstack.getItemDamage()));
+						data.upgrades.add(DataCore.get(itemstack.getItemDamage()));
 					}
 				}
-
-				data.upgrades.addAll(upgrades);
 
 				calculateCoords();
 				loadChunks();
@@ -132,7 +128,6 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 					final int z = data.framePos.posZ;
 
 					final ForgeDirection direction = BlockGroundBridgeFrame.getFrameDirection(worldObj, x, y, z);
-
 					if(direction == null || isPortalObstructed(x, y, z, direction)) {
 						data.errors.add(new ErrorContainer(GroundBridgeError.PORTAL_OBSTRUCTED));
 					}
@@ -157,7 +152,8 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 					data.errors.add(new ErrorContainer(GroundBridgeError.NOT_ENOUGH_SPACE));
 				}
 
-				if(extractEnergy(getConsumptionRate(), true) < getConsumptionRate()) {
+				final float consumption = getConsumptionRate();
+				if(extractEnergy(consumption, true) < consumption) {
 					data.errors.add(new ErrorContainer(GroundBridgeError.NOT_ENOUGH_ENERGY));
 				}
 
@@ -175,7 +171,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 							BlockGroundBridgeTeleporter.fillEastFacingFrame(getDestWorld(), destX, destY - 1, destZ, TFBlocks.groundBridgeTeleporter, this, true);
 						}
 
-						extractEnergy(getConsumptionRate(), false);
+						extractEnergy(consumption, false);
 					}
 					catch(final Exception e) {
 						e.printStackTrace();
@@ -463,7 +459,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 			final Ticket ticket = chunkTickets.get(1);
 
 			if(ticket != null) {
-				final SubTicket subTicket = getSubTicket(ticket, 1);
+				final SubTicket subTicket = getSubTicket(1);
 
 				if(subTicket != null) {
 					final NBTTagCompound nbt = subTicket.getTag();
@@ -495,6 +491,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	@Override
 	public void readCustomNBT(final NBTTagCompound nbt) {
 		super.readCustomNBT(nbt);
+
 		data.direction = nbt.getInteger("PortalDirection");
 		data.frameDirection = nbt.getInteger("SrcPortalDirection");
 		data.activationLeverState = nbt.getBoolean("Lever");
@@ -529,6 +526,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	@Override
 	public void writeCustomNBT(final NBTTagCompound nbt) {
 		super.writeCustomNBT(nbt);
+
 		nbt.setInteger("PortalDirection", data.direction);
 		nbt.setInteger("SrcPortalDirection", data.frameDirection);
 		nbt.setBoolean("Lever", data.activationLeverState);
@@ -675,7 +673,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 
 	public void releaseChunk(final int index) {
 		if(chunkTickets.get(index) != null) {
-			final SubTicket subTicket = getSubTicket(chunkTickets.get(index), index);
+			final SubTicket subTicket = getSubTicket(index);
 
 			if(subTicket != null) {
 				TFChunkManager.releaseChunk(subTicket, forcedChunks.get(index));
@@ -685,7 +683,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public SubTicket getSubTicket(final Ticket ticket, final int index) {
+	public SubTicket getSubTicket(final int index) {
 		final List<SubTicket> list = SubTicket.getChildren(chunkTickets.get(index));
 
 		for(final SubTicket subTicket : list) {

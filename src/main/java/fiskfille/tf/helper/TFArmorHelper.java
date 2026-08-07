@@ -14,7 +14,6 @@ public final class TFArmorHelper {
 			}
 
 			final NBTTagCompound nbt = itemstack.getTagCompound().getCompoundTag("ArmorShell");
-
 			if(nbt != null) {
 				return ItemStack.loadItemStackFromNBT(nbt);
 			}

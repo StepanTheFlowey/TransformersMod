@@ -232,7 +232,7 @@ public class ModelSubwooferVehicle extends ModelVehicleBase {
 		vehicleBass3.mirror = true;
 		vehicleBass3.setRotationPoint(-2.5F, -2.5F, 2.1F);
 		vehicleBass3.addBox(0, 0, 0, 1, 4, 3, 0);
-		setRotateAngle(vehicleBass3, 0, 1.5707963267948966F, 0);
+		vehicleBass3.rotateAngleY = 1.5707963267948966F;
 
 		vehicleFrontWheel1 = new ModelRendererTF(this, 0, 77);
 		vehicleFrontWheel1.setRotationPoint(-2.5F, 1.5F, -3.7F);
@@ -251,18 +251,18 @@ public class ModelSubwooferVehicle extends ModelVehicleBase {
 		vehicleBass2 = new ModelRendererTF(this, 0, 112);
 		vehicleBass2.setRotationPoint(1.7F, -2.5F, 2.1F);
 		vehicleBass2.addBox(0, 0, 0, 1, 4, 3, 0);
-		setRotateAngle(vehicleBass2, 0, 1.5707963267948966F, 0);
+		vehicleBass2.rotateAngleY = 1.5707963267948966F;
 
 		vehicleChestMain6 = new ModelRendererTF(this, 0, 89);
 		vehicleChestMain6.mirror = true;
 		vehicleChestMain6.setRotationPoint(-2.9F, 0.5F, 3);
 		vehicleChestMain6.addBox(-1, -2, 0, 2, 3, 4, 0);
-		setRotateAngle(vehicleChestMain6, 3.141592653589793F, 0, 0);
+		vehicleChestMain6.rotateAngleX = 3.141592653589793F;
 
 		vehicleShoulderBase2 = new ModelRendererTF(this, 48, 78);
 		vehicleShoulderBase2.setRotationPoint(1, -1.9F, 0);
 		vehicleShoulderBase2.addBox(-0.1F, -1, -1.4F, 3, 2, 3, 0);
-		setRotateAngle(vehicleShoulderBase2, 1.5707963267948966F, 0, 0);
+		vehicleShoulderBase2.rotateAngleX = 1.5707963267948966F;
 
 		vehicleRearWheel1 = new ModelRendererTF(this, 0, 77);
 		vehicleRearWheel1.mirror = true;
@@ -317,8 +317,8 @@ public class ModelSubwooferVehicle extends ModelVehicleBase {
 	}
 
 	@Override
-	public void render(final EntityPlayer player, final ItemStack itemstack) {
-		TFRenderHelper.setupRenderLayers(player, itemstack, vehicleBase);
+	public void render(final ItemStack itemstack) {
+		TFRenderHelper.setupRenderLayers(itemstack, vehicleBase);
 	}
 
 	@Override

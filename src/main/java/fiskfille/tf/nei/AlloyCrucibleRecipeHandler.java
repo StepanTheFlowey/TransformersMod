@@ -59,7 +59,7 @@ public final class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public void loadCraftingRecipes(final String outputId, final Object... results) {
-		if(outputId.equals("alloy_crucible") && getClass() == AlloyCrucibleRecipeHandler.class) {
+		if(outputId.equals("alloy_crucible")) {
 			final Map<AlloyIngredients, ItemStack> recipes = AlloyRecipes.getInstance().getSmeltingList();
 
 			for(final Entry<AlloyIngredients, ItemStack> e : recipes.entrySet()) {

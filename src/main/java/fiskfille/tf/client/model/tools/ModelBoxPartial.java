@@ -9,18 +9,20 @@ import net.minecraft.util.AxisAlignedBB;
 
 public class ModelBoxPartial extends ModelBox {
 	public final ModelRendererPartial model;
-	protected final float scale;
-	protected final float textureX;
-	protected final float textureY;
 	public float posX1;
 	public float posY1;
 	public float posZ1;
 	public float posX2;
 	public float posY2;
 	public float posZ2;
+
+	protected final float scale;
+	protected final float textureX;
+	protected final float textureY;
 	protected float width;
 	protected float height;
 	protected float depth;
+
 	private TexturedQuadPartial[] quadList;
 
 	public ModelBoxPartial(final ModelRendererPartial modelRenderer, final int texX, final int texY, final float x, final float y, final float z, final int w, final int h, final int d, final float mcScale) {

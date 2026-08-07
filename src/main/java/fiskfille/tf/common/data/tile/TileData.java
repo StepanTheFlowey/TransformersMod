@@ -11,11 +11,10 @@ public abstract class TileData {
 	private DimensionalCoords coords;
 	private boolean init = false;
 
-	public TileData() {
-	}
+	public TileData() {}
 
 	public TileData(final TileData data) {
-		coords = DimensionalCoords.copy(data.coords);
+		coords = new DimensionalCoords(data.coords);
 		init = data.init;
 	}
 

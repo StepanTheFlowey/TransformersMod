@@ -19,6 +19,7 @@ public final class TFWorldGenHandler {
 	public final WorldGenerator energonGen;
 	public final WorldGenerator energonCrystalGen;
 	public final WorldGenerator redEnergonCrystalGen;
+
 	private World world;
 	private Random rand;
 	private int xCoord;
@@ -53,7 +54,7 @@ public final class TFWorldGenHandler {
 		genStandardOre(10, redEnergonCrystalGen, 24);
 	}
 
-	protected void genStandardOre(final int veins, final WorldGenerator generator, final int maxHeight) {
+	private void genStandardOre(final int veins, final WorldGenerator generator, final int maxHeight) {
 		if(TerrainGen.generateOre(world, rand, generator, xCoord, zCoord, CUSTOM)) {
 			for(int i = 0; i < veins; ++i) {
 				final int x = xCoord + rand.nextInt(16);

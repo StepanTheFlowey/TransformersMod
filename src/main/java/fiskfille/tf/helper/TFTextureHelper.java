@@ -34,7 +34,7 @@ public final class TFTextureHelper {
 	public static ResourceLocation getSkin(final String username) {
 		ResourceLocation resourcelocation = AbstractClientPlayer.locationStevePng;
 
-		if(username != null && username.length() > 0) {
+		if(username != null && !username.isEmpty()) {
 			resourcelocation = AbstractClientPlayer.getLocationSkin(username);
 			AbstractClientPlayer.getDownloadImageSkin(resourcelocation, username);
 		}

@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderEnergonTank extends TileEntitySpecialRenderer {
 	private RenderBlocks renderBlocks = RenderBlocks.getInstance();
 
-	public void render(final TileEntityEnergonTank tile, final double x, final double y, final double z, final float partialTicks) {
+	public void render(final TileEntityEnergonTank tile, final double x, final double y, final double z) {
 		final FluidStack stack = tile.data.getFluid();
 		if(stack == null || stack.getFluid() == null || stack.amount <= 0) {
 			return;
@@ -35,11 +35,9 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 		bindTexture(TextureMap.locationBlocksTexture);
-		final float[] afloat = TFRenderHelper.hexToRGB(stack.getFluid().getColor(stack));
-		GL11.glColor4f(afloat[0], afloat[1], afloat[2], 1);
+		TFRenderHelper.glColorRGB(stack.getFluid().getColor(stack));
 
-		final float scale = 0.99F;
-		float scaleY = scale;
+		float scaleY = 0.99F;
 		float scaleOffset = 0;
 		final World world = tile.getWorldObj();
 		if(world != null) {
@@ -72,7 +70,7 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 
 		GL11.glTranslated(x, y, z);
 		GL11.glTranslatef(0.5F, 0.5F + scaleOffset, 0.5F);
-		GL11.glScalef(scale, scaleY, scale);
+		GL11.glScalef(0.99F, scaleY, 0.99F);
 		GL11.glTranslatef(-0.5F, -0.5F - scaleOffset, -0.5F);
 
 		final int dl = (int) ((float) stack.amount / tile.data.getCapacity() * (TFFluidRenderHelper.DISPLAY_STAGES - 1));
@@ -88,6 +86,6 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityEnergonTank) tileentity, d, d1, d2, f);
+		render((TileEntityEnergonTank) tileentity, d, d1, d2);
 	}
 }

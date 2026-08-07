@@ -12,6 +12,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class EntityLaserBeam extends EntityThrowable implements IEntityAdditionalSpawnData {
 	private boolean blue;
 
@@ -45,10 +47,10 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 
 		if(isEntityAlive()) {
 			if(worldObj.isRemote) {
+				final ThreadLocalRandom random = ThreadLocalRandom.current();
 				for(int i = 0; i < 5; ++i) {
-					final float f = rand.nextFloat() / 5;
-
-					worldObj.spawnParticle("reddust", posX + f, posY + 0.15F, posZ + f, blue ? -1D : 0D, 0D, blue ? 1D : 0D);
+					final float f = random.nextFloat() / 5;
+					worldObj.spawnParticle("reddust", posX + f, posY + 0.15D, posZ + f, blue ? -1 : 0, 0, blue ? 1 : 0);
 				}
 			}
 
@@ -81,16 +83,6 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 	}
 
 	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
-	@Override
-	public void writeEntityToNBT(final NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-
-		nbt.setBoolean("Blue", blue);
-	}
-
-	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
@@ -100,13 +92,23 @@ public class EntityLaserBeam extends EntityThrowable implements IEntityAdditiona
 		blue = nbt.getBoolean("Blue");
 	}
 
+	/**
+	 * (abstract) Protected helper method to write subclass entity data to NBT.
+	 */
 	@Override
-	public void writeSpawnData(final ByteBuf buf) {
-		buf.writeBoolean(blue);
+	public void writeEntityToNBT(final NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+
+		nbt.setBoolean("Blue", blue);
 	}
 
 	@Override
 	public void readSpawnData(final ByteBuf buf) {
 		blue = buf.readBoolean();
+	}
+
+	@Override
+	public void writeSpawnData(final ByteBuf buf) {
+		buf.writeBoolean(blue);
 	}
 }

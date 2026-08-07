@@ -59,13 +59,13 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 
 			if(TFHelper.isFullyTransformed(player)) {
 				if(layerToRender == 2) {
-					vehicleModel.render(player, chest); // TODO: Create display vehicle instance with all pieces
+					vehicleModel.render(chest); // TODO: Create display vehicle instance with all pieces
 				}
 			}
 			else {
 				if(!wearingChest) {
 					if(layerToRender == 1 && wearingHead) {
-						TFRenderHelper.setupRenderLayers(entity, head, tfModel.getHead());
+						TFRenderHelper.setupRenderLayers(head, tfModel.getHead());
 					}
 
 					if(layerToRender == 3 && wearingLegs) {
@@ -79,7 +79,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 							model.isHidden = true;
 						}
 
-						TFRenderHelper.setupRenderLayers(entity, legs, getWaist());
+						TFRenderHelper.setupRenderLayers(legs, getWaist());
 
 						for(final ModelRenderer model : hidden) {
 							model.isHidden = false;
@@ -90,7 +90,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 						getWaist().hideUntil(tfModel.getFeet());
 
 						tfModel.getHead().isHidden = true;
-						TFRenderHelper.setupRenderLayers(entity, feet, getWaist());
+						TFRenderHelper.setupRenderLayers(feet, getWaist());
 						tfModel.getHead().isHidden = false;
 					}
 				}
@@ -98,67 +98,70 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 					final List<ModelRenderer> hidden = Lists.newArrayList();
 					ItemStack itemstack = chest;
 
-					if(layerToRender == 1) {
-						if(!areIdentical(chest, head)) {
-							getWaist().hideUntil(tfModel.getHead());
-							hidden.addAll(Arrays.asList(tfModel.getLegs()));
-							itemstack = head;
-						}
-						else {
-							return;
-						}
-					}
-					else if(layerToRender == 2) {
-						if(!areIdentical(chest, head)) {
-							hidden.add(tfModel.getHead());
-						}
+					switch(layerToRender) {
+						case 1:
+							if(!areIdentical(chest, head)) {
+								getWaist().hideUntil(tfModel.getHead());
+								hidden.addAll(Arrays.asList(tfModel.getLegs()));
+								itemstack = head;
+							}
+							else {
+								return;
+							}
+							break;
 
-						if(!areIdentical(chest, legs)) {
-							hidden.addAll(Arrays.asList(tfModel.getLegs()));
-						}
-						else if(!areIdentical(chest, feet)) {
-							hidden.addAll(Arrays.asList(tfModel.getFeet()));
-						}
-					}
-					else if(layerToRender == 3) {
-						if(!areIdentical(chest, legs)) {
-							getWaist().hideUntil(tfModel.getLegs());
-							hidden.add(tfModel.getHead());
-							itemstack = legs;
+						case 2:
+							if(!areIdentical(chest, head)) {
+								hidden.add(tfModel.getHead());
+							}
 
-							if(!areIdentical(legs, feet)) {
+							if(!areIdentical(chest, legs)) {
+								hidden.addAll(Arrays.asList(tfModel.getLegs()));
+							}
+							else if(!areIdentical(chest, feet)) {
 								hidden.addAll(Arrays.asList(tfModel.getFeet()));
 							}
-						}
-						else {
-							return;
-						}
-					}
-					else {
-						if(!areIdentical(legs, feet)) {
-							getWaist().hideUntil(tfModel.getFeet());
-							hidden.add(tfModel.getHead());
-							itemstack = feet;
-						}
-						else {
-							return;
-						}
+							break;
+
+						case 3:
+							if(!areIdentical(chest, legs)) {
+								getWaist().hideUntil(tfModel.getLegs());
+								hidden.add(tfModel.getHead());
+								itemstack = legs;
+
+								if(!areIdentical(legs, feet)) {
+									hidden.addAll(Arrays.asList(tfModel.getFeet()));
+								}
+							}
+							else {
+								return;
+							}
+							break;
+
+						case 4:
+							if(!areIdentical(legs, feet)) {
+								getWaist().hideUntil(tfModel.getFeet());
+								hidden.add(tfModel.getHead());
+								itemstack = feet;
+							}
+							else {
+								return;
+							}
+							break;
 					}
 
 					for(final ModelRenderer model : hidden) {
 						model.isHidden = true;
 					}
 
-					TFRenderHelper.setupRenderLayers(entity, itemstack, getWaist());
+					TFRenderHelper.setupRenderLayers(itemstack, getWaist());
 
 					for(final ModelRenderer model : hidden) {
 						model.isHidden = false;
 					}
 				}
-				else {
-					if(layerToRender == 2) {
-						TFRenderHelper.setupRenderLayers(entity, chest, getWaist());
-					}
+				else if(layerToRender == 2) {
+					TFRenderHelper.setupRenderLayers(chest, getWaist());
 				}
 
 				getWaist().hideUntil();

@@ -46,14 +46,14 @@ public class RenderPlayerHand extends RenderPlayer {
 
 				model.renderFirstPersonArm(player);
 				GL11.glTranslatef(0F, 0.35F, 0F);
-				TFRenderHelper.setupRenderLayers(player, player.getCurrentArmor(2), upperArm);
+				TFRenderHelper.setupRenderLayers(player.getCurrentArmor(2), upperArm);
 
 				if(pass > 0) {
-					TFRenderHelper.setupRenderLayers(player, player.getCurrentArmor(2), upperArm);
+					TFRenderHelper.setupRenderLayers(player.getCurrentArmor(2), upperArm);
 
 					if((pass & 240) == 16) {
 						func_82408_c(player, 1, partialTicks);
-						TFRenderHelper.setupRenderLayers(player, player.getCurrentArmor(2), upperArm);
+						TFRenderHelper.setupRenderLayers(player.getCurrentArmor(2), upperArm);
 					}
 
 					if((pass & 15) == 15) {
@@ -77,7 +77,7 @@ public class RenderPlayerHand extends RenderPlayer {
 							GL11.glRotatef(30 - i * 60, 0F, 0F, 1F);
 							GL11.glTranslatef(0F, f1, 0F);
 							GL11.glMatrixMode(GL11.GL_MODELVIEW);
-							TFRenderHelper.setupRenderLayers(player, player.getCurrentArmor(2), upperArm);
+							TFRenderHelper.setupRenderLayers(player.getCurrentArmor(2), upperArm);
 						}
 
 						GL11.glColor3f(1F, 1F, 1F);

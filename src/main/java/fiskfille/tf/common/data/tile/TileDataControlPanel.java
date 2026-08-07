@@ -6,16 +6,17 @@ import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TileDataControlPanel extends TileDataEnergyContainer {
-	public ArrayList<DataCore> upgrades = new ArrayList<>();
-	public ArrayList<ErrorContainer> errors = new ArrayList<>();
+	public final ArrayList<DataCore> upgrades = new ArrayList<>();
+	public final ArrayList<ErrorContainer> errors = new ArrayList<>();
+	public final DimensionalCoords destination = new DimensionalCoords();
 	public DimensionalCoords framePos;
-	public DimensionalCoords destination = new DimensionalCoords();
 	public int modifiedDestY;
 	public int direction;
 	public int frameDirection;
-	public boolean activationLeverState = false;
+	public boolean activationLeverState;
 
 	public TileDataControlPanel() {
 		super(64000);
@@ -23,10 +24,13 @@ public class TileDataControlPanel extends TileDataEnergyContainer {
 
 	public TileDataControlPanel(final TileDataControlPanel data) {
 		super(data);
-		upgrades = new ArrayList<>(data.upgrades);
-		errors = new ArrayList<>(data.errors);
-		framePos = DimensionalCoords.copy(data.framePos);
-		destination = DimensionalCoords.copy(data.destination);
+
+		upgrades.addAll(data.upgrades);
+		errors.addAll(data.errors);
+		destination.set(data.destination);
+		if(data.framePos != null) {
+			framePos = new DimensionalCoords(data.framePos);
+		}
 		modifiedDestY = data.modifiedDestY;
 		direction = data.direction;
 		frameDirection = data.frameDirection;
@@ -36,6 +40,7 @@ public class TileDataControlPanel extends TileDataEnergyContainer {
 	@Override
 	public void toBytes(final ByteBuf buf) {
 		super.toBytes(buf);
+
 		buf.writeInt(modifiedDestY);
 		buf.writeByte(direction);
 		buf.writeByte(frameDirection);
@@ -65,12 +70,13 @@ public class TileDataControlPanel extends TileDataEnergyContainer {
 	@Override
 	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
+
 		modifiedDestY = buf.readInt();
 		direction = buf.readByte();
 		frameDirection = buf.readByte();
 		activationLeverState = buf.readBoolean();
 
-		upgrades = new ArrayList<>();
+		upgrades.clear();
 		final byte upgradeCount = buf.readByte();
 		for(byte i = 0; i < upgradeCount; i++) {
 			final DataCore core = DataCore.get(buf.readByte());
@@ -80,7 +86,7 @@ public class TileDataControlPanel extends TileDataEnergyContainer {
 			}
 		}
 
-		errors = new ArrayList<>();
+		errors.clear();
 		final byte errorCount = buf.readByte();
 		for(byte i = 0; i < errorCount; i++) {
 			final ErrorContainer container = ErrorContainer.fromBytes(buf);
@@ -105,28 +111,11 @@ public class TileDataControlPanel extends TileDataEnergyContainer {
 	public boolean matches(final TileData tileData) {
 		if(tileData instanceof TileDataControlPanel) {
 			final TileDataControlPanel data = (TileDataControlPanel) tileData;
-			final boolean frameEquals = data.framePos == null && framePos == null || data.framePos != null && data.framePos.equals(framePos);
-			final boolean destinationEquals = data.destination.equals(destination) && data.modifiedDestY == modifiedDestY;
+			final boolean frameEquals = Objects.deepEquals(data.framePos, framePos);
+			final boolean destinationEquals = destination.equals(data.destination) && data.modifiedDestY == modifiedDestY;
 
-			boolean errorsEqual = data.errors.size() == errors.size();
-			if(errorsEqual) {
-				for(int i = 0; i < data.errors.size(); i++) {
-					if(!data.errors.get(i).equals(errors.get(i))) {
-						errorsEqual = false;
-						break;
-					}
-				}
-			}
-
-			boolean coresEqual = data.upgrades.size() == upgrades.size();
-			if(coresEqual) {
-				for(int i = 0; i < data.upgrades.size(); i++) {
-					if(data.upgrades.get(i).index != upgrades.get(i).index) {
-						coresEqual = false;
-						break;
-					}
-				}
-			}
+			final boolean errorsEqual = errors.equals(data.errors);
+			final boolean coresEqual = upgrades.equals(data.upgrades);
 
 			return super.matches(data) && frameEquals && coresEqual && errorsEqual && destinationEquals && data.activationLeverState == activationLeverState && data.direction == direction && data.frameDirection == frameDirection;
 		}

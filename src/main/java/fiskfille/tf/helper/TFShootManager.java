@@ -38,7 +38,7 @@ public final class TFShootManager {
 						if(laserCharge < max) {
 							laserCharge += 1;
 						}
-						else if(laserCharge >= max) {
+						else {
 							laserFilling = false;
 							laserCharge = max;
 						}

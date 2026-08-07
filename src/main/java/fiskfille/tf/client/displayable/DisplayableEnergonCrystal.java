@@ -25,9 +25,8 @@ public class DisplayableEnergonCrystal extends Displayable {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		final BlockEnergonCrystal block = (BlockEnergonCrystal) Block.getBlockFromItem(itemstack.getItem());
-		final float[] rgb = TFRenderHelper.hexToRGB(block.getEnergonType().getColor());
-		GL11.glColor4f(rgb[0], rgb[1], rgb[2], 0.5F);
+		final float[] color = TFRenderHelper.hexToRGB(((BlockEnergonCrystal) Block.getBlockFromItem(itemstack.getItem())).getEnergonType().getColor());
+		GL11.glColor4f(color[0], color[1], color[2], 0.5F);
 		TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 
 		model.render();

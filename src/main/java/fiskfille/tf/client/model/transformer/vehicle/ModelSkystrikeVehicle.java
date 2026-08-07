@@ -1089,8 +1089,8 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase {
 	}
 
 	@Override
-	public void render(final EntityPlayer player, final ItemStack itemstack) {
-		TFRenderHelper.setupRenderLayers(player, itemstack, waistbase);
+	public void render(final ItemStack itemstack) {
+		TFRenderHelper.setupRenderLayers(itemstack, waistbase);
 	}
 
 	@Override
@@ -1099,7 +1099,7 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase {
 		setToInitPose();
 
 		if(entity instanceof EntityPlayer) {
-			waistbase.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
+			waistbase.rotateAngleX = (float) Math.toRadians(rotationPitch);
 			waistbase.rotateAngleZ = -bipedHead.rotateAngleY;
 		}
 	}

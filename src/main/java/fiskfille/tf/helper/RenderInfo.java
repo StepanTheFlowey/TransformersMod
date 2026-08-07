@@ -14,28 +14,26 @@ import java.util.Arrays;
 public class RenderInfo {
 	public final boolean[] renderSide = new boolean[]{true, true, true, true, true, true};
 	public final int light = -1;
-	public double minX = 0D;
-	public double minY = 0D;
-	public double minZ = 0D;
-	public double maxX = 1D;
-	public double maxY = 1D;
-	public double maxZ = 1D;
+
+	public IIcon[] textureArray;
+	public IIcon texture;
 	public Block baseBlock = Blocks.sand;
-	public IIcon texture = null;
-	public IIcon[] textureArray = null;
+	public double minX = 0;
+	public double minY = 0;
+	public double minZ = 0;
+	public double maxX = 1;
+	public double maxY = 1;
+	public double maxZ = 1;
 	public int brightness = -1;
 
-	public RenderInfo() {
-	}
+	public RenderInfo() {}
 
 	public RenderInfo(final Block template, final IIcon[] texture) {
-		this();
 		this.baseBlock = template;
 		this.textureArray = texture;
 	}
 
 	public RenderInfo(final float minX, final float minY, final float minZ, final float maxX, final float maxY, final float maxZ) {
-		this();
 		setBounds(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 

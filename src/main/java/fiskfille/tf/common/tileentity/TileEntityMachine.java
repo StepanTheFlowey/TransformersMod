@@ -49,7 +49,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 
 				for(final ForgeDirection dir : list) {
 					final IEnergyContainer receiver = (IEnergyContainer) TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0), zCoord + dir.offsetZ));
-					float rate = getTransferRate(dir, io[dir.ordinal()]);
+					float rate = getTransferRate();
 
 					if(distribution == EnumDistribution.SPREAD) {
 						rate /= list.size();
@@ -147,7 +147,7 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 		}
 	}
 
-	public float getTransferRate(final ForgeDirection dir, final EnumIO mode) {
+	public float getTransferRate() {
 		return 10;
 	}
 

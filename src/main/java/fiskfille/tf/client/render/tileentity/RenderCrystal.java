@@ -20,17 +20,19 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 		final Energon energon = block.getEnergonType();
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
-		GL11.glScalef(1, -1F, -1F);
+		GL11.glTranslated(x + 0.5D, y + 0.5D, z + 0.5D);
+		GL11.glScalef(1, -1, -1);
 		adjustRotation(tile);
 
-		final float[] rgb = TFRenderHelper.hexToRGB(energon.getColor());
-		GL11.glColor4f(rgb[0], rgb[1], rgb[2], 0.5F);
+		final float[] color = TFRenderHelper.hexToRGB(energon.getColor());
+		GL11.glColor4f(color[0], color[1], color[2], 0.5F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
+
 		model.render();
+
 		TFRenderHelper.resetLighting();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
@@ -40,13 +42,15 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 			if(progress >= 0) {
 				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 				bindTexture(new ResourceLocation(String.format("textures/blocks/destroy_stage_%s.png", progress)));
-				GL11.glColor4f(1F, 1F, 1F, 0.5F);
+				GL11.glColor4f(1, 1, 1, 0.5F);
 				GL11.glPushMatrix();
 				GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
 				GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 				GL11.glEnable(GL11.GL_ALPHA_TEST);
 				model.setBreaking(true);
+
 				model.render();
+
 				GL11.glDisable(GL11.GL_ALPHA_TEST);
 				GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
 				GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -61,22 +65,23 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 
 	public void adjustRotation(final TileEntityCrystal tile) {
 		final int metadata = tile.getBlockMetadata();
-		final ForgeDirection dir = ForgeDirection.getOrientation(metadata).getOpposite();
+		switch(ForgeDirection.getOrientation(metadata).getOpposite()) {
+			case UP:
+				GL11.glTranslatef(0, 1, 0);
+				GL11.glRotatef(180, 0, 0, 1);
+				break;
 
-		if(dir == ForgeDirection.UP) {
-			GL11.glTranslatef(0, 1, 0);
-			GL11.glRotatef(180, 0, 0, 1);
-		}
-		else if(dir == ForgeDirection.DOWN) {
-			GL11.glTranslatef(0, -1, 0);
-		}
-		else {
-			final int[] rotations = {2, 0, 1, 3};
+			case DOWN:
+				GL11.glTranslatef(0, -1, 0);
+				break;
 
-			GL11.glTranslatef(0, 0.125F, 0);
-			GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
-			GL11.glRotatef(55, 1, 0, 0);
-			GL11.glTranslatef(0, -1, 0.36F);
+			default:
+				final int[] rotations = {2, 0, 1, 3};
+				GL11.glTranslatef(0, 0.125F, 0);
+				GL11.glRotatef(90 * rotations[(metadata - 2) % 4], 0, 1, 0);
+				GL11.glRotatef(55, 1, 0, 0);
+				GL11.glTranslatef(0, -1, 0.36F);
+				break;
 		}
 	}
 

@@ -19,7 +19,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -59,41 +59,44 @@ public final class TFRenderHelper {
 		return new float[]{r, g, b};
 	}
 
-	public static void setupRenderLayers(final Entity entity, final ItemStack itemstack, final ModelRenderer model) {
-		if(itemstack != null && itemstack.getItem() instanceof ItemTransformerArmor) {
-			final TransformerModel tfModel = TFModelRegistry.getModel(((ItemTransformerArmor) itemstack.getItem()).getTransformer());
+	public static void glColorRGB(final int hex) {
+		GL11.glColor3ub((byte) ((hex & 0xFF0000) >> 16), (byte) ((hex & 0xFF00) >> 8), (byte) (hex));
+	}
+
+	public static void setupRenderLayers(final ItemStack item, final ModelRenderer model) {
+		if(item != null && item.getItem() instanceof ItemTransformerArmor) {
+			final TransformerModel tfModel = TFModelRegistry.getModel(((ItemTransformerArmor) item.getItem()).getTransformer());
 
 			if(TFTextureHelper.isBoundTexture(TFTextureHelper.RES_ITEM_GLINT)) {
 				model.render(0.0625F);
 			}
 			else {
 				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-				if(TFArmorDyeHelper.isDyed(itemstack)) {
-					final float[] primaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getPrimaryColor(itemstack));
-					final float[] secondaryColor = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(itemstack));
-
-					GL11.glColor3f(primaryColor[0], primaryColor[1], primaryColor[2]);
-					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_primary"));
+				final TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
+				if(TFArmorDyeHelper.isDyed(item)) {
+					textureManager.bindTexture(tfModel.getTexture(null, "_primary"));
+					TFRenderHelper.glColorRGB(TFArmorDyeHelper.getPrimaryColor(item));
 					model.render(0.0625F);
 
-					GL11.glColor3f(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_secondary"));
+					textureManager.bindTexture(tfModel.getTexture(null, "_secondary"));
+					TFRenderHelper.glColorRGB(TFArmorDyeHelper.getSecondaryColor(item));
 					model.render(0.0625F);
 
-					GL11.glColor3f(1F, 1F, 1F);
-					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_base"));
+					textureManager.bindTexture(tfModel.getTexture(null, "_base"));
+					GL11.glColor3f(1, 1, 1);
 				}
 				else {
-					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, ""));
+					textureManager.bindTexture(tfModel.getTexture(null, ""));
 				}
 
 				model.render(0.0625F);
 
 				if(tfModel.hasLightsLayer()) {
 					setLighting(LIGHTING_LUMINOUS);
-					Minecraft.getMinecraft().getTextureManager().bindTexture(tfModel.getTexture(entity, "_lights"));
+					textureManager.bindTexture(tfModel.getTexture(null, "_lights"));
 					model.render(0.0625F);
 					resetLighting();
 				}
@@ -104,9 +107,10 @@ public final class TFRenderHelper {
 	}
 
 	public static void startGlScissor(int x, int y, final int width, final int height) {
-		final ScaledResolution reso = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
-		final double scaleW = Minecraft.getMinecraft().displayWidth / reso.getScaledWidth_double();
-		final double scaleH = Minecraft.getMinecraft().displayHeight / reso.getScaledHeight_double();
+		final Minecraft minecraft = Minecraft.getMinecraft();
+		final ScaledResolution reso = new ScaledResolution(minecraft, minecraft.displayWidth, minecraft.displayHeight);
+		final double scaleW = minecraft.displayWidth / reso.getScaledWidth_double();
+		final double scaleH = minecraft.displayHeight / reso.getScaledHeight_double();
 
 		if(width <= 0 || height <= 0) {
 			return;
@@ -119,12 +123,7 @@ public final class TFRenderHelper {
 		}
 
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
-		GL11.glScissor(
-						MathHelper.floor_double(x * scaleW),
-						MathHelper.floor_double(Minecraft.getMinecraft().displayHeight - (y + height) * scaleH),
-						MathHelper.floor_double((x + width) * scaleW) - MathHelper.floor_double(x * scaleW),
-						MathHelper.floor_double(Minecraft.getMinecraft().displayHeight - y * scaleH) - MathHelper.floor_double(Minecraft.getMinecraft().displayHeight - (y + height) * scaleH)
-		);
+		GL11.glScissor(MathHelper.floor_double(x * scaleW), MathHelper.floor_double(minecraft.displayHeight - (y + height) * scaleH), MathHelper.floor_double((x + width) * scaleW) - MathHelper.floor_double(x * scaleW), MathHelper.floor_double(minecraft.displayHeight - y * scaleH) - MathHelper.floor_double(minecraft.displayHeight - (y + height) * scaleH));
 	}
 
 	public static void endGlScissor() {
@@ -184,7 +183,7 @@ public final class TFRenderHelper {
 		final double d2 = dst.zCoord - src.zCoord;
 		final double d3 = Math.hypot(d0, d2);
 
-		GL11.glRotated(Math.toDegrees(Math.atan2(d2, d0)) - 90D, 0, -1, 0);
+		GL11.glRotated(Math.toDegrees(Math.atan2(d2, d0)) - 90, 0, -1, 0);
 		GL11.glRotated(Math.toDegrees(Math.atan2(d1, d3)), -1, 0, 0);
 	}
 
@@ -289,11 +288,7 @@ public final class TFRenderHelper {
 				GL11.glTranslated(x + x1, y + y1, z + z1);
 
 				if(invertCurrent) {
-					GL11.glTranslated(
-									tile.xCoord - coords.posX,
-									tile.yCoord - coords.posY,
-									tile.zCoord - coords.posZ
-					);
+					GL11.glTranslated(tile.xCoord - coords.posX, tile.yCoord - coords.posY, tile.zCoord - coords.posZ);
 				}
 
 				renderEnergyBeam(src, dst, primary, secondary, parentPrimary, parentSecondary);
@@ -316,7 +311,7 @@ public final class TFRenderHelper {
 		final float[] parentPrimary = hexToRGB(primaryParentColor);
 		final float[] parentSecondary = hexToRGB(secondaryParentColor);
 
-		final double width = 1D / 16D;
+		final double width = 1 / 16;
 		final double length = src.distanceTo(dst);
 		final int segments = MathHelper.floor_double(length * 8);
 

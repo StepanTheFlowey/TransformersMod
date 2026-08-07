@@ -52,15 +52,4 @@ public final class TFVectorHelper {
 
 		return Vec3.createVectorHelper(player.posX, player.boundingBox.minY, player.posZ).addVector(f7 * amount, f6 * amount, f8 * amount);
 	}
-
-	public static Vec3 getFrontCoords(final EntityPlayer player, final float angle, final double amount) {
-		final float f3 = MathHelper.cos(-player.rotationYaw * 0.017453292F - (float) Math.PI);
-		final float f4 = MathHelper.sin(-player.rotationYaw * 0.017453292F - (float) Math.PI);
-		final float f5 = -MathHelper.cos(angle * 0.017453292F);
-		final float f6 = -MathHelper.sin(angle * 0.017453292F);
-		final float f7 = f4 * f5;
-		final float f8 = f3 * f5;
-
-		return Vec3.createVectorHelper(player.posX, player.boundingBox.minY, player.posZ).addVector(f7 * amount, f6 * amount, f8 * amount);
-	}
 }

@@ -434,8 +434,8 @@ public class ModelVurpStealth extends ModelVurpVehicle {
 	}
 
 	@Override
-	public void render(final EntityPlayer player, final ItemStack itemstack) {
-		TFRenderHelper.setupRenderLayers(player, itemstack, vehicleBase);
+	public void render(final ItemStack itemstack) {
+		TFRenderHelper.setupRenderLayers(itemstack, vehicleBase);
 	}
 
 	@Override

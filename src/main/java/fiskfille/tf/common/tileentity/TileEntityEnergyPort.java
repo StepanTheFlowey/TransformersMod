@@ -62,11 +62,12 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 		final ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
 		final float f = 0.0625F * height;
 
-		if(dir == ForgeDirection.UP) {
-			return Vec3.createVectorHelper(0, 0.5F - f, 0);
-		}
-		else if(dir == ForgeDirection.DOWN) {
-			return Vec3.createVectorHelper(0, -0.5F + f, 0);
+		switch(dir) {
+			case UP:
+				return Vec3.createVectorHelper(0, 0.5F - f, 0);
+
+			case DOWN:
+				return Vec3.createVectorHelper(0, -0.5F + f, 0);
 		}
 
 		final int[] rotations = {2, 0, 1, 3};
@@ -74,7 +75,6 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 
 		final Vec3 vec3 = Vec3.createVectorHelper(0, 0, 0.5F - f);
 		vec3.rotateAroundY(-yaw * (float) Math.PI / 180F);
-
 		return vec3;
 	}
 

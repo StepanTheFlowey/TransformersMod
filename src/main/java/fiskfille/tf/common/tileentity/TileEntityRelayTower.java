@@ -1,6 +1,5 @@
 package fiskfille.tf.common.tileentity;
 
-import com.google.common.collect.Maps;
 import fiskfille.tf.common.chunk.ForcedChunk;
 import fiskfille.tf.common.chunk.SubTicket;
 import fiskfille.tf.common.chunk.TFChunkManager;
@@ -17,19 +16,19 @@ import net.minecraft.util.Vec3;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.Constants.NBT;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmitter, IEnergyReceiver, IChunkLoaderTile, IMultiTile {
-	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
+	public final HashMap<DimensionalCoords, Float> netEnergyTransfer = new HashMap<>();
 	public final EnergyStorage storage = new EnergyStorageRelay(this);
-	public final Map<DimensionalCoords, Float> netEnergyTransfer = Maps.newHashMap();
+	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
 	public TileDataRelay data = new TileDataRelay();
+	public Ticket chunkTicket;
 	public float energyTransfer;
 	public float energyReceived;
 	public float energyExtracted;
-
-	public Ticket chunkTicket;
 
 	@Override
 	public void updateEntity() {
@@ -70,9 +69,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 			}
 		}
 
-		energyTransfer = 0;
-		energyReceived = 0;
-		energyTransfer = 0;
+		energyReceived = energyTransfer = 0;
 		netEnergyTransfer.clear();
 	}
 

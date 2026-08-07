@@ -74,12 +74,8 @@ public class MowzieModelBase extends ModelBiped {
 		final double childRelativeRotation = parentToChildAngle - parent.rotateAngleX;
 
 		final float oldRotateAngleX = parent.rotateAngleX;
-		parent.rotateAngleX = 0F;
-		child.setRotationPoint(
-						child.rotationPointX - parent.rotationPointX,
-						(float) (distance * Math.cos(childRelativeRotation)),
-						(float) (distance * Math.sin(childRelativeRotation))
-		);
+		parent.rotateAngleX = 0;
+		child.setRotationPoint(child.rotationPointX - parent.rotationPointX, (float) (distance * Math.cos(childRelativeRotation)), (float) (distance * Math.sin(childRelativeRotation)));
 		parent.addChild(child);
 		parent.rotateAngleX = oldRotateAngleX;
 
@@ -318,29 +314,17 @@ public class MowzieModelBase extends ModelBiped {
 	 * @param f        The progress (0-1)
 	 */
 	protected void rotateTo(final ModelRenderer rotating, final ModelRenderer to, final float f) {
-		final float rotXDif = to.rotateAngleX - rotating.rotateAngleX;
-		final float rotYDif = to.rotateAngleY - rotating.rotateAngleY;
-		final float rotZDif = to.rotateAngleZ - rotating.rotateAngleZ;
+		rotating.rotateAngleX += (to.rotateAngleX - rotating.rotateAngleX) * f;
+		rotating.rotateAngleY += (to.rotateAngleY - rotating.rotateAngleY) * f;
+		rotating.rotateAngleZ += (to.rotateAngleZ - rotating.rotateAngleZ) * f;
 
-		final float posXDif = to.rotationPointX - rotating.rotationPointX;
-		final float posYDif = to.rotationPointY - rotating.rotationPointY;
-		final float posZDif = to.rotationPointZ - rotating.rotationPointZ;
+		rotating.offsetX += (to.offsetX - rotating.offsetX) * f;
+		rotating.offsetY += (to.offsetY - rotating.offsetY) * f;
+		rotating.offsetZ += (to.offsetZ - rotating.offsetZ) * f;
 
-		final float offsetXDif = to.offsetX - rotating.offsetX;
-		final float offsetYDif = to.offsetY - rotating.offsetY;
-		final float offsetZDif = to.offsetZ - rotating.offsetZ;
-
-		rotating.rotateAngleX += rotXDif * f;
-		rotating.rotateAngleY += rotYDif * f;
-		rotating.rotateAngleZ += rotZDif * f;
-
-		rotating.offsetX += offsetXDif * f;
-		rotating.offsetY += offsetYDif * f;
-		rotating.offsetZ += offsetZDif * f;
-
-		rotating.rotationPointX += posXDif * f;
-		rotating.rotationPointY += posYDif * f;
-		rotating.rotationPointZ += posZDif * f;
+		rotating.rotationPointX += (to.rotationPointX - rotating.rotationPointX) * f;
+		rotating.rotationPointY += (to.rotationPointY - rotating.rotationPointY) * f;
+		rotating.rotationPointZ += (to.rotationPointZ - rotating.rotationPointZ) * f;
 	}
 
 	public void addPart(final MowzieModelRenderer mowzieModelRenderer) {

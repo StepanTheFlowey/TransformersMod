@@ -1633,38 +1633,37 @@ public class ModelSkystrike extends ModelTransformerBase {
 	public void renderArmorPiece(final int armorPiece) {
 		setToInitPose();
 
-		if(armorPiece == 0) {
-			GL11.glTranslatef(0F, 0.0625F, -0.0625F);
-			GL11.glRotatef(4F, 1F, 0F, 0F);
-			headbase.render(0.0625F);
-		}
-		else if(armorPiece == 1) {
-			GL11.glTranslatef(0F, 0F, 0.0625F);
-			upperlegL1.showModel = false;
-			upperlegR1.showModel = false;
-			headbase.showModel = false;
-			waistbase.render(0.0625F);
-			upperlegL1.showModel = true;
-			upperlegR1.showModel = true;
-			headbase.showModel = true;
-		}
-		else if(armorPiece == 2) {
-			feetbaseL1.showModel = false;
-			feetbaseR1.showModel = false;
-			upperlegL1.render(0.0625F);
-			upperlegR1.render(0.0625F);
-			feetbaseL1.showModel = true;
-			feetbaseR1.showModel = true;
-		}
-		else if(armorPiece == 3) {
-			feetbaseL1.rotationPointX -= 3.5F;
-			feetbaseR1.rotationPointX += 3.5F;
-			feetbaseL1.rotateAngleX += 0.2F;
-			feetbaseL1.rotateAngleY += 0.2F;
-			feetbaseR1.rotateAngleX += 0.2F;
-			feetbaseR1.rotateAngleY -= 0.2F;
-			feetbaseL1.render(0.0625F);
-			feetbaseR1.render(0.0625F);
+		switch(armorPiece) {
+			case 0:
+				GL11.glTranslatef(0, 0.0625F, -0.0625F);
+				GL11.glRotatef(4, 1, 0, 0);
+				headbase.render(0.0625F);
+				break;
+
+			case 1:
+				GL11.glTranslatef(0F, 0F, 0.0625F);
+				upperlegL1.showModel = upperlegR1.showModel = headbase.showModel = false;
+				waistbase.render(0.0625F);
+				upperlegL1.showModel = upperlegR1.showModel = headbase.showModel = true;
+				break;
+
+			case 2:
+				feetbaseL1.showModel = feetbaseR1.showModel = false;
+				upperlegL1.render(0.0625F);
+				upperlegR1.render(0.0625F);
+				feetbaseL1.showModel = feetbaseR1.showModel = true;
+				break;
+
+			case 3:
+				feetbaseL1.rotationPointX -= 3.5F;
+				feetbaseR1.rotationPointX += 3.5F;
+				feetbaseL1.rotateAngleX += 0.2F;
+				feetbaseL1.rotateAngleY += 0.2F;
+				feetbaseR1.rotateAngleX += 0.2F;
+				feetbaseR1.rotateAngleY -= 0.2F;
+				feetbaseL1.render(0.0625F);
+				feetbaseR1.render(0.0625F);
+				break;
 		}
 	}
 }

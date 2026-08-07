@@ -17,15 +17,14 @@ import java.util.*;
  * Handles all receivers this transmitter is transmitting to
  */
 public class TransmissionHandler {
-	private final Set<ReceiverEntry> receivers = new HashSet<>();
-	private final Queue<ReceiverEntry> queuedReceivers = new ArrayDeque<>();
+	private final HashSet<ReceiverEntry> receivers = new HashSet<>();
+	private final ArrayDeque<ReceiverEntry> queuedReceivers = new ArrayDeque<>();
 
 	private NetworkEntry owner;
 	private boolean needsUpdate = false;
 
 	public void toBytes(final ByteBuf buf) {
 		buf.writeInt(receivers.size());
-
 		for(final ReceiverEntry receiver : receivers) {
 			receiver.toBytes(buf);
 		}
@@ -33,7 +32,6 @@ public class TransmissionHandler {
 
 	public void fromBytes(final ByteBuf buf) {
 		final int receiverCount = buf.readInt();
-
 		for(int i = 0; i < receiverCount; i++) {
 			receivers.add(ReceiverEntry.fromBytes(buf));
 		}
@@ -85,24 +83,23 @@ public class TransmissionHandler {
 	}
 
 	private boolean canPowerReach(final ReceiverEntry entry) {
-		final TileEntity tile = owner.getTile();
-		final IEnergyTransmitter transmitter = owner.getTransmitter();
-		final IEnergyReceiver receiver = entry.getReceiver();
-
 		final DimensionalCoords coords = entry.getCoords();
-		Vec3 hit = receiver.getEnergyInputOffset().addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
-		final Vec3 original = receiver.getEnergyInputOffset().addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
-		Vec3 output = transmitter.getEnergyOutputOffset().addVector(tile.xCoord + 0.5F, tile.yCoord + 0.5F, tile.zCoord + 0.5F);
+		final Vec3 receiver = entry.getReceiver().getEnergyInputOffset().addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
 
-		final double deltaScale = 1F / hit.distanceTo(output);
-		output = Vec3.createVectorHelper(output.xCoord + (hit.xCoord - output.xCoord) * deltaScale, output.yCoord + (hit.yCoord - output.yCoord) * deltaScale, output.zCoord + (hit.zCoord - output.zCoord) * deltaScale);
-		final MovingObjectPosition result = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), output, hit);
+		final TileEntity tile = owner.getTile();
+		final Vec3 transmitter = owner.getTransmitter().getEnergyOutputOffset().addVector(tile.xCoord + 0.5F, tile.yCoord + 0.5F, tile.zCoord + 0.5F);
 
-		if(result != null) {
-			hit = result.hitVec;
+		final double deltaScale = 1 / receiver.distanceTo(transmitter);
+		transmitter.xCoord += (receiver.xCoord - transmitter.xCoord) * deltaScale;
+		transmitter.yCoord += (receiver.yCoord - transmitter.yCoord) * deltaScale;
+		transmitter.zCoord += (receiver.zCoord - transmitter.zCoord) * deltaScale;
+
+		final MovingObjectPosition result = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), transmitter, receiver);
+		if(result == null || result.typeOfHit == MovingObjectPosition.MovingObjectType.MISS) {
+			return true;
 		}
 
-		return hit.xCoord == original.xCoord && hit.yCoord == original.yCoord && hit.zCoord == original.zCoord;
+		return result.hitVec.distanceTo(receiver) < 0.0625D;
 	}
 
 	public void kill() {
@@ -172,7 +169,6 @@ public class TransmissionHandler {
 	}
 
 	public void writeToNBT(final NBTTagCompound nbt) {
-		final NBTTagCompound energy = nbt.getCompoundTag("EmB");
 		final NBTTagList receiverList = new NBTTagList();
 
 		for(final ReceiverEntry receiver : receivers) {
@@ -183,6 +179,7 @@ public class TransmissionHandler {
 			writeReceiver(receiverList, receiver);
 		}
 
+		final NBTTagCompound energy = nbt.getCompoundTag("EmB");
 		energy.setTag("Receivers", receiverList);
 		nbt.setTag("EmB", energy);
 	}

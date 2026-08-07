@@ -333,8 +333,7 @@ public class ClientEventHandler {
 
 						GL11.glRotatef(6F + f6 / 2F + f5, 1F, 0F, 0F);
 						GL11.glRotatef(f7 / 2F, 0F, 0F, 1F);
-						GL11.glRotatef(-f7 / 2F, 0F, 1F, 0F);
-						GL11.glRotatef(180F, 0F, 1F, 0F);
+						GL11.glRotatef(-f7 / 2F + 180F, 0F, 1F, 0F);
 						modelBipedMain.renderCloak(0.0625F);
 						GL11.glPopMatrix();
 					}
@@ -445,7 +444,7 @@ public class ClientEventHandler {
 								f12 = (i >> 16 & 255) / 255F;
 								f3 = (i >> 8 & 255) / 255F;
 								f4 = (i & 255) / 255F;
-								GL11.glColor4f(f12, f3, f4, 1F);
+								GL11.glColor3f(f12, f3, f4);
 								renderManager.itemRenderer.renderItem(player, heldItemStack, k);
 							}
 						}
@@ -454,7 +453,7 @@ public class ClientEventHandler {
 							final float f11 = (k >> 16 & 255) / 255F;
 							f12 = (k >> 8 & 255) / 255F;
 							f3 = (k & 255) / 255F;
-							GL11.glColor4f(f11, f12, f3, 1F);
+							GL11.glColor3f(f11, f12, f3);
 							renderManager.itemRenderer.renderItem(player, heldItemStack, 0);
 						}
 

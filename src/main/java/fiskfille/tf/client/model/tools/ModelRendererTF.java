@@ -27,63 +27,26 @@ public class ModelRendererTF extends MowzieModelRenderer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void render(final float f) {
-		GL11.glPushMatrix();
-
-		if(!isHidden) {
-			if(showModel) {
-				if(!compiled && hideUntil.isEmpty()) {
-					compileDisplayList(f);
-				}
-
-				GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
-				GL11.glTranslatef(offsetX, offsetY, offsetZ);
-				GL11.glScalef(scaleX, scaleY, scaleZ);
-				GL11.glTranslatef(-rotationPointX * f, -rotationPointY * f, -rotationPointZ * f);
-
-				if(rotateAngleX == 0 && rotateAngleY == 0 && rotateAngleZ == 0) {
-					if(rotationPointX == 0 && rotationPointY == 0 && rotationPointZ == 0) {
-						renderThis();
-						renderChildren(f);
-					}
-					else {
-						GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
-						renderThis();
-						renderChildren(f);
-						GL11.glTranslatef(-rotationPointX * f, -rotationPointY * f, -rotationPointZ * f);
-					}
-				}
-				else {
-					GL11.glPushMatrix();
-					GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
-
-					if(rotateAngleZ != 0) {
-						GL11.glRotatef(rotateAngleZ * (180F / (float) Math.PI), 0, 0, 1);
-					}
-
-					if(rotateAngleY != 0) {
-						GL11.glRotatef(rotateAngleY * (180F / (float) Math.PI), 0, 1, 0);
-					}
-
-					if(rotateAngleX != 0) {
-						GL11.glRotatef(rotateAngleX * (180F / (float) Math.PI), 1, 0, 0);
-					}
-
-					renderThis();
-					renderChildren(f);
-					GL11.glPopMatrix();
-				}
-
-				GL11.glTranslatef(-offsetX, -offsetY, -offsetZ);
-				GL11.glScalef(1 / scaleX, 1 / scaleY, 1 / scaleZ);
+		if(!isHidden && showModel) {
+			if(!compiled && hideUntil.isEmpty()) {
+				compileDisplayList(f);
 			}
-		}
 
-		GL11.glPopMatrix();
-	}
+			GL11.glPushMatrix();
 
-	protected void renderThis() {
-		if(hideUntil.isEmpty()) {
-			GL11.glCallList(displayList);
+			GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
+			GL11.glTranslatef(offsetX, offsetY, offsetZ);
+			GL11.glScalef(scaleX, scaleY, scaleZ);
+			GL11.glRotatef((float) Math.toDegrees(rotateAngleZ), 0, 0, 1);
+			GL11.glRotatef((float) Math.toDegrees(rotateAngleY), 0, 1, 0);
+			GL11.glRotatef((float) Math.toDegrees(rotateAngleX), 1, 0, 0);
+
+			if(hideUntil.isEmpty()) {
+				GL11.glCallList(displayList);
+			}
+			renderChildren(f);
+
+			GL11.glPopMatrix();
 		}
 	}
 

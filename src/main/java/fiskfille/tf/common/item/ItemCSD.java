@@ -98,10 +98,9 @@ public class ItemCSD extends Item {
 	}
 
 	public static class DimensionalCoords extends ChunkCoordinates {
-		public int dimension;
+		public int dimension = 0;
 
-		public DimensionalCoords() {
-		}
+		public DimensionalCoords() {}
 
 		public DimensionalCoords(final int x, final int y, final int z, final int dim) {
 			super(x, y, z);
@@ -113,16 +112,12 @@ public class ItemCSD extends Item {
 			dimension = dim;
 		}
 
-		public DimensionalCoords(final TileEntity tile) {
-			set(tile);
+		public DimensionalCoords(final DimensionalCoords coords) {
+			set(coords);
 		}
 
-		public static DimensionalCoords copy(final DimensionalCoords coords) {
-			if(coords != null) {
-				return new DimensionalCoords().set(coords);
-			}
-
-			return null;
+		public DimensionalCoords(final TileEntity tile) {
+			set(tile);
 		}
 
 		public static DimensionalCoords fromArray(final int[] aint) {
@@ -133,33 +128,35 @@ public class ItemCSD extends Item {
 			return new DimensionalCoords(aint1[0], aint1[1], aint1[2], aint1[3]);
 		}
 
-		public DimensionalCoords set(final int x, final int y, final int z, final int dim) {
+		public void set(final int x, final int y, final int z, final int dim) {
 			posX = x;
 			posY = y;
 			posZ = z;
 			dimension = dim;
-
-			return this;
 		}
 
-		public DimensionalCoords set(final TileEntity tile) {
-			if(tile.getWorldObj() != null) {
-				return set(tile.xCoord, tile.yCoord, tile.zCoord, tile.getWorldObj().provider.dimensionId);
+		public void set(final DimensionalCoords coords) {
+			posX = coords.posX;
+			posY = coords.posY;
+			posZ = coords.posZ;
+			dimension = coords.dimension;
+		}
+
+		public void set(final TileEntity tile) {
+			posX = tile.xCoord;
+			posY = tile.yCoord;
+			posZ = tile.zCoord;
+			if(tile.hasWorldObj()) {
+				dimension = tile.getWorldObj().provider.dimensionId;
 			}
-
-			return this;
 		}
 
-		public DimensionalCoords set(final DimensionalCoords coords) {
-			return set(coords.toArray());
-		}
-
-		public DimensionalCoords set(final int... args) {
+		public void set(final int... args) {
 			final int[] aint = toArray();
 
 			System.arraycopy(args, 0, aint, 0, Math.min(args.length, aint.length));
 
-			return set(aint[0], aint[1], aint[2], aint[3]);
+			set(aint[0], aint[1], aint[2], aint[3]);
 		}
 
 		public IChatComponent getFormatted() {
@@ -185,14 +182,13 @@ public class ItemCSD extends Item {
 		}
 
 		@Override
-		public boolean equals(final Object obj) {
-			if(!(obj instanceof DimensionalCoords)) {
-				return false;
+		public boolean equals(final Object object) {
+			if(object instanceof DimensionalCoords) {
+				final DimensionalCoords dimensionalCoords = (DimensionalCoords) object;
+				return posX == dimensionalCoords.posX && posY == dimensionalCoords.posY && posZ == dimensionalCoords.posZ && dimension == dimensionalCoords.dimension;
 			}
-			else {
-				final DimensionalCoords coords = (DimensionalCoords) obj;
-				return posX == coords.posX && posY == coords.posY && posZ == coords.posZ && dimension == coords.dimension;
-			}
+
+			return false;
 		}
 
 		@Override

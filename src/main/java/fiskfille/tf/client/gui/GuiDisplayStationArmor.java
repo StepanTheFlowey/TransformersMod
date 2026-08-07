@@ -99,7 +99,7 @@ public class GuiDisplayStationArmor extends GuiContainer {
 			}
 
 			itemRender.renderWithColor = prevColor;
-			GL11.glColor3f(1F, 1F, 1F);
+			GL11.glColor3f(1, 1, 1);
 			TFRenderHelper.finishRenderItemIntoGUI();
 		}
 	}

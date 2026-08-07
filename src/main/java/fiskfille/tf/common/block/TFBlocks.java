@@ -73,7 +73,7 @@ public class TFBlocks {
 		displayPedestal = new BlockDisplayPedestal();
 		displayStation = new BlockDisplayStation();
 		wool = new BlockColoredTF(Material.cloth).setHardness(0.8F).setStepSound(Block.soundTypeCloth);
-		stainedHardenedClay = new BlockColoredTF(Material.rock).setHardness(1.25F).setResistance(7F).setStepSound(Block.soundTypePiston);
+		stainedHardenedClay = new BlockColoredTF(Material.rock).setHardness(1.25F).setResistance(7).setStepSound(Block.soundTypePiston);
 		stainedGlass = new BlockStainedGlassTF().setHardness(0.3F).setStepSound(Block.soundTypeGlass);
 		stainedGlassPane = new BlockStainedGlassPaneTF().setHardness(0.3F).setStepSound(Block.soundTypeGlass);
 		carpet = new BlockCarpetTF().setHardness(0.1F).setStepSound(Block.soundTypeCloth).setLightOpacity(0);

@@ -25,13 +25,13 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 		}
 
 		if(metadata < 4) {
+			bindTexture(texture);
 			GL11.glPushMatrix();
 			GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
 			GL11.glScalef(1, -1, -1);
 			GL11.glRotatef(metadata * 90, 0, 1, 0);
-
-			bindTexture(texture);
 			model.setBreaking(false);
+
 			model.render(transmitter, partialTicks);
 
 			bindTexture(textureLights);
@@ -39,7 +39,9 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
+
 			model.render(transmitter, partialTicks);
+
 			TFRenderHelper.resetLighting();
 			GL11.glEnable(GL11.GL_LIGHTING);
 
@@ -55,7 +57,9 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 					GL11.glEnable(GL11.GL_ALPHA_TEST);
 					model.setBreaking(true);
+
 					model.render(transmitter, partialTicks);
+
 					GL11.glDisable(GL11.GL_ALPHA_TEST);
 					GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
 					GL11.glEnable(GL11.GL_ALPHA_TEST);

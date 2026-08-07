@@ -17,8 +17,8 @@ public abstract class Energon {
 
 	public abstract String getId();
 
-	public float getEnergyValue() {
-		return 1F;
+	public int getEnergyValue() {
+		return 1;
 	}
 
 	public String getTranslatedName() {

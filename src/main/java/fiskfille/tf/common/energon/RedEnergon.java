@@ -27,7 +27,7 @@ public class RedEnergon extends Energon {
 	}
 
 	@Override
-	public float getEnergyValue() {
+	public int getEnergyValue() {
 		return 10;
 	}
 }

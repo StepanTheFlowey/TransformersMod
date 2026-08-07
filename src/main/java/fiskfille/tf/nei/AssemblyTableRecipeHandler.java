@@ -38,13 +38,8 @@ public final class AssemblyTableRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public int recipiesPerPage() {
-		return 1;
-	}
-
-	@Override
 	public void loadCraftingRecipes(final String outputId, final Object... results) {
-		if(outputId.equals("assembly_table") && getClass() == AssemblyTableRecipeHandler.class) {
+		if(outputId.equals("assembly_table")) {
 			for(final IRecipe irecipe : (List<IRecipe>) AssemblyTableCraftingManager.getInstance().getRecipeList()) {
 				CachedAssemblyRecipe recipe = null;
 

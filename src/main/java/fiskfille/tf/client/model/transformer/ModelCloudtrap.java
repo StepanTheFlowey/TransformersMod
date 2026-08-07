@@ -96,9 +96,9 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	private final ModelRendererTF waist;
 	private final ModelRendererTF waist1;
 	private final ModelRendererTF waist2;
+	private final ModelRendererTF wasit3;
 	private final ModelRendererTF waist4;
 	private final ModelRendererTF waist5;
-	private final ModelRendererTF wasit3;
 	private final ModelRendererTF wingbaseL;
 	private final ModelRendererTF wingbaseR;
 	private final ModelRendererTF wingconnectorL;
@@ -226,7 +226,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		final ModelRendererTF head1 = new ModelRendererTF(this, 14, 19);
 		head1.setRotationPoint(0, -3, 2.7F);
 		head1.addBox(-2, -0.4F, -2.2F, 4, 1, 2, 0);
-		setRotateAngle(head1, 0.04537856055185257F, 0, 0);
+		head1.rotateAngleX = 0.04537856055185257F;
 
 		final ModelRendererTF torsoR1 = new ModelRendererTF(this, 15, 53);
 		torsoR1.setRotationPoint(-1, -5, -1.4F);
@@ -722,7 +722,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		cockpit3.mirror = true;
 		cockpit3.setRotationPoint(2, -0.1F, -3);
 		cockpit3.addBox(-1, -0.1F, -1.7F, 1, 2, 2, 0);
-		setRotateAngle(cockpit3, 0, 0, -0.08726646259971647F);
+		cockpit3.rotateAngleZ = -0.08726646259971647F;
 
 		engineL4 = new ModelRendererTF(this, 8, 80);
 		engineL4.mirror = true;
@@ -769,7 +769,7 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		final ModelRendererTF back2 = new ModelRendererTF(this, 23, 53);
 		back2.setRotationPoint(0, 2, 1.9F);
 		back2.addBox(-1.5F, 0, -2, 3, 3, 2, 0);
-		setRotateAngle(back2, -0.06981317007977318F, 0, 0);
+		back2.rotateAngleX = -0.06981317007977318F;
 
 		lowerlegL5 = new ModelRendererTF(this, 18, 83);
 		lowerlegL5.mirror = true;
@@ -790,12 +790,12 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		engineR3.mirror = true;
 		engineR3.setRotationPoint(1.5F, 1, 1.5F);
 		engineR3.addBox(-1, 0, -1, 1, 2, 2, 0);
-		setRotateAngle(engineR3, 0, 0, 0.19198621771937624F);
+		engineR3.rotateAngleZ = 0.19198621771937624F;
 
 		final ModelRendererTF feetL2 = new ModelRendererTF(this, 14, 88);
 		feetL2.setRotationPoint(-1.5F, 0, -3.4F);
 		feetL2.addBox(0, 0, -1, 3, 1, 1, 0);
-		setRotateAngle(feetL2, 1.0122909661567112F, 0, 0);
+		feetL2.rotateAngleX = 1.0122909661567112F;
 
 		waist5 = new ModelRendererTF(this, 10, 17);
 		waist5.setRotationPoint(-2, -0.5F, -1.7F);
@@ -811,12 +811,12 @@ public class ModelCloudtrap extends ModelTransformerBase {
 		final ModelRendererTF neck3 = new ModelRendererTF(this, 16, 35);
 		neck3.setRotationPoint(0.5F, -1.2F, -2);
 		neck3.addBox(-1, 0, 0, 1, 2, 3, 0);
-		setRotateAngle(neck3, 0, 0.33161255787892263F, 0);
+		neck3.rotateAngleY = 0.33161255787892263F;
 
 		final ModelRendererTF finger3_2 = new ModelRendererTF(this, 39, 40);
 		finger3_2.setRotationPoint(-0.4F, 1, 0);
 		finger3_2.addBox(0, -0.5F, -0.4F, 2, 1, 1, 0);
-		setRotateAngle(finger3_2, 0, 0, -0.10471975511965977F);
+		finger3_2.rotateAngleZ = -0.10471975511965977F;
 
 		leftshoulderbase = new ModelRendererTF(this, 0, 46);
 		leftshoulderbase.mirror = true;
@@ -1181,25 +1181,25 @@ public class ModelCloudtrap extends ModelTransformerBase {
 
 	@Override
 	public void doIdleAnimations(final EntityPlayer player, final float progress, final float limbSwing, final float limbSwingAmount, final float ticks, final float rotationYaw, final float rotationPitch, final boolean wearingHead, final boolean wearingChest, final boolean wearingLegs, final boolean wearingFeet) {
-		walk(torsoConnector, 0.08F, 0.05F, true, 1, 0, ticks, 1F);
-		walk(upperBodyBase, 0.08F, 0.05F, false, 1, 0, ticks, 1F);
-		walk(head, 0.08F, 0.04F, true, 1, 0, ticks, 1F);
-		walk(upperArmR, 0.08F, 0.04F, true, 1, 0, ticks, 1F);
-		walk(upperArmL, 0.08F, 0.04F, true, 1, 0, ticks, 1F);
+		walk(torsoConnector, 0.08F, 0.05F, true, 1, 0, ticks, 1);
+		walk(upperBodyBase, 0.08F, 0.05F, false, 1, 0, ticks, 1);
+		walk(head, 0.08F, 0.04F, true, 1, 0, ticks, 1);
+		walk(upperArmR, 0.08F, 0.04F, true, 1, 0, ticks, 1);
+		walk(upperArmL, 0.08F, 0.04F, true, 1, 0, ticks, 1);
 
-		flap(upperArmR, 0.08F, 0.04F, true, 1, 0, ticks, 1F);
-		flap(upperArmL, 0.08F, 0.04F, false, 1, 0, ticks, 1F);
-		walk(lowerArmR, 0.08F, 0.1F, true, 1, 0, ticks, 1F);
-		walk(lowerArmL, 0.08F, 0.1F, true, 1, 0, ticks, 1F);
+		flap(upperArmR, 0.08F, 0.04F, true, 1, 0, ticks, 1);
+		flap(upperArmL, 0.08F, 0.04F, false, 1, 0, ticks, 1);
+		walk(lowerArmR, 0.08F, 0.1F, true, 1, 0, ticks, 1);
+		walk(lowerArmL, 0.08F, 0.1F, true, 1, 0, ticks, 1);
 
-		flap(wingbaseR, 0.08F, 0.04F, true, 1, 0, ticks, 1F);
-		flap(wingbaseL, 0.08F, 0.04F, false, 1, 0, ticks, 1F);
+		flap(wingbaseR, 0.08F, 0.04F, true, 1, 0, ticks, 1);
+		flap(wingbaseL, 0.08F, 0.04F, false, 1, 0, ticks, 1);
 
-		walk(wingstrutR1, 0.08F, 0.08F, true, 2.5F, 0, ticks, 1F);
-		walk(wingstrutL1, 0.08F, 0.08F, true, 2.5F, 0, ticks, 1F);
+		walk(wingstrutR1, 0.08F, 0.08F, true, 2.5F, 0, ticks, 1);
+		walk(wingstrutL1, 0.08F, 0.08F, true, 2.5F, 0, ticks, 1);
 
-		walk(wingstrutR3, 0.08F, 0.08F, false, 2.5F, 0, ticks, 1F);
-		walk(wingstrutL3, 0.08F, 0.08F, false, 2.5F, 0, ticks, 1F);
+		walk(wingstrutR3, 0.08F, 0.08F, false, 2.5F, 0, ticks, 1);
+		walk(wingstrutL3, 0.08F, 0.08F, false, 2.5F, 0, ticks, 1);
 	}
 
 	@Override
@@ -1424,48 +1424,45 @@ public class ModelCloudtrap extends ModelTransformerBase {
 	public void renderArmorPiece(final int armorPiece) {
 		setToInitPose();
 
-		if(armorPiece == 0) {
-			GL11.glTranslatef(0F, 0F, -0.125F);
+		switch(armorPiece) {
+			case 0:
+				GL11.glTranslatef(0, 0, -0.125F);
+				head.rotationPointX = head.rotationPointY = head.rotationPointZ = 0;
 
-			head.rotationPointX = 0F;
-			head.rotationPointY = 0F;
-			head.rotationPointZ = 0F;
-			head.render(0.0625F);
-		}
-		else if(armorPiece == 1) {
-			GL11.glTranslatef(0F, -0.1F, 0.0625F);
-			upperLegL.showModel = false;
-			upperLegR.showModel = false;
-			head.showModel = false;
+				head.render(0.0625F);
+				break;
 
-			waist.render(0.0625F);
+			case 1:
+				GL11.glTranslatef(0, -0.1F, 0.0625F);
+				upperLegL.showModel = upperLegR.showModel = head.showModel = false;
 
-			upperLegL.showModel = true;
-			upperLegR.showModel = true;
-			head.showModel = true;
-		}
-		else if(armorPiece == 2) {
-			feetbaseL.showModel = false;
-			feetbaseR.showModel = false;
+				waist.render(0.0625F);
 
-			upperLegL.render(0.0625F);
-			upperLegR.render(0.0625F);
+				upperLegL.showModel = upperLegR.showModel = head.showModel = true;
+				break;
 
-			feetbaseL.showModel = true;
-			feetbaseR.showModel = true;
-		}
-		else if(armorPiece == 3) {
-			GL11.glRotatef(5.5F, 1F, 0F, 0F);
+			case 2:
+				feetbaseL.showModel = feetbaseR.showModel = false;
 
-			feetbaseL.rotationPointX -= 3.5F;
-			feetbaseL.rotateAngleX += 0.2F;
-			feetbaseL.rotateAngleY += 0.1F;
-			feetbaseL.render(0.0625F);
+				upperLegL.render(0.0625F);
+				upperLegR.render(0.0625F);
 
-			feetbaseR.rotationPointX += 3.5F;
-			feetbaseR.rotateAngleX += 0.2F;
-			feetbaseR.rotateAngleY -= 0.1F;
-			feetbaseR.render(0.0625F);
+				feetbaseL.showModel = feetbaseR.showModel = true;
+				break;
+
+			case 3:
+				GL11.glRotatef(5.5F, 1, 0, 0);
+
+				feetbaseL.rotationPointX -= 3.5F;
+				feetbaseL.rotateAngleX += 0.2F;
+				feetbaseL.rotateAngleY += 0.1F;
+				feetbaseL.render(0.0625F);
+
+				feetbaseR.rotationPointX += 3.5F;
+				feetbaseR.rotateAngleX += 0.2F;
+				feetbaseR.rotateAngleY -= 0.1F;
+				feetbaseR.render(0.0625F);
+				break;
 		}
 	}
 }

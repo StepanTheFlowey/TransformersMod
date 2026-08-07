@@ -765,8 +765,8 @@ public class ModelPurgeVehicle extends ModelVehicleBase {
 	}
 
 	@Override
-	public void render(final EntityPlayer player, final ItemStack itemstack) {
-		TFRenderHelper.setupRenderLayers(player, itemstack, vehiclebase);
+	public void render(final ItemStack itemstack) {
+		TFRenderHelper.setupRenderLayers(itemstack, vehiclebase);
 	}
 
 	@Override

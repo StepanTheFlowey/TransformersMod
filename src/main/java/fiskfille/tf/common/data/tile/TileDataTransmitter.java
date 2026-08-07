@@ -8,8 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class TileDataTransmitter extends TileDataTransmitterBase {
 	public FluidTankTF tank;
 
-	public TileDataTransmitter() {
-	}
+	public TileDataTransmitter() {}
 
 	public TileDataTransmitter(final float maxEnergy, final int fluidCapacity) {
 		super(maxEnergy);
