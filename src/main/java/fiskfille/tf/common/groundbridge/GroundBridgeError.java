@@ -1,13 +1,17 @@
 package fiskfille.tf.common.groundbridge;
 
-import com.google.common.collect.Lists;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.StatCollector;
 
-import java.util.List;
+import java.util.Arrays;
 
 public enum GroundBridgeError {
-	INVALID_COORDS, NOT_ENOUGH_SPACE, NOT_ENOUGH_ENERGY, NO_PORTAL_LINKED, PORTAL_OBSTRUCTED, OUT_OF_BOUNDS;
+	INVALID_COORDS,
+	NOT_ENOUGH_SPACE,
+	NOT_ENOUGH_ENERGY,
+	NO_PORTAL_LINKED,
+	PORTAL_OBSTRUCTED,
+	OUT_OF_BOUNDS;
 
 	public static class ErrorContainer {
 		private final GroundBridgeError error;
@@ -20,16 +24,15 @@ public enum GroundBridgeError {
 
 		public static ErrorContainer fromBytes(ByteBuf buf) {
 			try {
-				GroundBridgeError error = GroundBridgeError.values()[buf.readByte()];
-				List<Integer> list = Lists.newArrayList();
+				final byte index = buf.readByte();
+				final byte length = buf.readByte();
 
-				int length = buf.readByte() & 0xFF;
-
-				for(int i = 0; i < length; ++i) {
-					list.add(buf.readInt());
+				Integer[] list = new Integer[length];
+				for(byte i = 0; i < length; ++i) {
+					list[i] = buf.readInt();
 				}
 
-				return new ErrorContainer(error, list.toArray(new Integer[0]));
+				return new ErrorContainer(GroundBridgeError.values()[index], list);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -43,14 +46,17 @@ public enum GroundBridgeError {
 		}
 
 		public String translate() {
-			return StatCollector.translateToLocalFormatted("ground_bridge.error." + error.name().toLowerCase(), (Object[]) arguments);
+			return StatCollector.translateToLocalFormatted(
+							"ground_bridge.error." + error.name().toLowerCase(),
+							(Object[]) arguments
+			);
 		}
 
 		public void toBytes(ByteBuf buf) {
-			buf.writeByte(error.ordinal() & 0xFF);
-			buf.writeByte(arguments.length & 0xFF);
+			buf.writeByte(error.ordinal());
+			buf.writeByte(arguments.length);
 
-			for(Integer argument : arguments) {
+			for(final int argument : arguments) {
 				buf.writeInt(argument);
 			}
 		}
@@ -63,18 +69,8 @@ public enum GroundBridgeError {
 		@Override
 		public boolean equals(Object obj) {
 			if(obj instanceof ErrorContainer) {
-				ErrorContainer container = (ErrorContainer) obj;
-				boolean flag = container.arguments.length == arguments.length;
-
-				if(flag) {
-					for(int i = 0; i < arguments.length; ++i) {
-						if(!container.arguments[i].equals(arguments[i])) {
-							return false;
-						}
-					}
-				}
-
-				return container.error == error && flag;
+				final ErrorContainer container = (ErrorContainer) obj;
+				return container.error == error && Arrays.equals(container.arguments, arguments);
 			}
 
 			return false;

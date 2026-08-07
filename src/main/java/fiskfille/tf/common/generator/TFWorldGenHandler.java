@@ -56,9 +56,9 @@ public class TFWorldGenHandler {
 	protected void genStandardOre(int veins, WorldGenerator generator, int maxHeight) {
 		if(TerrainGen.generateOre(world, rand, generator, xCoord, zCoord, CUSTOM)) {
 			for(int i = 0; i < veins; ++i) {
-				int x = xCoord + rand.nextInt(16);
-				int y = rand.nextInt(maxHeight);
-				int z = zCoord + rand.nextInt(16);
+				final int x = xCoord + rand.nextInt(16);
+				final int y = rand.nextInt(maxHeight);
+				final int z = zCoord + rand.nextInt(16);
 
 				generator.generate(world, rand, x, y, z);
 			}

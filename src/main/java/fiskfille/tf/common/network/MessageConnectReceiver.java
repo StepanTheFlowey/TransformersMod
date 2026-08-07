@@ -19,9 +19,9 @@ public class MessageConnectReceiver implements IMessage {
 
 	public MessageConnectReceiver() {}
 
-	public MessageConnectReceiver(DimensionalCoords coords, DimensionalCoords coords1) {
-		transmitterCoords = coords;
-		receiverCoords = coords1;
+	public MessageConnectReceiver(DimensionalCoords transmitterCoords, DimensionalCoords receiverCoords) {
+		this.transmitterCoords = transmitterCoords;
+		this.receiverCoords = receiverCoords;
 	}
 
 	@Override
@@ -40,19 +40,19 @@ public class MessageConnectReceiver implements IMessage {
 		@Override
 		public IMessage onMessage(MessageConnectReceiver message, MessageContext ctx) {
 			if(ctx.side.isServer()) {
-				final DimensionalCoords coords = message.transmitterCoords;
-				final DimensionalCoords coords1 = message.receiverCoords;
-				final World world = MinecraftServer.getServer().worldServerForDimension(coords.dimension);
+				final World world = MinecraftServer.getServer().worldServerForDimension(message.transmitterCoords.dimension);
 
 				if(world != null) {
-					final TileEntity transmitterTile = world.getTileEntity(coords.posX, coords.posY, coords.posZ);
-					final TileEntity receiverTile = world.getTileEntity(coords1.posX, coords1.posY, coords1.posZ);
+					final DimensionalCoords transmitterCoords = message.transmitterCoords;
+					final TileEntity transmitterTile = world.getTileEntity(transmitterCoords.posX, transmitterCoords.posY, transmitterCoords.posZ);
+
+					final DimensionalCoords receiverCoords = message.receiverCoords;
+					final TileEntity receiverTile = world.getTileEntity(receiverCoords.posX, receiverCoords.posY, receiverCoords.posZ);
 
 					if(transmitterTile instanceof IEnergyTransmitter && receiverTile instanceof IEnergyReceiver) {
-						final IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
-						final TransmissionHandler handler = transmitter.getTransmissionHandler();
+						final TransmissionHandler handler = ((IEnergyTransmitter) transmitterTile).getTransmissionHandler();
 
-						if(handler.getReceiver(coords1) != null) {
+						if(handler.getReceiver(receiverCoords) != null) {
 							handler.remove(new ReceiverEntry(receiverTile));
 						}
 						else {

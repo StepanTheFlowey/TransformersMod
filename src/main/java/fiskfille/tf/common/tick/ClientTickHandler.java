@@ -46,10 +46,8 @@ public class ClientTickHandler {
 				if(transformationTimer >= 0.5F) {
 					transformer.updateMovement(player);
 
-					if(TFData.BOOSTING.get(player) && TFData.NITRO.get(player) > 0) {
-						if(TFHelper.isFullyTransformed(player)) {
-							transformer.doNitroParticles(player);
-						}
+					if(TFData.BOOSTING.get(player) && TFData.NITRO.get(player) > 0 && TFHelper.isFullyTransformed(player)) {
+						transformer.doNitroParticles(player);
 					}
 				}
 
@@ -77,10 +75,8 @@ public class ClientTickHandler {
 
 						TFData.BOOSTING.set(player, useNitro);
 
-						if(TFData.TRANSFORM_PROGRESS.get(player) == 0 && TFData.PREV_TRANSFORM_PROGRESS.get(player) > 0) {
-							if(TFConfig.firstPersonAfterTransformation) {
-								gameSettings.thirdPersonView = 0;
-							}
+						if(TFData.TRANSFORM_PROGRESS.get(player) == 0 && TFData.PREV_TRANSFORM_PROGRESS.get(player) > 0 && TFConfig.firstPersonAfterTransformation) {
+							gameSettings.thirdPersonView = 0;
 						}
 					}
 				}

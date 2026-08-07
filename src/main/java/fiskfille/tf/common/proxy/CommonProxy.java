@@ -75,7 +75,7 @@ public class CommonProxy {
 
 	public void runTasks() {
 		while(!tasks.isEmpty()) {
-			Runnable task = tasks.poll();
+			final Runnable task = tasks.poll();
 
 			if(task != null) {
 				task.run();
