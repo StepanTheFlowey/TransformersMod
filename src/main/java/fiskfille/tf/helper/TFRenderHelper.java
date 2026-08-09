@@ -8,7 +8,6 @@ import fiskfille.tf.common.energon.power.*;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.item.armor.ItemTransformerArmor;
 import fiskfille.tf.common.tick.ClientTickHandler;
-import fiskfille.tf.common.tileentity.TileEntityMachine;
 import fiskfille.tf.common.tileentity.TileEntityRelayTower;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -197,103 +196,88 @@ public final class TFRenderHelper {
 
 		final IEnergyTransmitter transmitter = (IEnergyTransmitter) transmitterTile;
 		final TransmissionHandler transmissionHandler = transmitter.getTransmissionHandler();
+		for(ReceiverEntry entry : transmissionHandler.getReceivers()) {
+			TileEntity recieverTile = entry.getTile();
+			if(recieverTile == null) {
+				continue;
+			}
 
-		boolean renderBeams;
-		if(transmitterTile instanceof TileEntityRelayTower) {
-			renderBeams = ((TileEntityRelayTower) transmitterTile).data.isPowered;
-		}
-		else {
-			renderBeams = transmitter.getEnergy() > 0;
-		}
+			final boolean invertCurrent = transmitterTile instanceof TileEntityRelayTower && ((TileEntityRelayTower) transmitterTile).data.invertCurrent.contains(entry.getCoords());
+			final boolean canReach = entry.canReach();
 
-		if(transmitterTile instanceof TileEntityMachine) {
-			renderBeams &= ((TileEntityMachine) transmitterTile).canActivate();
-		}
+			TileEntity tile = transmitterTile;
+			Vec3 srcOffset1 = transmitter.getEnergyOutputOffset();
+			Vec3 dstOffset1 = entry.getReceiver().getEnergyInputOffset();
 
-		if(renderBeams) {
-			for(ReceiverEntry entry : transmissionHandler.getReceivers()) {
-				final boolean invertCurrent = transmitterTile instanceof TileEntityRelayTower && ((TileEntityRelayTower) transmitterTile).data.invertCurrent.contains(entry.getCoords());
-				final boolean canReach = entry.canReach();
+			if(tile instanceof ITransmitterRender) {
+				srcOffset1 = ((ITransmitterRender) tile).getRenderOutputOffset();
+			}
 
-				if(entry.getTile() == null) {
-					continue;
+			if(recieverTile instanceof IReceiverRender) {
+				dstOffset1 = ((IReceiverRender) recieverTile).getRenderInputOffset();
+			}
+
+			final Vec3 srcOffset;
+			final Vec3 dstOffset;
+			if(invertCurrent) {
+				tile = recieverTile;
+				entry = new ReceiverEntry(transmitterTile);
+				entry.setCanReach(canReach);
+
+				srcOffset = dstOffset1.addVector(0, 0, 0);
+				dstOffset = srcOffset1.addVector(0, 0, 0);
+			}
+			else {
+				srcOffset = srcOffset1.addVector(0, 0, 0);
+				dstOffset = dstOffset1.addVector(0, 0, 0);
+			}
+
+			final DimensionalCoords coords = entry.getCoords();
+			Vec3 src = srcOffset.addVector(tile.xCoord + 0.5F, tile.yCoord + 0.5F, tile.zCoord + 0.5F);
+			Vec3 dst = dstOffset.addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
+
+			if(!canReach) {
+				final double d = 1D / dst.distanceTo(src);
+				src.xCoord += (dst.xCoord - src.xCoord) * d;
+				src.yCoord += (dst.yCoord - src.yCoord) * d;
+				src.zCoord += (dst.zCoord - src.zCoord) * d;
+
+				final MovingObjectPosition mop = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), src, dst);
+				if(mop != null && mop.typeOfHit != MovingObjectPosition.MovingObjectType.MISS) {
+					dst = mop.hitVec;
 				}
+			}
 
-				TileEntity tile = transmitterTile;
-				Vec3 srcOffset1 = transmitter.getEnergyOutputOffset();
-				Vec3 dstOffset1 = entry.getReceiver().getEnergyInputOffset();
+			src.xCoord = 0.5D + srcOffset.xCoord;
+			src.yCoord = 0.5D + srcOffset.yCoord;
+			src.zCoord = 0.5D + srcOffset.zCoord;
+			dst.xCoord = dst.xCoord - tile.xCoord;
+			dst.yCoord = dst.yCoord - tile.yCoord;
+			dst.zCoord = dst.zCoord - tile.zCoord;
 
-				if(tile instanceof ITransmitterRender) {
-					srcOffset1 = ((ITransmitterRender) tile).getRenderOutputOffset();
-				}
+			int primary = 0x57ABAF;
+			int secondary = 0x7BF2F8;
+			final int parentPrimary = primary;
+			final int parentSecondary = secondary;
 
-				if(entry.getTile() instanceof IReceiverRender) {
-					dstOffset1 = ((IReceiverRender) entry.getTile()).getRenderInputOffset();
-				}
-
-				final Vec3 srcOffset;
-				final Vec3 dstOffset;
-				if(invertCurrent) {
-					tile = entry.getTile();
-					entry = new ReceiverEntry(transmitterTile);
-					entry.setCanReach(canReach);
-
-					srcOffset = dstOffset1.addVector(0, 0, 0);
-					dstOffset = srcOffset1.addVector(0, 0, 0);
-				}
-				else {
-					srcOffset = srcOffset1.addVector(0, 0, 0);
-					dstOffset = dstOffset1.addVector(0, 0, 0);
-				}
-
-				final DimensionalCoords coords = entry.getCoords();
-				Vec3 src = srcOffset.addVector(tile.xCoord + 0.5F, tile.yCoord + 0.5F, tile.zCoord + 0.5F);
-				Vec3 dst = dstOffset.addVector(coords.posX + 0.5F, coords.posY + 0.5F, coords.posZ + 0.5F);
-
-				if(!canReach) {
-					final double d = 1D / dst.distanceTo(src);
-					src = Vec3.createVectorHelper(src.xCoord + (dst.xCoord - src.xCoord) * d, src.yCoord + (dst.yCoord - src.yCoord) * d, src.zCoord + (dst.zCoord - src.zCoord) * d);
-
-					final MovingObjectPosition mop = TFEnergyHelper.rayTraceBlocks(tile.getWorldObj(), src, dst);
-					if(mop != null) {
-						dst = mop.hitVec;
-					}
-				}
-
-				final double x1 = 0.5D + srcOffset.xCoord;
-				final double y1 = 0.5D + srcOffset.yCoord;
-				final double z1 = 0.5D + srcOffset.zCoord;
-				final double deltaX = dst.xCoord - tile.xCoord;
-				final double deltaY = dst.yCoord - tile.yCoord;
-				final double deltaZ = dst.zCoord - tile.zCoord;
-
-				src = Vec3.createVectorHelper(x1, y1, z1);
-				dst = Vec3.createVectorHelper(deltaX, deltaY, deltaZ);
-
-				int primary = 0x57ABAF;
-				int secondary = 0x7BF2F8;
-				final int parentPrimary = primary;
-				final int parentSecondary = secondary;
-
-				if(!canReach) {
-					primary = 0xAF5B57;
-					secondary = 0xF8817B;
-				}
+			if(!canReach) {
+				primary = 0xAF5B57;
+				secondary = 0xF8817B;
+			}
 //			else if (!(receiverTile instanceof IEnergyTransmitter) && receiver.getEnergy() >= receiver.getMaxEnergy()) {
 //				primary = 0x62AF57;
 //				secondary = 0x8AF87B;
 //			}
 
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + x1, y + y1, z + z1);
+			GL11.glPushMatrix();
+			GL11.glTranslated(x + src.xCoord, y + src.yCoord, z + src.zCoord);
 
-				if(invertCurrent) {
-					GL11.glTranslated(tile.xCoord - coords.posX, tile.yCoord - coords.posY, tile.zCoord - coords.posZ);
-				}
-
-				renderEnergyBeam(src, dst, primary, secondary, parentPrimary, parentSecondary);
-				GL11.glPopMatrix();
+			if(invertCurrent) {
+				GL11.glTranslated(tile.xCoord - coords.posX, tile.yCoord - coords.posY, tile.zCoord - coords.posZ);
 			}
+
+			renderEnergyBeam(src, dst, primary, secondary, parentPrimary, parentSecondary);
+			GL11.glPopMatrix();
 		}
 
 		resetLighting();
@@ -311,14 +295,14 @@ public final class TFRenderHelper {
 		final float[] parentPrimary = hexToRGB(primaryParentColor);
 		final float[] parentSecondary = hexToRGB(secondaryParentColor);
 
-		final double width = 1 / 16;
+		final double width = 0.0625D;
 		final double length = src.distanceTo(dst);
 		final int segments = MathHelper.floor_double(length * 8);
 
 		faceVec(src, dst);
 
+		final double segmentLength = length / segments;
 		for(int i = 0; i < segments; ++i) {
-			final double segmentLength = length / segments;
 			final double start = i * segmentLength;
 			final double end = (i + 1) * segmentLength;
 			final float f = (float) Math.cos(i / (segments * 0.15625F) - (Minecraft.getMinecraft().thePlayer.ticksExisted + partialTicks) / 5);
@@ -437,7 +421,9 @@ public final class TFRenderHelper {
 			GL11.glPushMatrix();
 			GL11.glTranslated(src.xCoord, src.yCoord, src.zCoord);
 			faceVec(src, dst);
+
 			tessellator.draw();
+
 			GL11.glPopMatrix();
 			src = dst;
 		}
