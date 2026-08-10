@@ -17,7 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderPlayerHand extends RenderPlayer {
+public final class RenderPlayerHand extends RenderPlayer {
 	public Render parent;
 
 	@Override
@@ -41,11 +41,10 @@ public class RenderPlayerHand extends RenderPlayer {
 
 				final int pass = shouldRenderPass(player, 1, partialTicks);
 				final float ticks = player.ticksExisted + partialTicks;
-				final float scale = 1.2F;
-				GL11.glScalef(scale, scale, scale);
+				GL11.glScalef(1.2F, 1.2F, 1.2F);
 
 				model.renderFirstPersonArm(player);
-				GL11.glTranslatef(0F, 0.35F, 0F);
+				GL11.glTranslatef(0, 0.35F, 0);
 				TFRenderHelper.setupRenderLayers(player.getCurrentArmor(2), upperArm);
 
 				if(pass > 0) {
@@ -74,13 +73,13 @@ public class RenderPlayerHand extends RenderPlayer {
 							GL11.glMatrixMode(GL11.GL_TEXTURE);
 							GL11.glLoadIdentity();
 							GL11.glScalef(f2, f2, f2);
-							GL11.glRotatef(30 - i * 60, 0F, 0F, 1F);
-							GL11.glTranslatef(0F, f1, 0F);
+							GL11.glRotatef(30 - i * 60, 0, 0, 1);
+							GL11.glTranslatef(0, f1, 0);
 							GL11.glMatrixMode(GL11.GL_MODELVIEW);
 							TFRenderHelper.setupRenderLayers(player.getCurrentArmor(2), upperArm);
 						}
 
-						GL11.glColor3f(1F, 1F, 1F);
+						GL11.glColor3f(1, 1, 1);
 						GL11.glMatrixMode(GL11.GL_TEXTURE);
 						GL11.glDepthMask(true);
 						GL11.glLoadIdentity();

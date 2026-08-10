@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 
 import java.lang.reflect.Constructor;
 
-public class TFParticles {
+public final class TFParticles {
 	public static void spawnParticle(final TFParticleType particleType, final double x, final double y, final double z, final float motionX, final float motionY, final float motionZ) {
 		if(Minecraft.getMinecraft() != null && Minecraft.getMinecraft().renderViewEntity != null && Minecraft.getMinecraft().effectRenderer != null) {
 			if(Minecraft.getMinecraft().theWorld.isRemote) {

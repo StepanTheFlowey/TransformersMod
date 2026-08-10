@@ -114,7 +114,7 @@ public class FluidTankTF extends FluidTank {
 
 				if(percentage > 0) {
 					final IChatComponent name = new ChatComponentText(energon.getTranslatedName()).setChatStyle(new ChatStyle().setColor(GRAY));
-					final IChatComponent ratio = new ChatComponentText(percentage + "").setChatStyle(new ChatStyle().setColor(YELLOW));
+					final IChatComponent ratio = new ChatComponentText(Integer.toString(percentage)).setChatStyle(new ChatStyle().setColor(YELLOW));
 
 					list.add(new ChatComponentTranslation("gui.energon_processor.content", name, ratio).setChatStyle(new ChatStyle().setColor(GRAY)));
 					flag = true;

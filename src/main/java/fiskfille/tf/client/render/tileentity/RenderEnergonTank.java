@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.common.tileentity.TileEntityEnergonTank;
 import fiskfille.tf.helper.TFFluidRenderHelper;
 import fiskfille.tf.helper.TFRenderHelper;
@@ -13,10 +15,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
-public class RenderEnergonTank extends TileEntitySpecialRenderer {
+@SideOnly(Side.CLIENT)
+public final class RenderEnergonTank extends TileEntitySpecialRenderer {
 	private RenderBlocks renderBlocks = RenderBlocks.getInstance();
 
-	public void render(final TileEntityEnergonTank tile, final double x, final double y, final double z) {
+	private void render(final TileEntityEnergonTank tile, final double x, final double y, final double z) {
 		final FluidStack stack = tile.data.getFluid();
 		if(stack == null || stack.getFluid() == null || stack.amount <= 0) {
 			return;
@@ -27,15 +30,14 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 			return;
 		}
 
-		GL11.glPushMatrix();
-		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
 		bindTexture(TextureMap.locationBlocksTexture);
 		TFRenderHelper.glColorRGB(stack.getFluid().getColor(stack));
+		GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_LIGHTING_BIT);
+		GL11.glPushMatrix();
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 		float scaleY = 0.99F;
 		float scaleOffset = 0;
@@ -75,8 +77,8 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 
 		final int dl = (int) ((float) stack.amount / tile.data.getCapacity() * (TFFluidRenderHelper.DISPLAY_STAGES - 1));
 		GL11.glCallList(displayList[MathHelper.clamp_int(dl, 0, TFFluidRenderHelper.DISPLAY_STAGES - 1)]);
-		GL11.glPopAttrib();
 		GL11.glPopMatrix();
+		GL11.glPopAttrib();
 	}
 
 	@Override
@@ -85,7 +87,7 @@ public class RenderEnergonTank extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityEnergonTank) tileentity, d, d1, d2);
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
+		render((TileEntityEnergonTank) tileentity, x, y, z);
 	}
 }

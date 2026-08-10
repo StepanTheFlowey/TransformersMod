@@ -85,7 +85,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		for(int i = 0; i < coordinateFields.length; ++i) {
 			coordinateFields[i] = new GuiTextFieldFlat(fontRendererObj, x + 7 + 55 * i, y + 7, 52);
 			coordinateFields[i].setMaxStringLength(20);
-			coordinateFields[i].setText(destination[i] + "");
+			coordinateFields[i].setText(Integer.toString(destination[i]));
 		}
 
 		dimensionField = new GuiTextFieldFlat(fontRendererObj, x + 81, y + 49, 71);
@@ -119,7 +119,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 		if(inventory.getStackInSlot(0) != null) {
 			final int[] originalDestination = data.destination.toArray();
 			for(int i = 0; i < coordinateFields.length; ++i) {
-				coordinateFields[i].setText(originalDestination[i] + "");
+				coordinateFields[i].setText(Integer.toString(originalDestination[i]));
 			}
 		}
 		else if(!data.activationLeverState) {
@@ -248,7 +248,7 @@ public class GuiGroundBridge extends GuiContainerTF implements INEIGuiHandler {
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		mc.getTextureManager().bindTexture(guiTextures);
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 

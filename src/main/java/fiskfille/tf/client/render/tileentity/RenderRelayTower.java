@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tileentity.ModelRelayTorch;
 import fiskfille.tf.client.model.tileentity.ModelRelayTower;
@@ -14,7 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-public class RenderRelayTower extends TileEntitySpecialRenderer {
+@SideOnly(Side.CLIENT)
+public final class RenderRelayTower extends TileEntitySpecialRenderer {
 	private final ModelRelayTower modelTower = new ModelRelayTower();
 	private final ModelRelayTorch modelTorch = new ModelRelayTorch();
 
@@ -27,16 +30,12 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 		}
 
 		if(tower.isValid(metadata)) {
-			final ModelRelayTower model = getModel(tower);
-
 			GL11.glPushMatrix();
 			GL11.glTranslated(x + 0.5D, y + 0.5D, z + 0.5D);
-			GL11.glScalef(1, -1F, -1F);
+			GL11.glScalef(1, -1, -1);
 
 			if(tower instanceof TileEntityRelayTorch && world != null) {
-				final ForgeDirection dir = ForgeDirection.getOrientation(metadata);
-
-				switch(dir) {
+				switch(ForgeDirection.getOrientation(metadata)) {
 					case UP:
 						GL11.glTranslatef(0, 1, 0);
 						GL11.glRotatef(180, 0, 0, 1);
@@ -60,7 +59,8 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 			}
 
 			bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/relay_%s.png", tower instanceof TileEntityRelayTorch ? "torch" : "tower")));
-			model.setBreaking(false);
+			final ModelRelayTower model = getModel(tower);
+
 			model.render(tower, partialTicks);
 
 			bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/relay_%s_lights.png", tower instanceof TileEntityRelayTorch ? "torch" : "tower")));
@@ -68,7 +68,9 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
+
 			model.render(tower, partialTicks);
+
 			TFRenderHelper.resetLighting();
 			GL11.glEnable(GL11.GL_LIGHTING);
 
@@ -76,22 +78,21 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 				final int progress = TFRenderHelper.getBlockDestroyProgress(world, tower.xCoord, tower.yCoord, tower.zCoord);
 
 				if(progress >= 0) {
-					OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 					bindTexture(new ResourceLocation(String.format("textures/blocks/destroy_stage_%s.png", progress)));
 					GL11.glColor4f(1, 1, 1, 0.5F);
-					GL11.glPushMatrix();
+
+					GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
 					GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
-					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 					GL11.glEnable(GL11.GL_ALPHA_TEST);
+					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+					OpenGlHelper.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_SRC_COLOR, GL11.GL_ONE, GL11.GL_ZERO);
 					model.setBreaking(true);
 
 					model.render(tower, partialTicks);
 
-					GL11.glDisable(GL11.GL_ALPHA_TEST);
+					model.setBreaking(false);
 					GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
-					GL11.glEnable(GL11.GL_ALPHA_TEST);
-					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glPopMatrix();
+					GL11.glPopAttrib();
 				}
 			}
 
@@ -104,7 +105,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 		}
 	}
 
-	public ModelRelayTower getModel(final TileEntityRelayTower tower) {
+	private ModelRelayTower getModel(final TileEntityRelayTower tower) {
 		if(tower instanceof TileEntityRelayTorch) {
 			return modelTorch;
 		}
@@ -113,7 +114,7 @@ public class RenderRelayTower extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityRelayTower) tileentity, d, d1, d2, f);
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
+		render((TileEntityRelayTower) tileentity, x, y, z, partialTicks);
 	}
 }

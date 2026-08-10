@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.client.displayable.Displayable;
 import fiskfille.tf.common.tileentity.TileEntityDisplayPedestal;
@@ -9,8 +11,9 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderDisplayPedestal extends TileEntitySpecialRenderer {
-	public void renderModelAt(final TileEntityDisplayPedestal displayPillar, final double x, final double y, final double z, final float partialTicks) {
+@SideOnly(Side.CLIENT)
+public final class RenderDisplayPedestal extends TileEntitySpecialRenderer {
+	private void renderModelAt(final TileEntityDisplayPedestal displayPillar, final double x, final double y, final double z) {
 		final ItemStack displayItem = displayPillar.getDisplayItem();
 		if(displayItem == null) {
 			return;
@@ -23,18 +26,17 @@ public class RenderDisplayPedestal extends TileEntitySpecialRenderer {
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
-		GL11.glScalef(1F, -1F, -1F);
+		GL11.glScalef(1, -1, -1);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
 		displayable.render(displayItem);
 
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-		GL11.glColor3f(1F, 1F, 1F);
 		GL11.glPopMatrix();
 	}
 
 	@Override
 	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
-		renderModelAt((TileEntityDisplayPedestal) tileentity, x, y, z, partialTicks);
+		renderModelAt((TileEntityDisplayPedestal) tileentity, x, y, z);
 	}
 }

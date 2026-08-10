@@ -129,7 +129,7 @@ public class GuiAlloyCrucible extends GuiContainerTF implements IButtonRenderCal
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		mc.getTextureManager().bindTexture(texture);
 		final int x = (width - xSize) / 2;
 		final int y = (height - ySize) / 2;

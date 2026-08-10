@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderTransformiumSeedEntity extends Render {
+public final class RenderTransformiumSeedEntity extends Render {
 	private final ModelTransformiumSeed model = new ModelTransformiumSeed();
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transformium_seed_lights.png");
@@ -21,8 +21,8 @@ public class RenderTransformiumSeedEntity extends Render {
 		shadowSize = 0.5F;
 	}
 
-	public void doRender(final EntityTransformiumSeed seed, final double x, final double y, final double z, final float rotationYaw, final float p_76986_9_) {
-		bindTexture(getEntityTexture(seed));
+	public void doRender(final EntityTransformiumSeed seed, final double x, final double y, final double z) {
+		bindEntityTexture(seed);
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
@@ -46,7 +46,7 @@ public class RenderTransformiumSeedEntity extends Render {
 	}
 
 	@Override
-	public void doRender(final Entity p_76986_1_, final double p_76986_2_, final double p_76986_4_, final double p_76986_6_, final float p_76986_8_, final float p_76986_9_) {
-		this.doRender((EntityTransformiumSeed) p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+	public void doRender(final Entity entity, final double x, final double y, final double z, final float entityYaw, final float partialTicks) {
+		this.doRender((EntityTransformiumSeed) entity, x, y, z);
 	}
 }

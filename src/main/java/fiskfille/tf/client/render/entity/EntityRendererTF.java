@@ -1,11 +1,14 @@
 package fiskfille.tf.client.render.entity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.helper.TFHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class EntityRendererTF extends EntityRenderer {
+@SideOnly(Side.CLIENT)
+public final class EntityRendererTF extends EntityRenderer {
 	public EntityRendererTF(final Minecraft mc) {
 		super(mc, mc.getResourceManager());
 	}

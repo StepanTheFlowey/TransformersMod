@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class RenderBlank extends Render {
+public final class RenderBlank extends Render {
 	public RenderBlank() {
 		shadowSize = 0F;
 	}
@@ -19,5 +19,5 @@ public class RenderBlank extends Render {
 	}
 
 	@Override
-	public void doRender(final Entity entity, final double x, final double y, final double z, final float yaw, final float partialTicks) {}
+	public void doRender(final Entity entity, final double x, final double y, final double z, final float entityYaw, final float partialTicks) {}
 }

@@ -37,11 +37,11 @@ public class GuiVerticalHeightSlider extends GuiVerticalSlider {
 			}
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glColor3f(1F, 1F, 1F);
+			GL11.glColor3f(1, 1, 1);
+
 			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)), 20, 0, width, 4);
 			drawTexturedModalRect(xPosition, yPosition + (int) (percentage * (height - 8)) + 4, 20, 196, width, 4);
-
-			drawString(mc.fontRenderer, parent.getLayer() + "", xPosition + width + 3, yPosition + (int) (percentage * (height - 8)), -1);
+			drawString(mc.fontRenderer, Integer.toString(parent.getLayer()), xPosition + width + 3, yPosition + (int) (percentage * (height - 8)), -1);
 		}
 	}
 }

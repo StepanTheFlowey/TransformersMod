@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-public class RenderBlockGroundBridgeFrame implements ISimpleBlockRenderingHandler {
+public final class RenderBlockGroundBridgeFrame implements ISimpleBlockRenderingHandler {
 	public static final RenderBlockGroundBridgeFrame instance = new RenderBlockGroundBridgeFrame();
 	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 

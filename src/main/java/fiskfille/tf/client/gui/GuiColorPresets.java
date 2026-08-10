@@ -262,10 +262,12 @@ public class GuiColorPresets extends GuiScreen {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(0F, 0F, 0F, 0.4F);
+		GL11.glColor4f(0, 0, 0, 0.4F);
+
 		drawTexturedModalRect(width / 2 - 60, height / 6 + 130, 0, 0, 120, 20);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+
 		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		drawCenteredString(fontRendererObj, I18n.format("gui.display_station.color.presets.page", page + 1, maxPages + 1), width / 2, height / 6 + 135, 16777215);
 		super.drawScreen(mouseX, mouseY, partialTicks);

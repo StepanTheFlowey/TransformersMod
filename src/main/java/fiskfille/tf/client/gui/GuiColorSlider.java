@@ -23,10 +23,10 @@ public class GuiColorSlider extends GuiSliderBase {
 	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
 		if(visible) {
 			mc.getTextureManager().bindTexture(buttonTextures);
-			GL11.glColor3f(1F, 1F, 1F);
+			GL11.glColor3f(1, 1, 1);
 			field_146123_n = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
 			GL11.glEnable(GL11.GL_BLEND);
-			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+			OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			final int k = getHoverState(field_146123_n);
 			drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height);

@@ -11,7 +11,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class RenderBlockDisplayPedestal implements ISimpleBlockRenderingHandler {
+public final class RenderBlockDisplayPedestal implements ISimpleBlockRenderingHandler {
 	public static final RenderBlockDisplayPedestal instance = new RenderBlockDisplayPedestal();
 	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 
@@ -47,7 +47,7 @@ public class RenderBlockDisplayPedestal implements ISimpleBlockRenderingHandler 
 		final BlockIcon[] icons = BlockDisplayPedestal.getTexture(metadata);
 		final AxisAlignedBB[] bounds = BlockDisplayPedestal.getBounds();
 
-		GL11.glRotatef(90F, 0F, 1F, 0F);
+		GL11.glRotatef(90, 0, 1, 0);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
 		for(int i = 0; i < Math.min(icons.length, bounds.length); ++i) {

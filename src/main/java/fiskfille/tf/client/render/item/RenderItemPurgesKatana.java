@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemPurgesKatana implements IItemRenderer {
+public final class RenderItemPurgesKatana implements IItemRenderer {
 	private final ModelPurgesKatana model = new ModelPurgesKatana();
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/purge/purge.png");
 
@@ -26,19 +26,23 @@ public class RenderItemPurgesKatana implements IItemRenderer {
 	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP) {
-			GL11.glRotatef(210, 0F, 0F, 1F);
-			GL11.glTranslatef(-0.7F, 0.2F, -0F);
+		switch(type) {
+			case EQUIPPED_FIRST_PERSON:
+			case FIRST_PERSON_MAP:
+				GL11.glRotatef(210, 0, 0, 1);
+				GL11.glTranslatef(-0.7F, 0.2F, 0);
 
-			model.render();
-		}
-		else if(type == ItemRenderType.EQUIPPED) {
-			GL11.glRotatef(5, 1F, 0F, 0F);
-			GL11.glRotatef(-5, 0F, 1F, 0F);
-			GL11.glRotatef(215, 0F, 0F, 1F);
-			GL11.glTranslatef(-0.715F, 0.265F, -0.07F);
+				model.render();
+				break;
 
-			model.render();
+			case EQUIPPED:
+				GL11.glRotatef(5, 1, 0, 0);
+				GL11.glRotatef(-5, 0, 1, 0);
+				GL11.glRotatef(215, 0, 0, 1);
+				GL11.glTranslatef(-0.715F, 0.265F, -0.07F);
+
+				model.render();
+				break;
 		}
 	}
 }

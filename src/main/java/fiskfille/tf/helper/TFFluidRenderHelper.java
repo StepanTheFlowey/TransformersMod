@@ -119,7 +119,7 @@ public final class TFFluidRenderHelper {
 			GL11.glEndList();
 		}
 
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_LIGHTING);
@@ -156,7 +156,7 @@ public final class TFFluidRenderHelper {
 			tessellator.draw();
 
 			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glColor3f(1F, 1F, 1F);
+			GL11.glColor3f(1, 1, 1);
 		}
 	}
 }

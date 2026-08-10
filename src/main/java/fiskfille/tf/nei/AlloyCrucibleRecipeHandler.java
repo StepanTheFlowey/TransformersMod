@@ -116,7 +116,7 @@ public final class AlloyCrucibleRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public void drawBackground(final int recipe) {
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		changeTexture(getGuiTexture());
 		drawTexturedModalRect(0, 0, 5, 11, 166, 65);
 	}

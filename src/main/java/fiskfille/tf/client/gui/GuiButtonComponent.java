@@ -24,7 +24,7 @@ public class GuiButtonComponent extends GuiButtonFlat {
 		}
 
 		mc.getTextureManager().bindTexture(tfButtonTextures);
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 		field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
 
 		drawTexturedModalRect(xPosition, yPosition, 60 + getHoverState(field_146123_n) * width, 104, width, height);

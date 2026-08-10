@@ -15,7 +15,7 @@ import net.minecraft.util.Vec3;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemPowerCanister implements IItemRenderer {
+public final class RenderItemPowerCanister implements IItemRenderer {
 	private static final ModelPowerCanister modelCanister = new ModelPowerCanister();
 	private static final RenderItem renderItem = new RenderItem();
 
@@ -31,7 +31,9 @@ public class RenderItemPowerCanister implements IItemRenderer {
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(TransformersMod.MODID, String.format("textures/models/tiles/power_canister_%s.png", container.tiers[Math.min(itemstack.getItemDamage(), container.tiers.length - 1)])));
 		GL11.glDisable(GL11.GL_CULL_FACE);
+
 		modelCanister.render();
+
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
 
@@ -88,7 +90,7 @@ public class RenderItemPowerCanister implements IItemRenderer {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
-				GL11.glColor3f(1F, 1F, 1F);
+				GL11.glColor3f(1, 1, 1);
 			}
 		}
 		else {

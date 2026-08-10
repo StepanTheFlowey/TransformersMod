@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tileentity.ModelEnergyColumn;
 import fiskfille.tf.client.render.item.RenderItemPowerCanister;
@@ -15,12 +17,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-public class RenderColumn extends TileEntitySpecialRenderer {
+@SideOnly(Side.CLIENT)
+public final class RenderColumn extends TileEntitySpecialRenderer {
 	private final ModelEnergyColumn model = new ModelEnergyColumn();
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_column.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_column_lights.png");
 
-	public void render(final TileEntityColumn tile, final double x, final double y, final double z, final float partialTicks) {
+	private void render(final TileEntityColumn tile, final double x, final double y, final double z) {
 		final World world = tile.getWorldObj();
 		int metadata = 0;
 
@@ -32,10 +35,9 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 			bindTexture(texture);
 			GL11.glPushMatrix();
 			GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
-			GL11.glScalef(1F, -1F, -1F);
-			GL11.glRotatef(metadata * 90F, 0F, 1F, 0F);
+			GL11.glScalef(1, -1, -1);
+			GL11.glRotatef(metadata * 90, 0, 1, 0);
 
-			model.setBreaking(false);
 			model.render(tile);
 
 			bindTexture(textureLights);
@@ -51,7 +53,6 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 			final float texY = 31F;
 			final float texWidth = 7F;
 			final float width = texWidth * 0.0625F;
-
 			final Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
 			tessellator.addVertexWithUV(width / 2, -(0.5F + f), -width / 2, (texX + texWidth) * (1F / 128), (texY + texWidth) * (1F / 64));
@@ -64,6 +65,7 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 			tessellator.addVertexWithUV(-width / 2, 1.5F + f, width / 2, texX * (1F / 128), texY * (1F / 64));
 			tessellator.addVertexWithUV(width / 2, 1.5F + f, width / 2, (texX + texWidth) * (1F / 128), texY * (1F / 64));
 			tessellator.draw();
+
 			TFRenderHelper.resetLighting();
 			GL11.glEnable(GL11.GL_LIGHTING);
 
@@ -71,20 +73,21 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 				final int progress = TFRenderHelper.getBlockDestroyProgress(world, tile.xCoord, tile.yCoord, tile.zCoord);
 
 				if(progress >= 0) {
-					OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 					bindTexture(new ResourceLocation(String.format("textures/blocks/destroy_stage_%s.png", progress)));
 					GL11.glColor4f(1, 1, 1, 0.5F);
-					GL11.glPushMatrix();
+
+					GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
 					GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+					GL11.glEnable(GL11.GL_ALPHA_TEST);
 					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-					GL11.glEnable(GL11.GL_ALPHA_TEST);
+					OpenGlHelper.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_SRC_COLOR, GL11.GL_ONE, GL11.GL_ZERO);
 					model.setBreaking(true);
+
 					model.render(tile);
-					GL11.glDisable(GL11.GL_ALPHA_TEST);
+
+					model.setBreaking(false);
 					GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
-					GL11.glEnable(GL11.GL_ALPHA_TEST);
-					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glPopMatrix();
+					GL11.glPopAttrib();
 				}
 			}
 
@@ -109,7 +112,7 @@ public class RenderColumn extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityColumn) tileentity, d, d1, d2, f);
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
+		render((TileEntityColumn) tileentity, x, y, z);
 	}
 }

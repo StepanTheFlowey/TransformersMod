@@ -66,12 +66,20 @@ public class ModelEnergyPort extends MowzieModelBase {
 
 	public void render() {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(base.offsetX, base.offsetY, base.offsetZ);
-		GL11.glTranslatef(base.rotationPointX * 0.0625F, base.rotationPointY * 0.0625F, base.rotationPointZ * 0.0625F);
+		GL11.glTranslatef(
+						base.offsetX + base.rotationPointX * 0.0625F,
+						base.offsetY + base.rotationPointY * 0.0625F,
+						base.offsetZ + base.rotationPointZ * 0.0625F
+		);
 		GL11.glScaled(1.0103125D, 1.0103125D, 1.0103125D);
-		GL11.glTranslatef(-base.offsetX, -base.offsetY, -base.offsetZ);
-		GL11.glTranslatef(-base.rotationPointX * 0.0625F, -base.rotationPointY * 0.0625F, -base.rotationPointZ * 0.0625F);
+		GL11.glTranslatef(
+						-base.offsetX - base.rotationPointX * 0.0625F,
+						-base.offsetY - base.rotationPointY * 0.0625F,
+						-base.offsetZ - base.rotationPointZ * 0.0625F
+		);
+
 		base.render(0.0625F);
+
 		GL11.glPopMatrix();
 	}
 }

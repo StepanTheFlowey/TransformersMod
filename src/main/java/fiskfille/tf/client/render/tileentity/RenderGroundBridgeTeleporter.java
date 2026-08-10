@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.render.shader.PortalShader;
 import fiskfille.tf.common.block.TFBlocks;
@@ -18,7 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 
-public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
+@SideOnly(Side.CLIENT)
+public final class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/misc/portal_effect.png");
 	private PortalShader shader;
 
@@ -31,7 +34,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		}
 	}
 
-	public void render(final TileEntityGroundBridgeTeleporter tileentity, final double x, final double y, final double z, final float partialTicks) {
+	private void render(final TileEntityGroundBridgeTeleporter tileentity, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
 
 		if(tileentity.getWorldObj() != null) {
@@ -66,16 +69,16 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 
 			GL11.glScalef(f1, f1, 1);
 			GL11.glColor3f(1, 1, 1);
-			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
+			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 
 			if(shader == null || TFConfig.oldPortalRender) {
 				bindTexture(TextureMap.locationBlocksTexture);
-				drawPortalOld(0, 0, 0, 1.9425F, 1.5F, false);
-				drawPortalOld(0, 0, 0, 1.9425F, 1.5F, true);
+				drawPortalOld(false);
+				drawPortalOld(true);
 			}
 			else {
 				bindTexture(texture);
@@ -86,27 +89,26 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 				shader.setTime(tileentity.ticks + partialTicks);
 				GL11.glRotatef((tileentity.ticks + partialTicks) * 2, 0, 0, 1);
 
-				drawPortal(0, 0, 0.6F, 1.9F, false);
-				drawPortal(0, 0, 0.6F, 1.9F, true);
+				drawPortal(false);
+				drawPortal(true);
 
 				shader.stop();
-				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
-				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 				GL11.glPopAttrib();
 			}
 
+			TFRenderHelper.resetLighting();
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 			GL11.glEnable(GL11.GL_LIGHTING);
-			TFRenderHelper.resetLighting();
 			GL11.glPopMatrix();
 		}
 	}
 
-	public void drawPortal(final float offsetX, final float offsetY, final float offsetZ, final float scale, final boolean invert) {
+	private void drawPortal(final boolean invert) {
 		GL11.glPushMatrix();
 		GL11.glRotatef(180, 0, 0, 1);
-		GL11.glTranslatef(offsetX, offsetY, offsetZ);
-		GL11.glScalef(scale, scale, 1);
+		GL11.glTranslatef(0, 0, 0.6F);
+		GL11.glScalef(1.9F, 1.9F, 1);
+
 		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawing(GL11.GL_TRIANGLES);
 
@@ -182,15 +184,11 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	public void drawPortalOld(final float offsetX, final float offsetY, final float offsetZ, final float scale, final float radius, final boolean invert) {
+	private void drawPortalOld(final boolean invert) {
 		GL11.glPushMatrix();
 		GL11.glRotatef(180, 0, 0, 1);
+		GL11.glScalef(1.9425F, 1.9425F, 1);
 
-		if(offsetX != 0 || offsetY != 0 || offsetZ != 0) {
-			GL11.glTranslatef(offsetX, offsetY, offsetZ);
-		}
-
-		GL11.glScalef(scale, scale, 1);
 		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawing(GL11.GL_TRIANGLES);
 
@@ -201,8 +199,8 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 		final float zoom = 46 * (16F / icon.getIconWidth());
 
 		for(int j = 0; j <= corners; ++j) {
-			final Vec3 pos1 = Vec3.createVectorHelper(0, radius, 0);
-			final Vec3 pos2 = Vec3.createVectorHelper(0, radius, 0);
+			final Vec3 pos1 = Vec3.createVectorHelper(0, 1.5, 0);
+			final Vec3 pos2 = Vec3.createVectorHelper(0, 1.5, 0);
 			pos1.rotateAroundZ(angle * j * (float) Math.PI / 180F);
 			pos2.rotateAroundZ(angle * (j - 1) * (float) Math.PI / 180F);
 
@@ -239,7 +237,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityGroundBridgeTeleporter) tileentity, d, d1, d2, f);
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
+		render((TileEntityGroundBridgeTeleporter) tileentity, x, y, z, partialTicks);
 	}
 }

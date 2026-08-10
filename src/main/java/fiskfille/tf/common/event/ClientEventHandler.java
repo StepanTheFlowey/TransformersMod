@@ -211,7 +211,7 @@ public class ClientEventHandler {
 					final Transformer transformer = TFHelper.getTransformerFromArmor(player, 2);
 					final RenderManager renderManager = RenderManager.instance;
 
-					GL11.glColor3f(1F, 1F, 1F);
+					GL11.glColor3f(1, 1, 1);
 
 					// renderArrowsStuckInEntity(player, partialTicks); TODO
 

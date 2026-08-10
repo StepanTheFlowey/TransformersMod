@@ -13,40 +13,37 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderBassCharge extends Render {
+public final class RenderBassCharge extends Render {
 	private final ModelBassCharge model = new ModelBassCharge();
 
 	@Override
-	public void doRender(final Entity entity, final double x, final double y, final double z, final float f, final float partialTicks) {
-		final float pitch = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
-		final float yaw = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
-		final float f1 = 0.2F + entity.ticksExisted / 10F;
-
+	public void doRender(final Entity entity, final double x, final double y, final double z, final float entityYaw, final float partialTicks) {
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
-		GL11.glRotatef(pitch, 1F, 0F, 0F);
-		GL11.glRotatef(yaw, 0F, 1F, 0F);
+		GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 1, 0, 0);
+		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks, 0, 1, 0);
+		final float f1 = 0.2F + entity.ticksExisted / 10F;
 		GL11.glScalef(f1, f1, f1);
-		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glDepthMask(false);
 		GL11.glColor4f(112F / 255F, 145F / 255F, 1F, (20 - entity.ticksExisted) / 20F);
 
 		model.render();
 
+		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);
 		GL11.glPopMatrix();
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(final Entity p_110775_1_) {
+	protected ResourceLocation getEntityTexture(final Entity entity) {
 		return TextureMap.locationItemsTexture;
 	}
 }

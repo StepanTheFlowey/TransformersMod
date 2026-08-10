@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler {
+public final class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler {
 	public static final RenderBlockEnergonOre instance = new RenderBlockEnergonOre();
 	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 
@@ -28,7 +28,7 @@ public class RenderBlockEnergonOre implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public void renderInventoryBlock(final Block block, final int metadata, final int modelID, final RenderBlocks renderer) {
-		GL11.glRotatef(90F, 0F, 1F, 0F);
+		GL11.glRotatef(90, 0, 1, 0);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
 		BlockEnergonOre.renderPass = 0;

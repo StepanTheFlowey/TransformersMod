@@ -1,6 +1,6 @@
 package fiskfille.tf.client.render.shader;
 
-public class PortalShader extends ShaderProgram {
+public final class PortalShader extends ShaderProgram {
 	public PortalShader() throws Exception {
 		super("portal.vsh", "portal.fsh");
 	}

@@ -10,7 +10,7 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemDataCore implements IItemRenderer {
+public final class RenderItemDataCore implements IItemRenderer {
 	public final RenderBlocks renderBlocks = RenderBlocks.getInstance();
 
 	@Override
@@ -25,7 +25,7 @@ public class RenderItemDataCore implements IItemRenderer {
 
 	@Override
 	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor3f(1, 1, 1);
 
 		float scale = type != ItemRenderType.INVENTORY ? 0.5F : 1F;
 		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED) {
@@ -43,9 +43,9 @@ public class RenderItemDataCore implements IItemRenderer {
 		final Block block = TFBlocks.groundBridgeControlPanel;
 		final Tessellator tessellator = Tessellator.instance;
 
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
 
 		for(int i = 0; i < 2; ++i) {
 			final IIcon icon = itemstack.getItem().getIcon(itemstack, i);

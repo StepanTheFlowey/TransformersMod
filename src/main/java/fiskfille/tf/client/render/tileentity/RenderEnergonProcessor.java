@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tileentity.ModelEnergonProcessor;
 import fiskfille.tf.common.tileentity.TileEntityEnergonProcessor;
@@ -10,32 +12,35 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
+@SideOnly(Side.CLIENT)
+public final class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 	private final ModelEnergonProcessor model = new ModelEnergonProcessor();
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energon_processor.png");
+	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energon_processor_lights.png");
 
-	public void render(final TileEntityEnergonProcessor tileentity, final double x, final double y, final double z, final float partialTicks) {
+	private void render(final TileEntityEnergonProcessor tileentity, final double x, final double y, final double z) {
 		int metadata = 0;
 
 		if(tileentity.getWorldObj() != null) {
 			metadata = tileentity.getBlockMetadata();
 		}
 
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GL11.glScalef(1F, -1F, -1F);
-		GL11.glRotatef(metadata * 90, 0F, 1F, 0F);
-
 		bindTexture(texture);
-		model.setBreaking(false);
+		GL11.glPushMatrix();
+		GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
+		GL11.glScalef(1, -1, -1);
+		GL11.glRotatef(metadata * 90, 0, 1, 0);
+
 		model.render(tileentity);
 
-		bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energon_processor_lights.png"));
+		bindTexture(textureLights);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
+
 		model.render(tileentity);
+
 		TFRenderHelper.resetLighting();
 		GL11.glEnable(GL11.GL_LIGHTING);
 
@@ -43,20 +48,21 @@ public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 			final int progress = TFRenderHelper.getBlockDestroyProgress(tileentity.getWorldObj(), tileentity.xCoord, tileentity.yCoord, tileentity.zCoord);
 
 			if(progress >= 0) {
-				OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 				bindTexture(new ResourceLocation(String.format("textures/blocks/destroy_stage_%s.png", progress)));
 				GL11.glColor4f(1, 1, 1, 0.5F);
-				GL11.glPushMatrix();
+
+				GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
 				GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+				GL11.glEnable(GL11.GL_ALPHA_TEST);
 				GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-				GL11.glEnable(GL11.GL_ALPHA_TEST);
+				OpenGlHelper.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_SRC_COLOR, GL11.GL_ONE, GL11.GL_ZERO);
 				model.setBreaking(true);
+
 				model.render(tileentity);
-				GL11.glDisable(GL11.GL_ALPHA_TEST);
+
+				model.setBreaking(false);
 				GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
-				GL11.glEnable(GL11.GL_ALPHA_TEST);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glPopMatrix();
+				GL11.glPopAttrib();
 			}
 		}
 
@@ -65,7 +71,7 @@ public class RenderEnergonProcessor extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityEnergonProcessor) tileentity, d, d1, d2, f);
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
+		render((TileEntityEnergonProcessor) tileentity, x, y, z);
 	}
 }

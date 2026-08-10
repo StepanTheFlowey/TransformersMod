@@ -19,17 +19,16 @@ public class ASMHooksClient {
 	public static int getBrightnessForRender(final Entity entity) {
 		if(entity instanceof EntityPlayer) {
 			final float scale = TFHelper.getHeight((EntityPlayer) entity) / 1.8F;
-
 			return MathHelper.floor_double(entity.boundingBox.minY + scale * 1.62F);
 		}
 
-		final double d0 = (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.66D;
-		return MathHelper.floor_double(entity.posY - entity.yOffset + d0);
+		final double offset = (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.66D;
+		return MathHelper.floor_double(entity.posY - entity.yOffset + offset);
 	}
 
 	public static void applyPlayerRenderTranslation(final RenderPlayer render, final AbstractClientPlayer player, final double x, final double y, final double z) {
 		if(player == Minecraft.getMinecraft().thePlayer) {
-			GL11.glTranslatef(0F, player.yOffset - 1.62F, 0F);
+			GL11.glTranslatef(0, player.yOffset - 1.62F, 0);
 		}
 
 		GL11.glTranslated(x, y, z);
@@ -40,6 +39,6 @@ public class ASMHooksClient {
 	}
 
 	public static void renderSlotPost(final GuiContainer gui, final Slot slot) {
-		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+		OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
 	}
 }

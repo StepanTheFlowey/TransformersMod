@@ -36,7 +36,7 @@ public class GuiSelectReceivers extends GuiScreen {
 
 	public final TileEntity owner;
 	public final IEnergyTransmitter transmitter;
-	public final List<Integer> layers = Lists.newArrayList();
+	public final ArrayList<Integer> layers = new ArrayList<>();
 	public DimensionalCoords[] coordArray;
 	public GuiVerticalHeightSlider heightSlider;
 
@@ -454,7 +454,7 @@ public class GuiSelectReceivers extends GuiScreen {
 		if(layers.size() > 1) {
 			for(int i = 0; i < layers.size(); i += layers.size() - 1) {
 				final float f = (float) i / (layers.size() - 1);
-				drawString(mc.fontRenderer, layers.get(i) + "", heightSlider.xPosition + heightSlider.width + 3, heightSlider.yPosition + (int) ((1 - f) * (heightSlider.height - 8)), 0x4C4C4C);
+				drawString(mc.fontRenderer, String.valueOf(layers.get(i)), heightSlider.xPosition + heightSlider.width + 3, heightSlider.yPosition + (int) ((1 - f) * (heightSlider.height - 8)), 0x4C4C4C);
 			}
 		}
 

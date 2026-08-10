@@ -161,7 +161,7 @@ public class ItemCSD extends Item {
 
 		public IChatComponent getFormatted() {
 			final ChatStyle green = new ChatStyle().setColor(EnumChatFormatting.GREEN);
-			return new ChatComponentTranslation("csd.format", new ChatComponentText(TFDimensionHelper.getDimensionName(dimension)).setChatStyle(green), new ChatComponentText(posX + "").setChatStyle(green), new ChatComponentText(posY + "").setChatStyle(green), new ChatComponentText(posZ + "").setChatStyle(green));
+			return new ChatComponentTranslation("csd.format", new ChatComponentText(TFDimensionHelper.getDimensionName(dimension)).setChatStyle(green), new ChatComponentText(Integer.toString(posX)).setChatStyle(green), new ChatComponentText(Integer.toString(posY)).setChatStyle(green), new ChatComponentText(Integer.toString(posZ)).setChatStyle(green));
 		}
 
 		public void toBytes(final ByteBuf buf) {

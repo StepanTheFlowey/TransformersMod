@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -149,10 +150,10 @@ public final class TFRenderHelper {
 		GL11.glRotatef(-thePlayer.rotationPitch, 1, 0, 0);
 		GL11.glScalef(0.02F, 0.02F, -0.02F);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_BLEND);
-		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDepthMask(false);
+		OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
 
 		final FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
 		final double i = fontrenderer.getStringWidth(s) / 2D;
@@ -170,9 +171,8 @@ public final class TFRenderHelper {
 
 		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, -1);
 
-		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glColor3f(1, 1, 1);
+		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 
@@ -491,43 +491,34 @@ public final class TFRenderHelper {
 		final Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
-		tessellator.setNormal(0F, -1F, 0F);
-		renderer.renderFaceYNeg(block, 0D, 0D, 0D, block.getIcon(0, meta));
+		tessellator.setNormal(0, -1, 0);
+		renderer.renderFaceYNeg(block, 0, 0, 0, block.getIcon(0, meta));
 		tessellator.draw();
 
 		tessellator.startDrawingQuads();
-		tessellator.setNormal(0F, 1F, 0F);
-		renderer.renderFaceYPos(block, 0D, 0D, 0D, block.getIcon(1, meta));
+		tessellator.setNormal(0, 1, 0);
+		renderer.renderFaceYPos(block, 0, 0, 0, block.getIcon(1, meta));
 		tessellator.draw();
 
 		tessellator.startDrawingQuads();
-		tessellator.setNormal(0F, 0F, -1F);
-		renderer.renderFaceZNeg(block, 0D, 0D, 0D, block.getIcon(2, meta));
+		tessellator.setNormal(0, 0, -1);
+		renderer.renderFaceZNeg(block, 0, 0, 0, block.getIcon(2, meta));
 		tessellator.draw();
 
 		tessellator.startDrawingQuads();
-		tessellator.setNormal(0F, 0F, 1F);
-		renderer.renderFaceZPos(block, 0D, 0D, 0D, block.getIcon(3, meta));
+		tessellator.setNormal(0, 0, 1);
+		renderer.renderFaceZPos(block, 0, 0, 0, block.getIcon(3, meta));
 		tessellator.draw();
 
 		tessellator.startDrawingQuads();
-		tessellator.setNormal(-1F, 0F, 0F);
-		renderer.renderFaceXNeg(block, 0D, 0D, 0D, block.getIcon(4, meta));
+		tessellator.setNormal(-1, 0, 0);
+		renderer.renderFaceXNeg(block, 0, 0, 0, block.getIcon(4, meta));
 		tessellator.draw();
 
 		tessellator.startDrawingQuads();
-		tessellator.setNormal(1F, 0F, 0F);
-		renderer.renderFaceXPos(block, 0D, 0D, 0D, block.getIcon(5, meta));
+		tessellator.setNormal(1, 0, 0);
+		renderer.renderFaceXPos(block, 0, 0, 0, block.getIcon(5, meta));
 		tessellator.draw();
-	}
-
-	public static void renderBlockAllFaces(final RenderBlocks renderer, final Block block, final int x, final int y, final int z, final IIcon icon) {
-		renderer.renderFaceYNeg(block, x, y, z, icon);
-		renderer.renderFaceYPos(block, x, y, z, icon);
-		renderer.renderFaceZNeg(block, x, y, z, icon);
-		renderer.renderFaceZPos(block, x, y, z, icon);
-		renderer.renderFaceXNeg(block, x, y, z, icon);
-		renderer.renderFaceXPos(block, x, y, z, icon);
 	}
 
 	public static boolean shouldOverrideView(final EntityPlayer player) {
@@ -539,23 +530,30 @@ public final class TFRenderHelper {
 	}
 
 	public static void renderItemIntoGUI(final int x, final int y, final ItemStack itemstack) {
-		if(itemstack == null) {
-			return;
-		}
-
-		FontRenderer font = itemstack.getItem().getFontRenderer(itemstack);
-		if(font == null) {
-			font = Minecraft.getMinecraft().fontRenderer;
-		}
+		final FontRenderer font = getItemstackFont(itemstack);
 
 		itemRender.renderItemAndEffectIntoGUI(font, Minecraft.getMinecraft().getTextureManager(), itemstack, x, y);
 		if(itemstack.stackSize > 1) {
-			itemRender.renderItemOverlayIntoGUI(font, Minecraft.getMinecraft().getTextureManager(), itemstack, x, y, itemstack.stackSize + "");
+			itemRender.renderItemOverlayIntoGUI(font, Minecraft.getMinecraft().getTextureManager(), itemstack, x, y, Integer.toString(itemstack.stackSize));
 		}
 	}
 
+	private static FontRenderer getItemstackFont(ItemStack itemstack) {
+		final Item item = itemstack.getItem();
+		if(item == null) {
+			return Minecraft.getMinecraft().fontRenderer;
+		}
+
+		final FontRenderer font = item.getFontRenderer(itemstack);
+		if(font == null) {
+			return Minecraft.getMinecraft().fontRenderer;
+		}
+
+		return font;
+	}
+
 	public static void setupRenderItemIntoGUI() {
-		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
+		GL11.glPushAttrib(GL11.GL_ENABLE_BIT | GL11.GL_LIGHTING_BIT);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glEnable(GL11.GL_LIGHTING);

@@ -22,11 +22,11 @@ public class GuiIconFlat extends GuiButtonFlat {
 		if(visible) {
 			mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
 
-			GL11.glColor3f(1F, 1F, 1F);
+			GL11.glColor3f(1, 1, 1);
 			field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
 
 			GL11.glEnable(GL11.GL_BLEND);
-			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+			OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			mouseDragged(mc, mouseX, mouseY);
 

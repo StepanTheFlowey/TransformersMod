@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tileentity.ModelControlPanel;
 import fiskfille.tf.common.block.BlockControlPanel;
@@ -19,26 +21,25 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public final class RenderControlPanel extends TileEntitySpecialRenderer {
-	private static final ResourceLocation texturePanel = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel.png");
-	private static final ResourceLocation texturePanelLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel_lights.png");
-	private static final ResourceLocation textureEnergy = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_meter.png");
-
 	private final ModelControlPanel model = new ModelControlPanel();
+	private final ResourceLocation texturePanel = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel.png");
+	private final ResourceLocation texturePanelLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel_lights.png");
+	private final ResourceLocation textureEnergy = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_meter.png");
 	private final ItemRenderer itemRenderer = new ItemRenderer(Minecraft.getMinecraft());
 
-	public void render(final TileEntityControlPanel tile, final double x, final double y, final double z, final float partialTicks) {
+	private void render(final TileEntityControlPanel tile, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
 		if(tile.getWorldObj() != null) {
 			metadata = tile.getBlockMetadata();
 		}
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
-		GL11.glScalef(1, -1, -1);
-		GL11.glRotatef(BlockControlPanel.getDirection(metadata) * 90 + 180, 0, 1, 0);
-
 		if(BlockControlPanel.isBlockLeftSideOfPanel(metadata)) {
+			GL11.glPushMatrix();
+			GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
+			GL11.glScalef(1, -1, -1);
+			GL11.glRotatef(BlockControlPanel.getDirection(metadata) * 90 + 180, 0, 1, 0);
 			GL11.glTranslatef(0.5F, 0, 0);
 
 			GL11.glPushMatrix();
@@ -70,12 +71,10 @@ public final class RenderControlPanel extends TileEntitySpecialRenderer {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 			bindTexture(texturePanel);
-			model.setBreaking(false);
 			model.render(tile, partialTicks);
 
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 			bindTexture(texturePanelLights);
-			model.setBreaking(false);
 			model.render(tile, partialTicks);
 			model.table1.postRender(0.0625F);
 			model.table2.postRender(0.0625F);
@@ -119,18 +118,18 @@ public final class RenderControlPanel extends TileEntitySpecialRenderer {
 			model.screen2.postRender(0.0625F);
 			GL11.glTranslatef(0, 0, -0.001F);
 
-			renderText(StatCollector.translateToLocal("ground_bridge.destination"), 0, 0, 0, -1);
-			renderText(StatCollector.translateToLocalFormatted("ground_bridge.destination.format", data.destination.posX, tile.hasUpgrade(DataCore.leveler) ? String.format("%s -> %s", data.destination.posY, data.modifiedDestY) : data.destination.posY, data.destination.posZ, dimensionName), 1, 0, 0, -1);
+			renderText(StatCollector.translateToLocal("ground_bridge.destination"), 0, 0, -1);
+			renderText(StatCollector.translateToLocalFormatted("ground_bridge.destination.format", data.destination.posX, tile.hasUpgrade(DataCore.leveler) ? String.format("%s -> %s", data.destination.posY, data.modifiedDestY) : data.destination.posY, data.destination.posZ, dimensionName), 1, 0, -1);
 
 			if(!data.errors.isEmpty()) {
-				renderText(StatCollector.translateToLocal("ground_bridge.error"), 2, 0, 0.025F, 0xC10000);
-				renderText(data.errors.get(0).translate(), 3, 0, 0.025F, 0xC10000);
+				renderText(StatCollector.translateToLocal("ground_bridge.error"), 2, 0.025F, 0xC10000);
+				renderText(data.errors.get(0).translate(), 3, 0.025F, 0xC10000);
 
 				if(data.errors.size() == 1) {
-					renderText(StatCollector.translateToLocal("ground_bridge.error.no_other_errors"), 7, 0, 0, -1);
+					renderText(StatCollector.translateToLocal("ground_bridge.error.no_other_errors"), 7, 0, -1);
 				}
 				else {
-					renderText(StatCollector.translateToLocalFormatted("ground_bridge.error.other_error" + (tile.data.errors.size() == 2 ? "" : "s"), tile.data.errors.size() - 1), 7, 0, 0, 0xC10000);
+					renderText(StatCollector.translateToLocalFormatted("ground_bridge.error.other_error" + (tile.data.errors.size() == 2 ? "" : "s"), tile.data.errors.size() - 1), 7, 0, 0xC10000);
 				}
 			}
 
@@ -156,7 +155,7 @@ public final class RenderControlPanel extends TileEntitySpecialRenderer {
 				model.dimPanel7.postRender(0.0625F);
 				GL11.glTranslatef(0.345F, -0.025F, -0.0625F * 6.3F);
 				GL11.glRotatef(5, 1, 0, 0);
-				renderCenteredText(data.destination.dimension + "", 0, 0.02F);
+				renderCenteredText(Integer.toString(data.destination.dimension), 0, 0.02F);
 				GL11.glPopMatrix();
 
 				GL11.glPopMatrix();
@@ -206,32 +205,32 @@ public final class RenderControlPanel extends TileEntitySpecialRenderer {
 				final int progress = TFRenderHelper.getBlockDestroyProgress(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
 
 				if(progress >= 0) {
-					OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 					bindTexture(new ResourceLocation(String.format("textures/blocks/destroy_stage_%s.png", progress)));
 					GL11.glColor4f(1, 1, 1, 0.5F);
-					GL11.glPushMatrix();
+
+					GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
 					GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+					GL11.glEnable(GL11.GL_ALPHA_TEST);
 					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-					GL11.glEnable(GL11.GL_ALPHA_TEST);
+					OpenGlHelper.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_SRC_COLOR, GL11.GL_ONE, GL11.GL_ZERO);
 					model.setBreaking(true);
+
 					model.render(tile, partialTicks);
-					GL11.glDisable(GL11.GL_ALPHA_TEST);
+
+					model.setBreaking(false);
 					GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
-					GL11.glEnable(GL11.GL_ALPHA_TEST);
-					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glPopMatrix();
+					GL11.glPopAttrib();
 				}
 			}
 
 			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glPopMatrix();
 		}
-
-		GL11.glPopMatrix();
 	}
 
-	private void renderText(final String s, final int line, final float x, final float y, final int color) {
+	private void renderText(final String s, final int line, final float y, final int color) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x + 0.05F, y + 0.0375F + 0.05F * line, -0.001F);
+		GL11.glTranslatef(0.05F, y + 0.0375F + 0.05F * line, -0.001F);
 		GL11.glScalef(0.004F, 0.004F, -0.004F);
 		GL11.glColor3f(1, 1, 1);
 		GL11.glDisable(GL11.GL_LIGHTING);
@@ -256,7 +255,7 @@ public final class RenderControlPanel extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityControlPanel) tileentity, d, d1, d2, f);
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
+		render((TileEntityControlPanel) tileentity, x, y, z, partialTicks);
 	}
 }

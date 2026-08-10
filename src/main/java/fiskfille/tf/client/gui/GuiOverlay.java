@@ -72,7 +72,7 @@ public class GuiOverlay extends Gui {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(0F, 0F, 0F, 0.3F);
+			GL11.glColor4f(0, 0, 0, 0.3F);
 
 			final int offset = Math.round((1 - Math.min(TFHelper.getTransformationTimer(player), stealthModeTimer)) * 210);
 			int x = 6 - offset;
@@ -91,16 +91,16 @@ public class GuiOverlay extends Gui {
 			drawTexturedModalRect(x + 17, y, 0, 0, 102, 12);
 
 			if(hasSniper) {
-				GL11.glColor4f(0F, 1F, 1F, 0.5F);
+				GL11.glColor4f(0, 1, 1, 0.5F);
 			}
 			else {
-				GL11.glColor4f(1F, 0F, 0F, 0.5F);
+				GL11.glColor4f(1, 0, 0, 0.5F);
 			}
 
 			// Charge Bar
 			drawTexturedModalRect(x + 18, y + 1, 0, 0, TFShootManager.laserCharge * 2, 10);
 
-			GL11.glColor4f(0F, 0F, 0F, 0.2F);
+			GL11.glColor4f(0, 0, 0, 0.2F);
 			drawTexturedModalRect(x - 1, y, 0, 0, 16, 16);
 			drawTexturedModalRect(x, y + 1, 0, 0, 14, 14);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -112,7 +112,9 @@ public class GuiOverlay extends Gui {
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 			GL11.glEnable(GL11.GL_LIGHTING);
+
 			itemRenderer.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1, y);
+
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glDepthMask(true);
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -224,8 +226,8 @@ public class GuiOverlay extends Gui {
 					if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && heldItem.getItem() == TFItems.vurpsSniper && TFDataManager.getZoomTimer(player) > 7) {
 						GL11.glDisable(GL11.GL_DEPTH_TEST);
 						GL11.glDepthMask(false);
-						OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-						GL11.glColor3f(1F, 1F, 1F);
+						OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
+						GL11.glColor3f(1, 1, 1);
 						GL11.glDisable(GL11.GL_ALPHA_TEST);
 						Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
@@ -240,7 +242,7 @@ public class GuiOverlay extends Gui {
 						GL11.glDepthMask(true);
 						GL11.glEnable(GL11.GL_DEPTH_TEST);
 						GL11.glEnable(GL11.GL_ALPHA_TEST);
-						GL11.glColor3f(1F, 1F, 1F);
+						GL11.glColor3f(1, 1, 1);
 					}
 				}
 			}

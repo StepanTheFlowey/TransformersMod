@@ -10,7 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
+public final class RenderBlockEnergonTank implements ISimpleBlockRenderingHandler {
 	public static final RenderBlockEnergonTank instance = new RenderBlockEnergonTank();
 	public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
 

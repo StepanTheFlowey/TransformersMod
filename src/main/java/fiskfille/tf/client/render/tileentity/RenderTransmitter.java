@@ -1,5 +1,7 @@
 package fiskfille.tf.client.render.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tileentity.ModelTransmitter;
 import fiskfille.tf.common.tileentity.TileEntityTransmitter;
@@ -11,12 +13,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-public class RenderTransmitter extends TileEntitySpecialRenderer {
+@SideOnly(Side.CLIENT)
+public final class RenderTransmitter extends TileEntitySpecialRenderer {
 	private final ModelTransmitter model = new ModelTransmitter();
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transmitter.png");
 	private final ResourceLocation textureLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/transmitter_lights.png");
 
-	public void render(final TileEntityTransmitter transmitter, final double x, final double y, final double z, final float partialTicks) {
+	private void render(final TileEntityTransmitter transmitter, final double x, final double y, final double z, final float partialTicks) {
 		final World world = transmitter.getWorldObj();
 		int metadata = 0;
 
@@ -30,7 +33,6 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 			GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
 			GL11.glScalef(1, -1, -1);
 			GL11.glRotatef(metadata * 90, 0, 1, 0);
-			model.setBreaking(false);
 
 			model.render(transmitter, partialTicks);
 
@@ -49,22 +51,21 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 				final int progress = TFRenderHelper.getBlockDestroyProgress(world, transmitter.xCoord, transmitter.yCoord, transmitter.zCoord);
 
 				if(progress >= 0) {
-					OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 					bindTexture(new ResourceLocation(String.format("textures/blocks/destroy_stage_%s.png", progress)));
 					GL11.glColor4f(1, 1, 1, 0.5F);
-					GL11.glPushMatrix();
+
+					GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
 					GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
-					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 					GL11.glEnable(GL11.GL_ALPHA_TEST);
+					GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+					OpenGlHelper.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_SRC_COLOR, GL11.GL_ONE, GL11.GL_ZERO);
 					model.setBreaking(true);
 
 					model.render(transmitter, partialTicks);
 
-					GL11.glDisable(GL11.GL_ALPHA_TEST);
+					model.setBreaking(false);
 					GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
-					GL11.glEnable(GL11.GL_ALPHA_TEST);
-					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glPopMatrix();
+					GL11.glPopAttrib();
 				}
 			}
 
@@ -78,7 +79,7 @@ public class RenderTransmitter extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
-		render((TileEntityTransmitter) tileentity, d, d1, d2, f);
+	public void renderTileEntityAt(final TileEntity tileentity, final double x, final double y, final double z, final float partialTicks) {
+		render((TileEntityTransmitter) tileentity, x, y, z, partialTicks);
 	}
 }

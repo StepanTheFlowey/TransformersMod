@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants.NBT;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemEnergonTank extends RenderItemTileEntity {
+public final class RenderItemEnergonTank extends RenderItemTileEntity {
 	public RenderItemEnergonTank() {
 		super(TFBlocks.energonFluidTank);
 	}
@@ -25,16 +25,19 @@ public class RenderItemEnergonTank extends RenderItemTileEntity {
 			tileentity.readFromNBT(nbt);
 		}
 
-		if(type == ItemRenderType.INVENTORY) {
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glRotatef(90, 0, 1, 0);
-			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		}
-		else if(type == ItemRenderType.ENTITY) {
-			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		switch(type) {
+			case INVENTORY:
+				GL11.glEnable(GL11.GL_ALPHA_TEST);
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				GL11.glRotatef(90, 0, 1, 0);
+				GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+				break;
+
+			case ENTITY:
+				GL11.glRotatef(180, 0, 1, 0);
+				GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+				break;
 		}
 
 		GL11.glEnable(GL11.GL_CULL_FACE);

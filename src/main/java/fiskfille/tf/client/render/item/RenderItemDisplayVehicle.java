@@ -3,13 +3,12 @@ package fiskfille.tf.client.render.item;
 import fiskfille.tf.TransformersAPI;
 import fiskfille.tf.client.model.transformer.definition.TFModelRegistry;
 import fiskfille.tf.client.model.transformer.definition.TransformerModel;
-import fiskfille.tf.client.model.transformer.vehicle.ModelVehicleBase;
 import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemDisplayVehicle implements IItemRenderer {
+public final class RenderItemDisplayVehicle implements IItemRenderer {
 	public TransformerModel getModelFromMetadata(final int metadata) {
 		final Transformer transformer = TransformersAPI.getTransformers().get(metadata);
 
@@ -32,31 +31,34 @@ public class RenderItemDisplayVehicle implements IItemRenderer {
 
 	@Override
 	public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
-		final ModelVehicleBase vehicleModel = getModelFromMetadata(item.getItemDamage()).getVehicleModel();
+		switch(type) {
+			case EQUIPPED_FIRST_PERSON:
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glRotatef(210, 0, 1, 0);
+				GL11.glRotatef(10, 0, 0, 1);
+				GL11.glTranslatef(-0.7F, -2.1F, 0.2F);
+				break;
 
-		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glRotatef(210, 0, 1, 0);
-			GL11.glRotatef(10, 0, 0, 1);
-			GL11.glTranslatef(-0.7F, -2.1F, 0.2F);
-		}
-		else if(type == ItemRenderType.EQUIPPED) {
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glRotatef(-45, 0, 1, 0);
-			GL11.glRotatef(-45, 0, 0, 1);
-			GL11.glTranslatef(0.3F, -0.9F, -0.2F);
-			GL11.glScalef(0.7F, 0.7F, 0.7F);
-		}
-		else if(type == ItemRenderType.INVENTORY) {
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glTranslatef(0, -1, 0);
-		}
-		else if(type == ItemRenderType.ENTITY) {
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glTranslatef(0, -0.5F, 0);
-			GL11.glScalef(0.5F, 0.5F, 0.5F);
+			case EQUIPPED:
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glRotatef(-45, 0, 1, 0);
+				GL11.glRotatef(-45, 0, 0, 1);
+				GL11.glTranslatef(0.3F, -0.9F, -0.2F);
+				GL11.glScalef(0.7F, 0.7F, 0.7F);
+				break;
+
+			case INVENTORY:
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glTranslatef(0, -1, 0);
+				break;
+
+			case ENTITY:
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glTranslatef(0, -0.5F, 0);
+				GL11.glScalef(0.5F, 0.5F, 0.5F);
+				break;
 		}
 
-		vehicleModel.renderDisplayVehicle(item);
+		getModelFromMetadata(item.getItemDamage()).getVehicleModel().renderDisplayVehicle(item);
 	}
 }
