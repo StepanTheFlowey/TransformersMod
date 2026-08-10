@@ -43,10 +43,8 @@ public class BlockGroundBridgeFrame extends Block implements ITileEntityProvider
 
 	@Override
 	public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int side, final float hitX, final float hitY, final float hitZ) {
-		final int metadata = world.getBlockMetadata(x, y, z);
-
 		if(getFrameDirection(world, x, y, z) != null) {
-			if(metadata == 0) {
+			if(world.getBlockMetadata(x, y, z) == 0) {
 				world.setBlockMetadataWithNotify(x, y, z, 1, 2);
 			}
 			else {

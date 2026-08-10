@@ -77,9 +77,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 				for(final TileEntity tile : list) {
 					if(Math.sqrt(getDistanceFrom(tile.xCoord, tile.yCoord, tile.zCoord)) <= TFConfig.controlPanelMaxRange) {
 						if(tile instanceof TileEntityGroundBridgeFrame) {
-							final ForgeDirection direction = BlockGroundBridgeFrame.getFrameDirection(worldObj, tile.xCoord, tile.yCoord, tile.zCoord);
-
-							if(direction != null) {
+							if(BlockGroundBridgeFrame.getFrameDirection(worldObj, tile.xCoord, tile.yCoord, tile.zCoord) != null) {
 								data.framePos = new DimensionalCoords(tile.xCoord, tile.yCoord, tile.zCoord, worldObj.provider.dimensionId);
 								break;
 							}
@@ -93,13 +91,14 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 				final int y = data.framePos.posY;
 				final int z = data.framePos.posZ;
 
-				if(BlockGroundBridgeFrame.getFrameDirection(worldObj, x, y, z) == null) {
+				final ForgeDirection frameDirection = BlockGroundBridgeFrame.getFrameDirection(worldObj, x, y, z);
+				if(frameDirection == null) {
 					data.framePos = null;
 				}
 				else if(!data.activationLeverState) {
 					int dir = worldObj.getBlockMetadata(x, y, z) * 2;
 
-					if(BlockGroundBridgeFrame.getFrameDirection(worldObj, x, y, z) == ForgeDirection.EAST) {
+					if(frameDirection == ForgeDirection.EAST) {
 						dir += 1;
 					}
 
@@ -296,11 +295,18 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		return increments;
 	}
 
+	private boolean isNotAllowedInsidePortal(final Block block) {
+		if(block == null) {
+			return false;
+		}
+		return block != Blocks.air && block != TFBlocks.groundBridgeTeleporter;
+	}
+
 	private boolean isPortalObstructed(final int x, final int y, final int z, final ForgeDirection direction) {
 		if(direction == ForgeDirection.NORTH) {
 			for(int i = 0; i < 5; ++i) {
 				for(int j = 0; j < 3; ++j) {
-					if(!(worldObj.getBlock(x - 1 + j, y + 1 + i, z) == Blocks.air || worldObj.getBlock(x - 1 + j, y + 1 + i, z) == TFBlocks.groundBridgeTeleporter) || !(worldObj.getBlock(x - 2 + i, y + 2 + j, z) == Blocks.air || worldObj.getBlock(x - 2 + i, y + 2 + j, z) == TFBlocks.groundBridgeTeleporter)) {
+					if(isNotAllowedInsidePortal(worldObj.getBlock(x - 1 + j, y + 1 + i, z)) || isNotAllowedInsidePortal(worldObj.getBlock(x - 2 + i, y + 2 + j, z))) {
 						return true;
 					}
 				}
@@ -309,7 +315,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		else {
 			for(int i = 0; i < 5; ++i) {
 				for(int j = 0; j < 3; ++j) {
-					if(!(worldObj.getBlock(x, y + 1 + i, z - 1 + j) == Blocks.air || worldObj.getBlock(x, y + 1 + i, z - 1 + j) == TFBlocks.groundBridgeTeleporter) || !(worldObj.getBlock(x, y + 2 + j, z - 2 + i) == Blocks.air || worldObj.getBlock(x, y + 2 + j, z - 2 + i) == TFBlocks.groundBridgeTeleporter)) {
+					if(isNotAllowedInsidePortal(worldObj.getBlock(x, y + 1 + i, z - 1 + j)) || isNotAllowedInsidePortal(worldObj.getBlock(x, y + 2 + j, z - 2 + i))) {
 						return true;
 					}
 				}

@@ -19,8 +19,7 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 
 public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
-	private final ResourceLocation PORTAL_EFFECT = new ResourceLocation(TransformersMod.MODID, "textures/misc/portal_effect.png");
-
+	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/misc/portal_effect.png");
 	private PortalShader shader;
 
 	public RenderGroundBridgeTeleporter() {
@@ -41,8 +40,8 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 
 		if((metadata & 1) == 1) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
-			GL11.glScalef(1F, -1F, -1F);
+			GL11.glTranslated(x + 0.5D, y + 0.5D, z + 0.5D);
+			GL11.glScalef(1, -1, -1);
 
 			if(tileentity.controlPanel != null) {
 				final TileDataControlPanel data = (TileDataControlPanel) TFTileHelper.getTileData(tileentity.controlPanel);
@@ -66,7 +65,7 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 			f1 = MathHelper.clamp_float(f1, 0, 1);
 
 			GL11.glScalef(f1, f1, 1);
-			GL11.glColor3f(1F, 1F, 1F);
+			GL11.glColor3f(1, 1, 1);
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
@@ -74,28 +73,26 @@ public class RenderGroundBridgeTeleporter extends TileEntitySpecialRenderer {
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 
 			if(shader == null || TFConfig.oldPortalRender) {
-				final float scale = 1.9425F;
-				final float radius = 1.5F;
-
 				bindTexture(TextureMap.locationBlocksTexture);
-				drawPortalOld(0, 0, 0, scale, radius, false);
-				drawPortalOld(0, 0, 0, scale, radius, true);
+				drawPortalOld(0, 0, 0, 1.9425F, 1.5F, false);
+				drawPortalOld(0, 0, 0, 1.9425F, 1.5F, true);
 			}
 			else {
-				final float zOffset = 0.6F;
-				final float scale = 1.9F;
-
-				bindTexture(PORTAL_EFFECT);
+				bindTexture(texture);
+				GL11.glPushAttrib(GL11.GL_TEXTURE_BIT);
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 				shader.start();
 				shader.setTime(tileentity.ticks + partialTicks);
 				GL11.glRotatef((tileentity.ticks + partialTicks) * 2, 0, 0, 1);
-				drawPortal(0, 0, zOffset, scale, false);
-				drawPortal(0, 0, zOffset, scale, true);
+
+				drawPortal(0, 0, 0.6F, 1.9F, false);
+				drawPortal(0, 0, 0.6F, 1.9F, true);
+
 				shader.stop();
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+				GL11.glPopAttrib();
 			}
 
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);

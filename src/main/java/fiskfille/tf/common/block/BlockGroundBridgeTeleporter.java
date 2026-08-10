@@ -123,49 +123,45 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 	public static boolean isNorthSouthFacingFramePresent(final IBlockAccess world, final int x, final int y, final int z) {
 		final Block b = TFBlocks.groundBridgeFrame;
 
-		if(world.getBlock(x, y, z) == b && world.getBlock(x - 1, y, z) == b && world.getBlock(x + 1, y, z) == b) {
-			if(world.getBlock(x - 2, y + 1, z) == b && world.getBlock(x + 2, y + 1, z) == b) {
-				int j = 0;
-
-				for(int i = 0; i < 3; ++i) {
-					if(world.getBlock(x - 3, y + 2 + i, z) == b && world.getBlock(x + 3, y + 2 + i, z) == b) {
-						++j;
-					}
-				}
-
-				if(j == 3) {
-					if(world.getBlock(x - 2, y + 5, z) == b && world.getBlock(x + 2, y + 5, z) == b) {
-						return world.getBlock(x, y + 6, z) == b && world.getBlock(x - 1, y + 6, z) == b && world.getBlock(x + 1, y + 6, z) == b;
-					}
-				}
-			}
-		}
-
-		return false;
+		return
+			world.getBlock(x, y, z) == b &&
+			world.getBlock(x - 1, y, z) == b &&
+			world.getBlock(x + 1, y, z) == b &&
+			world.getBlock(x - 2, y + 1, z) == b &&
+			world.getBlock(x + 2, y + 1, z) == b &&
+			world.getBlock(x - 3, y + 2, z) == b &&
+			world.getBlock(x + 3, y + 2, z) == b &&
+			world.getBlock(x - 3, y + 3, z) == b &&
+			world.getBlock(x + 3, y + 3, z) == b &&
+			world.getBlock(x + 3, y + 4, z) == b &&
+			world.getBlock(x + 3, y + 4, z) == b &&
+			world.getBlock(x + 2, y + 5, z) == b &&
+			world.getBlock(x + 2, y + 5, z) == b &&
+			world.getBlock(x - 1, y + 6, z) == b &&
+			world.getBlock(x + 1, y + 6, z) == b &&
+			world.getBlock(x, y + 6, z) == b;
 	}
 
 	public static boolean isEastWestFacingFramePresent(final IBlockAccess world, final int x, final int y, final int z) {
 		final Block b = TFBlocks.groundBridgeFrame;
 
-		if(world.getBlock(x, y, z) == b && world.getBlock(x, y, z - 1) == b && world.getBlock(x, y, z + 1) == b) {
-			if(world.getBlock(x, y + 1, z - 2) == b && world.getBlock(x, y + 1, z + 2) == b) {
-				int j = 0;
-
-				for(int i = 0; i < 3; ++i) {
-					if(world.getBlock(x, y + 2 + i, z - 3) == b && world.getBlock(x, y + 2 + i, z + 3) == b) {
-						++j;
-					}
-				}
-
-				if(j == 3) {
-					if(world.getBlock(x, y + 5, z - 2) == b && world.getBlock(x, y + 5, z + 2) == b) {
-						return world.getBlock(x, y + 6, z) == b && world.getBlock(x, y + 6, z - 1) == b && world.getBlock(x, y + 6, z + 1) == b;
-					}
-				}
-			}
-		}
-
-		return false;
+		return
+			world.getBlock(x, y, z) == b &&
+			world.getBlock(x, y, z - 1) == b &&
+			world.getBlock(x, y, z + 1) == b &&
+			world.getBlock(x, y + 1, z - 2) == b &&
+			world.getBlock(x, y + 1, z + 2) == b &&
+			world.getBlock(x, y + 2, z - 3) == b &&
+			world.getBlock(x, y + 2, z + 3) == b &&
+			world.getBlock(x, y + 3, z - 3) == b &&
+			world.getBlock(x, y + 3, z + 3) == b &&
+			world.getBlock(x, y + 4, z + 3) == b &&
+			world.getBlock(x, y + 4, z + 3) == b &&
+			world.getBlock(x, y + 5, z + 2) == b &&
+			world.getBlock(x, y + 5, z + 2) == b &&
+			world.getBlock(x, y + 6, z - 1) == b &&
+			world.getBlock(x, y + 6, z + 1) == b &&
+			world.getBlock(x, y + 6, z) == b;
 	}
 
 	public static void fillNorthFacingFrame(final World world, final int x, final int y, final int z, final Block block, final TileEntityControlPanel tile, final boolean returnPortal) {
@@ -266,16 +262,16 @@ public class BlockGroundBridgeTeleporter extends BlockBreakable implements ITile
 		final boolean flag1 = canPaneConnectTo(world, x - 1, y, z, WEST) || canPaneConnectTo(world, x + 1, y, z, EAST);
 
 		if(!flag && flag1) {
-			f = 0F;
-			f1 = 1F;
+			f = 0;
+			f1 = 1;
 		}
 
 		if(flag && !flag1) {
-			f2 = 0F;
-			f3 = 1F;
+			f2 = 0;
+			f3 = 1;
 		}
 
-		setBlockBounds(f, 0F, f2, f1, 1F, f3);
+		setBlockBounds(f, 0, f2, f1, 1, f3);
 	}
 
 	@Override

@@ -19,24 +19,28 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class RenderControlPanel extends TileEntitySpecialRenderer {
+public final class RenderControlPanel extends TileEntitySpecialRenderer {
+	private static final ResourceLocation texturePanel = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel.png");
+	private static final ResourceLocation texturePanelLights = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel_lights.png");
+	private static final ResourceLocation textureEnergy = new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_meter.png");
+
 	private final ModelControlPanel model = new ModelControlPanel();
 	private final ItemRenderer itemRenderer = new ItemRenderer(Minecraft.getMinecraft());
 
 	public void render(final TileEntityControlPanel tile, final double x, final double y, final double z, final float partialTicks) {
 		int metadata = 0;
-
 		if(tile.getWorldObj() != null) {
 			metadata = tile.getBlockMetadata();
 		}
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
-		GL11.glScalef(1F, -1F, -1F);
-		GL11.glRotatef(BlockControlPanel.getDirection(metadata) * 90 + 180, 0F, 1F, 0F);
+		GL11.glScalef(1, -1, -1);
+		GL11.glRotatef(BlockControlPanel.getDirection(metadata) * 90 + 180, 0, 1, 0);
 
 		if(BlockControlPanel.isBlockLeftSideOfPanel(metadata)) {
 			GL11.glTranslatef(0.5F, 0, 0);
+
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -53,11 +57,11 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 				GL11.glScalef(2, 2, 2);
 				GL11.glTranslatef(-0.497F / 2, 0.8765F / 2, (-0.2825F - i * 0.2175F) / 2);
 				GL11.glScalef(-0.155F, -0.155F, 0.155F);
-				GL11.glColor3f(1F, 1F, 1F);
+				GL11.glColor3f(1, 1, 1);
 
 				itemRenderer.renderItem(Minecraft.getMinecraft().thePlayer, itemstack, 0);
 
-				GL11.glColor3f(1F, 1F, 1F);
+				GL11.glColor3f(1, 1, 1);
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glPopMatrix();
 			}
@@ -65,19 +69,18 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-			bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel.png"));
+			bindTexture(texturePanel);
 			model.setBreaking(false);
 			model.render(tile, partialTicks);
 
 			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
-			bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/ground_bridge_control_panel_lights.png"));
+			bindTexture(texturePanelLights);
 			model.setBreaking(false);
 			model.render(tile, partialTicks);
 			model.table1.postRender(0.0625F);
 			model.table2.postRender(0.0625F);
 
 			if(tile.getWorldObj() != null) {
-				final Tessellator tessellator = Tessellator.instance;
 				final float energy = tile.getEnergy();
 
 				if(energy > 0) {
@@ -85,17 +88,20 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 					final float f1 = energy / tile.getMaxEnergy();
 					final float length = f * 18;
 					final float width = f * 4;
+					final Tessellator tessellator = Tessellator.instance;
 					tessellator.startDrawingQuads();
 					tessellator.addVertexWithUV(width, 0, 0, width, length);
 					tessellator.addVertexWithUV(width, 0, length * f1, width, length * (1 - f1));
 					tessellator.addVertexWithUV(0, 0, length * f1, 0, length * (1 - f1));
 					tessellator.addVertexWithUV(0, 0, 0, 0, length);
 
+					bindTexture(textureEnergy);
 					GL11.glPushMatrix();
 					GL11.glDisable(GL11.GL_LIGHTING);
-					bindTexture(new ResourceLocation(TransformersMod.MODID, "textures/models/tiles/energy_meter.png"));
 					GL11.glTranslatef(f * 40, -0.1251F, f * 7);
+
 					tessellator.draw();
+
 					GL11.glEnable(GL11.GL_LIGHTING);
 					GL11.glPopMatrix();
 				}
@@ -112,6 +118,7 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 			model.screen1.postRender(0.0625F);
 			model.screen2.postRender(0.0625F);
 			GL11.glTranslatef(0, 0, -0.001F);
+
 			renderText(StatCollector.translateToLocal("ground_bridge.destination"), 0, 0, 0, -1);
 			renderText(StatCollector.translateToLocalFormatted("ground_bridge.destination.format", data.destination.posX, tile.hasUpgrade(DataCore.leveler) ? String.format("%s -> %s", data.destination.posY, data.modifiedDestY) : data.destination.posY, data.destination.posZ, dimensionName), 1, 0, 0, -1);
 
@@ -131,56 +138,66 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 				GL11.glPushMatrix();
 				model.dimPanel1.postRender(0.0625F);
 				model.dimPanel2.postRender(0.0625F);
+
 				GL11.glPushMatrix();
 				model.dimPanel3.postRender(0.0625F);
 				GL11.glTranslatef(0.3125F, -0.025F, -0.0625F * 5.21F);
-				renderCenteredText("<", 0, 0, 0, -1, 0.00725F);
+				renderCenteredText("<", 0, 0);
 				GL11.glPopMatrix();
+
 				GL11.glPushMatrix();
 				model.dimPanel4.postRender(0.0625F);
 				GL11.glTranslatef(0.3125F, -0.025F, -0.0625F * 5.21F);
-				renderCenteredText(">", 0, 0, 0, -1, 0.00725F);
+				renderCenteredText(">", 0, 0);
 				GL11.glPopMatrix();
+
 				GL11.glPushMatrix();
 				model.dimPanel6.postRender(0.0625F);
 				model.dimPanel7.postRender(0.0625F);
 				GL11.glTranslatef(0.345F, -0.025F, -0.0625F * 6.3F);
 				GL11.glRotatef(5, 1, 0, 0);
-				renderCenteredText(data.destination.dimension + "", 0, 0, 0.02F, -1, 0.00725F);
+				renderCenteredText(data.destination.dimension + "", 0, 0.02F);
 				GL11.glPopMatrix();
+
 				GL11.glPopMatrix();
 			}
 
 			GL11.glPopMatrix();
+
 			GL11.glPushMatrix();
 			model.table6.postRender(0.0625F);
+
 			GL11.glPushMatrix();
 			model.compass1.postRender(0.0625F);
 			GL11.glTranslatef(0, -0.032F, 0);
 			GL11.glRotatef(-90, 1, 0, 0);
-			renderCenteredText(StatCollector.translateToLocal("direction.south.short"), 0, -0.0465F, 0.13F, -1, 0.00725F);
+			renderCenteredText(StatCollector.translateToLocal("direction.south.short"), -0.0465F, 0.13F);
 			GL11.glPopMatrix();
+
 			GL11.glPushMatrix();
 			model.compass2.postRender(0.0625F);
 			GL11.glTranslatef(0, -0.032F, 0);
 			GL11.glRotatef(-90, 0, 1, 0);
 			GL11.glRotatef(-90, 1, 0, 0);
-			renderCenteredText(StatCollector.translateToLocal("direction.west.short"), 0, -0.2395F, -0.0625F, -1, 0.00725F);
+			renderCenteredText(StatCollector.translateToLocal("direction.west.short"), -0.2395F, -0.0625F);
 			GL11.glPopMatrix();
+
 			GL11.glPushMatrix();
 			model.compass3.postRender(0.0625F);
 			GL11.glTranslatef(0, -0.032F, 0);
 			GL11.glRotatef(180, 0, 1, 0);
 			GL11.glRotatef(-90, 1, 0, 0);
-			renderCenteredText(StatCollector.translateToLocal("direction.north.short"), 0, -0.0465F, -0.2575F, -1, 0.00725F);
+			renderCenteredText(StatCollector.translateToLocal("direction.north.short"), -0.0465F, -0.2575F);
 			GL11.glPopMatrix();
+
 			GL11.glPushMatrix();
 			model.compass4.postRender(0.0625F);
 			GL11.glTranslatef(0, -0.032F, 0);
 			GL11.glRotatef(90, 0, 1, 0);
 			GL11.glRotatef(-90, 1, 0, 0);
-			renderCenteredText(StatCollector.translateToLocal("direction.east.short"), 0, 0.1475F, -0.0625F, -1, 0.00725F);
+			renderCenteredText(StatCollector.translateToLocal("direction.east.short"), 0.1475F, -0.0625F);
 			GL11.glPopMatrix();
+
 			GL11.glPopMatrix();
 			GL11.glPopMatrix();
 			TFRenderHelper.resetLighting();
@@ -212,32 +229,28 @@ public class RenderControlPanel extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	protected void renderText(final String s, final int line, final float x, final float y, final int color) {
-		renderText(s, line, x, y, color, 0.004F);
-	}
-
-	protected void renderText(final String s, final int line, final float x, final float y, final int color, final float scale) {
-		final float left = 0.05F;
-		final float top = 0.0375F;
+	private void renderText(final String s, final int line, final float x, final float y, final int color) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
-		GL11.glScalef(scale, scale, -scale);
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glTranslatef(x + 0.05F, y + 0.0375F + 0.05F * line, -0.001F);
+		GL11.glScalef(0.004F, 0.004F, -0.004F);
+		GL11.glColor3f(1, 1, 1);
 		GL11.glDisable(GL11.GL_LIGHTING);
+
 		Minecraft.getMinecraft().fontRenderer.drawSplitString(s, 0, 0, 200, color);
+
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 
-	protected void renderCenteredText(final String s, final int line, final float x, final float y, final int color, final float scale) {
-		final float left = 0.05F;
-		final float top = 0.0375F;
+	private void renderCenteredText(final String s, final float x, final float y) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x + left, y + top + 0.05F * line, -0.001F);
-		GL11.glScalef(scale, scale, -scale);
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glTranslatef(x + 0.05F, y + 0.0375F, -0.001F);
+		GL11.glScalef(0.00725F, 0.00725F, -0.00725F);
+		GL11.glColor3f(1, 1, 1);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		Minecraft.getMinecraft().fontRenderer.drawString(s, -Minecraft.getMinecraft().fontRenderer.getStringWidth(s) / 2, 0, color);
+
+		Minecraft.getMinecraft().fontRenderer.drawString(s, -Minecraft.getMinecraft().fontRenderer.getStringWidth(s) / 2, 0, -1);
+
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
