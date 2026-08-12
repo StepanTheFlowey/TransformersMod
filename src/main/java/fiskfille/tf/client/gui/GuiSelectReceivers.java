@@ -421,7 +421,7 @@ public class GuiSelectReceivers extends GuiScreen {
 							GL11.glColor4f(0, 0.6F, 0, opacity);
 						}
 						else {
-							if(tile instanceof IEnergyReceiver && ((IEnergyReceiver) tile).canReceiveEnergy(owner)) {
+							if(tile instanceof IEnergyReceiver) {
 								final float[] afloat = TFRenderHelper.hexToRGB(((IEnergyReceiver) tile).getMapColor());
 
 								if(tile instanceof IEnergyTransmitter && TFEnergyHelper.isPowering((IEnergyTransmitter) tile, owner)) {
