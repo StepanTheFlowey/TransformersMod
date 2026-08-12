@@ -101,7 +101,6 @@ public class ModelPurgesKatana extends ModelBase {
 		balde6.addBox(-1F, -1F, -0.5F, 2, 2, 2, 0F);
 
 		final ModelRenderer blade17 = new ModelRenderer(this, 0, 23);
-		blade17.setRotationPoint(0F, 0F, 0F);
 		blade17.addBox(-0.5F, 1F, -0.5F, 1, 4, 1, 0F);
 		blade17.addChild(blade18);
 

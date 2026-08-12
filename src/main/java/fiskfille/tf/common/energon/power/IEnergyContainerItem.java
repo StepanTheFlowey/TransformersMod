@@ -9,5 +9,5 @@ public interface IEnergyContainerItem {
 
 	float getEnergyStored(ItemStack itemstack);
 
-	float getEnergyCapacity(ItemStack itemstack);
+	int getEnergyCapacity(ItemStack itemstack);
 }

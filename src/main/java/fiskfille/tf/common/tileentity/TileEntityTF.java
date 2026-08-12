@@ -46,7 +46,7 @@ public abstract class TileEntityTF extends TileEntity {
 		}
 	}
 
-	protected abstract void writeCustomNBT(NBTTagCompound nbt);
+	protected abstract void writeCustomNBT(final NBTTagCompound nbt);
 
-	protected abstract void readCustomNBT(NBTTagCompound nbt);
+	protected abstract void readCustomNBT(final NBTTagCompound nbt);
 }

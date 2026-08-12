@@ -2,4 +2,4 @@ package fiskfille.tf.common.tileentity;
 
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityCrystal extends TileEntity {}
+public final class TileEntityCrystal extends TileEntity {}

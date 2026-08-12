@@ -31,11 +31,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
-public class TileEntityTransmitter extends TileEntityMachineContainer implements IEnergyTransmitter, IFluidHandlerTF, ISidedInventory, IChunkLoaderTile, IMultiTile, ITransmitterRender {
+public final class TileEntityTransmitter extends TileEntityMachineContainer implements IEnergyTransmitter, IFluidHandlerTF, ISidedInventory, IChunkLoaderTile, IMultiTile, ITransmitterRender {
 	public TileDataTransmitter data = new TileDataTransmitter(16000, 6000);
 	public Ticket chunkTicket;
 	public int animationTimer;
@@ -62,7 +62,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 				data.serverTickPre();
 
 				if(getEnergy() > 0 && canActivate()) {
-					final List<ReceiverEntry> receiversToPower = TFEnergyHelper.getReceiversToPower(this);
+					final ArrayList<ReceiverEntry> receiversToPower = TFEnergyHelper.getReceiversToPower(this);
 					final float f = Math.min(getEnergy(), getTransmissionRate()) / receiversToPower.size();
 
 					for(final ReceiverEntry entry : receiversToPower) {
@@ -78,10 +78,10 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 				final FluidStack fluidStack = data.tank.getFluid();
 
 				if(fluidStack != null && fluidStack.amount > 0) {
-					final Map<String, Float> ratios = FluidEnergon.getRatios(fluidStack);
+					final HashMap<String, Float> ratios = FluidEnergon.getRatios(fluidStack);
 					final int max = Math.min(10, fluidStack.amount);
 
-					for(final Map.Entry<String, Float> e : ratios.entrySet()) {
+					for(final HashMap.Entry<String, Float> e : ratios.entrySet()) {
 						final Energon energon = TransformersAPI.getEnergonTypeByName(e.getKey());
 
 						if(energon != null) {
@@ -131,7 +131,7 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(0.35D, 0, 0.35D).addCoord(0, 2, 0);
 
 		if(getBlockMetadata() < 4) {
-			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
+			final HashSet<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
 			for(final ReceiverEntry entry : receivers) {
 				final TileEntity tile = entry.getTile();
@@ -218,13 +218,13 @@ public class TileEntityTransmitter extends TileEntityMachineContainer implements
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return data.storage.getMaxEnergy();
 	}
 
 	@Override
 	public float getEnergyUsage() {
-		return data.storage.getUsage();
+		return data.storage.getEnergyUsage();
 	}
 
 	@Override

@@ -158,7 +158,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		textureWidth = 128;
 		textureHeight = 128;
 		towerenergyorb12 = new ModelRendererBreakable(this, 67, 28);
-		towerenergyorb12.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb12.addBox(-4F, -4F, -6.7F, 8, 8, 1, 0F);
 		tower42 = new ModelRendererBreakable(this, false, 45, 79);
 		tower42.mirror = true;
@@ -166,7 +165,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower42.addBox(-2F, 0F, 0F, 2, 28, 2, 0F);
 		setRotateAngle(tower42, -0.20943951023931953F, 0F, -0.20943951023931953F);
 		towerenergyorb19 = new ModelRendererBreakable(this, 66, 20);
-		towerenergyorb19.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb19.addBox(-3F, -3F, -7.4F, 6, 6, 1, 0F);
 		tower31 = new ModelRendererBreakable(this, 0, 90);
 		tower31.setRotationPoint(0F, 2.5F, 0F);
@@ -182,7 +180,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower48.addBox(0.2F, 12F, -4F, 1, 1, 8, 0F);
 		setRotateAngle(tower48, 0F, 0F, 0.20943951023931953F);
 		towerenergyorb17 = new ModelRendererBreakable(this, 46, 27);
-		towerenergyorb17.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb17.addBox(-4.5F, -4.5F, -6F, 9, 9, 1, 0F);
 		setRotateAngle(towerenergyorb17, 1.5707963267948966F, 0F, 0F);
 		tower50 = new ModelRendererBreakable(this, false, 7, 20);
@@ -206,7 +203,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower135.addBox(-2F, 0F, -5F, 4, 3, 6, 0F);
 		setRotateAngle(tower135, 0.20943951023931953F, 1.5707963267948966F, 0F);
 		towerenergyorb18 = new ModelRendererBreakable(this, 67, 28);
-		towerenergyorb18.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb18.addBox(-4F, -4F, -6.7F, 8, 8, 1, 0F);
 		tower64 = new ModelRendererBreakable(this, false, 13, 26);
 		tower64.mirror = true;
@@ -214,7 +210,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower64.addBox(-1.2F, 8F, -3F, 1, 1, 6, 0F);
 		setRotateAngle(tower64, 0F, 0F, -0.20943951023931953F);
 		towerenergyorb5 = new ModelRendererBreakable(this, 46, 27);
-		towerenergyorb5.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb5.addBox(-4.5F, -4.5F, -6F, 9, 9, 1, 0F);
 		setRotateAngle(towerenergyorb5, 0F, 1.5707963267948966F, 0F);
 		towerpole5_4 = new ModelRendererBreakable(this, false, 10, 26);
@@ -263,7 +258,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower37.addBox(-2.5F, 0F, -7.4F, 5, 1, 2, 0F);
 		setRotateAngle(tower37, -0.017453292519943295F, -2.356194490192345F, 0F);
 		towerenergyorb8 = new ModelRendererBreakable(this, 46, 27);
-		towerenergyorb8.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb8.addBox(-4.5F, -4.5F, -6F, 9, 9, 1, 0F);
 		setRotateAngle(towerenergyorb8, 0F, -1.5707963267948966F, 0F);
 		towerpole1_4 = new ModelRendererBreakable(this, false, 10, 26);
@@ -288,7 +282,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower012.addBox(-2F, 0F, -4.9F, 4, 1, 1, 0F);
 		setRotateAngle(tower012, 0F, 2.356194490192345F, 0F);
 		towerrotatdisk2 = new ModelRendererBreakable(this, false, 25, 31);
-		towerrotatdisk2.setRotationPoint(0F, 0F, 0F);
 		towerrotatdisk2.addBox(-1.5F, 0F, -4.5F, 3, 5, 9, 0F);
 		tower3 = new ModelRendererBreakable(this, 0, 52);
 		tower3.setRotationPoint(-7.5F, 0F, -7.5F);
@@ -315,7 +308,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower010.addBox(-2F, 0F, -4.9F, 4, 1, 1, 0F);
 		setRotateAngle(tower010, 0F, -0.7853981633974483F, 0F);
 		towerenergyorb7 = new ModelRendererBreakable(this, 66, 20);
-		towerenergyorb7.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb7.addBox(-3F, -3F, -7.4F, 6, 6, 1, 0F);
 		towerpole2_1 = new ModelRendererBreakable(this, 30, 23);
 		towerpole2_1.setRotationPoint(-4F, 0.5F, 0F);
@@ -390,7 +382,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		towerbase1.setRotationPoint(0F, 20F, 0F);
 		towerbase1.addBox(-7.5F, 0F, -7.5F, 15, 4, 15, 0F);
 		tower45 = new ModelRendererBreakable(this, 0, 24);
-		tower45.setRotationPoint(0F, 0F, 0F);
 		tower45.addBox(-4F, -0.8F, -3F, 1, 2, 6, 0F);
 		tower127 = new ModelRendererBreakable(this, false, 0, 84);
 		tower127.setRotationPoint(3F, 4.5F, 1.7F);
@@ -458,14 +449,12 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower139.addBox(-2F, 0F, -5F, 4, 3, 6, 0F);
 		setRotateAngle(tower139, 0.20943951023931953F, -1.5707963267948966F, 0F);
 		towerenergyorb9 = new ModelRendererBreakable(this, 67, 28);
-		towerenergyorb9.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb9.addBox(-4F, -4F, -6.7F, 8, 8, 1, 0F);
 		towerpole7_1 = new ModelRendererBreakable(this, 30, 23);
 		towerpole7_1.setRotationPoint(3F, 0.5F, -3F);
 		towerpole7_1.addBox(-1F, -1F, -5F, 2, 1, 5, 0F);
 		setRotateAngle(towerpole7_1, -0.17453292519943295F, -0.7853981633974483F, 0F);
 		towerenergyorb13 = new ModelRendererBreakable(this, 66, 20);
-		towerenergyorb13.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb13.addBox(-3F, -3F, -7.4F, 6, 6, 1, 0F);
 		tower130 = new ModelRendererBreakable(this, false, 0, 84);
 		tower130.setRotationPoint(1F, 0F, 3F);
@@ -485,7 +474,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower36.addBox(-2.5F, 0F, -7.4F, 5, 1, 2, 0F);
 		setRotateAngle(tower36, -0.017453292519943295F, 2.356194490192345F, 0F);
 		towerrotatdisk4 = new ModelRendererBreakable(this, false, 25, 31);
-		towerrotatdisk4.setRotationPoint(0F, 0F, 0F);
 		towerrotatdisk4.addBox(-1.5F, 0F, -4.5F, 3, 5, 9, 0F);
 		setRotateAngle(towerrotatdisk4, 0F, 0.7853981633974483F, 0F);
 		tower022 = new ModelRendererBreakable(this, 0, 90);
@@ -493,7 +481,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower022.addBox(-3.5F, 0F, -7F, 7, 1, 2, 0F);
 		setRotateAngle(tower022, -0.017453292519943295F, -1.5707963267948966F, 0F);
 		towerenergyorb2 = new ModelRendererBreakable(this, 46, 27);
-		towerenergyorb2.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb2.addBox(-4.5F, -4.5F, -6F, 9, 9, 1, 0F);
 		tower26 = new ModelRendererBreakable(this, 0, 93);
 		tower26.setRotationPoint(0F, 2.5F, 0F);
@@ -501,7 +488,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		setRotateAngle(tower26, -0.017453292519943295F, -0.7853981633974483F, 0F);
 		tower62 = new ModelRendererBreakable(this, 0, 24);
 		tower62.mirror = true;
-		tower62.setRotationPoint(0F, 0F, 0F);
 		tower62.addBox(3F, -0.8F, -3F, 1, 2, 6, 0F);
 		setRotateAngle(tower62, 0F, -1.5707963267948966F, 0F);
 		towerpole8_4 = new ModelRendererBreakable(this, false, 10, 26);
@@ -549,7 +535,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower138.addBox(0F, 0F, 0F, 6, 5, 1, 0F);
 		setRotateAngle(tower138, -0.19198621771937624F, 0F, 0F);
 		towerenergyorb3 = new ModelRendererBreakable(this, 67, 28);
-		towerenergyorb3.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb3.addBox(-4F, -4F, -6.7F, 8, 8, 1, 0F);
 		towerpole2_2 = new ModelRendererBreakable(this, 21, 24);
 		towerpole2_2.setRotationPoint(0F, 0F, -5F);
@@ -559,7 +544,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower121.setRotationPoint(0.5F, 7.8F, -0.2F);
 		tower121.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		towerenergyorb6 = new ModelRendererBreakable(this, 67, 28);
-		towerenergyorb6.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb6.addBox(-4F, -4F, -6.7F, 8, 8, 1, 0F);
 		tower002 = new ModelRendererBreakable(this, 0, 52);
 		tower002.mirror = true;
@@ -579,15 +563,12 @@ public class ModelTransmitter extends MowzieModelBase {
 		towerpole4_4.addBox(-1.5F, -3F, -0.6F, 3, 3, 1, 0F);
 		setRotateAngle(towerpole4_4, 0.15707963267948966F, 0F, 0F);
 		towerenergyorb11 = new ModelRendererBreakable(this, 46, 27);
-		towerenergyorb11.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb11.addBox(-4.5F, -4.5F, -6F, 9, 9, 1, 0F);
 		setRotateAngle(towerenergyorb11, 0F, -3.141592653589793F, 0F);
 		towerenergyorb4 = new ModelRendererBreakable(this, 66, 20);
-		towerenergyorb4.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb4.addBox(-3F, -3F, -7.4F, 6, 6, 1, 0F);
 		tower51 = new ModelRendererBreakable(this, 0, 24);
 		tower51.mirror = true;
-		tower51.setRotationPoint(0F, 0F, 0F);
 		tower51.addBox(3F, -0.8F, -3F, 1, 2, 6, 0F);
 		towerpole4_2 = new ModelRendererBreakable(this, 21, 24);
 		towerpole4_2.setRotationPoint(0F, 0F, -5F);
@@ -608,13 +589,11 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower019.setRotationPoint(0F, -8F, 0F);
 		tower019.addBox(-5.5F, 0F, -5.5F, 11, 1, 11, 0F);
 		towerenergyorb15 = new ModelRendererBreakable(this, 67, 28);
-		towerenergyorb15.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb15.addBox(-4F, -4F, -6.7F, 8, 8, 1, 0F);
 		tower122 = new ModelRendererBreakable(this, false, 0, 69);
 		tower122.setRotationPoint(0.5F, 6.5F, -0.2F);
 		tower122.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		towerrotatdisk3 = new ModelRendererBreakable(this, false, 25, 31);
-		towerrotatdisk3.setRotationPoint(0F, 0F, 0F);
 		towerrotatdisk3.addBox(-1.5F, 0F, -4.5F, 3, 5, 9, 0F);
 		setRotateAngle(towerrotatdisk3, 0F, -0.7853981633974483F, 0F);
 		tower24 = new ModelRendererBreakable(this, 0, 90);
@@ -640,7 +619,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		setRotateAngle(tower27, -0.017453292519943295F, 2.356194490192345F, 0F);
 		tower57 = new ModelRendererBreakable(this, 0, 24);
 		tower57.mirror = true;
-		tower57.setRotationPoint(0F, 0F, 0F);
 		tower57.addBox(3F, -0.8F, -3F, 1, 2, 6, 0F);
 		setRotateAngle(tower57, 0F, 1.5707963267948966F, 0F);
 		tower61 = new ModelRendererBreakable(this, false, 7, 20);
@@ -692,7 +670,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower011.addBox(-2F, 0F, -4.9F, 4, 1, 1, 0F);
 		setRotateAngle(tower011, 0F, 0.7853981633974483F, 0F);
 		towerenergyorb16 = new ModelRendererBreakable(this, 66, 20);
-		towerenergyorb16.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb16.addBox(-3F, -3F, -7.4F, 6, 6, 1, 0F);
 		tower60 = new ModelRendererBreakable(this, false, 11, 24);
 		tower60.mirror = true;
@@ -700,7 +677,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower60.addBox(-1.2F, 11.2F, -4F, 1, 1, 8, 0F);
 		setRotateAngle(tower60, 0F, 0F, -0.20943951023931953F);
 		towerenergyorb10 = new ModelRendererBreakable(this, 66, 20);
-		towerenergyorb10.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb10.addBox(-3F, -3F, -7.4F, 6, 6, 1, 0F);
 		tower39 = new ModelRendererBreakable(this, 13, 91);
 		tower39.setRotationPoint(-3F, 17F, -3F);
@@ -732,7 +708,6 @@ public class ModelTransmitter extends MowzieModelBase {
 		tower55.addBox(-1.2F, 16F, -5F, 1, 1, 10, 0F);
 		setRotateAngle(tower55, 0F, 0F, -0.20943951023931953F);
 		towerenergyorb14 = new ModelRendererBreakable(this, 46, 27);
-		towerenergyorb14.setRotationPoint(0F, 0F, 0F);
 		towerenergyorb14.addBox(-4.5F, -4.5F, -6F, 9, 9, 1, 0F);
 		setRotateAngle(towerenergyorb14, -1.5707963267948966F, 0F, 0F);
 		tower142 = new ModelRendererBreakable(this, 0, 17);

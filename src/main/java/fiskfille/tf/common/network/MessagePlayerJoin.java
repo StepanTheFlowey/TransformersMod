@@ -12,19 +12,20 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.helper.TFDimensionHelper;
 import io.netty.buffer.ByteBuf;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntComparator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MessagePlayerJoin extends MessageSyncBase {
-	private Map<Transformer, Boolean> canTransform;
-	private Map<Integer, String> dimensionNames = Maps.newHashMap();
-	private Integer[] dimensionIDs;
+	private HashMap<Transformer, Boolean> canTransform;
+	private HashMap<Integer, String> dimensionNames = new HashMap<>();
+	private int[] dimensionIDs;
 
 	public MessagePlayerJoin() {}
 
@@ -51,16 +52,16 @@ public class MessagePlayerJoin extends MessageSyncBase {
 			}
 		}
 
-		final ArrayList<Integer> list = new ArrayList<>();
+		final IntArrayList list = new IntArrayList();
 		for(final int id : ids) {
 			if(DimensionManager.shouldLoadSpawn(id)) {
 				list.add(id);
 			}
 		}
 
-		list.sort(Comparator.comparing(Double::valueOf));
+		list.sort(IntComparator.comparing(Double::valueOf));
 
-		TFDimensionHelper.dimensionIDs = dimensionIDs = list.toArray(new Integer[0]);
+		TFDimensionHelper.dimensionIDs = dimensionIDs = list.elements();
 	}
 
 	@Override
@@ -77,7 +78,7 @@ public class MessagePlayerJoin extends MessageSyncBase {
 			dimensionNames.put(buf.readInt(), ByteBufUtils.readUTF8String(buf));
 		}
 
-		dimensionIDs = new Integer[buf.readInt()];
+		dimensionIDs = new int[buf.readInt()];
 		for(int i = 0; i < dimensionIDs.length; ++i) {
 			dimensionIDs[i] = buf.readInt();
 		}
@@ -98,7 +99,7 @@ public class MessagePlayerJoin extends MessageSyncBase {
 		}
 
 		buf.writeInt(dimensionIDs.length);
-		for(final Integer dimensionID : dimensionIDs) {
+		for(final int dimensionID : dimensionIDs) {
 			buf.writeInt(dimensionID);
 		}
 	}

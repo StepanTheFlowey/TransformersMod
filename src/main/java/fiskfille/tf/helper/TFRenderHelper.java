@@ -53,14 +53,18 @@ public final class TFRenderHelper {
 	}
 
 	public static float[] hexToRGB(final int hex) {
-		final float r = ((hex & 0xFF0000) >> 16) / 255F;
-		final float g = ((hex & 0xFF00) >> 8) / 255F;
+		final float r = ((hex >> 16) & 0xFF) / 255F;
+		final float g = ((hex >> 8) & 0xFF) / 255F;
 		final float b = (hex & 0xFF) / 255F;
 		return new float[]{r, g, b};
 	}
 
-	public static void glColorRGB(final int hex) {
-		GL11.glColor3ub((byte) ((hex & 0xFF0000) >> 16), (byte) ((hex & 0xFF00) >> 8), (byte) (hex));
+	public static void glColor(final int hex) {
+		GL11.glColor3ub((byte) (hex >> 16), (byte) (hex >> 8), (byte) hex);
+	}
+
+	public static void glColor(final int hex, final byte alpha) {
+		GL11.glColor4ub((byte) (hex >> 16), (byte) (hex >> 8), (byte) hex, alpha);
 	}
 
 	public static void setupRenderLayers(final ItemStack item, final ModelRenderer model) {
@@ -78,11 +82,11 @@ public final class TFRenderHelper {
 				final TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
 				if(TFArmorDyeHelper.isDyed(item)) {
 					textureManager.bindTexture(tfModel.getTexture(null, "_primary"));
-					TFRenderHelper.glColorRGB(TFArmorDyeHelper.getPrimaryColor(item));
+					TFRenderHelper.glColor(TFArmorDyeHelper.getPrimaryColor(item));
 					model.render(0.0625F);
 
 					textureManager.bindTexture(tfModel.getTexture(null, "_secondary"));
-					TFRenderHelper.glColorRGB(TFArmorDyeHelper.getSecondaryColor(item));
+					TFRenderHelper.glColor(TFArmorDyeHelper.getSecondaryColor(item));
 					model.render(0.0625F);
 
 					textureManager.bindTexture(tfModel.getTexture(null, "_base"));

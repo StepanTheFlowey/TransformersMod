@@ -15,7 +15,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ASMHooksClient {
+public final class ASMHooksClient {
 	public static int getBrightnessForRender(final Entity entity) {
 		if(entity instanceof EntityPlayer) {
 			final float scale = TFHelper.getHeight((EntityPlayer) entity) / 1.8F;

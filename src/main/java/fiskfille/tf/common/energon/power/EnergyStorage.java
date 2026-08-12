@@ -9,17 +9,18 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.IChatComponent;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static net.minecraft.util.EnumChatFormatting.*;
 
 public class EnergyStorage {
-	protected final float maxEnergy;
+	protected final int maxEnergy;
 	protected float energy;
 	protected float energyUsage;
 	protected float lastEnergy;
 
-	public EnergyStorage(final float max) {
+	public EnergyStorage(final int max) {
 		maxEnergy = max;
 	}
 
@@ -84,15 +85,15 @@ public class EnergyStorage {
 		return energy;
 	}
 
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return maxEnergy;
 	}
 
 	public void set(final float amount) {
-		energy = Math.min(getMaxEnergy(), Math.max(0F, amount));
+		energy = Math.min(getMaxEnergy(), Math.max(0, amount));
 	}
 
-	public float getUsage() {
+	public float getEnergyUsage() {
 		return energyUsage;
 	}
 
@@ -107,17 +108,26 @@ public class EnergyStorage {
 	}
 
 	public List<IChatComponent> format() {
-		final float usage = getUsage();
+		final float usage = getEnergyUsage();
 
-		final IChatComponent gain = new ChatComponentText("+").setChatStyle(new ChatStyle().setColor(GREEN));
-		final IChatComponent loss = new ChatComponentText("-").setChatStyle(new ChatStyle().setColor(RED));
 		final IChatComponent rate = new ChatComponentText(TFFormatHelper.formatNumberPrecise(Math.abs(usage)));
-		IChatComponent prefix = new ChatComponentText("").setChatStyle(new ChatStyle().setColor(GRAY));
-		prefix = usage > 0 ? gain : usage < 0 ? loss : prefix;
+		final IChatComponent prefix;
+		if(usage > 0) {
+			prefix = new ChatComponentText("+").setChatStyle(new ChatStyle().setColor(GREEN));
+		}
+		else if(usage < 0) {
+			prefix = new ChatComponentText("-").setChatStyle(new ChatStyle().setColor(RED));
+		}
+		else {
+			prefix = new ChatComponentText("").setChatStyle(new ChatStyle().setColor(GRAY));
+		}
 
-		return Arrays.asList(
-						new ChatComponentTranslation("gui.emb.storage", TFFormatHelper.formatNumber(getEnergy()), TFFormatHelper.formatNumber(getMaxEnergy())),
-						new ChatComponentTranslation("gui.emb.rate", prefix.appendSibling(rate)).setChatStyle(new ChatStyle().setColor(GRAY))
-		);
+		final IChatComponent rateFormetted = new ChatComponentTranslation("gui.emb.rate", prefix.appendSibling(rate)).setChatStyle(new ChatStyle().setColor(GRAY));
+		final float maxEnergy = getMaxEnergy();
+		if(maxEnergy > 0) {
+			return Arrays.asList(new ChatComponentTranslation("gui.emb.storage", TFFormatHelper.formatNumber(getEnergy()), TFFormatHelper.formatNumber(maxEnergy)), rateFormetted);
+		}
+
+		return Collections.singletonList(rateFormetted);
 	}
 }

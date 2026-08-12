@@ -1,6 +1,5 @@
 package fiskfille.tf.waila;
 
-import com.google.common.collect.Maps;
 import fiskfille.tf.common.groundbridge.DataCore;
 import fiskfille.tf.common.tileentity.TileEntityControlPanel;
 import fiskfille.tf.helper.TFTileHelper;
@@ -14,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DataProviderControlPanel extends DataProviderMachine {
+final class DataProviderControlPanel extends DataProviderMachine {
 	public DataProviderControlPanel(final String s) {
 		super(s, TileEntityControlPanel.class);
 	}
@@ -25,11 +24,9 @@ public class DataProviderControlPanel extends DataProviderMachine {
 		final TileEntity tileentity = TFTileHelper.getTileBase(accessor.getTileEntity());
 
 		if(tileentity instanceof TileEntityControlPanel && config.getConfig(key, true)) {
-			final TileEntityControlPanel tile = (TileEntityControlPanel) tileentity;
-			final List<DataCore> upgrades = tile.getUpgrades();
-			final LinkedHashMap<DataCore, Integer> map = Maps.newLinkedHashMap();
+			final LinkedHashMap<DataCore, Integer> map = new LinkedHashMap<>();
 
-			for(final DataCore dataCore : upgrades) {
+			for(final DataCore dataCore : ((TileEntityControlPanel) tileentity).getUpgrades()) {
 				map.put(dataCore, map.containsKey(dataCore) ? map.get(dataCore) + 1 : 1);
 			}
 

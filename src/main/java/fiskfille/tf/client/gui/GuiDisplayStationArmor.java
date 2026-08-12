@@ -87,8 +87,8 @@ public class GuiDisplayStationArmor extends GuiContainer {
 		if(transformer != null) {
 			final boolean prevColor = itemRender.renderWithColor;
 
-			TFRenderHelper.setupRenderItemIntoGUI();
 			GL11.glColor4f(0.6F, 0.6F, 0.6F, 0.25F);
+			TFRenderHelper.setupRenderItemIntoGUI();
 			itemRender.renderWithColor = false;
 
 			final Item[] items = {transformer.getHelmet(), transformer.getChestplate(), transformer.getLeggings(), transformer.getBoots()};
@@ -99,8 +99,8 @@ public class GuiDisplayStationArmor extends GuiContainer {
 			}
 
 			itemRender.renderWithColor = prevColor;
-			GL11.glColor3f(1, 1, 1);
 			TFRenderHelper.finishRenderItemIntoGUI();
+			GL11.glColor3f(1, 1, 1);
 		}
 	}
 }

@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class DataProviderEnergonTank extends DataProviderMachine {
+final class DataProviderEnergonTank extends DataProviderMachine {
 	public FluidTankTF fluidTank = new FluidTankTF(TFFluids.energon, 0, 0);
 
 	public DataProviderEnergonTank(final String s) {

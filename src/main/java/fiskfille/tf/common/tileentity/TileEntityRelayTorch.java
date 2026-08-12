@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Set;
 
-public class TileEntityRelayTorch extends TileEntityRelayTower {
+public final class TileEntityRelayTorch extends TileEntityRelayTower {
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
@@ -52,7 +52,7 @@ public class TileEntityRelayTorch extends TileEntityRelayTower {
 		}
 
 		final int[] rotations = {2, 0, 1, 3};
-		final float yaw = rotations[dir.ordinal() - 2] * 90;
+		final int yaw = rotations[dir.ordinal() - 2] * 90;
 
 		final Vec3 vec3 = Vec3.createVectorHelper(0, 0, -f);
 		vec3.rotateAroundY(-yaw * (float) Math.PI / 180F);

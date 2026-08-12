@@ -55,7 +55,6 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 			if(getItemStacks()[slot].stackSize <= amount) {
 				itemstack = getItemStacks()[slot];
 				getItemStacks()[slot] = null;
-				return itemstack;
 			}
 			else {
 				itemstack = getItemStacks()[slot].splitStack(amount);
@@ -63,13 +62,12 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 				if(getItemStacks()[slot].stackSize == 0) {
 					getItemStacks()[slot] = null;
 				}
-
-				return itemstack;
 			}
+
+			return itemstack;
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	@Override
@@ -79,9 +77,8 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 			getItemStacks()[slot] = null;
 			return itemstack;
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	@Override
@@ -105,11 +102,11 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 			setItemStacks(new ItemStack[getSizeInventory()]);
 
 			for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-				final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-				final byte slot = nbttagcompound1.getByte("Slot");
+				final NBTTagCompound tagCompound = nbttaglist.getCompoundTagAt(i);
+				final byte slot = tagCompound.getByte("Slot");
 
 				if(slot >= 0 && slot < getItemStacks().length) {
-					getItemStacks()[slot] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+					getItemStacks()[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
 				}
 			}
 		}
@@ -125,11 +122,13 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 		final NBTTagList nbttaglist = new NBTTagList();
 
 		for(int i = 0; i < getItemStacks().length; ++i) {
-			if(getItemStacks()[i] != null) {
-				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				getItemStacks()[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
+			final ItemStack itemStack = getItemStacks()[i];
+
+			if(itemStack != null) {
+				final NBTTagCompound tagCompound = new NBTTagCompound();
+				tagCompound.setByte("Slot", (byte) i);
+				itemStack.writeToNBT(tagCompound);
+				nbttaglist.appendTag(tagCompound);
 			}
 		}
 
@@ -147,12 +146,10 @@ public abstract class TileEntityContainer extends TileEntityTF implements IInven
 	}
 
 	@Override
-	public void openInventory() {
-	}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory() {
-	}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {

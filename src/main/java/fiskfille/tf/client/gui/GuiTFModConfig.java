@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GuiTFModConfig extends GuiConfig {
 	public GuiTFModConfig(final GuiScreen parent) {
@@ -19,8 +18,8 @@ public class GuiTFModConfig extends GuiConfig {
 	/**
 	 * Compiles a list of config elements
 	 */
-	private static List<IConfigElement> getConfigElements() {
-		final List<IConfigElement> elements = new ArrayList<>();
+	private static ArrayList<IConfigElement> getConfigElements() {
+		final ArrayList<IConfigElement> elements = new ArrayList<>();
 
 		elements.add(categoryElement("Options", "General", "General Options"));
 		elements.add(categoryElement("Aesthetic", "Aesthetic", "Aesthetic Options"));

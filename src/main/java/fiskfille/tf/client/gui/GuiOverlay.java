@@ -138,18 +138,18 @@ public class GuiOverlay extends Gui {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(0F, 0F, 0F, 0.3F);
+			GL11.glColor4f(0, 0, 0, 0.3F);
 
 			// Speed Outline
 			drawTexturedModalRect(5 - offset, 3, 0, 0, 202, 12);
 
 			// Nitro Outline
 			drawTexturedModalRect(5 - offset, 16, 0, 0, 202, 12);
-			GL11.glColor4f(0F, 1F, 1F, 0.5F);
+			GL11.glColor4f(0, 1, 1, 0.5F);
 
 			// Nitro Bar
 			drawTexturedModalRect(6 - offset, 4, 0, 0, Math.round(nitro * 200), 10);
-			GL11.glColor4f(1F, 0F, 0F, 0.5F);
+			GL11.glColor4f(1, 0, 0, 0.5F);
 
 			// Speed Bar
 			drawTexturedModalRect(6 - offset, 17, 0, 0, speed > 200 ? 200 : (int) speed, 10);
@@ -187,23 +187,29 @@ public class GuiOverlay extends Gui {
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(0F, 0F, 0F, 0.15F);
+				GL11.glColor4f(0, 0, 0, 0.15F);
+
 				drawTexturedModalRect(x + 94 - offset, y, 0, 0, 52, 12);
-				GL11.glColor4f(0F, 0F, 0F, 0.2F);
+
+				GL11.glColor4f(0, 0, 0, 0.2F);
+
 				drawTexturedModalRect(x - 1 - offset, y - 1, 0, 0, 16, 16);
 				drawTexturedModalRect(x - offset, y, 0, 0, 14, 14);
-				GL11.glColor4f(1F, 0F, 0F, 0.25F);
-				drawTexturedModalRect(x + 95 - offset, y + 1, 0, 0, (int) ((20 - TFShootManager.shootCooldown) * 2.5), 10);
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-				GL11.glDisable(GL11.GL_LIGHTING);
+				GL11.glColor4f(1, 0, 0, 0.25F);
+
+				drawTexturedModalRect(x + 95 - offset, y + 1, 0, 0, (int) ((20 - TFShootManager.shootCooldown) * 2.5), 10);
+
 				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 				GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 				GL11.glEnable(GL11.GL_LIGHTING);
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
+
 				itemRenderer.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), new ItemStack(transformer.getShootItem()), x - 1 - offset, y - 1);
+
 				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glDepthMask(true);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
+				GL11.glDepthMask(true);
 
 				GL11.glPushMatrix();
 				GL11.glTranslatef(x - 1 - offset, y + 16, 0);
@@ -221,7 +227,7 @@ public class GuiOverlay extends Gui {
 				if(transformationTimer == 0 && heldItem.getItem() == TFItems.vurpsSniper) {
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glColor4f(0F, 0F, 0F, 0.15F);
+					GL11.glColor4f(0, 0, 0, 0.15F);
 
 					if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && heldItem.getItem() == TFItems.vurpsSniper && TFDataManager.getZoomTimer(player) > 7) {
 						GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -233,10 +239,10 @@ public class GuiOverlay extends Gui {
 
 						final Tessellator tessellator = Tessellator.instance;
 						tessellator.startDrawingQuads();
-						tessellator.addVertexWithUV(0D, height, -90D, 0D, 1D);
-						tessellator.addVertexWithUV(width, height, -90D, 1D, 1D);
-						tessellator.addVertexWithUV(width, 0D, -90D, 1D, 0D);
-						tessellator.addVertexWithUV(0D, 0D, -90D, 0D, 0D);
+						tessellator.addVertexWithUV(0, height, -90, 0, 1);
+						tessellator.addVertexWithUV(width, height, -90, 1, 1);
+						tessellator.addVertexWithUV(width, 0, -90, 1, 0);
+						tessellator.addVertexWithUV(0, 0, -90, 0, 0);
 						tessellator.draw();
 
 						GL11.glDepthMask(true);
@@ -254,18 +260,18 @@ public class GuiOverlay extends Gui {
 			final int j = TFItems.purgesKatana.getMaxItemUseDuration(player.getHeldItem()) - player.getItemInUseCount();
 			double d = (double) j / 10;
 
-			if(d > 2D) {
-				d = 2D;
+			if(d > 2) {
+				d = 2;
 			}
 
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(0F, 0F, 0F, 0.15F);
+			GL11.glColor4f(0, 0, 0, 0.15F);
 
 			final int x = width / 2 - 26, y = TFConfig.purgeDashTop ? 5 : height / 2 + 9;
 			drawTexturedModalRect(x, y, 0, 0, 52, 12);
-			GL11.glColor4f(1F, 0F, 0F, 0.25F);
+			GL11.glColor4f(1, 0, 0, 0.25F);
 			drawTexturedModalRect(x + 1, y + 1, 0, 0, (int) (d * 25), 10);
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);

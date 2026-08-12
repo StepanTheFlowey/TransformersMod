@@ -8,10 +8,11 @@ import net.minecraft.entity.Entity;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class TFReflection {
-	public static Method renderHandMethod;
+public final class TFReflection {
 	public static Field thirdPersonDistanceField;
-	public static Method setSizeMethod;
+
+	private static Method renderHandMethod;
+	private static Method setSizeMethod;
 
 	@SideOnly(Side.CLIENT)
 	public static void client() {

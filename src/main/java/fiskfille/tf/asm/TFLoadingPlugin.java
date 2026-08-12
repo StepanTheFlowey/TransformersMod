@@ -16,7 +16,7 @@ import java.util.Map;
 @SideOnly(Side.CLIENT)
 @MCVersion("1.7.10")
 @TransformerExclusions("fiskfille.tf.asm")
-public class TFLoadingPlugin implements IFMLLoadingPlugin {
+public final class TFLoadingPlugin implements IFMLLoadingPlugin {
 	public static boolean loaded;
 
 	@Override

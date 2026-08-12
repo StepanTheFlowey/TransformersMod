@@ -11,7 +11,10 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Handles all receivers this transmitter is transmitting to
@@ -213,7 +216,7 @@ public class TransmissionHandler {
 		needsUpdate = true;
 	}
 
-	public Set<ReceiverEntry> getReceivers() {
+	public HashSet<ReceiverEntry> getReceivers() {
 		return receivers;
 	}
 

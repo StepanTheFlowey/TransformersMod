@@ -24,12 +24,12 @@ public class ContainerEmpty extends ContainerBasic {
 			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if(slotId >= 0 && slotId < 27) {
+			if(slotId < 27) {
 				if(!mergeItemStack(itemstack1, 27, 36, false)) {
 					return null;
 				}
 			}
-			else if(slotId >= 27 && slotId < 36 && !mergeItemStack(itemstack1, 0, 27, false)) {
+			else if(slotId < 36 && !mergeItemStack(itemstack1, 0, 27, false)) {
 				return null;
 			}
 

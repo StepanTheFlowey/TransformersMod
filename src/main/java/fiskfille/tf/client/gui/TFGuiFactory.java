@@ -6,9 +6,9 @@ import net.minecraft.client.gui.GuiScreen;
 
 import java.util.Set;
 
-public class TFGuiFactory implements IModGuiFactory {
+public final class TFGuiFactory implements IModGuiFactory {
 	@Override
-	public void initialize(final Minecraft minecraftInstance) {}
+	public void initialize(final Minecraft minecraft) {}
 
 	@Override
 	public Class<? extends GuiScreen> mainConfigGuiClass() {

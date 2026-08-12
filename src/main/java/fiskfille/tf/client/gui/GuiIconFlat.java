@@ -19,24 +19,25 @@ public class GuiIconFlat extends GuiButtonFlat {
 
 	@Override
 	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY) {
-		if(visible) {
-			mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
-
-			GL11.glColor3f(1, 1, 1);
-			field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
-
-			GL11.glEnable(GL11.GL_BLEND);
-			OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			mouseDragged(mc, mouseX, mouseY);
-
-			drawTexturedModalRect(xPosition, yPosition, 210, getHoverState(field_146123_n) * height, width, height);
-
-			GL11.glPushMatrix();
-			GL11.glTranslatef(xPosition, yPosition, 0);
-			callback.render(this, mouseX, mouseY);
-			GL11.glPopMatrix();
+		if(!visible) {
+			return;
 		}
+
+		field_146123_n = new Rectangle(xPosition, yPosition, width, height).contains(mouseX, mouseY);
+
+		mc.getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
+		GL11.glColor3f(1, 1, 1);
+		GL11.glEnable(GL11.GL_BLEND);
+		OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		mouseDragged(mc, mouseX, mouseY);
+
+		drawTexturedModalRect(xPosition, yPosition, 210, getHoverState(field_146123_n) * height, width, height);
+
+		GL11.glPushMatrix();
+		GL11.glTranslatef(xPosition, yPosition, 0);
+		callback.render(this, mouseX, mouseY);
+		GL11.glPopMatrix();
 	}
 
 	@Override

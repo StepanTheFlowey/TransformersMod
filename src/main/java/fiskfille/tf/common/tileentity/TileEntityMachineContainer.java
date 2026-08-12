@@ -66,9 +66,8 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 
 			return itemstack;
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	@Override
@@ -78,9 +77,8 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 			getItemStacks()[slot] = null;
 			return itemstack;
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	@Override
@@ -125,18 +123,19 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 		}
 
 		nbt.setBoolean("LoadInventory", true);
-		final NBTTagList nbttaglist = new NBTTagList();
+		final NBTTagList tagList = new NBTTagList();
 
 		for(int i = 0; i < getItemStacks().length; ++i) {
-			if(getItemStacks()[i] != null) {
-				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				getItemStacks()[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
+			final ItemStack itemStack = getItemStacks()[i];
+			if(itemStack != null) {
+				final NBTTagCompound tagCompound = new NBTTagCompound();
+				tagCompound.setByte("Slot", (byte) i);
+				itemStack.writeToNBT(tagCompound);
+				tagList.appendTag(tagCompound);
 			}
 		}
 
-		nbt.setTag("Items", nbttaglist);
+		nbt.setTag("Items", tagList);
 	}
 
 	@Override
@@ -150,12 +149,10 @@ public abstract class TileEntityMachineContainer extends TileEntityMachine imple
 	}
 
 	@Override
-	public void openInventory() {
-	}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory() {
-	}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(final int slot, final ItemStack stack) {

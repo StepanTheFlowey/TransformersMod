@@ -6,7 +6,6 @@ import fiskfille.tf.common.energon.power.IEnergyContainer;
 import fiskfille.tf.common.network.MessageTileTrigger.ITileDataCallback;
 import fiskfille.tf.helper.TFEnergyHelper;
 import fiskfille.tf.helper.TFTileHelper;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,12 +18,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class TileEntityMachine extends TileEntityTF implements ITileDataCallback {
-	public final EnumIO[] io;
+	public final EnumIO[] io = new EnumIO[ForgeDirection.VALID_DIRECTIONS.length];
 	public EnumRedstone redstoneMode = EnumRedstone.IGNORE;
 	public EnumDistribution distribution = EnumDistribution.QUEUED;
 
 	public TileEntityMachine() {
-		io = new EnumIO[ForgeDirection.VALID_DIRECTIONS.length];
 		Arrays.fill(io, EnumIO.NONE);
 	}
 
@@ -59,10 +57,9 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 						case PULL:
 							TFEnergyHelper.transferEnergy(container, receiver, rate, false);
 							break;
+
 						case PUSH:
 							TFEnergyHelper.transferEnergy(receiver, container, rate, false);
-							break;
-						default:
 							break;
 					}
 				}
@@ -79,11 +76,11 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	public void readCustomNBT(final NBTTagCompound nbt) {
 		if(nbt.hasKey("ConfigDataTF", NBT.TAG_COMPOUND)) {
 			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
-			final NBTTagList nbttaglist = config.getTagList("IO", NBT.TAG_COMPOUND);
+			final NBTTagList list = config.getTagList("IO", NBT.TAG_COMPOUND);
 
-			for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-				final NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
-				io[nbttagcompound.getByte("side") % io.length] = EnumIO.values()[nbttagcompound.getByte("mode") % EnumIO.values().length];
+			for(int i = 0; i < list.tagCount(); ++i) {
+				final NBTTagCompound ioNbt = list.getCompoundTagAt(i);
+				io[ioNbt.getByte("side") % io.length] = EnumIO.values()[ioNbt.getByte("mode") % EnumIO.values().length];
 			}
 
 			redstoneMode = EnumRedstone.values()[config.getByte("Redstone") % EnumRedstone.values().length];
@@ -95,18 +92,18 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 	public void writeCustomNBT(final NBTTagCompound nbt) {
 		if(isConfigured()) {
 			final NBTTagCompound config = nbt.getCompoundTag("ConfigDataTF");
-			final NBTTagList nbttaglist = new NBTTagList();
+			final NBTTagList list = new NBTTagList();
 
 			for(int i = 0; i < io.length; ++i) {
-				final NBTTagCompound nbttagcompound = new NBTTagCompound();
-				nbttagcompound.setByte("side", (byte) i);
-				nbttagcompound.setByte("mode", (byte) io[i].ordinal());
-				nbttaglist.appendTag(nbttagcompound);
+				final NBTTagCompound ioNbt = new NBTTagCompound();
+				ioNbt.setByte("side", (byte) i);
+				ioNbt.setByte("mode", (byte) io[i].ordinal());
+				list.appendTag(ioNbt);
 			}
 
 			config.setByte("Redstone", (byte) redstoneMode.ordinal());
 			config.setByte("Distribution", (byte) distribution.ordinal());
-			config.setTag("IO", nbttaglist);
+			config.setTag("IO", list);
 			nbt.setTag("ConfigDataTF", config);
 		}
 	}
@@ -138,16 +135,14 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 		}
 
 		switch(redstoneMode) {
-			case WITH:
-				return isPowered;
-			case WITHOUT:
-				return !isPowered;
-			default:
-				return true;
+			case WITH:		return isPowered;
+			case WITHOUT:	return !isPowered;
 		}
+
+		return true;
 	}
 
-	public float getTransferRate() {
+	public int getTransferRate() {
 		return 10;
 	}
 
@@ -155,17 +150,15 @@ public abstract class TileEntityMachine extends TileEntityTF implements ITileDat
 		final int x = xCoord + dir.offsetX;
 		final int y = yCoord + dir.offsetY + (dir.offsetY > 0 ? getBlockType().getBlockHeight() - 1 : 0);
 		final int z = zCoord + dir.offsetZ;
-		final float f = 0.001F;
 
-		final Block block = worldObj.getBlock(x, y, z);
-		final AxisAlignedBB aabb = block.getCollisionBoundingBoxFromPool(worldObj, x, y, z);
+		final AxisAlignedBB aabb0 = worldObj.getBlock(x, y, z).getCollisionBoundingBoxFromPool(worldObj, x, y, z);
 		final AxisAlignedBB aabb1 = getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
 
-		if(aabb == null || aabb1 == null) {
+		if(aabb0 == null || aabb1 == null) {
 			return false;
 		}
 
-		return aabb1.addCoord(dir.offsetX * f, dir.offsetY * f, dir.offsetZ * f).intersectsWith(aabb);
+		return aabb1.addCoord(dir.offsetX * 0.001D, dir.offsetY * 0.001D, dir.offsetZ * 0.001D).intersectsWith(aabb0);
 	}
 
 	@Override

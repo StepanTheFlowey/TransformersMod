@@ -11,8 +11,8 @@ import net.minecraft.world.WorldServer;
 import java.util.ArrayList;
 
 public class TileDataRelay extends TileData {
+	public final ArrayList<DimensionalCoords> invertCurrent = new ArrayList<>();
 	public TransmissionHandler transmissionHandler = new TransmissionHandler();
-	public ArrayList<DimensionalCoords> invertCurrent = new ArrayList<>();
 	public boolean isPowered;
 
 	public TileDataRelay() {}

@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TileEntityAlloyCrucible extends TileEntityMachineContainer implements IEnergyReceiver, ISidedInventory, ITileDataCallback {
+public final class TileEntityAlloyCrucible extends TileEntityMachineContainer implements IEnergyReceiver, ISidedInventory, ITileDataCallback {
 	private static final int[] slotsBottom = new int[]{3};
 	private static final int[] slotsSides = new int[]{0, 1, 2};
 
@@ -35,11 +35,10 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 
 	public EnumSmeltingMode smeltingMode = EnumSmeltingMode.ALLOY;
 	public ItemStack smeltingResult;
-	public boolean alloyResult;
 	public int smeltTime;
-
 	public int alloyResults;
 	public int furnaceResults;
+	public boolean alloyResult;
 
 	private int metadataFlags;
 
@@ -302,13 +301,13 @@ public class TileEntityAlloyCrucible extends TileEntityMachineContainer implemen
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return data.storage.getMaxEnergy();
 	}
 
 	@Override
 	public float getEnergyUsage() {
-		return data.storage.getUsage();
+		return data.storage.getEnergyUsage();
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public final class RenderEnergonTank extends TileEntitySpecialRenderer {
 		}
 
 		bindTexture(TextureMap.locationBlocksTexture);
-		TFRenderHelper.glColorRGB(stack.getFluid().getColor(stack));
+		TFRenderHelper.glColor(stack.getFluid().getColor(stack));
 		GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_LIGHTING_BIT);
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);

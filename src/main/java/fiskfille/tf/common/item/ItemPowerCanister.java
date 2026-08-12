@@ -23,7 +23,7 @@ public class ItemPowerCanister extends ItemEnergyContainer {
 	}
 
 	@Override
-	public float getEnergyCapacity(final ItemStack itemstack) {
+	public int getEnergyCapacity(final ItemStack itemstack) {
 		final int tier = Math.min(itemstack.getItemDamage(), tiers.length - 1);
 		int i = 4;
 

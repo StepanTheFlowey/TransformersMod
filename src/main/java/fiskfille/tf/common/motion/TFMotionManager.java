@@ -11,7 +11,6 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static net.minecraft.block.material.Material.*;

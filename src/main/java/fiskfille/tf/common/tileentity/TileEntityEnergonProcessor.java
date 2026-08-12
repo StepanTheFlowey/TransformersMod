@@ -25,7 +25,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-public class TileEntityEnergonProcessor extends TileEntityMachineContainer implements IFluidHandlerTF, ISidedInventory {
+public final class TileEntityEnergonProcessor extends TileEntityMachineContainer implements IFluidHandlerTF, ISidedInventory {
 	private static final int[] slotsTop = {1};
 	private static final int[] slotsBottom = {2};
 	private static final int[] slotsSides = {0, 2};

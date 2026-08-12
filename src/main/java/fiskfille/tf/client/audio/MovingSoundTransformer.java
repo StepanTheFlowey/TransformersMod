@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class MovingSoundTransformer extends MovingSound {
+public final class MovingSoundTransformer extends MovingSound {
 	private final Entity entity;
 
 	public MovingSoundTransformer(final Entity entity, final ResourceLocation sound) {
@@ -19,12 +19,12 @@ public class MovingSoundTransformer extends MovingSound {
 	@Override
 	public void update() {
 		if(entity.isDead) {
-			this.donePlaying = true;
+			donePlaying = true;
 			return;
 		}
 
-		this.xPosF = (float) entity.posX;
-		this.yPosF = (float) entity.posY;
-		this.zPosF = (float) entity.posZ;
+		xPosF = (float) entity.posX;
+		yPosF = (float) entity.posY;
+		zPosF = (float) entity.posZ;
 	}
 }

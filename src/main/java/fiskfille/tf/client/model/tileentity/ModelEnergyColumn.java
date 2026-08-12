@@ -21,7 +21,6 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		top1.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 
 		final ModelRendererBreakable top7 = new ModelRendererBreakable(this, 0, 36);
-		top7.setRotationPoint(0F, 0F, 0F);
 		top7.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top7, 0F, 0.7853981633974483F, 0F);
 
@@ -36,12 +35,10 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		setRotateAngle(connector4, -0.3490658503988659F, 0F, 0F);
 
 		final ModelRendererBreakable bottom3 = new ModelRendererBreakable(this, 0, 31);
-		bottom3.setRotationPoint(0F, 0F, 0F);
 		bottom3.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom3, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable bottom2 = new ModelRendererBreakable(this, 0, 31);
-		bottom2.setRotationPoint(0F, 0F, 0F);
 		bottom2.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom2, 0F, 0.7853981633974483F, 0F);
 
@@ -51,22 +48,18 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		setRotateAngle(connector1, 0F, 0.5235987755982988F, 0F);
 
 		final ModelRendererBreakable columnBase5 = new ModelRendererBreakable(this, 40, 0);
-		columnBase5.setRotationPoint(0F, 0F, 0F);
 		columnBase5.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase5, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable top5 = new ModelRendererBreakable(this, 0, 36);
-		top5.setRotationPoint(0F, 0F, 0F);
 		top5.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top5, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable bottom6 = new ModelRendererBreakable(this, 0, 31);
-		bottom6.setRotationPoint(0F, 0F, 0F);
 		bottom6.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom6, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable top3 = new ModelRendererBreakable(this, 0, 36);
-		top3.setRotationPoint(0F, 0F, 0F);
 		top3.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top3, 0F, 0.7853981633974483F, 0F);
 
@@ -81,42 +74,34 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		setRotateAngle(connector2, 0.6632251157578453F, 0F, 0F);
 
 		final ModelRendererBreakable top8 = new ModelRendererBreakable(this, 0, 36);
-		top8.setRotationPoint(0F, 0F, 0F);
 		top8.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top8, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable top4 = new ModelRendererBreakable(this, 0, 36);
-		top4.setRotationPoint(0F, 0F, 0F);
 		top4.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top4, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable bottom7 = new ModelRendererBreakable(this, 0, 31);
-		bottom7.setRotationPoint(0F, 0F, 0F);
 		bottom7.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom7, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable columnBase3 = new ModelRendererBreakable(this, 20, 0);
-		columnBase3.setRotationPoint(0F, 0F, 0F);
 		columnBase3.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase3, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable columnBase6 = new ModelRendererBreakable(this, 50, 0);
-		columnBase6.setRotationPoint(0F, 0F, 0F);
 		columnBase6.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase6, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable columnBase8 = new ModelRendererBreakable(this, 70, 0);
-		columnBase8.setRotationPoint(0F, 0F, 0F);
 		columnBase8.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase8, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable top6 = new ModelRendererBreakable(this, 0, 36);
-		top6.setRotationPoint(0F, 0F, 0F);
 		top6.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top6, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable bottom5 = new ModelRendererBreakable(this, 0, 31);
-		bottom5.setRotationPoint(0F, 0F, 0F);
 		bottom5.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom5, 0F, 0.7853981633974483F, 0F);
 
@@ -125,12 +110,10 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		columnBase1.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 
 		final ModelRendererBreakable columnBase7 = new ModelRendererBreakable(this, 60, 0);
-		columnBase7.setRotationPoint(0F, 0F, 0F);
 		columnBase7.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase7, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable top2 = new ModelRendererBreakable(this, 0, 36);
-		top2.setRotationPoint(0F, 0F, 0F);
 		top2.addBox(-1.5F, 0F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(top2, 0F, 0.7853981633974483F, 0F);
 
@@ -139,7 +122,6 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		bottom1.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 
 		final ModelRendererBreakable columnBase2 = new ModelRendererBreakable(this, 10, 0);
-		columnBase2.setRotationPoint(0F, 0F, 0F);
 		columnBase2.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase2, 0F, 0.7853981633974483F, 0F);
 
@@ -148,17 +130,14 @@ public class ModelEnergyColumn extends MowzieModelBase {
 		panel.addBox(-2F, -3F, 0F, 4, 6, 1, 0F);
 
 		final ModelRendererBreakable bottom8 = new ModelRendererBreakable(this, 0, 31);
-		bottom8.setRotationPoint(0F, 0F, 0F);
 		bottom8.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom8, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable bottom4 = new ModelRendererBreakable(this, 0, 31);
-		bottom4.setRotationPoint(0F, 0F, 0F);
 		bottom4.addBox(-1.5F, -1F, -0.38F, 3, 1, 4, 0F);
 		setRotateAngle(bottom4, 0F, 0.7853981633974483F, 0F);
 
 		final ModelRendererBreakable columnBase4 = new ModelRendererBreakable(this, 30, 0);
-		columnBase4.setRotationPoint(0F, 0F, 0F);
 		columnBase4.addBox(-2F, -31F, 3.83F, 4, 30, 1, 0F);
 		setRotateAngle(columnBase4, 0F, 0.7853981633974483F, 0F);
 

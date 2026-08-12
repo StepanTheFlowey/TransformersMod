@@ -14,8 +14,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockColumn extends BlockMachineBase {
 	public BlockColumn() {
 		super(Material.iron);
-		setHardness(5F);
-		setResistance(10F);
+		setHardness(5);
+		setResistance(10);
 	}
 
 	@Override

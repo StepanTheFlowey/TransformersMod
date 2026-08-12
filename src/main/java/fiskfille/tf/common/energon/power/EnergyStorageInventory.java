@@ -1,22 +1,19 @@
 package fiskfille.tf.common.energon.power;
 
-import net.minecraft.inventory.IInventory;
+import fiskfille.tf.common.tileentity.TileEntityMachineContainer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
 public class EnergyStorageInventory extends EnergyStorage {
-	protected final TileEntity tile;
-	protected final IInventory energyInventory;
+	protected final TileEntityMachineContainer owner;
 
-	public EnergyStorageInventory(final TileEntity tileentity, final IInventory inventory) {
+	public EnergyStorageInventory(final TileEntityMachineContainer owner) {
 		super(0);
-		tile = tileentity;
-		energyInventory = inventory;
+		this.owner = owner;
 	}
 
 	@Override
 	public EnergyStorageInventory copy() {
-		return new EnergyStorageInventory(tile, energyInventory);
+		return new EnergyStorageInventory(owner);
 	}
 
 	@Override
@@ -28,15 +25,15 @@ public class EnergyStorageInventory extends EnergyStorage {
 		float max = Math.min(amount, getEnergy());
 		float removed = 0;
 
-		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			final ItemStack stack = energyInventory.getStackInSlot(i);
+		for(int i = 0; i < owner.getSizeInventory(); ++i) {
+			final ItemStack stack = owner.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
 				float extracted = container.extractEnergy(stack, max, true);
 
 				extracted = Math.min(extracted, max);
-				removed += container.extractEnergy(stack, extracted, simulate || tile.getWorldObj().isRemote);
+				removed += container.extractEnergy(stack, extracted, simulate || owner.getWorldObj().isRemote);
 				max -= extracted;
 
 				if(max <= 0) {
@@ -59,15 +56,15 @@ public class EnergyStorageInventory extends EnergyStorage {
 		float max = Math.max(Math.min(amount, getMaxEnergy() - getEnergy()), 0);
 		float added = 0;
 
-		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			final ItemStack stack = energyInventory.getStackInSlot(i);
+		for(int i = 0; i < owner.getSizeInventory(); ++i) {
+			final ItemStack stack = owner.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
 				float extracted = container.receiveEnergy(stack, max, true);
 
 				extracted = Math.min(extracted, max);
-				added += container.receiveEnergy(stack, extracted, simulate || tile.getWorldObj().isRemote);
+				added += container.receiveEnergy(stack, extracted, simulate || owner.getWorldObj().isRemote);
 				max -= extracted;
 
 				if(max <= 0) {
@@ -85,12 +82,11 @@ public class EnergyStorageInventory extends EnergyStorage {
 	public float getEnergy() {
 		energy = 0;
 
-		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			final ItemStack stack = energyInventory.getStackInSlot(i);
+		for(int i = 0; i < owner.getSizeInventory(); ++i) {
+			final ItemStack stack = owner.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
-				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
-				energy += container.getEnergyStored(stack);
+				energy += ((IEnergyContainerItem) stack.getItem()).getEnergyStored(stack);
 			}
 		}
 
@@ -98,15 +94,14 @@ public class EnergyStorageInventory extends EnergyStorage {
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		int max = 0;
 
-		for(int i = 0; i < energyInventory.getSizeInventory(); ++i) {
-			final ItemStack stack = energyInventory.getStackInSlot(i);
+		for(int i = 0; i < owner.getSizeInventory(); ++i) {
+			final ItemStack stack = owner.getStackInSlot(i);
 
 			if(stack != null && stack.getItem() instanceof IEnergyContainerItem) {
-				final IEnergyContainerItem container = (IEnergyContainerItem) stack.getItem();
-				max += (int) container.getEnergyCapacity(stack);
+				max += ((IEnergyContainerItem) stack.getItem()).getEnergyCapacity(stack);
 			}
 		}
 

@@ -12,6 +12,7 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import fiskfille.tf.helper.TFEnergyHelper;
 import fiskfille.tf.helper.TFRenderHelper;
 import fiskfille.tf.helper.TFVectorHelper;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -36,7 +37,7 @@ public class GuiSelectReceivers extends GuiScreen {
 
 	public final TileEntity owner;
 	public final IEnergyTransmitter transmitter;
-	public final ArrayList<Integer> layers = new ArrayList<>();
+	public final IntArrayList layers = new IntArrayList();
 	public DimensionalCoords[] coordArray;
 	public GuiVerticalHeightSlider heightSlider;
 
@@ -289,8 +290,8 @@ public class GuiSelectReceivers extends GuiScreen {
 			final float angle = 35;
 			final float length = 4;
 
+			GL11.glColor3f(0, 1, 1);
 			GL11.glLineWidth(SIZE);
-			GL11.glColor3f(0F, 1F, 1F);
 			for(int i = 0; i < boardWidth; ++i) {
 				for(int j = 0; j < boardWidth; ++j) {
 					final DimensionalCoords coords = coordArray[i + j * boardWidth];
@@ -318,8 +319,8 @@ public class GuiSelectReceivers extends GuiScreen {
 										k -= boardWidth;
 									}
 
-									final Vec3 vec3 = Vec3.createVectorHelper(x + (float) SIZE / 2, y + (float) SIZE / 2, 0);
-									final Vec3 vec31 = Vec3.createVectorHelper(baseX + (SPACING + SIZE) * k + (float) SIZE / 2, baseY + (SPACING + SIZE) * l + (float) SIZE / 2, 0);
+									final Vec3 vec3 = Vec3.createVectorHelper(x + SIZE / 2F, y + SIZE / 2F, 0);
+									final Vec3 vec31 = Vec3.createVectorHelper(baseX + (SPACING + SIZE) * k + SIZE / 2F, baseY + (SPACING + SIZE) * l + SIZE / 2F, 0);
 									Vec3 vec32 = vec31.subtract(vec3);
 									Vec3 vec33 = vec31.subtract(vec3);
 									Vec3 vec34 = vec31.subtract(vec3);
@@ -368,7 +369,7 @@ public class GuiSelectReceivers extends GuiScreen {
 					}
 
 					final Vec3 vec3 = Vec3.createVectorHelper(baseX + (SPACING + SIZE) * boardWidth / 2F - 0.5F, baseY + (SPACING + SIZE) * boardWidth / 2F - 0.5F, 0);
-					final Vec3 vec31 = Vec3.createVectorHelper(baseX + (SPACING + SIZE) * k + (float) SIZE / 2, baseY + (SPACING + SIZE) * l + (float) SIZE / 2, 0);
+					final Vec3 vec31 = Vec3.createVectorHelper(baseX + (SPACING + SIZE) * k + SIZE / 2F, baseY + (SPACING + SIZE) * l + SIZE / 2F, 0);
 					Vec3 vec32 = vec31.subtract(vec3);
 					Vec3 vec33 = vec31.subtract(vec3);
 					Vec3 vec34 = vec31.subtract(vec3);
@@ -445,10 +446,10 @@ public class GuiSelectReceivers extends GuiScreen {
 				}
 			}
 
-			GL11.glLineWidth(prevWidth);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+			GL11.glLineWidth(prevWidth);
 		}
 
 		if(layers.size() > 1) {

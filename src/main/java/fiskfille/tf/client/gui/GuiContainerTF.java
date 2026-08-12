@@ -1,6 +1,5 @@
 package fiskfille.tf.client.gui;
 
-import com.google.common.collect.Lists;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -24,7 +23,7 @@ public abstract class GuiContainerTF extends GuiContainer {
 		drawHoveringText(mouseX, mouseY);
 	}
 
-	public void drawHoveringText(final int mouseX, final int mouseY) {
+	private void drawHoveringText(final int mouseX, final int mouseY) {
 		for(final GuiButton button : (List<GuiButton>) buttonList) {
 			if(button.func_146115_a() && button instanceof GuiButtonFlat) {
 				final List<String> text = ((GuiButtonFlat) button).getHoverText();
@@ -40,9 +39,9 @@ public abstract class GuiContainerTF extends GuiContainer {
 	protected void drawHoveringText(List text, final int mouseX, final int mouseY, final FontRenderer font) {
 		if(!text.isEmpty()) {
 			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-			RenderHelper.disableStandardItemLighting();
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			RenderHelper.disableStandardItemLighting();
 
 			int k = 0;
 			final Iterator iterator = text.iterator();
@@ -76,7 +75,7 @@ public abstract class GuiContainerTF extends GuiContainer {
 				}
 			}
 
-			text = Lists.newArrayList();
+			text = new ArrayList<>();
 			text.addAll(list);
 
 			int j2 = mouseX + 12;

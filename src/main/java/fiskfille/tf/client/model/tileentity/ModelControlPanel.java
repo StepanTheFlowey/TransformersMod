@@ -60,7 +60,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		switchBottom2.addBox(0F, -2F, -0.5F, 2, 2, 1, 0F);
 
 		final MowzieModelRenderer compass_7 = new ModelRendererBreakable(this, 0, 58);
-		compass_7.setRotationPoint(0F, 0F, 0F);
 		compass_7.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass_7, -0.017453292519943295F, 2.356194490192345F, 0F);
 
@@ -70,7 +69,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		setRotateAngle(lever, 0.17453292519943295F, 0F, 0F);
 
 		compass1 = new ModelRendererBreakable(this, 0, 46);
-		compass1.setRotationPoint(0F, 0F, 0F);
 		compass1.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass1, -0.017453292519943295F, 0F, 0F);
 
@@ -88,7 +86,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		table5.addBox(0F, 0F, 0F, 9, 1, 2, 0F);
 
 		final MowzieModelRenderer needle_2 = new ModelRendererBreakable(this, 8, 50);
-		needle_2.setRotationPoint(0F, 0F, 0F);
 		needle_2.addBox(-1F, -0.8F, -1F, 2, 1, 2, 0F);
 
 		switchMiddle2 = new ModelRendererBreakable(this, false, 0, 9);
@@ -96,7 +93,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		switchMiddle2.addBox(0F, -2F, -0.5F, 2, 2, 1, 0F);
 
 		compass3 = new ModelRendererBreakable(this, 0, 52);
-		compass3.setRotationPoint(0F, 0F, 0F);
 		compass3.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass3, -0.017453292519943295F, 3.141592653589793F, 0F);
 
@@ -127,7 +123,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		switchTop4.addBox(0F, -2F, -0.5F, 2, 2, 1, 0F);
 
 		final MowzieModelRenderer dimPanel8 = new ModelRendererBreakable(this, 70, 14);
-		dimPanel8.setRotationPoint(0F, 0F, 0F);
 		dimPanel8.addBox(0.5F, 0.5F, 0F, 2, 3, 1, 0F);
 
 		leverCover1 = new ModelRendererBreakable(this, 7, 96);
@@ -150,7 +145,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		setRotateAngle(table2, 0.08726646259971647F, 0F, 0F);
 
 		compass4 = new ModelRendererBreakable(this, 0, 55);
-		compass4.setRotationPoint(0F, 0F, 0F);
 		compass4.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass4, -0.017453292519943295F, -1.5707963267948966F, 0F);
 
@@ -185,7 +179,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		lever3.addBox(0F, -1F, 0F, 1, 2, 4, 0F);
 
 		compass2 = new ModelRendererBreakable(this, 0, 49);
-		compass2.setRotationPoint(0F, 0F, 0F);
 		compass2.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass2, -0.017453292519943295F, 1.5707963267948966F, 0F);
 
@@ -245,7 +238,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		switchTop3.addBox(0F, -2F, -0.5F, 2, 2, 1, 0F);
 
 		final MowzieModelRenderer lever2 = new ModelRendererBreakable(this, 0, 103);
-		lever2.setRotationPoint(0F, 0F, 0F);
 		lever2.addBox(1F, -0.5F, 2.5F, 4, 1, 1, 0F);
 
 		final MowzieModelRenderer table9 = new ModelRendererBreakable(this, 0, 106);
@@ -253,7 +245,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		table9.addBox(0F, 0F, 0F, 2, 1, 2, 0F);
 
 		final MowzieModelRenderer compass_6 = new ModelRendererBreakable(this, 0, 58);
-		compass_6.setRotationPoint(0F, 0F, 0F);
 		compass_6.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass_6, -0.017453292519943295F, 0.7853981633974483F, 0F);
 
@@ -286,7 +277,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		dimPanel6.addBox(0F, 0F, 0.7F, 3, 3, 1, 0F);
 
 		final MowzieModelRenderer compass_8 = new ModelRendererBreakable(this, 0, 58);
-		compass_8.setRotationPoint(0F, 0F, 0F);
 		compass_8.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass_8, -0.017453292519943295F, -2.356194490192345F, 0F);
 
@@ -296,7 +286,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		dimPanel10.addBox(-1F, 0F, 0F, 1, 2, 2, 0F);
 
 		final MowzieModelRenderer compass_5 = new ModelRendererBreakable(this, 0, 58);
-		compass_5.setRotationPoint(0F, 0F, 0F);
 		compass_5.addBox(-1.5F, -0.5F, -3.6F, 3, 1, 1, 0F);
 		setRotateAngle(compass_5, -0.017453292519943295F, -0.7853981633974483F, 0F);
 
@@ -313,7 +302,6 @@ public class ModelControlPanel extends MowzieModelBase {
 		table17.addBox(0F, 0F, 0F, 9, 3, 1, 0F);
 
 		final MowzieModelRenderer dimPanel5 = new ModelRendererBreakable(this, 70, 10);
-		dimPanel5.setRotationPoint(0F, 0F, 0F);
 		dimPanel5.addBox(0.5F, 0.5F, 0F, 4, 2, 1, 0F);
 
 		table1 = new ModelRendererBreakable(this, 0, 21);

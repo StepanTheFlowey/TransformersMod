@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class DataProviderMachine implements IWailaDataProvider {
+class DataProviderMachine implements IWailaDataProvider {
 	public final String key;
 	public final Class targetClass;
 
@@ -48,17 +48,13 @@ public class DataProviderMachine implements IWailaDataProvider {
 				storage.setUsage(energyContainer.getEnergyUsage());
 
 				list.addAll(TFFormatHelper.toString(storage.format()));
-
 				if(tileentity instanceof IFluidHandlerTF) {
 					list.add(" ");
 				}
 			}
 
 			if(tileentity instanceof IFluidHandlerTF) {
-				final IFluidHandlerTF fluidHandler = (IFluidHandlerTF) tileentity;
-				final FluidTankTF tank = getFluid(tileentity, fluidHandler);
-
-				list.addAll(TFFormatHelper.toString(tank.format()));
+				list.addAll(TFFormatHelper.toString(getFluid(tileentity, (IFluidHandlerTF) tileentity).format()));
 			}
 		}
 

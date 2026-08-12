@@ -4,7 +4,7 @@ import fiskfille.tf.TransformersAPI;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 
-public class TileEntityDisplayPedestal extends TileEntityContainer {
+public final class TileEntityDisplayPedestal extends TileEntityContainer {
 	@Override
 	public int getSizeInventory() {
 		return 1;

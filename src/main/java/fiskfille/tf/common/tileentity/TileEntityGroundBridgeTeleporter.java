@@ -8,7 +8,7 @@ import fiskfille.tf.common.network.base.TFNetworkManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants.NBT;
 
-public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
+public final class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 	public DimensionalCoords controlPanel;
 	public int lastUpdate;
 	public int ticks;
@@ -49,12 +49,12 @@ public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 	@Override
 	public void readCustomNBT(final NBTTagCompound nbt) {
 		if(nbt.hasKey("ControlPanel", NBT.TAG_COMPOUND)) {
-			final NBTTagCompound nbttagcompound = nbt.getCompoundTag("ControlPanel");
+			final NBTTagCompound controlPanelLocationNbt = nbt.getCompoundTag("ControlPanel");
 			controlPanel = new DimensionalCoords(
-							nbttagcompound.getInteger("x"),
-							nbttagcompound.getInteger("y"),
-							nbttagcompound.getInteger("z"),
-							nbttagcompound.getInteger("dim")
+				controlPanelLocationNbt.getInteger("x"),
+				controlPanelLocationNbt.getInteger("y"),
+				controlPanelLocationNbt.getInteger("z"),
+				controlPanelLocationNbt.getInteger("dim")
 			);
 		}
 	}
@@ -62,12 +62,12 @@ public class TileEntityGroundBridgeTeleporter extends TileEntityTF {
 	@Override
 	public void writeCustomNBT(final NBTTagCompound nbt) {
 		if(controlPanel != null) {
-			final NBTTagCompound nbttagcompound = new NBTTagCompound();
-			nbttagcompound.setInteger("x", controlPanel.posX);
-			nbttagcompound.setInteger("y", controlPanel.posY);
-			nbttagcompound.setInteger("z", controlPanel.posZ);
-			nbttagcompound.setInteger("dim", controlPanel.dimension);
-			nbt.setTag("ControlPanel", nbttagcompound);
+			final NBTTagCompound controlPanelLocationNbt = new NBTTagCompound();
+			controlPanelLocationNbt.setInteger("x", controlPanel.posX);
+			controlPanelLocationNbt.setInteger("y", controlPanel.posY);
+			controlPanelLocationNbt.setInteger("z", controlPanel.posZ);
+			controlPanelLocationNbt.setInteger("dim", controlPanel.dimension);
+			nbt.setTag("ControlPanel", controlPanelLocationNbt);
 		}
 	}
 }

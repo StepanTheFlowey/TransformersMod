@@ -1,6 +1,5 @@
 package fiskfille.tf.common.block;
 
-import com.google.common.collect.Lists;
 import fiskfille.tf.client.render.block.RenderBlockDisplayPedestal;
 import fiskfille.tf.common.tileentity.TileEntityDisplayPedestal;
 import net.minecraft.block.Block;

@@ -1,12 +1,12 @@
 package fiskfille.tf.helper;
 
-import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IChatComponent;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TFFormatHelper {
+public final class TFFormatHelper {
 	public static String formatNumber(final float f) {
 		final String s = (long) f + "";
 
@@ -51,8 +51,8 @@ public class TFFormatHelper {
 		return s.substring(0, 1).toUpperCase() + s.substring(1);
 	}
 
-	public static List<String> toString(final List<IChatComponent> list) {
-		final List<String> list1 = Lists.newArrayList();
+	public static ArrayList<String> toString(final List<IChatComponent> list) {
+		final ArrayList<String> list1 = new ArrayList<>();
 
 		for(final IChatComponent component : list) {
 			list1.add(component == null ? "" : component.getFormattedText());

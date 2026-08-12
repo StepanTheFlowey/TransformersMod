@@ -5,7 +5,6 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import net.minecraftforge.common.config.Configuration;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class TFConfig {
 	private static final String CATEGORY_GENERAL = "Options";
@@ -22,7 +21,7 @@ public class TFConfig {
 	public static boolean oldPortalRender;
 	public static int controlPanelMaxRange;
 
-	public static Map<Transformer, Boolean> canTransform = new HashMap<>();
+	public static HashMap<Transformer, Boolean> canTransform = new HashMap<>();
 
 	public static Configuration configFile;
 

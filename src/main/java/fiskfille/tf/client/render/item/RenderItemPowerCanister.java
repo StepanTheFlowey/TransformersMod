@@ -22,7 +22,7 @@ public final class RenderItemPowerCanister implements IItemRenderer {
 	public static void renderCanister(final ItemStack itemstack) {
 		final ItemPowerCanister container = (ItemPowerCanister) itemstack.getItem();
 		final float energy = container.getEnergyStored(itemstack);
-		final float max = container.getEnergyCapacity(itemstack);
+		final int max = container.getEnergyCapacity(itemstack);
 
 		if(energy > 0) {
 			final Vec3 vec3 = Vec3.createVectorHelper(0, 0.0625F * 8.5F, 0);
@@ -55,7 +55,7 @@ public final class RenderItemPowerCanister implements IItemRenderer {
 			if(itemstack.getItem() instanceof IEnergyContainerItem) {
 				final IEnergyContainerItem container = (IEnergyContainerItem) itemstack.getItem();
 				final float energy = container.getEnergyStored(itemstack);
-				final float max = container.getEnergyCapacity(itemstack);
+				final int max = container.getEnergyCapacity(itemstack);
 				final float filled = energy / max;
 
 				if(energy > 0) {

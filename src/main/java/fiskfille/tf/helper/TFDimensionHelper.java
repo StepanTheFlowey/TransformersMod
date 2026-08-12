@@ -1,6 +1,5 @@
 package fiskfille.tf.helper;
 
-import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.server.MinecraftServer;
@@ -8,11 +7,11 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-import java.util.Map;
+import java.util.HashMap;
 
-public class TFDimensionHelper {
-	public static Map<Integer, String> dimensionNames = Maps.newHashMap();
-	public static Integer[] dimensionIDs = new Integer[0];
+public final class TFDimensionHelper {
+	public static HashMap<Integer, String> dimensionNames = new HashMap<>();
+	public static int[] dimensionIDs;
 
 	public static void travelToDimension(final Entity entity, final int dimension, final Teleporter teleporter) {
 		if(!entity.worldObj.isRemote && !entity.isDead) {

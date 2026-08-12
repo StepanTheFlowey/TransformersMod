@@ -9,7 +9,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class DisplayableSkystrikesCrossbow extends Displayable {
+final class DisplayableSkystrikesCrossbow extends Displayable {
 	private final ModelSkystrikesCrossbow model = new ModelSkystrikesCrossbow();
 	private final ResourceLocation texture = new ResourceLocation(TransformersMod.MODID, "textures/models/weapons/skystrikes_crossbow.png");
 
@@ -17,8 +17,9 @@ public class DisplayableSkystrikesCrossbow extends Displayable {
 	public void render(final ItemStack itemstack) {
 		bindTexture(texture);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		GL11.glRotatef((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0, 1, 0);
-		final float f1 = MathHelper.sin((Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.1F;
+		final float ticks = Minecraft.getMinecraft().thePlayer.ticksExisted + ClientTickHandler.renderTick;
+		GL11.glRotatef(ticks * 0.75F, 0, 1, 0);
+		final float f1 = MathHelper.sin(ticks / 15F) * 0.1F;
 		GL11.glTranslatef(0, 1 + f1, -0.0625F);
 
 		model.render();

@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 
 @SideOnly(Side.CLIENT)
-public class ASMHooks {
+public final class ASMHooks {
 	public static double getScaledSneakOffset(final Entity entity, final double d) {
 		return d;
 	}

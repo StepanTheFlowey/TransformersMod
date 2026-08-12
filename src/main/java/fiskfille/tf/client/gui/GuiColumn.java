@@ -32,9 +32,8 @@ public class GuiColumn extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
-		final int x = (width - xSize) / 2;
-		final int y = (height - ySize) / 2;
 
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		fieldEnergy = new GuiHoverFieldEnergy[6];
 
 		for(int i = 0; i < fieldEnergy.length; ++i) {

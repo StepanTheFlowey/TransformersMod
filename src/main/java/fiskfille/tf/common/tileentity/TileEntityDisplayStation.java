@@ -26,7 +26,7 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
-public class TileEntityDisplayStation extends TileEntityContainer implements IMultiTile, ITileDataCallback {
+public final class TileEntityDisplayStation extends TileEntityContainer implements IMultiTile, ITileDataCallback {
 	public final GameProfile username = new GameProfile(UUID.randomUUID(), String.format("[%s]", new DimensionalCoords(this)));
 	public EntityPlayer fakePlayer;
 	public boolean isRedstonePowered = false;

@@ -1,26 +1,25 @@
 package fiskfille.tf.helper;
 
-import com.google.common.collect.Maps;
 import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.item.ItemCSD.DimensionalCoords;
 import fiskfille.tf.common.tileentity.IMultiTile;
 import net.minecraft.tileentity.TileEntity;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public final class TFTileHelper {
-	private static final Map<DimensionalCoords, TileData> tileData = Maps.newHashMap();
+	private static final HashMap<DimensionalCoords, TileData> tileData = new HashMap<>();
 
 	public static TileData getTileData(final DimensionalCoords coords) {
 		return tileData.get(coords);
 	}
 
-	public static Map<DimensionalCoords, TileData> getTileData() {
+	public static HashMap<DimensionalCoords, TileData> getTileData() {
 		return tileData;
 	}
 
 	public static void clearTileData() {
-		for(final Map.Entry<DimensionalCoords, TileData> e : tileData.entrySet()) {
+		for(final HashMap.Entry<DimensionalCoords, TileData> e : tileData.entrySet()) {
 			e.getValue().kill();
 		}
 	}

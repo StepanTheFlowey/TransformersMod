@@ -11,16 +11,11 @@ import net.minecraft.util.StatCollector;
 import java.util.List;
 
 public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
-	protected float capacity;
+	protected final int capacity;
 
-	public ItemEnergyContainer(final float max) {
+	public ItemEnergyContainer(final int max) {
 		setMaxStackSize(1);
 		capacity = max;
-	}
-
-	public ItemEnergyContainer setCapacity(final float max) {
-		capacity = max;
-		return this;
 	}
 
 	@Override
@@ -34,12 +29,11 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 			itemstack.setTagCompound(new NBTTagCompound());
 		}
 
-		float energy = itemstack.getTagCompound().getFloat("Energy");
+		final NBTTagCompound tagCompound = itemstack.getTagCompound();
+		final float energy = tagCompound.getFloat("Energy");
 		final float energyReceived = Math.min(getEnergyCapacity(itemstack) - energy, amount);
-
 		if(!simulate) {
-			energy += energyReceived;
-			itemstack.getTagCompound().setFloat("Energy", energy);
+			tagCompound.setFloat("Energy", energy + energyReceived);
 		}
 
 		return energyReceived;
@@ -47,16 +41,19 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 
 	@Override
 	public float extractEnergy(final ItemStack itemstack, final float amount, final boolean simulate) {
-		if(!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy")) {
+		if(!itemstack.hasTagCompound()) {
 			return 0;
 		}
 
-		float energy = itemstack.getTagCompound().getFloat("Energy");
-		final float energyExtracted = Math.min(energy, amount);
+		final NBTTagCompound tagCompound = itemstack.getTagCompound();
+		if(!tagCompound.hasKey("Energy")) {
+			return 0;
+		}
 
+		final float energy = tagCompound.getFloat("Energy");
+		final float energyExtracted = Math.min(energy, amount);
 		if(!simulate) {
-			energy -= energyExtracted;
-			itemstack.getTagCompound().setFloat("Energy", energy);
+			tagCompound.setFloat("Energy", energy - energyExtracted);
 		}
 
 		return energyExtracted;
@@ -64,21 +61,25 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 
 	@Override
 	public float getEnergyStored(final ItemStack itemstack) {
-		if(!itemstack.hasTagCompound() || !itemstack.getTagCompound().hasKey("Energy")) {
+		if(!itemstack.hasTagCompound()) {
 			return 0;
 		}
 
-		float energy = itemstack.getTagCompound().getFloat("Energy");
+		final NBTTagCompound tagCompound = itemstack.getTagCompound();
+		if(!tagCompound.hasKey("Energy")) {
+			return 0;
+		}
 
+		float energy = tagCompound.getFloat("Energy");
 		if(energy <= 1E-16) {
-			itemstack.getTagCompound().setFloat("Energy", energy = 0);
+			tagCompound.setFloat("Energy", energy = 0);
 		}
 
 		return energy;
 	}
 
 	@Override
-	public float getEnergyCapacity(final ItemStack itemstack) {
+	public int getEnergyCapacity(final ItemStack itemstack) {
 		return capacity;
 	}
 }

@@ -93,102 +93,140 @@ public class BlockTransmitter extends BlockMachineBase {
 			final int direction = metadata % 4;
 			int face = -1;
 
-			if(side == 0) {
-				face = 5;
-			}
-			else if(side == 1) {
-				face = 4;
+			switch(side) {
+				case 0:
+					face = 5;
+					break;
+
+				case 1:
+					face = 4;
+					break;
 			}
 
-			if(direction == 0) {
-				if(side == 2) {
-					face = 0;
-				}
-				else if(side == 3) {
-					face = 1;
-				}
-				else if(side == 4) {
-					face = 2;
-				}
-				else if(side == 5) {
-					face = 3;
-				}
-			}
-			else if(direction == 1) {
-				if(side == 5) {
-					face = 0;
-				}
-				else if(side == 4) {
-					face = 1;
-				}
-				else if(side == 2) {
-					face = 2;
-				}
-				else if(side == 3) {
-					face = 3;
-				}
-			}
-			else if(direction == 2) {
-				if(side == 3) {
-					face = 0;
-				}
-				else if(side == 2) {
-					face = 1;
-				}
-				else if(side == 5) {
-					face = 2;
-				}
-				else if(side == 4) {
-					face = 3;
-				}
-			}
-			else if(direction == 3) {
-				if(side == 4) {
-					face = 0;
-				}
-				else if(side == 5) {
-					face = 1;
-				}
-				else if(side == 3) {
-					face = 2;
-				}
-				else if(side == 2) {
-					face = 3;
-				}
+			switch(direction) {
+				case 0:
+					switch(side) {
+						case 2:
+							face = 0;
+							break;
+
+						case 3:
+							face = 1;
+							break;
+
+						case 4:
+							face = 2;
+							break;
+
+						case 5:
+							face = 3;
+							break;
+					}
+					break;
+
+				case 1:
+					switch(side) {
+						case 5:
+							face = 0;
+							break;
+
+						case 4:
+							face = 1;
+							break;
+
+						case 2:
+							face = 2;
+							break;
+
+						case 3:
+							face = 3;
+							break;
+					}
+					break;
+				case 2:
+					switch(side) {
+						case 3:
+							face = 0;
+							break;
+
+						case 2:
+							face = 1;
+							break;
+
+						case 5:
+							face = 2;
+							break;
+
+						case 4:
+							face = 3;
+							break;
+					}
+					break;
+
+				case 3:
+					switch(side) {
+						case 4:
+							face = 0;
+							break;
+
+						case 5:
+							face = 1;
+							break;
+
+						case 3:
+							face = 2;
+							break;
+
+						case 2:
+							face = 3;
+							break;
+					}
+					break;
 			}
 
 			if(face != -1) {
-				if(side == 0 || side == 1) {
-					if(direction == 0) {
+				switch(side) {
+					case 0:
+					case 1:
+						switch(direction) {
+							case 0:
+								hitX = 1 - hitX;
+								hitY = (side == 1 ? 1 : hitZ * 2) - hitZ;
+								break;
+
+							case 1:
+								hitY = (side == 0 ? 1 : hitX * 2) - hitX;
+								hitX = 1 - hitZ;
+								break;
+
+							case 2:
+								hitY = (side == 0 ? 1 : hitZ * 2) - hitZ;
+								break;
+
+							case 3:
+								hitY = (side == 1 ? 1 : hitX * 2) - hitX;
+								hitX = hitZ;
+								break;
+						}
+						break;
+
+					case 2:
 						hitX = 1 - hitX;
-						hitY = (side == 1 ? 1 : hitZ * 2) - hitZ;
-					}
-					else if(direction == 1) {
-						hitY = (side == 0 ? 1 : hitX * 2) - hitX;
-						hitX = 1 - hitZ;
-					}
-					else if(direction == 2) {
-						hitY = (side == 0 ? 1 : hitZ * 2) - hitZ;
-					}
-					else if(direction == 3) {
-						hitY = (side == 1 ? 1 : hitX * 2) - hitX;
+						hitY = 1 - hitY;
+						break;
+
+					case 3:
+						hitY = 1 - hitY;
+						break;
+
+					case 4:
 						hitX = hitZ;
-					}
-				}
-				else if(side == 2) {
-					hitX = 1 - hitX;
-					hitY = 1 - hitY;
-				}
-				else if(side == 3) {
-					hitY = 1 - hitY;
-				}
-				else if(side == 4) {
-					hitX = hitZ;
-					hitY = 1 - hitY;
-				}
-				else if(side == 5) {
-					hitX = 1 - hitZ;
-					hitY = 1 - hitY;
+						hitY = 1 - hitY;
+						break;
+					case 5:
+						hitX = 1 - hitZ;
+						hitY = 1 - hitY;
+						break;
 				}
 
 				if(face == 1) {

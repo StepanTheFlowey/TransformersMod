@@ -39,6 +39,7 @@ public class GuiEnergonProcessor extends GuiContainerTF {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
+
 		fieldFluid.update(tileentity.data.tank);
 	}
 
@@ -77,10 +78,12 @@ public class GuiEnergonProcessor extends GuiContainerTF {
 		}
 
 		GL11.glEnable(GL11.GL_BLEND);
+
 		TFFluidRenderHelper.renderIntoGUI(tileentity.getTank(), x + 79, y + 19, 48, 48, zLevel);
-		GL11.glDisable(GL11.GL_BLEND);
 
 		mc.getTextureManager().bindTexture(guiTextures);
+		GL11.glDisable(GL11.GL_BLEND);
+
 		drawTexturedModalRect(x + 77, y + 17, 204, 0, 52, 52);
 	}
 }

@@ -44,7 +44,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TileEntityControlPanel extends TileEntityMachineContainer implements IEnergyReceiver, ITileDataCallback, IChunkLoaderTile, IMultiTile {
+public final class TileEntityControlPanel extends TileEntityMachineContainer implements IEnergyReceiver, ITileDataCallback, IChunkLoaderTile, IMultiTile {
 	public static final int[][] directions = new int[][]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 
 	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
@@ -423,7 +423,7 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 		}
 	}
 
-	public List<DataCore> getUpgrades() {
+	public ArrayList<DataCore> getUpgrades() {
 		return data.upgrades;
 	}
 
@@ -596,13 +596,13 @@ public class TileEntityControlPanel extends TileEntityMachineContainer implement
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return data.storage.getMaxEnergy();
 	}
 
 	@Override
 	public float getEnergyUsage() {
-		return data.storage.getUsage();
+		return data.storage.getEnergyUsage();
 	}
 
 	@Override

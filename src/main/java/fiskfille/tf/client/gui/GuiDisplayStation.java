@@ -41,9 +41,9 @@ public class GuiDisplayStation extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
+
 		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		buttonList.add(new GuiButtonTransform(0, x + 140, y + 83));
-
 		for(int i = 0; i < 2; ++i) {
 			final GuiButton button = new GuiButtonComponent(i + 1, x + 140, y + 17 + i * 18);
 			button.enabled = getComponent(i) != null && getComponent(i).canLoad(tileentity, i);

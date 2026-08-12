@@ -1,6 +1,5 @@
 package fiskfille.tf.common.tileentity;
 
-import com.google.common.collect.Maps;
 import fiskfille.tf.common.data.tile.TileData;
 import fiskfille.tf.common.data.tile.TileDataEnergyContainer;
 import fiskfille.tf.common.energon.Energon;
@@ -15,12 +14,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Map;
+import java.util.HashMap;
 
-public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergyContainer {
-	public final Map<ForgeDirection, Block> providers = Maps.newHashMap();
-	public final Map<ForgeDirection, Float> animationTimer = Maps.newHashMap();
-	public final Map<ForgeDirection, Float> prevAnimationTimer = Maps.newHashMap();
+public final class TileEntityIsoCondenser extends TileEntityMachine implements IEnergyContainer {
+	public final HashMap<ForgeDirection, Block> providers = new HashMap<>();
+	public final HashMap<ForgeDirection, Float> animationTimer = new HashMap<>();
+	public final HashMap<ForgeDirection, Float> prevAnimationTimer = new HashMap<>();
 	public TileDataEnergyContainer data = new TileDataEnergyContainer(8000);
 
 	@Override
@@ -56,9 +55,8 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 
 		if(!worldObj.isRemote) {
 			if(canActivate()) {
-				for(final Map.Entry<ForgeDirection, Block> e : providers.entrySet()) {
-					final IEnergon ienergon = (IEnergon) e.getValue();
-					receiveEnergy(getGenerationRate(ienergon.getMass()), false);
+				for(final HashMap.Entry<ForgeDirection, Block> e : providers.entrySet()) {
+					receiveEnergy(getGenerationRate(((IEnergon) e.getValue()).getMass()), false);
 				}
 			}
 
@@ -66,7 +64,6 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 		}
 
 		final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
-
 		if(prevData instanceof TileDataEnergyContainer) {
 			data = new TileDataEnergyContainer((TileDataEnergyContainer) prevData);
 		}
@@ -131,12 +128,12 @@ public class TileEntityIsoCondenser extends TileEntityMachine implements IEnergy
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return data.getMaxEnergy();
 	}
 
 	@Override
 	public float getEnergyUsage() {
-		return data.storage.getUsage();
+		return data.storage.getEnergyUsage();
 	}
 }

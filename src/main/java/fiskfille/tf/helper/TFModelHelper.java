@@ -13,12 +13,12 @@ import java.util.Map;
  * @author gegy1000, FiskFille
  */
 @SideOnly(Side.CLIENT)
-public class TFModelHelper {
+public final class TFModelHelper {
 	public static final ModelBipedPartial modelBipedPartial = new ModelBipedPartial();
 	private static final Map<Entity, ModelOffset> offsets = new HashMap<>();
 
 	/**
-	 * @returns the model offsets for the specified entity.
+	 * @return the model offsets for the specified entity.
 	 */
 	public static ModelOffset getOffsets(final Entity entity) {
 		return offsets.computeIfAbsent(entity, k -> new ModelOffset(false));

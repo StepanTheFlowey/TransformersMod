@@ -58,11 +58,11 @@ public final class RenderItemArmor implements IItemRenderer {
 		final TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
 		if(TFArmorDyeHelper.isDyed(item)) {
 			textureManager.bindTexture(tfModel.getTexture(null, "_primary"));
-			TFRenderHelper.glColorRGB(TFArmorDyeHelper.getPrimaryColor(item));
+			TFRenderHelper.glColor(TFArmorDyeHelper.getPrimaryColor(item));
 			renderArmor(type, model);
 
 			textureManager.bindTexture(tfModel.getTexture(null, "_secondary"));
-			TFRenderHelper.glColorRGB(TFArmorDyeHelper.getSecondaryColor(item));
+			TFRenderHelper.glColor(TFArmorDyeHelper.getSecondaryColor(item));
 			renderArmor(type, model);
 
 			textureManager.bindTexture(tfModel.getTexture(null, "_base"));

@@ -10,10 +10,9 @@ import net.minecraft.world.WorldServer;
 public class TileDataTransmitterBase extends TileDataEnergyContainer {
 	public TransmissionHandler transmissionHandler = new TransmissionHandler();
 
-	public TileDataTransmitterBase() {
-	}
+	public TileDataTransmitterBase() {}
 
-	public TileDataTransmitterBase(final float max) {
+	public TileDataTransmitterBase(final int max) {
 		super(max);
 	}
 

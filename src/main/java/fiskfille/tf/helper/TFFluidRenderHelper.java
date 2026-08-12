@@ -68,7 +68,7 @@ public final class TFFluidRenderHelper {
 			return;
 		}
 
-		TFRenderHelper.glColorRGB(fluidstack.getFluid().getColor(fluidstack));
+		TFRenderHelper.glColor(fluidstack.getFluid().getColor(fluidstack));
 	}
 
 	public static int[] getFluidDisplayLists(final RenderBlocks renderBlocks, final FluidStack fluidStack, final World world, final boolean flowing) {

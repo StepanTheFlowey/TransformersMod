@@ -108,10 +108,12 @@ public class GuiEnergonTank extends GuiContainerTF {
 		}
 
 		GL11.glEnable(GL11.GL_BLEND);
+
 		TFFluidRenderHelper.renderIntoGUI(fluidTank, x + 64, y + 19, 48, 48, zLevel);
-		GL11.glDisable(GL11.GL_BLEND);
 
 		mc.getTextureManager().bindTexture(guiTextures);
+		GL11.glDisable(GL11.GL_BLEND);
+
 		drawTexturedModalRect(x + 62, y + 17, 204, 0, 52, 52);
 	}
 }

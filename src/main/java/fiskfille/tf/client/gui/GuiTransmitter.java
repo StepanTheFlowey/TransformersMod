@@ -49,14 +49,15 @@ public class GuiTransmitter extends GuiContainerTF {
 
 	@Override
 	protected void actionPerformed(final GuiButton button) {
-		final int id = button.id;
+		switch(button.id) {
+			case 0:
+				mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 1));
+				break;
 
-		if(id == 0) {
-			mc.displayGuiScreen(new GuiConfigSides(mc.thePlayer.inventory, this, tileentity));
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 1));
-		}
-		else if(id == 1) {
-			TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
+			case 1:
+				TFNetworkManager.networkWrapper.sendToServer(new MessageTileTrigger(new DimensionalCoords(tileentity), mc.thePlayer, -tileentity.io.length - 2));
+				break;
 		}
 	}
 
@@ -69,10 +70,10 @@ public class GuiTransmitter extends GuiContainerTF {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
-		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
-
 		mc.getTextureManager().bindTexture(guiTextures);
 		GL11.glColor3f(1, 1, 1);
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
+
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 		if(tileentity.getEnergy() > 0) {
@@ -81,10 +82,12 @@ public class GuiTransmitter extends GuiContainerTF {
 		}
 
 		GL11.glEnable(GL11.GL_BLEND);
+
 		TFFluidRenderHelper.renderIntoGUI(tileentity.getTank(), x + 80, y + 19, 16, 48, zLevel);
-		GL11.glDisable(GL11.GL_BLEND);
 
 		mc.getTextureManager().bindTexture(guiTextures);
+		GL11.glDisable(GL11.GL_BLEND);
+
 		drawTexturedModalRect(x + 78, y + 17, 176, 0, 20, 52);
 	}
 }

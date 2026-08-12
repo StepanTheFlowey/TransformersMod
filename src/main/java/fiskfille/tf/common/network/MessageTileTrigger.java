@@ -86,8 +86,7 @@ public class MessageTileTrigger implements IMessage {
 			}
 
 			if(world.getTileEntity(coords.posX, coords.posY, coords.posZ) instanceof ITileDataCallback) {
-				final ITileDataCallback callback = (ITileDataCallback) world.getTileEntity(coords.posX, coords.posY, coords.posZ);
-				callback.receive(player, message.action);
+				((ITileDataCallback) world.getTileEntity(coords.posX, coords.posY, coords.posZ)).receive(player, message.action);
 
 				if(ctx.side.isServer()) {
 					TFNetworkManager.networkWrapper.sendToAll(new MessageTileTrigger(coords, player, message.action));

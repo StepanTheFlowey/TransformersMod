@@ -5,15 +5,10 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
-import java.util.Arrays;
 
 public class RenderInfo {
 	public final boolean[] renderSide = new boolean[]{true, true, true, true, true, true};
-	public final int light = -1;
+	public final int brightness = -1;
 
 	public IIcon[] textureArray;
 	public IIcon texture;
@@ -24,66 +19,8 @@ public class RenderInfo {
 	public double maxX = 1;
 	public double maxY = 1;
 	public double maxZ = 1;
-	public int brightness = -1;
 
 	public RenderInfo() {}
-
-	public RenderInfo(final Block template, final IIcon[] texture) {
-		this.baseBlock = template;
-		this.textureArray = texture;
-	}
-
-	public RenderInfo(final float minX, final float minY, final float minZ, final float maxX, final float maxY, final float maxZ) {
-		setBounds(minX, minY, minZ, maxX, maxY, maxZ);
-	}
-
-	public void setSkyBlockLight(final World world, final int x, final int y, final int z, final int light) {
-		this.brightness = world.getSkyBlockTypeBrightness(EnumSkyBlock.Sky, x, y, z) << 16 | light;
-	}
-
-	public float getBlockBrightness(final IBlockAccess iblockaccess, final int i, final int j, final int k) {
-		return baseBlock.getMixedBrightnessForBlock(iblockaccess, i, j, k);
-	}
-
-	public final void setBounds(final double minX, final double minY, final double minZ, final double maxX, final double maxY, final double maxZ) {
-		this.minX = minX;
-		this.minY = minY;
-		this.minZ = minZ;
-		this.maxX = maxX;
-		this.maxY = maxY;
-		this.maxZ = maxZ;
-	}
-
-	public final void setRenderSingleSide(final int side) {
-		Arrays.fill(renderSide, false);
-		renderSide[side] = true;
-	}
-
-	public final void setRenderAllSides() {
-		Arrays.fill(renderSide, true);
-	}
-
-	public void rotate() {
-		double temp = minX;
-		minX = minZ;
-		minZ = temp;
-
-		temp = maxX;
-		maxX = maxZ;
-		maxZ = temp;
-	}
-
-	public void reverseX() {
-		final double temp = minX;
-		minX = 1 - maxX;
-		maxX = 1 - temp;
-	}
-
-	public void reverseZ() {
-		final double temp = minZ;
-		minZ = 1 - maxZ;
-		maxZ = 1 - temp;
-	}
 
 	public IIcon getBlockTextureFromSide(final int i) {
 		if(texture != null) {
@@ -110,10 +47,7 @@ public class RenderInfo {
 
 		renderBlocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
 
-		if(light != -1) {
-			tessellator.setBrightness(light << 20 | light << 4);
-		}
-		else if(brightness != -1) {
+		if(brightness != -1) {
 			tessellator.setBrightness(brightness << 4);
 		}
 

@@ -10,7 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class DisplayableTransformiumSeed extends Displayable {
+final class DisplayableTransformiumSeed extends Displayable {
 	private final TileEntityTransformiumSeed tileentity = new TileEntityTransformiumSeed();
 
 	@Override
@@ -18,12 +18,13 @@ public class DisplayableTransformiumSeed extends Displayable {
 		TFRenderHelper.renderTag(StatCollector.translateToLocalFormatted("tile.display_pedestal.amount", itemstack.stackSize), 0, 0.05F, 0);
 
 		final Minecraft minecraft = Minecraft.getMinecraft();
-		GL11.glRotatef((minecraft.thePlayer.ticksExisted + ClientTickHandler.renderTick) * 0.75F, 0, 1, 0);
-		final float f1 = MathHelper.sin((minecraft.thePlayer.ticksExisted + ClientTickHandler.renderTick) / 15F) * 0.07F;
+		final float ticks = minecraft.thePlayer.ticksExisted + ClientTickHandler.renderTick;
+		GL11.glRotatef(ticks * 0.75F, 0, 1, 0);
+		final float f1 = MathHelper.sin(ticks / 15F) * 0.07F;
 		GL11.glTranslatef(0, 0.6F + f1, 0);
-		GL11.glRotatef(180F, 1, 0, 0);
+		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
 
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(tileentity, -0.5F, -0.5F, -0.5F, 0F);
+		TileEntityRendererDispatcher.instance.renderTileEntityAt(tileentity, -0.5F, -0.5F, -0.5F, 0);
 	}
 }

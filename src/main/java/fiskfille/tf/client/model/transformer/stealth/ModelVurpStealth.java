@@ -157,7 +157,6 @@ public class ModelVurpStealth extends ModelVurpVehicle {
 
 		vehicleFrontL2 = new ModelRendererTF(this, 48, 70);
 		vehicleFrontL2.mirror = true;
-		vehicleFrontL2.setRotationPoint(0F, 0F, 0F);
 		vehicleFrontL2.addBox(-0.5F, -2F, -3.7F, 2, 1, 3, 0F);
 		setRotateAngle(vehicleFrontL2, 0.017453292519943295F, 0F, 0F);
 
@@ -238,7 +237,6 @@ public class ModelVurpStealth extends ModelVurpVehicle {
 		setRotateAngle(vehicleFrontR1, 0F, 0.9599310885968813F, 0F);
 
 		vehicleFrontR2 = new ModelRendererTF(this, 48, 70);
-		vehicleFrontR2.setRotationPoint(0F, 0F, 0F);
 		vehicleFrontR2.addBox(-1.5F, -2F, -3.7F, 2, 1, 3, 0F);
 		setRotateAngle(vehicleFrontR2, -0.017453292519943295F, 0F, -0.017453292519943295F);
 
@@ -268,7 +266,6 @@ public class ModelVurpStealth extends ModelVurpVehicle {
 		setRotateAngle(vehicleLowerLegR7, 0.6108652381980153F, -0.05235987755982988F, 0F);
 
 		vehicleHood2 = new ModelRendererTF(this, 47, 65);
-		vehicleHood2.setRotationPoint(0F, 0F, 0F);
 		vehicleHood2.addBox(0.8F, -3.3F, -1F, 1, 4, 1, 0F);
 		setRotateAngle(vehicleHood2, -0.005235987755982988F, 0.003490658503988659F, 0.22165681500327983F);
 

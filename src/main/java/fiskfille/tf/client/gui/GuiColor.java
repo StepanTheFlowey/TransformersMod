@@ -26,13 +26,14 @@ import java.awt.*;
 @SideOnly(Side.CLIENT)
 public class GuiColor extends GuiScreen {
 	public static final float[][] layerColors = {{1, 1, 1}, {1, 1, 1}};
-	public static int ticks;
-	public static boolean fromPresetMenu = false;
-	public static int layerSelected;
 	public static GuiColorSlider sliderRed;
 	public static GuiColorSlider sliderGreen;
 	public static GuiColorSlider sliderBlue;
 	public static GuiTextField inputField;
+	public static int ticks;
+	public static int layerSelected;
+	public static boolean fromPresetMenu = false;
+
 	private final TileEntityDisplayStation tileentity;
 
 	public GuiColor(final TileEntityDisplayStation tile) {
@@ -52,15 +53,8 @@ public class GuiColor extends GuiScreen {
 
 		final ItemStack head = tileentity.getStackInSlot(0).copy();
 		if(TFArmorDyeHelper.isDyed(head) && !fromPresetMenu) {
-			final Color primary = new Color(TFArmorDyeHelper.getPrimaryColor(head));
-			final Color secondary = new Color(TFArmorDyeHelper.getSecondaryColor(head));
-
-			layerColors[0][0] = (float) primary.getRed() / 255;
-			layerColors[0][1] = (float) primary.getGreen() / 255;
-			layerColors[0][2] = (float) primary.getBlue() / 255;
-			layerColors[1][0] = (float) secondary.getRed() / 255;
-			layerColors[1][1] = (float) secondary.getGreen() / 255;
-			layerColors[1][2] = (float) secondary.getBlue() / 255;
+			layerColors[0] = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getPrimaryColor(head));
+			layerColors[1] = TFRenderHelper.hexToRGB(TFArmorDyeHelper.getSecondaryColor(head));
 		}
 
 		fromPresetMenu = false;
@@ -89,13 +83,12 @@ public class GuiColor extends GuiScreen {
 		}
 		else {
 			try {
-				final Color color = new Color(Integer.parseUnsignedInt(inputField.getText(), 16));
-				sliderRed.percentage = (float) color.getRed() / 255F;
-				sliderGreen.percentage = (float) color.getGreen() / 255F;
-				sliderBlue.percentage = (float) color.getBlue() / 255F;
+				final float[] color = TFRenderHelper.hexToRGB(Integer.parseUnsignedInt(inputField.getText(), 16));
+				sliderRed.percentage = color[0];
+				sliderGreen.percentage = color[1];
+				sliderBlue.percentage = color[2];
 			}
-			catch(final Exception e) {
-			}
+			catch(final Exception ignored) {}
 		}
 	}
 
@@ -113,30 +106,35 @@ public class GuiColor extends GuiScreen {
 	protected void actionPerformed(final GuiButton button) {
 		final int id = button.id;
 
-		if(id == 0) {
-			final Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
-			final Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
-			TFNetworkManager.networkWrapper.sendToServer(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, primary.getRGB(), secondary.getRGB()));
-			TFNetworkManager.networkWrapper.sendToAll(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, primary.getRGB(), secondary.getRGB()));
+		switch(id) {
+			case 0:
+				final Color primary = new Color(layerColors[0][0], layerColors[0][1], layerColors[0][2]);
+				final Color secondary = new Color(layerColors[1][0], layerColors[1][1], layerColors[1][2]);
+				TFNetworkManager.networkWrapper.sendToServer(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, primary.getRGB(), secondary.getRGB()));
+				TFNetworkManager.networkWrapper.sendToAll(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, primary.getRGB(), secondary.getRGB()));
 
-			mc.displayGuiScreen(null);
-		}
-		else if(id == 4) {
-			mc.displayGuiScreen(new GuiColorPresets(tileentity, this));
-		}
-		else if(id == 5) {
-			final float[] afloat = layerColors[0];
-			layerColors[0] = layerColors[1];
-			layerColors[1] = afloat;
-			sliderRed.percentage = layerColors[layerSelected][0];
-			sliderGreen.percentage = layerColors[layerSelected][1];
-			sliderBlue.percentage = layerColors[layerSelected][2];
-		}
-		else if(id == 6) {
-			final int i = Integer.MIN_VALUE;
-			TFNetworkManager.networkWrapper.sendToServer(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, i, i));
+				mc.displayGuiScreen(null);
+				break;
 
-			mc.displayGuiScreen(null);
+			case 4:
+				mc.displayGuiScreen(new GuiColorPresets(tileentity, this));
+				break;
+
+			case 5:
+				final float[] afloat = layerColors[0];
+				layerColors[0] = layerColors[1];
+				layerColors[1] = afloat;
+				sliderRed.percentage = layerColors[layerSelected][0];
+				sliderGreen.percentage = layerColors[layerSelected][1];
+				sliderBlue.percentage = layerColors[layerSelected][2];
+				break;
+
+			case 6:
+				final int i = Integer.MIN_VALUE;
+				TFNetworkManager.networkWrapper.sendToServer(new MessageColorArmor(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, i, i));
+
+				mc.displayGuiScreen(null);
+				break;
 		}
 	}
 
@@ -212,29 +210,30 @@ public class GuiColor extends GuiScreen {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(width / 2F - 128 + 50, height / 6F + 132, 50F);
 			GL11.glScalef(-60, 60, 60);
-			GL11.glRotatef(180F, 0F, 0F, 1F);
-			GL11.glRotatef(135F, 0F, 1F, 0F);
-			RenderHelper.enableStandardItemLighting();
-			GL11.glRotatef(-135F, 0F, 1F, 0F);
-			GL11.glTranslatef(0F, entity.yOffset, 10F);
-			GL11.glRotatef((ticks + partialTicks) / 2, 0F, 1F, 0F);
-			RenderManager.instance.playerViewY = 180F;
+			GL11.glRotatef(180, 0, 0, 1);
+			GL11.glRotatef(135, 0, 1, 0);
+			GL11.glRotatef(-135, 0F, 1, 0F);
+			GL11.glTranslatef(0, entity.yOffset, 10);
+			GL11.glRotatef((ticks + partialTicks) / 2, 0, 1, 0);
 			TFRenderHelper.startGlScissor(width / 2 - 128, height / 6, 100, 150);
-			RenderManager.instance.renderEntityWithPosYaw(entity, 0D, 0D, 0D, 0F, 1F);
+			RenderHelper.enableStandardItemLighting();
+			RenderManager.instance.playerViewY = 180;
+
+			RenderManager.instance.renderEntityWithPosYaw(entity, 0, 0, 0, 0, 1);
+
 			TFRenderHelper.endGlScissor();
-			GL11.glPopMatrix();
 			RenderHelper.disableStandardItemLighting();
 			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 			OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+			GL11.glPopMatrix();
 		}
 
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		GL11.glColor3f(0F, 0F, 0F);
+		GL11.glColor3f(0, 0, 0);
 		drawTexturedModalRect(width / 2 - 22, height / 6 + 84, 0, 0, 66, 66);
 		drawTexturedModalRect(width / 2 - 22 + 67, height / 6 + 84, 0, 0, 66, 66);
 

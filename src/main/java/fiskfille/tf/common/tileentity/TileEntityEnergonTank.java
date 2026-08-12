@@ -18,16 +18,14 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
-public class TileEntityEnergonTank extends TileEntityMachineContainer implements IFluidHandlerTF, ISidedInventory, IMultiTile {
-	private static final int[] slotsSides = {0, 1};
-
+public final class TileEntityEnergonTank extends TileEntityMachineContainer implements IFluidHandlerTF, ISidedInventory, IMultiTile {
 	public TileDataEnergonTank data = new TileDataEnergonTank(16000);
-
 	public int fillTime;
-	public int lastFluidUsage;
+
+	private static final int[] slotsSides = {0, 1};
 
 	@Override
 	public void updateEntity() {
@@ -82,11 +80,10 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 				else {
 					final ForgeDirection dir = ForgeDirection.getOrientation(getBlockMetadata());
 					final TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-					final int maxTransfer = 100;
 
-					if(canActivate() && maxTransfer > 0 && tile instanceof IFluidHandler) {
+					if(canActivate() && tile instanceof IFluidHandler) {
 						final IFluidHandler fluidHandler = (IFluidHandler) tile;
-						final FluidStack fluid = drain(dir, maxTransfer, false);
+						final FluidStack fluid = drain(dir, 100, false);
 
 						if(fluid != null && fluid.amount > 0 && fluidHandler.canFill(dir.getOpposite(), fluid.getFluid())) {
 							final int amount = fluidHandler.fill(dir.getOpposite(), fluid, true);
@@ -120,7 +117,7 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 				float f = 0;
 
 				final Map<String, Float> ratios = FluidEnergon.getRatios(mix);
-				final List<TileEntityEnergonTank> tiles = Lists.newArrayList();
+				final ArrayList<TileEntityEnergonTank> tiles = new ArrayList<>();
 
 				while(y < worldObj.getHeight() && TFTileHelper.getTileBase(worldObj.getTileEntity(xCoord, y, zCoord)) == tileBase) {
 					final TileEntityEnergonTank tile = (TileEntityEnergonTank) worldObj.getTileEntity(xCoord, y, zCoord);
@@ -158,7 +155,6 @@ public class TileEntityEnergonTank extends TileEntityMachineContainer implements
 		}
 
 		final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
-
 		if(prevData instanceof TileDataEnergonTank) {
 			data = new TileDataEnergonTank((TileDataEnergonTank) prevData);
 		}

@@ -7,7 +7,7 @@ public interface IEnergyContainer {
 
 	float getEnergy();
 
-	float getMaxEnergy();
+	int getMaxEnergy();
 
 	float getEnergyUsage();
 }

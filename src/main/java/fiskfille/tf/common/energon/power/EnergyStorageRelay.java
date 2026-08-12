@@ -5,7 +5,7 @@ import fiskfille.tf.helper.TFEnergyHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class EnergyStorageRelay extends EnergyStorage {
 	protected final TileEntityRelayTower relay;
@@ -34,7 +34,7 @@ public class EnergyStorageRelay extends EnergyStorage {
 
 	@Override
 	public float remove(final float amount, final boolean simulate) {
-		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
+		final ArrayList<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
 		float removed = 0;
 
 		for(final ReceiverEntry entry : receivers) {
@@ -49,7 +49,7 @@ public class EnergyStorageRelay extends EnergyStorage {
 
 	@Override
 	public float add(final float amount, final boolean simulate) {
-		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
+		final ArrayList<ReceiverEntry> receivers = TFEnergyHelper.getReceiversToPower(relay);
 		float added = 0;
 
 		for(final ReceiverEntry entry : receivers) {
@@ -64,7 +64,7 @@ public class EnergyStorageRelay extends EnergyStorage {
 
 	@Override
 	public float getEnergy() {
-		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
+		final ArrayList<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
 		float energy = 0;
 
 		for(final ReceiverEntry entry : receivers) {
@@ -75,9 +75,9 @@ public class EnergyStorageRelay extends EnergyStorage {
 	}
 
 	@Override
-	public float getMaxEnergy() {
-		final List<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
-		float maxEnergy = 0;
+	public int getMaxEnergy() {
+		final ArrayList<ReceiverEntry> receivers = TFEnergyHelper.getReceiverDescendants(relay);
+		int maxEnergy = 0;
 
 		for(final ReceiverEntry entry : receivers) {
 			maxEnergy += entry.getReceiver().getMaxEnergy();

@@ -1,6 +1,5 @@
 package fiskfille.tf.common.tileentity;
 
-import fiskfille.tf.common.energon.power.EnergyStorage;
 import fiskfille.tf.common.energon.power.EnergyStorageInventory;
 import fiskfille.tf.common.energon.power.IEnergyReceiver;
 import fiskfille.tf.common.energon.power.ReceiverHandler;
@@ -11,9 +10,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 
-public class TileEntityColumn extends TileEntityMachineContainer implements IEnergyReceiver, IMultiTile {
+public final class TileEntityColumn extends TileEntityMachineContainer implements IEnergyReceiver, IMultiTile {
 	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
-	public final EnergyStorage storage = new EnergyStorageInventory(this, this);
+	public final EnergyStorageInventory storage = new EnergyStorageInventory(this);
 
 	@Override
 	public void updateEntity() {
@@ -69,13 +68,13 @@ public class TileEntityColumn extends TileEntityMachineContainer implements IEne
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return storage.getMaxEnergy();
 	}
 
 	@Override
 	public float getEnergyUsage() {
-		return storage.getUsage();
+		return storage.getEnergyUsage();
 	}
 
 	@Override

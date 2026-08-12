@@ -24,14 +24,16 @@ import java.awt.*;
 @SideOnly(Side.CLIENT)
 public class GuiColorPresets extends GuiScreen {
 	public static final float[][] tempLayerColors = {{1, 1, 1}, {1, 1, 1}};
+	public static final int columnsPerPage = 5;
+	public static final int rowsPerPage = 2;
 	public static int ticks;
-	public final int columnsPerPage = 5;
-	public final int rowsPerPage = 2;
-	private final TileEntityDisplayStation tileentity;
-	private final GuiColor parent;
-	public ColorPreset[] presets = {};
+
 	public int maxPages = 0;
 	public int page = 0;
+
+	private final TileEntityDisplayStation tileentity;
+	private final GuiColor parent;
+	private ColorPreset[] presets = {};
 
 	public GuiColorPresets(final TileEntityDisplayStation tile, final GuiColor gui) {
 		tileentity = tile;
@@ -41,6 +43,7 @@ public class GuiColorPresets extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
+
 		buttonList.add(new GuiButton(0, width / 2 - 100, height / 6 + 168, I18n.format("gui.done")));
 		buttonList.add(new GuiButton(1, width / 2 - 85, height / 6 + 130, 20, 20, "<"));
 		buttonList.add(new GuiButton(2, width / 2 + 65, height / 6 + 130, 20, 20, ">"));
@@ -93,19 +96,21 @@ public class GuiColorPresets extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(final GuiButton button) {
-		final int id = button.id;
+		switch(button.id) {
+			case 0:
+				GuiColor.fromPresetMenu = true;
+				mc.displayGuiScreen(parent);
+				break;
 
-		if(id == 0) {
-			GuiColor.fromPresetMenu = true;
-			mc.displayGuiScreen(parent);
-		}
-		if(id == 1) {
-			page -= page > 0 ? 1 : 0;
-			mc.displayGuiScreen(this);
-		}
-		if(id == 2) {
-			page += page < maxPages ? 1 : 0;
-			mc.displayGuiScreen(this);
+			case 1:
+				page -= page > 0 ? 1 : 0;
+				mc.displayGuiScreen(this);
+				break;
+
+			case 2:
+				page += page < maxPages ? 1 : 0;
+				mc.displayGuiScreen(this);
+				break;
 		}
 	}
 
@@ -113,18 +118,11 @@ public class GuiColorPresets extends GuiScreen {
 	protected void mouseClicked(final int mouseX, final int mouseY, final int button) {
 		super.mouseClicked(mouseX, mouseY, button);
 
-		for(final ColorPreset preset : presets) {
-			if(button == 0) {
+		if(button == 0) {
+			for(final ColorPreset preset : presets) {
 				if(mouseX >= preset.posX && mouseX < preset.posX + 50 && mouseY >= preset.posY && mouseY < preset.posY + 50) {
-					final Color primary = new Color(preset.primaryColor);
-					final Color secondary = new Color(preset.secondaryColor);
-
-					GuiColor.layerColors[0][0] = (float) primary.getRed() / 255;
-					GuiColor.layerColors[0][1] = (float) primary.getGreen() / 255;
-					GuiColor.layerColors[0][2] = (float) primary.getBlue() / 255;
-					GuiColor.layerColors[1][0] = (float) secondary.getRed() / 255;
-					GuiColor.layerColors[1][1] = (float) secondary.getGreen() / 255;
-					GuiColor.layerColors[1][2] = (float) secondary.getBlue() / 255;
+					GuiColor.layerColors[0] = TFRenderHelper.hexToRGB(preset.primaryColor);
+					GuiColor.layerColors[2] = TFRenderHelper.hexToRGB(preset.secondaryColor);
 					GuiColor.fromPresetMenu = true;
 
 					mc.displayGuiScreen(parent);
@@ -165,21 +163,15 @@ public class GuiColorPresets extends GuiScreen {
 					final float opacityMax = 20;
 					float opacity = (ticks + partialTicks) % opacityMax;
 					opacity = opacity > opacityMax / 2 ? opacityMax / 2 - (opacity - opacityMax / 2) : opacity;
-					GL11.glColor4f(1F, 1F, 0F, opacity / opacityMax + 0.1F);
+					GL11.glColor4f(1, 1, 0, opacity / opacityMax + 0.1F);
 					drawTexturedModalRect(preset.posX - 2, preset.posY - 2, 0, 0, 54, 2);
 					drawTexturedModalRect(preset.posX - 2, preset.posY + 50, 0, 0, 54, 2);
 					drawTexturedModalRect(preset.posX - 2, preset.posY, 0, 0, 2, 50);
 					drawTexturedModalRect(preset.posX + 50, preset.posY, 0, 0, 2, 50);
 					GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-					final Color color = new Color(preset.primaryColor);
-					final Color color1 = new Color(preset.secondaryColor);
-					tempLayerColors[0][0] = color.getRed() / 255F;
-					tempLayerColors[0][1] = color.getGreen() / 255F;
-					tempLayerColors[0][2] = color.getBlue() / 255F;
-					tempLayerColors[1][0] = color1.getRed() / 255F;
-					tempLayerColors[1][1] = color1.getGreen() / 255F;
-					tempLayerColors[1][2] = color1.getBlue() / 255F;
+					tempLayerColors[0] = TFRenderHelper.hexToRGB(preset.primaryColor);
+					tempLayerColors[1] = TFRenderHelper.hexToRGB(preset.secondaryColor);
 
 					drawCenteredString(fontRendererObj, preset.name, width / 2 - 150, height / 6 - 15, -1);
 				}
@@ -193,11 +185,13 @@ public class GuiColorPresets extends GuiScreen {
 			}
 		}
 
+		GL11.glColor4f(0, 0, 0, 0.4F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(0, 0, 0, 0.4F);
+
 		drawTexturedModalRect(width / 2 - 200, height / 6, 0, 0, 100, 150);
+
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		boolean flag = false;
@@ -235,17 +229,17 @@ public class GuiColorPresets extends GuiScreen {
 
 				GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 				GL11.glPushMatrix();
-				GL11.glTranslatef(width / 2F - 200 + 50, height / 6F + 132, 50F);
+				GL11.glTranslatef(width / 2F - 200 + 50, height / 6F + 132, 50);
 				GL11.glScalef(-60, 60, 60);
-				GL11.glRotatef(180F, 0F, 0F, 1F);
-				GL11.glRotatef(135F, 0F, 1F, 0F);
+				GL11.glRotatef(180, 0, 0, 1);
+				GL11.glRotatef(135, 0, 1, 0);
 				RenderHelper.enableStandardItemLighting();
-				GL11.glRotatef(-135F, 0F, 1F, 0F);
-				GL11.glTranslatef(0F, entity.yOffset, 10F);
-				GL11.glRotatef((ticks + partialTicks) / 2, 0F, 1F, 0F);
-				RenderManager.instance.playerViewY = 180F;
+				GL11.glRotatef(-135, 0, 1, 0);
+				GL11.glTranslatef(0, entity.yOffset, 10);
+				GL11.glRotatef((ticks + partialTicks) / 2, 0, 1, 0);
+				RenderManager.instance.playerViewY = 180;
 				TFRenderHelper.startGlScissor(width / 2 - 200, height / 6, 100, 150);
-				RenderManager.instance.renderEntityWithPosYaw(entity, 0D, 0D, 0D, 0F, 1F);
+				RenderManager.instance.renderEntityWithPosYaw(entity, 0, 0, 0, 0, 1);
 				TFRenderHelper.endGlScissor();
 				GL11.glPopMatrix();
 				RenderHelper.disableStandardItemLighting();
@@ -259,10 +253,10 @@ public class GuiColorPresets extends GuiScreen {
 			ticks = GuiColor.ticks = 0;
 		}
 
+		GL11.glColor4f(0, 0, 0, 0.4F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(0, 0, 0, 0.4F);
 
 		drawTexturedModalRect(width / 2 - 60, height / 6 + 130, 0, 0, 120, 20);
 
@@ -274,7 +268,7 @@ public class GuiColorPresets extends GuiScreen {
 		tempLayerColors[0][0] = tempLayerColors[0][1] = tempLayerColors[0][2] = tempLayerColors[1][0] = tempLayerColors[1][1] = tempLayerColors[1][2] = 0;
 	}
 
-	public static class ColorPreset extends Gui {
+	private static class ColorPreset extends Gui {
 		public final String name;
 		public final int primaryColor;
 		public final int secondaryColor;
@@ -288,13 +282,16 @@ public class GuiColorPresets extends GuiScreen {
 		}
 
 		public void drawScreen() {
-			final Color color = new Color(primaryColor);
-			final Color color1 = new Color(secondaryColor);
-
 			Minecraft.getMinecraft().getTextureManager().bindTexture(GuiButtonFlat.tfButtonTextures);
-			GL11.glColor3f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F);
+
+			final Color primary = new Color(primaryColor);
+			GL11.glColor3ub((byte) primary.getRed(), (byte) primary.getGreen(), (byte) primary.getBlue());
+
 			drawTexturedModalRect(posX, posY, 156, 206, 50, 50);
-			GL11.glColor3f(color1.getRed() / 255F, color1.getGreen() / 255F, color1.getBlue() / 255F);
+
+			final Color secondary = new Color(secondaryColor);
+			GL11.glColor3ub((byte) secondary.getRed(), (byte) secondary.getGreen(), (byte) secondary.getBlue());
+
 			drawTexturedModalRect(posX, posY, 206, 206, 50, 50);
 		}
 	}

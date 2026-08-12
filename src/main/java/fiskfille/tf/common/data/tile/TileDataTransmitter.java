@@ -10,7 +10,7 @@ public class TileDataTransmitter extends TileDataTransmitterBase {
 
 	public TileDataTransmitter() {}
 
-	public TileDataTransmitter(final float maxEnergy, final int fluidCapacity) {
+	public TileDataTransmitter(final int maxEnergy, final int fluidCapacity) {
 		super(maxEnergy);
 		tank = new FluidTankTF(fluidCapacity);
 	}

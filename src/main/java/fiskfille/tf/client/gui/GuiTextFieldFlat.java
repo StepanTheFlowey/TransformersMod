@@ -18,20 +18,21 @@ public class GuiTextFieldFlat extends GuiTextField {
 	public final int yPosition;
 	public final int width;
 	public final int height;
+
 	private final FontRenderer fontRendererObj;
 	private String text = "";
 	private int maxStringLength = 32;
 	private int cursorCounter;
-	private boolean enableBackgroundDrawing = true;
-	private boolean canLoseFocus = true;
-	private boolean isFocused;
-	private boolean isEnabled = true;
 	private int lineScrollOffset;
 	private int cursorPosition;
 	private int selectionEnd;
 	private int enabledColor = 0x373737;
 	private int disabledColor = 0x7F7F7F;
 	private boolean visible = true;
+	private boolean enableBackgroundDrawing = true;
+	private boolean canLoseFocus = true;
+	private boolean isFocused;
+	private boolean isEnabled = true;
 
 	public GuiTextFieldFlat(final FontRenderer fontRenderer, final int x, final int y, final int w) {
 		super(fontRenderer, x, y, w, 13);
@@ -214,15 +215,18 @@ public class GuiTextFieldFlat extends GuiTextField {
 					setCursorPositionEnd();
 					setSelectionPos(0);
 					return true;
+
 				case 3:
 					GuiScreen.setClipboardString(getSelectedText());
 					return true;
+
 				case 22:
 					if(isEnabled) {
 						writeText(GuiScreen.getClipboardString());
 					}
 
 					return true;
+
 				case 24:
 					GuiScreen.setClipboardString(getSelectedText());
 
@@ -231,6 +235,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 					}
 
 					return true;
+
 				default:
 					switch(key) {
 						case 14:
@@ -242,8 +247,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 							else if(isEnabled) {
 								deleteFromCursor(-1);
 							}
-
 							return true;
+
 						case 199:
 							if(GuiScreen.isShiftKeyDown()) {
 								setSelectionPos(0);
@@ -251,8 +256,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 							else {
 								setCursorPositionZero();
 							}
-
 							return true;
+
 						case 203:
 							if(GuiScreen.isShiftKeyDown()) {
 								if(GuiScreen.isCtrlKeyDown()) {
@@ -268,8 +273,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 							else {
 								moveCursorBy(-1);
 							}
-
 							return true;
+
 						case 205:
 							if(GuiScreen.isShiftKeyDown()) {
 								if(GuiScreen.isCtrlKeyDown()) {
@@ -285,8 +290,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 							else {
 								moveCursorBy(1);
 							}
-
 							return true;
+
 						case 207:
 							if(GuiScreen.isShiftKeyDown()) {
 								setSelectionPos(text.length());
@@ -296,6 +301,7 @@ public class GuiTextFieldFlat extends GuiTextField {
 							}
 
 							return true;
+
 						case 211:
 							if(GuiScreen.isCtrlKeyDown()) {
 								if(isEnabled) {
@@ -305,8 +311,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 							else if(isEnabled) {
 								deleteFromCursor(1);
 							}
-
 							return true;
+
 						default:
 							if(ChatAllowedCharacters.isAllowedCharacter(c)) {
 								if(isEnabled) {
@@ -315,9 +321,8 @@ public class GuiTextFieldFlat extends GuiTextField {
 
 								return true;
 							}
-							else {
-								return false;
-							}
+
+							return false;
 					}
 			}
 		}
@@ -440,17 +445,19 @@ public class GuiTextFieldFlat extends GuiTextField {
 			x = xPosition + width;
 		}
 
-		final Tessellator tessellator = Tessellator.instance;
-		GL11.glColor3f(0F, 0F, 1F);
+		GL11.glColor3f(0, 0, 1);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_COLOR_LOGIC_OP);
 		GL11.glLogicOp(GL11.GL_OR_REVERSE);
+
+		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertex(x, y1, 0D);
-		tessellator.addVertex(x1, y1, 0D);
-		tessellator.addVertex(x1, y, 0D);
-		tessellator.addVertex(x, y, 0D);
+		tessellator.addVertex(x, y1, 0);
+		tessellator.addVertex(x1, y1, 0);
+		tessellator.addVertex(x1, y, 0);
+		tessellator.addVertex(x, y, 0);
 		tessellator.draw();
+
 		GL11.glDisable(GL11.GL_COLOR_LOGIC_OP);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}

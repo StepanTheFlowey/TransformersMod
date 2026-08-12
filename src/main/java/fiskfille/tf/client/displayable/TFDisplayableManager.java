@@ -5,7 +5,7 @@ import fiskfille.tf.common.block.TFBlocks;
 import fiskfille.tf.common.item.TFItems;
 import net.minecraft.item.Item;
 
-public class TFDisplayableManager {
+public final class TFDisplayableManager {
 	public static void registerDisplayables() {
 		TransformersAPI.registerDisplayable(TFItems.displayVehicle, DisplayableVehicle.class);
 		TransformersAPI.registerDisplayable(TFItems.skystrikesCrossbow, DisplayableSkystrikesCrossbow.class);

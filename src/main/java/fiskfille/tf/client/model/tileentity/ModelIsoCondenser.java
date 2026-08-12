@@ -161,7 +161,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape38.addBox(0F, 0F, -0.5F, 2, 1, 1, 0F);
 		setRotateAngle(shape38, -0.2617993877991494F, 0.5235987755982988F, 0.17453292519943295F);
 		arm1_7 = new MowzieModelRenderer(this, 36, 4);
-		arm1_7.setRotationPoint(0F, 0F, 0F);
 		arm1_7.addBox(-1.4F, -2F, -1F, 1, 2, 2, 0F);
 		arm2_11 = new MowzieModelRenderer(this, 24, 7);
 		arm2_11.mirror = true;
@@ -169,7 +168,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm2_11.addBox(-2F, -0.1F, 0F, 2, 2, 2, 0F);
 		setRotateAngle(arm2_11, 0.9599310885968813F, 0F, 0F);
 		shape21 = new MowzieModelRenderer(this, 0, 16);
-		shape21.setRotationPoint(0F, 0F, 0F);
 		shape21.addBox(0.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		setRotateAngle(shape21, 0F, -1.5707963267948966F, 0F);
 		shape64 = new MowzieModelRenderer(this, 12, 39);
@@ -225,10 +223,8 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm1_1.addBox(-0.5F, -1F, -3.5F, 1, 2, 5, 0F);
 		setRotateAngle(arm1_1, -0.9599310885968813F, 1.5707963267948966F, 0F);
 		shape83 = new MowzieModelRenderer(this, 13, 45);
-		shape83.setRotationPoint(0F, 0F, 0F);
 		shape83.addBox(0.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		arm4_7 = new MowzieModelRenderer(this, 36, 4);
-		arm4_7.setRotationPoint(0F, 0F, 0F);
 		arm4_7.addBox(-1.4F, -2F, -1F, 1, 2, 2, 0F);
 		shape42 = new MowzieModelRenderer(this, 0, 53);
 		shape42.setRotationPoint(-1F, 0.8F, 0.6F);
@@ -246,7 +242,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape15.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		setRotateAngle(shape15, 0F, 0F, -0.12217304763960307F);
 		shape72 = new MowzieModelRenderer(this, 0, 8);
-		shape72.setRotationPoint(0F, 0F, 0F);
 		shape72.addBox(-1F, -1.6F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(shape72, -0.10471975511965977F, 3.141592653589793F, 0F);
 		shape73 = new MowzieModelRenderer(this, 12, 39);
@@ -262,7 +257,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm3_2.addBox(-1F, -1F, -1F, 2, 2, 2, 0F);
 		setRotateAngle(arm3_2, -0.7853981633974483F, 0F, 0F);
 		shape66 = new MowzieModelRenderer(this, 13, 45);
-		shape66.setRotationPoint(0F, 0F, 0F);
 		shape66.addBox(0.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		arm4_11 = new MowzieModelRenderer(this, 24, 7);
 		arm4_11.mirror = true;
@@ -270,7 +264,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm4_11.addBox(-2F, -0.1F, 0F, 2, 2, 2, 0F);
 		setRotateAngle(arm4_11, 0.9599310885968813F, 0F, 0F);
 		arm4_10 = new MowzieModelRenderer(this, 21, 0);
-		arm4_10.setRotationPoint(0F, 0F, 0F);
 		arm4_10.addBox(-2F, 1.2F, -0.4F, 3, 1, 1, 0F);
 		shape52 = new MowzieModelRenderer(this, 4, 46);
 		shape52.setRotationPoint(0.8F, 0F, 0F);
@@ -281,7 +274,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape63.addBox(-0.7F, -1F, -1F, 1, 2, 2, 0F);
 		setRotateAngle(shape63, 0.12217304763960307F, 0.15707963267948966F, -0.08726646259971647F);
 		shape75 = new MowzieModelRenderer(this, 13, 45);
-		shape75.setRotationPoint(0F, 0F, 0F);
 		shape75.addBox(0.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		arm4_9 = new MowzieModelRenderer(this, 24, 7);
 		arm4_9.setRotationPoint(0.5F, 0.5F, -0.5F);
@@ -296,13 +288,10 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm3_9.addBox(0F, -0.1F, 0F, 2, 2, 2, 0F);
 		setRotateAngle(arm3_9, 0.9599310885968813F, 0F, 0F);
 		shape80 = new MowzieModelRenderer(this, 13, 45);
-		shape80.setRotationPoint(0F, 0F, 0F);
 		shape80.addBox(-2.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		arm4_6 = new MowzieModelRenderer(this, 36, 4);
-		arm4_6.setRotationPoint(0F, 0F, 0F);
 		arm4_6.addBox(0.4F, -2F, -1F, 1, 2, 2, 0F);
 		shape69 = new MowzieModelRenderer(this, 0, 8);
-		shape69.setRotationPoint(0F, 0F, 0F);
 		shape69.addBox(-1F, -1.6F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(shape69, -0.10471975511965977F, 0F, 0F);
 		shape77 = new MowzieModelRenderer(this, 12, 39);
@@ -318,7 +307,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape27.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		setRotateAngle(shape27, 0F, 0F, -0.12217304763960307F);
 		arm1_10 = new MowzieModelRenderer(this, 21, 0);
-		arm1_10.setRotationPoint(0F, 0F, 0F);
 		arm1_10.addBox(-2F, 1.2F, -0.4F, 3, 1, 1, 0F);
 		shape60 = new MowzieModelRenderer(this, 4, 48);
 		shape60.setRotationPoint(2F, 0F, -0.5F);
@@ -328,7 +316,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape33.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		setRotateAngle(shape33, 0F, 0F, -0.12217304763960307F);
 		shape5 = new MowzieModelRenderer(this, 0, 16);
-		shape5.setRotationPoint(0F, 0F, 0F);
 		shape5.addBox(0.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		shape50 = new MowzieModelRenderer(this, 0, 40);
 		shape50.mirror = true;
@@ -339,7 +326,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm4_4.setRotationPoint(0F, 0F, -0.7F);
 		arm4_4.addBox(-1.5F, 0.8F, 0F, 1, 2, 1, 0F);
 		arm2_10 = new MowzieModelRenderer(this, 21, 0);
-		arm2_10.setRotationPoint(0F, 0F, 0F);
 		arm2_10.addBox(-2F, 1.2F, -0.4F, 3, 1, 1, 0F);
 		arm3_4 = new MowzieModelRenderer(this, 25, 2);
 		arm3_4.setRotationPoint(0F, 0F, -0.7F);
@@ -358,7 +344,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm1_3.addBox(-1.5F, -2.2F, -0.7F, 3, 3, 1, 0F);
 		setRotateAngle(arm1_3, 0.2617993877991494F, 0F, 0F);
 		shape4 = new MowzieModelRenderer(this, 12, 32);
-		shape4.setRotationPoint(0F, 0F, 0F);
 		shape4.addBox(-3F, -3F, -3F, 6, 1, 6, 0F);
 		shape78 = new MowzieModelRenderer(this, 13, 43);
 		shape78.setRotationPoint(0F, 1.5F, 0F);
@@ -388,7 +373,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape49.addBox(-0.7F, -1F, -1F, 1, 2, 2, 0F);
 		setRotateAngle(shape49, 0.12217304763960307F, 0.15707963267948966F, -0.08726646259971647F);
 		arm1_6 = new MowzieModelRenderer(this, 36, 4);
-		arm1_6.setRotationPoint(0F, 0F, 0F);
 		arm1_6.addBox(0.4F, -2F, -1F, 1, 2, 2, 0F);
 		arm2_5 = new MowzieModelRenderer(this, 25, 2);
 		arm2_5.setRotationPoint(0F, 0F, -0.7F);
@@ -398,14 +382,11 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape32.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		setRotateAngle(shape32, 0F, 0F, -0.12217304763960307F);
 		arm2_6 = new MowzieModelRenderer(this, 36, 4);
-		arm2_6.setRotationPoint(0F, 0F, 0F);
 		arm2_6.addBox(0.4F, -2F, -1F, 1, 2, 2, 0F);
 		bottom2 = new MowzieModelRenderer(this, 0, 8);
-		bottom2.setRotationPoint(0F, 0F, 0F);
 		bottom2.addBox(-1F, -1.3F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(bottom2, 0.10471975511965977F, 0F, 0F);
 		shape7 = new MowzieModelRenderer(this, 0, 16);
-		shape7.setRotationPoint(0F, 0F, 0F);
 		shape7.addBox(-1.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		shape17 = new MowzieModelRenderer(this, 0, 13);
 		shape17.setRotationPoint(-2F, -5.3F, -1.8F);
@@ -430,14 +411,12 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape14.addBox(0.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		setRotateAngle(shape14, 0F, 1.5707963267948966F, 0F);
 		shape13 = new MowzieModelRenderer(this, 12, 32);
-		shape13.setRotationPoint(0F, 0F, 0F);
 		shape13.addBox(-3F, 0F, -3F, 6, 1, 6, 0F);
 		shape25 = new MowzieModelRenderer(this, 0, 13);
 		shape25.setRotationPoint(-2F, -6.6F, -1.8F);
 		shape25.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		setRotateAngle(shape25, 0F, 0F, -0.12217304763960307F);
 		shape30 = new MowzieModelRenderer(this, 0, 16);
-		shape30.setRotationPoint(0F, 0F, 0F);
 		shape30.addBox(-1.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		shape74 = new MowzieModelRenderer(this, 13, 43);
 		shape74.setRotationPoint(0F, 1.5F, 0F);
@@ -451,7 +430,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape20.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		setRotateAngle(shape20, 0F, 0F, -0.12217304763960307F);
 		arm2_7 = new MowzieModelRenderer(this, 36, 4);
-		arm2_7.setRotationPoint(0F, 0F, 0F);
 		arm2_7.addBox(-1.4F, -2F, -1F, 1, 2, 2, 0F);
 		shape57 = new MowzieModelRenderer(this, 0, 40);
 		shape57.mirror = true;
@@ -459,11 +437,9 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape57.addBox(0F, 0F, 0F, 1, 12, 1, 0F);
 		setRotateAngle(shape57, 0F, 1.5707963267948966F, 0F);
 		bottom5 = new MowzieModelRenderer(this, 0, 8);
-		bottom5.setRotationPoint(0F, 0F, 0F);
 		bottom5.addBox(-1F, -1.3F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(bottom5, 0.10471975511965977F, 3.141592653589793F, 0F);
 		shape70 = new MowzieModelRenderer(this, 0, 8);
-		shape70.setRotationPoint(0F, 0F, 0F);
 		shape70.addBox(-1F, -1.6F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(shape70, -0.10471975511965977F, 1.5707963267948966F, 0F);
 		arm2_3 = new MowzieModelRenderer(this, 39, 0);
@@ -484,7 +460,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape37.addBox(-1F, -2F, -1F, 2, 4, 2, 0F);
 		setRotateAngle(shape37, 0F, 0.7853981633974483F, 0F);
 		shape76 = new MowzieModelRenderer(this, 13, 45);
-		shape76.setRotationPoint(0F, 0F, 0F);
 		shape76.addBox(-2.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		shape45 = new MowzieModelRenderer(this, 4, 46);
 		shape45.setRotationPoint(0.8F, 0F, 0F);
@@ -495,7 +470,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm2_8.addBox(-0.5F, 0F, 0.3F, 1, 2, 1, 0F);
 		setRotateAngle(arm2_8, 0.5061454830783556F, 0F, 0F);
 		arm3_7 = new MowzieModelRenderer(this, 36, 4);
-		arm3_7.setRotationPoint(0F, 0F, 0F);
 		arm3_7.addBox(-1.4F, -2F, -1F, 1, 2, 2, 0F);
 		arm4_3 = new MowzieModelRenderer(this, 39, 0);
 		arm4_3.setRotationPoint(0F, 0.6F, -0.4F);
@@ -521,16 +495,12 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape26.addBox(0F, 0F, 0F, 4, 1, 1, 0F);
 		setRotateAngle(shape26, 0F, 0F, -0.12217304763960307F);
 		shape79 = new MowzieModelRenderer(this, 13, 45);
-		shape79.setRotationPoint(0F, 0F, 0F);
 		shape79.addBox(0.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		arm3_6 = new MowzieModelRenderer(this, 36, 4);
-		arm3_6.setRotationPoint(0F, 0F, 0F);
 		arm3_6.addBox(0.4F, -2F, -1F, 1, 2, 2, 0F);
 		shape67 = new MowzieModelRenderer(this, 13, 45);
-		shape67.setRotationPoint(0F, 0F, 0F);
 		shape67.addBox(-2.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		shape16 = new MowzieModelRenderer(this, 0, 16);
-		shape16.setRotationPoint(0F, 0F, 0F);
 		shape16.addBox(-1.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		shape54 = new MowzieModelRenderer(this, 4, 46);
 		shape54.mirror = true;
@@ -538,11 +508,9 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape54.addBox(-2F, 0F, -0.5F, 2, 1, 1, 0F);
 		setRotateAngle(shape54, -0.2617993877991494F, -0.5759586531581287F, 0F);
 		shape3 = new MowzieModelRenderer(this, 12, 25);
-		shape3.setRotationPoint(0F, 0F, 0F);
 		shape3.addBox(-2.5F, -2F, -2.5F, 5, 2, 5, 0F);
 		setRotateAngle(shape3, 0F, 2.4586453172844123F, 0F);
 		bottom4 = new MowzieModelRenderer(this, 0, 8);
-		bottom4.setRotationPoint(0F, 0F, 0F);
 		bottom4.addBox(-1F, -1.3F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(bottom4, 0.10471975511965977F, -1.5707963267948966F, 0F);
 		arm3_1 = new MowzieModelRenderer(this, 24, 0);
@@ -550,11 +518,9 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm3_1.addBox(-0.5F, -1F, -3.5F, 1, 2, 5, 0F);
 		setRotateAngle(arm3_1, -0.9599310885968813F, -1.5707963267948966F, 0F);
 		bottom3 = new MowzieModelRenderer(this, 0, 8);
-		bottom3.setRotationPoint(0F, 0F, 0F);
 		bottom3.addBox(-1F, -1.3F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(bottom3, 0.10471975511965977F, 1.5707963267948966F, 0F);
 		shape71 = new MowzieModelRenderer(this, 0, 8);
-		shape71.setRotationPoint(0F, 0F, 0F);
 		shape71.addBox(-1F, -1.6F, 1.7F, 2, 2, 1, 0F);
 		setRotateAngle(shape71, -0.10471975511965977F, -1.5707963267948966F, 0F);
 		bottom1 = new MowzieModelRenderer(this, 20, 39);
@@ -606,7 +572,6 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		arm4_2.addBox(-1F, -1F, -1F, 2, 2, 2, 0F);
 		setRotateAngle(arm4_2, -0.7853981633974483F, 0F, 0F);
 		shape28 = new MowzieModelRenderer(this, 0, 16);
-		shape28.setRotationPoint(0F, 0F, 0F);
 		shape28.addBox(0.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		setRotateAngle(shape28, 0F, 3.141592653589793F, 0F);
 		shape12 = new MowzieModelRenderer(this, 12, 25);
@@ -614,13 +579,10 @@ public class ModelIsoCondenser extends MowzieModelBase {
 		shape12.addBox(-2.5F, -2F, -2.5F, 5, 2, 5, 0F);
 		setRotateAngle(shape12, 0F, 0.7853981633974483F, 0F);
 		shape23 = new MowzieModelRenderer(this, 0, 16);
-		shape23.setRotationPoint(0F, 0F, 0F);
 		shape23.addBox(-1.3F, -9F, -2.1F, 1, 6, 1, 0F);
 		shape84 = new MowzieModelRenderer(this, 13, 45);
-		shape84.setRotationPoint(0F, 0F, 0F);
 		shape84.addBox(-2.7F, -1.5F, -0.6F, 2, 1, 1, 0F);
 		arm3_10 = new MowzieModelRenderer(this, 21, 0);
-		arm3_10.setRotationPoint(0F, 0F, 0F);
 		arm3_10.addBox(-2F, 1.2F, -0.4F, 3, 1, 1, 0F);
 		arm2_1 = new MowzieModelRenderer(this, 24, 0);
 		arm2_1.setRotationPoint(0F, -2F, -4F);

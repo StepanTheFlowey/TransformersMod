@@ -17,8 +17,7 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.Constants.NBT;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.HashSet;
 
 public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmitter, IEnergyReceiver, IChunkLoaderTile, IMultiTile {
 	public final HashMap<DimensionalCoords, Float> netEnergyTransfer = new HashMap<>();
@@ -53,7 +52,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 				data.isPowered = energyTransfer > 0 || TFEnergyHelper.canPowerChainReach(this);
 				data.invertCurrent.clear();
 
-				for(final Map.Entry<DimensionalCoords, Float> e : netEnergyTransfer.entrySet()) {
+				for(final HashMap.Entry<DimensionalCoords, Float> e : netEnergyTransfer.entrySet()) {
 					if(e.getValue() < 0) {
 						data.invertCurrent.add(e.getKey());
 					}
@@ -63,7 +62,6 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 			}
 
 			final TileData prevData = TFTileHelper.getTileData(new DimensionalCoords(this));
-
 			if(prevData instanceof TileDataRelay) {
 				data = new TileDataRelay((TileDataRelay) prevData);
 			}
@@ -86,7 +84,7 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).addCoord(0, 1.25F, 0);
 
 		if(isValid(getBlockMetadata())) {
-			final Set<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
+			final HashSet<ReceiverEntry> receivers = data.transmissionHandler.getReceivers();
 
 			for(final ReceiverEntry entry : receivers) {
 				final TileEntity tile = entry.getTile();
@@ -203,13 +201,13 @@ public class TileEntityRelayTower extends TileEntityTF implements IEnergyTransmi
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return storage.getMaxEnergy();
 	}
 
 	@Override
 	public float getEnergyUsage() {
-		return storage.getUsage();
+		return storage.getEnergyUsage();
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import net.minecraft.util.Vec3;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

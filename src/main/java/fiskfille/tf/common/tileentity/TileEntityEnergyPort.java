@@ -11,7 +11,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceiver, IReceiverRender {
+public final class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceiver, IReceiverRender {
 	public final ReceiverHandler receiverHandler = new ReceiverHandler(this);
 
 	public IEnergyContainer getReceiver() {
@@ -117,7 +117,7 @@ public class TileEntityEnergyPort extends TileEntityTF implements IEnergyReceive
 	}
 
 	@Override
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		final IEnergyContainer container = getReceiver();
 
 		if(container != null) {

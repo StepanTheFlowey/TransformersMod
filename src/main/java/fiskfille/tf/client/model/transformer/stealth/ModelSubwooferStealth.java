@@ -113,7 +113,6 @@ public class ModelSubwooferStealth extends ModelSubwooferVehicle {
 		vehicleCannonR2.addBox(-1F, -3F, 0F, 1, 3, 1, 0F);
 
 		vehicleFront2 = new ModelRendererTF(this, 0, 0);
-		vehicleFront2.setRotationPoint(0F, 0F, 0F);
 		vehicleFront2.addBox(7F, 0.4F, -2.8F, 1, 3, 1, 0F);
 		setRotateAngle(vehicleFront2, -0.13962634015954636F, 0F, 0F);
 
@@ -122,7 +121,6 @@ public class ModelSubwooferStealth extends ModelSubwooferVehicle {
 		vehicleChestMain3.addBox(0F, 0F, 0F, 6, 4, 2, 0F);
 
 		vehicleCrotch1 = new ModelRendererTF(this, 0, 105);
-		vehicleCrotch1.setRotationPoint(0F, 0F, 0F);
 		vehicleCrotch1.addBox(-1F, -0.7F, -2.4F, 2, 3, 4, 0F);
 
 		vehicleRear1 = new ModelRendererTF(this, 0, 22);
@@ -230,7 +228,6 @@ public class ModelSubwooferStealth extends ModelSubwooferVehicle {
 
 		vehicleFront1 = new ModelRendererTF(this, 0, 0);
 		vehicleFront1.mirror = true;
-		vehicleFront1.setRotationPoint(0F, 0F, 0F);
 		vehicleFront1.addBox(0F, 0.4F, -2.8F, 1, 3, 1, 0F);
 		setRotateAngle(vehicleFront1, -0.13962634015954636F, 0F, 0F);
 

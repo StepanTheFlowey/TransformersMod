@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
-public class DisplayableVehicle extends Displayable {
+final class DisplayableVehicle extends Displayable {
 	@Override
 	public void render(final ItemStack itemstack) {
 		final Transformer transformer = TransformersAPI.getTransformers().get(itemstack.getItemDamage());

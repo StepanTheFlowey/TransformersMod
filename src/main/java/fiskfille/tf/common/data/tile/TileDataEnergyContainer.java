@@ -7,14 +7,13 @@ import io.netty.buffer.ByteBuf;
 public class TileDataEnergyContainer extends TileData {
 	public EnergyStorage storage;
 
-	public TileDataEnergyContainer() {
-	}
+	public TileDataEnergyContainer() {}
 
 	public TileDataEnergyContainer(final EnergyStorage energyStorage) {
 		storage = energyStorage;
 	}
 
-	public TileDataEnergyContainer(final float max) {
+	public TileDataEnergyContainer(final int max) {
 		this(new EnergyStorage(max));
 	}
 
@@ -33,7 +32,7 @@ public class TileDataEnergyContainer extends TileData {
 	@Override
 	public void fromBytes(final ByteBuf buf) {
 		super.fromBytes(buf);
-		storage = new EnergyStorage(buf.readFloat());
+		storage = new EnergyStorage(buf.readInt());
 		storage.fromBytes(buf);
 	}
 
@@ -53,10 +52,10 @@ public class TileDataEnergyContainer extends TileData {
 	}
 
 	public float getEnergyUsage() {
-		return storage.getUsage();
+		return storage.getEnergyUsage();
 	}
 
-	public float getMaxEnergy() {
+	public int getMaxEnergy() {
 		return storage.getMaxEnergy();
 	}
 

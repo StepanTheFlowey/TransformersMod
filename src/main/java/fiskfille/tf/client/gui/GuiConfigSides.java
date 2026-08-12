@@ -66,9 +66,8 @@ public class GuiConfigSides extends GuiContainerTF {
 	@Override
 	public void initGui() {
 		super.initGui();
-		final int x = (width - xSize) / 2;
-		final int y = (height - ySize) / 2;
 
+		final int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		buttonList.add(new GuiButtonDistribution(0, x + 111, y + 66, machine));
 		for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			final int index = dir.ordinal();
