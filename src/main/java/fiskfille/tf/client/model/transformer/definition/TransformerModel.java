@@ -40,14 +40,11 @@ public abstract class TransformerModel {
 		return null;
 	}
 
-	public void renderItem(final EntityPlayer player, final ItemStack stack) {
-	}
+	public void renderItem(final EntityPlayer player, final ItemStack stack) {}
 
-	public void renderCape(final EntityPlayer player) {
-	}
+	public void renderCape(final EntityPlayer player) {}
 
-	public void renderFirstPersonArm(final EntityPlayer player) {
-	}
+	public void renderFirstPersonArm(final EntityPlayer player) {}
 
 	public boolean hasLightsLayer() {
 		return false;

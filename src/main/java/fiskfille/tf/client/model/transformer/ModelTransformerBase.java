@@ -1,6 +1,5 @@
 package fiskfille.tf.client.model.transformer;
 
-import com.google.common.collect.Lists;
 import fiskfille.tf.client.model.AnimationModifier;
 import fiskfille.tf.client.model.tools.ModelRendererTF;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
@@ -17,8 +16,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public abstract class ModelTransformerBase extends MowzieModelBase {
 	private final float baseSpeed;
@@ -69,7 +68,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 					}
 
 					if(layerToRender == 3 && wearingLegs) {
-						final List<ModelRenderer> hidden = Lists.newArrayList();
+						final ArrayList<ModelRenderer> hidden = new ArrayList<>();
 						hidden.add(tfModel.getHead());
 						hidden.addAll(Arrays.asList(tfModel.getFeet()));
 
@@ -95,7 +94,7 @@ public abstract class ModelTransformerBase extends MowzieModelBase {
 					}
 				}
 				else if(!areIdentical(head, chest, legs, feet)) {
-					final List<ModelRenderer> hidden = Lists.newArrayList();
+					final ArrayList<ModelRenderer> hidden = new ArrayList<>();
 					ItemStack itemstack = chest;
 
 					switch(layerToRender) {

@@ -6,11 +6,11 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class ModelRendererTF extends MowzieModelRenderer {
-	private ArrayList<ModelRenderer> hideUntil = new ArrayList<>();
+	private HashSet<ModelRenderer> hideUntil = new HashSet<>();
 
 	public ModelRendererTF(final ModelBase modelBase, final String name) {
 		super(modelBase, name);
@@ -28,7 +28,7 @@ public class ModelRendererTF extends MowzieModelRenderer {
 	@SideOnly(Side.CLIENT)
 	public void render(final float f) {
 		if(!isHidden && showModel) {
-			if(!compiled && hideUntil.isEmpty()) {
+			if(!compiled) {
 				compileDisplayList(f);
 			}
 
@@ -54,10 +54,10 @@ public class ModelRendererTF extends MowzieModelRenderer {
 		if(childModels != null) {
 			for(final Object childModel : childModels) {
 				final ModelRendererTF model = (ModelRendererTF) childModel;
-				ArrayList<ModelRenderer> list = new ArrayList<>(hideUntil);
+				HashSet<ModelRenderer> list = new HashSet<>(hideUntil);
 
 				if(hideUntil.contains(model)) {
-					list = new ArrayList<>();
+					list = new HashSet<>();
 				}
 
 				model.hideUntil = list;

@@ -1456,11 +1456,13 @@ public class ModelCloudtrap extends ModelTransformerBase {
 				feetbaseL.rotationPointX -= 3.5F;
 				feetbaseL.rotateAngleX += 0.2F;
 				feetbaseL.rotateAngleY += 0.1F;
+
 				feetbaseL.render(0.0625F);
 
 				feetbaseR.rotationPointX += 3.5F;
 				feetbaseR.rotateAngleX += 0.2F;
 				feetbaseR.rotateAngleY -= 0.1F;
+
 				feetbaseR.render(0.0625F);
 				break;
 		}

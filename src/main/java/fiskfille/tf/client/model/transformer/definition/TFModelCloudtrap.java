@@ -1,5 +1,7 @@
 package fiskfille.tf.client.model.transformer.definition;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tools.ModelRendererTF;
 import fiskfille.tf.client.model.transformer.ModelCloudtrap;
@@ -14,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 
+@SideOnly(Side.CLIENT)
 public class TFModelCloudtrap extends TransformerModel {
 	private final ModelCloudtrap model = new ModelCloudtrap();
 	private final ModelCloudtrap modelItem = new ModelCloudtrap();

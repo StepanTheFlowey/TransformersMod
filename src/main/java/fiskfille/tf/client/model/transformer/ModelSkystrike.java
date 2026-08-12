@@ -1086,19 +1086,23 @@ public class ModelSkystrike extends ModelTransformerBase {
 		lowerarmR4.setRotationPoint(1.1F, 1, -1.3F);
 		lowerarmR4.addBox(-2, 0, 0, 2, 1, 3, 0);
 		setRotateAngle(lowerarmR4, 0, 0.017453292519943295F, 0);
+
 		wingR4 = new ModelRendererTF(this, 62, 18);
 		wingR4.mirror = true;
 		wingR4.setRotationPoint(0, -6.9F, 2.3F);
 		wingR4.addBox(-0.5F, 0, 0, 1, 8, 2, 0);
 		setRotateAngle(wingR4, 0, -0.3839724354387525F, 0);
+
 		lowerlegL2 = new ModelRendererTF(this, 29, 54);
 		lowerlegL2.setRotationPoint(-1, 6.5F, -2.5F);
 		lowerlegL2.addBox(0, 0, 0, 3, 1, 2, 0);
+
 		backfinR1 = new ModelRendererTF(this, 0, 91);
 		backfinR1.mirror = true;
 		backfinR1.setRotationPoint(-1, 0.9F, -1.2F);
 		backfinR1.addBox(-1, 0, -0.5F, 1, 4, 2, 0);
 		setRotateAngle(backfinR1, 0.5061454830783556F, 0.13962634015954636F, -0.06981317007977318F);
+
 		feetL1.addChild(feetL4);
 		feetR6.addChild(feetR7);
 		lowerlegL1.addChild(lowerlegL3);
@@ -1643,14 +1647,18 @@ public class ModelSkystrike extends ModelTransformerBase {
 			case 1:
 				GL11.glTranslatef(0F, 0F, 0.0625F);
 				upperlegL1.showModel = upperlegR1.showModel = headbase.showModel = false;
+
 				waistbase.render(0.0625F);
+
 				upperlegL1.showModel = upperlegR1.showModel = headbase.showModel = true;
 				break;
 
 			case 2:
 				feetbaseL1.showModel = feetbaseR1.showModel = false;
+
 				upperlegL1.render(0.0625F);
 				upperlegR1.render(0.0625F);
+
 				feetbaseL1.showModel = feetbaseR1.showModel = true;
 				break;
 
@@ -1661,6 +1669,7 @@ public class ModelSkystrike extends ModelTransformerBase {
 				feetbaseL1.rotateAngleY += 0.2F;
 				feetbaseR1.rotateAngleX += 0.2F;
 				feetbaseR1.rotateAngleY -= 0.2F;
+
 				feetbaseL1.render(0.0625F);
 				feetbaseR1.render(0.0625F);
 				break;

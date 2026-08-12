@@ -75,8 +75,8 @@ public final class RenderItemArmor implements IItemRenderer {
 		renderArmor(type, model);
 
 		if(tfModel.hasLightsLayer()) {
-			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 			textureManager.bindTexture(tfModel.getTexture(null, "_lights"));
+			TFRenderHelper.setLighting(TFRenderHelper.LIGHTING_LUMINOUS);
 			renderArmor(type, model);
 			TFRenderHelper.resetLighting();
 		}

@@ -1,5 +1,7 @@
 package fiskfille.tf.client.model.transformer.definition;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.tools.ModelRendererTF;
 import fiskfille.tf.client.model.transformer.ModelTransformerBase;
@@ -15,6 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 
+@SideOnly(Side.CLIENT)
 public class TFModelVurp extends TransformerModel {
 	private final ModelVurp model = new ModelVurp();
 	private final ModelVurp modelItem = new ModelVurp();

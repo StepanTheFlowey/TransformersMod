@@ -53,10 +53,4 @@ public class ModelBassCharge extends ModelBase {
 	public void render() {
 		shape1.render(0.0625F);
 	}
-
-	public void setRotateAngle(final ModelRenderer modelRenderer, final float x, final float y, final float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
-	}
 }
