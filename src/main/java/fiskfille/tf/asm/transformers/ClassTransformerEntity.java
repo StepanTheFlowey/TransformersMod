@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.asm.ASMHooksClient;
 import fiskfille.tf.asm.TFTranslator;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.*;
 
@@ -33,11 +34,11 @@ public class ClassTransformerEntity extends ClassTransformerBase {
 					if(i + 9 < method.instructions.size()) {
 						final AbstractInsnNode endNode = method.instructions.get(i + 9);
 
-						if(endNode instanceof VarInsnNode && ((VarInsnNode) endNode).var == 6 && endNode.getOpcode() == ISTORE) {
+						if(endNode instanceof VarInsnNode && ((VarInsnNode) endNode).var == 6 && endNode.getOpcode() == Opcodes.ISTORE) {
 							startIndex = i;
 							endIndex = i + 9;
-							list.add(new VarInsnNode(ALOAD, 0));
-							list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(ASMHooksClient.class), "getBrightnessForRender", "(L" + varEntity + ";)I", false));
+							list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+							list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHooksClient.class), "getBrightnessForRender", "(L" + varEntity + ";)I", false));
 						}
 					}
 

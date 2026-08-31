@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.asm.TFTranslator;
 import fiskfille.tf.helper.TFModelHelper;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.*;
 
@@ -31,15 +32,15 @@ public class ClassTransformerModelBiped extends ClassTransformerBase {
 
 						if(methodNode.name.equals(TFTranslator.getMappedName("a", "setRotationAngles")) && methodNode.desc.equals(TFTranslator.getMappedName("(FFFFFFLsa;)V", "(FFFFFFLnet/minecraft/entity/Entity;)V"))) {
 							list.add(node);
-							list.add(new VarInsnNode(ALOAD, 0));
-							list.add(new VarInsnNode(ALOAD, 1));
-							list.add(new VarInsnNode(FLOAD, 2));
-							list.add(new VarInsnNode(FLOAD, 3));
-							list.add(new VarInsnNode(FLOAD, 4));
-							list.add(new VarInsnNode(FLOAD, 5));
-							list.add(new VarInsnNode(FLOAD, 6));
-							list.add(new VarInsnNode(FLOAD, 7));
-							list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(TFModelHelper.class), "renderBipedPre", TFTranslator.getMappedName("(Lbhm;Lsa;FFFFFF)V", "(Lnet/minecraft/client/model/ModelBiped;Lnet/minecraft/entity/Entity;FFFFFF)V"), false));
+							list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+							list.add(new VarInsnNode(Opcodes.ALOAD, 1));
+							list.add(new VarInsnNode(Opcodes.FLOAD, 2));
+							list.add(new VarInsnNode(Opcodes.FLOAD, 3));
+							list.add(new VarInsnNode(Opcodes.FLOAD, 4));
+							list.add(new VarInsnNode(Opcodes.FLOAD, 5));
+							list.add(new VarInsnNode(Opcodes.FLOAD, 6));
+							list.add(new VarInsnNode(Opcodes.FLOAD, 7));
+							list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(TFModelHelper.class), "renderBipedPre", TFTranslator.getMappedName("(Lbhm;Lsa;FFFFFF)V", "(Lnet/minecraft/client/model/ModelBiped;Lnet/minecraft/entity/Entity;FFFFFF)V"), false));
 							continue;
 						}
 					}
@@ -90,6 +91,5 @@ public class ClassTransformerModelBiped extends ClassTransformerBase {
 	}
 
 	@Override
-	public void setupMappings() {
-	}
+	public void setupMappings() {}
 }

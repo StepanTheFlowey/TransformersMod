@@ -6,7 +6,6 @@ import fiskfille.tf.TransformersMod;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -14,7 +13,7 @@ import org.objectweb.asm.tree.MethodNode;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public abstract class ClassTransformerBase implements IClassTransformer, Opcodes {
+public abstract class ClassTransformerBase implements IClassTransformer {
 	protected final String classPath;
 	protected final String unobfClass;
 
@@ -23,103 +22,27 @@ public abstract class ClassTransformerBase implements IClassTransformer, Opcodes
 		this.unobfClass = classPath.substring(classPath.lastIndexOf('.') + 1);
 	}
 
-	public static MethodNode generateSetter(final String className, final String methodName, final String fieldName, final String fieldType) {
-		final MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "(" + fieldType + ")V", null, null);
-		mn.visitCode();
-		mn.visitVarInsn(ALOAD, 0);
-		final int opCode;
-
-		switch(fieldType) {
-			case "I":
-			case "Z":
-				opCode = ILOAD;
-				break;
-
-			case "L":
-				opCode = LLOAD;
-				break;
-
-			case "F":
-				opCode = FLOAD;
-				break;
-
-			case "D":
-				opCode = DLOAD;
-				break;
-
-			default:
-				opCode = ALOAD;
-				break;
-		}
-
-		mn.visitVarInsn(opCode, 1);
-		mn.visitFieldInsn(PUTFIELD, className, fieldName, fieldType);
-		mn.visitInsn(RETURN);
-		mn.visitMaxs(2, 2);
-		mn.visitEnd();
-		return mn;
-	}
-
-	public static MethodNode generateGetter(final String className, final String methodName, final String fieldName, final String fieldType) {
-		final MethodNode mn = new MethodNode(ACC_PUBLIC, methodName, "()" + fieldType, null, null);
-		mn.visitCode();
-		mn.visitVarInsn(ALOAD, 0);
-		mn.visitFieldInsn(GETFIELD, className, fieldName, fieldType);
-		final int opCode;
-
-		switch(fieldType) {
-			case "I":
-			case "Z":
-				opCode = IRETURN;
-				break;
-
-			case "L":
-				opCode = LRETURN;
-				break;
-
-			case "F":
-				opCode = FRETURN;
-				break;
-
-			case "D":
-				opCode = DRETURN;
-				break;
-
-			default:
-				opCode = ARETURN;
-				break;
-		}
-
-		mn.visitInsn(opCode);
-		mn.visitMaxs(1, 1);
-		mn.visitEnd();
-		return mn;
-	}
-
 	@Override
 	public byte[] transform(final String name, final String transformedName, final byte[] bytes) {
 		try {
 			if(transformedName.equals(classPath)) {
 				TransformersMod.log.info("Patching class {} ({})...", unobfClass, name);
 
-				final ClassReader cr = new ClassReader(bytes);
-				final ClassNode cn = new ClassNode();
-				cr.accept(cn, 0);
+				final ClassReader classReader = new ClassReader(bytes);
+				final ClassNode classNode = new ClassNode();
+				classReader.accept(classNode, 0);
 
 				setupMappings();
-				final boolean success = processFields(cn.fields) && processMethods(cn.methods);
-
-				final ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-				cn.accept(cw);
-
-				if(success) {
+				if(processFields(classNode.fields) && processMethods(classNode.methods)) {
 					TransformersMod.log.info("Patching class {} done.", unobfClass);
 				}
 				else {
 					TransformersMod.log.error("Patching class {} failed!", unobfClass);
 				}
 
-				return cw.toByteArray();
+				final ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+				classNode.accept(classWriter);
+				return classWriter.toByteArray();
 			}
 		}
 		catch(final Exception e) {

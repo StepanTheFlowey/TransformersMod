@@ -2,9 +2,9 @@ package fiskfille.tf.asm.transformers;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.asm.ASMHooks;
 import fiskfille.tf.asm.ASMHooksClient;
 import fiskfille.tf.asm.TFTranslator;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.*;
 
@@ -12,8 +12,6 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class ClassTransformerRenderPlayer extends ClassTransformerBase {
-	public static String varPlayer;
-
 	public ClassTransformerRenderPlayer() {
 		super("net.minecraft.client.renderer.entity.RenderPlayer");
 	}
@@ -32,32 +30,8 @@ public class ClassTransformerRenderPlayer extends ClassTransformerBase {
 					if(node instanceof MethodInsnNode) {
 						final MethodInsnNode methodNode = (MethodInsnNode) node;
 
-						if(methodNode.getOpcode() == INVOKEVIRTUAL && methodNode.desc.equals(TFTranslator.getMappedName("(Lblg;DDD)V", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V"))) {
-							list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(ASMHooksClient.class), "applyPlayerRenderTranslation", TFTranslator.getMappedName("(Lbop;Lblg;DDD)V", "(Lnet/minecraft/client/renderer/entity/RenderPlayer;Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V"), false));
-							continue;
-						}
-					}
-
-					list.add(node);
-				}
-
-				method.instructions.clear();
-				method.instructions.add(list);
-				flag = true;
-			}
-			else if(method.name.equals(TFTranslator.getMappedName("a", "doRender")) && method.desc.equals(TFTranslator.getMappedName("(Lblg;DDDFF)V", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V"))) {
-				final InsnList list = new InsnList();
-
-				for(int i = 0; i < method.instructions.size(); ++i) {
-					final AbstractInsnNode node = method.instructions.get(i);
-
-					if(node instanceof LdcInsnNode) {
-						final LdcInsnNode ldcNode = (LdcInsnNode) node;
-
-						if(ldcNode.cst instanceof Double && (Double) ldcNode.cst == 0.125D) {
-							list.add(new VarInsnNode(ALOAD, 1));
-							list.add(node);
-							list.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(ASMHooks.class), "getScaledSneakOffset", TFTranslator.getMappedName("(Lsa;D)D", "(Lnet/minecraft/entity/Entity;D)D"), false));
+						if(methodNode.getOpcode() == Opcodes.INVOKEVIRTUAL && methodNode.desc.equals(TFTranslator.getMappedName("(Lblg;DDD)V", "(Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V"))) {
+							list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMHooksClient.class), "applyPlayerRenderTranslation", TFTranslator.getMappedName("(Lbop;Lblg;DDD)V", "(Lnet/minecraft/client/renderer/entity/RenderPlayer;Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V"), false));
 							continue;
 						}
 					}
@@ -80,7 +54,5 @@ public class ClassTransformerRenderPlayer extends ClassTransformerBase {
 	}
 
 	@Override
-	public void setupMappings() {
-		varPlayer = TFTranslator.getMappedName("yz", "net/minecraft/entity/player/EntityPlayer");
-	}
+	public void setupMappings() {}
 }
